@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/archive.html</loc>
-  <lastmod>2024-03-12T16:52:00Z</lastmod>
+  <lastmod>2024-03-12T17:15:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/categories/</loc>
@@ -47,7 +47,7 @@
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/listings/hello.py.html</loc>
-  <lastmod>2024-03-12T16:52:00Z</lastmod>
+  <lastmod>2024-03-12T17:15:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/experiments/</loc>
@@ -56,10 +56,6 @@
  <url>
   <loc>https://pedro-leitao.github.io/pages/howto/</loc>
   <lastmod>2024-03-12T16:52:00Z</lastmod>
- </url>
- <url>
-  <loc>https://pedro-leitao.github.io/pages/howtos/</loc>
-  <lastmod>2024-03-12T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/howtos/machine-learning-apple-silicon/</loc>
@@ -72,9 +68,5 @@
  <url>
   <loc>https://pedro-leitao.github.io/posts/experiments/sentiment-classification-partI/</loc>
   <lastmod>2024-03-12T16:42:00Z</lastmod>
- </url>
- <url>
-  <loc>https://pedro-leitao.github.io/posts/sentiment-classification-partI/</loc>
-  <lastmod>2024-03-12T15:39:00Z</lastmod>
  </url>
 </urlset>
