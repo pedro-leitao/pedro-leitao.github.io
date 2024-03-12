@@ -1,0 +1,4 @@
+Sitemap: https://pedro-leitao.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: pedro-leitao.github.io
