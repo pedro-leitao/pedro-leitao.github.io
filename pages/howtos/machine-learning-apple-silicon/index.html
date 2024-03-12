@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Instructions on setting up a Machine Learning environment on Apple Silicon">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setting up a Machine Learning environment on Apple Silicon | Pedro's Experiments</title>
+<link href="../../../assets/css/theme.css" type="text/css" rel="stylesheet">
+<link href="../../../assets/css/pure.css" type="text/css" rel="stylesheet">
+<link href="../../../assets/css/style.css" type="text/css" rel="stylesheet">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="https://pedro-leitao.github.io/pages/howtos/machine-learning-apple-silicon/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Pedro Leitao">
+<meta property="og:site_name" content="Pedro's Experiments">
+<meta property="og:title" content="Setting up a Machine Learning environment on Apple Silicon">
+<meta property="og:url" content="https://pedro-leitao.github.io/pages/howtos/machine-learning-apple-silicon/">
+<meta property="og:description" content="Instructions on setting up a Machine Learning environment on Apple Silicon">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2024-03-12T00:00:00Z">
+</head>
+<body>
+<div class="body_container">
+    <div id="header">
+        <div class="site-name">
+                <h1>Pedro's Experiments</h1>
+        </div>
+
+        <div id="nav-menu">
+            <div class="bitcron_nav_container">
+                <div class="bitcron_nav">
+                    <div class="site_nav_wrap">
+                        <ul class="site_nav sm sm-base">
+<li><a href="../../../" class="nav__item">Home</a></li>
+            <li><a href="../../experiments/" class="nav__item">Experiments</a></li>
+            <li><a href="../../howto/" class="nav__item">How to</a></li>
+
+                            
+                        </ul>
+<div class="clear clear_nav_inline_end"></div>
+                    </div>
+                </div>
+                <div class="clear clear_nav_end"></div>
+            </div>
+        </div>
+    </div>
+    <div id="layout">
+        <div class="pure-g">
+            <div class=" pure-u-24-24 pure-u-sm-24-24 pure-u-md-18-24 pure_cell">
+                <div class="content_container">
+                    <!--Body content-->
+                    <div class="row">
+                        
+                        
+<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Setting up a Machine Learning environment on Apple Silicon</a></h1>
+
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <p>All the kids now use cloud machine learning platforms like Google Colab, Kaggle, or AWS. But if you want to do some machine learning on your local machine,
+you might find it a bit tricky to set up a proper environment without burning your pocket on GPUs. Anyone with a Mac with Apple Silicon (M1, M2, M3) has access
+to a reasonably nifty hardware, at least for some basic machine learning tasks.</p>
+<p>Here's a guide on setting up a machine learning environment on Apple Silicon, specifically for Python and TensorFlow.</p>
+<section id="install-homebrew"><h2>Install Homebrew</h2>
+<p>Homebrew is a package manager for macOS. It's the easiest way to install and manage software on your Mac. You can install Homebrew by running the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_fe979f8a5df94e5cae2db6ee8c6f6542-1" name="rest_code_fe979f8a5df94e5cae2db6ee8c6f6542-1" href="#rest_code_fe979f8a5df94e5cae2db6ee8c6f6542-1"></a>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">"</span>
+</pre></div>
+<p>(most likely you already have it installed)</p>
+</section><section id="install-python"><h2>Install Python</h2>
+<p>You can install Python using Homebrew. Run the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_d0bbf822f59a49c08899393458e956f0-1" name="rest_code_d0bbf822f59a49c08899393458e956f0-1" href="#rest_code_d0bbf822f59a49c08899393458e956f0-1"></a>brew<span class="w"> </span>install<span class="w"> </span>python
+</pre></div>
+<p>This will install a recent version of Python, but to use Apple Silicon at this moment in time, you will need to install an older version of Python. You can do this by running the following command:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_d219a77c39f8442a9956c0131bd5d132-1" name="rest_code_d219a77c39f8442a9956c0131bd5d132-1" href="#rest_code_d219a77c39f8442a9956c0131bd5d132-1"></a>brew<span class="w"> </span>install<span class="w"> </span>python@3.9
+</pre></div>
+</section><section id="create-a-virtual-environment"><h2>Create a virtual environment</h2>
+<p>You want to separate your machine learning environment from your system Python. You can do this by creating a virtual environment. Run the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_1750ea906dd04a73a42d6c82fb6175ed-1" name="rest_code_1750ea906dd04a73a42d6c82fb6175ed-1" href="#rest_code_1750ea906dd04a73a42d6c82fb6175ed-1"></a>python3.9<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>ml-env
+</pre></div>
+<p>This will create a virtual environment in a folder called <cite>ml-env</cite>. You can activate the virtual environment by running the following command:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_a28cad8cac0a4afca6aa2d27202c1e06-1" name="rest_code_a28cad8cac0a4afca6aa2d27202c1e06-1" href="#rest_code_a28cad8cac0a4afca6aa2d27202c1e06-1"></a><span class="nb">source</span><span class="w"> </span>ml-env/bin/activate
+</pre></div>
+</section><section id="install-tensorflow"><h2>Install TensorFlow</h2>
+<p>You can install TensorFlow using pip. Run the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_d37b626fa63a431f9cf7bff550818b02-1" name="rest_code_d37b626fa63a431f9cf7bff550818b02-1" href="#rest_code_d37b626fa63a431f9cf7bff550818b02-1"></a>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
+</pre></div>
+<p>This will install the latest version of TensorFlow available for Python 3.9.</p>
+</section><section id="install-tensorflow-metal"><h2>Install TensorFlow-Metal</h2>
+<p>Apple has released a Metal backend for TensorFlow, which allows you to use the GPU on Apple Silicon. You can install TensorFlow-Metal using pip. Run the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_e785a744865b4e338a4d576f223fc0f2-1" name="rest_code_e785a744865b4e338a4d576f223fc0f2-1" href="#rest_code_e785a744865b4e338a4d576f223fc0f2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>tensorflow-metal
+</pre></div>
+</section><section id="test-your-installation"><h2>Test your installation</h2>
+<p>You can test your installation by running the following Python code in your terminal:</p>
+<div class="code"><pre class="code python"><a id="rest_code_706c3964e19345bda13e0feadfd9303c-1" name="rest_code_706c3964e19345bda13e0feadfd9303c-1" href="#rest_code_706c3964e19345bda13e0feadfd9303c-1"></a><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<a id="rest_code_706c3964e19345bda13e0feadfd9303c-2" name="rest_code_706c3964e19345bda13e0feadfd9303c-2" href="#rest_code_706c3964e19345bda13e0feadfd9303c-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+<p>This will print the version of TensorFlow you have installed. If you see a version number, then congratulations! You have successfully set up a machine learning environment on Apple Silicon.</p>
+</section><section id="install-jupyter-lab"><h2>Install Jupyter Lab</h2>
+<p>You can install Jupyter Lab using pip. Run the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_51a8d5eef6684466a8f959a9d1269ef3-1" name="rest_code_51a8d5eef6684466a8f959a9d1269ef3-1" href="#rest_code_51a8d5eef6684466a8f959a9d1269ef3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>jupyterlab
+</pre></div>
+<p>You can start Jupyter Lab by running the following command in your terminal:</p>
+<div class="code"><pre class="code bash"><a id="rest_code_9f31ce0aee3b480fb0c56b255266a8b9-1" name="rest_code_9f31ce0aee3b480fb0c56b255266a8b9-1" href="#rest_code_9f31ce0aee3b480fb0c56b255266a8b9-1"></a>jupyter<span class="w"> </span>lab
+</pre></div>
+<p>This will start Jupyter Lab in your default web browser. You can now create a new notebook and start doing some machine learning on your local machine.</p>
+<p>That's it! You now have a machine learning environment set up on Apple Silicon. You can start doing some basic machine learning tasks on your local machine
+without burning your pocket on GPUs.</p>
+<p>Happy coding!</p>
+</section>
+</div>
+    
+
+</article>
+</div>
+                <!--End of body content-->
+                <div style="clear:both;height:0;"></div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+
+        <div class=" pure-u-6-24 pure_cell">
+            <div id="sidebar">
+                <div class="widget">
+                    <div id="search_bar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        
+<div class="content-footer">
+    Follow me on
+    <a href="https://www.linkedin.com/in/nunoleitao/" target="_blank">
+        <img src="../../../images/LI-In-Bug.png" alt="LinkedIn" style="width: 20px; vertical-align: middle;"></a>
+</div>
+
+        
+    </div>
+
+    <!--FIXME: put these somewhere                            -->
+    <!--%if len(translations) > 1:-->
+    <!--<li>
+</li>-->
+    <!--%endif-->
+    <!--% if show_sourcelink:-->
+    <!--
+    <li>
+        <a href="/pages/howtos/machine-learning-apple-silicon/index.rst" id="sourcelink">Source</a>
+    </li>
+-->
+    <!--%endif-->
+    <link href="../../../assets/css/duoshuo.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
+</div>
+</body>
+</html>
