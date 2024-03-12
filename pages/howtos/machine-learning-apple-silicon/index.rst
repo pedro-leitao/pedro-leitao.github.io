@@ -7,9 +7,10 @@
 
 All the kids now use cloud machine learning platforms like Google Colab, Kaggle, or AWS. But if you want to do some machine learning on your local machine,
 you might find it a bit tricky to set up a proper environment without burning your pocket on GPUs. Anyone with a Mac with Apple Silicon (M1, M2, M3) has access
-to a reasonably nifty hardware, at least for some basic machine learning tasks.
+to reasonably nifty hardware, at least for some basic machine learning tasks.
 
 Here's a guide on setting up a machine learning environment on Apple Silicon, specifically for Python and TensorFlow.
+In an attempt to keep things simple, this guide relies only on the standard Python distribution rather than Anaconda, Miniconda or other Python distributions.
 
 Install Homebrew
 -------------------------

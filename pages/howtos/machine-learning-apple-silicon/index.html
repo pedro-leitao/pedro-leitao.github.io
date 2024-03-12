@@ -78,48 +78,49 @@ bg-light
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <p>All the kids now use cloud machine learning platforms like Google Colab, Kaggle, or AWS. But if you want to do some machine learning on your local machine,
 you might find it a bit tricky to set up a proper environment without burning your pocket on GPUs. Anyone with a Mac with Apple Silicon (M1, M2, M3) has access
-to a reasonably nifty hardware, at least for some basic machine learning tasks.</p>
-<p>Here's a guide on setting up a machine learning environment on Apple Silicon, specifically for Python and TensorFlow.</p>
+to reasonably nifty hardware, at least for some basic machine learning tasks.</p>
+<p>Here's a guide on setting up a machine learning environment on Apple Silicon, specifically for Python and TensorFlow.
+In an attempt to keep things simple, this guide relies only on the standard Python distribution rather than Anaconda, Miniconda or other Python distributions.</p>
 <section id="install-homebrew"><h2>Install Homebrew</h2>
 <p>Homebrew is a package manager for macOS. It's the easiest way to install and manage software on your Mac. You can install Homebrew by running the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_fe979f8a5df94e5cae2db6ee8c6f6542-1" name="rest_code_fe979f8a5df94e5cae2db6ee8c6f6542-1" href="#rest_code_fe979f8a5df94e5cae2db6ee8c6f6542-1"></a>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">"</span>
+<div class="code"><pre class="code bash"><a id="rest_code_8d1514447a954052b5e5f7e90da0360f-1" name="rest_code_8d1514447a954052b5e5f7e90da0360f-1" href="#rest_code_8d1514447a954052b5e5f7e90da0360f-1"></a>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">"</span>
 </pre></div>
 <p>(most likely you already have it installed)</p>
 </section><section id="install-python"><h2>Install Python</h2>
 <p>You can install Python using Homebrew. Run the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_d0bbf822f59a49c08899393458e956f0-1" name="rest_code_d0bbf822f59a49c08899393458e956f0-1" href="#rest_code_d0bbf822f59a49c08899393458e956f0-1"></a>brew<span class="w"> </span>install<span class="w"> </span>python
+<div class="code"><pre class="code bash"><a id="rest_code_ae80d6a6d6bc446cbae1b459c2c282b1-1" name="rest_code_ae80d6a6d6bc446cbae1b459c2c282b1-1" href="#rest_code_ae80d6a6d6bc446cbae1b459c2c282b1-1"></a>brew<span class="w"> </span>install<span class="w"> </span>python
 </pre></div>
 <p>This will install a recent version of Python, but to use Apple Silicon at this moment in time, you will need to install an older version of Python. You can do this by running the following command:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_d219a77c39f8442a9956c0131bd5d132-1" name="rest_code_d219a77c39f8442a9956c0131bd5d132-1" href="#rest_code_d219a77c39f8442a9956c0131bd5d132-1"></a>brew<span class="w"> </span>install<span class="w"> </span>python@3.9
+<div class="code"><pre class="code bash"><a id="rest_code_b8f3770781e045e8b9361ef4e339f898-1" name="rest_code_b8f3770781e045e8b9361ef4e339f898-1" href="#rest_code_b8f3770781e045e8b9361ef4e339f898-1"></a>brew<span class="w"> </span>install<span class="w"> </span>python@3.9
 </pre></div>
 </section><section id="create-a-virtual-environment"><h2>Create a virtual environment</h2>
 <p>You want to separate your machine learning environment from your system Python. You can do this by creating a virtual environment. Run the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_1750ea906dd04a73a42d6c82fb6175ed-1" name="rest_code_1750ea906dd04a73a42d6c82fb6175ed-1" href="#rest_code_1750ea906dd04a73a42d6c82fb6175ed-1"></a>python3.9<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>ml-env
+<div class="code"><pre class="code bash"><a id="rest_code_a951224d398c4f8dbe05dab0b6682891-1" name="rest_code_a951224d398c4f8dbe05dab0b6682891-1" href="#rest_code_a951224d398c4f8dbe05dab0b6682891-1"></a>python3.9<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>ml-env
 </pre></div>
 <p>This will create a virtual environment in a folder called <cite>ml-env</cite>. You can activate the virtual environment by running the following command:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_a28cad8cac0a4afca6aa2d27202c1e06-1" name="rest_code_a28cad8cac0a4afca6aa2d27202c1e06-1" href="#rest_code_a28cad8cac0a4afca6aa2d27202c1e06-1"></a><span class="nb">source</span><span class="w"> </span>ml-env/bin/activate
+<div class="code"><pre class="code bash"><a id="rest_code_c35cf2fb588d4a9d9f5e76d4ec11a484-1" name="rest_code_c35cf2fb588d4a9d9f5e76d4ec11a484-1" href="#rest_code_c35cf2fb588d4a9d9f5e76d4ec11a484-1"></a><span class="nb">source</span><span class="w"> </span>ml-env/bin/activate
 </pre></div>
 </section><section id="install-tensorflow"><h2>Install TensorFlow</h2>
 <p>You can install TensorFlow using pip. Run the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_d37b626fa63a431f9cf7bff550818b02-1" name="rest_code_d37b626fa63a431f9cf7bff550818b02-1" href="#rest_code_d37b626fa63a431f9cf7bff550818b02-1"></a>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
+<div class="code"><pre class="code bash"><a id="rest_code_8e7ff957b9b1420694d60f89596937e1-1" name="rest_code_8e7ff957b9b1420694d60f89596937e1-1" href="#rest_code_8e7ff957b9b1420694d60f89596937e1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
 </pre></div>
 <p>This will install the latest version of TensorFlow available for Python 3.9.</p>
 </section><section id="install-tensorflow-metal"><h2>Install TensorFlow-Metal</h2>
 <p>Apple has released a Metal backend for TensorFlow, which allows you to use the GPU on Apple Silicon. You can install TensorFlow-Metal using pip. Run the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_e785a744865b4e338a4d576f223fc0f2-1" name="rest_code_e785a744865b4e338a4d576f223fc0f2-1" href="#rest_code_e785a744865b4e338a4d576f223fc0f2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>tensorflow-metal
+<div class="code"><pre class="code bash"><a id="rest_code_3a20b25083de44f4bbaf9a514cc7dd81-1" name="rest_code_3a20b25083de44f4bbaf9a514cc7dd81-1" href="#rest_code_3a20b25083de44f4bbaf9a514cc7dd81-1"></a>pip<span class="w"> </span>install<span class="w"> </span>tensorflow-metal
 </pre></div>
 </section><section id="test-your-installation"><h2>Test your installation</h2>
 <p>You can test your installation by running the following Python code in your terminal:</p>
-<div class="code"><pre class="code python"><a id="rest_code_706c3964e19345bda13e0feadfd9303c-1" name="rest_code_706c3964e19345bda13e0feadfd9303c-1" href="#rest_code_706c3964e19345bda13e0feadfd9303c-1"></a><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<a id="rest_code_706c3964e19345bda13e0feadfd9303c-2" name="rest_code_706c3964e19345bda13e0feadfd9303c-2" href="#rest_code_706c3964e19345bda13e0feadfd9303c-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<div class="code"><pre class="code python"><a id="rest_code_1cd0bf9ad3114dd8b97b83d5c872845c-1" name="rest_code_1cd0bf9ad3114dd8b97b83d5c872845c-1" href="#rest_code_1cd0bf9ad3114dd8b97b83d5c872845c-1"></a><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<a id="rest_code_1cd0bf9ad3114dd8b97b83d5c872845c-2" name="rest_code_1cd0bf9ad3114dd8b97b83d5c872845c-2" href="#rest_code_1cd0bf9ad3114dd8b97b83d5c872845c-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 <p>This will print the version of TensorFlow you have installed. If you see a version number, then congratulations! You have successfully set up a machine learning environment on Apple Silicon.</p>
 </section><section id="install-jupyter-lab"><h2>Install Jupyter Lab</h2>
 <p>You can install Jupyter Lab using pip. Run the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_51a8d5eef6684466a8f959a9d1269ef3-1" name="rest_code_51a8d5eef6684466a8f959a9d1269ef3-1" href="#rest_code_51a8d5eef6684466a8f959a9d1269ef3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>jupyterlab
+<div class="code"><pre class="code bash"><a id="rest_code_19410f885c5c46e282e4a192b475059f-1" name="rest_code_19410f885c5c46e282e4a192b475059f-1" href="#rest_code_19410f885c5c46e282e4a192b475059f-1"></a>pip<span class="w"> </span>install<span class="w"> </span>jupyterlab
 </pre></div>
 <p>You can start Jupyter Lab by running the following command in your terminal:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_9f31ce0aee3b480fb0c56b255266a8b9-1" name="rest_code_9f31ce0aee3b480fb0c56b255266a8b9-1" href="#rest_code_9f31ce0aee3b480fb0c56b255266a8b9-1"></a>jupyter<span class="w"> </span>lab
+<div class="code"><pre class="code bash"><a id="rest_code_3d4581013cb14920b17f681c02674fd7-1" name="rest_code_3d4581013cb14920b17f681c02674fd7-1" href="#rest_code_3d4581013cb14920b17f681c02674fd7-1"></a>jupyter<span class="w"> </span>lab
 </pre></div>
 <p>This will start Jupyter Lab in your default web browser. You can now create a new notebook and start doing some machine learning on your local machine.</p>
 <p>That's it! You now have a machine learning environment set up on Apple Silicon. You can start doing some basic machine learning tasks on your local machine
