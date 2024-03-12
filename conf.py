@@ -181,35 +181,36 @@ THEME_COLOR = '#5670d4'
 #                      navbar_custom_bg (defaults to '')
 
 # Config for bootblog4:
+#THEME_CONFIG = {
+#    DEFAULT_LANG: {
+#        # Show the latest featured post in a large box, with the previewimage as its background.
+#        'featured_large': True,
+#        # Show the first (remaining) two featured posts in small boxes.
+#        'featured_small': False,
+#        # Show featured posts on mobile.
+#        'featured_on_mobile': True,
+#        # Show image in `featured_large` on mobile.
+#        # `featured_small` displays them only on desktop.
+#        'featured_large_image_on_mobile': True,
+#        # Strip HTML from featured post text.
+#        'featured_strip_html': False,
+#        # Contents of the sidebar, If empty, the sidebar is not displayed.
+#        'sidebar': ''
+#    }
+#}
+
+# Config for bootstrap4:
 THEME_CONFIG = {
     DEFAULT_LANG: {
-        # Show the latest featured post in a large box, with the previewimage as its background.
-        'featured_large': True,
-        # Show the first (remaining) two featured posts in small boxes.
-        'featured_small': False,
-        # Show featured posts on mobile.
-        'featured_on_mobile': True,
-        # Show image in `featured_large` on mobile.
-        # `featured_small` displays them only on desktop.
-        'featured_large_image_on_mobile': True,
-        # Strip HTML from featured post text.
-        'featured_strip_html': False,
-        # Contents of the sidebar, If empty, the sidebar is not displayed.
-        'sidebar': ''
+        # Use a light navbar with dark text. Defaults to False.
+        'navbar_light': True,
+        # Use a custom navbar color. If unset, 'navbar_light' sets text +
+        # background color. If set, navbar_light controls only background
+        # color. Supported values: bg-dark, bg-light, bg-primary, bg-secondary,
+        # bg-success, bg-danger, bg-warning, bg-info, bg-white, bg-transparent.
+        'navbar_custom_bg': '',
     }
 }
-# Config for bootstrap4:
-# THEME_CONFIG = {
-#     DEFAULT_LANG: {
-#         # Use a light navbar with dark text. Defaults to False.
-#         'navbar_light': False,
-#         # Use a custom navbar color. If unset, 'navbar_light' sets text +
-#         # background color. If set, navbar_light controls only background
-#         # color. Supported values: bg-dark, bg-light, bg-primary, bg-secondary,
-#         # bg-success, bg-danger, bg-warning, bg-info, bg-white, bg-transparent.
-#         'navbar_custom_bg': '',
-#     }
-# }
 
 # POSTS and PAGES contains (wildcard, destination, template) tuples.
 # (translatable)
