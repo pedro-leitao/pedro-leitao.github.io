@@ -86,6 +86,11 @@ You can test your installation by running the following Python code in your term
 
 This will print the version of TensorFlow you have installed. If you see a version number, then congratulations! You have successfully set up a machine learning environment on Apple Silicon.
 
+.. WARNING:: You will see the following warning in Tensorflow, this is normal as Apple Silicon uses UMA and not NUMA architecture. You can ignore this warning.:
+
+    tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:306] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+
+
 Install Jupyter Lab
 -------------------------
 
@@ -102,6 +107,7 @@ You can start Jupyter Lab by running the following command in your terminal:
     jupyter lab
 
 This will start Jupyter Lab in your default web browser. You can now create a new notebook and start doing some machine learning on your local machine.
+
 
 That's it! You now have a machine learning environment set up on Apple Silicon. You can start doing some basic machine learning tasks on your local machine
 without burning your pocket on GPUs.
