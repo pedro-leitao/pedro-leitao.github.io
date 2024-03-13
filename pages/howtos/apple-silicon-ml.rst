@@ -86,7 +86,7 @@ You can test your installation by running the following Python code in your term
 
 This will print the version of TensorFlow you have installed. If you see a version number, then congratulations! You have successfully set up a machine learning environment on Apple Silicon.
 
-.. WARNING:: You will see the following warning in Tensorflow, this is normal as Apple Silicon uses UMA and not NUMA architecture. You can ignore this warning.:
+.. WARNING:: You will see the following message in Tensorflow, this is normal as Apple Silicon uses a UMA and not NUMA architecture. You can ignore this:
 
     tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:306] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
 
