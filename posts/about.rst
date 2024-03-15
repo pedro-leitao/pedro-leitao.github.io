@@ -10,7 +10,7 @@
 .. image:: /images/pedro.jpg
     :align: right
     
-This repository serves as a curated collection of experiments, musings, and dialogues courtesy of the author, meticulously crafted during those fleeting moments of respite
+This repository serves as a curated collection of `experiments <link://slug/experiments>`_, `how to's <link://slug/howtos>`_ and musings, courtesy of the author, meticulously crafted during those fleeting moments of respite
 from the professional and personal arenas—a rarity, akin to finding a parking spot in Hackney at peak hours. As such, readers are advised to approach these writings with
 a discerning eye and a generous pinch (or perhaps a handful) of skepticism.
 
