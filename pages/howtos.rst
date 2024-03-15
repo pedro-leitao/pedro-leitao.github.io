@@ -1,5 +1,5 @@
 .. title: How To's
-.. slug: howto
+.. slug: howtos
 .. date: 2024-03-12 00:00:00 GMT
 .. tags:
 .. link:

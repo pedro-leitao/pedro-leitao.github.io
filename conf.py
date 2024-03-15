@@ -154,7 +154,7 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/", "Home"),
         ("link://slug/experiments", "Experiments"),
-        ("link://slug/howto", "How to"),
+        ("link://slug/howtos", "How to"),
     ),
 }
 
