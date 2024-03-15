@@ -7,66 +7,66 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://pedro-leitao.github.io/</loc>
-  <lastmod>2024-03-12T11:54:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/2024/</loc>
-  <lastmod>2024-03-12T11:54:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/archive.html</loc>
-  <lastmod>2024-03-13T16:48:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/categories/</loc>
-  <lastmod>2024-03-12T14:01:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/categories/about/</loc>
-  <lastmod>2024-03-12T14:01:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/categories/cat_personal/</loc>
-  <lastmod>2024-03-12T14:01:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/galleries/</loc>
-  <lastmod>2024-03-12T11:02:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/galleries/demo/</loc>
-  <lastmod>2024-03-12T11:02:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/listings/</loc>
-  <lastmod>2024-03-12T19:09:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/listings/__pycache__/</loc>
-  <lastmod>2024-03-12T11:02:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/experiments/</loc>
-  <lastmod>2024-03-12T15:01:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
-  <loc>https://pedro-leitao.github.io/pages/howto/</loc>
-  <lastmod>2024-03-12T16:52:00Z</lastmod>
+  <loc>https://pedro-leitao.github.io/pages/howtos/</loc>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/howtos/machine-learning-apple-silicon/</loc>
-  <lastmod>2024-03-12T16:48:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/posts/about/</loc>
-  <lastmod>2024-03-12T14:01:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/posts/experiments/sentiment-classification-partI/</loc>
-  <lastmod>2024-03-12T16:42:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/posts/howtos/tensorflow-keras-distributed-training/</loc>
-  <lastmod>2024-03-15T13:51:00Z</lastmod>
+  <lastmod>2024-03-15T14:12:00Z</lastmod>
  </url>
 </urlset>
