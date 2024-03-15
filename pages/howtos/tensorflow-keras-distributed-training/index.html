@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Distributed Training on Tensorflow &amp; Keras. | Pedro's Experiments</title>
+<title>Distributed Training on Tensorflow &amp; Keras | Pedro's Experiments</title>
 <link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@
 <link rel="canonical" href="https://pedro-leitao.github.io/pages/howtos/tensorflow-keras-distributed-training/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Pedro Leitao">
 <meta property="og:site_name" content="Pedro's Experiments">
-<meta property="og:title" content="Distributed Training on Tensorflow &amp; Keras.">
+<meta property="og:title" content="Distributed Training on Tensorflow &amp; Keras">
 <meta property="og:url" content="https://pedro-leitao.github.io/pages/howtos/tensorflow-keras-distributed-training/">
 <meta property="og:description" content="Training a model can be extremely compute intensive, even for relatively small problems and even with access to powerful GPU hardware, network training can run for many hours, days or weeks!
 If you ar">
@@ -68,7 +68,7 @@ bg-light
         
         
         
-<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Distributed Training on Tensorflow &amp; Keras.</a></h1>
+<article class="post-text storypage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Distributed Training on Tensorflow &amp; Keras</a></h1>
 
         
 
@@ -96,6 +96,7 @@ bg-light
 <li>You have multiple nodes in the same network with good connectivity</li>
 <li>All nodes <strong>should</strong> have the same version of Tensorflow and Keras</li>
 </ul>
+<p>Even with the above considerations, you might find that some things might or might not work very well, for example, I couldn't get distributed model predictions to work in my environment (therefore, saving the model and reloading it when predicting).</p>
 </div>
 </div>
 </div>
