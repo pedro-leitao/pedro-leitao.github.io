@@ -8,3 +8,4 @@
 Personal experiments on various topics, which might be useful for a broader audience. If you find it useful in any way, feel free but in no way oblidged to link back to it.
 
 - `A learning model to classify sentiment in financial sentences - Part I <link://slug/sentiment-classification-partI>`_
+- `An embeddings based Recursive Neural Network (RNN) to predict Shakespearean text <link://slug/shakespeare-embeddings>`_

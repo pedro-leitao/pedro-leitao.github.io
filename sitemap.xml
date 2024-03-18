@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/archive.html</loc>
-  <lastmod>2024-03-15T14:25:00Z</lastmod>
+  <lastmod>2024-03-18T10:46:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/categories/</loc>
@@ -47,11 +47,15 @@
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/experiments/</loc>
-  <lastmod>2024-03-15T14:25:00Z</lastmod>
+  <lastmod>2024-03-18T15:51:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/experiments/sentiment-classification-partI/</loc>
   <lastmod>2024-03-15T14:25:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://pedro-leitao.github.io/pages/experiments/shakespeare-embeddings/</loc>
+  <lastmod>2024-03-18T15:51:00Z</lastmod>
  </url>
  <url>
   <loc>https://pedro-leitao.github.io/pages/howtos/</loc>
