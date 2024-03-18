@@ -1,3 +1,32 @@
+
+/* Main font for titles and headings */
+
+h1, h2, h3, h4, h5 {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Font for body text */
+body {
+    font-family: "DM Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+}
+
+a {
+    color: #5D3B9A; /* Dark purple for regular link state */
+    text-decoration: none; /* Removes the underline from links */
+}
+
+a:hover {
+    color: #7F5FBF; /* Lighter purple for the hover state */
+    text-decoration: underline; /* Adds underline on hover for clarity */
+}
+
+
+
 img {
     max-width: 100%;
 }
