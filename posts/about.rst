@@ -7,23 +7,21 @@
 .. description:
 .. category: personal
 
-.. image:: /images/pedro.jpg
+.. image:: /images/pedro-business.jpg
     :align: right
-    
-This repository serves as a curated collection of `experiments <link://slug/experiments>`_, `how to's <link://slug/howtos>`_ and musings, courtesy of the author, meticulously crafted during those fleeting moments of respite
-from the professional and personal arenas—a rarity, akin to finding a parking spot in Hackney at peak hours. As such, readers are advised to approach these writings with
-a discerning eye and a generous pinch (or perhaps a handful) of skepticism.
+    :height: 450px
 
-Covering a broad spectrum of topics from software development and data science to personal growth and business acumen, this compendium offers insights that may range from
+    
+This repository serves as a curated collection of `experiments <link://slug/experiments>`_, `how to's <link://slug/howtos>`_ and musings, courtesy of the author, crafted
+during those fleeting moments of respite from the professional and personal arenas -- a rarity, akin to finding a parking spot at peak hours.
+As such, readers are advised to approach these writings with a discerning eye and a generous pinch (or perhaps a handful) of skepticism.
+
+Covering a spectrum of topics from software development and machine learning to perhaps one or the other personal topic, what you find here may offer insights that range from
 interesting to pointless, with no guarantees of accuracy or coherence.
 
-Hailing from a background steeped in software architecture, I have navigated the software industry's turbulent waters for more years than I'm inclined to enumerate.
-The journey has been long, fraught with code, and punctuated by the occasional coffee spill.
-In the past I have lived in a few different countries, and I have been fortunate to work with a broad set of people, from whom I have learned a great deal.
-People have been the backbone of my career, and I have been fortunate to have met and worked with people who were patient enough to teach me a few tricks.
-
-My favourite authors and intellectual masters include the likes of Penrose, Chomsky, Feynman and Sagan, to name a few. I am also a fan of the classics, and I have a
-particular interest in the ancient Greeks and Romans. I am a firm believer in the power of the written word, and I am a strong advocate for the preservation of the
-classics, as well as the promotion of the arts and humanities.
+Hailing from a software architecture background, I have navigated the software industry's turbulent waters for more years than I'm inclined to enumerate.
+In the past I have lived in a few different countries, and have been fortunate to work with a broad set of people, from whom I have learned a great deal.
+People have been the backbone of my professional and personal journey, and I have been fortunate to have met and worked with some who were patient enough to teach
+me a thing or two.
 
 As the usual disclaimer, the views expressed here are my own and do not necessarily reflect the views of my employer, or any other entity with which I have been associated with.
