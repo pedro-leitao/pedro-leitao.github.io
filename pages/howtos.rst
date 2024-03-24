@@ -9,4 +9,4 @@ Guides and How To's for various likely technical topics. What you find here is m
 useful to you as well.
 
 - `Setting up a Machine Learning environment on Apple Silicon <link://slug/machine-learning-apple-silicon>`_
-- `Distributed Training on Tensorflow & Keras <link://slug/tensorflow-keras-distributed-training>`_
+- `Distributed training on Tensorflow & Keras <link://slug/tensorflow-keras-distributed-training>`_
