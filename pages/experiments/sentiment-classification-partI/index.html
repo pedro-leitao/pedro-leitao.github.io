@@ -659,7 +659,7 @@ Validation accuracy: 0.7057313919067383
 </div>
 <div class="cell border-box-sizing code_cell rendered" id="cell-id=fcc29b84">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Try a few predictions</span>
@@ -678,27 +678,27 @@ Validation accuracy: 0.7057313919067383
     <span class="c1"># Get the sentiment with the highest probability</span>
     <span class="n">sentiment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
     
-    <span class="k">return</span> <span class="n">sentiment</span>
+    <span class="k">return</span> <span class="n">sentiment</span><span class="p">,</span> <span class="n">prediction</span>
 
 <span class="c1"># Predict the sentiment of a positive sentence</span>
-<span class="n">sentence</span> <span class="o">=</span> <span class="s2">"IBM reported a 15</span><span class="si">% i</span><span class="s2">ncrease in revenue during the last quarter"</span>
-<span class="n">sentiment</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentence: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">"IBM reported an increase in revenue during the last quarter"</span>
+<span class="n">sentiment</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentence: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">, Predictions: </span><span class="si">{</span><span class="n">predictions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># Print the sentiment</span>
 <span class="k">if</span> <span class="n">sentiment</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Correctly predicted - Sentiment: Positive"</span><span class="p">)</span>
 
 <span class="c1"># Predict the sentiment of a neutral sentence</span>
 <span class="n">sentence</span> <span class="o">=</span> <span class="s2">"IBM is a technology company"</span>
-<span class="n">sentiment</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentence: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">sentiment</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentence: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">, Predictions: </span><span class="si">{</span><span class="n">predictions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">sentiment</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Correctly predicted - Sentiment: Neutral"</span><span class="p">)</span>
 
 <span class="c1"># Predict the sentiment of a negative sentence</span>
-<span class="n">sentence</span> <span class="o">=</span> <span class="s2">"IBM reported a 15</span><span class="si">% d</span><span class="s2">ecrease in revenue during the last quarter"</span>
-<span class="n">sentiment</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentence: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">"IBM down $3.4 in yesterday's trading session"</span>
+<span class="n">sentiment</span><span class="p">,</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentence: </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">, Predictions: </span><span class="si">{</span><span class="n">predictions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">sentiment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Correctly predicted - Sentiment: Negative"</span><span class="p">)</span>
 </pre></div>
@@ -710,16 +710,39 @@ Validation accuracy: 0.7057313919067383
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 36ms/step
-Sentence: IBM reported a 15% increase in revenue during the last quarter
+<pre><span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 12ms/step
+Sentence: IBM reported an increase in revenue during the last quarter, Predictions: [0.07309805 0.08431192 0.84259003]
 Correctly predicted - Sentiment: Positive
 <span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 10ms/step
-Sentence: IBM is a technology company
+Sentence: IBM is a technology company, Predictions: [0.13165404 0.5093285  0.3590175 ]
 Correctly predicted - Sentiment: Neutral
-<span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 9ms/step
-Sentence: IBM reported a 15% decrease in revenue during the last quarter
+<span class="ansi-bold">1/1</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 10ms/step
+Sentence: IBM down $3.4 in yesterday's trading session, Predictions: [0.47053966 0.3518991  0.1775612 ]
+Correctly predicted - Sentiment: Negative
 </pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=e6cdb61a">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the above output, we can see the model's predictions for a few sample sentences. The model assigns a sentiment label to each sentence, with the corresponding probabilities for each class. The sentiment label with the highest probability is considered the model's prediction for that sentence. Keep in mind the index mapping for sentiment labels: 0 for negative, 1 for neutral, and 2 for positive. In the first sentence example, the model predicts <code>[0.07309805 0.08431192 0.84259003]</code>, or an 84% probability for a positive sentiment.</p>
+<div class="alert alert-block alert-warning">
+<b>Warning: </b>
+An important aspect of developing any model, is understanding your training data and the context in which the model will be used. In this case, the financial sentiment dataset is relatively small and will not be representative enough. You should also consider the potential biases in the data and how they might impact the model's predictions, for example, in our dataset we have an uneven distribution of sentiment classes:
+
+<div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s2">",negative"</span><span class="w"> </span><span class="nv">$HOME</span>/Downloads/data.csv<span class="p">|</span>wc<span class="w"> </span>-l
+<span class="w">     </span><span class="m">860</span>
+grep<span class="w"> </span><span class="s2">",neutral"</span><span class="w"> </span><span class="nv">$HOME</span>/Downloads/data.csv<span class="p">|</span>wc<span class="w"> </span>-l
+<span class="w">    </span><span class="m">3130</span>
+grep<span class="w"> </span><span class="s2">",positive"</span><span class="w"> </span><span class="nv">$HOME</span>/Downloads/data.csv<span class="p">|</span>wc<span class="w"> </span>-l
+<span class="w">    </span><span class="m">1852</span>
+</pre></div>
+<p>It's important to keep these limitations in mind when interpreting the model's predictions and deciding on its deployment.</p>
 </div>
 </div>
 </div>
