@@ -268,7 +268,7 @@ Relative differences (%): [ 16.77148847  94.03930131 -17.9021042   24.04849039  
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that based on the above regressor, our (R^2) is about 0.678. What this means is that 67% of the variance in the target variable can be explained by the features used in the model. In practical terms, this indicates a moderate to good fit, depending on the context and the complexity of the problem being modeled. However, it also means that 33% of the variance is not captured by the model, which could be due to various factors like missing important features, model underfitting, or the data inherently containing a significant amount of unexplainable variability.</p>
+<p>We can see that based on the above regressor, our $R^2$ is about 0.678. What this means is that 67% of the variance in the target variable can be explained by the features used in the model. In practical terms, this indicates a moderate to good fit, depending on the context and the complexity of the problem being modeled. However, it also means that 33% of the variance is not captured by the model, which could be due to various factors like missing important features, model underfitting, or the data inherently containing a significant amount of unexplainable variability.</p>
 </div>
 </div>
 </div>
@@ -367,7 +367,7 @@ Relative differences (%): [ 10.32273684 193.54183955 -14.47183549  29.13692576  
 <li>
 <strong>Tune the models</strong>: Experiment with different settings and configurations to improve accuracy.</li>
 <li>
-<strong>Compare more metrics</strong>: Look beyond the (R^2) score to other metrics like MAE or MSE for a fuller picture of model performance.</li>
+<strong>Compare more metrics</strong>: Look beyond the $R^2$ score to other metrics like MAE or MSE for a fuller picture of model performance.</li>
 <li>
 <strong>Explore model limitations</strong>: Identify and address any shortcomings in the models used.</li>
 </ul>
@@ -379,8 +379,18 @@ Relative differences (%): [ 10.32273684 193.54183955 -14.47183549  29.13692576  
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-3lJUsx1TJHt7BA4udB5KPnDrlkO8T6J6v/op7ui0BbCjvZ9WqV4Xm6DTP6kQ/iBH" crossorigin="anonymous"></script><script type="text/x-mathjax-config">
-        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
-        </script></article><!--End of body content--><footer id="footer"><div class="content-footer">
+MathJax.Hub.Config({
+     tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+         processEscapes: true
+     },
+     displayAlign: 'center', // Change this to 'left' if you want left-aligned equations.
+     "HTML-CSS": {
+         styles: {'.MathJax_Display': {"margin": 0}}
+     }
+ });
+ </script></article><!--End of body content--><footer id="footer"><div class="content-footer">
     Find me on
     <a href="https://www.linkedin.com/in/nunoleitao/" target="_blank">
         <img src="../../../images/LI-In-Bug.png" alt="LinkedIn" style="width: 20px; vertical-align: middle;"></a>, 
