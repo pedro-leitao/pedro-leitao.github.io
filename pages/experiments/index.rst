@@ -9,3 +9,4 @@ Personal experiments on various topics, which might be useful for a broader audi
 
 - `A learning model to classify sentiment in financial sentences - Part I <link://slug/sentiment-classification-partI>`_
 - `An embeddings based Recurrent Neural Network (RNN) to predict Shakespearean text <link://slug/shakespeare-embeddings>`_
+- `Instance vs model based learning <link://slug/instance-vs-model-learning>`_
