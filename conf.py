@@ -283,14 +283,14 @@ TIMEZONE = "Europe/London"
 # Date format used to display post dates. (translatable)
 # Used by babel.dates, CLDR style: http://cldr.unicode.org/translation/date-time-1/date-time
 # You can also use 'full', 'long', 'medium', or 'short'
-# DATE_FORMAT = 'yyyy-MM-dd HH:mm'
+DATE_FORMAT = 'yyyy-MM-dd'
 
 # Date format used to display post dates, if local dates are used. (translatable)
 # Used by Luxon: https://moment.github.io/luxon/docs/manual/formatting
 # Example for presets: {'preset': True, 'format': 'DATE_FULL'}
-# LUXON_DATE_FORMAT = {
-#     DEFAULT_LANG: {'preset': False, 'format': 'yyyy-MM-dd HH:mm'},
-# }
+LUXON_DATE_FORMAT = {
+    DEFAULT_LANG: {'preset': False, 'format': 'yyyy-MM-dd'},
+}
 
 # Date fanciness.
 #
@@ -299,7 +299,7 @@ TIMEZONE = "Europe/London"
 # 2 = using a string like “2 days ago” (JS, using Luxon)
 #
 # Your theme must support it, Bootstrap already does.
-# DATE_FANCINESS = 0
+DATE_FANCINESS = 0
 
 # Customize the locale/region used for a language.
 # For example, to use British instead of US English: LOCALES = {'en': 'en_GB'}
@@ -1358,7 +1358,8 @@ EXTRA_HEAD_DATA = """
 # TYPES_TO_HIDE_TITLE = []
 
 # Additional metadata that is added to a post when creating a new_post
-# ADDITIONAL_METADATA = {}
+ADDITIONAL_METADATA = {
+}
 
 # Nikola supports Twitter Card summaries, but they are disabled by default.
 # They make it possible for you to attach media to Tweets that link
