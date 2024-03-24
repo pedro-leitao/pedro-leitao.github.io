@@ -987,7 +987,9 @@ FEED_LINKS_APPEND_QUERY = False
 
 # A HTML fragment describing the license, for the sidebar.
 # (translatable)
-LICENSE = ""
+LICENSE = """
+<p style="display: inline;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://pedro-leitao.github.io">Pedro's Experiments</a> by <span property="cc:attributionName">Pedro Leitao</span> is marked with <a href="http://creativecommons.org/publicdomain/zero/1.0?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display: inline-block;">CC0 1.0<img style="height:22px!important; margin-left:3px; vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important; margin-left:3px; vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1"></a></p>
+"""
 # I recommend using the Creative Commons' wizard:
 # https://creativecommons.org/choose/
 # LICENSE = """
@@ -1001,10 +1003,11 @@ LICENSE = ""
 #CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         {license}'
 CONTENT_FOOTER = '''
 <div class="content-footer">
-    Follow me on
+    Find me on
     <a href="https://www.linkedin.com/in/nunoleitao/" target="_blank">
         <img src="/images/LI-In-Bug.png" alt="LinkedIn" style="width: 20px; vertical-align: middle;"/>
-    </a>
+    </a>, {license} {date}
+    <p/>
 </div>
 '''
 
