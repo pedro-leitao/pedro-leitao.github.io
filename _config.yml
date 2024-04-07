@@ -42,4 +42,7 @@ html:
 
 sphinx:
   config:
+    suppress_warnings: ["mystnb.unknown_mime_type"]
     html_show_copyright: false
+    html_js_files:
+      - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js # To correctly render plotly

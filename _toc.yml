@@ -14,3 +14,4 @@ parts:
       - file: experiments/ml-pipeline-sklearn
       - file: experiments/sentiment-partI
       - file: experiments/shakespeare-embeddings
+      - file: experiments/gensim
