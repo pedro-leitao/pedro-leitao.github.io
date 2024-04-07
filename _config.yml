@@ -3,6 +3,7 @@
 
 title: Pedro's experiments
 author: Pedro Leitao
+copyright: 2024
 logo: logo.png
 exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, "**.ipynb_checkpoints"]
 base_url: https://pedro-leitao.github.io/
@@ -30,6 +31,15 @@ bibtex_bibfiles:
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
-# html:
-  # use_issues_button: true
-  # use_repository_button: true
+html:
+  use_issues_button: false
+  use_repository_button: false
+  extra_footer: |
+      <div>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+          All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 license</a>
+      </div>
+
+sphinx:
+  config:
+    html_show_copyright: false
