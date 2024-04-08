@@ -11,7 +11,7 @@ base_url: https://pedro-leitao.github.io/
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: cache
+  execute_notebooks: off
   allow_errors: false
   timeout: 300
 

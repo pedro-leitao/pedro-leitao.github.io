@@ -407,26 +407,20 @@ document.write(`
 <p>As the dataset, we will be using <a class="reference external" href="https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays">~100,000 lines from Shakespeare plays</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
 <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;google.colab&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive/
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 
 <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^a-zA-Z ]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -449,7 +443,7 @@ document.write(`
 <p>We start by tokenizing all the text in each line, and then saving the resulting tokenizer. As we will need it at later stages for prediction. We tokenize with the inbuilt <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer">Keras pre-processing tokenizer</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Keras to tokenize the lines.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Keras to tokenize the lines.</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">pad_sequences</span>
 
@@ -479,7 +473,7 @@ document.write(`
 <p>For instance, consider the sentence: “The quick brown fox jumps over the lazy dog.” If we were to generate 2-grams (also known as bigrams) for this sentence, we would produce a list of consecutive word pairs: [“The quick”, “quick brown”, “brown fox”, “fox jumps”, “jumps over”, “over the”, “the lazy”, “lazy dog”]. Similarly, 3-grams (trigrams) would yield: [“The quick brown”, “quick brown fox”, “brown fox jumps”, “fox jumps over”, “jumps over the”, “over the lazy”, “the lazy dog”]. By examining these n-grams, a model learns the common patterns of word sequences in a language, which aids in predicting what word naturally follows a given sequence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_ngrams</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="n">every_nth</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_ngrams</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="n">every_nth</span><span class="p">):</span>
     <span class="n">ngrams</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">token_list</span> <span class="ow">in</span> <span class="n">sequences</span><span class="p">[::</span><span class="n">every_nth</span><span class="p">]:</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">token_list</span><span class="p">)):</span>
@@ -495,7 +489,7 @@ document.write(`
 <p>Here’s an example of the generated n-grams for the first five n-grams produced (integers because we are looking at token indices rather than the actual tokens).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ngrams</span> <span class="o">=</span> <span class="n">create_ngrams</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngrams</span> <span class="o">=</span> <span class="n">create_ngrams</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ngrams</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -516,7 +510,7 @@ document.write(`
 <p>An <code class="docutils literal notranslate"><span class="pre">Adam</span></code> optimizer with a learning rate of <code class="docutils literal notranslate"><span class="pre">0.0005</span></code> is used to compile the model. This reduced learning rate is a deliberate choice to mitigate the risk of exploding gradients, a common issue in training deep neural networks, especially on complex sequence data. The model uses <code class="docutils literal notranslate"><span class="pre">sparse_categorical_crossentropy</span></code> as the loss function, appropriate for this multi-class classification problem, and tracks <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> as a metric to evaluate its performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a model with an embeddings layer.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a model with an embeddings layer.</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Embedding</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers.schedules</span> <span class="kn">import</span> <span class="n">ExponentialDecay</span>
@@ -549,7 +543,7 @@ document.write(`
 <p>For instance, consider a scenario where we are training a model on a dataset of sentences with varying lengths, and our model requires each input sequence to have a length of 10 words. A sentence with 8 words would be padded with 2 pad tokens at the end (or the beginning, as per the chosen strategy), while a sentence with 12 words might be truncated to the first (or last) 10 words.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">max_seq_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ngrams</span><span class="p">])</span>  <span class="c1"># Determine the max length after forming n-grams</span>
 <span class="n">padded_sequences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">ngrams</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">))</span>
@@ -566,7 +560,7 @@ document.write(`
 <p>The presence of sequences filled exclusively with pad tokens (zeros) or empty sequences could significantly impact the model’s learning process. Such sequences do not provide any valuable information or context that the model can learn from, potentially skewing the training process or leading to biases in the model’s predictions. For instance, a model trained on a dataset with a high number of zero-only sequences might become inclined to predict pad tokens more frequently, reducing its overall effectiveness in generating or classifying text.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that the input sequences are not empty, that are not all zeros, and that there are no NaN values. Print an error if they do.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check that the input sequences are not empty, that are not all zeros, and that there are no NaN values. Print an error if they do.</span>
 <span class="k">def</span> <span class="nf">check_input_sequences</span><span class="p">(</span><span class="n">input_sequences</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking input sequences...&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">sequence</span> <span class="ow">in</span> <span class="n">input_sequences</span><span class="p">:</span>
@@ -666,7 +660,7 @@ Example target word: [   4 9703]
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add early stopping to prevent overfitting.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add early stopping to prevent overfitting.</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
 <span class="n">early_stopping_callback</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span>
     <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span>  <span class="c1"># Monitor the training loss</span>
@@ -711,7 +705,7 @@ None
 <p>We finally run the training of our LSTM model with the setup previously discussed, including the early stopping mechanism to prevent overfitting. This process involves feeding the model with our preprocessed and padded sequences of text data, along with their corresponding targets, and allowing it to learn how to predict the next word in a sequence based on its current understanding of the text’s structure and content.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">TensorBoard</span>
 
 <span class="c1"># Create a unique name for the log directory based on the current time and set callback</span>
@@ -765,7 +759,7 @@ Epoch 139: early stopping
 <p>Let us now plot the training history, and save the model. We are saving the trained model on the Google Drive to ensure it doesn’t get deleted once the running session ends.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the training history</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the training history</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="k">def</span> <span class="nf">plot_training_history</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
@@ -794,7 +788,7 @@ Epoch 139: early stopping
 <p>Finally we can run predictions based on seed inputs, to see how the model performs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model, and the tokenizer</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model, and the tokenizer</span>
 
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
 <span class="kn">import</span> <span class="nn">pickle</span>

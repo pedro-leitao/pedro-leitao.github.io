@@ -465,7 +465,7 @@ It can be downloaded/loaded using the
       Statistics and Probability Letters, 33 (1997) 291-297
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14146a790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17db12fa0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d120b450b8bf4f1de80f829e3cdd6d28abba9a096639814f6219587cc07b7799.png" src="../_images/d120b450b8bf4f1de80f829e3cdd6d28abba9a096639814f6219587cc07b7799.png" />
@@ -511,10 +511,10 @@ It can be downloaded/loaded using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model R^2 score: 0.6701434312491916
-Predictions for first 5 instances: [0.563    0.8563   4.221604 2.6454   2.6198  ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model R^2 score: 0.6685552061947615
+Predictions for first 5 instances: [0.5474   0.8863   4.297903 2.6508   2.4821  ]
 Actual values for first 5 instances: [0.477   0.458   5.00001 2.186   2.78   ]
-Relative differences (%): [ 18.0293501   86.9650655  -15.56808886  21.01555352  -5.76258993]
+Relative differences (%): [ 14.75890985  93.51528384 -14.04211192  21.26258005 -10.71582734]
 </pre></div>
 </div>
 </div>
@@ -564,48 +564,20 @@ Relative differences (%): [ 18.0293501   86.9650655  -15.56808886  21.01555352  
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/pedroleitao/.pyenv/versions/3.9.18/envs/tf/lib/python3.9/site-packages/keras/src/layers/core/dense.py:85: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(activity_regularizer=activity_regularizer, **kwargs)
-2024-04-08 10:14:30.120146: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M2
-2024-04-08 10:14:30.120163: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 24.00 GB
-2024-04-08 10:14:30.120167: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 8.00 GB
-2024-04-08 10:14:30.120180: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
-2024-04-08 10:14:30.120189: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
+2024-04-08 10:06:46.961288: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M2
+2024-04-08 10:06:46.961306: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 24.00 GB
+2024-04-08 10:06:46.961310: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 8.00 GB
+2024-04-08 10:06:46.961326: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2024-04-08 10:06:46.961338: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
+2024-04-08 10:06:47.080453: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-08 10:14:30.351328: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/129</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 7ms/step - loss: 0.2710
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold"> 38/129</span> <span class=" -Color -Color-Green">━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3254
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold"> 76/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3351
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">114/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3355
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">129/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3355
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final validation loss: 0.32527393102645874
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 169ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 169ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions for first 5 instances: [0.3799098 1.4113882 3.9570675 2.767168  2.9889328]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">129/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3369
+Final validation loss: 0.3279680609703064
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 178ms/step
+Predictions for first 5 instances: [0.4028629 1.2707397 3.897564  2.7003922 2.9025683]
 Actual values for first 5 instances: [0.477   0.458   5.00001 2.186   2.78   ]
-Relative differences (%): [-20.35433681 208.16335345 -20.85880849  26.5859124    7.51557007]
+Relative differences (%): [-15.54236762 177.45407742 -22.04887722  23.5312098    4.4089331 ]
 </pre></div>
 </div>
 </div>
