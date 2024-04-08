@@ -611,11 +611,11 @@ Batch size can have a significant impact on the training process.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/pedroleitao/.pyenv/versions/3.9.18/envs/tf/lib/python3.9/site-packages/keras/src/layers/core/embedding.py:81: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
   super().__init__(**kwargs)
-2024-04-08 09:57:26.461609: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M2
-2024-04-08 09:57:26.461626: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 24.00 GB
-2024-04-08 09:57:26.461631: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 8.00 GB
-2024-04-08 09:57:26.461665: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
-2024-04-08 09:57:26.461678: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
+2024-04-08 10:16:06.553359: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M2
+2024-04-08 10:16:06.553373: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 24.00 GB
+2024-04-08 10:16:06.553377: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 8.00 GB
+2024-04-08 10:16:06.553393: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2024-04-08 10:16:06.553404: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
 </pre></div>
 </div>
 <div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential"</span>
@@ -692,11 +692,11 @@ Batch size can have a significant impact on the training process.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-08 09:57:26.738601: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-08 10:16:06.792729: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.8367215991020203
-Validation accuracy: 0.7117193937301636
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.8365076184272766
+Validation accuracy: 0.7100085616111755
 </pre></div>
 </div>
 </div>
@@ -731,8 +731,8 @@ Validation accuracy: 0.7117193937301636
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d9ca6256513387d9d65a5bac4d9fb86e2c4da3bb482593cf9424e530df2b5915.png" src="../_images/d9ca6256513387d9d65a5bac4d9fb86e2c4da3bb482593cf9424e530df2b5915.png" />
-<img alt="../_images/3c737aefe05f4d53bcef5f64977c244185a7cdb51dc87eaa12b0fe9aee1cd22c.png" src="../_images/3c737aefe05f4d53bcef5f64977c244185a7cdb51dc87eaa12b0fe9aee1cd22c.png" />
+<img alt="../_images/6db085e370a1caf8cc20cbad7e89b825b2cc9931521a9e44b5a68609541d31ec.png" src="../_images/6db085e370a1caf8cc20cbad7e89b825b2cc9931521a9e44b5a68609541d31ec.png" />
+<img alt="../_images/2db3c8c4e57073ac9f47d7e558bea4c7a22718871afcfc8d9e1046105b4a94ea.png" src="../_images/2db3c8c4e57073ac9f47d7e558bea4c7a22718871afcfc8d9e1046105b4a94ea.png" />
 </div>
 </div>
 <p>We can now try out some predictions on the model to see how it performs on unseen data.</p>
@@ -781,14 +781,35 @@ Validation accuracy: 0.7117193937301636
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 48ms/step
-Sentence: IBM reported an increase in revenue during the last quarter, Predictions: [0.08229597 0.24526857 0.6724355 ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 45ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 45ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentence: IBM reported an increase in revenue during the last quarter, Predictions: [0.10793524 0.14154196 0.75052285]
 Correctly predicted - Sentiment: Positive
-<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 9ms/step
-Sentence: IBM is a technology company, Predictions: [0.10290223 0.7102392  0.18685855]
+
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 7ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 7ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentence: IBM is a technology company, Predictions: [0.12592863 0.6510984  0.22297299]
 Correctly predicted - Sentiment: Neutral
-<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 9ms/step
-Sentence: IBM down $3.4 in yesterday&#39;s trading session, Predictions: [0.347476  0.3561046 0.2964194]
+
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 7ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 7ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentence: IBM down $3.4 in yesterday&#39;s trading session, Predictions: [0.38864955 0.29330721 0.31804326]
+Correctly predicted - Sentiment: Negative
 </pre></div>
 </div>
 </div>
@@ -877,19 +898,23 @@ t-SNE, short for t-Distributed Stochastic Neighbor Embedding, is a machine learn
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[t-SNE] Computing 31 nearest neighbors...
-[t-SNE] Indexed 5000 samples in 0.003s...
-[t-SNE] Computed neighbors for 5000 samples in 0.048s...
+[t-SNE] Indexed 5000 samples in 0.001s...
+[t-SNE] Computed neighbors for 5000 samples in 0.023s...
 [t-SNE] Computed conditional probabilities for sample 1000 / 5000
 [t-SNE] Computed conditional probabilities for sample 2000 / 5000
 [t-SNE] Computed conditional probabilities for sample 3000 / 5000
 [t-SNE] Computed conditional probabilities for sample 4000 / 5000
 [t-SNE] Computed conditional probabilities for sample 5000 / 5000
-[t-SNE] Mean sigma: 0.052459
-[t-SNE] KL divergence after 250 iterations with early exaggeration: 72.451553
-[t-SNE] KL divergence after 300 iterations: 2.603390
+[t-SNE] Mean sigma: 0.051566
 </pre></div>
 </div>
-<img alt="../_images/f563d6b9d1c2da3166ebab05b7aea5bfb494bd25006eb8d5f6f30a12ade0511b.png" src="../_images/f563d6b9d1c2da3166ebab05b7aea5bfb494bd25006eb8d5f6f30a12ade0511b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[t-SNE] KL divergence after 250 iterations with early exaggeration: 73.643921
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[t-SNE] KL divergence after 300 iterations: 2.665655
+</pre></div>
+</div>
+<img alt="../_images/9fe338cc1406be7f3ebdb14c6f5419e063c94a49b297701626a23c9a7dfe7f2f.png" src="../_images/9fe338cc1406be7f3ebdb14c6f5419e063c94a49b297701626a23c9a7dfe7f2f.png" />
 </div>
 </div>
 </section>

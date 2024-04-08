@@ -636,42 +636,6 @@ Keras version is 3.0.5
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Enabled multi-worker collective ops with available devices: [&#39;/job:chief/replica:0/task:0/device:CPU:0&#39;, &#39;/job:worker/replica:0/task:0/device:CPU:0&#39;]
-INFO:tensorflow:Using MirroredStrategy with devices (&#39;/job:chief/task:0/device:CPU:0&#39;,)
-INFO:tensorflow:Check health not enabled.
-INFO:tensorflow:MultiWorkerMirroredStrategy with cluster_spec = {&#39;worker&#39;: [&#39;pedros-macbook-pro-3.local:9999&#39;], &#39;chief&#39;: [&#39;macmini.local:9999&#39;]}, task_type = &#39;chief&#39;, task_id = 0, num_workers = 2, local_devices = (&#39;/job:chief/task:0/device:CPU:0&#39;,), communication = CommunicationImplementation.AUTO
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1710684877.465218 3612918 coordination_service_agent.cc:303] Coordination agent has successfully connected.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
-INFO:tensorflow:Collective all_reduce tensors: 1 all_reduces, num_devices = 1, group_size = 2, implementation = CommunicationImplementation.AUTO, num_packs = 1
-INFO:tensorflow:Collective all_reduce tensors: 1 all_reduces, num_devices = 1, group_size = 2, implementation = CommunicationImplementation.AUTO, num_packs = 1
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 46ms/step - loss: 1.5073 - mae: 1.2994
-Epoch 2/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 40ms/step - loss: 0.1458 - mae: 0.4487
-Epoch 3/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 40ms/step - loss: 0.0306 - mae: 0.1988
-Epoch 4/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 47ms/step - loss: 0.0200 - mae: 0.1575
-Epoch 5/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 39ms/step - loss: 0.0191 - mae: 0.1523
-Epoch 6/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 38ms/step - loss: 0.0201 - mae: 0.1594
-Epoch 7/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 46ms/step - loss: 0.0203 - mae: 0.1598
-Epoch 8/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 38ms/step - loss: 0.0185 - mae: 0.1512
-Epoch 9/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 46ms/step - loss: 0.0181 - mae: 0.1511
-Epoch 10/10
-<span class=" -Color -Color-Bold">20/20</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 45ms/step - loss: 0.0195 - mae: 0.1559
-</pre></div>
-</div>
-</div>
 </div>
 <p>If all went well, you will have seen the model being trained across your multiple devices. We can visualise our dataset to illustrate what the model solved for.</p>
 <div class="cell docutils container">
