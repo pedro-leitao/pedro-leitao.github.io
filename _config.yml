@@ -4,7 +4,7 @@
 title: Pedro's experiments
 author: Pedro Leitao
 copyright: "2024"
-logo: logo.png
+logo: logo-new.png
 exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, logs, "**.ipynb_checkpoints"]
 base_url: https://pedro-leitao.github.io/
 
