@@ -3,3 +3,8 @@ matplotlib
 numpy
 pandas
 plotly
+gensim
+nltk
+scikit-learn
+seaborn
+tensorflow

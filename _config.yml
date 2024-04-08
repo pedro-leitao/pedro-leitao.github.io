@@ -3,16 +3,17 @@
 
 title: Pedro's experiments
 author: Pedro Leitao
-copyright: 2024
+copyright: "2024"
 logo: logo.png
-exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, "**.ipynb_checkpoints"]
+exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, logs, "**.ipynb_checkpoints"]
 base_url: https://pedro-leitao.github.io/
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: off
+  execute_notebooks: cache
   allow_errors: false
+  timeout: 300
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -45,4 +46,4 @@ sphinx:
     suppress_warnings: ["mystnb.unknown_mime_type"]
     html_show_copyright: false
     html_js_files:
-      - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js # To correctly render plotly
+      - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" # To correctly render plotly

@@ -380,7 +380,7 @@ document.write(`
 <p>Let us start by getting a sense of what the dataset is about.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_california_housing</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -409,21 +409,21 @@ California Housing dataset
 
 **Data Set Characteristics:**
 
-    :Number of Instances: 20640
+:Number of Instances: 20640
 
-    :Number of Attributes: 8 numeric, predictive attributes and the target
+:Number of Attributes: 8 numeric, predictive attributes and the target
 
-    :Attribute Information:
-        - MedInc        median income in block group
-        - HouseAge      median house age in block group
-        - AveRooms      average number of rooms per household
-        - AveBedrms     average number of bedrooms per household
-        - Population    block group population
-        - AveOccup      average number of household members
-        - Latitude      block group latitude
-        - Longitude     block group longitude
+:Attribute Information:
+    - MedInc        median income in block group
+    - HouseAge      median house age in block group
+    - AveRooms      average number of rooms per household
+    - AveBedrms     average number of bedrooms per household
+    - Population    block group population
+    - AveOccup      average number of household members
+    - Latitude      block group latitude
+    - Longitude     block group longitude
 
-    :Missing Attribute Values: None
+:Missing Attribute Values: None
 
 This dataset was obtained from the StatLib repository.
 https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html
@@ -450,10 +450,10 @@ It can be downloaded/loaded using the
       Statistics and Probability Letters, 33 (1997) 291-297
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7b489b9b54e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14146a790&gt;
 </pre></div>
 </div>
-<img alt="../_images/9ecb6fe60c2fd2dfe37b7ddb072c32d52c79e73ebbea0ddb218307fe0671d74a.png" src="../_images/9ecb6fe60c2fd2dfe37b7ddb072c32d52c79e73ebbea0ddb218307fe0671d74a.png" />
+<img alt="../_images/d120b450b8bf4f1de80f829e3cdd6d28abba9a096639814f6219587cc07b7799.png" src="../_images/d120b450b8bf4f1de80f829e3cdd6d28abba9a096639814f6219587cc07b7799.png" />
 </div>
 </div>
 <p>And now that we have a reasonable idea of what data we are dealing with, let us define the predictor. In our case, we will be using a k-Nearest Neighbors regressor set for 10 neighbour groups.</p>
@@ -461,9 +461,7 @@ It can be downloaded/loaded using the
 <b>Note: </b> The k-nearest neighbors (k-NN) regressor is a straightforward  method used in machine learning for predicting the value of an unknown point based on the values of its nearest neighbors. Imagine you're at a park trying to guess the age of a tree you're standing next to but have no idea how to do it. What you can do, however, is look at the nearby trees whose ages you do know. You decide to consider the ages of the 3 trees closest to the one you're interested in. If those trees are 50, 55, and 60 years old, you might guess that the tree you're looking at is around 55 years old—the average age of its "nearest neighbors."
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">housing</span><span class="o">.</span><span class="n">target</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">housing</span><span class="o">.</span><span class="n">target</span>
 
 <span class="c1"># Load and split the California housing dataset</span>
 <span class="n">X_train_full</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train_full</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -498,10 +496,10 @@ It can be downloaded/loaded using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model R^2 score: 0.6860593051838495
-Predictions for first 5 instances: [0.557    0.8887   4.104903 2.7117   2.5497  ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model R^2 score: 0.6701434312491916
+Predictions for first 5 instances: [0.563    0.8563   4.221604 2.6454   2.6198  ]
 Actual values for first 5 instances: [0.477   0.458   5.00001 2.186   2.78   ]
-Relative differences (%): [ 16.77148847  94.03930131 -17.9021042   24.04849039  -8.28417266]
+Relative differences (%): [ 18.0293501   86.9650655  -15.56808886  21.01555352  -5.76258993]
 </pre></div>
 </div>
 </div>
@@ -513,7 +511,7 @@ Relative differences (%): [ 16.77148847  94.03930131 -17.9021042   24.04849039  
 <p>Let’s explore a model-based method for making predictions by utilizing a straightforward neural network structure. This network comprises two layers: the first is a dense layer with 50 neurons, designed to process input features and identify patterns through activation functions. The second layer is a singular neuron that outputs the predicted value. This setup forms the core of our predictive model, where the initial layer’s neuron count aids in capturing the complexities of the input data, and the final single neuron consolidates this information into a single predictive output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
 
 <span class="c1"># Define the model architecture</span>
@@ -549,12 +547,50 @@ Relative differences (%): [ 16.77148847  94.03930131 -17.9021042   24.04849039  
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>129/129 [==============================] - 0s 2ms/step - loss: 0.3393
-Final validation loss: 0.3401060402393341
-1/1 [==============================] - 0s 47ms/step
-Predictions for first 5 instances: [0.52623945 1.3444216  4.276417   2.8229332  2.8558393 ]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/pedroleitao/.pyenv/versions/3.9.18/envs/tf/lib/python3.9/site-packages/keras/src/layers/core/dense.py:85: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+2024-04-08 10:14:30.120146: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M2
+2024-04-08 10:14:30.120163: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 24.00 GB
+2024-04-08 10:14:30.120167: I metal_plugin/src/device/metal_device.cc:313] maxCacheSize: 8.00 GB
+2024-04-08 10:14:30.120180: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:305] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2024-04-08 10:14:30.120189: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:271] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-08 10:14:30.351328: I tensorflow/core/grappler/optimizers/custom_graph_optimizer_registry.cc:117] Plugin optimizer for device_type GPU is enabled.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/129</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 7ms/step - loss: 0.2710
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold"> 38/129</span> <span class=" -Color -Color-Green">━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3254
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold"> 76/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3351
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">114/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3355
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">129/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.3355
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final validation loss: 0.32527393102645874
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 169ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">1/1</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 169ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predictions for first 5 instances: [0.3799098 1.4113882 3.9570675 2.767168  2.9889328]
 Actual values for first 5 instances: [0.477   0.458   5.00001 2.186   2.78   ]
-Relative differences (%): [ 10.32273684 193.54183955 -14.47183549  29.13692576   2.72803066]
+Relative differences (%): [-20.35433681 208.16335345 -20.85880849  26.5859124    7.51557007]
 </pre></div>
 </div>
 </div>
