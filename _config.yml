@@ -13,7 +13,7 @@ base_url: https://pedro-leitao.github.io/
 execute:
   execute_notebooks: cache
   allow_errors: false
-  timeout: 300
+  timeout: 600
 
 # Define the name of the latex output file for PDF builds
 latex:
