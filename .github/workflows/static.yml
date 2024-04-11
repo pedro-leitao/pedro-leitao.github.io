@@ -29,6 +29,10 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install graphviz
+      run: |
+        apt install graphviz
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
