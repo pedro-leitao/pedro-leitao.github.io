@@ -29,9 +29,17 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: Install graphviz
+      run: |
+        sudo apt install graphviz
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
+    - name: Check dot works
+      run: |
+        dot -V
 
     # (optional) Cache your executed notebooks between runs
     # if you have config:
