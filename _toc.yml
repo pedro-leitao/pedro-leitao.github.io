@@ -16,3 +16,4 @@ parts:
       - file: experiments/shakespeare-embeddings
       - file: experiments/gensim
       - file: experiments/pca-vs-tsne
+      - file: experiments/random-forests
