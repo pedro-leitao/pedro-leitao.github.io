@@ -31,7 +31,7 @@ jobs:
 
     - name: Install graphviz
       run: |
-        apt install graphviz
+        sudo apt install graphviz
 
     - name: Install dependencies
       run: |
