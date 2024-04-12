@@ -2,7 +2,7 @@
 
 ```{image} images/pedro-business.jpg
 :alt: Pedro
-:height: 300px
+:height: 350px
 :align: right
 ```
 
