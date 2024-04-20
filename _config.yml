@@ -12,6 +12,7 @@ base_url: https://pedro-leitao.github.io/
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: cache
+  exclude_patterns: ["sentiment-partI.ipynb", "shakespeare-embeddings.ipynb", "bert-emotions.ipynb"]
   allow_errors: false
   timeout: 600
 

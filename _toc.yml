@@ -17,3 +17,4 @@ parts:
       - file: experiments/gensim
       - file: experiments/pca-vs-tsne
       - file: experiments/random-forests
+      - file: experiments/bert-emotions
