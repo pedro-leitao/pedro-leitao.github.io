@@ -46,6 +46,7 @@ html:
 
 sphinx:
   config:
+    html_theme: "insegel"
     language: en
     suppress_warnings: ["mystnb.unknown_mime_type"]
     html_show_copyright: false
