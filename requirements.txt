@@ -11,4 +11,3 @@ tensorflow
 scipy==1.10.1
 xgboost
 dtreeviz
-insegel
