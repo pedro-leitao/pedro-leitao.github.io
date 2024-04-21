@@ -37,6 +37,7 @@ html:
   use_issues_button: false
   use_repository_button: true
   html_show_copyright: false
+  use_multitoc_numbering: false
   extra_footer: |
       <div>
       <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
