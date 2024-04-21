@@ -1,4 +1,4 @@
-# Pedro's experiments
+## Pedro's experiments
 
 ```{image} images/pedro-business.jpg
 :alt: Pedro
