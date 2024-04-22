@@ -52,9 +52,16 @@ sphinx:
       home_page_in_toc: true
       show_navbar_depth: 2
       extra_footer: |
-        <div>
-        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
-            All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 license</a>
+        <div style="display: flex; align-items: center;">
+          <a href="https://www.linkedin.com/in/nunoleitao/">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Profile" style="width: 20px; margin-right: 10px;">
+          </a>
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png" alt="CC BY-NC-SA 4.0 License">
+          </a>
+          All content on this site (unless otherwise specified) is licensed under the 
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 license</a>
         </div>
+  
       repository_url: https://github.com/pedro-leitao/pedro-leitao.github.io
       repository_branch: master
