@@ -54,7 +54,7 @@ sphinx:
       extra_footer: |
         <div style="display: flex; align-items: center;">
           <a href="https://www.linkedin.com/in/nunoleitao/">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Profile" style="width: 20px; margin-right: 10px;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Profile" style="width: 30px; margin-right: 10px;">
           </a>
           <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
               <img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png" alt="CC BY-NC-SA 4.0 License">
