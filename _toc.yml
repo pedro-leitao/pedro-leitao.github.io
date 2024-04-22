@@ -1,7 +1,7 @@
 format: jb-book
 root: intro
 options:
-  numbered: true
+  numbered: false
 chapters:
 - file: experiments/index
   sections:
