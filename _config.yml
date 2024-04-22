@@ -64,3 +64,5 @@ sphinx:
         </div>
       repository_url: https://github.com/pedro-leitao/pedro-leitao.github.io
       repository_branch: master
+      use_source_button: true
+      use_repository_button: true
