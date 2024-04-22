@@ -39,11 +39,6 @@ html:
   use_repository_button: true
   html_show_copyright: false
   use_multitoc_numbering: false
-  extra_footer: |
-      <div>
-      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
-          All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 license</a>
-      </div>
 
 sphinx:
   config:
@@ -54,3 +49,8 @@ sphinx:
       - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" # To correctly render plotly
     html_theme_options:
       show_navbar_depth: 2
+      extra_footer: |
+        <div>
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+            All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 license</a>
+        </div>
