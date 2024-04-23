@@ -16,6 +16,6 @@ As the usual disclaimer, any views expressed here are my own and do not necessar
 
 ```{image} logo.png
 :alt: Jupyter Book
-:height: 70px
-:align: right
+:height: 40px
+:align: left
 ```
