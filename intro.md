@@ -12,10 +12,5 @@ Covering a spectrum of topics from software, machine learning, software architec
 
 As the usual disclaimer, any views expressed here are my own and do not necessarily reflect the views of my employer, or any other entity with which I have been associated with.
 
-<span style="font-size:small;">Created with</span>
+<span style="font-size:small;">Created with</span> <a href="https://jupyterbook.org"> <img src="logo.png" alt="Jupyter Book" height="30px" style="float: left;"></a>
 
-```{image} logo.png
-:alt: Jupyter Book
-:height: 40px
-:align: left
-```
