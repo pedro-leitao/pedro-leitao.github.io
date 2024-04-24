@@ -1,7 +1,3 @@
----
-file_format: mystnb
----
-
 # Jupyter Book for a Personal Site
 
 Having a personal site or blog was all the rage back in the early 2000s, but it seems to have fallen out of favor in recent years. Social media platforms like Twitter, Instagram, and LinkedIn have become the go-to places for sharing updates, thoughts, and projects. However, there's something special about having your own corner of the internet where you can showcase your work, share your ideas, and connect with others in a more long-form and structured way.
@@ -88,13 +84,10 @@ jobs:
 
 ## Notes
 
-Here are some particular notes on things I've figured out the hard way:
+Here are some notes on peculiarities I've had to figure out the hard way:
 
 - When using MyST Markdown content
   - Make sure you use the [correct syntax](https://jupyterbook.org/en/stable/reference/cheatsheet.html#code) for various blocks - for example, `{code-cell}` and `{code}` for executable code cells and code blocks, respectively.
-  - Additionally, read the [text based MyST notebooks guide](https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html#) for MyST-NB.
-- Don't try and guess what your `_toc.yml` file should look like, you can programmatically generate it using the `jupyter-book toc` command. For example, in my case I just run
-```bash
-jupyter-book toc from-project -e .rst -e .md -e .ipynb -f jb-book pedros-experiments/ > pedros-experiments/_toc.yml
-```
+  - Additionally, read the [text based MyST notebooks guide](https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html#) for MyST-NB, there is significant detail there which is useful to understand.
+- Don't try and guess what your `_toc.yml` file should look like, you can programmatically generate it using the `jupyter-book toc` command. For example, in my case I just run `jupyter-book toc from-project -e .rst -e .md -e .ipynb -f jb-book pedros-experiments/ > pedros-experiments/_toc.yml` to generate the table of contents for this book.
 
