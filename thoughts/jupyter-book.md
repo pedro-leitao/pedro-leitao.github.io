@@ -16,6 +16,7 @@ When authoring content, if you use any Markdown, make sure you read the [Jupyter
 
 I previously had used [Hugo](https://gohugo.io) and [Nikola](https://getnikola.com), but neither of them felt quite right for my needs, nor did they integrate as well with my existing workflow. Jupyter Book just _feels_ like it works really well with a bunch of tools, and it's been a joy to use so far. Sure, it doesn't ship with all the templates and themes others do (pretty much there's one theme which works out of the box, [Sphinx Book](https://sphinx-book-theme.readthedocs.io/en/stable/), and which provides pretty much all you need), but it's way easier to setup and get going with without feeling as brittle or cumbersome.
 
+
 ## Automated deployments on GitHub Pages
 
 A great feature of Jupyter Book is that it can automatically build and deploy your book to GitHub Pages whenever you push changes to your repository. This is done using GitHub Actions, which can fully automate your workflow in your GitHub repository. You can set up a simple workflow that builds your book whenever you push changes to your repository, and then deploys it to GitHub Pages so that it's always up to date.
@@ -82,12 +83,11 @@ jobs:
 ```
 ````
 
-## Notes
+## Notes
 
-Here are some notes on peculiarities I've had to figure out the hard way:
+Here are some peculiarities I've had to figure out the hard way:
 
 - When using MyST Markdown content
   - Make sure you use the [correct syntax](https://jupyterbook.org/en/stable/reference/cheatsheet.html#code) for various blocks - for example, `{code-cell}` and `{code}` for executable code cells and code blocks, respectively.
   - Additionally, read the [text based MyST notebooks guide](https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html#) for MyST-NB, there is significant detail there which is useful to understand.
 - Don't try and guess what your `_toc.yml` file should look like, you can programmatically generate it using the `jupyter-book toc` command. For example, in my case I just run `jupyter-book toc from-project -e .rst -e .md -e .ipynb -f jb-book pedros-experiments/ > pedros-experiments/_toc.yml` to generate the table of contents for this book.
-
