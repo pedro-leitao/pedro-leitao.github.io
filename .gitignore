@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+.jupyter
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux system files
+.directory
+
+# Virtual environments
+env/
+venv/
+.venv/
+*.env
+*.venv
+
+# Sphinx documentation
+_build/
+_build/html
+_build/doctrees
+_build/jupyter_execute
+
+# Jupyter Book cache
+.jupyter_cache/
+
+# Python debug logs
+*.log
+
+# Node modules
+node_modules/
+
+# Private keys
+*.pem
+
+# Book outputs
+_book/
+_bookdown_files/
+
+# Exclude all Markdown backups
+*.md.back
+*.markdown.back
+
+# Environment variables
+.env
+
