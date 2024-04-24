@@ -49,6 +49,7 @@ sphinx:
       - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" # To correctly render plotly
     html_theme_options:
       toc_title: "On this page"
+      collapse_navbar: true  # Ensures that the navigation collapses by default
       home_page_in_toc: true
       show_navbar_depth: 2
       extra_footer: |

@@ -1,7 +1,5 @@
 format: jb-book
 root: intro
-options:
-  numbered: false
 chapters:
 - file: experiments/index
   sections:
@@ -17,3 +15,7 @@ chapters:
   sections:
   - file: howtos/apple-silicon-ml
   - file: howtos/distributed-training
+- file: thoughts/index
+  sections:
+  - file: thoughts/jupyter-book
+
