@@ -24,7 +24,9 @@ I previously had used [Hugo](https://gohugo.io) and [Nikola](https://getnikola.c
 
 A great feature of Jupyter Book is that it can automatically build and deploy your book to GitHub Pages whenever you push changes to your repository. This is done using GitHub Actions, which can fully automate your workflow in your GitHub repository. You can set up a simple workflow that builds your book whenever you push changes to your repository, and then deploys it to GitHub Pages so that it's always up to date.
 
-````{dropdown} Here's my GitHub Actions workflow for deploying this site
+ Here's my GitHub Actions workflow for deploying this site:
+
+````{toggle}
 ```{code} yaml
 name: deploy-book
 
