@@ -86,3 +86,15 @@ jobs:
 ```
 ````
 
+## Notes
+
+Here are some particular notes on things I've figured out the hard way:
+
+- When using MyST Markdown content
+  - Make sure you use the [correct syntax](https://jupyterbook.org/en/stable/reference/cheatsheet.html#code) for various blocks - for example, `{code-cell}` and `{code}` for executable code cells and code blocks, respectively.
+  - Additionally, read the [text based MyST notebooks guide](https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html#) for MyST-NB.
+- Don't try and guess what your `_toc.yml` file should look like, you can programmatically generate it using the `jupyter-book toc` command. For example, in my case I just run
+```bash
+jupyter-book toc from-project -e .rst -e .md -e .ipynb -f jb-book pedros-experiments/ > pedros-experiments/_toc.yml
+```
+
