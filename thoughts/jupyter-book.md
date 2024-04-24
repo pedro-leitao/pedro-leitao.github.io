@@ -12,9 +12,9 @@ It's a part of the whole Jupyter ecosystem, which includes [Jupyter Notebooks](h
 
 In my case, I host content on [GitHub Pages](https://pages.github.com), which is free and easy to set up. I can write content in Markdown or Jupyter Notebooks, push it to a GitHub repository, and have it automatically built and deployed. It's a simple and efficient workflow that lets me focus on creating content rather than worrying about the technical details of hosting and maintaining a website. You can also host your Jupyter Book on [Netlify](https://www.netlify.com), [Read the Docs](https://readthedocs.org) or just about anywhere which can host HTML content.
 
-```{tip}
+:::{tip}
 When authoring content, if you use any Markdown, make sure you read the [JupyterBook MyST Markdown Guide](https://jupyterbook.org/content/myst.html), and the broader [MyST Markdown Guide](https://mystmd.org/guide) to understand how to use Markdown in Jupyter Book. It's a bit different from standard Markdown, but it offers an enourmous degree of authoring capabilities, at the cost of a bit of complexity and at times, perplexity!
-```
+:::
 
 ## Alternatives I tried
 
