@@ -91,3 +91,11 @@ Here are some peculiarities I've had to figure out the hard way:
   - Make sure you use the [correct syntax](https://jupyterbook.org/en/stable/reference/cheatsheet.html#code) for various blocks - for example, `{code-cell}` and `{code}` for executable code cells and code blocks, respectively.
   - Additionally, read the [text based MyST notebooks guide](https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html#) for MyST-NB, there is significant detail there which is useful to understand.
 - Don't try and guess what your `_toc.yml` file should look like, you can programmatically generate it using the `jupyter-book toc` command. For example, in my case I just run `jupyter-book toc from-project -e .rst -e .md -e .ipynb -f jb-book pedros-experiments/ > pedros-experiments/_toc.yml` to generate the table of contents for this book.
+- If you're using Jupyter Notebooks, make sure you're using the correct kernel for each notebook. You can specify the kernel in the notebook's metadata, or you can set a default kernel for the entire book in the `_config.yml` file. For example, in my case I use the `tf` kernel for most of my notebooks, which is a custom kernel I've set up for TensorFlow development, and I specify it in the notebook's metadata like so:
+  ```yaml
+  kernelspec:
+    name: tf
+    display_name: "Python (tf)"
+    language: python
+  ```
+  To setup the kernel, use the following command: `python -m ipykernel install --user --name tf --display-name "Python (tf)"`.
