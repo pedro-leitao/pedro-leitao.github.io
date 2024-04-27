@@ -39,6 +39,7 @@ html:
   use_repository_button: true
   html_show_copyright: false
   use_multitoc_numbering: false
+  google_analytics_id: G-FQKJNEYQJM
 
 sphinx:
   config:
