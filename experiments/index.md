@@ -1,7 +1,7 @@
 ---
 file_format: mystnb
 kernelspec:
-  name: tf
+  name: python3
   display_name: "Python (tf)"
   language: python
 ---
