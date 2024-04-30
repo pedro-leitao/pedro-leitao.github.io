@@ -6,12 +6,6 @@ on:
     branches:
     - master
     - main
-    # If your git repository has the Jupyter Book within some-subfolder next to
-    # unrelated files, you can make this run only if a file within that specific
-    # folder has been modified.
-    #
-    # paths:
-    # - some-subfolder/**
 
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
@@ -24,30 +18,32 @@ jobs:
     - uses: actions/checkout@v3
 
     # Install dependencies
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.11
+    - name: Install pyenv with Python 3.11
+      run: |
+        # Install pyenv
+        curl https://pyenv.run | bash
+        echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> $GITHUB_ENV
+        echo 'eval "$(pyenv init --path)"' >> $GITHUB_ENV
+        echo 'eval "$(pyenv virtualenv-init -)"' >> $GITHUB_ENV
+        source $GITHUB_ENV
 
-    #- name: Setup Graphviz
-      # You may pin to the exact commit or the version.
-      # uses: ts-graphviz/setup-graphviz@c001ccfb5aff62e28bda6a6c39b59a7e061be5b9
-      #uses: ts-graphviz/setup-graphviz@v1
+        # Install Python 3.11 and create a virtual environment
+        pyenv install 3.11
+        pyenv virtualenv 3.11 tf
+
+    # Activate the virtual environment
+    - name: Activate virtual environment
+      run: |
+        pyenv global tf
 
     - name: Install Graphviz
-      # You may pin to the exact commit or the version.
-      # uses: tlylt/install-graphviz@b2201200d85f06f0189cb74d9b69208504cf12cd
       uses: tlylt/install-graphviz@v1.0.0
-          
       
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
 
     # (optional) Cache your executed notebooks between runs
-    # if you have config:
-    # execute:
-    #   execute_notebooks: cache
     - name: cache executed notebooks
       uses: actions/cache@v3
       with:
@@ -67,5 +63,4 @@ jobs:
 
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
-      id: deployment
       uses: actions/deploy-pages@v2
