@@ -17,43 +17,23 @@ on:
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python:
-          - 3.11
     permissions:
       pages: write
       id-token: write
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup Python
-      uses: actions/setup-python@v5.1.0
+    # Install dependencies
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.9
-          
-
-    - name: Install pyenv, pyenv-virtualenv
-      run: |
-        pip install pyenv
-        pyenv install 3.11
-        pip install -U pip  # upgrade pip after installing python
-        pip install virtualenv
-        git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-        eval "$(pyenv virtualenv-init -)"
-
-    # Setup a virtual env called ml-env
-    - name: Create Python virtual env and activate
-      run: |
-        pyenv versions
-        pyenv virtualenv 3.11 ml-env
-        pyenv activate ml-env
+        python-version: 3.11
 
     - name: Install Graphviz
       # You may pin to the exact commit or the version.
       # uses: tlylt/install-graphviz@b2201200d85f06f0189cb74d9b69208504cf12cd
       uses: tlylt/install-graphviz@v1.0.0
-          
+             
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
