@@ -42,6 +42,7 @@ jobs:
 
     - name: Install pyenv-virtualenv
       run: |
+        pyenv install --list
         pip install virtualenv
         git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
         eval "$(pyenv virtualenv-init -)"
