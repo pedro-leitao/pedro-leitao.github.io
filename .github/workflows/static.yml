@@ -40,6 +40,10 @@ jobs:
         default: "${{ matrix.python }}"
         command: pip install -U pip  # upgrade pip after installing python
 
+    - name: Install pyenv-virtualenv
+      run: |
+        pip install virtualenv
+
     # Setup a virtual env called ml-env
     - name: Create Python virtual env and activate
       run: |
