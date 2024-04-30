@@ -42,7 +42,6 @@ jobs:
 
     - name: Install pyenv-virtualenv
       run: |
-        pyenv install --list
         pip install virtualenv
         git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
         eval "$(pyenv virtualenv-init -)"
@@ -50,6 +49,7 @@ jobs:
     # Setup a virtual env called ml-env
     - name: Create Python virtual env and activate
       run: |
+        pyenv versions
         pyenv virtualenv 3.11 ml-env
         pyenv activate ml-env
 
