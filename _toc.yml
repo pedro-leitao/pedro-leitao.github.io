@@ -11,6 +11,7 @@ chapters:
   - file: experiments/random-forests
   - file: experiments/sentiment-partI
   - file: experiments/shakespeare-embeddings
+  - file: experiments/mot
 - file: howtos/index
   sections:
   - file: howtos/apple-silicon-ml
