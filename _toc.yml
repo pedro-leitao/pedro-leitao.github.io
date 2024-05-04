@@ -1,23 +1,23 @@
+---
 format: jb-book
 root: intro
 chapters:
-- file: genindex
-- file: experiments/index
-  sections:
-  - file: experiments/bert-emotions
-  - file: experiments/gensim
-  - file: experiments/instance_vs_model_learning
-  - file: experiments/ml-pipeline-sklearn
-  - file: experiments/pca-vs-tsne
-  - file: experiments/random-forests
-  - file: experiments/sentiment-partI
-  - file: experiments/shakespeare-embeddings
-  - file: experiments/mot
-- file: howtos/index
-  sections:
-  - file: howtos/apple-silicon-ml
-  - file: howtos/distributed-training
-- file: thoughts/index
-  sections:
-  - file: thoughts/jupyter-book
-
+  - file: experiments/index
+    sections:
+      - file: experiments/bert-emotions
+      - file: experiments/gensim
+      - file: experiments/instance_vs_model_learning
+      - file: experiments/ml-pipeline-sklearn
+      - file: experiments/pca-vs-tsne
+      - file: experiments/random-forests
+      - file: experiments/sentiment-partI
+      - file: experiments/shakespeare-embeddings
+      - file: experiments/mot
+  - file: howtos/index
+    sections:
+      - file: howtos/apple-silicon-ml
+      - file: howtos/distributed-training
+  - file: thoughts/index
+    sections:
+      - file: thoughts/jupyter-book
+  - file: genindex
