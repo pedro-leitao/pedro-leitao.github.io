@@ -46,7 +46,7 @@ html:
 
 sphinx:
   config:
-    templates_path: ["_templates"] # You can add custom Jinja2 templates here
+    templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
       - _static
     language: en
@@ -58,7 +58,7 @@ sphinx:
     suppress_warnings: ["mystnb.unknown_mime_type"]
     html_show_copyright: false
     html_js_files:
-      - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" # To correctly render plotly
+      - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"  # To correctly render plotly
     html_theme_options:
       show_prev_next: false
       footer_start: ["license"]

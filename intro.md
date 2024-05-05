@@ -4,6 +4,7 @@
 :alt: Pedro
 :height: 350px
 :align: right
+:class: no-scaled-link
 ```
 
 *$\Delta(\text{data})$* is a curated collection of experiments, how to's and general commentary, courtesy of the author. The best way to learn is to create, and a lot of what you will find here are the means by which I experiment and trial thoughts and ideas. As such, readers are advised to approach these articles with a discerning eye and a generous pinch of skepticism.
