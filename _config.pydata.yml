@@ -58,8 +58,9 @@ sphinx:
       - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" # To correctly render plotly
     html_theme_options:
       show_prev_next: false
-      footer_start: ["license"]
-      footer_end: ["author"]
+      footer_start: []
+      footer_center: ["license"]
+      footer_end: []
       logo:
         text: Pedro's Experiments
         image_light: _static/logo-new.png
