@@ -50,6 +50,9 @@ sphinx:
     html_static_path:
       - _static
     language: en
+    html_sidebars:  # Removes the sidebar for the index page
+      index: []
+      genindex: []
     html_theme: pydata_sphinx_theme
     html_show_sourcelink: false
     suppress_warnings: ["mystnb.unknown_mime_type"]
