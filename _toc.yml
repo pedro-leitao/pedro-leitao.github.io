@@ -20,4 +20,5 @@ chapters:
   - file: thoughts/index
     sections:
       - file: thoughts/jupyter-book
+      - file: thoughts/eu-tech.md
   - file: genindex
