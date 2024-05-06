@@ -78,7 +78,7 @@ bars[2].set_color('lightcoral')   # Highlight China with a different color
 bars[14].set_color('palegreen') # Highlight Israel with a different color
 
 # Adding labels and title
-plt.xlabel('Investment (USD)')
+plt.xlabel('Investment per Capita (USD)')
 plt.title('AI Investment Per Capita by Country, Sorted')
 
 # Adding ratio labels
