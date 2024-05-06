@@ -8,6 +8,9 @@ kernelspec:
 
 # The Connundrum of European Tech and Artificial Intelligence
 
+:::{index} European Union ; artificial intelligence
+:::
+
 The European tech scene is a curious one. It is a region that is home to some of the oldest and most representative companies in the world, yet it is also a region that is often overlooked when it comes to tech investment. This is a paradox that has puzzled many observers, and one that has led to a number of questions about the future of European tech.
 
 One can't but notice the stark contrast between Europe and the US and China when it comes to areas such as Artificial Intelligence, and other cutting-edge technologies. Here's investment data from the [2023 AI Index Report](https://aiindex.stanford.edu/ai-index-report-2023/):
@@ -40,6 +43,9 @@ plt.show()
 ```
 
 The US eclipses all other countries in AI investment, with China coming in second. The UK, Germany, and France are the only European countries in the top 15. Per capita, the figures also don't look particularly great.
+
+:::{index} European Union ; investment in artificial intelligence
+:::
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -102,6 +108,9 @@ The European Union has taken notice of this discrepancy and has launched the [Di
 Of these 7.5 billion euros, 2.1 billion euros are earmarked for the development of AI technologies.
 
 ## Venture capital
+
+:::{index} European Union ; venture capital
+:::
 
 Another marked difference between Europe and the US is the availability of venture capital. Comparing VC investments related to AI in the US and Europe, the difference is staggering.
 
