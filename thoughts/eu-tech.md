@@ -60,7 +60,7 @@ populations = [331, 1441, 68, 9.2, 1380,
                26, 5.9, 8.6, 126, 5.5]
 
 # Calculate investment per capita (investment amount / population)
-investments_per_capita = [invest * 1000000000 / pop * 1000000 for invest, pop in zip(investments, populations)]
+investments_per_capita = [(invest * 1000000000) / (pop * 1000000) for invest, pop in zip(investments, populations)]
 
 # Sort data by investment per capita in descending order
 sorted_data = sorted(zip(countries, investments_per_capita), key=lambda x: x[1], reverse=False)
@@ -71,14 +71,14 @@ us_investment_per_capita = sorted_investments_per_capita[12]
 ratios = [x / us_investment_per_capita for x in sorted_investments_per_capita]
 
 # Creating a horizontal bar chart with sorted data
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(8, 6))
 bars = plt.barh(sorted_countries, sorted_investments_per_capita, color='grey')
 bars[12].set_color('powderblue')  # Highlight the United States with a different color
 bars[2].set_color('lightcoral')   # Highlight China with a different color
 bars[14].set_color('palegreen') # Highlight Israel with a different color
 
 # Adding labels and title
-plt.xlabel('Investment Per Capita (USD)')
+plt.xlabel('Investment (USD)')
 plt.title('AI Investment Per Capita by Country, Sorted')
 
 # Adding ratio labels
@@ -121,7 +121,7 @@ openai_investment_reversed = openai_investment[::-1]
 regions_reversed = regions[::-1]
 
 # Recreate the horizontal bar plot with reversed data
-fig, ax = plt.subplots(figsize=(10, 5))
+fig, ax = plt.subplots(figsize=(8, 6))
 
 # Recalculate positions for reversed data
 bar_width = 0.35
@@ -161,7 +161,7 @@ countries_sorted = [countries[i] for i in sorted_indices]
 startups_funded_sorted = [startups_funded[i] for i in sorted_indices]
 
 # Creating the horizontal bar plot
-fig, ax = plt.subplots(figsize=(10, 8))
+fig, ax = plt.subplots(figsize=(8, 6))
 bars = ax.barh(countries_sorted, startups_funded_sorted, color='powderblue')
 bars[0].set_color('powderblue')  # Highlight the United States with a different color
 bars[1].set_color('lightcoral')   # Highlight China with a different color
