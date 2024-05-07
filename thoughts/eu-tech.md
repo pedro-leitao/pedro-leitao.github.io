@@ -16,7 +16,7 @@ The European tech scene is a curious one. It is a region that is home to some of
 One can't but notice the stark contrast between Europe and the US and China when it comes to areas such as Artificial Intelligence, and other cutting-edge technologies. Here's investment data from the [2023 AI Index Report](https://aiindex.stanford.edu/ai-index-report-2023/):
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [remove-input]
 import matplotlib.pyplot as plt
 
 countries = ['United States', 'China', 'United Kingdom', 'Israel', 'India', 
@@ -48,7 +48,7 @@ The US eclipses all other countries in AI investment, with China coming in secon
 :::
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [remove-input]
 
 import matplotlib.pyplot as plt
 
@@ -117,7 +117,7 @@ Another marked difference between Europe and the US is the availability of ventu
 According to dealroom.co, the [amount of VC investment in generative AI](https://dealroom.co/guides/generative-ai) reached 29.5 billion US\$ in the US between 2019 and 2023, while in Europe it was 2.5 billion US\$. This is a remarkable difference, and one that is hard to ignore.
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [remove-input]
 import matplotlib.pyplot as plt
 
 # Data from the provided chart
@@ -155,7 +155,7 @@ plt.show()
 The number of newly funded startups in the AI space is also significantly higher in the US than in Europe.
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [remove-input]
 import matplotlib.pyplot as plt
 
 # Data from the provided table
