@@ -13,6 +13,7 @@ chapters:
       - file: experiments/sentiment-partI
       - file: experiments/shakespeare-embeddings
       - file: experiments/mot
+      - file: experiments/predictive-maintenance
   - file: howtos/index
     sections:
       - file: howtos/apple-silicon-ml
