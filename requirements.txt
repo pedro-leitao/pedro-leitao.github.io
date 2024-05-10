@@ -15,3 +15,8 @@ pydata-sphinx-theme
 imbalanced-learn
 statsmodels
 kaggle
+tqdm
+setuptools
+sympy
+torch
+pykan

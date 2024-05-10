@@ -21,5 +21,6 @@ chapters:
   - file: thoughts/index
     sections:
       - file: thoughts/jupyter-book
-      - file: thoughts/eu-tech.md
+      - file: thoughts/eu-tech
+      - file: thoughts/kolmogorov-arnold-networks
   - file: genindex
