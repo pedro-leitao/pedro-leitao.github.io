@@ -13,4 +13,4 @@ Covering a spectrum of topics from software, machine learning, software architec
 
 As the usual disclaimer, any views expressed here are my own and do not necessarily reflect the views of my employer, or any other entity with which I have been associated with.
 
-<small>Created with [JupyterBook](https://jupyterbook.org)</small>
+<small>Created with [JupyterBook](https://jupyterbook.org) and [PyData-Sphinx](https://pydata-sphinx-theme.readthedocs.io/en/stable/)</small>
