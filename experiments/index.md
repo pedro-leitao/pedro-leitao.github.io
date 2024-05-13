@@ -1,7 +1,7 @@
 ---
 file_format: mystnb
 kernelspec:
-  name: tf
+  name: python3
   display_name: "Python (tf)"
   language: python
 ---
@@ -9,6 +9,8 @@ kernelspec:
 # Experiments
 
 Experiments on various topics, mainly machine learning exploration and software. No specific order, just a collection of topics that I needed specific refreshers on or wanted to explore further.
+
+## My environment
 
 To run a lot of the code in these experiments, it is useful to know the development environment they were created in and the dependencies involved. Here is a list of the main tools and libraries used in my environment:
 

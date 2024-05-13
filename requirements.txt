@@ -11,3 +11,12 @@ tensorflow
 scipy==1.10.1
 xgboost
 dtreeviz
+pydata-sphinx-theme
+imbalanced-learn
+statsmodels
+kaggle
+tqdm
+setuptools
+sympy
+torch
+pykan

@@ -29,17 +29,11 @@ jobs:
       with:
         python-version: 3.11
 
-    #- name: Setup Graphviz
-      # You may pin to the exact commit or the version.
-      # uses: ts-graphviz/setup-graphviz@c001ccfb5aff62e28bda6a6c39b59a7e061be5b9
-      #uses: ts-graphviz/setup-graphviz@v1
-
     - name: Install Graphviz
       # You may pin to the exact commit or the version.
       # uses: tlylt/install-graphviz@b2201200d85f06f0189cb74d9b69208504cf12cd
       uses: tlylt/install-graphviz@v1.0.0
-          
-      
+             
     - name: Install dependencies
       run: |
         pip install -r requirements.txt

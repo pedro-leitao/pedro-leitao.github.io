@@ -1,0 +1,81 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+---
+title: Δ(data)
+author: Pedro Leitao
+copyright: "2024"
+logo: _static/logo-new.png
+exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, logs, "**.ipynb_checkpoints"]
+base_url: https://pedro-leitao.github.io/
+only_build_toc_files: true
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: cache
+  exclude_patterns: ["sentiment-partI.ipynb", "shakespeare-embeddings.ipynb", "bert-emotions.ipynb", "distributed-training.ipynb", "mot.ipynb"]
+  allow_errors: false
+  timeout: 600
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/pedro-leitao/pedro-leitao.github.io  # Online location of your book
+  #  path_to_book: docs  # Optional path to your book, relative to the repository root
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  favicon: _static/favicon.ico
+  use_issues_button: false
+  use_repository_button: false
+  html_show_copyright: false
+  use_multitoc_numbering: false
+  google_analytics_id: "G-FQKJNEYQJM"
+  analytics:
+    google_analytics_id: "G-FQKJNEYQJM"
+
+sphinx:
+  config:
+    templates_path: ["_templates"]  # You can add custom Jinja2 templates here
+    html_static_path:
+      - _static
+    language: en
+    html_sidebars:  # Removes the sidebar for the index page
+      index: []
+      genindex: []
+    html_theme: pydata_sphinx_theme
+    html_show_sourcelink: false
+    suppress_warnings: ["mystnb.unknown_mime_type"]
+    html_show_copyright: false
+    html_js_files:
+      - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"  # To correctly render plotly
+    html_theme_options:
+      show_prev_next: false
+      footer_start: ["license"]
+      footer_center: []
+      footer_end: ["author"]
+      logo:
+        # text: Δ(data)
+        image_light: _static/logo-b.png
+        image_dark: _static/logo-b.png
+      icon_links:
+        - name: "GitHub"  # Label for this link
+          url: "https://github.com/pedro-leitao/pedro-leitao.github.io"  # URL where the link will redirect
+          icon: "fa-brands fa-square-github"  # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
+          type: "fontawesome"  # The type of image to be used
+        - name: "LinkedIn"  # Label for this link
+          url: "https://www.linkedin.com/in/nunoleitao/"  # URL where the link will redirect
+          icon: "fa-brands fa-linkedin"  # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
+          type: "fontawesome"  # The type of image to be used
+      analytics:
+        google_analytics_id: "G-FQKJNEYQJM"
