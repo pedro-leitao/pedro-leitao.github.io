@@ -24,4 +24,5 @@ chapters:
       - file: thoughts/jupyter-book
       - file: thoughts/eu-tech
       - file: thoughts/kolmogorov-arnold-networks
+      - file: thoughts/ai-brain-curve-fitting
   - file: genindex
