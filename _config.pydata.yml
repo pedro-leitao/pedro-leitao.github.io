@@ -53,7 +53,10 @@ html:
     google_analytics_id: "G-FQKJNEYQJM"
 
 sphinx:
+  extra_extensions:
+    - sphinx_sitemap
   config:
+    html_baseurl: https://pedro-leitao.github.io/
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
       - _static

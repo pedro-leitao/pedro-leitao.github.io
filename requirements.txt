@@ -1,4 +1,5 @@
 jupyter-book
+sphinx-sitemap
 matplotlib
 numpy
 pandas
