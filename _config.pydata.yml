@@ -21,7 +21,7 @@ execute:
     "mot.ipynb",
     "predictive-maintenance.ipynb",
     "predictive-maintenance-kan.ipynb"
-    ]
+  ]
   allow_errors: false
   timeout: 600
 
@@ -58,7 +58,7 @@ sphinx:
   config:
     html_baseurl: https://pedro-leitao.github.io/
     sitemap_url_scheme: "{link}"
-    sitemap_excludes: ["search.html", "genindex.html"]
+    sitemap_excludes: ["search.html", "gensim.html"]
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
       - _static
