@@ -58,6 +58,7 @@ sphinx:
   config:
     html_baseurl: https://pedro-leitao.github.io/
     sitemap_url_scheme: "{link}"
+    sitemap_excludes: ["search.html", "genindex.html"]
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
       - _static
