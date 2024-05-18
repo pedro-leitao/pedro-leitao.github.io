@@ -6,7 +6,7 @@ author: Pedro Leitao
 copyright: "2024"
 logo: _static/logo-new.png
 exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, logs, "**.ipynb_checkpoints"]
-base_url: https://pedro-leitao.github.io/
+base_url: https://deltadata.fyi/
 only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.
@@ -57,7 +57,7 @@ sphinx:
     - sphinx_sitemap
   config:
     html_extra_path: [ "BingSiteAuth.xml" ]
-    html_baseurl: https://pedro-leitao.github.io/
+    html_baseurl: https://deltadata.fyi/
     sitemap_url_scheme: "{link}"
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
