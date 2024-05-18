@@ -51,13 +51,12 @@ html:
   google_analytics_id: "G-FQKJNEYQJM"
   analytics:
     google_analytics_id: "G-FQKJNEYQJM"
-  extra_files:
-    - BingSiteAuth.xml
 
 sphinx:
   extra_extensions:
     - sphinx_sitemap
   config:
+    html_extra_path: [ "BingSiteAuth.xml" ]
     html_baseurl: https://pedro-leitao.github.io/
     sitemap_url_scheme: "{link}"
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
