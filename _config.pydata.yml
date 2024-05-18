@@ -51,6 +51,8 @@ html:
   google_analytics_id: "G-FQKJNEYQJM"
   analytics:
     google_analytics_id: "G-FQKJNEYQJM"
+  extra_files:
+    - BingSiteAuth.xml
 
 sphinx:
   extra_extensions:
