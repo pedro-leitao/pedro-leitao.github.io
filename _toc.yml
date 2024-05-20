@@ -26,4 +26,5 @@ chapters:
       - file: thoughts/eu-tech
       - file: thoughts/kolmogorov-arnold-networks
       - file: thoughts/ai-brain-curve-fitting
+      - file: thoughts/scaling-ai
   - file: genindex
