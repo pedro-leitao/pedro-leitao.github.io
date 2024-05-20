@@ -58,4 +58,4 @@ The [Chinchilla scaling law](https://en.wikipedia.org/wiki/Neural_scaling_law#Ch
 
 ## Where will we go from here?
 
-Quite honestly, it's hard to predict where we'll go from here. Perhaps we will overcome the data problem by using non-textual data more effectively, or maybe we'll find ways to generate synthetic data that can help train models more efficiently (albeit, to me this kind of sounds non-sensical). The future of AI scaling is uncertain, but one thing is clear: we need to address the challenges posed by data quality, diversity, and sample efficiency to continue pushing the boundaries.
+Quite honestly, it's hard to predict where we'll go from here. Perhaps we will overcome the data problem by using non-textual data more effectively, or maybe we'll find ways to generate [synthetic data](https://research.ibm.com/blog/LLM-generated-data) that can help train models more efficiently (albeit, to me this kind of sounds non-sensical). The future of AI scaling is uncertain, but one thing is clear: we need to address the challenges posed by data quality, diversity, and sample efficiency to continue pushing the boundaries.
