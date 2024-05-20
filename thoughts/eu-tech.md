@@ -4,6 +4,10 @@ kernelspec:
   name: python3
   display_name: "Python (tf)"
   language: python
+myst:
+  html_meta:
+    description: "The European tech scene is a curious one. It is a region that is home to some of the oldest and most representative companies in the world, yet it is also a region that is often overlooked when it comes to tech investment. This is a paradox that has puzzled many observers, and one that has led to a number of questions about the future of European tech."
+    keywords: "European Union, artificial intelligence, tech investment, venture capital, regulation, talent, Digital Europe Programme, Pedro, Pedro Leitao"
 ---
 
 # The Connundrum of European Tech and Artificial Intelligence

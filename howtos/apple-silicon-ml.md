@@ -1,3 +1,10 @@
+---
+myst:
+    html_meta:
+        description: "A guide on setting up a machine learning environment on Apple Silicon, specifically for Python and TensorFlow. In an attempt to keep things simple, this guide relies only on the standard Python distribution rather than Anaconda, Miniconda or other Python distributions."
+        keywords: "Machine Learning, Apple Silicon, M2, M1, M3, Python, TensorFlow, TensorFlow-Metal, Jupyter Lab, Homebrew, Python 3.9, virtual environment, UMA, NUMA, GPU, Apple, Silicon, M1, M2, M3, Pedro, Pedro Leitao"
+---
+
 # Setting up a Machine Learning environment on Apple Silicon
 
 All the kids now use cloud machine learning platforms like Google Colab, Kaggle, or AWS. But if you want to do some machine learning on your local machine,

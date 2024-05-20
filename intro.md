@@ -1,3 +1,10 @@
+---
+myst:
+    html_meta:
+        description: "A curated collection of experiments, how to's and general commentary, courtesy of the author."
+        keywords: "Pedro, Data Science, Machine Learning, Software Engineering, Software Architecture, Python, Jupyter, JupyterBook, PyData-Sphinx"
+---
+
 # About $\Delta(\text{data})$
 
 ```{image} images/pedro-business.jpg

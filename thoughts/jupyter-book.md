@@ -1,3 +1,10 @@
+---
+myst:
+    html_meta:
+        description: "Creating a personal site with Jupyter Book is an interesting way to showcase your projects, research, or portfolio, especially if your work involves a lot of data analysis, coding, or scientific research."
+        keywords: "Jupyter Book, Jupyter Notebooks, Sphinx, GitHub Pages, Netlify, Read the Docs, Hugo, Nikola, Jupyter ecosystem, MyST Markdown, Sphinx Book theme, GitHub Actions, automated deployments, Python, TensorFlow, kernels"
+---
+
 # Jupyter Book for a Personal Site
 
 Having a personal site or blog was all the rage back in the early 2000s, but it seems to have fallen out of favor in recent years. Social media platforms like Twitter, Instagram, and LinkedIn have become the go-to places for sharing updates, thoughts, and projects. However, there's something special about having your own corner of the internet where you can showcase your work, share your ideas, and connect with others in a more long-form and structured way.
