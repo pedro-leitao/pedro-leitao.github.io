@@ -20,7 +20,8 @@ execute:
     "distributed-training.ipynb",
     "mot.ipynb",
     "predictive-maintenance.ipynb",
-    "predictive-maintenance-kan.ipynb"
+    "predictive-maintenance-kan.ipynb",
+    "customer-churn.ipynb",
   ]
   allow_errors: false
   timeout: 600

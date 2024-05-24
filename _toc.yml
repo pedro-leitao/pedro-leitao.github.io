@@ -16,6 +16,7 @@ chapters:
       - file: experiments/predictive-maintenance
       - file: experiments/predictive-maintenance-kan
       - file: experiments/unsupervised-image-segmentation
+      - file: experiments/customer-churn
   - file: howtos/index
     sections:
       - file: howtos/apple-silicon-ml
