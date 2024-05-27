@@ -57,7 +57,6 @@ html:
 sphinx:
   extra_extensions:
     - sphinx_sitemap
-    - sphinx_last_updated_by_git
   config:
     html_extra_path: [ "BingSiteAuth.xml" ]
     html_baseurl: https://deltadata.fyi/
@@ -76,7 +75,7 @@ sphinx:
     html_js_files:
       - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"  # To correctly render plotly
     html_theme_options:
-      article_header_end: ["last-updated"]
+      article_header_end: []
       show_prev_next: false
       footer_start: ["license"]
       footer_center: []
