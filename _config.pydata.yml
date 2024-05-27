@@ -22,7 +22,7 @@ execute:
     "predictive-maintenance.ipynb",
     "predictive-maintenance-kan.ipynb",
     "customer-churn.ipynb",
-    "randomforests-embeddings.ipynb",
+    "random-forests-embeddings.ipynb",
   ]
   allow_errors: false
   timeout: 600
