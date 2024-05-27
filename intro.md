@@ -25,7 +25,7 @@ Covering a spectrum of topics from software, machine learning, software architec
 
 As the usual disclaimer, any views expressed here are my own and do not necessarily reflect the views of my employer, or any other entity with which I have been associated with.
 
-```{code-cell} python3
+```{code-cell} ipython3
 :tags: [remove-input]
 from datetime import datetime
 from pathlib import Path
