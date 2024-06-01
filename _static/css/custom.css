@@ -9,15 +9,14 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Proza Libre', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .bd-links__title {
-    font-family: 'Proza Libre', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .last-updated {
-    font-family: 'Proza Libre', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.8em;
-    font-weight: bold;
 }
