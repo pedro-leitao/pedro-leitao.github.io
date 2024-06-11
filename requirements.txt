@@ -9,8 +9,12 @@ nltk
 scikit-learn
 seaborn
 tensorflow
-scipy==1.10.1
+tensorflow-metal
+tf-keras
+transformers
+scipy
 xgboost
+catboost
 dtreeviz
 pydata-sphinx-theme
 imbalanced-learn
@@ -27,3 +31,6 @@ noise
 scikit-image
 sphinx_last_updated_by_git
 sphinx-copybutton
+fastparquet
+pyarrow
+ipywidgets
