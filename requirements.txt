@@ -9,7 +9,6 @@ nltk
 scikit-learn
 seaborn
 tensorflow
-tensorflow-metal
 tf-keras
 transformers
 scipy
