@@ -23,6 +23,7 @@ execute:
     "predictive-maintenance-kan.ipynb",
     "customer-churn.ipynb",
     "random-forests-embeddings.ipynb",
+    "caching-long-running-jobs.ipynb",
   ]
   allow_errors: false
   timeout: 600
