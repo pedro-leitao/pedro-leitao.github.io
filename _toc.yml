@@ -22,6 +22,7 @@ chapters:
     sections:
       - file: howtos/apple-silicon-ml
       - file: howtos/distributed-training
+      - file: howtos/caching-long-running-jobs
   - file: thoughts/index
     sections:
       - file: thoughts/jupyter-book
