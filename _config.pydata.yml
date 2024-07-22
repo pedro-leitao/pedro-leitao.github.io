@@ -24,6 +24,7 @@ execute:
     "customer-churn.ipynb",
     "random-forests-embeddings.ipynb",
     "caching-long-running-jobs.ipynb",
+    "time-series-forecasting.ipynb",
   ]
   allow_errors: false
   timeout: 600
