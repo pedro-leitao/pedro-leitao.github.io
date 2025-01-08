@@ -36,4 +36,5 @@ chapters:
       - file: python-for-students/intro
       - file: python-for-students/basics
       - file: python-for-students/types-of-data
+      - file: python-for-students/flow-control
   - file: genindex
