@@ -31,4 +31,9 @@ chapters:
       - file: thoughts/kolmogorov-arnold-networks
       - file: thoughts/ai-brain-curve-fitting
       - file: thoughts/scaling-ai
+  - file: python-for-students/index
+    sections:
+      - file: python-for-students/intro
+      - file: python-for-students/basics
+      - file: python-for-students/types-of-data
   - file: genindex
