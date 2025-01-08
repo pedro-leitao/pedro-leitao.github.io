@@ -26,6 +26,8 @@ sympy
 imblearn
 torch
 pykan
+ez_setup
+moviepy
 noise
 scikit-image
 sphinx_last_updated_by_git
