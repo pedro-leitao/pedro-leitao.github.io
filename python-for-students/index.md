@@ -19,6 +19,12 @@ There's a great Big Think [article](https://bigthink.com/articles/computational-
 
 Computational thinking is a way of solving problems which can be used by anyone, not just computer scientists. It involves breaking down a problem into smaller parts, and then solving each part in a logical way. This is a skill that can be used in many different areas, and it is becoming increasingly important in a world where data is everywhere.
 
+## A bit of personal advice
+
+Learning to think computationally, and learning to program, can be challenging and sometimes frustrating. If you are new to technology and programming, it can be overwhelming at first. However once you get the hang of it, and you see yourself improving, it can be tremendously rewarding. Potential future employers will also appreciate your ability to work with data and technology, even if you *think* knowing how to write code, and solving problems with a computer is not that relevant for your area of work.
+
+Today everything, and I mean *everything* is data driven, and knowing how to *think* and work around data, is a skill which will decide your future. So, don't be afraid to make mistakes, and don't be afraid to ask for help, but whatever you do, stick with it! You will be glad you did.
+
 ## Table of contents
 
 ```{tableofcontents}
