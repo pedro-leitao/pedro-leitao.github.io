@@ -54,7 +54,6 @@ html:
   use_repository_button: false
   html_show_copyright: false
   use_multitoc_numbering: false
-  google_analytics_id: "G-FQKJNEYQJM"
   analytics:
     google_analytics_id: "G-FQKJNEYQJM"
 
