@@ -23,7 +23,9 @@ Computational thinking is a way of solving problems which can be used by anyone,
 
 Learning to think computationally, and learning to program, can be challenging and sometimes frustrating. If you are new to technology and programming, it can be overwhelming at first. However once you get the hang of it, and you see yourself improving, it can be tremendously rewarding. Potential future employers will also appreciate your ability to work with data and technology, even if you *think* knowing how to write code, and solving problems with a computer is not that relevant for your area of work.
 
-Today everything, and I mean *everything* is data driven, and knowing how to *think* and work around data, is a skill which will decide your future. So, don't be afraid to make mistakes, and don't be afraid to ask for help, but whatever you do, stick with it! You will be glad you did.
+Today everything, and I mean *everything*, is data driven. Knowing how to *think* and work around data is a skill which will be a big contributor to your future success. Don't be afraid to make mistakes, and don't be afraid to ask for help, but whatever you do, stick with it!
+
+You will be glad you did.
 
 ## Table of contents
 
