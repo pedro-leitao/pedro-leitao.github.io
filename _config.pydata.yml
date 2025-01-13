@@ -80,12 +80,15 @@ sphinx:
     html_js_files:
       # To correctly render plotly
       - "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"
+    html_context:
+      default_mode: "light"
     html_theme_options:
       article_header_end: ["last-updated"]
       show_prev_next: false
       footer_start: ["license"]
       footer_center: []
       footer_end: ["author"]
+      navbar_end: ["navbar-icon-links"]
       logo:
         # text: Δ(data)
         image_light: _static/logo-b.png
