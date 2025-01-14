@@ -9,9 +9,15 @@ myst:
 
 ![student python](figures/index-python-student.png)
 
-This is an introduction to Python aimed at students in non-computer science disciplines. It is meant to be a gentle introduction to programming and Python, with a focus on practical data and machine learning applications and examples. It is not meant to be comprehensive or authoritative, but rather a starting point for students who are new to programming. This is inspired by trying to teach the basics of data, data science, machine learning and programming to my own son, who is studying an engineering degree.
+This is an introduction to Python aimed at students in non-computer science disciplines. It is meant to be a gentle and *concise* introduction to programming and Python, with a focus on practical data and machine learning applications and examples. It is not meant to be comprehensive or authoritative, but rather a starting point for students who are new to programming. This is inspired by trying to teach the basics of data, data science, machine learning and programming to my own son, who is studying an engineering degree.
 
 Content in this book will grow over time, and will be updated and expanded as I have time. There are many excellent resources available for learning Python, and I will try to provide links to some of them as I go along. I will also try to provide references to more advanced topics and resources for students who want to go deeper.
+
+This book does not try to be in any way a replacement for a formal course in Python programming, or a replacement for many of the excellent books and online resources available, some of which include:
+
+- [Python Crash Course](https://www.amazon.co.uk/Python-Crash-Course-3Rd-Matthes/dp/1718502702/?_encoding=UTF8&pd_rd_w=tG279&content-id=amzn1.sym.a4ac6c4d-6ae7-4d95-b5e0-812c9dcfc72e%3Aamzn1.symc.fc11ad14-99c1-406b-aa77-051d0ba1aade&pf_rd_p=a4ac6c4d-6ae7-4d95-b5e0-812c9dcfc72e&pf_rd_r=X3RVQFX8P18QB5Q7R8SV&pd_rd_wg=K6ISH&pd_rd_r=81da5d1c-e7f7-4a20-b92c-fffa29e39c81&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d)
+- [Python Programming For Beginners Made Easy](https://www.amazon.co.uk/Python-Programming-Beginners-Made-Hands/dp/B0CY2VGHQ5/ref=sr_1_5?crid=1FPJAM0A5YUTM&dib=eyJ2IjoiMSJ9.IVkgF--i1xibH_M29RxHiHkoi5IBZHiw10EjBMVYtJ7-awZiveG7I-pGR4J0dKLWT9S03C2Uqq5i-zqU_8_VcrbnSaONAxo2JkzBvYahR1kIGEP87LjKf61cAR1AYsX5X05LnKmfZVTEmAULZLyi8zRFq02UXn8hVfu4E5hVSzcES5QsGpkFTGVeRXM5R_eBMtc9a_wOAzDoGoiarDhDTo9IN0EbPXqmL7w6hiSWSnY.WF6s3lQL-0maBHv5fJwCNw0uKwlDbHFKe4HCTxoMJbg&dib_tag=se&keywords=python+for+beginners&qid=1736814841&sprefix=python+for+be%2Caps%2C96&sr=8-5)
+- [Google's Python Class](https://developers.google.com/edu/python)
 
 ## Why learning to program matters
 
