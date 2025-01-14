@@ -1,42 +1,45 @@
----
 format: jb-book
-root: intro
+root: genindex
 chapters:
-  - file: experiments/index
-    sections:
-      - file: experiments/bert-emotions
-      - file: experiments/gensim
-      - file: experiments/instance_vs_model_learning
-      - file: experiments/ml-pipeline-sklearn
-      - file: experiments/pca-vs-tsne
-      - file: experiments/random-forests
-      - file: experiments/sentiment-partI
-      - file: experiments/shakespeare-embeddings
-      - file: experiments/mot
-      - file: experiments/predictive-maintenance
-      - file: experiments/predictive-maintenance-kan
-      - file: experiments/unsupervised-image-segmentation
-      - file: experiments/customer-churn
-      - file: experiments/random-forests-embeddings
-      - file: experiments/time-series-forecasting
-  - file: howtos/index
-    sections:
-      - file: howtos/apple-silicon-ml
-      - file: howtos/distributed-training
-      - file: howtos/caching-long-running-jobs
-  - file: thoughts/index
-    sections:
-      - file: thoughts/jupyter-book
-      - file: thoughts/eu-tech
-      - file: thoughts/kolmogorov-arnold-networks
-      - file: thoughts/ai-brain-curve-fitting
-      - file: thoughts/scaling-ai
-  - file: python-for-students/index
-    sections:
-      - file: python-for-students/intro
-      - file: python-for-students/basics
-      - file: python-for-students/types-of-data
-      - file: python-for-students/flow-control
-      - file: python-for-students/functions-and-modules
-      - file: python-for-students/comprehensions
-  - file: genindex
+- file: intro
+- file: experiments/index
+  sections:
+  - file: experiments/bert-emotions
+  - file: experiments/cross-validation
+  - file: experiments/customer-churn
+  - file: experiments/cve-experiments
+  - file: experiments/gensim
+  - file: experiments/instance_vs_model_learning
+  - file: experiments/ml-pipeline-sklearn
+  - file: experiments/mot
+  - file: experiments/pca-vs-tsne
+  - file: experiments/predictive-maintenance
+  - file: experiments/predictive-maintenance-kan
+  - file: experiments/random-forests
+  - file: experiments/random-forests-embeddings
+  - file: experiments/sentiment-partI
+  - file: experiments/shakespeare-embeddings
+  - file: experiments/time-series-forecasting
+  - file: experiments/unsupervised-image-segmentation
+- file: howtos/index
+  sections:
+  - file: howtos/apple-silicon-ml
+  - file: howtos/caching-long-running-jobs
+  - file: howtos/distributed-training
+- file: python-for-students/index
+  sections:
+  - file: python-for-students/intro
+  - file: python-for-students/basics
+  - file: python-for-students/types-of-data
+  - file: python-for-students/flow-control
+  - file: python-for-students/functions-and-modules
+  - file: python-for-students/comprehensions
+  - file: python-for-students/working-with-files
+- file: thoughts/index
+  sections:
+  - file: thoughts/ai-brain-curve-fitting
+  - file: thoughts/eu-tech
+  - file: thoughts/jupyter-book
+  - file: thoughts/kolmogorov-arnold-networks
+  - file: thoughts/scaling-ai
+
