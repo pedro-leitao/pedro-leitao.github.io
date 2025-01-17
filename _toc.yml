@@ -1,7 +1,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: intro
 - file: experiments/index
   sections:
   - file: experiments/bert-emotions

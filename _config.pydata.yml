@@ -91,8 +91,8 @@ sphinx:
       navbar_end: ["navbar-icon-links"]
       logo:
         # text: Δ(data)
-        image_light: _static/logo-b.png
-        image_dark: _static/logo-b.png
+        image_light: _static/logo-new.png
+        image_dark: _static/logo-new.png
       icon_links:
         - name: "GitHub"  # Label for this link
           # URL where the link will redirect
