@@ -60,8 +60,11 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         path: "_build/html"
+        name: github-pages
 
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
+      with:
+        name: github-pages
