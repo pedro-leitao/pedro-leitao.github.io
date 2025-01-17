@@ -10,7 +10,7 @@ myst:
         keywords: "Pedro, Data Science, Machine Learning, Software Engineering, Software Architecture, Python, Jupyter, JupyterBook, PyData-Sphinx"
 ---
 
-# About $\Delta(\text{data})$
+# About
 
 ```{image} images/pedro-business.jpg
 :alt: Pedro

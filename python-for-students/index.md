@@ -5,9 +5,9 @@ myst:
         keywords: "python, data analysis, data science, machine learning, students, non-computer science, introduction"
 ---
 
-# Python for Students
-
 ![student python](figures/index-python-student.png)
+
+# Python for Students
 
 This is an introduction to Python aimed at students in non-computer science disciplines. It is meant to be a gentle and *concise* introduction to programming and Python, with a focus on practical data and machine learning applications and examples. It is not meant to be comprehensive or authoritative, but rather a starting point for students who are new to programming. This is inspired by trying to teach the basics of data, data science, machine learning and programming to my own son, who is studying an engineering degree.
 

@@ -23,6 +23,13 @@ chapters:
   - file: howtos/apple-silicon-ml
   - file: howtos/caching-long-running-jobs
   - file: howtos/distributed-training
+- file: thoughts/index
+  sections:
+  - file: thoughts/ai-brain-curve-fitting
+  - file: thoughts/eu-tech
+  - file: thoughts/jupyter-book
+  - file: thoughts/kolmogorov-arnold-networks
+  - file: thoughts/scaling-ai
 - file: python-for-students/index
   sections:
   - file: python-for-students/intro
@@ -33,11 +40,5 @@ chapters:
   - file: python-for-students/comprehensions
   - file: python-for-students/working-with-files
   - file: python-for-students/diving-into-data
-- file: thoughts/index
-  sections:
-  - file: thoughts/ai-brain-curve-fitting
-  - file: thoughts/eu-tech
-  - file: thoughts/jupyter-book
-  - file: thoughts/kolmogorov-arnold-networks
-  - file: thoughts/scaling-ai
+- file: genindex
 
