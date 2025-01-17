@@ -35,6 +35,7 @@ chapters:
   - file: python-for-students/functions-and-modules
   - file: python-for-students/comprehensions
   - file: python-for-students/working-with-files
+  - file: python-for-students/diving-into-data
 - file: thoughts/index
   sections:
   - file: thoughts/ai-brain-curve-fitting
