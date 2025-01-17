@@ -5,9 +5,7 @@ chapters:
 - file: experiments/index
   sections:
   - file: experiments/bert-emotions
-  - file: experiments/cross-validation
   - file: experiments/customer-churn
-  - file: experiments/cve-experiments
   - file: experiments/gensim
   - file: experiments/instance_vs_model_learning
   - file: experiments/ml-pipeline-sklearn
