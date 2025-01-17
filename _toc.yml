@@ -1,5 +1,5 @@
 format: jb-book
-root: genindex
+root: intro
 chapters:
 - file: intro
 - file: experiments/index
