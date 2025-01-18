@@ -3,7 +3,7 @@
 
 html {
     /* --pst-header-height: 90px; */
-    --pst-header-height: 6rem;
+    --pst-header-height: 6rem; /* Make the header height 6x the font size, making the header height larger */
 }
 
 body {
