@@ -16,6 +16,7 @@ scipy
 xgboost
 catboost
 dtreeviz
+folium
 pydata-sphinx-theme
 imbalanced-learn
 statsmodels
