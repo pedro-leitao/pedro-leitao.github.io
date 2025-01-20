@@ -39,7 +39,7 @@ chapters:
   - file: python-for-students/functions-and-modules
   - file: python-for-students/comprehensions
   - file: python-for-students/working-with-files
-  - file: python-for-students/diving-into-data
   - file: python-for-students/error-handling-and-debugging
+  - file: python-for-students/diving-into-data
 - file: genindex
 
