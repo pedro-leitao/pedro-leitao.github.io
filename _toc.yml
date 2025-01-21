@@ -32,8 +32,8 @@ chapters:
   - file: thoughts/scaling-ai
 - file: python-for-students/index
   sections:
-  - file: python-for-students/intro
   - file: python-for-students/computational-thinking
+  - file: python-for-students/intro
   - file: python-for-students/basics
   - file: python-for-students/types-of-data
   - file: python-for-students/flow-control
