@@ -23,6 +23,7 @@ chapters:
   - file: howtos/apple-silicon-ml
   - file: howtos/caching-long-running-jobs
   - file: howtos/distributed-training
+  - file: howtos/deepseek-r1-reasoning
 - file: thoughts/index
   sections:
   - file: thoughts/ai-brain-curve-fitting
