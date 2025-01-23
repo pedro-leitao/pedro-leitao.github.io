@@ -26,6 +26,7 @@ execute:
     "random-forests-embeddings.ipynb",
     "caching-long-running-jobs.ipynb",
     "time-series-forecasting.ipynb",
+    "deepseek-r1-reasoning.ipnb",
   ]
   allow_errors: false
   timeout: 600
