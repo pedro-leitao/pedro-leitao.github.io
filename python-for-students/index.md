@@ -9,6 +9,8 @@ myst:
 
 # Python for Students
 
+{bdg-danger}`Work in Progress`
+
 This is an introduction to Python aimed at students in non-computer science disciplines. It is meant to be a gentle and *concise* introduction to programming and Python, with a focus on practical data and machine learning applications and examples. It is not meant to be comprehensive or authoritative, but rather a starting point for students who are new to programming. This is inspired by trying to teach the basics of data, data science, machine learning and programming to my own son, who is studying an engineering degree.
 
 Content in this book will grow over time, and will be updated and expanded as I have time. There are many excellent resources available for learning Python, and I will try to provide links to some of them as I go along. I will also try to provide references to more advanced topics and resources for students who want to go deeper.
