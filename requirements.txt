@@ -34,6 +34,7 @@ noise
 scikit-image
 sphinx_last_updated_by_git
 sphinx-copybutton
+sphinxext-opengraph
 fastparquet
 pyarrow
 ipywidgets

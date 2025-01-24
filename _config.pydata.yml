@@ -63,7 +63,14 @@ sphinx:
     - sphinx_sitemap
     - sphinx_copybutton
     - sphinx_last_updated_by_git
+    - sphinxext.opengraph
   config:
+    project: Δ(data)
+    ogp_site_url: https://deltadata.fyi/
+    ogp_description_length: 350
+    ogp_enable_meta_description: true
+    ogp_social_cards:
+      image: images/pedro-business-round.png
     html_extra_path: ["BingSiteAuth.xml"]
     html_baseurl: https://deltadata.fyi/
     sitemap_url_scheme: "{link}"
