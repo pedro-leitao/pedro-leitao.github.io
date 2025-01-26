@@ -1,0 +1,29 @@
+{
+    "adapter_path": "adapter",
+    "batch_size": 6,
+    "config": null,
+    "data": "./no_robots",
+    "fine_tune_type": "lora",
+    "grad_checkpoint": true,
+    "iters": 1000,
+    "learning_rate": 1e-05,
+    "lora_parameters": {
+        "rank": 8,
+        "alpha": 16,
+        "dropout": 0.0,
+        "scale": 10.0
+    },
+    "lr_schedule": null,
+    "max_seq_length": 2048,
+    "model": "/Users/pedroleitao/.lmstudio/models/mlx-community/DeepSeek-R1-Distill-Qwen-1.5B-8bit",
+    "num_layers": 16,
+    "resume_adapter_file": null,
+    "save_every": 100,
+    "seed": 0,
+    "steps_per_eval": 200,
+    "steps_per_report": 10,
+    "test": true,
+    "test_batches": 500,
+    "train": true,
+    "val_batches": 25
+}

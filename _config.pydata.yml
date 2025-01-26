@@ -27,6 +27,7 @@ execute:
     "caching-long-running-jobs.ipynb",
     "time-series-forecasting.ipynb",
     "deepseek-r1-reasoning.ipynb",
+    "fine-tuning-mlx.ipynb",
   ]
   allow_errors: false
   timeout: 600
