@@ -25,8 +25,6 @@ Covering a spectrum of topics from software, machine learning, software architec
 
 My career spanned a number of industries and disciplines, from software engineering to architecture and data science. I was lucky enough to have worked with interesting and very bright people, certainly more than I deserved. I have been fortunate to learn from them, and I hope that I have been able to give back in some small way.
 
-Of note I was priviliged to have come across [Antonio Costa](https://cdio.org/cdio-action/people/antonio-cardoso-costa), who was my very first mentor and the professor who introduced me to the [Unix pipeline](https://en.wikipedia.org/wiki/Pipeline_(Unix)) - I will be always grateful for his early guidance and patience.
-
 As the usual disclaimer, any views expressed here are my own and do not necessarily reflect the views of my employer, or any other entity with which I have been associated with.
 
 <small>Created with [JupyterBook](https://jupyterbook.org) and [PyData-Sphinx](https://pydata-sphinx-theme.readthedocs.io/en/stable/)</small>
