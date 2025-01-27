@@ -35,6 +35,7 @@ scikit-image
 sphinx_last_updated_by_git
 sphinx-copybutton
 sphinxext-opengraph
+sphinxcontrib-mermaid
 fastparquet
 pyarrow
 ipywidgets

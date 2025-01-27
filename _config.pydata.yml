@@ -65,6 +65,7 @@ sphinx:
     - sphinx_copybutton
     - sphinx_last_updated_by_git
     - sphinxext.opengraph
+    - sphinxcontrib.mermaid
   config:
     project: Δ(data)
     ogp_site_url: https://deltadata.fyi/
