@@ -1,13 +1,13 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 ---
-title: Δ(data)
+title: Pedro's Ramblings
 author: Pedro Leitao
 copyright: "2024"
 logo: _static/logo-new.png
 exclude_patterns: [_build, Thumbs.db, .DS_Store, .data, logs,
                    "**.ipynb_checkpoints"]
-base_url: https://deltadata.fyi/
+base_url: https://pedroleitao.nl/
 only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.
@@ -67,14 +67,14 @@ sphinx:
     - sphinxext.opengraph
     - sphinxcontrib.mermaid
   config:
-    project: Δ(data)
-    ogp_site_url: https://deltadata.fyi/
+    project: Pedro's Ramblings
+    ogp_site_url: https://pedroleitao.nl
     ogp_description_length: 350
     ogp_enable_meta_description: true
     ogp_social_cards:
       image: images/pedro-business-round.png
     html_extra_path: ["BingSiteAuth.xml"]
-    html_baseurl: https://deltadata.fyi/
+    html_baseurl: https://pedroleitao.nl
     sitemap_url_scheme: "{link}"
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
@@ -100,7 +100,7 @@ sphinx:
       footer_end: ["author"]
       navbar_end: ["navbar-icon-links"]
       logo:
-        # text: Δ(data)
+        # text:
         image_light: _static/logo-new.png
         image_dark: _static/logo-new.png
       icon_links:

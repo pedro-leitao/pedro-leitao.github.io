@@ -1,9 +1,5 @@
 ---
 file_format: mystnb
-kernelspec:
-    name: python3
-    display_name: "Python (tf)"
-    language: python
 myst:
     html_meta:
         description: "A curated collection of experiments, how to's and general commentary, courtesy of the author."
@@ -19,7 +15,7 @@ myst:
 :class: no-scaled-link
 ```
 
-*$\Delta(\text{data})$* is a curated collection of [experiments](experiments/index), [how to's](howtos/index) and general [commentary](thoughts/index), courtesy of the author. The best way to learn is to create, and a lot of what you will find here are the means by which I experiment and trial thoughts and ideas. As such, readers are advised to approach these articles with a discerning eye and a generous pinch of skepticism.
+This is a curated collection of [experiments](experiments/index), [how to's](howtos/index) and general [commentary](thoughts/index), courtesy of the author. The best way to learn is to create, and a lot of what you will find here are the means by which I experiment and trial ideas. As such, readers are advised to approach these articles with a discerning eye and a generous pinch of skepticism.
 
 Covering a spectrum of topics from software, machine learning, software architecture and perhaps, one or the other personal topic, what you find here may offer insights that range from interesting to mundane. However I hope that you find them useful, or at the very least, informative.
 
