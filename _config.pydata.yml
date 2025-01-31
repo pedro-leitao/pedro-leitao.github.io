@@ -68,13 +68,13 @@ sphinx:
     - sphinxcontrib.mermaid
   config:
     project: Pedro's Ramblings
-    ogp_site_url: https://pedroleitao.nl
+    ogp_site_url: https://pedroleitao.nl/
     ogp_description_length: 350
     ogp_enable_meta_description: true
     ogp_social_cards:
       image: images/pedro-business-round.png
     html_extra_path: ["BingSiteAuth.xml"]
-    html_baseurl: https://pedroleitao.nl
+    html_baseurl: https://pedroleitao.nl/
     sitemap_url_scheme: "{link}"
     templates_path: ["_templates"]  # You can add custom Jinja2 templates here
     html_static_path:
