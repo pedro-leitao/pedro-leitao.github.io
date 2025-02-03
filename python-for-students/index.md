@@ -5,8 +5,6 @@ myst:
         keywords: "python, data analysis, data science, machine learning, students, non-computer science, introduction"
 ---
 
-![student python](figures/index-python-student.png)
-
 # Python for Students
 
 {bdg-danger}`Work in Progress`
