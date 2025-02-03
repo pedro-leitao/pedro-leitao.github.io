@@ -69,6 +69,7 @@ sphinx:
     - sphinxcontrib.mermaid
   config:
     project: Pedro's Ramblings
+    mermaid_version: "11.3.0"
     ogp_site_url: https://pedroleitao.nl/
     ogp_description_length: 350
     ogp_enable_meta_description: true
