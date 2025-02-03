@@ -73,7 +73,7 @@ sphinx:
     ogp_description_length: 350
     ogp_enable_meta_description: true
     ogp_social_cards:
-      image: images/pedro-business-round.png
+      image: _static/logo-new.png
     html_extra_path: ["BingSiteAuth.xml"]
     html_baseurl: https://pedroleitao.nl/
     sitemap_url_scheme: "{link}"
