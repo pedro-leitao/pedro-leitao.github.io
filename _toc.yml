@@ -27,6 +27,7 @@ chapters:
   - file: howtos/deepseek-r1-reasoning
   - file: howtos/fine-tuning/mlx/fine-tuning-mlx
   - file: howtos/fine-tuning/transformers/fine-tuning-transformers
+  - file: howtos/model-management-mlflow
 - file: thoughts/index
   sections:
   - file: thoughts/ai-brain-curve-fitting

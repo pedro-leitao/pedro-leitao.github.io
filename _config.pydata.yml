@@ -29,7 +29,8 @@ execute:
     "deepseek-r1-reasoning.ipynb",
     "fine-tuning-mlx.ipynb",
     "fine-tuning-transformers.ipynb",
-    "parallel-mandelbrot.ipynb"
+    "parallel-mandelbrot.ipynb",
+    "model-management-mlflow.ipynb"
   ]
   allow_errors: false
   timeout: 600
