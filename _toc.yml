@@ -32,7 +32,6 @@ chapters:
   sections:
   - file: thoughts/ai-brain-curve-fitting
   - file: thoughts/eu-tech
-  - file: thoughts/jupyter-book
   - file: thoughts/kolmogorov-arnold-networks
   - file: thoughts/scaling-ai
   - file: thoughts/france-ai-investment
