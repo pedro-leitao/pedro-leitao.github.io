@@ -1,0 +1,31 @@
+---
+file_format: mystnb
+kernelspec:
+  name: python3
+  display_name: "Python (tf)"
+  language: python
+myst:
+  html_meta:
+    description: "France is about to announce €109 billion private sector investments in AI. Could this lead Germany to go back to nuclear?"
+    keywords: "European Union, artificial intelligence, tech investment, venture capital, regulation, talent, nuclear energy"
+---
+
+# France, AI and Back to Nuclear for Germany ?
+
+President Macron has [just signalled that France is about to announce €109 billion private sector investments in AI](https://www.reuters.com/technology/artificial-intelligence/france-invest-109-billion-euros-ai-macron-announces-2025-02-09/). This is a significant amount of money, even for a country like France. It is also a clear signal that at least some European countries might be serious about technology investment.
+
+France is at this time the only european union country with a significant AI company ([Mistral](https://mistral.ai/en)), and perhaps this is a reflection of this. In the meantime, [Aleph Alpha](https://aleph-alpha.com), the German AI startup pretty much ditched large scale model development and claims to be building [B2B tooling for AI](https://sifted.eu/articles/aleph-alpha-what-comes-next-news), read that in whatever way you see fit.
+
+## The German Nuclear Question
+
+France produces most of its electricity from nuclear power, and Germany has been phasing out nuclear power since 2011. Obviously France will be better positioned to produce the necessary electricity for any large scale AI infrastructure, and this is bound to be a significant advantage in the future if this really does lead to the need to power a number of data centers and AI operations which require substantial energy.
+
+Germany is in the midst of a debate towards a [return to nuclear power](https://www.politico.eu/article/germany-election-jens-spahn-nuclear-energy-comeback/), the country has been struggling with its energy transition, and the need to power a significant AI infrastructure could be a significant factor in this debate.
+
+A lot of this will depend on the coming [German election](https://www.dw.com/en/german-election-2025/t-70794502) and whether [Merz](https://www.politico.eu/article/germany-next-chancellor-friedrich-merz-vows-put-economy-before-climate-elections/) is likely to hold his nerve when it comes to energy policy. If Merz ends up in a coalition with the Greens, it is likely that the nuclear question will be off the table.
+
+## The European Union
+
+In the meantime, the European Union now seems to be talking more and more about deregulation, but the spin seems to be more about [simplification](https://www.ft.com/content/144d4f10-1c52-4f11-b5d9-f8ea9da7962a) rather than actually significantly removing barriers to entry - it remains to be seen if EU institutions are actually capable of removing the web of regulation which has been built up over the last few decades.
+
+In the meantime the pace of regulatory change in Europe continues unabated, with the European Comission alone having [passed 421 new legal acts](https://eur-lex.europa.eu/statistics/2024/legislative-acts-statistics.html) in 2024 alone.

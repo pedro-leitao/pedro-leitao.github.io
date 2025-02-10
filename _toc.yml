@@ -35,6 +35,7 @@ chapters:
   - file: thoughts/jupyter-book
   - file: thoughts/kolmogorov-arnold-networks
   - file: thoughts/scaling-ai
+  - file: thoughts/france-ai-investment
 - file: python-for-students/index
   sections:
   - file: python-for-students/computational-thinking
