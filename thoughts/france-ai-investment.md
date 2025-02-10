@@ -18,7 +18,7 @@ France is at this time the only european union country with a significant AI com
 
 ## The German Nuclear Question
 
-France produces most of its electricity from nuclear power, and Germany has been phasing out nuclear power since 2011. Obviously France will be better positioned to have in place the necessary electricity for any large scale AI infrastructure, and this is bound to be a significant advantage in the future if  really does lead to a sustained level of investment.
+France produces most of its electricity from nuclear power, and Germany has been phasing out nuclear power since 2011. Obviously France will be better positioned to have in place the necessary electricity for any large scale AI infrastructure, and this is bound to be a significant advantage in the future if it really does lead to a sustained level of investment.
 
 Germany is in the midst of a debate about a [return to nuclear power](https://www.politico.eu/article/germany-election-jens-spahn-nuclear-energy-comeback/), the country has been struggling with its energy transition, and the need to power a significant AI infrastructure could be a significant factor to be considered.
 
