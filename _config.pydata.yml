@@ -62,6 +62,9 @@ html:
   use_multitoc_numbering: false
   analytics:
     google_analytics_id: "G-FQKJNEYQJM"
+  comments:
+    utterances:
+      repo: pedro-leitao/pedro-leitao.github.io
 
 sphinx:
   extra_extensions:
