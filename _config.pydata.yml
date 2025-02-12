@@ -73,6 +73,7 @@ sphinx:
     - sphinx_last_updated_by_git
     - sphinxext.opengraph
     - sphinxcontrib.mermaid
+    - sphinx_comments
   config:
     project: Pedro's Ramblings
     mermaid_version: "11.3.0"

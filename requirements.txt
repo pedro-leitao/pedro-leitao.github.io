@@ -36,6 +36,7 @@ sphinx_last_updated_by_git
 sphinx-copybutton
 sphinxext-opengraph
 sphinxcontrib-mermaid
+sphinx-comments
 fastparquet
 pyarrow
 ipywidgets
