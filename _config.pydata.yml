@@ -64,7 +64,12 @@ html:
     google_analytics_id: "G-FQKJNEYQJM"
   comments:
     utterances:
-      repo: pedro-leitao/pedro-leitao.github.io
+      repo: "pedro-leitao/pedro-leitao.github.io"
+      src: "https://utteranc.es/client.js"
+      issue-term: "pathname"
+      label: "Comment"
+      theme: "github-light"
+      crossorigin: "anonymous"
 
 sphinx:
   extra_extensions:
@@ -73,7 +78,6 @@ sphinx:
     - sphinx_last_updated_by_git
     - sphinxext.opengraph
     - sphinxcontrib.mermaid
-    - sphinx_comments
   config:
     project: Pedro's Ramblings
     mermaid_version: "11.3.0"
