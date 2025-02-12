@@ -30,7 +30,8 @@ execute:
     "fine-tuning-mlx.ipynb",
     "fine-tuning-transformers.ipynb",
     "parallel-mandelbrot.ipynb",
-    "model-management-mlflow.ipynb"
+    "model-management-mlflow.ipynb",
+    "connect-four-rl.ipynb"
   ]
   allow_errors: false
   timeout: 600
