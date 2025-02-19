@@ -20,6 +20,7 @@ chapters:
   - file: experiments/unsupervised-image-segmentation
   - file: experiments/parallel-mandelbrot
   - file: experiments/connect-four-rl
+  - file: experiments/understanding-regularization
 - file: howtos/index
   sections:
   - file: howtos/apple-silicon-ml
