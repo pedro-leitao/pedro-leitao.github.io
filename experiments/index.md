@@ -12,7 +12,7 @@ myst:
 
 # Experiments
 
-Experiments on various topics, mainly machine learning exploration and software. No specific order, just a collection of topics that I needed specific refreshers on or wanted to explore further.
+This is a space dedicated to experimentation and exploration across various topics, primarily focusing on machine learning, data analytics, and software development. There is no strict structure or predefined order - rather, it serves as a dynamic collection of concepts, techniques, and ideas that I’ve revisited for a refresher or delved into out of curiosity. Whether it's revisiting foundational principles, testing new methodologies, or exploring emerging trends, this area is meant to document insights, experiments, and learning experiences along the way.
 
 ## Table of contents
 

@@ -7,7 +7,7 @@ myst:
 
 # How to's
 
-Specific guides and details on setting up various tools and software. A lot of these are pretty specific to my setup, but I hope they can be useful to others as well.
+This section provides detailed guides and step-by-step instructions for setting up various tools and software. Many of these configurations are tailored to my specific setup, but they may still offer useful insights or serve as a reference for others facing similar challenges. Anything here tends to age quickly, so please verify and adapt it to your needs.
 
 ## Table of contents
 
