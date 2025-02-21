@@ -8,12 +8,14 @@ myst:
 
 # About
 
-This is a curated collection of [experiments](experiments/index), [how to's](howtos/index) and general [commentary](thoughts/index), courtesy of the author. The best way to learn is to create, and a lot of what you will find here are the means by which I experiment and trial ideas. As such, readers are advised to approach these articles with a discerning eye and a generous pinch of skepticism.
+This is a curated collection of [experiments](experiments/index), [tutorials](howtos/index), and [general commentary](thoughts/index), all crafted by the author.
 
-Covering a spectrum of topics from software, machine learning, software architecture and perhaps, one or the other personal topic, what you find here may offer insights that range from interesting to mundane. However I hope that you find them useful, or at the very least, informative.
+I’ve long held the belief that the most effective way to learn is through creation. Knowledge isn’t truly grasped until you roll up your sleeves and build something with it. Much of what you’ll encounter in this collection reflects my own process of exploring, experimenting, and occasionally stumbling along the way. These pieces aren’t intended to be flawless or definitive; rather, they’re snapshots of discovery - sometimes messy, sometimes illuminating, but always authentic. With that in mind, I invite you to approach these articles with a critical lens and a healthy dose of skepticism. Challenge my assumptions, test my conclusions, and adapt these ideas to your own context.
 
-My career spanned a number of industries and disciplines, from software engineering to architecture and data science. I was lucky enough to have worked with interesting and very bright people, certainly more than I deserved. I have been fortunate to learn from them, and I hope that I have been able to give back in some small way.
+The content you will find here spans a range of topics, including software development, machine learning, and software architecture, with the occasional dip into personal reflections. Any insights offered may vary from thoughtful to everyday, my hope is that you’ll find them valuable, or at least informative.
 
-As the usual disclaimer, any views expressed here are my own and do not necessarily reflect the views of my employer, or any other entity with which I have been associated with.
+My career has taken me across diverse fields, from software engineering to architecture and data science. Along the way, I’ve had the privilege of working with remarkably talented individuals—perhaps more gifted than I deserve. I’ve gained a wealth of knowledge from them and aspire to have contributed something meaningful in return, however modest it may be.
+
+As a standard note, the opinions shared here are mine alone and do not necessarily represent those of my employer or any organization I’ve been affiliated with before.
 
 <small>Created with [JupyterBook](https://jupyterbook.org) and [PyData-Sphinx](https://pydata-sphinx-theme.readthedocs.io/en/stable/)</small>
