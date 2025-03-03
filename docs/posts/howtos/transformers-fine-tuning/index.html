@@ -515,7 +515,7 @@ Exercise suggestion
 </section>
 <section id="configuring-lora" class="level2">
 <h2 class="anchored" data-anchor-id="configuring-lora">Configuring LoRA</h2>
-<p>Now that we have a sense of the model’s architecture, we can configure LoRA. The setup uses small matrices (<code>rank 16</code>) are added to specific parts of the model. The number 32 (<code>alpha</code>) controls how much these new matrices affect the original weights – like a volume knob for the adjustments. A small 5% dropout (<code>lora_dropout</code>) is applied to these added components to prevent overfitting.</p>
+<p>Now that we have a sense of the model’s architecture, we can configure LoRA. The setup uses small matrices (<code>rank 16</code>) which are added to specific parts of the model. The number 32 (<code>alpha</code>) controls how much these new matrices affect the original weights – like a volume knob for the adjustments. A small 5% dropout (<code>lora_dropout</code>) is applied to these added components to prevent overfitting.</p>
 <p>It targets all linear layers (<code>target_modules</code>) in the model for adaptation (like attention and feed-forward layers) while explicitly keeping the word embedding layer and the final output layer (<code>lm_head</code>) fully trainable. The <code>bias</code> terms in the original model remain frozen. This configuration is specifically designed for causal language modeling tasks like text generation, where the model predicts the next word in a sequence. The approach balances efficiency (only modifying parts of the model) with flexibility (keeping key components like embeddings trainable).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
