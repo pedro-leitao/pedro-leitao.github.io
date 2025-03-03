@@ -212,6 +212,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Fine-tuning an LLM with Apple’s MLX Framework</h1>
+            <p class="subtitle lead">fine-tuning pre-trained language models in apple silicon</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">HowTo</div>
                 <div class="quarto-category">AI</div>
@@ -374,7 +375,7 @@ About LoRA
     --model lmstudio-community/Qwen2.5-0.5B-Instruct-MLX-8bit \
     --prompt 'When did Michael Jackson die?'</code></pre>
 <p>In my case, I use <a href="https://lmstudio.ai">LMStudio</a> to manage models, so I point at the model in a specific location rather than downloading it from the Hugging Face model hub via the <code>mlx</code> command.</p>
-<div id="b1ece29e" class="cell" data-execution_count="1">
+<div id="b1ece29e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.generate <span class="op">\</span></span>
@@ -424,7 +425,7 @@ Note
 <p>For the purposes of this exercise, we don’t need to worry about the specifics of the dataset, or whether the model improves or not - we are only interested in the process of fine-tuning.</p>
 </div>
 </div>
-<div id="02a839b6" class="cell" data-execution_count="2">
+<div id="02a839b6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datasets <span class="im">import</span> load_dataset</span>
@@ -456,7 +457,7 @@ Note
 })</code></pre>
 </div>
 </div>
-<div id="529d23a8" class="cell" data-execution_count="3">
+<div id="529d23a8" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dataset[<span class="st">"train"</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -466,7 +467,7 @@ Note
 </div>
 </div>
 <p>Now let’s save the split dataset into a file.</p>
-<div id="d347d611" class="cell" data-execution_count="4">
+<div id="d347d611" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
@@ -498,7 +499,7 @@ Note
 </div>
 </div>
 <p>And finally let us run the fine-tuning process. For the training we will set the number of adapter layers to <span class="math inline">\(8\)</span> (<code>--num-layers 8</code>), the batch size to <span class="math inline">\(6\)</span> (<code>--batch-size 6</code>), the number of iterations to <span class="math inline">\(1500\)</span> (<code>--iters 1500</code>), and we will also checkpoint the model every <span class="math inline">\(100\)</span> iterations (<code>--grad-checkpoint</code>). You can pass these parameters directly to the <code>mlx_lm.train</code> command, but in our case we want to save them into a configuration <code>yaml</code> file.</p>
-<div id="9b06fa97" class="cell" data-execution_count="5">
+<div id="9b06fa97" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat no_robots<span class="op">-</span>train<span class="op">-</span>params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -544,7 +545,7 @@ max_seq_length: 2048
 grad_checkpoint: true</code></pre>
 </div>
 </div>
-<div id="4894d246" class="cell" data-execution_count="6">
+<div id="4894d246" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.lora <span class="op">\</span></span>
@@ -591,7 +592,7 @@ About Gradient Checkpointing
 </div>
 </div>
 <p>We just fine-tuned the model, and we can now see the adapter matrices in the <code>adapter</code> directory!</p>
-<div id="0ad581af" class="cell" data-execution_count="7">
+<div id="0ad581af" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls <span class="op">-</span>lh adapter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -605,7 +606,7 @@ About Gradient Checkpointing
 </div>
 </div>
 <p>Before we can use the fine-tuned model, we need to merge (or “fuse”) the adapter matrices from the fine-tuning training back into the original model. This can be done with the <code>mlx_lm.fuse</code> command.</p>
-<div id="86def030" class="cell" data-execution_count="8">
+<div id="86def030" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.fuse <span class="op">\</span></span>
@@ -618,7 +619,7 @@ About Gradient Checkpointing
 </div>
 </div>
 <p>And finally we can generate text using the fine-tuned model as before.</p>
-<div id="1e285ffa" class="cell" data-execution_count="9">
+<div id="1e285ffa" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.generate <span class="op">\</span></span>

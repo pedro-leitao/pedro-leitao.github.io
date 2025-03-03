@@ -178,6 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Model Management with MLflow</h1>
+            <p class="subtitle lead">how to log, compare, and deploy machine learning models consistently with mlflow</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">HowTo</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -244,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a-simple-example" class="level3">
 <h3 class="anchored" data-anchor-id="a-simple-example">A simple example</h3>
 <p>Let’s exemplify how to use MLflow with a simple use case. We will produce a 2D dataset, and train a variety of models on it. We will log the models, along with their hyperparameters and performance metrics to MLflow so we can reproduce and compare them later.</p>
-<div id="cdeb405e" class="cell" data-execution_count="1">
+<div id="cdeb405e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -257,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">4</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> X <span class="op">+</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> X) <span class="op">+</span> <span class="fl">0.4</span> <span class="op">*</span> np.random.randn(<span class="dv">1000</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="967dceff" class="cell" data-execution_count="2">
+<div id="967dceff" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -285,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>With the necessary dataset out of the way, we can now move on to creating an MLflow <em>experiment</em>. An experiment is a set of <em>runs</em> that are typically related to a specific goal. For example, you might create an experiment to compare different models on a specific dataset or to optimize a model for a specific metric. Each run within an experiment logs metrics, parameters, and artifacts, which can be compared and analyzed later.</p>
 <p>Below, when we run <code>autolog()</code>, we are priming MLflow to automatically log all the parameters, metrics, model signatures, models and datasets from our runs. This is a convenient way to ensure that all relevant information is captured without having to manually log each item. It is the easiest way to get started, but you can also log items manually if you prefer.</p>
-<div id="5062b1f8" class="cell" data-execution_count="3">
+<div id="5062b1f8" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlflow <span class="im">import</span> set_experiment</span>
@@ -317,7 +318,7 @@ Note
 <p>Always ensure you end your run with <code>mlflow.end_run()</code>. This will ensure that all the relevant information is logged to MLflow.</p>
 </div>
 </div>
-<div id="91768304" class="cell" data-execution_count="4">
+<div id="91768304" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple linear regression model</span></span>
@@ -368,7 +369,7 @@ Note
 </figure>
 </div>
 <p>With the data recorded, we can use the client API to query the data logged, for example, we can retrieve logged metrics for the run we just completed.</p>
-<div id="a2236d54" class="cell" data-execution_count="5">
+<div id="a2236d54" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlflow <span class="im">import</span> MlflowClient</span>
@@ -393,7 +394,7 @@ training_score: 0.9063114215104214</code></pre>
 </div>
 </div>
 <p>We can continue to log more runs to the same experiment, and compare the results in the MLflow UI. For example, let’s create another run, this time with a Random Forest regressor model. Notice that the flow of the code is the same as before, we start a new run, train the model and end the run.</p>
-<div id="26631a2b" class="cell" data-execution_count="6">
+<div id="26631a2b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict with a random forest regressor</span></span>
@@ -433,7 +434,7 @@ training_score: 0.9063114215104214</code></pre>
 </div>
 </div>
 </div>
-<div id="ddda3a8e" class="cell" data-execution_count="7">
+<div id="ddda3a8e" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>run_data <span class="op">=</span> client.get_run(run.info.run_id).data</span>
@@ -458,7 +459,7 @@ training_score: 0.9948639192015508</code></pre>
 <p>We have so far relied on MLflow’s autologging feature to capture all the relevant information for our runs. However, you can also log items manually if you prefer. This gives more control over what is logged, and allows you to log custom metrics, parameters, and artifacts.</p>
 <p>Let’s add another run to the experiment, this time logging the model manually. We will use a simple neural network model with PyTorch, but this time all logging will be setup explicitly instead of relying on autologging.</p>
 <p>We start by setting up the network and model.</p>
-<div id="857839ec" class="cell" data-execution_count="8">
+<div id="857839ec" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict with a PyTorch neural network</span></span>
@@ -516,7 +517,7 @@ training_score: 0.9948639192015508</code></pre>
 </div>
 <p>We then start a new run, just like before, except that now we are logging everything manually - for example, using <code>mlflow.log_params</code> to log the hyperparameters, and <code>mlflow.log_metrics</code> for performance metrics.</p>
 <p>Finally, we log the model itself as an artifact. This is a common use case - you can log any file or directory as an artifact, and it will be stored with the run in MLflow. This is useful for storing models, datasets, and other files that are relevant to the run.</p>
-<div id="0917b806" class="cell" data-execution_count="9">
+<div id="0917b806" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, mean_absolute_error, r2_score</span>
@@ -598,7 +599,7 @@ training_score: 0.9948639192015508</code></pre>
 </div>
 </div>
 </div>
-<div id="63521edb" class="cell" data-execution_count="10">
+<div id="63521edb" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>run_data <span class="op">=</span> client.get_run(run.info.run_id).data</span>
@@ -617,7 +618,7 @@ train_loss: 0.1441287100315094</code></pre>
 </div>
 </div>
 <p>Because our training run logged the training loss as a history for each epoch, we can fetch the loss curve via the MLflow API and plot it ourselves.</p>
-<div id="0cae8ae4" class="cell" data-execution_count="11">
+<div id="0cae8ae4" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve training loss history for the known run_id</span></span>

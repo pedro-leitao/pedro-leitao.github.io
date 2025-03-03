@@ -207,6 +207,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">How GPU’s work, an explainer using the Mandelbrot set</h1>
+            <p class="subtitle lead">mandelbrot sets and parallelism</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">GPU</div>
@@ -281,7 +282,7 @@ f(z) = z^2 + c
 <h2 class="anchored" data-anchor-id="calculating-the-mandelbrot-set-with-no-parallelism">Calculating the Mandelbrot set with no parallelism</h2>
 <p>Let’s start by writing a simple, naive function to calculate the Mandelbrot set. This function uses <em>no</em> parallelism, and it’s a simple for loop that iterates over each pixel in the image and calculates each using the CPU only. It basically iterates over columns and rows and computes whether that particular point diverges or not as nested loops.</p>
 <p>For a width of 500 and height of 500, this function will compute <span class="math inline">\(250000\)</span> pixels, for a width of 1000 and height of 1000, it will compute <span class="math inline">\(1000000\)</span> pixels, and so on. The time taken for this function to run increase as <span class="math inline">\(O(n^2)\)</span> where <span class="math inline">\(n\)</span> is the width or height of the image.</p>
-<div id="68e56eb5" class="cell" data-execution_count="1">
+<div id="68e56eb5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_iterations(width, height, max_iter):</span>
@@ -325,7 +326,7 @@ f(z) = z^2 + c
 <section id="numpy" class="level3">
 <h3 class="anchored" data-anchor-id="numpy">Numpy</h3>
 <p>Let’s start with an implementation of the <code>compute_mandelbrot_iterations</code> function using <code>numpy</code>, entirely with array (or matrix) operations.</p>
-<div id="4f011e40" class="cell" data-execution_count="2">
+<div id="4f011e40" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -374,7 +375,7 @@ Tip
 <p>The reason you see a transpose in PyTorch is because its grid creation defaults to a different dimension ordering than <code>numpy</code>’s. In <code>numpy</code>, when you use <code>np.meshgrid</code> with <code>indexing='xy'</code>, the resulting arrays have the first dimension corresponding to the y-axis and the second to the x-axis, matching common image coordinate conventions. <code>pytorch</code>’s <code>torch.meshgrid</code>, on the other hand, typically returns tensors where the dimensions are swapped relative to that layout. By transposing (<code>.t()</code>) the <code>pytorch</code> tensors, you align the dimensions so that the complex grid <code>c</code> ends up with the same arrangement as in <code>numpy</code>. This ensures that each element in <code>c</code> correctly corresponds to the intended coordinate in the complex plane.</p>
 </div>
 </div>
-<div id="b8cd3dee" class="cell" data-execution_count="3">
+<div id="b8cd3dee" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -405,7 +406,7 @@ Tip
 <section id="apples-mlx" class="level3">
 <h3 class="anchored" data-anchor-id="apples-mlx">Apple’s MLX</h3>
 <p>Apple’s MLX offers an API which is virtually the same as PyTorch and NumPy, and it can be used interchangeably with them. The only difference is that it is optimized for Apple hardware, and it can be used on Apple Silicon.</p>
-<div id="eab842b5" class="cell" data-execution_count="4">
+<div id="eab842b5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlx.core <span class="im">as</span> mx</span>
@@ -435,7 +436,7 @@ Tip
 <section id="putting-it-all-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
 <p>Let’s put all the above together and render the Mandelbrot set with each different method. Each of <code>compute_mandelbrot_*</code> returns a 2D array of integers, where each integer represents the number of iterations it took for that pixel to diverge. We will then use <code>matplotlib</code> to render the image.</p>
-<div id="9f10a0d6" class="cell" data-execution_count="5">
+<div id="9f10a0d6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mps_available <span class="op">=</span> torch.backends.mps.is_available()</span>
@@ -462,7 +463,7 @@ Tip
 <section id="plotting-the-set" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-the-set">Plotting the set</h2>
 <p>Now let’s create a function to plot the above <code>iter_counts</code> list of Mandelbrot images so we can compare each visually, they should all look the same.</p>
-<div id="47ba4c8c" class="cell" data-execution_count="6">
+<div id="47ba4c8c" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
@@ -504,7 +505,7 @@ Tip
 <span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="d4fa6b04" class="cell" data-execution_count="7">
+<div id="d4fa6b04" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plot_mandelbrot_grid(</span>
@@ -530,7 +531,7 @@ Tip
 <section id="timing-the-functions" class="level2">
 <h2 class="anchored" data-anchor-id="timing-the-functions">Timing the functions</h2>
 <p>So we can easily contrast and compare the speed of each of the above functions, let’s time them using the <code>time</code> module in Python at different resolutions (width and height). We will see the difference in parallelism between methods which rely entirely on the CPU and those which offload the computation to the GPU. All timings are in seconds.</p>
-<div id="b334194e" class="cell" data-execution_count="8">
+<div id="b334194e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -599,7 +600,7 @@ Tip
 </div>
 </div>
 <p>And finally let us put the above results in an intuitive visual representation, so we can see the difference in speed between the different methods.</p>
-<div id="b1ebaf4b" class="cell" data-execution_count="9">
+<div id="b1ebaf4b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> ticker</span>

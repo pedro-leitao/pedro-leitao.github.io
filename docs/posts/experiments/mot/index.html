@@ -210,6 +210,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Which Car is Best ? Analysing and Predicting MOT Test Results</h1>
+            <p class="subtitle lead">dive deeper into data analysis using a real-world dataset</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Machine Learning</div>
                 <div class="quarto-category">Data Science</div>
@@ -261,7 +262,7 @@ window.Quarto = {
 <p>In this experiment, we will be analysing the MOT test results of cars in the UK. The MOT test is an annual test of vehicle safety, roadworthiness aspects and exhaust emissions required in the United Kingdom for most vehicles over three years old. The MOT test is designed to ensure that a vehicle is roadworthy and safe to drive. The test checks the vehicle against a number of criteria, including the condition of the vehicle’s brakes, lights, tyres, exhaust emissions, and more.</p>
 <p>The dataset we will be using in this experiment is the <a href="https://www.data.gov.uk/dataset/e3939ef8-30c7-4ca8-9c7c-ad9475cc9b2f/anonymised-mot-tests-and-results">UK MOT test results dataset</a> for 2023. Information includes the make, model, and year of the car, as well as the overal test result.</p>
 <p>Let us start by loading the dataset and taking a look at the first few rows.</p>
-<div id="f12be255" class="cell" data-execution_count="1">
+<div id="f12be255" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load .data/mot/test_results.csv as a dataframe</span></span>
@@ -482,7 +483,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Let us also load a few lookup tables that will help us in our analysis, and merge them with the main dataset.</p>
-<div id="121f060f" class="cell" data-execution_count="2">
+<div id="121f060f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fuel_types <span class="op">=</span> pd.read_csv(<span class="st">'.data/mdr_fuel_types.csv'</span>, sep<span class="op">=</span><span class="st">'|'</span>)</span>
@@ -731,7 +732,7 @@ window.Quarto = {
 <section id="pre-processing" class="level2">
 <h2 class="anchored" data-anchor-id="pre-processing">Pre-processing</h2>
 <p>First let us perform some simple pre-processing steps on the dataset, to remove any data that is not relevant to our analysis and to perform some basic tidying. We will also calculate a few additional columns that will be useful for our analysis.</p>
-<div id="b2261fb6" class="cell" data-execution_count="3">
+<div id="b2261fb6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop any first_use and test_date before 1970, to avoid invalid ages due to the UNIX epoch</span></span>
@@ -1041,7 +1042,7 @@ window.Quarto = {
 </div>
 </div>
 <p>That’s looking better, and we now have a couple of more columns - a combined make and model column, and a column for the age of the car based on the first use date and the actual test date. Now let us sample the top 20 most tested cars from the dataset, we will also filter for only ‘NT’ (Normal Test) test types, as overall we only want to consider normal tests and not retests.</p>
-<div id="ebe7ed5c" class="cell" data-execution_count="4">
+<div id="ebe7ed5c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop any rows where test_type is not 'NT'</span></span>
@@ -1352,7 +1353,7 @@ About Correlation Matrixes
 <p>Both positive and negative correlation values provide insights into the variables being studied, helping to understand whether and how variables influence each other.</p>
 </div>
 </div>
-<div id="4942de46" class="cell" data-execution_count="5">
+<div id="4942de46" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1403,7 +1404,7 @@ About Correlation Matrixes
 <section id="exploratory-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-analysis">Exploratory analysis</h2>
 <p>Let’s try and gather some insights from the data. We will start by looking at the most common make/model combinations available.</p>
-<div id="d4695b67" class="cell" data-execution_count="6">
+<div id="d4695b67" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the top 10 most common make-model combinations</span></span>
@@ -1427,7 +1428,7 @@ About Correlation Matrixes
 </div>
 <p>That’s interesting! The most common make/model combination is the Ford Fiesta, followed by the Ford Focus and the Vauxhall Corsa. These are all popular cars in the UK, so it makes sense that they are the most tested. Note that we are measuring <em>the number of tests</em> and not the number of cars, so it is possible that some cars have been tested multiple times.</p>
 <p>Let’s now perform a different visualisation which might be a bit more interesting, we will first show the distribution of car makes in relative terms as a treemap. In this case, let us remove any vehicle duplicates, so we only have one test per vehicle and therefore are comparing actual number of vehicles.</p>
-<div id="ebbb492d" class="cell" data-execution_count="7">
+<div id="ebbb492d" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> squarify</span>
@@ -1454,7 +1455,7 @@ About Correlation Matrixes
 </div>
 </div>
 </div>
-<div id="c448a132" class="cell" data-execution_count="8">
+<div id="c448a132" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the top vehicle models, while deduplicating for vehicle_id</span></span>
@@ -1481,7 +1482,7 @@ About Correlation Matrixes
 </div>
 <p>This is quite informative! We can easily see the relative popularity of different models, and the color coding gives a great visual representation of the distribution of both makes and models.</p>
 <p>Now let us look at how vehicle age, make and model is distributed - this will help us get a better picture of the test results for each make and model. First let us understand the overal distribution of vehicle age in the dataset, as an histogram.</p>
-<div id="22a930d3" class="cell" data-execution_count="9">
+<div id="22a930d3" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -1516,7 +1517,7 @@ Q&amp;A
 </div>
 </div>
 <p>Again, super informative. It would however be interesting to understand this as percentiles as well, so let us add that.</p>
-<div id="17ba562a" class="cell" data-execution_count="10">
+<div id="17ba562a" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and plot percentiles for the age_years column</span></span>
@@ -1552,7 +1553,7 @@ Name: age_years, dtype: float64</code></pre>
 </div>
 </div>
 <p>We conclude that only 25% of cars are newer than 7 years, and 50% newer than 10. Let us perform a similar analysis, but for mileage instead of age.</p>
-<div id="3ab8423f" class="cell" data-execution_count="11">
+<div id="3ab8423f" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and plot percentiles for the test_mileage column</span></span>
@@ -1589,7 +1590,7 @@ Name: test_mileage, dtype: float64</code></pre>
 </div>
 <p>Lots of information here. We can see that only 25% of cars have a mileage of less than aproximately 44000 miles, and half the cars have over 70000 miles on the clock! This is quite a lot of mileage, and it will be interesting to see how this affects the test results.</p>
 <p>Let us now visually try to understand these distributions of age and mileage for each make and model. We are only ilustrating the visualisation technique, so let us look at age only - we could easily do the same for mileage. We will use a stacked histogram, where the <code>y</code> axis is the percentage of cars in each age group, and the <code>x</code> axis is the age of the car.</p>
-<div id="9a89d65a" class="cell" data-execution_count="12">
+<div id="9a89d65a" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a matrix of histograms per make of the age of vehicles in years</span></span>
@@ -1611,7 +1612,7 @@ Name: test_mileage, dtype: float64</code></pre>
 </div>
 <p>There are <em>a lot</em> of old Volkswagens out on the road! This is quite interesting, and we can see that the distribution of ages for different makes is very different, ilustrating the popularity of different makes over time, a little bit like reading tree rings!</p>
 <p>Let us perform the same analysis, but for models instead of makes.</p>
-<div id="e52bf723" class="cell" data-execution_count="13">
+<div id="e52bf723" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a matrix of histograms per model of the age of vehicles in years</span></span>
@@ -1632,7 +1633,7 @@ Name: test_mileage, dtype: float64</code></pre>
 </div>
 </div>
 <p>The number of Golf’s and Transporter vans helps to explain the make distribution we saw before. The effect we see is quite striking, and just like car makers before, it ilustrates the popularity of different models over time.</p>
-<div id="268799d8" class="cell" data-execution_count="14">
+<div id="268799d8" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average test mileage</span></span>
@@ -1700,7 +1701,7 @@ About Pass Ratio
 <p>This measure is a very simplistic proxy for reliability. In practice, we would need to consider other factors, such as the number of retests, the type of failures, etc.</p>
 </div>
 </div>
-<div id="34c0ec77" class="cell" data-execution_count="15">
+<div id="34c0ec77" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the makes with the highest ratio of test_result = P</span></span>
@@ -1751,7 +1752,7 @@ About Pass Ratio
 </div>
 </div>
 <p>And now a similar analysis, but for models instead of makes.</p>
-<div id="9bcf4777" class="cell" data-execution_count="16">
+<div id="9bcf4777" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the models with the highest ratio of test_result = P</span></span>
@@ -1802,7 +1803,7 @@ About Pass Ratio
 </div>
 </div>
 <p>It could also be interesting to have a look at how the pass ratio is distributed by fuel type.</p>
-<div id="b75c7133" class="cell" data-execution_count="17">
+<div id="b75c7133" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate counts and ratios as before, change to grouping by 'make'</span></span>
@@ -1847,7 +1848,7 @@ About Pass Ratio
 </div>
 <p>Electric vehicles display a broad spectrum of pass ratios that differ notably depending on the manufacturer. This contrasts with petrol and diesel cars, which tend to exhibit more consistent pass rates across various makes. The observed disparity in the performance of electric cars suggests underlying differences in technology or quality control among manufacturers, or variability in testing standards. This pattern is intriguing and could provide valuable insights into the reliability and engineering of electric vehicles, making it a worthwhile subject for deeper analysis.</p>
 <p>It would also be nice to understand the distribution of test results for each model. Let us try a visualisation which might help - we will facet a scatter plot for each model into a single grid.</p>
-<div id="737d96ea" class="cell" data-execution_count="18">
+<div id="737d96ea" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a FacetGrid object</span></span>
@@ -1904,7 +1905,7 @@ About Effective Data Visualisation
 <section id="understanding-geographic-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-geographic-distribution">Understanding geographic distribution</h2>
 <p>It would be interesting to understand the geographic distribution of test results. Let us start by calculating a table which summarises a few key metrics for each postcode area. We will use <code>pgeocode</code> to get the latitude and longitude of each postcode area.</p>
-<div id="aa6304f8" class="cell" data-execution_count="19">
+<div id="aa6304f8" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pgeocode</span>
@@ -1975,7 +1976,7 @@ BB             53.773367  -2.463333  </code></pre>
 </div>
 </div>
 <p>Let us visualise this data per latitude and longitude, using a scatter plot, which should give us a rough aproximation of a map.</p>
-<div id="64dd54cd" class="cell" data-execution_count="20">
+<div id="64dd54cd" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mcolors</span>
@@ -2037,7 +2038,7 @@ BB             53.773367  -2.463333  </code></pre>
 <p><strong>Pass Ratio</strong>: The pass ratio varies significantly across different regions. The southeast appears to have higher pass ratios (darker circles), which may correlate with better vehicle maintenance or newer cars in these areas. Conversely, some northern areas show lower pass ratios (lighter circles), possibly due to the older vehicle age or higher usage affecting vehicle conditions.</p>
 <p>These observations hint at regional differences in vehicle usage, maintenance, and age which could be driven by socioeconomic factors, infrastructure, or regional policies. This geographic visualization effectively highlights how vehicle conditions and usage can vary within a country, prompting further investigation into the causes behind these patterns.</p>
 <p>Let us now try a similar plot, but focusing on the top/bottom postcode areas for each metric, to highlight the extremes.</p>
-<div id="10873c8f" class="cell" data-execution_count="21">
+<div id="10873c8f" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the figure and axes</span></span>
@@ -2125,7 +2126,7 @@ About Stratified Sampling
 </div>
 </div>
 <p>We will sample on the <code>test_result_desc</code> column, as this is the target variable we are trying to predict.</p>
-<div id="eb765eab" class="cell" data-execution_count="22">
+<div id="eb765eab" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -2224,7 +2225,7 @@ L(\Theta) = \sum_{i=1}^N l(y_i, \hat{y}_i) + \sum_{k=1}^K \Omega(f_k)
 </div>
 </div>
 <p>Let us now encode all categorical features in the dataset (<code>LightGBM</code> cannot handle unencoded categories), and split the data into training and testing sets.</p>
-<div id="6f8ee7cb" class="cell" data-execution_count="23">
+<div id="6f8ee7cb" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Encode the categorical columns</span></span>
@@ -2240,7 +2241,7 @@ L(\Theta) = \sum_{i=1}^N l(y_i, \hat{y}_i) + \sum_{k=1}^K \Omega(f_k)
 </details>
 </div>
 <p>We are now ready to train the models. We will train a <code>LightGBM</code> classifier, using <code>GridSearchCV</code> to find the best hyperparameters.</p>
-<div id="e2cf6bb6" class="cell" data-execution_count="24">
+<div id="e2cf6bb6" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lightgbm <span class="im">as</span> lgb</span>
@@ -2312,7 +2313,7 @@ Model: LightGBM
 </div>
 </div>
 <p>Let’s look at feature importance as determined by the model.</p>
-<div id="df62f787" class="cell" data-execution_count="25">
+<div id="df62f787" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the best model from the results</span></span>
@@ -2365,14 +2366,14 @@ About Model Evaluation
 <p>Selecting the right hyperparameters for a machine learning model is a crucial step in the model development process. Hyperparameters are the configuration settings used to tune the learning algorithm, and they can significantly impact the performance of the model. Using <code>GridSearchCV</code> allows you to search through a grid of hyperparameters and find the best combination that maximizes the model’s performance, as measured by a specified evaluation metric. However, it is important to note that hyperparameter tuning can be computationally expensive, especially when searching through a large grid of hyperparameters. Therefore, it is essential to balance the trade-off between computational resources and model performance when tuning hyperparameters, as well as understanding model performance to target the most impactfull hyperparameters.</p>
 </div>
 </div>
-<div id="a59dfd1b" class="cell" data-execution_count="26">
+<div id="a59dfd1b" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_model[<span class="st">'model'</span>].predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let’s print the classification report for the model, as well as the confusion matrix.</p>
-<div id="e038d5a7" class="cell" data-execution_count="27">
+<div id="e038d5a7" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>

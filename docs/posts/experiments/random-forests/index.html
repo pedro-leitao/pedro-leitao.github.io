@@ -181,6 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Understanding Random Forest Classification and Its Effectiveness</h1>
+            <p class="subtitle lead">why random forests and ensemble methods are the underrated heroes of machine learning</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -267,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="an-example-random-forest-classifier" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-random-forest-classifier">An example Random Forest classifier</h2>
 <p>Below is an example demonstrating the implementation of a Random Forest classifier using the <code>scikit-learn</code> library. This example uses the <code>Breast Cancer</code> dataset. Let us start by describing the data.</p>
-<div id="3e20198a" class="cell" data-execution_count="1">
+<div id="3e20198a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
@@ -586,7 +587,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>And let’s get a view into the distribution of the available data.</p>
-<div id="efe5cc68" class="cell" data-execution_count="2">
+<div id="efe5cc68" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1245,7 +1246,7 @@ About Scale Variance
 </div>
 </div>
 <p>Let us build and train a Random Forest model with the data we just loaded.</p>
-<div id="87a8c465" class="cell" data-execution_count="3">
+<div id="87a8c465" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
@@ -1279,7 +1280,7 @@ About Scale Variance
 <li><p><strong>Leaf Nodes</strong>: Leaf nodes are the terminal nodes of the tree at which no further splitting occurs. Each leaf node represents a decision outcome or prediction. In classification trees, the leaf node assigns the class that is most frequent among the samples in that node. In regression trees, the leaf usually predicts the mean or median of the targets.</p></li>
 <li><p><strong>Branches</strong>: Branches represent the outcome of a test in terms of feature and threshold. Each branch corresponds to one of the possible answers to the question posed at the node: Is the feature value higher or lower than the threshold? This binary splitting makes the structure of a decision tree inherently simple to understand.</p></li>
 </ul>
-<div id="dffeda69" class="cell" data-execution_count="4">
+<div id="dffeda69" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1311,7 +1312,7 @@ About Scale Variance
 </div>
 </div>
 <p>We have seen a single tree, but Random Forest is an ensemble of multiple trees. The final prediction is made by aggregating the predictions of all the trees in the forest. We can also visualise all or a subset of trees in the forest to grasp the complexity and diversity of the model.</p>
-<div id="4fd1a1be" class="cell" data-execution_count="5">
+<div id="4fd1a1be" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -1360,7 +1361,7 @@ About Scale Variance
 <h2 class="anchored" data-anchor-id="explainability">Explainability</h2>
 <p>We’ve established that Random Forest models offer substantial explainability, unlike many other complex model frameworks that are often considered “black boxes.” To elucidate this aspect, one effective method is visualizing the decision paths used by the trees within the forest when making predictions. This can be accomplished using the <a href="https://github.com/parrt/dtreeviz">dtreeviz</a> library, which provides a detailed and interactive visualization of the decision-making process within a tree.</p>
 <p>Using dtreeviz, we can trace the decision path of a single example from the training set across any of the trees in the model. This visualization includes splits made at each node, the criteria for these splits, and the distribution of target classes at each step. Such detailed traceability helps in understanding exactly how the model is arriving at its conclusions, highlighting the individual contributions of features in the decision process.</p>
-<div id="9a050032" class="cell" data-execution_count="6">
+<div id="9a050032" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> model</span>
@@ -1398,7 +1399,7 @@ About Scale Variance
 </div>
 </div>
 <p>Another great feature of Random Forests is that they can explain the relative importance of each feature when predicting results. For our <code>Breast Cancer</code> dataset, here is how each feature impacts the model.</p>
-<div id="d61470e7" class="cell" data-execution_count="7">
+<div id="d61470e7" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1423,7 +1424,7 @@ About Scale Variance
 </div>
 </div>
 <p>Now that we know which features are most important, we can use <code>dtreeviz</code> to visualise the classification boundaries for any pair of features. This can help us understand how the model is making decisions. Let us visualise classification boundaries for <code>worst concave points</code> and <code>worst area</code> features.</p>
-<div id="e823cd90" class="cell" data-execution_count="8">
+<div id="e823cd90" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> decision_boundaries</span>
@@ -1448,7 +1449,7 @@ About Scale Variance
 </div>
 </div>
 <p>We can also plot pairs of features and their decision boundaries in a grid, to understand how pairs of features interact in the model. This can help us understand the relationships between features and how they contribute to the model’s predictions. Let us do so for random pairs, just for illustration purposes. In practice, you would choose pairs of features that are most important for your specific problem.</p>
-<div id="54ec1dc9" class="cell" data-execution_count="9">
+<div id="54ec1dc9" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>

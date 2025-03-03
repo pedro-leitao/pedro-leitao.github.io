@@ -207,6 +207,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Instance vs Model Learning</h1>
+            <p class="subtitle lead">a comparison of two machine learning approaches</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -275,7 +276,7 @@ About Linearly Separable
 <h2 class="anchored" data-anchor-id="an-example-instance-approach-predictor">An example instance approach predictor</h2>
 <p>To illustrate the above, let us build a simple instance based predictor - in this case, based on the California Housing dataset which can be found both on Keras and SKLearn. This predictor will attempt to “guess” the median house price for a given California district census block group.</p>
 <p>Let us start by getting a sense of what the dataset is about.</p>
-<div id="ec873cf1" class="cell" data-execution_count="1">
+<div id="ec873cf1" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -365,7 +366,7 @@ About k-Nearest Neighbors
 <p>The k-nearest neighbors (k-NN) regressor is a straightforward method used in machine learning for predicting the value of an unknown point based on the values of its nearest neighbors. Imagine you’re at a park trying to guess the age of a tree you’re standing next to but have no idea how to do it. What you can do, however, is look at the nearby trees whose ages you do know. You decide to consider the ages of the 3 trees closest to the one you’re interested in. If those trees are 50, 55, and 60 years old, you might guess that the tree you’re looking at is around 55 years old—the average age of its “nearest neighbors.”</p>
 </div>
 </div>
-<div id="89559447" class="cell" data-execution_count="2">
+<div id="89559447" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -431,7 +432,7 @@ Relative differences (%): [ 19.79035639  44.84716157 -12.1000758   20.37968893  
 <h2 class="anchored" data-anchor-id="solving-the-same-problem-with-a-model-approach">Solving the same problem with a model approach</h2>
 <p>Let’s explore a model-based method for making predictions by utilizing a straightforward neural network structure. it is a simple feedforward model built for regression tasks. It starts with an input layer that directly connects to a hidden layer of 50 neurons. This hidden layer uses the ReLU activation function, which helps the model capture non-linear relationships in the data. After processing through this hidden layer, the data is passed to a single neuron in the output layer that produces the final prediction.</p>
 <p>Additionally, the model is trained using the mean squared error (MSE) loss function, which is well-suited for regression because it penalizes larger errors more heavily. The use of stochastic gradient descent (SGD) helps in efficiently updating the model’s weights. We also add an early stopping mechanism to halt training when the validation loss stops improving, thereby preventing overfitting.</p>
-<div id="2f0b6b2f" class="cell" data-execution_count="3">
+<div id="2f0b6b2f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
@@ -517,7 +518,7 @@ Relative differences (%): [ 19.79035639  44.84716157 -12.1000758   20.37968893  
 </details>
 </div>
 <p>With the model trained, let us evaluate performance and run a few predictions.</p>
-<div id="1ee31f36" class="cell" data-execution_count="4">
+<div id="1ee31f36" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on the test set</span></span>
@@ -533,7 +534,7 @@ Relative differences (%): [ 19.79035639  44.84716157 -12.1000758   20.37968893  
 Test MSE: [{'test_loss': 0.3777255415916443}]</code></pre>
 </div>
 </div>
-<div id="4c0f6a21" class="cell" data-execution_count="5">
+<div id="4c0f6a21" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions for the first 5 test instances</span></span>

@@ -204,6 +204,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Reasoning Models for Fun and Profit</h1>
+            <p class="subtitle lead">deepseek r1 and the chinese room</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">HowTo</div>
                 <div class="quarto-category">AI</div>
@@ -290,7 +291,7 @@ About Supervised Fine Tuning
 <h3 class="anchored" data-anchor-id="installing-ollama">Installing Ollama</h3>
 <p>You can run distilled versions of the R1 model locally in multiple ways, but the easiest is to use <a href="https://ollama.com">Ollama</a>. Start by downloading the Ollama app, and proceed to then download a version of the model which will fit your hardware (you will likely need 16GB of RAM to run the 8B model, 32GB for 14B model and 64GB+ for the 32B model). There are multiple parameter sizes available, from 1.5B parameters all the way up to 70B parameters.</p>
 <p>In my case, my version of Ollama is:</p>
-<div id="43aaa2e1" class="cell" data-execution_count="1">
+<div id="43aaa2e1" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -305,7 +306,7 @@ Warning: client version is 0.5.12</code></pre>
 <section id="pulling-the-model" class="level3">
 <h3 class="anchored" data-anchor-id="pulling-the-model">Pulling the model</h3>
 <p>Once Ollama is installed, chose and install an appropriate distilled model. In our case we will use <a href="https://huggingface.co/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF"><code>unsloth/DeepSeek-R1-Distill-Qwen-8B-GGUF</code></a> quantized to 8 bits, which is a 8 billion parameter model, so very small compared to the original R1 model.</p>
-<div id="e9da642b" class="cell" data-execution_count="2">
+<div id="e9da642b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama pull hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -321,7 +322,7 @@ writing manifest
 success </code></pre>
 </div>
 </div>
-<div id="6c71eb0e" class="cell" data-execution_count="3">
+<div id="6c71eb0e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="bu">list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -337,7 +338,7 @@ hf.co/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF:Q8_0      8e12be36faa4    34 GB 
 <section id="testing-the-model" class="level2">
 <h2 class="anchored" data-anchor-id="testing-the-model">Testing the model</h2>
 <p>With the model installed, we can run it in preparation for some prompts to make sure it all works.</p>
-<div id="8f16883a" class="cell" data-execution_count="4">
+<div id="8f16883a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama run hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF <span class="st">"Who are you?"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -359,7 +360,7 @@ any inquiries or tasks you may have.
 <section id="integrating-with-python" class="level2">
 <h2 class="anchored" data-anchor-id="integrating-with-python">Integrating with Python</h2>
 <p>Ollama can be invoked from Python via the <code>ollama</code> package, which can be installed in your Python environment via <code>pip</code> or <code>conda</code>. You then can use it to interact with the model. Let’s start with a simple fact based question.</p>
-<div id="97059243" class="cell" data-execution_count="5">
+<div id="97059243" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
@@ -437,7 +438,7 @@ for a young child.</code></pre>
 <section id="deeper-reasoning" class="level2">
 <h2 class="anchored" data-anchor-id="deeper-reasoning">Deeper reasoning</h2>
 <p>Let us give the model something to chew on which goes beyond just some factual questions. We will give it a simple reasoning problem which involves geography, and see how it performs.</p>
-<div id="ac66e24f" class="cell" data-execution_count="6">
+<div id="ac66e24f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
@@ -514,7 +515,7 @@ such an endeavor.</code></pre>
 <section id="enter-maths" class="level2">
 <h2 class="anchored" data-anchor-id="enter-maths">Enter maths</h2>
 <p>Let us now give the model a simple maths problem, and see how it performs. In this case we aren’t asking a question which only requires simple formulation, but instead one which requires more deliberate thinking.</p>
-<div id="3d26e30b" class="cell" data-execution_count="7">
+<div id="3d26e30b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
@@ -556,7 +557,7 @@ with 6 cans.</code></pre>
 <p>The reasoning sequence in the chain of thought is interesting. The model actually goes beyond what was asked, and consistently solves through the <em>whole</em> chain (it would have been enough to stop at <span class="math inline">\(28 + 2 = 30\)</span>), but it shows a decent level of sophistication for an 8 billion parameter model.</p>
 <p>This isn’t exactly a groundbreaking result, but it shows that it can reason through a simple maths problem, and that it can identify the possible solution.</p>
 <p>It finally presents us with the answer.</p>
-<div id="bfb8806e" class="cell" data-execution_count="8">
+<div id="bfb8806e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Answer:</span><span class="ch">\n\n</span><span class="sc">{</span>answer<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

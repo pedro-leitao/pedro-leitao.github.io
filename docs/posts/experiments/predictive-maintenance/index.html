@@ -210,6 +210,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Machine Learning and Predictive Maintenance</h1>
+            <p class="subtitle lead">using machine learning for a common industrial and engineering application</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -263,7 +264,7 @@ window.Quarto = {
 <p>Energy companies are also applying these techniques to predict the maintenance needs of infrastructure like wind turbines and pipelines. This proactive approach not only ensures operational efficiency but also helps in preventing environmental hazards.</p>
 <p>In this exercise, we will explore a simple predictive maintenance scenario using machine learning. We will use a dataset that simulates the sensor data from a car engine, and build a model to predict when an engine is likely running abnormally and might require maintenance.</p>
 <p>We will use a <a href="https://www.kaggle.com/datasets/parvmodi/automotive-vehicles-engine-health-dataset">simple dataset</a> covering data from various sensors, and a target variable indicating whether the engine is running normally or abnormally.</p>
-<div id="7ac30ddd" class="cell" data-execution_count="1">
+<div id="7ac30ddd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset from Kaggle</span></span>
@@ -278,7 +279,7 @@ Downloading automotive-vehicles-engine-health-dataset.zip to .data
 100%|████████████████████████████████████████| 595k/595k [00:00&lt;00:00, 1.35MB/s]</code></pre>
 </div>
 </div>
-<div id="3b352402" class="cell" data-execution_count="2">
+<div id="3b352402" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load engine data from dataset into a pandas dataframe</span></span>
@@ -291,7 +292,7 @@ Downloading automotive-vehicles-engine-health-dataset.zip to .data
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>As in any ML task, let’s start by understanding the content of the dataset.</p>
-<div id="adf35acd" class="cell" data-execution_count="3">
+<div id="adf35acd" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>engine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -432,7 +433,7 @@ Downloading automotive-vehicles-engine-health-dataset.zip to .data
 </div>
 </div>
 <p>As we can see it is composed of various sensor data and a target variable indicating whether the engine is running normally or abnormally. Let’s make sure there’s no missing data.</p>
-<div id="6b30eafc" class="cell" data-execution_count="4">
+<div id="6b30eafc" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>engine.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -454,7 +455,7 @@ dtypes: float64(5), int64(2)
 memory usage: 1.0 MB</code></pre>
 </div>
 </div>
-<div id="86011894" class="cell" data-execution_count="5">
+<div id="86011894" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show a data summary, excluding the 'Engine Condition' column</span></span>
@@ -658,7 +659,7 @@ memory usage: 1.0 MB</code></pre>
 <p>Lubrication oil temperature and coolant temperature have averages of roughly 77.64°C and 78.43°C, respectively, with lubrication oil showing less temperature variability (standard deviation of about 3.11) compared to coolant temperature (standard deviation of approximately 6.21). This temperature stability is crucial for maintaining engine health, yet the wider range in coolant temperature could indicate different cooling needs or system efficiencies among the units observed.</p>
 <p>Overall, while there is a general consistency in the central values of these parameters, the variability highlighted by the standard deviations and the range between minimum and maximum values underline the complexities and differing conditions under which the engines operate.</p>
 <p>To avoid any errors further down in the pipeline, let’s also rename all columns so they do not have any whitespaces - this is not strictly necessary, but it can help avoid issues later on.</p>
-<div id="1b08fe22" class="cell" data-execution_count="6">
+<div id="1b08fe22" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid issues further down, let us rename the columns to remove spaces</span></span>
@@ -666,7 +667,7 @@ memory usage: 1.0 MB</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>engine.columns <span class="op">=</span> engine.columns.<span class="bu">str</span>.replace(<span class="st">' '</span>, <span class="st">'_'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="e4e9715a" class="cell" data-execution_count="7">
+<div id="e4e9715a" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into features and target</span></span>
@@ -687,7 +688,7 @@ Name: count, dtype: int64</code></pre>
 <section id="balancing-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="balancing-the-data">Balancing the data</h2>
 <p>Notice the imbalance in the target variable <code>Engine_Condition</code>, with a split between categories of 58%/42%. This imbalance could affect the model’s ability to learn the patterns in the data, especially if the minority class (abnormal engine operation) is underrepresented. We will address this issue with a resampling technique called SMOTE.</p>
-<div id="c5ecec8e" class="cell" data-execution_count="8">
+<div id="c5ecec8e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There is a class imbalance in the target variable. We will use the SMOTE technique to balance the classes.</span></span>
@@ -718,7 +719,7 @@ About SMOTE
 <section id="visualising-the-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="visualising-the-distributions">Visualising the distributions</h2>
 <p>Now that we have balanced the target classes, let’s visualize the distributions of the features to understand their spread and identify any patterns or outliers. This will help us determine which features are most relevant for predicting engine condition, if any.</p>
-<div id="66cf5a63" class="cell" data-execution_count="9">
+<div id="66cf5a63" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -775,7 +776,7 @@ About SMOTE
 </div>
 </div>
 <p>We see the expected spread as indicated before. Another important step is to understand if there is a clear correlation between the features and the target variable. This can be done by plotting a correlation matrix.</p>
-<div id="c2afc50c" class="cell" data-execution_count="10">
+<div id="c2afc50c" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation matrix of the features</span></span>
@@ -800,7 +801,7 @@ About SMOTE
 <section id="reducing-dimensionality-for-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="reducing-dimensionality-for-analysis">Reducing dimensionality for analysis</h2>
 <p>To further understand the data, we can reduce the dimensionality of the dataset using t-SNE (t-distributed Stochastic Neighbor Embedding). This technique is useful for visualizing high-dimensional data in 2D or 3D, allowing us to explore the data’s structure and identify any clusters or patterns.</p>
-<div id="657d639d" class="cell" data-execution_count="11">
+<div id="657d639d" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
@@ -861,7 +862,7 @@ About SMOTE
 <h2 class="anchored" data-anchor-id="testing-a-prediction-model">Testing a prediction model</h2>
 <p>We have mentioned that the features might not be linearly related to the target variable, and more complex relationships might be at play. To address this, we can use a Random Forest classifier, which is an ensemble learning method that combines multiple decision trees to improve predictive performance. Random Forest models are known for their robustness and ability to capture complex relationships in the data, making them suitable for this task.</p>
 <p>First we will split the data into training and testing sets, and then train the Random Forest model on the training data. We will evaluate the model’s performance on the test data using metrics such as accuracy, precision, recall, and F1 score. Notice how we are stratifying the split to ensure that the distribution of the target variable is preserved in both the training and testing sets.</p>
-<div id="3f969cea" class="cell" data-execution_count="12">
+<div id="3f969cea" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a train-test split of the data</span></span>
@@ -876,7 +877,7 @@ About SMOTE
 </details>
 </div>
 <p>Let’s now train the Random Forest Model and evaluate its performance. We will do this by searching for the best hyperparameters using a grid search.</p>
-<div id="73503869" class="cell" data-execution_count="13">
+<div id="73503869" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do a grid search to find the best hyperparameters for a Random Forest Classifier</span></span>
@@ -948,7 +949,7 @@ About Model Accuracy
 </div>
 </div>
 <p>Let us now look at the feature importances, as determined by the model. This will help us understand which features are most relevant for predicting engine condition.</p>
-<div id="2bef2b45" class="cell" data-execution_count="14">
+<div id="2bef2b45" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the feature importances</span></span>

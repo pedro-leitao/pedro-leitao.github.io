@@ -207,6 +207,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Caching long running jobs</h1>
+            <p class="subtitle lead">how to cache the results of long running computations in python</p>
                       </div>
   </div>
     
@@ -256,7 +257,7 @@ window.Quarto = {
 <section id="a-simple-example" class="level2">
 <h2 class="anchored" data-anchor-id="a-simple-example">A simple example</h2>
 <p>Let’s start with a simple example. Suppose you have a function that takes a long time to run, and you want to cache the results of this function. To illustrate this, we will use the <a href="https://mathworld.wolfram.com/PrimeSpiral.html">Ulam Spiral</a> as an example. The Ulam Spiral is a graphical depiction of the set of prime numbers, where the primes are arranged in a spiral. We will write a function that generates the Ulam Spiral for a given range of numbers, and cache the results of this function.</p>
-<div id="927bf2c0" class="cell" data-execution_count="1">
+<div id="927bf2c0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -320,7 +321,7 @@ Note
 <p>We will zoom into the Ulam Spiral just to illustrate what it visually looks like, later on we will compute the entire spiral, which will take considerably longer.</p>
 </div>
 </div>
-<div id="86f61ccb" class="cell" data-execution_count="2">
+<div id="86f61ccb" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -339,7 +340,7 @@ Note
 Time taken:  52.26889610290527</code></pre>
 </div>
 </div>
-<div id="24d8fd9b" class="cell" data-execution_count="3">
+<div id="24d8fd9b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -373,7 +374,7 @@ Time taken:  52.26889610290527</code></pre>
 <section id="wrapping-methods-with-joblib" class="level2">
 <h2 class="anchored" data-anchor-id="wrapping-methods-with-joblib">Wrapping methods with <code>joblib</code></h2>
 <p>Let us wrap the <code>ulam_spiral</code> and <code>primes_between</code> methods with joblib’s <code>Memory</code> class. This will allow us to cache the results, so that we don’t have to re-run any given combination of parameters every time we make a change to our code. To do this, we will just use <code>joblib</code>’s annotation <code>@memory.cache</code> before the method definition.</p>
-<div id="699cdd4f" class="cell" data-execution_count="4">
+<div id="699cdd4f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap the 'ulam_spiral' method call with joblib's 'Memory' class</span></span>
@@ -391,7 +392,7 @@ Time taken:  52.26889610290527</code></pre>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> primes_between(a, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="64f7ad80" class="cell" data-execution_count="5">
+<div id="64f7ad80" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute all primes</span></span>

@@ -178,6 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Basics of Word Vectors</h1>
+            <p class="subtitle lead">understanding what word vectors are, and what they mean in modern natural language processing</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">NLP</div>
@@ -226,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Word vectors are a mainstay of NLP, and are used in a variety of tasks, from sentiment analysis to machine translation. In this experiment, we will explore the very basics of word vectors, and how they can be used to represent words in a way that captures their meaning. Word vector models represent words as vectors in a high-dimensional space, where the distance between vectors captures the similarity and relationships between words within a given context of a corpus.</p>
 <p>For the purposes of simplicity, we will use the <code>gensim</code> library and a ready made word vector model. The model we will use is the <code>glove-wiki-gigaword-50</code> model, which is a 50-dimensional word vector model trained on the Wikipedia corpus.</p>
 <p>Let’s start by loading the model.</p>
-<div id="b6d71a91" class="cell" data-execution_count="1">
+<div id="b6d71a91" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -261,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-word-vectors-for-question-answering" class="level2">
 <h2 class="anchored" data-anchor-id="using-word-vectors-for-question-answering">Using word vectors for question answering</h2>
 <p>We will use this model to explore the relationships between words. Let us start with a simple problem - “Brasil is to Portugal, what <em>X</em> is to Spain”. We will use word vectors to estimate possible candidates to <em>X</em>.</p>
-<div id="6ed0e003" class="cell" data-execution_count="2">
+<div id="6ed0e003" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the "br - pt + es" vector and find the closest word</span></span>
@@ -278,7 +279,7 @@ Number of vector dimensions:  50</code></pre>
 </div>
 </div>
 <p>Great! We now have a candidate word for <em>X</em> and a probability score, also notice how the resulting word vector returned by the model has 50 dimensions.</p>
-<div id="77caf723" class="cell" data-execution_count="3">
+<div id="77caf723" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model[result[<span class="dv">0</span>][<span class="dv">0</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -300,7 +301,7 @@ Number of vector dimensions:  50</code></pre>
 <section id="visualising-word-vectors" class="level2">
 <h2 class="anchored" data-anchor-id="visualising-word-vectors">Visualising word vectors</h2>
 <p>Now let us attempt to visualise the relationships between these vector representations - we will perform a comparison between an actual vector operation, and the estimate returned by <code>gensim</code> using the <code>most_similar</code> operation. We first need to get vector representations for all the words (“portugal”, “brazil”, “spain” and “mexico”) so we can plot their proximity.</p>
-<div id="dcbdba12" class="cell" data-execution_count="4">
+<div id="dcbdba12" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -330,7 +331,7 @@ PCA or t-SNE?
 <p>In this case, we will use Principal Component Analysis (PCA), a statistical procedure that utilizes orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components. A better approach would be using t-SNE, but given we have a tiny number of samples, it makes little or no difference.</p>
 </div>
 </div>
-<div id="4ff11ac3" class="cell" data-execution_count="5">
+<div id="4ff11ac3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -383,7 +384,7 @@ PCA or t-SNE?
 </div>
 <p>Notice how the “true” vector (the ‘brazil + spain - portugal’ edge) doesn’t seem to align much or be anywhere near “mexico” ? This can simply be explained by dimensionality reduction - the original number of dimensions is much higher than three, and our dimensionality reduction does not capture the complexity of the data. Take the above as a mere ilustration.</p>
 <p>Now to offer a different visualisation, let us perform a 3D plot of a variety of countries. Additionally, we will also cluster countries into separate groups using KMeans. Can you discern how the algorithm decided to group different countries ?</p>
-<div id="74423b4b" class="cell" data-execution_count="6">
+<div id="74423b4b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
@@ -451,7 +452,7 @@ PCA or t-SNE?
 <section id="answering-further-questions" class="level2">
 <h2 class="anchored" data-anchor-id="answering-further-questions">Answering further questions</h2>
 <p>Finally let us investigate a few more questions to see what the model returns.</p>
-<div id="371eb0a4" class="cell" data-execution_count="7">
+<div id="371eb0a4" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Codfish is to Portugal as ? is to Spain</span></span>

@@ -210,6 +210,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Text Tasks without Neural Networks</h1>
+            <p class="subtitle lead">random forests and embeddings for sentiment analysis</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -262,7 +263,7 @@ window.Quarto = {
 <section id="loading-and-understanding-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-and-understanding-the-data">Loading and understanding the data</h2>
 <p>Let’s start by loading the dataset and understanding its structure. The dataset contains tweets labeled as positive, negative, neutral, or irrelevant. We will load the data and examine a few samples to understand the text and labels.</p>
-<div id="3b1689a3" class="cell" data-execution_count="1">
+<div id="3b1689a3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset</span></span>
@@ -277,7 +278,7 @@ Downloading twitter-entity-sentiment-analysis.zip to .data
 100%|██████████████████████████████████████| 1.99M/1.99M [00:00&lt;00:00, 3.27MB/s]</code></pre>
 </div>
 </div>
-<div id="d4b9e059" class="cell" data-execution_count="2">
+<div id="d4b9e059" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset</span></span>
@@ -393,7 +394,7 @@ Downloading twitter-entity-sentiment-analysis.zip to .data
 </div>
 </div>
 <p>Let’s count the number of samples for each sentiment category in the dataset, so we can understand the distribution of labels.</p>
-<div id="ab1a582b" class="cell" data-execution_count="3">
+<div id="ab1a582b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sentiment[<span class="st">'sentiment'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -408,7 +409,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Note how the <code>Irrelevant</code> category has the least number of samples, which might pose a challenge for training a classifier. Let us also check the category distribution for the validation set.</p>
-<div id="7a14a560" class="cell" data-execution_count="4">
+<div id="7a14a560" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sentiment_validation[<span class="st">'sentiment'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -423,7 +424,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Before continuing, we will also drop any rows with missing values in the text column.</p>
-<div id="5d7065ad" class="cell" data-execution_count="5">
+<div id="5d7065ad" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Validate that 'text' is not null or empty</span></span>
@@ -436,7 +437,7 @@ Name: count, dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="calculating-embeddings-using-bert">Calculating embeddings using BERT</h2>
 <p>We will be using the <a href="https://huggingface.co/docs/transformers/en/model_doc/bert">BERT</a> model for generating embeddings for the text data. BERT (Bidirectional Encoder Representations from Transformers) is a powerful pre-trained language model that can be fine-tuned for various NLP tasks. In this case, we will use BERT to generate embeddings for the tweets in our dataset.</p>
 <p>We have explored BERT embeddings in a <a href="../../../posts/experiments/bert-emotions">previous experiment</a>. As reference, in that experiment, a fine tuned BERT model achieved an accuracy of 0.87.</p>
-<div id="2e6e523d" class="cell" data-execution_count="6">
+<div id="2e6e523d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -521,7 +522,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Let’s check what the embeddings look like for a sample tweet.</p>
-<div id="17edc300" class="cell" data-execution_count="7">
+<div id="17edc300" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show a few random samples of the sentiment DataFrame</span></span>
@@ -574,7 +575,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Notice the computed embedding vector for the tweet. This vector captures the semantic information of the text, which can be used as input for traditional machine learning algorithms. Let us look at the embedding in more detail.</p>
-<div id="9e985552" class="cell" data-execution_count="8">
+<div id="9e985552" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first 20 embedding values for row 0 of the sentiment DataFrame, and its shape</span></span>
@@ -591,7 +592,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>The embedding vector has 768 dimensions, encoding the semantic information of the text data. Different models may have different embedding dimensions, but BERT embeddings are typically 768 or 1024 dimensions.</p>
 <p>Let us also drop the <code>tag</code> and <code>id</code> columns from the training and validation sets, as they are not needed for classification.</p>
-<div id="4ae4d170" class="cell" data-execution_count="9">
+<div id="4ae4d170" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the 'tag' and 'id' columns</span></span>
@@ -600,7 +601,7 @@ Name: count, dtype: int64</code></pre>
 </details>
 </div>
 <p>And finally before we continue, let us evaluate the degree of separation between the classes in the embedding space. We will use <a href="../../../posts/experiments/pca-vs-tsne">t-SNE</a> to visualize the embeddings in 2D space.</p>
-<div id="4695ff7a" class="cell" data-execution_count="10">
+<div id="4695ff7a" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a t-SNE visualization of the embeddings</span></span>
@@ -665,7 +666,7 @@ About Cross validation
 <p>This method helps in detecting overfitting and ensures that the model’s evaluation is not overly dependent on a particular subset of the data. By using cross-validation, one can make better decisions about model selection and hyperparameter tuning, leading to more reliable and generalizable models.</p>
 </div>
 </div>
-<div id="1b794d5b" class="cell" data-execution_count="11">
+<div id="1b794d5b" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -761,7 +762,7 @@ Fitting 3 folds for each of 16 candidates, totalling 48 fits</code></pre>
 </div>
 <p>We trained both Random Forest and XGBoost classifiers on the training set. We used the F1 score as the evaluation metric, as it provides a balance between precision and recall. The F1 score is particularly useful for imbalanced datasets, like the one we have, where the number of samples in each class is not equal. In particular, we used L1 and L2 regularization for XGBoost to prevent overfitting.</p>
 <p>Now, we will evaluate the performance of the Random Forest and XGBoost classifiers on the validation set to choose the best performing model.</p>
-<div id="187234e2" class="cell" data-execution_count="12">
+<div id="187234e2" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Validation set</span></span>
@@ -845,7 +846,7 @@ F1 = 2 \times \frac{precision \times recall}{precision + recall}
 </div>
 <p>The <code>Irrelevant</code> class has the lowest F1-score, which is expected given the class imbalance in the dataset. Removing the <code>Irrelevant</code> class from the dataset, or merging it with <code>Neutral</code> would improve the overall performance of the classifier by quite a few points.</p>
 <p>The confusion matrix for the XGBoost classifier on the validation set looks as follows:</p>
-<div id="80dbd49f" class="cell" data-execution_count="13">
+<div id="80dbd49f" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Plot a confusion matrix with a summer_r colormap</span></span>
@@ -872,7 +873,7 @@ F1 = 2 \times \frac{precision \times recall}{precision + recall}
 </div>
 <p>As expected, the <code>Irrelevant</code> class has the lowest precision and recall, while the <code>Positive</code> class has the highest precision and recall. The confusion matrix provides a detailed breakdown of the classifier’s performance on each class.</p>
 <p>Let us also calculate the per-class accuracy for the XGBoost classifier on the validation set.</p>
-<div id="c6587e5f" class="cell" data-execution_count="14">
+<div id="c6587e5f" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot accuracy for each class</span></span>
@@ -913,7 +914,7 @@ F1 = 2 \times \frac{precision \times recall}{precision + recall}
 </div>
 </div>
 <p>And finally let us evaluate the performance of the XGBoost classifier on a set of entirely new, general sentences. These are sentences that the model has not seen before or which originate from the original dataset, and will help us understand how well the model generalizes to unseen data.</p>
-<div id="0f072dd6" class="cell" data-execution_count="15">
+<div id="0f072dd6" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

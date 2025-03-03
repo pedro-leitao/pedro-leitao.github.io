@@ -207,6 +207,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Exploring the Impact of Kolmogorov-Arnold Networks in Machine Learning</h1>
+            <p class="subtitle lead">a new dawn for machine learning, or just another fad?</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Thoughts</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -301,7 +302,7 @@ N(d) = 10^d
 <h2 class="anchored" data-anchor-id="a-simple-brief-example-of-a-kan">A simple, brief example of a KAN</h2>
 <p>To illustrate the fundamental difference between KANs and MLPs, let’s consider a simple example. Suppose we have a dataset with two features, <span class="math inline">\(\mathbf{x_1}\)</span> and <span class="math inline">\(\mathbf{x_2}\)</span>, and a binary target variable <span class="math inline">\(\mathbf{y}\)</span>. We want to build a simple classification model to predict <span class="math inline">\(\mathbf{y}\)</span> based on the input features. Furthermore, let us pick a dataset that is not linearly separable and which would present a challenge for any ML model.</p>
 <p>Let’s create a simple, synthetic dataset with <code>SKLearn</code> to demonstrate a KAN in action. In this case we will use the <code>make_circles</code> function to generate a toy dataset that is not linearly separable.</p>
-<div id="c7b992b9" class="cell" data-execution_count="1">
+<div id="c7b992b9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> datasets</span>
@@ -334,7 +335,7 @@ N(d) = 10^d
 </div>
 </div>
 <p>The dataset has 1000 samples, 2 features, and 2 classes. We will split the dataset into training and testing sets, and then train a KAN model on the training data and evaluate its performance on the test data. Let’s have a look at what it looks like.</p>
-<div id="34df014c" class="cell" data-execution_count="2">
+<div id="34df014c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot X and y as 2D scatter plot</span></span>
@@ -355,7 +356,7 @@ N(d) = 10^d
 </div>
 <p>We can clearly see this is not a linearly separable dataset, as the two classes are intertwined in a circular pattern. This should be a good test for the KAN approach.</p>
 <p>Let’s now create the model. It will have two input nodes, and two output nodes, one for each class. The key difference from an MLP is that the weights are replaced by learnable activation functions on the edges connecting the nodes.</p>
-<div id="4ae8fe22" class="cell" data-execution_count="3">
+<div id="4ae8fe22" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kan <span class="im">as</span> kan</span>
@@ -368,7 +369,7 @@ saving model version 0.0</code></pre>
 </div>
 </div>
 <p>One great thing about the KAN <code>pytorch</code> implementation is that it alows us to easily visualize the model structure. Let’s have a look at it.</p>
-<div id="ec58093c" class="cell" data-execution_count="4">
+<div id="ec58093c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the uninitialized model</span></span>
@@ -388,7 +389,7 @@ saving model version 0.0</code></pre>
 </div>
 </div>
 <p>Now let us define two metric functions to evaluate the model performance - one for training accuracy, and one for test accuracy. We will then train it on the data and evaluate its performance.</p>
-<div id="6670f0c3" class="cell" data-execution_count="5">
+<div id="6670f0c3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_acc():</span>
@@ -426,7 +427,7 @@ saving model version 0.0</code></pre>
 </div>
 <p>That training run took just a few seconds to complete, and the model achieved a test accuracy of 0.98, which is quite impressive given the complexity of the dataset! This demonstrates the power of KANs in handling non-linearly separable data and achieving high accuracy with a simple model.</p>
 <p>Let’s look at the training performance.</p>
-<div id="131515a1" class="cell" data-execution_count="6">
+<div id="131515a1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Plot the training and test accuracy</span></span>
@@ -447,7 +448,7 @@ saving model version 0.0</code></pre>
 </div>
 <p>We can see that the training accuracy increases rapidly and converges to a high value, indicating that the model is learning effectively from the data just after a few training steps.</p>
 <p>Let’s look at it after training.</p>
-<div id="c75311b0" class="cell" data-execution_count="7">
+<div id="c75311b0" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model.plot(title<span class="op">=</span><span class="st">"Circles, 5 neurons"</span>,</span>
@@ -465,7 +466,7 @@ saving model version 0.0</code></pre>
 </div>
 <p>You will have noticed that the shape of the activation functions has changed after training. This is because the model has learned the optimal activation functions to map the input data to the output classes effectively.</p>
 <p>Remember that we mentioned that KANs are more interpretable than MLPs? Let’s look at the symbolic representation of the activation functions learned by the model. This is a unique feature of KANs that allows us to understand how the model is making decisions, and which you can’t get from a traditional MLP network.</p>
-<div id="fb1ef69d" class="cell" data-execution_count="8">
+<div id="fb1ef69d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>function_library <span class="op">=</span> [<span class="st">'x'</span>,<span class="st">'x^2'</span>,<span class="st">'x^3'</span>,<span class="st">'x^4'</span>,<span class="st">'exp'</span>,<span class="st">'log'</span>,<span class="st">'sqrt'</span>,<span class="st">'tanh'</span>,<span class="st">'sin'</span>,<span class="st">'tan'</span>,<span class="st">'abs'</span>]</span>
@@ -480,7 +481,7 @@ fixing (0,1,1) with sin, r2=0.995384156703949, c=2
 saving model version 0.2</code></pre>
 </div>
 </div>
-<div id="377af703" class="cell" data-execution_count="9">
+<div id="377af703" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>formula1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -489,7 +490,7 @@ saving model version 0.2</code></pre>
 <p><span class="math inline">\(\displaystyle - 395.614929199219 \sin{\left(0.600559830665588 x_{1} + 7.81623983383179 \right)} - 41.3908004760742 \sin{\left(2.02695989608765 x_{2} + 1.60479974746704 \right)} + 392.057125091553\)</span></p>
 </div>
 </div>
-<div id="f5180dda" class="cell" data-execution_count="10">
+<div id="f5180dda" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>formula2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -499,7 +500,7 @@ saving model version 0.2</code></pre>
 </div>
 </div>
 <p>We get two formulas, one for each class, that represent the activation functions learned by the model. With this, we can now calculate the accuracy of the determined symbolic functions on the test data.</p>
-<div id="82053fc6" class="cell" data-execution_count="11">
+<div id="82053fc6" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the accuracy of the formula</span></span>
@@ -524,7 +525,7 @@ formula test accuracy: tensor(0.9860)</code></pre>
 </div>
 <p>The symbolic functions learned by the model achieve a test accuracy of 0.98, which is very close to the model itself. This demonstrates the power of KANs in learning interpretable activation functions that can effectively map input data to output classes.</p>
 <p>As a last step, let’s visualize the decision boundary learned by the model. This will help us understand how the model is separating the two classes in the input space.</p>
-<div id="a4222c66" class="cell" data-execution_count="12">
+<div id="a4222c66" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the symbolic formula as a Plotly contour plot</span></span>

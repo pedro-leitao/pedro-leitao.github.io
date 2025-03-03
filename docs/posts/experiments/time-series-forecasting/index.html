@@ -211,6 +211,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Time Series Forecasting with Prophet</h1>
+            <p class="subtitle lead">predicting the future with machine learning</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Time Series Analysis</div>
@@ -267,7 +268,7 @@ window.Quarto = {
 <section id="load-the-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-datasets">Load the datasets</h2>
 <p>We will be using public Kaggle datasets, one containing weather data for Malaysia, and the other containing the number of births.</p>
-<div id="fbf55edd" class="cell" data-execution_count="1">
+<div id="fbf55edd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Download https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia?select=full-weather.csv using the Kaggle API</span></span>
@@ -282,7 +283,7 @@ Downloading weather-data-malaysia.zip to .data
 100%|████████████████████████████████████████| 311M/311M [00:41&lt;00:00, 7.94MB/s]</code></pre>
 </div>
 </div>
-<div id="799c1cce" class="cell" data-execution_count="2">
+<div id="799c1cce" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download https://www.kaggle.com/datasets/jylim21/malaysia-public-data</span></span>
@@ -297,7 +298,7 @@ Downloading malaysia-public-data.zip to .data
 100%|█████████████████████████████████████████| 156k/156k [00:00&lt;00:00, 648kB/s]</code></pre>
 </div>
 </div>
-<div id="bb98feb3" class="cell" data-execution_count="3">
+<div id="bb98feb3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Disable all warnings</span></span>
@@ -308,7 +309,7 @@ Downloading malaysia-public-data.zip to .data
 </details>
 </div>
 <p>Let’s load these as dataframes and inspect the first few rows of each dataset.</p>
-<div id="322f4857" class="cell" data-execution_count="4">
+<div id="322f4857" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load full_weather.csv and births.csv</span></span>
@@ -323,7 +324,7 @@ Downloading malaysia-public-data.zip to .data
 <section id="preprocessing-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="preprocessing-the-data">Preprocessing the data</h2>
 <p>We will need to adjust the available data to fit our purposes, including filling in gaps and merging the data we are interested in.</p>
-<div id="9ff862d0" class="cell" data-execution_count="5">
+<div id="9ff862d0" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first 5 rows of each dataframe</span></span>
@@ -512,7 +513,7 @@ Downloading malaysia-public-data.zip to .data
 </table>
 </div>
 </div>
-<div id="ca4f701d" class="cell" data-execution_count="6">
+<div id="ca4f701d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>births.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,7 +587,7 @@ Downloading malaysia-public-data.zip to .data
 </div>
 </div>
 <p>The <code>datetime</code> column is a string, which we want to convert to a Pandas datetime object.</p>
-<div id="6dab683b" class="cell" data-execution_count="7">
+<div id="6dab683b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the 'date' column in both dataframes to datetime</span></span>
@@ -596,7 +597,7 @@ Downloading malaysia-public-data.zip to .data
 </details>
 </div>
 <p>The weather dataset contains multiple measurements in a single day, which we will need to aggregate to daily values. Also, different measurements are available for different locations - we will average these to get a single value for the whole country, as births are recorded at the national level.</p>
-<div id="8f20f6d8" class="cell" data-execution_count="8">
+<div id="8f20f6d8" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average all features in the weather dataframe by day</span></span>
@@ -615,7 +616,7 @@ Downloading malaysia-public-data.zip to .data
 </details>
 </div>
 <p>Let’s check what each column of the weather dataset now looks like, and statistics for each column.</p>
-<div id="4e245209" class="cell" data-execution_count="9">
+<div id="4e245209" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -961,7 +962,7 @@ Downloading malaysia-public-data.zip to .data
 </div>
 </div>
 <p>We have two separate datasets, one for weather and one for births. Let us merge these on the date column.</p>
-<div id="25fe2027" class="cell" data-execution_count="10">
+<div id="25fe2027" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the two dataframes on the 'date' column, where the date is a datetime64 type</span></span>
@@ -970,7 +971,7 @@ Downloading malaysia-public-data.zip to .data
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>data.drop(columns<span class="op">=</span>[<span class="st">'state'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5abd2227" class="cell" data-execution_count="11">
+<div id="5abd2227" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1206,7 +1207,7 @@ Downloading malaysia-public-data.zip to .data
 </div>
 </div>
 <p>Let us also fill in any missing values using the mean for each column to fill in the gaps. This is a simple approach, and in practice more sophisticated methods to fill in missing data would need to be considered. For the purposes of this experiment, it will suffice.</p>
-<div id="e70e0e0a" class="cell" data-execution_count="12">
+<div id="e70e0e0a" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in missing values for each numerical column with the mean of that column</span></span>
@@ -1215,7 +1216,7 @@ Downloading malaysia-public-data.zip to .data
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>data.fillna(mean_values, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="2c3a1255" class="cell" data-execution_count="13">
+<div id="2c3a1255" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1446,7 +1447,7 @@ Downloading malaysia-public-data.zip to .data
 </table>
 </div>
 </div>
-<div id="c20b3a15" class="cell" data-execution_count="14">
+<div id="c20b3a15" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1819,7 +1820,7 @@ Downloading malaysia-public-data.zip to .data
 <section id="visualising-a-few-features" class="level2">
 <h2 class="anchored" data-anchor-id="visualising-a-few-features">Visualising a few features</h2>
 <p>Let’s visualise the data to get a better understanding of the trends and seasonality, and to develop an intuition of what we are trying to forecast. We will focus on births, temperature, and pollutant levels.</p>
-<div id="8b421a8d" class="cell" data-execution_count="15">
+<div id="8b421a8d" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1870,7 +1871,7 @@ About the Change Point Prior Scale
 </div>
 </div>
 <p>Prophet requires the input data to have two columns: <code>ds</code> and <code>y</code>. The <code>ds</code> column contains dates, and the <code>y</code> column the values we want to forecast - in our case temperature, pollutant levels, and births.</p>
-<div id="885528c5" class="cell" data-execution_count="16">
+<div id="885528c5" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet <span class="im">import</span> Prophet</span>
@@ -1912,7 +1913,7 @@ About Change Points
 <p>Prophet uses a piecewise linear model to capture the trend in the data. Change points are where the trend changes direction, and are automatically selected by the model. You can also manually specify individual change points if you have domain knowledge about the data.</p>
 </div>
 </div>
-<div id="e2cedad9" class="cell" data-execution_count="17">
+<div id="e2cedad9" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> add_changepoints_to_plot</span>
@@ -1943,7 +1944,7 @@ About Change Points
 </div>
 </div>
 <p>In addition we can plot the components of the forecast, including the trend, seasonality, and holidays. It helps to understand how these components contribute to the forecast. Notice how in the yearly seasonality plot, the model captures the peaks in temperature and pollutant levels during certain months.</p>
-<div id="16d454fa" class="cell" data-execution_count="18">
+<div id="16d454fa" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of each forecast</span></span>
@@ -1985,7 +1986,7 @@ About Regressors
 <p>Including additional regressors gives the ability to account for external factors that might influence the trend and seasonality of the data. This can improve the accuracy of the forecast, especially if these factors have a significant impact on the target variable. In this case, we are including temperature and pollutant levels as regressors as an illustration of how to use this feature in Prophet, in practice these might not be the most relevant factors for predicting births.</p>
 </div>
 </div>
-<div id="9f071a8e" class="cell" data-execution_count="19">
+<div id="9f071a8e" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_births <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'births'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'births'</span>: <span class="st">'y'</span>})</span>
@@ -2009,7 +2010,7 @@ Other Regressors and Seasonalities
 <p>As an exercise, can you think of other regressors or seasonalities that might influence the number of births? For example, you could include certain economic indicators, social factors, or other external variables that might affect birth rates.</p>
 </div>
 </div>
-<div id="c91435ed" class="cell" data-execution_count="20">
+<div id="c91435ed" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model_births <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
@@ -2039,7 +2040,7 @@ Other Regressors and Seasonalities
 </details>
 </div>
 <p>Now that we have completed a forecast, we can plot the predicted values, as well as uncertainty intervals, just as we did before for temperature and pollutant levels.</p>
-<div id="40473496" class="cell" data-execution_count="21">
+<div id="40473496" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the forecast</span></span>
@@ -2059,7 +2060,7 @@ Other Regressors and Seasonalities
 </div>
 </div>
 <p>Let us also plot the components of the forecast, including the trend, seasonality, holidays, and the impact of the regressors. This allows us to understand how these components contribute to the forecast and if and how the regressors influence the number of births.</p>
-<div id="f43a836c" class="cell" data-execution_count="22">
+<div id="f43a836c" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of the forecast</span></span>
@@ -2092,7 +2093,7 @@ About Cross Validation
 <p>Cross validation produces a dataframe with <code>yhat</code>, <code>yhat_lower</code>, <code>yhat_upper</code> and <code>y</code> columns. The <code>yhat</code> column contains the forecasted values, the <code>yhat_lower</code> and <code>yhat_upper</code> columns contain the uncertainty intervals, and the <code>y</code> column contains the actual values. We can use this dataframe to calculate evaluation metrics such as mean absolute error (MAE), mean squared error (MSE), and root mean squared error (RMSE).</p>
 </div>
 </div>
-<div id="f4d28ab1" class="cell" data-execution_count="23">
+<div id="f4d28ab1" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validate the model</span></span>
@@ -2229,7 +2230,7 @@ About Cross Validation
 <p>We are particularly interested in MAPE (Mean Absolute Percentage Error), which is a relative measure of the forecast accuracy. It is calculated as the average of the absolute percentage errors between the forecasted and actual values. A lower MAPE indicates a more accurate forecast.</p>
 <p><span class="math inline">\(MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\)</span></p>
 <p>As an example, a MAPE of 0.046 would indicate that the forecast is 4.6% off from the actual value.</p>
-<div id="9729a60d" class="cell" data-execution_count="24">
+<div id="9729a60d" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> performance_metrics</span>
@@ -2400,7 +2401,7 @@ About Cross Validation
 </div>
 </div>
 <p>We can plot the MAPE values for each forecast horizon to see how the forecast accuracy changes over time.</p>
-<div id="9462d2ae" class="cell" data-execution_count="25">
+<div id="9462d2ae" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the MAPE performance metric</span></span>
@@ -2419,7 +2420,7 @@ About Cross Validation
 </div>
 <p>Notice how this metric stays relatively stable over time, around or just below 5%. This indicates that the model is performing well and providing accurate forecasts.</p>
 <p>Let us now plot the output of the cross-validation, showing the actual values and forecasted values superimposed on each other. This allows us to visually inspect the accuracy of the forecast over the period and horizon of the cross-validation.</p>
-<div id="77fe499b" class="cell" data-execution_count="26">
+<div id="77fe499b" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure and axis</span></span>

@@ -186,6 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Model Fine-tuning with the Hugging Face <code>transformers</code> Library</h1>
+            <p class="subtitle lead">the basics of traditional fine-tuning</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">HowTo</div>
                 <div class="quarto-category">AI</div>
@@ -238,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Previously, we learned <a href="../../../howtos/fine-tuning/mlx/">how to use Apple’s MLX framework to fine-tune a language model</a>. This is an Apple specific framework and is not available to everyone. Here we will learn how to fine-tune a language model using the Hugging Face <a href="https://huggingface.co/docs/transformers/en/index"><code>transformers</code></a> library. This library is widely used and supports a variety of models on different platforms and hardware.</p>
 <p>It is also the basis for many other tools, such as <a href="https://github.com/axolotl-ai-cloud/axolotl"><code>Axolotl</code></a>, <a href="https://github.com/oumi-ai/oumi?tab=readme-ov-file"><code>oumi</code></a> and <a href="https://unsloth.ai"><code>unsloth</code></a> which ease and automate much of the fine-tuning pipeline. Even if you rely on these tools for your work, it is still important to understand the underlying <code>transformers</code> library and how to use it directly, even if only to get an intuition for how these tools work.</p>
 <p>As we did before when we fine-tuned a model with MLX, we will use the LoRA approach as opposed to fine-tuning the entire model.</p>
-<div id="30f28f0c" class="cell" data-execution_count="1">
+<div id="30f28f0c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -250,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>random.seed(SEED)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a95e87d3" class="cell" data-execution_count="2">
+<div id="a95e87d3" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> set_seed</span>
@@ -285,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let us start with a function which generates the necessary dataset in the appropriate chat format for the <code>transformers</code> library.</p>
-<div id="a909a234" class="cell" data-execution_count="3">
+<div id="a909a234" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -376,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Dataset.from_list(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="84c8dd42" class="cell" data-execution_count="4">
+<div id="84c8dd42" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> generate_arithmetic_dataset(<span class="dv">20000</span>)</span>
@@ -391,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>With the dataset generated, let us look at a few examples to understand what we will be training the model on.</p>
-<div id="2562f0c8" class="cell" data-execution_count="5">
+<div id="2562f0c8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show first few dataset entries</span></span>
@@ -429,7 +430,7 @@ Exercise suggestion
 <section id="loading-the-model" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-model">Loading the model</h2>
 <p>With a dataset ready, we can now load the model we want to fine-tune. We will use the <code>Qwen2.5-0.5B-Instruct</code> model from the Hugging Face model hub. This is a tiny model with half a billion parameters, and is a good starting point for fine-tuning experiments as it requires less computational resources.</p>
-<div id="d565b73a" class="cell" data-execution_count="6">
+<div id="d565b73a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoModelForCausalLM, AutoTokenizer</span>
@@ -447,7 +448,7 @@ Exercise suggestion
 </details>
 </div>
 <p>For reference, the input to the model will be tokenized using the model’s tokenizer, and the output will be a sequence of tokens, in a format called <code>ChatML</code>, which includes special tokens which are meaningful the pre-trained model.</p>
-<div id="81a2371a" class="cell" data-execution_count="7">
+<div id="81a2371a" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tokenizer.apply_chat_template(dataset[<span class="dv">0</span>][<span class="st">"messages"</span>], tokenize<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -458,7 +459,7 @@ Exercise suggestion
 </div>
 <p>Notice the <code>&lt;|im_start"&gt;</code> and <code>&lt;|im_end|&gt;</code> tokens. These are special tokens that the model uses to understand the start and end of the input sequence for each role (the prompter, and the assistant which represents the expected output from the model). The model will be trained to generate the output sequence between these tokens.</p>
 <p>Before we start training, let’s split the dataset into training and validation sets.</p>
-<div id="ae64740d" class="cell" data-execution_count="8">
+<div id="ae64740d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.train_test_split(test_size<span class="op">=</span><span class="fl">0.1</span>)</span>
@@ -479,7 +480,7 @@ Exercise suggestion
 </div>
 </div>
 <p>Let’s also look at the architecture of the model we are fine-tuning. It is important to have a sense of the model’s layers as this will directly impact how LoRA will be applied.</p>
-<div id="c343e386" class="cell" data-execution_count="9">
+<div id="c343e386" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
@@ -542,7 +543,7 @@ About the LoRA rank
 <p>By using rank 16, LoRA trains only a tiny fraction of the original parameters, making the process faster and more efficient. The trade-off is that we’re approximating changes rather than updating everything perfectly, but in practice, this works surprisingly well for adapting models to new tasks. The value 16 itself is a balance—small enough to save resources, but large enough to retain useful flexibility for learning.</p>
 </div>
 </div>
-<div id="44ce37b3" class="cell" data-execution_count="10">
+<div id="44ce37b3" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> peft <span class="im">import</span> LoraConfig</span>
@@ -563,7 +564,7 @@ About the LoRA rank
 <h2 class="anchored" data-anchor-id="configuring-the-trainer">Configuring the trainer</h2>
 <p>With the model and LoRA configured, we can now set up the trainer. We will use the <a href="https://huggingface.co/docs/trl/en/index"><code>TRL</code></a> library, which provides a number of fine-tuning strategies, including supervised fine-tuning, reinforcement learning, direct preference optimization, and more. In this case, we will use the supervised fine-tuning strategy.</p>
 <p>First, we need to configure the training arguments. We will set the number of epochs to 5, the learning rate to 2e-5, and the batch size to 4. Depending on what precisely you are fine-tuning the model for, you will need to adjust these values for best results.</p>
-<div id="1b332f78" class="cell" data-execution_count="11">
+<div id="1b332f78" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> trl <span class="im">import</span> SFTConfig</span>
@@ -610,7 +611,7 @@ About the warmup ratio
 <section id="setting-up-the-trainer" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-the-trainer">Setting up the trainer</h2>
 <p>With the training arguments configured, we can now set up the trainer. We will use the <code>SFTTrainer</code> class from the <code>TRL</code> library. This class takes the model, training arguments, and the dataset as input. The trainer will implicitly use the model’s tokenizer to tokenize the input data the way the model expects. We are also configuring an early stopping callback, which will stop training if the model’s performance does not improve after 2 evaluations.</p>
-<div id="3090486b" class="cell" data-execution_count="12">
+<div id="3090486b" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> trl <span class="im">import</span> SFTTrainer</span>
@@ -671,7 +672,7 @@ About the warmup ratio
 </div>
 </div>
 <p>We are now ready to kick off the training process. This will take some time, depending on the size of the model, the dataset, and the hardware you are using. It is a good idea to setup a checkpointing mechanism to save the model’s state at regular intervals, so you can resume training if it is interrupted - we do so with <code>resume_from_checkpoint</code>.</p>
-<div id="a4fee266" class="cell" data-execution_count="13">
+<div id="a4fee266" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers.trainer_utils <span class="im">import</span> get_last_checkpoint</span>
@@ -737,7 +738,7 @@ About perplexity
 <p>During training, lowering perplexity on validation data is a key goal. It signals the model is learning meaningful patterns rather than memorizing noise.</p>
 </div>
 </div>
-<div id="3e889791" class="cell" data-execution_count="14">
+<div id="3e889791" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
@@ -763,7 +764,7 @@ Perplexity: 1.3474345551889422</code></pre>
 </div>
 </div>
 <p>Let’s visualize the evaluation loss over the training steps to see how the model performed during training.</p>
-<div id="5d3e4166" class="cell" data-execution_count="15">
+<div id="5d3e4166" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -806,7 +807,7 @@ Perplexity: 1.3474345551889422</code></pre>
 <h2 class="anchored" data-anchor-id="merging-adaptations-and-saving-the-model">Merging adaptations and saving the model</h2>
 <p>We explained previously that LoRA adds small, trainable “adapters” to the existing linear layers without modifying the core weights. To finalize the fine-tuning process, we need to merge these adaptations back into the main model weights. This step ensures that the model is self-contained and can be used independently without requiring the additional LoRA adapters.</p>
 <p>We do that by saving the adapters <code>trainer.model.save_pretrained()</code>, and then by loading the model back with these adapters (<code>PeftModel.from_pretrained()</code>), and merging them back into the main model weights (<code>model.merge_and_unload()</code>). With a merged model, we can now save it for future use.</p>
-<div id="64e962db" class="cell" data-execution_count="16">
+<div id="64e962db" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> peft <span class="im">import</span> PeftModel</span>
@@ -844,7 +845,7 @@ Exercise suggestion
 <p>As an exercise, you can try fine-tuning the model on a different dataset, or with a different model from the Hugging Face model hub. You can also try different LoRA configurations to see how they affect the fine-tuning process.</p>
 </div>
 </div>
-<div id="9eea4b46" class="cell" data-execution_count="17">
+<div id="9eea4b46" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt the model with a few arithmetic problems</span></span>

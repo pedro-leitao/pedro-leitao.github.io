@@ -182,6 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Regularisation in Machine Learning</h1>
+            <p class="subtitle lead">a practical guide in overfitting prevention</p>
                       </div>
   </div>
     
@@ -234,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We pick this example because it is easy to generate significant amounts of synthetic data for this problem. We can create a large number of signals of different types, each with a different frequency, amplitude, and phase. We can also add noise to the signals to make the problem more challenging.</p>
 <p>Let’s start by producing some synthetic data, and then train a simple <a href="https://www.datacamp.com/tutorial/introduction-to-convolutional-neural-networks-cnns">convolutional neural network</a> (CNN) to classify the signals.</p>
 <p>The <code>generate_curves</code> function below creates a set of eight different signal types with variable amplitudes and frequencies with which we will train a model to classify.</p>
-<div id="3c4b1ff6" class="cell" data-execution_count="1">
+<div id="3c4b1ff6" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -309,7 +310,7 @@ Dataset generation
 <p>As an exercise, you can experiment with different signal types, noise levels, and the number of data points to see how they affect the performance of the classifier. You can also try adding more signal types to see if the classifier can still distinguish between them.</p>
 </div>
 </div>
-<div id="11b62dc6" class="cell" data-execution_count="2">
+<div id="11b62dc6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytorch_lightning <span class="im">as</span> pl</span>
@@ -327,7 +328,7 @@ Dataset generation
 </details>
 </div>
 <p>With the data generated, let us visualise an example of each to get a better intuition of what the classifier will be trying to distinguish.</p>
-<div id="454f0b2c" class="cell" data-execution_count="3">
+<div id="454f0b2c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -386,7 +387,7 @@ Dataset generation
 <h2 class="anchored" data-anchor-id="preparing-the-data">Preparing the data</h2>
 <p>Now let us follow up with a few steps to prepare the data for training. Don’t worry if you’re not familiar with the details of these steps - the main focus here is to understand how regularisation can help improve performance.</p>
 <p>Throughout this experiment we will be using the <a href="https://www.pytorchlightning.ai/">PyTorch Lightning</a> library. PyTorch Lightning is a lightweight PyTorch wrapper that lets you train your models with less boilerplate code.</p>
-<div id="96996f7c" class="cell" data-execution_count="4">
+<div id="96996f7c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([y <span class="cf">for</span> (_, y) <span class="kw">in</span> curves])</span>
@@ -399,7 +400,7 @@ Dataset generation
 <pre><code>X shape: (8000, 1, 200)</code></pre>
 </div>
 </div>
-<div id="5ae84c0b" class="cell" data-execution_count="5">
+<div id="5ae84c0b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
@@ -414,7 +415,7 @@ Dataset generation
 <pre><code>Classes: ['cosine' 'exp_decay' 'sawtooth' 'sinc' 'sine' 'sine_mix' 'square' 'tanh']</code></pre>
 </div>
 </div>
-<div id="b5cb26f6" class="cell" data-execution_count="6">
+<div id="b5cb26f6" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset</span>
@@ -442,7 +443,7 @@ Dataset generation
 <pre><code>Dataset size: 8000</code></pre>
 </div>
 </div>
-<div id="af3ee09f" class="cell" data-execution_count="7">
+<div id="af3ee09f" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> DataLoader</span>
@@ -522,7 +523,7 @@ Convolutional Neural Networks
 </div>
 </div>
 <p>Here’s the definition of our regularised CNN model.</p>
-<div id="19e7e5ba" class="cell" data-execution_count="8">
+<div id="19e7e5ba" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -604,7 +605,7 @@ Convolutional Neural Networks
 <span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> optimizer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="3476f711" class="cell" data-execution_count="9">
+<div id="3476f711" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate the model.</span></span>
@@ -625,7 +626,7 @@ Convolutional Neural Networks
 </div>
 </div>
 <p>With the model defined, we can now train it on the synthetic data we generated earlier and check how well it performs against the validation set.</p>
-<div id="f3e56f0d" class="cell" data-execution_count="10">
+<div id="f3e56f0d" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_lightning.callbacks <span class="im">import</span> EarlyStopping</span>
@@ -657,7 +658,7 @@ Convolutional Neural Networks
 <span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="8cdb50a2" class="cell" data-execution_count="11">
+<div id="8cdb50a2" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>val_loss <span class="op">=</span> trainer.callback_metrics.get(<span class="st">"val_loss"</span>)</span>
@@ -672,7 +673,7 @@ Convolutional Neural Networks
 </div>
 <p>A validation accuracy of 1.0 (100%) means that the model is able to classify all the signals in the validation set correctly. This is a good sign that the model has learned to generalise well to unseen data.</p>
 <p>Let us now define a similar model without regularisation and train it on the same data to compare its performance against the regularised model.</p>
-<div id="3f1d709d" class="cell" data-execution_count="12">
+<div id="3f1d709d" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -733,7 +734,7 @@ Convolutional Neural Networks
 <span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> optimizer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="eaaa65ef" class="cell" data-execution_count="13">
+<div id="eaaa65ef" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model_without_regularisation <span class="op">=</span> CurveClassifierWithoutRegularisation(</span>
@@ -751,7 +752,7 @@ Convolutional Neural Networks
 )</code></pre>
 </div>
 </div>
-<div id="8bae5307" class="cell" data-execution_count="14">
+<div id="8bae5307" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reinstantiate the early stopping callback.</span></span>
@@ -778,7 +779,7 @@ Convolutional Neural Networks
 <span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="dbfbeef9" class="cell" data-execution_count="15">
+<div id="dbfbeef9" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>val_loss <span class="op">=</span> trainer.callback_metrics.get(<span class="st">"val_loss"</span>)</span>
@@ -797,7 +798,7 @@ Convolutional Neural Networks
 <h2 class="anchored" data-anchor-id="applying-the-models-to-noisy-signals">Applying the models to noisy signals</h2>
 <p>To demonstrate the generalisation effects of regularisation, let us test our classifiers against increasing levels of noise in the signals, and also against a set which has been generated with a different random seed (i.e., an entirely different set of frequencies, amplitudes, etc.).</p>
 <p>To show how noise can quickly “drown” the underlying signal, let us look at what our waveforms look like when a noise factor os 0.8 is used (versus 0.1 which we used for training) during generation.</p>
-<div id="5078f930" class="cell" data-execution_count="16">
+<div id="5078f930" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>curves, labels <span class="op">=</span> generate_curves(</span>
@@ -817,7 +818,7 @@ Convolutional Neural Networks
 </div>
 <p>As it is pretty obvious, noise can “drown” the signal, making it harder for classification to happen correctly.</p>
 <p>A robust way to evaluate the performance of our models is to test them against increasing levels of noise in the signals, and compare the performance of each - it will show how capable each is to discern the true signal from the noise. Regularisation <em>should</em> help in better generalisation, and we can verify if this is indeed the case.</p>
-<div id="f193b79a" class="cell" data-execution_count="17">
+<div id="f193b79a" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_model(model, loader):</span>
@@ -860,7 +861,7 @@ Convolutional Neural Networks
 <span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    acc_non_regularised.append(non_reg_acc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fe6d127c" class="cell" data-execution_count="18">
+<div id="fe6d127c" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> np.array(acc_regularised) <span class="op">-</span> np.array(acc_non_regularised)</span>

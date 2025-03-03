@@ -210,6 +210,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">A Classical Machine Learning Problem: Predicting Customer Churn</h1>
+            <p class="subtitle lead">using machine learning to solve a common business problem</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -271,7 +272,7 @@ window.Quarto = {
 <section id="the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="the-dataset">The dataset</h2>
 <p>Let’s start by loading the dataset and examining its features.</p>
-<div id="cb7c08f8" class="cell" data-execution_count="1">
+<div id="cb7c08f8" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download dataset</span></span>
@@ -294,7 +295,7 @@ Train: (10000, 18)</code></pre>
 </div>
 </div>
 <p>We have 10000 rows, and 14 columns, not particularly large, but enough to build a simple model. Let’s look at the available columns.</p>
-<div id="060fdf92" class="cell" data-execution_count="2">
+<div id="060fdf92" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>churn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -567,7 +568,7 @@ Train: (10000, 18)</code></pre>
 </div>
 </div>
 <p>We have a mix of categorical and numerical features, some will clearly be of no use for our model (<code>CustomerId</code>, <code>Surname</code>, <code>RowNumber</code>), so let us perform a little bit of cleansing. We will drop any rows with missing values and remove the columns mentioned above.</p>
-<div id="9aa291ce" class="cell" data-execution_count="3">
+<div id="9aa291ce" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values, if any</span></span>
@@ -579,7 +580,7 @@ Train: (10000, 18)</code></pre>
 <pre><code>(10000, 18)</code></pre>
 </div>
 </div>
-<div id="1d8ce1f8" class="cell" data-execution_count="4">
+<div id="1d8ce1f8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Remove whitespaces from column names</span></span>
@@ -590,7 +591,7 @@ Train: (10000, 18)</code></pre>
 </details>
 </div>
 <p>That’s better. Let’s look at the data types of the various columns.</p>
-<div id="2328d750" class="cell" data-execution_count="5">
+<div id="2328d750" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>churn.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -615,7 +616,7 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>Some of the numerical columns are just truth values - we will convert them to booleans. We will also convert the categorical columns to one-hot encoded columns.</p>
-<div id="1b59ff6b" class="cell" data-execution_count="6">
+<div id="1b59ff6b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert binary features to booleans, 1 as True, 0 as False</span></span>
@@ -645,7 +646,7 @@ About One-hot vs label encoding
 </div>
 </div>
 <p>Let’s look at what the data looks like now.</p>
-<div id="b1ad3905" class="cell" data-execution_count="7">
+<div id="b1ad3905" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>churn_encoded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -936,7 +937,7 @@ About the QQ plot
 <p>A QQ plot, or quantile-quantile plot, is a graphical tool used to compare two probability distributions by plotting their quantiles against each other. It helps to determine if the distributions are similar by showing how well the points follow a straight line. If the points lie approximately along a 45-degree line, it indicates that the distributions being compared are similar. QQ plots are commonly used to check the normality of a dataset by comparing the sample distribution to a theoretical normal distribution. Deviations from the straight line can indicate departures from normality or highlight differences between the two distributions. This tool is particularly useful in statistical analysis for assessing assumptions and identifying anomalies.</p>
 </div>
 </div>
-<div id="d8617b97" class="cell" data-execution_count="8">
+<div id="d8617b97" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -995,7 +996,7 @@ About the QQ plot
 </ul>
 <p>We consider these distribution later when we define scaling and transformation strategies for the numerical features.</p>
 <p>Let us now look at the distribution of the target variable, <code>Exited</code>, which indicates whether a customer churned or not, and the interdependencies between some of the features. A useful tool for this is a pair plot, which shows the relationships between pairs of features and how they correlate with the target variable.</p>
-<div id="03981561" class="cell" data-execution_count="9">
+<div id="03981561" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairplot of the dataset for non-categorical features, with Exited as the target (stick to a sample for performance)</span></span>
@@ -1032,7 +1033,7 @@ About the QQ plot
 <li>Counterintuitively, there is no clear relationship between customer satisfaction and churn.</li>
 </ul>
 <p>Let us also look at the correlation matrix of the numerical features to see if there are any strong correlations between them.</p>
-<div id="c7c975bd" class="cell" data-execution_count="10">
+<div id="c7c975bd" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation heatmap</span></span>
@@ -1069,7 +1070,7 @@ About Perfect Correlation
 <p>To address this, one should consider removing or combining the perfectly correlated feature with the target variable. This helps in ensuring that the model is not relying on redundant or potentially leaked information, thereby improving the model’s robustness and generalizability. It also encourages the model to learn from more subtle, underlying patterns in the data rather than from straightforward, but unrealistic, relationships.</p>
 </div>
 </div>
-<div id="aa156962" class="cell" data-execution_count="11">
+<div id="aa156962" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the Complain feature</span></span>
@@ -1077,7 +1078,7 @@ About Perfect Correlation
 </details>
 </div>
 <p>Let us now visualise the dataset using dimensionality reduction, to assess if we can identify any patterns in the data, and the separability of the classes. This will give us a good first look at how likely our model is to perform well.</p>
-<div id="e4eff2ca" class="cell" data-execution_count="12">
+<div id="e4eff2ca" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
@@ -1131,7 +1132,7 @@ About Perfect Correlation
 <section id="balancing-the-dataset-and-creating-a-holdout-set" class="level2">
 <h2 class="anchored" data-anchor-id="balancing-the-dataset-and-creating-a-holdout-set">Balancing the dataset and creating a holdout set</h2>
 <p>Before we proceed with building a model, let us try to address any class imbalance in the dataset. Class imbalance occurs when one class significantly outnumbers the other, leading to biased model predictions. In our case, the number of customers who churned (<code>Exited=1</code>) is much smaller than those who did not churn (<code>Exited=0</code>). We will also create a holdout set to evaluate the model’s performance on unseen data.</p>
-<div id="3772a1eb" class="cell" data-execution_count="13">
+<div id="3772a1eb" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of churned and non-churned samples</span></span>
@@ -1162,7 +1163,7 @@ About the Limitations of SMOTE
 <p>SMOTE also does not consider the importance of different features when generating new instances, potentially creating less realistic samples if some features are more important than others. Lastly, while SMOTE addresses overall class imbalance, it does not tackle any imbalance within the minority class itself. If there are sub-classes within the minority class with their own imbalances, SMOTE won’t address this issue.</p>
 </div>
 </div>
-<div id="502f7a13" class="cell" data-execution_count="14">
+<div id="502f7a13" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
@@ -1203,7 +1204,7 @@ Name: count, dtype: int64</code></pre>
 <section id="model-selection-and-evaluation" class="level2">
 <h2 class="anchored" data-anchor-id="model-selection-and-evaluation">Model selection and evaluation</h2>
 <p>Now that we have a balanced dataset, and a holdout set, let us further split the resampled dataset into training and test sets.</p>
-<div id="e8ae88c4" class="cell" data-execution_count="15">
+<div id="e8ae88c4" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -1239,7 +1240,7 @@ Name: count, dtype: int64</code></pre>
 <section id="model-selection" class="level3">
 <h3 class="anchored" data-anchor-id="model-selection">Model selection</h3>
 <p>We will perform a grid search over a few different models to find the best hyperparameters for each, evaluating the models using cross-validation on the training set, and later testing the best models against the holdout set. Note how we are selecting different scaling strategies for the numerical features based on their distributions from our earlier analysis.</p>
-<div id="d3e050b0" class="cell" data-execution_count="16">
+<div id="d3e050b0" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier</span>
@@ -1345,7 +1346,7 @@ Name: count, dtype: int64</code></pre>
 </details>
 </div>
 <p>We have done a grid search over a few different models, let us checkl the results of the evaluation:</p>
-<div id="72899327" class="cell" data-execution_count="17">
+<div id="72899327" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model names</span></span>
@@ -1392,7 +1393,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Keep in mind that these results are based on the training set and cross-validation, and may not generalize to the holdout set. It is clear that three models stand out: Random Forest, Gradient Boosting, and XGBoost.</p>
 <p>Later we will evaluate these models on the holdout set to get a more accurate estimate of their performance, first let us look at the hyper-parameter values for the best models.</p>
-<div id="73dcefcf" class="cell" data-execution_count="18">
+<div id="73dcefcf" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model_names <span class="op">=</span> [</span>
@@ -1433,7 +1434,7 @@ Name: count, dtype: int64</code></pre>
 <section id="understanding-the-most-important-features" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-most-important-features">Understanding the most important features</h3>
 <p>Feature importance is a critical aspect of model interpretation, as it helps identify the key factors driving the predictions. By analyzing the importance of each feature, we can gain insights into the underlying relationships between the input variables and the target variable. This information is valuable for understanding the model’s decision-making process and identifying areas for improvement.</p>
-<div id="a4ce05d6" class="cell" data-execution_count="19">
+<div id="a4ce05d6" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show feature importance for Random Forest, Gradient Boosting and XGBoost</span></span>
@@ -1524,7 +1525,7 @@ About Different Feature Importance for Different Models
 <section id="model-evaluation-on-the-holdout-set" class="level2">
 <h2 class="anchored" data-anchor-id="model-evaluation-on-the-holdout-set">Model evaluation on the holdout set</h2>
 <p>As a final step, let us now evaluate the best models on the holdout set to get a more accurate estimate of their performance. We will calculate various metrics such as accuracy, precision, recall, and F1 score to assess the models’ performance in predicting customer churn.</p>
-<div id="b4627ab6" class="cell" data-execution_count="20">
+<div id="b4627ab6" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
@@ -1602,7 +1603,7 @@ About the ROC curve
 <p>The ROC curve is particularly useful because it provides a comprehensive view of a model’s performance across all threshold levels, making it easier to compare different models or to choose an optimal threshold based on the specific needs of a problem. For example, in a medical diagnosis scenario, one might prefer a threshold that minimizes false negatives to ensure no case is missed, even if it means accepting more false positives.</p>
 </div>
 </div>
-<div id="210e756b" class="cell" data-execution_count="21">
+<div id="210e756b" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span>

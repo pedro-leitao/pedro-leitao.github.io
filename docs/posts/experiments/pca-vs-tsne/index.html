@@ -178,6 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Evaluating Dimensionality Reduction - PCA vs t-SNE</h1>
+            <p class="subtitle lead">reducing dimensions for better insights</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -225,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Evaluating the effectiveness of dimensionality reduction techniques, such as Principal Component Analysis (PCA) and t-Distributed Stochastic Neighbor Embedding (t-SNE), requires a multifaceted approach tailored to the specific aims and context of the analysis. These methods serve to transform high-dimensional data into a lower-dimensional space while striving to preserve certain properties of the original data. The choice of evaluation criteria and methods significantly depends on the intended application of the dimensionality reduction, whether it be for visualization purposes, to facilitate clustering, or to enhance the performance of classification algorithms. Below, we explore a variety of strategies for assessing the performance of PCA and t-SNE, accompanied by Python code examples. It’s crucial to recognize that the efficacy of these techniques is highly contingent on the characteristics of the dataset in question and the specific objectives sought through the reduction process.</p>
 <p>For this experiment, we will use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html">SKLearn Digits dataset</a>, which comprises of a number of 16x16 digit representations.</p>
-<div id="fe752080" class="cell" data-execution_count="1">
+<div id="fe752080" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show an image of digits 0 to 9 from the digits dataset</span></span>
@@ -265,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="visual-inspection" class="level2">
 <h2 class="anchored" data-anchor-id="visual-inspection">Visual inspection</h2>
 <p>One of the simplest ways to evaluate PCA and t-SNE is by visually inspecting the reduced dimensions to see how well they separate different classes or clusters.</p>
-<div id="7a276a37" class="cell" data-execution_count="2">
+<div id="7a276a37" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -364,7 +365,7 @@ About Silhouette Score
 </ul>
 </div>
 </div>
-<div id="84cceb96" class="cell" data-execution_count="3">
+<div id="84cceb96" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
@@ -386,7 +387,7 @@ t-SNE Silhouette Score: 0.554421067237854</code></pre>
 <section id="classification-performance" class="level2">
 <h2 class="anchored" data-anchor-id="classification-performance">Classification performance</h2>
 <p>Another way to evaluate the effectiveness of PCA and t-SNE is to use the reduced dimensions as input for a classifier and compare the classification accuracy. This can help determine if the reduced dimensions capture the essential information needed for classification tasks. In this case, we use a simple Random Forest classifier to compare the classification accuracy of PCA and t-SNE reduced dimensions.</p>
-<div id="a826bfbb" class="cell" data-execution_count="4">
+<div id="a826bfbb" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -420,7 +421,7 @@ t-SNE Classification Accuracy: 0.987037037037037</code></pre>
 <section id="time-complexity" class="level2">
 <h2 class="anchored" data-anchor-id="time-complexity">Time complexity</h2>
 <p>Finally, comparing the time it takes to perform the reduction can be important, especially for large datasets. t-SNE is known to be computationally expensive compared to PCA, so understanding the time complexity of each method can help in choosing the right technique for the task at hand.</p>
-<div id="2db870c1" class="cell" data-execution_count="5">
+<div id="2db870c1" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>

@@ -181,6 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">A Wine Quality Prediction Experiment with SKLearn Pipelines</h1>
+            <p class="subtitle lead">pipelining in machine learning, for fun and profit</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Experiments</div>
                 <div class="quarto-category">Machine Learning</div>
@@ -227,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this experiment, let us use the <a href="https://www.kaggle.com/datasets/yasserh/wine-quality-dataset/data">Wine Quality Dataset from Kaggle</a> to predict the quality of wine based on its features. We will investigate the dataset, use <a href="https://scikit-learn.org/stable/">SKLearn</a> pipelines to preprocess the data, and to evaluate the performance of different models towards finding a suitable regressor. This is a normal activity in any machine learning project.</p>
 <section id="loading-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-data">Loading the data</h2>
-<div id="9b3bb229" class="cell" data-execution_count="1">
+<div id="9b3bb229" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>d yasserh<span class="op">/</span>wine<span class="op">-</span>quality<span class="op">-</span>dataset <span class="op">--</span>unzip <span class="op">-</span>p .data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -241,7 +242,7 @@ Downloading wine-quality-dataset.zip to .data
 </div>
 </div>
 <p>Let us start by loading the data into a Pandas dataframe. Remember that a Dataframe is a 2-dimensional labeled data structure with columns of potentially different types. You can think of it like a spreadsheet or SQL table, or a dictionary of Series objects.</p>
-<div id="d94ff68b" class="cell" data-execution_count="2">
+<div id="d94ff68b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in '.data/WineQT.csv' as a pandas dataframe</span></span>
@@ -252,7 +253,7 @@ Downloading wine-quality-dataset.zip to .data
 </details>
 </div>
 <p>Let us look at a few data examples.</p>
-<div id="9ead71c3" class="cell" data-execution_count="3">
+<div id="9ead71c3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -465,7 +466,7 @@ Downloading wine-quality-dataset.zip to .data
 </div>
 </div>
 <p>We can see the dataset is composed of 1143 samples, with 13 columns in total. Let us check the various datatypes in the dataset, and ensure there are no missing values.</p>
-<div id="f82cde4f" class="cell" data-execution_count="4">
+<div id="f82cde4f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wine.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -494,14 +495,14 @@ memory usage: 116.2 KB</code></pre>
 </div>
 </div>
 <p>We don’t particularly care about the <code>Id</code> column, so let us drop it from the dataset.</p>
-<div id="577fd9e5" class="cell" data-execution_count="5">
+<div id="577fd9e5" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>wine.drop(<span class="st">'Id'</span>, inplace<span class="op">=</span><span class="va">True</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let us further describe the dataset to understand the distribution of the data.</p>
-<div id="6a3311af" class="cell" data-execution_count="6">
+<div id="6a3311af" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wine.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -843,7 +844,7 @@ memory usage: 116.2 KB</code></pre>
 </div>
 </div>
 <p>And let’s visually inspect the distribution of the data.</p>
-<div id="c2efbb7f" class="cell" data-execution_count="7">
+<div id="c2efbb7f" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -879,7 +880,7 @@ About Scaling Features
 </div>
 </div>
 <p>Our target variable is the ‘quality’ column, let us look at its distribution more carefully.</p>
-<div id="b5d85ce7" class="cell" data-execution_count="8">
+<div id="b5d85ce7" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality'</span></span>
@@ -933,7 +934,7 @@ About Scaling Features
 </div>
 </div>
 <p>We can see the majority of wines have a quality of 5 or 6, with only very few wines having a quality of 3 or 4. Let us see this as a histogram of the quality column.</p>
-<div id="c51f055a" class="cell" data-execution_count="9">
+<div id="c51f055a" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality' as a histogram</span></span>
@@ -967,7 +968,7 @@ About Dropping Features
 <p>In many cases, it is important to reduce the number of features in the model. This is because having too many features can lead to overfitting, and the model may not generalize well to new data. In this case, we are dropping features with a correlation of less than 0.2 with the target variable, as they are less likely to be important in predicting the quality of wine.</p>
 </div>
 </div>
-<div id="8788f615" class="cell" data-execution_count="10">
+<div id="8788f615" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation chart of the features against the 'quality' target variable.</span></span>
@@ -1000,7 +1001,7 @@ About Dropping Features
 </div>
 <p>From this correlation matrix it becomes apparent that <code>alcohol</code>, <code>sulphates</code>, <code>volatile acidity</code> and <code>citric acid</code> are the features with the highest correlation with the target variable.</p>
 <p>Now let us plot a matrix for the features to see how they are related to each other. This will help us understand the multicollinearity between the features, as effectively a chemical feature comparison. Notice how we now have a smaller number of features, as we dropped the ones with a correlation of less than 0.2 with the target variable.</p>
-<div id="c6692253" class="cell" data-execution_count="11">
+<div id="c6692253" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us chart a matrix of plots, with X vs Y between all features.</span></span>
@@ -1138,7 +1139,7 @@ About Dropping Features
 </div>
 </div>
 <p>Now let us derive a second dataset, grouped by quality, where each featured is averaged. We will then use this to plot an aggregate positioning of the best correlated features.</p>
-<div id="dcf64a92" class="cell" data-execution_count="12">
+<div id="dcf64a92" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality <span class="op">=</span> wine.groupby(<span class="st">'quality'</span>).mean()</span>
@@ -1146,7 +1147,7 @@ About Dropping Features
 </details>
 </div>
 <p>And now let us plot the positioning for the three best correlators.</p>
-<div id="c37409e5" class="cell" data-execution_count="13">
+<div id="c37409e5" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -1200,7 +1201,7 @@ About Dropping Features
 <li><strong>KNeighbors Regressor</strong>: A type of instance-based learning or non-generalizing learning that does not attempt to construct a general internal model, but stores instances of the training data. Classification is computed from a simple majority vote of the nearest neighbors of each point.</li>
 </ul>
 <p>For each model, we will scale the features using <code>MinMaxScaler</code> to ensure that all features contribute equally to the result. This is particularly important for models like SVR and KNeighbors Regressor, which are sensitive to the scale of the input features. We will then perform hyperparameter tuning to find the best parameters for each model, using <code>GridSearchCV</code> to systematically explore a range of parameters for each model. Finally, we will evaluate the performance of each model based on the negative mean squared error (<code>neg_mean_squared_error</code>), allowing us to identify the model that best predicts the quality of the wine.</p>
-<div id="e92e41d9" class="cell" data-execution_count="14">
+<div id="e92e41d9" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
@@ -1320,7 +1321,7 @@ About Residuals
 <p>Residuals are the difference between the observed values and the predicted values. By plotting the residuals, we can visually inspect the performance of the model. Ideally, the residuals should be randomly distributed around zero, indicating that the model is making predictions without any systematic errors. If we observe a pattern in the residuals, it may indicate that the model is not capturing some underlying patterns in the data.</p>
 </div>
 </div>
-<div id="cf148c97" class="cell" data-execution_count="15">
+<div id="cf148c97" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
