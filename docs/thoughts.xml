@@ -17,7 +17,16 @@
 <width>144</width>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 10 Feb 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 03 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Moving to Quarto</title>
+  <link>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/</link>
+  <description><![CDATA[ I’ve been using <a href="https://jupyterbook.org">JupyterBook</a> to create this site for a while, and I’ve been pretty happy with it. But I’ve recently started using <a href="https://quarto.org">Quarto</a>, and I think it’s better. Here’s why. ]]></description>
+  <category>Thoughts</category>
+  <category>Publishing</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/</guid>
+  <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>France, AI and Back to Nuclear for Germany ?</title>
   <link>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</link>
