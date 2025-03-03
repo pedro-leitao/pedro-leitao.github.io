@@ -80,7 +80,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 6,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
@@ -233,7 +234,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(5)</span></div><div class="category" data-category="RGVlcCUyMExlYXJuaW5n">Deep Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXVyb3Bl">Europe <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UG9saXRpY3M=">Politics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UHVibGlzaGluZw==">Publishing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2NhbGluZw==">Scaling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGhvdWdodHM=">Thoughts <span class="quarto-category-count">(6)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(5)</span></div><div class="category" data-category="RGVlcCUyMExlYXJuaW5n">Deep Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXVyb3Bl">Europe <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UG9saXRpY3M=">Politics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UHVibGlzaGluZw==">Publishing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2NhbGluZw==">Scaling <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U29mdHdhcmUlMjBFbmdpbmVlcmluZw==">Software Engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGhvdWdodHM=">Thoughts <span class="quarto-category-count">(7)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -247,7 +248,41 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="VGhvdWdodHMlMkNQdWJsaXNoaW5n" data-listing-date-sort="1740960000000" data-listing-file-modified-sort="1741008596000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="204">
+<div class="g-col-1" data-index="0" data-categories="VGhvdWdodHMlMkNTb2Z0d2FyZSUyMEVuZ2luZWVyaW5nJTJDU2NhbGluZw==" data-listing-date-sort="1741046400000" data-listing-file-modified-sort="1741043278000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3978">
+<a href="./posts/thoughts/engineering-teams-scale/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="_static/logo-plain-transparent.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Getting Size Right: How Engineering Teams Scale
+</h5>
+<div class="listing-reading-time card-text text-muted">
+20 min
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
+Thoughts
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('U29mdHdhcmUlMjBFbmdpbmVlcmluZw=='); return false;">
+Software Engineering
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('U2NhbGluZw=='); return false;">
+Scaling
+</div>
+</div>
+<div class="card-text listing-description">
+larger doesn’t always mean better
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Mar 4, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="VGhvdWdodHMlMkNQdWJsaXNoaW5n" data-listing-date-sort="1740960000000" data-listing-file-modified-sort="1741008596000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="204">
 <a href="./posts/thoughts/moving-to-quarto/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="_static/logo-plain-transparent.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -278,7 +313,7 @@ Mar 3, 2025
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="VGhvdWdodHMlMkNBSSUyQ1BvbGl0aWNzJTJDRXVyb3Bl" data-listing-date-sort="1739145600000" data-listing-file-modified-sort="1741003406000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="379">
+<div class="g-col-1" data-index="2" data-categories="VGhvdWdodHMlMkNBSSUyQ1BvbGl0aWNzJTJDRXVyb3Bl" data-listing-date-sort="1739145600000" data-listing-file-modified-sort="1741003406000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="379">
 <a href="./posts/thoughts/france-ai-investment/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="_static/logo-plain-transparent.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -315,7 +350,7 @@ Feb 10, 2025
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="VGhvdWdodHMlMkNBSSUyQ01hY2hpbmUlMjBMZWFybmluZw==" data-listing-date-sort="1728601200000" data-listing-file-modified-sort="1741003524000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1230">
+<div class="g-col-1" data-index="3" data-categories="VGhvdWdodHMlMkNBSSUyQ01hY2hpbmUlMjBMZWFybmluZw==" data-listing-date-sort="1728601200000" data-listing-file-modified-sort="1741003524000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1230">
 <a href="./posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="posts/thoughts/will-ai-ever-be-more-than-curve-fitting/ai-is-curve-fitting.png" alt="AI is curve fitting!" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -349,7 +384,7 @@ Oct 11, 2024
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="VGhvdWdodHMlMkNNYWNoaW5lJTIwTGVhcm5pbmclMkNEZWVwJTIwTGVhcm5pbmclMkNBSQ==" data-listing-date-sort="1716591600000" data-listing-file-modified-sort="1741003440000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2507">
+<div class="g-col-1" data-index="4" data-categories="VGhvdWdodHMlMkNNYWNoaW5lJTIwTGVhcm5pbmclMkNEZWVwJTIwTGVhcm5pbmclMkNBSQ==" data-listing-date-sort="1716591600000" data-listing-file-modified-sort="1741003440000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2507">
 <a href="./posts/thoughts/kolmogorov/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="posts/thoughts/kolmogorov/index_files/figure-html/cell-3-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -386,7 +421,7 @@ May 25, 2024
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="VGhvdWdodHMlMkNBSSUyQ0V1cm9wZSUyQ1BvbGl0aWNz" data-listing-date-sort="1716159600000" data-listing-file-modified-sort="1741003382000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1582">
+<div class="g-col-1" data-index="5" data-categories="VGhvdWdodHMlMkNBSSUyQ0V1cm9wZSUyQ1BvbGl0aWNz" data-listing-date-sort="1716159600000" data-listing-file-modified-sort="1741003382000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1582">
 <a href="./posts/thoughts/connundrum-european-tech/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top"><img src="posts/thoughts/connundrum-european-tech/index_files/figure-html/cell-2-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
@@ -423,10 +458,10 @@ May 20, 2024
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="5" data-categories="VGhvdWdodHMlMkNBSSUyQ1NjYWxpbmc=" data-listing-date-sort="1716159600000" data-listing-file-modified-sort="1741003456000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="810">
+<div class="g-col-1" data-index="6" data-categories="VGhvdWdodHMlMkNBSSUyQ1NjYWxpbmc=" data-listing-date-sort="1716159600000" data-listing-file-modified-sort="1741003456000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="810">
 <a href="./posts/thoughts/scalling-ai/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="_static/logo-plain-transparent.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img data-src="_static/logo-plain-transparent.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 On Scaling AI: Are we Hitting the Limits of our Current Approaches?
@@ -461,6 +496,9 @@ May 20, 2024
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

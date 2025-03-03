@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-03-04">
+<meta name="description" content="larger doesn’t always mean better">
+
+<title>Getting Size Right: How Engineering Teams Scale – Pedro Leitão</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9143d267086697ee6a9fbeed7f968a66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FQKJNEYQJM"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FQKJNEYQJM', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Getting Size Right: How Engineering Teams Scale – Pedro Leitão">
+<meta property="og:description" content="larger doesn’t always mean better">
+<meta property="og:site_name" content="Pedro Leitão">
+<meta name="twitter:title" content="Getting Size Right: How Engineering Teams Scale – Pedro Leitão">
+<meta name="twitter:description" content="larger doesn’t always mean better">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../posts.html"> 
+<span class="menu-text">All posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../experiments.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../thoughts.html"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../howtos.html"> 
+<span class="menu-text">Howto’s</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pedro-leitao"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/nunoleitao"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Getting Size Right: How Engineering Teams Scale</h1>
+                  <div>
+        <div class="description">
+          larger doesn’t always mean better
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Thoughts</div>
+                <div class="quarto-category">Software Engineering</div>
+                <div class="quarto-category">Scaling</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 4, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div id="6abd20ee" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="6abd20ee"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6abd20ee-1"><a href="#6abd20ee-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="6abd20ee-2"><a href="#6abd20ee-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="6abd20ee-3"><a href="#6abd20ee-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="6abd20ee-4"><a href="#6abd20ee-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact, FloatSlider, IntSlider, Layout</span>
+<span id="6abd20ee-5"><a href="#6abd20ee-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pythreejs <span class="im">import</span> (</span>
+<span id="6abd20ee-6"><a href="#6abd20ee-6" aria-hidden="true" tabindex="-1"></a>    BoxBufferGeometry,</span>
+<span id="6abd20ee-7"><a href="#6abd20ee-7" aria-hidden="true" tabindex="-1"></a>    MeshLambertMaterial,</span>
+<span id="6abd20ee-8"><a href="#6abd20ee-8" aria-hidden="true" tabindex="-1"></a>    Mesh,</span>
+<span id="6abd20ee-9"><a href="#6abd20ee-9" aria-hidden="true" tabindex="-1"></a>    AmbientLight,</span>
+<span id="6abd20ee-10"><a href="#6abd20ee-10" aria-hidden="true" tabindex="-1"></a>    DirectionalLight,</span>
+<span id="6abd20ee-11"><a href="#6abd20ee-11" aria-hidden="true" tabindex="-1"></a>    Scene,</span>
+<span id="6abd20ee-12"><a href="#6abd20ee-12" aria-hidden="true" tabindex="-1"></a>    OrbitControls,</span>
+<span id="6abd20ee-13"><a href="#6abd20ee-13" aria-hidden="true" tabindex="-1"></a>    PerspectiveCamera,</span>
+<span id="6abd20ee-14"><a href="#6abd20ee-14" aria-hidden="true" tabindex="-1"></a>    Renderer,</span>
+<span id="6abd20ee-15"><a href="#6abd20ee-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="6abd20ee-16"><a href="#6abd20ee-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-17"><a href="#6abd20ee-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-18"><a href="#6abd20ee-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the productivity model</span></span>
+<span id="6abd20ee-19"><a href="#6abd20ee-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_unproductive_hours(</span>
+<span id="6abd20ee-20"><a href="#6abd20ee-20" aria-hidden="true" tabindex="-1"></a>    team_size,</span>
+<span id="6abd20ee-21"><a href="#6abd20ee-21" aria-hidden="true" tabindex="-1"></a>    weeks,</span>
+<span id="6abd20ee-22"><a href="#6abd20ee-22" aria-hidden="true" tabindex="-1"></a>    context_switching_factor<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="6abd20ee-23"><a href="#6abd20ee-23" aria-hidden="true" tabindex="-1"></a>    communication_factor<span class="op">=</span><span class="fl">0.03</span>,</span>
+<span id="6abd20ee-24"><a href="#6abd20ee-24" aria-hidden="true" tabindex="-1"></a>    meeting_factor<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="6abd20ee-25"><a href="#6abd20ee-25" aria-hidden="true" tabindex="-1"></a>    integration_factor<span class="op">=</span><span class="fl">0.02</span>,</span>
+<span id="6abd20ee-26"><a href="#6abd20ee-26" aria-hidden="true" tabindex="-1"></a>    onboarding_factor<span class="op">=</span><span class="fl">0.15</span>,</span>
+<span id="6abd20ee-27"><a href="#6abd20ee-27" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="6abd20ee-28"><a href="#6abd20ee-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="6abd20ee-29"><a href="#6abd20ee-29" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate unproductive hours based on team size and various overhead factors.</span></span>
+<span id="6abd20ee-30"><a href="#6abd20ee-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-31"><a href="#6abd20ee-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="6abd20ee-32"><a href="#6abd20ee-32" aria-hidden="true" tabindex="-1"></a><span class="co">    -----------</span></span>
+<span id="6abd20ee-33"><a href="#6abd20ee-33" aria-hidden="true" tabindex="-1"></a><span class="co">    team_size : int</span></span>
+<span id="6abd20ee-34"><a href="#6abd20ee-34" aria-hidden="true" tabindex="-1"></a><span class="co">        Number of people in the team</span></span>
+<span id="6abd20ee-35"><a href="#6abd20ee-35" aria-hidden="true" tabindex="-1"></a><span class="co">    weeks : int</span></span>
+<span id="6abd20ee-36"><a href="#6abd20ee-36" aria-hidden="true" tabindex="-1"></a><span class="co">        Project duration in weeks</span></span>
+<span id="6abd20ee-37"><a href="#6abd20ee-37" aria-hidden="true" tabindex="-1"></a><span class="co">    context_switching_factor : float</span></span>
+<span id="6abd20ee-38"><a href="#6abd20ee-38" aria-hidden="true" tabindex="-1"></a><span class="co">        Overhead due to context switching (per person per week)</span></span>
+<span id="6abd20ee-39"><a href="#6abd20ee-39" aria-hidden="true" tabindex="-1"></a><span class="co">    communication_factor : float</span></span>
+<span id="6abd20ee-40"><a href="#6abd20ee-40" aria-hidden="true" tabindex="-1"></a><span class="co">        Overhead due to communication complexity (scales with N^2)</span></span>
+<span id="6abd20ee-41"><a href="#6abd20ee-41" aria-hidden="true" tabindex="-1"></a><span class="co">    meeting_factor : float</span></span>
+<span id="6abd20ee-42"><a href="#6abd20ee-42" aria-hidden="true" tabindex="-1"></a><span class="co">        Overhead due to meetings (per person per week)</span></span>
+<span id="6abd20ee-43"><a href="#6abd20ee-43" aria-hidden="true" tabindex="-1"></a><span class="co">    integration_factor : float</span></span>
+<span id="6abd20ee-44"><a href="#6abd20ee-44" aria-hidden="true" tabindex="-1"></a><span class="co">        Overhead due to integration work (scales with N)</span></span>
+<span id="6abd20ee-45"><a href="#6abd20ee-45" aria-hidden="true" tabindex="-1"></a><span class="co">    onboarding_factor : float</span></span>
+<span id="6abd20ee-46"><a href="#6abd20ee-46" aria-hidden="true" tabindex="-1"></a><span class="co">        Overhead due to onboarding (per new team member)</span></span>
+<span id="6abd20ee-47"><a href="#6abd20ee-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-48"><a href="#6abd20ee-48" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="6abd20ee-49"><a href="#6abd20ee-49" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
+<span id="6abd20ee-50"><a href="#6abd20ee-50" aria-hidden="true" tabindex="-1"></a><span class="co">    dict</span></span>
+<span id="6abd20ee-51"><a href="#6abd20ee-51" aria-hidden="true" tabindex="-1"></a><span class="co">        Dictionary with unproductive hours breakdown</span></span>
+<span id="6abd20ee-52"><a href="#6abd20ee-52" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="6abd20ee-53"><a href="#6abd20ee-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assuming 40 productive hours per week per person</span></span>
+<span id="6abd20ee-54"><a href="#6abd20ee-54" aria-hidden="true" tabindex="-1"></a>    total_hours <span class="op">=</span> team_size <span class="op">*</span> weeks <span class="op">*</span> <span class="dv">40</span></span>
+<span id="6abd20ee-55"><a href="#6abd20ee-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-56"><a href="#6abd20ee-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Context switching overhead (increases with team size)</span></span>
+<span id="6abd20ee-57"><a href="#6abd20ee-57" aria-hidden="true" tabindex="-1"></a>    context_switching_hours <span class="op">=</span> team_size <span class="op">*</span> weeks <span class="op">*</span> <span class="dv">40</span> <span class="op">*</span> context_switching_factor</span>
+<span id="6abd20ee-58"><a href="#6abd20ee-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-59"><a href="#6abd20ee-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Communication overhead (scales approximately with n^2 - more people means more communication channels)</span></span>
+<span id="6abd20ee-60"><a href="#6abd20ee-60" aria-hidden="true" tabindex="-1"></a>    communication_channels <span class="op">=</span> (team_size <span class="op">*</span> (team_size <span class="op">-</span> <span class="dv">1</span>)) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="6abd20ee-61"><a href="#6abd20ee-61" aria-hidden="true" tabindex="-1"></a>    communication_hours <span class="op">=</span> communication_channels <span class="op">*</span> weeks <span class="op">*</span> communication_factor <span class="op">*</span> <span class="dv">40</span></span>
+<span id="6abd20ee-62"><a href="#6abd20ee-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-63"><a href="#6abd20ee-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Meeting overhead (scales linearly with team size, but can be highly variable)</span></span>
+<span id="6abd20ee-64"><a href="#6abd20ee-64" aria-hidden="true" tabindex="-1"></a>    meeting_hours <span class="op">=</span> team_size <span class="op">*</span> weeks <span class="op">*</span> <span class="dv">40</span> <span class="op">*</span> meeting_factor</span>
+<span id="6abd20ee-65"><a href="#6abd20ee-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-66"><a href="#6abd20ee-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Integration overhead (more people means more code to integrate)</span></span>
+<span id="6abd20ee-67"><a href="#6abd20ee-67" aria-hidden="true" tabindex="-1"></a>    integration_hours <span class="op">=</span> team_size <span class="op">*</span> weeks <span class="op">*</span> <span class="dv">40</span> <span class="op">*</span> integration_factor</span>
+<span id="6abd20ee-68"><a href="#6abd20ee-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-69"><a href="#6abd20ee-69" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Onboarding overhead (new team members need time to onboard)</span></span>
+<span id="6abd20ee-70"><a href="#6abd20ee-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simplified model: assume onboarding impact lasts for 4 weeks or the project duration, whichever is shorter</span></span>
+<span id="6abd20ee-71"><a href="#6abd20ee-71" aria-hidden="true" tabindex="-1"></a>    onboarding_weeks <span class="op">=</span> <span class="bu">min</span>(<span class="dv">4</span>, weeks)</span>
+<span id="6abd20ee-72"><a href="#6abd20ee-72" aria-hidden="true" tabindex="-1"></a>    onboarding_hours <span class="op">=</span> team_size <span class="op">*</span> onboarding_weeks <span class="op">*</span> <span class="dv">40</span> <span class="op">*</span> onboarding_factor</span>
+<span id="6abd20ee-73"><a href="#6abd20ee-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-74"><a href="#6abd20ee-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Total unproductive hours</span></span>
+<span id="6abd20ee-75"><a href="#6abd20ee-75" aria-hidden="true" tabindex="-1"></a>    total_unproductive <span class="op">=</span> (</span>
+<span id="6abd20ee-76"><a href="#6abd20ee-76" aria-hidden="true" tabindex="-1"></a>        context_switching_hours</span>
+<span id="6abd20ee-77"><a href="#6abd20ee-77" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> communication_hours</span>
+<span id="6abd20ee-78"><a href="#6abd20ee-78" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> meeting_hours</span>
+<span id="6abd20ee-79"><a href="#6abd20ee-79" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> integration_hours</span>
+<span id="6abd20ee-80"><a href="#6abd20ee-80" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> onboarding_hours</span>
+<span id="6abd20ee-81"><a href="#6abd20ee-81" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-82"><a href="#6abd20ee-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-83"><a href="#6abd20ee-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate productive hours</span></span>
+<span id="6abd20ee-84"><a href="#6abd20ee-84" aria-hidden="true" tabindex="-1"></a>    productive_hours <span class="op">=</span> total_hours <span class="op">-</span> total_unproductive</span>
+<span id="6abd20ee-85"><a href="#6abd20ee-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-86"><a href="#6abd20ee-86" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate productivity percentage</span></span>
+<span id="6abd20ee-87"><a href="#6abd20ee-87" aria-hidden="true" tabindex="-1"></a>    productivity_percentage <span class="op">=</span> (productive_hours <span class="op">/</span> total_hours) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="6abd20ee-88"><a href="#6abd20ee-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-89"><a href="#6abd20ee-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="6abd20ee-90"><a href="#6abd20ee-90" aria-hidden="true" tabindex="-1"></a>        <span class="st">"team_size"</span>: team_size,</span>
+<span id="6abd20ee-91"><a href="#6abd20ee-91" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weeks"</span>: weeks,</span>
+<span id="6abd20ee-92"><a href="#6abd20ee-92" aria-hidden="true" tabindex="-1"></a>        <span class="st">"total_hours"</span>: total_hours,</span>
+<span id="6abd20ee-93"><a href="#6abd20ee-93" aria-hidden="true" tabindex="-1"></a>        <span class="st">"context_switching_hours"</span>: context_switching_hours,</span>
+<span id="6abd20ee-94"><a href="#6abd20ee-94" aria-hidden="true" tabindex="-1"></a>        <span class="st">"communication_hours"</span>: communication_hours,</span>
+<span id="6abd20ee-95"><a href="#6abd20ee-95" aria-hidden="true" tabindex="-1"></a>        <span class="st">"meeting_hours"</span>: meeting_hours,</span>
+<span id="6abd20ee-96"><a href="#6abd20ee-96" aria-hidden="true" tabindex="-1"></a>        <span class="st">"integration_hours"</span>: integration_hours,</span>
+<span id="6abd20ee-97"><a href="#6abd20ee-97" aria-hidden="true" tabindex="-1"></a>        <span class="st">"onboarding_hours"</span>: onboarding_hours,</span>
+<span id="6abd20ee-98"><a href="#6abd20ee-98" aria-hidden="true" tabindex="-1"></a>        <span class="st">"total_unproductive"</span>: total_unproductive,</span>
+<span id="6abd20ee-99"><a href="#6abd20ee-99" aria-hidden="true" tabindex="-1"></a>        <span class="st">"productive_hours"</span>: productive_hours,</span>
+<span id="6abd20ee-100"><a href="#6abd20ee-100" aria-hidden="true" tabindex="-1"></a>        <span class="st">"productivity_percentage"</span>: productivity_percentage,</span>
+<span id="6abd20ee-101"><a href="#6abd20ee-101" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="6abd20ee-102"><a href="#6abd20ee-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-103"><a href="#6abd20ee-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-104"><a href="#6abd20ee-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create 3D visualization of the productivity model</span></span>
+<span id="6abd20ee-105"><a href="#6abd20ee-105" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_3d_viz(</span>
+<span id="6abd20ee-106"><a href="#6abd20ee-106" aria-hidden="true" tabindex="-1"></a>    max_team_size<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="6abd20ee-107"><a href="#6abd20ee-107" aria-hidden="true" tabindex="-1"></a>    max_weeks<span class="op">=</span><span class="dv">26</span>,</span>
+<span id="6abd20ee-108"><a href="#6abd20ee-108" aria-hidden="true" tabindex="-1"></a>    context_switching_factor<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="6abd20ee-109"><a href="#6abd20ee-109" aria-hidden="true" tabindex="-1"></a>    communication_factor<span class="op">=</span><span class="fl">0.03</span>,</span>
+<span id="6abd20ee-110"><a href="#6abd20ee-110" aria-hidden="true" tabindex="-1"></a>    meeting_factor<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="6abd20ee-111"><a href="#6abd20ee-111" aria-hidden="true" tabindex="-1"></a>    integration_factor<span class="op">=</span><span class="fl">0.02</span>,</span>
+<span id="6abd20ee-112"><a href="#6abd20ee-112" aria-hidden="true" tabindex="-1"></a>    onboarding_factor<span class="op">=</span><span class="fl">0.15</span>,</span>
+<span id="6abd20ee-113"><a href="#6abd20ee-113" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="6abd20ee-114"><a href="#6abd20ee-114" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create 3D visualization of productivity model using pythreejs"""</span></span>
+<span id="6abd20ee-115"><a href="#6abd20ee-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-116"><a href="#6abd20ee-116" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate data for the 3D surface</span></span>
+<span id="6abd20ee-117"><a href="#6abd20ee-117" aria-hidden="true" tabindex="-1"></a>    team_sizes <span class="op">=</span> np.arange(<span class="dv">1</span>, max_team_size <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="6abd20ee-118"><a href="#6abd20ee-118" aria-hidden="true" tabindex="-1"></a>    week_values <span class="op">=</span> np.arange(<span class="dv">1</span>, max_weeks <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="6abd20ee-119"><a href="#6abd20ee-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-120"><a href="#6abd20ee-120" aria-hidden="true" tabindex="-1"></a>    team_grid, week_grid <span class="op">=</span> np.meshgrid(team_sizes, week_values)</span>
+<span id="6abd20ee-121"><a href="#6abd20ee-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-122"><a href="#6abd20ee-122" aria-hidden="true" tabindex="-1"></a>    productivity_values <span class="op">=</span> np.zeros(team_grid.shape)</span>
+<span id="6abd20ee-123"><a href="#6abd20ee-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-124"><a href="#6abd20ee-124" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate productivity percentage for each combination</span></span>
+<span id="6abd20ee-125"><a href="#6abd20ee-125" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(week_values)):</span>
+<span id="6abd20ee-126"><a href="#6abd20ee-126" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(team_sizes)):</span>
+<span id="6abd20ee-127"><a href="#6abd20ee-127" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> calculate_unproductive_hours(</span>
+<span id="6abd20ee-128"><a href="#6abd20ee-128" aria-hidden="true" tabindex="-1"></a>                team_sizes[j],</span>
+<span id="6abd20ee-129"><a href="#6abd20ee-129" aria-hidden="true" tabindex="-1"></a>                week_values[i],</span>
+<span id="6abd20ee-130"><a href="#6abd20ee-130" aria-hidden="true" tabindex="-1"></a>                context_switching_factor,</span>
+<span id="6abd20ee-131"><a href="#6abd20ee-131" aria-hidden="true" tabindex="-1"></a>                communication_factor,</span>
+<span id="6abd20ee-132"><a href="#6abd20ee-132" aria-hidden="true" tabindex="-1"></a>                meeting_factor,</span>
+<span id="6abd20ee-133"><a href="#6abd20ee-133" aria-hidden="true" tabindex="-1"></a>                integration_factor,</span>
+<span id="6abd20ee-134"><a href="#6abd20ee-134" aria-hidden="true" tabindex="-1"></a>                onboarding_factor,</span>
+<span id="6abd20ee-135"><a href="#6abd20ee-135" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="6abd20ee-136"><a href="#6abd20ee-136" aria-hidden="true" tabindex="-1"></a>            productivity_values[i, j] <span class="op">=</span> result[<span class="st">"productivity_percentage"</span>]</span>
+<span id="6abd20ee-137"><a href="#6abd20ee-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-138"><a href="#6abd20ee-138" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create 3D visualization</span></span>
+<span id="6abd20ee-139"><a href="#6abd20ee-139" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the data to a format suitable for pythreejs</span></span>
+<span id="6abd20ee-140"><a href="#6abd20ee-140" aria-hidden="true" tabindex="-1"></a>    x_positions <span class="op">=</span> team_grid.flatten()</span>
+<span id="6abd20ee-141"><a href="#6abd20ee-141" aria-hidden="true" tabindex="-1"></a>    y_positions <span class="op">=</span> week_grid.flatten()</span>
+<span id="6abd20ee-142"><a href="#6abd20ee-142" aria-hidden="true" tabindex="-1"></a>    z_positions <span class="op">=</span> productivity_values.flatten()</span>
+<span id="6abd20ee-143"><a href="#6abd20ee-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-144"><a href="#6abd20ee-144" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize values for color mapping</span></span>
+<span id="6abd20ee-145"><a href="#6abd20ee-145" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> np.zeros((<span class="bu">len</span>(z_positions), <span class="dv">3</span>))</span>
+<span id="6abd20ee-146"><a href="#6abd20ee-146" aria-hidden="true" tabindex="-1"></a>    norm <span class="op">=</span> plt.Normalize(z_positions.<span class="bu">min</span>(), z_positions.<span class="bu">max</span>())</span>
+<span id="6abd20ee-147"><a href="#6abd20ee-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-148"><a href="#6abd20ee-148" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use a colormap (blue to red)</span></span>
+<span id="6abd20ee-149"><a href="#6abd20ee-149" aria-hidden="true" tabindex="-1"></a>    cmap <span class="op">=</span> plt.cm.coolwarm</span>
+<span id="6abd20ee-150"><a href="#6abd20ee-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-151"><a href="#6abd20ee-151" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(z_positions)):</span>
+<span id="6abd20ee-152"><a href="#6abd20ee-152" aria-hidden="true" tabindex="-1"></a>        colors[i] <span class="op">=</span> cmap(norm(z_positions[i]))[:<span class="dv">3</span>]</span>
+<span id="6abd20ee-153"><a href="#6abd20ee-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-154"><a href="#6abd20ee-154" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create geometries for each data point</span></span>
+<span id="6abd20ee-155"><a href="#6abd20ee-155" aria-hidden="true" tabindex="-1"></a>    geometries <span class="op">=</span> []</span>
+<span id="6abd20ee-156"><a href="#6abd20ee-156" aria-hidden="true" tabindex="-1"></a>    materials <span class="op">=</span> []</span>
+<span id="6abd20ee-157"><a href="#6abd20ee-157" aria-hidden="true" tabindex="-1"></a>    meshes <span class="op">=</span> []</span>
+<span id="6abd20ee-158"><a href="#6abd20ee-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-159"><a href="#6abd20ee-159" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x_positions)):</span>
+<span id="6abd20ee-160"><a href="#6abd20ee-160" aria-hidden="true" tabindex="-1"></a>        geometry <span class="op">=</span> BoxBufferGeometry(<span class="fl">0.8</span>, <span class="fl">0.8</span>, z_positions[i] <span class="op">/</span> <span class="dv">10</span>)</span>
+<span id="6abd20ee-161"><a href="#6abd20ee-161" aria-hidden="true" tabindex="-1"></a>        material <span class="op">=</span> MeshLambertMaterial(color<span class="op">=</span><span class="bu">tuple</span>(colors[i]))</span>
+<span id="6abd20ee-162"><a href="#6abd20ee-162" aria-hidden="true" tabindex="-1"></a>        mesh <span class="op">=</span> Mesh(geometry<span class="op">=</span>geometry, material<span class="op">=</span>material)</span>
+<span id="6abd20ee-163"><a href="#6abd20ee-163" aria-hidden="true" tabindex="-1"></a>        mesh.position <span class="op">=</span> [x_positions[i], y_positions[i], z_positions[i] <span class="op">/</span> <span class="dv">20</span>]</span>
+<span id="6abd20ee-164"><a href="#6abd20ee-164" aria-hidden="true" tabindex="-1"></a>        geometries.append(geometry)</span>
+<span id="6abd20ee-165"><a href="#6abd20ee-165" aria-hidden="true" tabindex="-1"></a>        materials.append(material)</span>
+<span id="6abd20ee-166"><a href="#6abd20ee-166" aria-hidden="true" tabindex="-1"></a>        meshes.append(mesh)</span>
+<span id="6abd20ee-167"><a href="#6abd20ee-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-168"><a href="#6abd20ee-168" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create scene</span></span>
+<span id="6abd20ee-169"><a href="#6abd20ee-169" aria-hidden="true" tabindex="-1"></a>    scene <span class="op">=</span> Scene()</span>
+<span id="6abd20ee-170"><a href="#6abd20ee-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-171"><a href="#6abd20ee-171" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add all meshes to the scene</span></span>
+<span id="6abd20ee-172"><a href="#6abd20ee-172" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> mesh <span class="kw">in</span> meshes:</span>
+<span id="6abd20ee-173"><a href="#6abd20ee-173" aria-hidden="true" tabindex="-1"></a>        scene.add(mesh)</span>
+<span id="6abd20ee-174"><a href="#6abd20ee-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-175"><a href="#6abd20ee-175" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add lighting</span></span>
+<span id="6abd20ee-176"><a href="#6abd20ee-176" aria-hidden="true" tabindex="-1"></a>    scene.add(AmbientLight(color<span class="op">=</span><span class="st">"#ffffff"</span>, intensity<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="6abd20ee-177"><a href="#6abd20ee-177" aria-hidden="true" tabindex="-1"></a>    directional_light <span class="op">=</span> DirectionalLight(</span>
+<span id="6abd20ee-178"><a href="#6abd20ee-178" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"#ffffff"</span>, position<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>], intensity<span class="op">=</span><span class="fl">0.5</span></span>
+<span id="6abd20ee-179"><a href="#6abd20ee-179" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-180"><a href="#6abd20ee-180" aria-hidden="true" tabindex="-1"></a>    scene.add(directional_light)</span>
+<span id="6abd20ee-181"><a href="#6abd20ee-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-182"><a href="#6abd20ee-182" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up camera</span></span>
+<span id="6abd20ee-183"><a href="#6abd20ee-183" aria-hidden="true" tabindex="-1"></a>    camera <span class="op">=</span> PerspectiveCamera(</span>
+<span id="6abd20ee-184"><a href="#6abd20ee-184" aria-hidden="true" tabindex="-1"></a>        position<span class="op">=</span>[max_team_size <span class="op">/</span> <span class="dv">2</span>, max_weeks <span class="op">/</span> <span class="dv">2</span>, <span class="dv">50</span>],</span>
+<span id="6abd20ee-185"><a href="#6abd20ee-185" aria-hidden="true" tabindex="-1"></a>        fov<span class="op">=</span><span class="dv">75</span>,</span>
+<span id="6abd20ee-186"><a href="#6abd20ee-186" aria-hidden="true" tabindex="-1"></a>        aspect<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="6abd20ee-187"><a href="#6abd20ee-187" aria-hidden="true" tabindex="-1"></a>        near<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="6abd20ee-188"><a href="#6abd20ee-188" aria-hidden="true" tabindex="-1"></a>        far<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="6abd20ee-189"><a href="#6abd20ee-189" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-190"><a href="#6abd20ee-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-191"><a href="#6abd20ee-191" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up controls</span></span>
+<span id="6abd20ee-192"><a href="#6abd20ee-192" aria-hidden="true" tabindex="-1"></a>    controls <span class="op">=</span> OrbitControls(controlling<span class="op">=</span>camera)</span>
+<span id="6abd20ee-193"><a href="#6abd20ee-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-194"><a href="#6abd20ee-194" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create renderer</span></span>
+<span id="6abd20ee-195"><a href="#6abd20ee-195" aria-hidden="true" tabindex="-1"></a>    renderer <span class="op">=</span> Renderer(</span>
+<span id="6abd20ee-196"><a href="#6abd20ee-196" aria-hidden="true" tabindex="-1"></a>        camera<span class="op">=</span>camera, scene<span class="op">=</span>scene, controls<span class="op">=</span>[controls], width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">600</span></span>
+<span id="6abd20ee-197"><a href="#6abd20ee-197" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-198"><a href="#6abd20ee-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-199"><a href="#6abd20ee-199" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> renderer</span>
+<span id="6abd20ee-200"><a href="#6abd20ee-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-201"><a href="#6abd20ee-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-202"><a href="#6abd20ee-202" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create interactive 2D visualization</span></span>
+<span id="6abd20ee-203"><a href="#6abd20ee-203" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_interactive_productivity():</span>
+<span id="6abd20ee-204"><a href="#6abd20ee-204" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create interactive 2D plots for productivity model"""</span></span>
+<span id="6abd20ee-205"><a href="#6abd20ee-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-206"><a href="#6abd20ee-206" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the layout for sliders to make them wider</span></span>
+<span id="6abd20ee-207"><a href="#6abd20ee-207" aria-hidden="true" tabindex="-1"></a>    slider_layout <span class="op">=</span> Layout(width<span class="op">=</span><span class="st">"600px"</span>)</span>
+<span id="6abd20ee-208"><a href="#6abd20ee-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-209"><a href="#6abd20ee-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">@interact</span>(</span>
+<span id="6abd20ee-210"><a href="#6abd20ee-210" aria-hidden="true" tabindex="-1"></a>        team_size<span class="op">=</span>IntSlider(</span>
+<span id="6abd20ee-211"><a href="#6abd20ee-211" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">1</span>,</span>
+<span id="6abd20ee-212"><a href="#6abd20ee-212" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="dv">50</span>,</span>
+<span id="6abd20ee-213"><a href="#6abd20ee-213" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="6abd20ee-214"><a href="#6abd20ee-214" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="6abd20ee-215"><a href="#6abd20ee-215" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Team Size:"</span>,</span>
+<span id="6abd20ee-216"><a href="#6abd20ee-216" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-217"><a href="#6abd20ee-217" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-218"><a href="#6abd20ee-218" aria-hidden="true" tabindex="-1"></a>        weeks<span class="op">=</span>IntSlider(</span>
+<span id="6abd20ee-219"><a href="#6abd20ee-219" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">1</span>,</span>
+<span id="6abd20ee-220"><a href="#6abd20ee-220" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="dv">52</span>,</span>
+<span id="6abd20ee-221"><a href="#6abd20ee-221" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="6abd20ee-222"><a href="#6abd20ee-222" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="6abd20ee-223"><a href="#6abd20ee-223" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Project Weeks:"</span>,</span>
+<span id="6abd20ee-224"><a href="#6abd20ee-224" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-225"><a href="#6abd20ee-225" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-226"><a href="#6abd20ee-226" aria-hidden="true" tabindex="-1"></a>        context_switching_factor<span class="op">=</span>FloatSlider(</span>
+<span id="6abd20ee-227"><a href="#6abd20ee-227" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">0</span>,</span>
+<span id="6abd20ee-228"><a href="#6abd20ee-228" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="6abd20ee-229"><a href="#6abd20ee-229" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="6abd20ee-230"><a href="#6abd20ee-230" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="6abd20ee-231"><a href="#6abd20ee-231" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Context Switching Overhead:"</span>,</span>
+<span id="6abd20ee-232"><a href="#6abd20ee-232" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-233"><a href="#6abd20ee-233" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-234"><a href="#6abd20ee-234" aria-hidden="true" tabindex="-1"></a>        communication_factor<span class="op">=</span>FloatSlider(</span>
+<span id="6abd20ee-235"><a href="#6abd20ee-235" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">0</span>,</span>
+<span id="6abd20ee-236"><a href="#6abd20ee-236" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="6abd20ee-237"><a href="#6abd20ee-237" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="fl">0.005</span>,</span>
+<span id="6abd20ee-238"><a href="#6abd20ee-238" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="fl">0.03</span>,</span>
+<span id="6abd20ee-239"><a href="#6abd20ee-239" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Communication Overhead:"</span>,</span>
+<span id="6abd20ee-240"><a href="#6abd20ee-240" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-241"><a href="#6abd20ee-241" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-242"><a href="#6abd20ee-242" aria-hidden="true" tabindex="-1"></a>        meeting_factor<span class="op">=</span>FloatSlider(</span>
+<span id="6abd20ee-243"><a href="#6abd20ee-243" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">0</span>,</span>
+<span id="6abd20ee-244"><a href="#6abd20ee-244" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="6abd20ee-245"><a href="#6abd20ee-245" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="6abd20ee-246"><a href="#6abd20ee-246" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="6abd20ee-247"><a href="#6abd20ee-247" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Meeting Overhead:"</span>,</span>
+<span id="6abd20ee-248"><a href="#6abd20ee-248" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-249"><a href="#6abd20ee-249" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-250"><a href="#6abd20ee-250" aria-hidden="true" tabindex="-1"></a>        integration_factor<span class="op">=</span>FloatSlider(</span>
+<span id="6abd20ee-251"><a href="#6abd20ee-251" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">0</span>,</span>
+<span id="6abd20ee-252"><a href="#6abd20ee-252" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="6abd20ee-253"><a href="#6abd20ee-253" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="fl">0.005</span>,</span>
+<span id="6abd20ee-254"><a href="#6abd20ee-254" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="fl">0.02</span>,</span>
+<span id="6abd20ee-255"><a href="#6abd20ee-255" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Integration Overhead:"</span>,</span>
+<span id="6abd20ee-256"><a href="#6abd20ee-256" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-257"><a href="#6abd20ee-257" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-258"><a href="#6abd20ee-258" aria-hidden="true" tabindex="-1"></a>        onboarding_factor<span class="op">=</span>FloatSlider(</span>
+<span id="6abd20ee-259"><a href="#6abd20ee-259" aria-hidden="true" tabindex="-1"></a>            <span class="bu">min</span><span class="op">=</span><span class="dv">0</span>,</span>
+<span id="6abd20ee-260"><a href="#6abd20ee-260" aria-hidden="true" tabindex="-1"></a>            <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="6abd20ee-261"><a href="#6abd20ee-261" aria-hidden="true" tabindex="-1"></a>            step<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="6abd20ee-262"><a href="#6abd20ee-262" aria-hidden="true" tabindex="-1"></a>            value<span class="op">=</span><span class="fl">0.15</span>,</span>
+<span id="6abd20ee-263"><a href="#6abd20ee-263" aria-hidden="true" tabindex="-1"></a>            description<span class="op">=</span><span class="st">"Onboarding Overhead:"</span>,</span>
+<span id="6abd20ee-264"><a href="#6abd20ee-264" aria-hidden="true" tabindex="-1"></a>            layout<span class="op">=</span>slider_layout,</span>
+<span id="6abd20ee-265"><a href="#6abd20ee-265" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="6abd20ee-266"><a href="#6abd20ee-266" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-267"><a href="#6abd20ee-267" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> update_plot(</span>
+<span id="6abd20ee-268"><a href="#6abd20ee-268" aria-hidden="true" tabindex="-1"></a>        team_size,</span>
+<span id="6abd20ee-269"><a href="#6abd20ee-269" aria-hidden="true" tabindex="-1"></a>        weeks,</span>
+<span id="6abd20ee-270"><a href="#6abd20ee-270" aria-hidden="true" tabindex="-1"></a>        context_switching_factor,</span>
+<span id="6abd20ee-271"><a href="#6abd20ee-271" aria-hidden="true" tabindex="-1"></a>        communication_factor,</span>
+<span id="6abd20ee-272"><a href="#6abd20ee-272" aria-hidden="true" tabindex="-1"></a>        meeting_factor,</span>
+<span id="6abd20ee-273"><a href="#6abd20ee-273" aria-hidden="true" tabindex="-1"></a>        integration_factor,</span>
+<span id="6abd20ee-274"><a href="#6abd20ee-274" aria-hidden="true" tabindex="-1"></a>        onboarding_factor,</span>
+<span id="6abd20ee-275"><a href="#6abd20ee-275" aria-hidden="true" tabindex="-1"></a>    ):</span>
+<span id="6abd20ee-276"><a href="#6abd20ee-276" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Update the plots based on slider values"""</span></span>
+<span id="6abd20ee-277"><a href="#6abd20ee-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-278"><a href="#6abd20ee-278" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate results for current parameters</span></span>
+<span id="6abd20ee-279"><a href="#6abd20ee-279" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> calculate_unproductive_hours(</span>
+<span id="6abd20ee-280"><a href="#6abd20ee-280" aria-hidden="true" tabindex="-1"></a>            team_size,</span>
+<span id="6abd20ee-281"><a href="#6abd20ee-281" aria-hidden="true" tabindex="-1"></a>            weeks,</span>
+<span id="6abd20ee-282"><a href="#6abd20ee-282" aria-hidden="true" tabindex="-1"></a>            context_switching_factor,</span>
+<span id="6abd20ee-283"><a href="#6abd20ee-283" aria-hidden="true" tabindex="-1"></a>            communication_factor,</span>
+<span id="6abd20ee-284"><a href="#6abd20ee-284" aria-hidden="true" tabindex="-1"></a>            meeting_factor,</span>
+<span id="6abd20ee-285"><a href="#6abd20ee-285" aria-hidden="true" tabindex="-1"></a>            integration_factor,</span>
+<span id="6abd20ee-286"><a href="#6abd20ee-286" aria-hidden="true" tabindex="-1"></a>            onboarding_factor,</span>
+<span id="6abd20ee-287"><a href="#6abd20ee-287" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-288"><a href="#6abd20ee-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-289"><a href="#6abd20ee-289" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate results for varying team sizes</span></span>
+<span id="6abd20ee-290"><a href="#6abd20ee-290" aria-hidden="true" tabindex="-1"></a>        team_sizes <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, team_size <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="6abd20ee-291"><a href="#6abd20ee-291" aria-hidden="true" tabindex="-1"></a>        team_results <span class="op">=</span> []</span>
+<span id="6abd20ee-292"><a href="#6abd20ee-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-293"><a href="#6abd20ee-293" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ts <span class="kw">in</span> team_sizes:</span>
+<span id="6abd20ee-294"><a href="#6abd20ee-294" aria-hidden="true" tabindex="-1"></a>            team_result <span class="op">=</span> calculate_unproductive_hours(</span>
+<span id="6abd20ee-295"><a href="#6abd20ee-295" aria-hidden="true" tabindex="-1"></a>                ts,</span>
+<span id="6abd20ee-296"><a href="#6abd20ee-296" aria-hidden="true" tabindex="-1"></a>                weeks,</span>
+<span id="6abd20ee-297"><a href="#6abd20ee-297" aria-hidden="true" tabindex="-1"></a>                context_switching_factor,</span>
+<span id="6abd20ee-298"><a href="#6abd20ee-298" aria-hidden="true" tabindex="-1"></a>                communication_factor,</span>
+<span id="6abd20ee-299"><a href="#6abd20ee-299" aria-hidden="true" tabindex="-1"></a>                meeting_factor,</span>
+<span id="6abd20ee-300"><a href="#6abd20ee-300" aria-hidden="true" tabindex="-1"></a>                integration_factor,</span>
+<span id="6abd20ee-301"><a href="#6abd20ee-301" aria-hidden="true" tabindex="-1"></a>                onboarding_factor,</span>
+<span id="6abd20ee-302"><a href="#6abd20ee-302" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="6abd20ee-303"><a href="#6abd20ee-303" aria-hidden="true" tabindex="-1"></a>            team_results.append(team_result)</span>
+<span id="6abd20ee-304"><a href="#6abd20ee-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-305"><a href="#6abd20ee-305" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract data for plotting</span></span>
+<span id="6abd20ee-306"><a href="#6abd20ee-306" aria-hidden="true" tabindex="-1"></a>        productivity_percentages <span class="op">=</span> [r[<span class="st">"productivity_percentage"</span>] <span class="cf">for</span> r <span class="kw">in</span> team_results]</span>
+<span id="6abd20ee-307"><a href="#6abd20ee-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-308"><a href="#6abd20ee-308" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create breakdown plot for current parameters</span></span>
+<span id="6abd20ee-309"><a href="#6abd20ee-309" aria-hidden="true" tabindex="-1"></a>        overhead_categories <span class="op">=</span> [</span>
+<span id="6abd20ee-310"><a href="#6abd20ee-310" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Context Switching"</span>,</span>
+<span id="6abd20ee-311"><a href="#6abd20ee-311" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Communication"</span>,</span>
+<span id="6abd20ee-312"><a href="#6abd20ee-312" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Meetings"</span>,</span>
+<span id="6abd20ee-313"><a href="#6abd20ee-313" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Integration"</span>,</span>
+<span id="6abd20ee-314"><a href="#6abd20ee-314" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Onboarding"</span>,</span>
+<span id="6abd20ee-315"><a href="#6abd20ee-315" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Productive Hours"</span>,</span>
+<span id="6abd20ee-316"><a href="#6abd20ee-316" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="6abd20ee-317"><a href="#6abd20ee-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-318"><a href="#6abd20ee-318" aria-hidden="true" tabindex="-1"></a>        hours_data <span class="op">=</span> [</span>
+<span id="6abd20ee-319"><a href="#6abd20ee-319" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"context_switching_hours"</span>],</span>
+<span id="6abd20ee-320"><a href="#6abd20ee-320" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"communication_hours"</span>],</span>
+<span id="6abd20ee-321"><a href="#6abd20ee-321" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"meeting_hours"</span>],</span>
+<span id="6abd20ee-322"><a href="#6abd20ee-322" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"integration_hours"</span>],</span>
+<span id="6abd20ee-323"><a href="#6abd20ee-323" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"onboarding_hours"</span>],</span>
+<span id="6abd20ee-324"><a href="#6abd20ee-324" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"productive_hours"</span>],</span>
+<span id="6abd20ee-325"><a href="#6abd20ee-325" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="6abd20ee-326"><a href="#6abd20ee-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-327"><a href="#6abd20ee-327" aria-hidden="true" tabindex="-1"></a>        colors <span class="op">=</span> [<span class="st">"#ff9999"</span>, <span class="st">"#ffcc99"</span>, <span class="st">"#ffff99"</span>, <span class="st">"#99ff99"</span>, <span class="st">"#99ccff"</span>, <span class="st">"#66ff66"</span>]</span>
+<span id="6abd20ee-328"><a href="#6abd20ee-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-329"><a href="#6abd20ee-329" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create pie chart for time breakdown</span></span>
+<span id="6abd20ee-330"><a href="#6abd20ee-330" aria-hidden="true" tabindex="-1"></a>        fig1 <span class="op">=</span> go.Figure(</span>
+<span id="6abd20ee-331"><a href="#6abd20ee-331" aria-hidden="true" tabindex="-1"></a>            data<span class="op">=</span>[</span>
+<span id="6abd20ee-332"><a href="#6abd20ee-332" aria-hidden="true" tabindex="-1"></a>                go.Pie(</span>
+<span id="6abd20ee-333"><a href="#6abd20ee-333" aria-hidden="true" tabindex="-1"></a>                    labels<span class="op">=</span>overhead_categories,</span>
+<span id="6abd20ee-334"><a href="#6abd20ee-334" aria-hidden="true" tabindex="-1"></a>                    values<span class="op">=</span>hours_data,</span>
+<span id="6abd20ee-335"><a href="#6abd20ee-335" aria-hidden="true" tabindex="-1"></a>                    marker<span class="op">=</span><span class="bu">dict</span>(colors<span class="op">=</span>colors),</span>
+<span id="6abd20ee-336"><a href="#6abd20ee-336" aria-hidden="true" tabindex="-1"></a>                    textinfo<span class="op">=</span><span class="st">"label+percent"</span>,</span>
+<span id="6abd20ee-337"><a href="#6abd20ee-337" aria-hidden="true" tabindex="-1"></a>                    hole<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="6abd20ee-338"><a href="#6abd20ee-338" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="6abd20ee-339"><a href="#6abd20ee-339" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="6abd20ee-340"><a href="#6abd20ee-340" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-341"><a href="#6abd20ee-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-342"><a href="#6abd20ee-342" aria-hidden="true" tabindex="-1"></a>        fig1.update_layout(</span>
+<span id="6abd20ee-343"><a href="#6abd20ee-343" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="ss">f"Time Breakdown (Team Size: </span><span class="sc">{</span>team_size<span class="sc">}</span><span class="ss">, Weeks: </span><span class="sc">{</span>weeks<span class="sc">}</span><span class="ss">)"</span>, height<span class="op">=</span><span class="dv">500</span></span>
+<span id="6abd20ee-344"><a href="#6abd20ee-344" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-345"><a href="#6abd20ee-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-346"><a href="#6abd20ee-346" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create line chart for productivity vs team size</span></span>
+<span id="6abd20ee-347"><a href="#6abd20ee-347" aria-hidden="true" tabindex="-1"></a>        fig2 <span class="op">=</span> go.Figure()</span>
+<span id="6abd20ee-348"><a href="#6abd20ee-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-349"><a href="#6abd20ee-349" aria-hidden="true" tabindex="-1"></a>        fig2.add_trace(</span>
+<span id="6abd20ee-350"><a href="#6abd20ee-350" aria-hidden="true" tabindex="-1"></a>            go.Scatter(</span>
+<span id="6abd20ee-351"><a href="#6abd20ee-351" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span><span class="bu">list</span>(team_sizes),</span>
+<span id="6abd20ee-352"><a href="#6abd20ee-352" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>productivity_percentages,</span>
+<span id="6abd20ee-353"><a href="#6abd20ee-353" aria-hidden="true" tabindex="-1"></a>                mode<span class="op">=</span><span class="st">"lines+markers"</span>,</span>
+<span id="6abd20ee-354"><a href="#6abd20ee-354" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="st">"Productivity %"</span>,</span>
+<span id="6abd20ee-355"><a href="#6abd20ee-355" aria-hidden="true" tabindex="-1"></a>                line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"green"</span>, width<span class="op">=</span><span class="dv">3</span>),</span>
+<span id="6abd20ee-356"><a href="#6abd20ee-356" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">8</span>),</span>
+<span id="6abd20ee-357"><a href="#6abd20ee-357" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="6abd20ee-358"><a href="#6abd20ee-358" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-359"><a href="#6abd20ee-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-360"><a href="#6abd20ee-360" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a vertical line at current team size</span></span>
+<span id="6abd20ee-361"><a href="#6abd20ee-361" aria-hidden="true" tabindex="-1"></a>        fig2.add_shape(</span>
+<span id="6abd20ee-362"><a href="#6abd20ee-362" aria-hidden="true" tabindex="-1"></a>            <span class="bu">type</span><span class="op">=</span><span class="st">"line"</span>,</span>
+<span id="6abd20ee-363"><a href="#6abd20ee-363" aria-hidden="true" tabindex="-1"></a>            x0<span class="op">=</span>team_size,</span>
+<span id="6abd20ee-364"><a href="#6abd20ee-364" aria-hidden="true" tabindex="-1"></a>            y0<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="6abd20ee-365"><a href="#6abd20ee-365" aria-hidden="true" tabindex="-1"></a>            x1<span class="op">=</span>team_size,</span>
+<span id="6abd20ee-366"><a href="#6abd20ee-366" aria-hidden="true" tabindex="-1"></a>            y1<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="6abd20ee-367"><a href="#6abd20ee-367" aria-hidden="true" tabindex="-1"></a>            line<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"red"</span>, width<span class="op">=</span><span class="dv">2</span>, dash<span class="op">=</span><span class="st">"dash"</span>),</span>
+<span id="6abd20ee-368"><a href="#6abd20ee-368" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-369"><a href="#6abd20ee-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-370"><a href="#6abd20ee-370" aria-hidden="true" tabindex="-1"></a>        fig2.update_layout(</span>
+<span id="6abd20ee-371"><a href="#6abd20ee-371" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Productivity Percentage vs Team Size"</span>,</span>
+<span id="6abd20ee-372"><a href="#6abd20ee-372" aria-hidden="true" tabindex="-1"></a>            xaxis_title<span class="op">=</span><span class="st">"Team Size"</span>,</span>
+<span id="6abd20ee-373"><a href="#6abd20ee-373" aria-hidden="true" tabindex="-1"></a>            yaxis_title<span class="op">=</span><span class="st">"Productivity Percentage"</span>,</span>
+<span id="6abd20ee-374"><a href="#6abd20ee-374" aria-hidden="true" tabindex="-1"></a>            yaxis<span class="op">=</span><span class="bu">dict</span>(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">100</span>]),</span>
+<span id="6abd20ee-375"><a href="#6abd20ee-375" aria-hidden="true" tabindex="-1"></a>            height<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="6abd20ee-376"><a href="#6abd20ee-376" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-377"><a href="#6abd20ee-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-378"><a href="#6abd20ee-378" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Display figures</span></span>
+<span id="6abd20ee-379"><a href="#6abd20ee-379" aria-hidden="true" tabindex="-1"></a>        display(fig1)</span>
+<span id="6abd20ee-380"><a href="#6abd20ee-380" aria-hidden="true" tabindex="-1"></a>        display(fig2)</span>
+<span id="6abd20ee-381"><a href="#6abd20ee-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-382"><a href="#6abd20ee-382" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print summary statistics</span></span>
+<span id="6abd20ee-383"><a href="#6abd20ee-383" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-384"><a href="#6abd20ee-384" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"</span><span class="ch">\n</span><span class="ss">--- Summary for Team Size: </span><span class="sc">{</span>team_size<span class="sc">}</span><span class="ss">, Project Duration: </span><span class="sc">{</span>weeks<span class="sc">}</span><span class="ss"> weeks ---"</span></span>
+<span id="6abd20ee-385"><a href="#6abd20ee-385" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-386"><a href="#6abd20ee-386" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Total Available Hours: </span><span class="sc">{</span>result[<span class="st">'total_hours'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="6abd20ee-387"><a href="#6abd20ee-387" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-388"><a href="#6abd20ee-388" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Productive Hours: </span><span class="sc">{</span>result[<span class="st">'productive_hours'</span>]<span class="sc">:.0f}</span><span class="ss"> (</span><span class="sc">{</span>result[<span class="st">'productivity_percentage'</span>]<span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-389"><a href="#6abd20ee-389" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-390"><a href="#6abd20ee-390" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-391"><a href="#6abd20ee-391" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Total Unproductive Hours: </span><span class="sc">{</span>result[<span class="st">'total_unproductive'</span>]<span class="sc">:.0f}</span><span class="ss"> (</span><span class="sc">{</span><span class="dv">100</span><span class="op">-</span>result[<span class="st">'productivity_percentage'</span>]<span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-392"><a href="#6abd20ee-392" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-393"><a href="#6abd20ee-393" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Breakdown of Unproductive Hours:"</span>)</span>
+<span id="6abd20ee-394"><a href="#6abd20ee-394" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-395"><a href="#6abd20ee-395" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  - Context Switching: </span><span class="sc">{</span>result[<span class="st">'context_switching_hours'</span>]<span class="sc">:.0f}</span><span class="ss"> hours (</span><span class="sc">{</span>result[<span class="st">'context_switching_hours'</span>]<span class="op">/</span>result[<span class="st">'total_hours'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-396"><a href="#6abd20ee-396" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-397"><a href="#6abd20ee-397" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-398"><a href="#6abd20ee-398" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  - Communication: </span><span class="sc">{</span>result[<span class="st">'communication_hours'</span>]<span class="sc">:.0f}</span><span class="ss"> hours (</span><span class="sc">{</span>result[<span class="st">'communication_hours'</span>]<span class="op">/</span>result[<span class="st">'total_hours'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-399"><a href="#6abd20ee-399" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-400"><a href="#6abd20ee-400" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-401"><a href="#6abd20ee-401" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  - Meetings: </span><span class="sc">{</span>result[<span class="st">'meeting_hours'</span>]<span class="sc">:.0f}</span><span class="ss"> hours (</span><span class="sc">{</span>result[<span class="st">'meeting_hours'</span>]<span class="op">/</span>result[<span class="st">'total_hours'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-402"><a href="#6abd20ee-402" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-403"><a href="#6abd20ee-403" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-404"><a href="#6abd20ee-404" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  - Integration: </span><span class="sc">{</span>result[<span class="st">'integration_hours'</span>]<span class="sc">:.0f}</span><span class="ss"> hours (</span><span class="sc">{</span>result[<span class="st">'integration_hours'</span>]<span class="op">/</span>result[<span class="st">'total_hours'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-405"><a href="#6abd20ee-405" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-406"><a href="#6abd20ee-406" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-407"><a href="#6abd20ee-407" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"  - Onboarding: </span><span class="sc">{</span>result[<span class="st">'onboarding_hours'</span>]<span class="sc">:.0f}</span><span class="ss"> hours (</span><span class="sc">{</span>result[<span class="st">'onboarding_hours'</span>]<span class="op">/</span>result[<span class="st">'total_hours'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-408"><a href="#6abd20ee-408" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-409"><a href="#6abd20ee-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-410"><a href="#6abd20ee-410" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate optimal team size based on maximum productivity</span></span>
+<span id="6abd20ee-411"><a href="#6abd20ee-411" aria-hidden="true" tabindex="-1"></a>        optimal_idx <span class="op">=</span> np.argmax(productivity_percentages)</span>
+<span id="6abd20ee-412"><a href="#6abd20ee-412" aria-hidden="true" tabindex="-1"></a>        optimal_team_size <span class="op">=</span> team_sizes[optimal_idx]</span>
+<span id="6abd20ee-413"><a href="#6abd20ee-413" aria-hidden="true" tabindex="-1"></a>        optimal_productivity <span class="op">=</span> productivity_percentages[optimal_idx]</span>
+<span id="6abd20ee-414"><a href="#6abd20ee-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-415"><a href="#6abd20ee-415" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="6abd20ee-416"><a href="#6abd20ee-416" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"</span><span class="ch">\n</span><span class="ss">Optimal Team Size for this project: </span><span class="sc">{</span>optimal_team_size<span class="sc">}</span><span class="ss"> (Productivity: </span><span class="sc">{</span>optimal_productivity<span class="sc">:.1f}</span><span class="ss">%)"</span></span>
+<span id="6abd20ee-417"><a href="#6abd20ee-417" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-418"><a href="#6abd20ee-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-419"><a href="#6abd20ee-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-420"><a href="#6abd20ee-420" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to analyze the productivity model for different team sizes and project durations</span></span>
+<span id="6abd20ee-421"><a href="#6abd20ee-421" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_productivity_trends():</span>
+<span id="6abd20ee-422"><a href="#6abd20ee-422" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Analyze how productivity changes with team size and project duration"""</span></span>
+<span id="6abd20ee-423"><a href="#6abd20ee-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-424"><a href="#6abd20ee-424" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define ranges for analysis</span></span>
+<span id="6abd20ee-425"><a href="#6abd20ee-425" aria-hidden="true" tabindex="-1"></a>    team_sizes <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">31</span>)</span>
+<span id="6abd20ee-426"><a href="#6abd20ee-426" aria-hidden="true" tabindex="-1"></a>    weeks_values <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">12</span>, <span class="dv">26</span>, <span class="dv">52</span>]</span>
+<span id="6abd20ee-427"><a href="#6abd20ee-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-428"><a href="#6abd20ee-428" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use default overhead factors</span></span>
+<span id="6abd20ee-429"><a href="#6abd20ee-429" aria-hidden="true" tabindex="-1"></a>    context_switching_factor <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="6abd20ee-430"><a href="#6abd20ee-430" aria-hidden="true" tabindex="-1"></a>    communication_factor <span class="op">=</span> <span class="fl">0.03</span></span>
+<span id="6abd20ee-431"><a href="#6abd20ee-431" aria-hidden="true" tabindex="-1"></a>    meeting_factor <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="6abd20ee-432"><a href="#6abd20ee-432" aria-hidden="true" tabindex="-1"></a>    integration_factor <span class="op">=</span> <span class="fl">0.02</span></span>
+<span id="6abd20ee-433"><a href="#6abd20ee-433" aria-hidden="true" tabindex="-1"></a>    onboarding_factor <span class="op">=</span> <span class="fl">0.15</span></span>
+<span id="6abd20ee-434"><a href="#6abd20ee-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-435"><a href="#6abd20ee-435" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate productivity for all combinations</span></span>
+<span id="6abd20ee-436"><a href="#6abd20ee-436" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="6abd20ee-437"><a href="#6abd20ee-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-438"><a href="#6abd20ee-438" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> weeks <span class="kw">in</span> weeks_values:</span>
+<span id="6abd20ee-439"><a href="#6abd20ee-439" aria-hidden="true" tabindex="-1"></a>        productivity_values <span class="op">=</span> []</span>
+<span id="6abd20ee-440"><a href="#6abd20ee-440" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> team_size <span class="kw">in</span> team_sizes:</span>
+<span id="6abd20ee-441"><a href="#6abd20ee-441" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> calculate_unproductive_hours(</span>
+<span id="6abd20ee-442"><a href="#6abd20ee-442" aria-hidden="true" tabindex="-1"></a>                team_size,</span>
+<span id="6abd20ee-443"><a href="#6abd20ee-443" aria-hidden="true" tabindex="-1"></a>                weeks,</span>
+<span id="6abd20ee-444"><a href="#6abd20ee-444" aria-hidden="true" tabindex="-1"></a>                context_switching_factor,</span>
+<span id="6abd20ee-445"><a href="#6abd20ee-445" aria-hidden="true" tabindex="-1"></a>                communication_factor,</span>
+<span id="6abd20ee-446"><a href="#6abd20ee-446" aria-hidden="true" tabindex="-1"></a>                meeting_factor,</span>
+<span id="6abd20ee-447"><a href="#6abd20ee-447" aria-hidden="true" tabindex="-1"></a>                integration_factor,</span>
+<span id="6abd20ee-448"><a href="#6abd20ee-448" aria-hidden="true" tabindex="-1"></a>                onboarding_factor,</span>
+<span id="6abd20ee-449"><a href="#6abd20ee-449" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="6abd20ee-450"><a href="#6abd20ee-450" aria-hidden="true" tabindex="-1"></a>            productivity_values.append(result[<span class="st">"productivity_percentage"</span>])</span>
+<span id="6abd20ee-451"><a href="#6abd20ee-451" aria-hidden="true" tabindex="-1"></a>        results.append((weeks, productivity_values))</span>
+<span id="6abd20ee-452"><a href="#6abd20ee-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-453"><a href="#6abd20ee-453" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create plot</span></span>
+<span id="6abd20ee-454"><a href="#6abd20ee-454" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> go.Figure()</span>
+<span id="6abd20ee-455"><a href="#6abd20ee-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-456"><a href="#6abd20ee-456" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> weeks, productivity_values <span class="kw">in</span> results:</span>
+<span id="6abd20ee-457"><a href="#6abd20ee-457" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(</span>
+<span id="6abd20ee-458"><a href="#6abd20ee-458" aria-hidden="true" tabindex="-1"></a>            go.Scatter(</span>
+<span id="6abd20ee-459"><a href="#6abd20ee-459" aria-hidden="true" tabindex="-1"></a>                x<span class="op">=</span>team_sizes,</span>
+<span id="6abd20ee-460"><a href="#6abd20ee-460" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>productivity_values,</span>
+<span id="6abd20ee-461"><a href="#6abd20ee-461" aria-hidden="true" tabindex="-1"></a>                mode<span class="op">=</span><span class="st">"lines+markers"</span>,</span>
+<span id="6abd20ee-462"><a href="#6abd20ee-462" aria-hidden="true" tabindex="-1"></a>                name<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>weeks<span class="sc">}</span><span class="ss"> weeks"</span>,</span>
+<span id="6abd20ee-463"><a href="#6abd20ee-463" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="6abd20ee-464"><a href="#6abd20ee-464" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="6abd20ee-465"><a href="#6abd20ee-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-466"><a href="#6abd20ee-466" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(</span>
+<span id="6abd20ee-467"><a href="#6abd20ee-467" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Productivity vs Team Size for Different Project Durations"</span>,</span>
+<span id="6abd20ee-468"><a href="#6abd20ee-468" aria-hidden="true" tabindex="-1"></a>        xaxis_title<span class="op">=</span><span class="st">"Team Size"</span>,</span>
+<span id="6abd20ee-469"><a href="#6abd20ee-469" aria-hidden="true" tabindex="-1"></a>        yaxis_title<span class="op">=</span><span class="st">"Productivity Percentage"</span>,</span>
+<span id="6abd20ee-470"><a href="#6abd20ee-470" aria-hidden="true" tabindex="-1"></a>        yaxis<span class="op">=</span><span class="bu">dict</span>(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">100</span>]),</span>
+<span id="6abd20ee-471"><a href="#6abd20ee-471" aria-hidden="true" tabindex="-1"></a>        height<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="6abd20ee-472"><a href="#6abd20ee-472" aria-hidden="true" tabindex="-1"></a>        width<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="6abd20ee-473"><a href="#6abd20ee-473" aria-hidden="true" tabindex="-1"></a>        legend<span class="op">=</span><span class="bu">dict</span>(x<span class="op">=</span><span class="fl">0.01</span>, y<span class="op">=</span><span class="fl">0.99</span>, bgcolor<span class="op">=</span><span class="st">"rgba(255,255,255,0.8)"</span>),</span>
+<span id="6abd20ee-474"><a href="#6abd20ee-474" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-475"><a href="#6abd20ee-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-476"><a href="#6abd20ee-476" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
+<span id="6abd20ee-477"><a href="#6abd20ee-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-478"><a href="#6abd20ee-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-479"><a href="#6abd20ee-479" aria-hidden="true" tabindex="-1"></a><span class="co"># Main function for Quarto usage</span></span>
+<span id="6abd20ee-480"><a href="#6abd20ee-480" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> team_productivity_model():</span>
+<span id="6abd20ee-481"><a href="#6abd20ee-481" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Main function to run the productivity model visualization"""</span></span>
+<span id="6abd20ee-482"><a href="#6abd20ee-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-483"><a href="#6abd20ee-483" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Software Engineering Team Productivity Model"</span>)</span>
+<span id="6abd20ee-484"><a href="#6abd20ee-484" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-------------------------------------------"</span>)</span>
+<span id="6abd20ee-485"><a href="#6abd20ee-485" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="6abd20ee-486"><a href="#6abd20ee-486" aria-hidden="true" tabindex="-1"></a>        <span class="st">"This interactive model simulates the impact of team size and overhead factors on productivity."</span></span>
+<span id="6abd20ee-487"><a href="#6abd20ee-487" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-488"><a href="#6abd20ee-488" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="6abd20ee-489"><a href="#6abd20ee-489" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Adjust the sliders to see how different factors affect the productive vs unproductive hours."</span></span>
+<span id="6abd20ee-490"><a href="#6abd20ee-490" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-491"><a href="#6abd20ee-491" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Factors modeled:"</span>)</span>
+<span id="6abd20ee-492"><a href="#6abd20ee-492" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="6abd20ee-493"><a href="#6abd20ee-493" aria-hidden="true" tabindex="-1"></a>        <span class="st">"- Context Switching: Overhead due to engineers switching between different tasks and projects"</span></span>
+<span id="6abd20ee-494"><a href="#6abd20ee-494" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-495"><a href="#6abd20ee-495" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Communication: Overhead that scales with team size (approximately n²)"</span>)</span>
+<span id="6abd20ee-496"><a href="#6abd20ee-496" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Meetings: Time spent in coordination meetings"</span>)</span>
+<span id="6abd20ee-497"><a href="#6abd20ee-497" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Integration: Overhead required to integrate work from multiple engineers"</span>)</span>
+<span id="6abd20ee-498"><a href="#6abd20ee-498" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Onboarding: Overhead due to new team members learning the project"</span>)</span>
+<span id="6abd20ee-499"><a href="#6abd20ee-499" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="6abd20ee-500"><a href="#6abd20ee-500" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="ch">\n</span><span class="st">Interactive controls are below. Please adjust sliders to see the impact.</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="6abd20ee-501"><a href="#6abd20ee-501" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6abd20ee-502"><a href="#6abd20ee-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-503"><a href="#6abd20ee-503" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run the interactive plot</span></span>
+<span id="6abd20ee-504"><a href="#6abd20ee-504" aria-hidden="true" tabindex="-1"></a>    plot_interactive_productivity()</span>
+<span id="6abd20ee-505"><a href="#6abd20ee-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-506"><a href="#6abd20ee-506" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For 3D visualization, uncomment this line:</span></span>
+<span id="6abd20ee-507"><a href="#6abd20ee-507" aria-hidden="true" tabindex="-1"></a>    <span class="co"># display(create_3d_viz())</span></span>
+<span id="6abd20ee-508"><a href="#6abd20ee-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-509"><a href="#6abd20ee-509" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Trend Analysis:"</span>)</span>
+<span id="6abd20ee-510"><a href="#6abd20ee-510" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> analyze_productivity_trends()</span>
+<span id="6abd20ee-511"><a href="#6abd20ee-511" aria-hidden="true" tabindex="-1"></a>    display(fig)</span>
+<span id="6abd20ee-512"><a href="#6abd20ee-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-513"><a href="#6abd20ee-513" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Model Assumptions and Limitations:"</span>)</span>
+<span id="6abd20ee-514"><a href="#6abd20ee-514" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Base productivity is assumed to be 40 hours/week per person"</span>)</span>
+<span id="6abd20ee-515"><a href="#6abd20ee-515" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Communication overhead scales approximately with n²"</span>)</span>
+<span id="6abd20ee-516"><a href="#6abd20ee-516" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- The model ignores team structure and hierarchy effects"</span>)</span>
+<span id="6abd20ee-517"><a href="#6abd20ee-517" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Skill levels and experience are not modeled"</span>)</span>
+<span id="6abd20ee-518"><a href="#6abd20ee-518" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- The model doesn't account for technology-specific factors"</span>)</span>
+<span id="6abd20ee-519"><a href="#6abd20ee-519" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"- Assumes constant overhead factors throughout the project duration"</span>)</span>
+<span id="6abd20ee-520"><a href="#6abd20ee-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-521"><a href="#6abd20ee-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6abd20ee-522"><a href="#6abd20ee-522" aria-hidden="true" tabindex="-1"></a><span class="co"># For use in notebooks and Quarto documents</span></span>
+<span id="6abd20ee-523"><a href="#6abd20ee-523" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="6abd20ee-524"><a href="#6abd20ee-524" aria-hidden="true" tabindex="-1"></a>    team_productivity_model()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Software Engineering Team Productivity Model
+-------------------------------------------
+This interactive model simulates the impact of team size and overhead factors on productivity.
+Adjust the sliders to see how different factors affect the productive vs unproductive hours.
+
+Factors modeled:
+- Context Switching: Overhead due to engineers switching between different tasks and projects
+- Communication: Overhead that scales with team size (approximately n²)
+- Meetings: Time spent in coordination meetings
+- Integration: Overhead required to integrate work from multiple engineers
+- Onboarding: Overhead due to new team members learning the project
+
+Interactive controls are below. Please adjust sliders to see the impact.
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"16fbe75c41f54c6db2a6287d10b053fd","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Trend Analysis:</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>                <div id="0fbb6b5f-e738-4310-a17e-5123a8921860" class="plotly-graph-div" style="height:600px; width:800px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("0fbb6b5f-e738-4310-a17e-5123a8921860")) {                    Plotly.newPlot(                        "0fbb6b5f-e738-4310-a17e-5123a8921860",                        [{"mode":"lines+markers","name":"4 weeks","x":{"dtype":"i1","bdata":"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0e"},"y":[68.0,66.5,65.0,63.5,62.0,60.5,59.0,57.49999999999999,55.99999999999999,54.50000000000001,53.0,51.5,50.0,48.50000000000001,47.0,45.49999999999999,44.0,42.5,41.0,39.5,38.00000000000001,36.50000000000001,35.0,33.5,32.0,30.500000000000004,28.999999999999993,27.500000000000004,25.99999999999999,24.5],"type":"scatter"},{"mode":"lines+markers","name":"12 weeks","x":{"dtype":"i1","bdata":"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0e"},"y":[77.99999999999999,76.5,75.0,73.5,72.0,70.5,69.0,67.5,65.99999999999999,64.5,63.0,61.5,60.0,58.50000000000001,56.99999999999999,55.49999999999999,53.99999999999999,52.5,51.000000000000014,49.5,48.0,46.5,45.0,43.50000000000001,42.0,40.5,39.00000000000001,37.5,36.00000000000001,34.5],"type":"scatter"},{"mode":"lines+markers","name":"26 weeks","x":{"dtype":"i1","bdata":"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0e"},"y":[80.6923076923077,79.1923076923077,77.6923076923077,76.1923076923077,74.6923076923077,73.1923076923077,71.6923076923077,70.1923076923077,68.6923076923077,67.1923076923077,65.6923076923077,64.1923076923077,62.69230769230769,61.19230769230768,59.692307692307686,58.1923076923077,56.6923076923077,55.19230769230769,53.692307692307686,52.19230769230769,50.69230769230769,49.192307692307686,47.69230769230769,46.192307692307686,44.69230769230769,43.19230769230769,41.69230769230769,40.19230769230769,38.692307692307686,37.19230769230769],"type":"scatter"},{"mode":"lines+markers","name":"52 weeks","x":{"dtype":"i1","bdata":"AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0e"},"y":[81.84615384615384,80.34615384615384,78.84615384615384,77.34615384615384,75.84615384615384,74.34615384615384,72.84615384615385,71.34615384615385,69.84615384615384,68.34615384615384,66.84615384615384,65.34615384615384,63.84615384615384,62.34615384615384,60.84615384615385,59.34615384615385,57.84615384615385,56.34615384615385,54.84615384615383,53.34615384615384,51.846153846153854,50.34615384615384,48.84615384615385,47.34615384615384,45.84615384615385,44.34615384615385,42.846153846153854,41.34615384615385,39.84615384615384,38.34615384615385],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"yaxis":{"title":{"text":"Productivity Percentage"},"range":[0,100]},"legend":{"x":0.01,"y":0.99,"bgcolor":"rgba(255,255,255,0.8)"},"title":{"text":"Productivity vs Team Size for Different Project Durations"},"xaxis":{"title":{"text":"Team Size"}},"height":600,"width":800},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('0fbb6b5f-e738-4310-a17e-5123a8921860');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Assumptions and Limitations:
+- Base productivity is assumed to be 40 hours/week per person
+- Communication overhead scales approximately with n²
+- The model ignores team structure and hierarchy effects
+- Skill levels and experience are not modeled
+- The model doesn't account for technology-specific factors
+- Assumes constant overhead factors throughout the project duration</code></pre>
+</div>
+</div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script>
+      (() => {
+        const scriptTag = document.createElement("script");
+        const base64State = "JTdCJTIyc3RhdGUlMjIlM0ElN0IlMjIwNzliYjhiYWExZTg0OWYzYjVjZTA5YzdiZDRiOWVkNSUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJTbGlkZXJTdHlsZU1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmJhc2UlMjIlMkMlMjJfdmlld19tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIyX3ZpZXdfbmFtZSUyMiUzQSUyMlN0eWxlVmlldyUyMiUyQyUyMmRlc2NyaXB0aW9uX3dpZHRoJTIyJTNBJTIyJTIyJTJDJTIyaGFuZGxlX2NvbG9yJTIyJTNBbnVsbCU3RCU3RCUyQyUyMjA5ZDAwYzg3NDc3YTQzNTViZjY5MjA0ZmI2ZTE2OGZlJTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJtb2RlbF9tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIybW9kZWxfbmFtZSUyMiUzQSUyMkludFNsaWRlck1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfZG9tX2NsYXNzZXMlMjIlM0ElNUIlNUQlMkMlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIySW50U2xpZGVyTW9kZWwlMjIlMkMlMjJfdmlld19jb3VudCUyMiUzQW51bGwlMkMlMjJfdmlld19tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZjb250cm9scyUyMiUyQyUyMl92aWV3X21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfdmlld19uYW1lJTIyJTNBJTIySW50U2xpZGVyVmlldyUyMiUyQyUyMmJlaGF2aW9yJTIyJTNBJTIyZHJhZy10YXAlMjIlMkMlMjJjb250aW51b3VzX3VwZGF0ZSUyMiUzQXRydWUlMkMlMjJkZXNjcmlwdGlvbiUyMiUzQSUyMlRlYW0lMjBTaXplJTNBJTIyJTJDJTIyZGVzY3JpcHRpb25fYWxsb3dfaHRtbCUyMiUzQWZhbHNlJTJDJTIyZGlzYWJsZWQlMjIlM0FmYWxzZSUyQyUyMmxheW91dCUyMiUzQSUyMklQWV9NT0RFTF80YjU0YTE0NTQxZmY0Yjg5YjFhMDE2OGMzY2QzYTIxZiUyMiUyQyUyMm1heCUyMiUzQTUwJTJDJTIybWluJTIyJTNBMSUyQyUyMm9yaWVudGF0aW9uJTIyJTNBJTIyaG9yaXpvbnRhbCUyMiUyQyUyMnJlYWRvdXQlMjIlM0F0cnVlJTJDJTIycmVhZG91dF9mb3JtYXQlMjIlM0ElMjJkJTIyJTJDJTIyc3RlcCUyMiUzQTElMkMlMjJzdHlsZSUyMiUzQSUyMklQWV9NT0RFTF8yMDdkMjA0MTdmNzk0Mjk3YjVhMzA5YmM3NjA1ZTdlYiUyMiUyQyUyMnRhYmJhYmxlJTIyJTNBbnVsbCUyQyUyMnRvb2x0aXAlMjIlM0FudWxsJTJDJTIydmFsdWUlMjIlM0ExMCU3RCU3RCUyQyUyMjE2ZmJlNzVjNDFmNTRjNmRiMmE2Mjg3ZDEwYjA1M2ZkJTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJtb2RlbF9tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIybW9kZWxfbmFtZSUyMiUzQSUyMlZCb3hNb2RlbCUyMiUyQyUyMnN0YXRlJTIyJTNBJTdCJTIyX2RvbV9jbGFzc2VzJTIyJTNBJTVCJTIyd2lkZ2V0LWludGVyYWN0JTIyJTVEJTJDJTIyX21vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMlZCb3hNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJWQm94VmlldyUyMiUyQyUyMmJveF9zdHlsZSUyMiUzQSUyMiUyMiUyQyUyMmNoaWxkcmVuJTIyJTNBJTVCJTIySVBZX01PREVMXzA5ZDAwYzg3NDc3YTQzNTViZjY5MjA0ZmI2ZTE2OGZlJTIyJTJDJTIySVBZX01PREVMX2I0Y2UxNjBhMzI1MDRkNWNiZDdlNWQ3MzVhOWRhNjIzJTIyJTJDJTIySVBZX01PREVMX2M5ZDVjODM2MGZkNjQ3ZmFhNjlhYjE2NmUyYWNmNTY0JTIyJTJDJTIySVBZX01PREVMXzg4YWI2NDkyMDA2MTQxOGQ4NWE4NWZlMTI2MTUzNzI1JTIyJTJDJTIySVBZX01PREVMXzViZGQ2ZmIyMGEyODQ0YjM4MDhkOWI4MzAxODU5ZTAzJTIyJTJDJTIySVBZX01PREVMX2NhYjY2NzUwNjkzNzRhNDViZGIyOTgxNzI5YzQxOTllJTIyJTJDJTIySVBZX01PREVMX2I2YWQ3NmVmMjQxZDQzYzE4YjQxZjI4NGE2N2IwODg0JTIyJTJDJTIySVBZX01PREVMXzdmZDNmN2ZmYmI0NDRhMzk4NDBlNWFjY2UxYjhhY2E4JTIyJTVEJTJDJTIybGF5b3V0JTIyJTNBJTIySVBZX01PREVMX2YwYjJhMmJhZTRhMTQ1YTk4ZmIwMjgyYTgwMzZlOTU2JTIyJTJDJTIydGFiYmFibGUlMjIlM0FudWxsJTJDJTIydG9vbHRpcCUyMiUzQW51bGwlN0QlN0QlMkMlMjIyMDdkMjA0MTdmNzk0Mjk3YjVhMzA5YmM3NjA1ZTdlYiUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJTbGlkZXJTdHlsZU1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmJhc2UlMjIlMkMlMjJfdmlld19tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIyX3ZpZXdfbmFtZSUyMiUzQSUyMlN0eWxlVmlldyUyMiUyQyUyMmRlc2NyaXB0aW9uX3dpZHRoJTIyJTNBJTIyJTIyJTJDJTIyaGFuZGxlX2NvbG9yJTIyJTNBbnVsbCU3RCU3RCUyQyUyMjM0MmVlMmFmNDYwODQwMmY5MmFkYWE4ZTM2NjFkNTEzJTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGYmFzZSUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyTGF5b3V0TW9kZWwlMjIlMkMlMjJzdGF0ZSUyMiUzQSU3QiUyMl9tb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZiYXNlJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMkxheW91dE1vZGVsJTIyJTJDJTIyX3ZpZXdfY291bnQlMjIlM0FudWxsJTJDJTIyX3ZpZXdfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGYmFzZSUyMiUyQyUyMl92aWV3X21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfdmlld19uYW1lJTIyJTNBJTIyTGF5b3V0VmlldyUyMiUyQyUyMmFsaWduX2NvbnRlbnQlMjIlM0FudWxsJTJDJTIyYWxpZ25faXRlbXMlMjIlM0FudWxsJTJDJTIyYWxpZ25fc2VsZiUyMiUzQW51bGwlMkMlMjJib3JkZXJfYm90dG9tJTIyJTNBbnVsbCUyQyUyMmJvcmRlcl9sZWZ0JTIyJTNBbnVsbCUyQyUyMmJvcmRlcl9yaWdodCUyMiUzQW51bGwlMkMlMjJib3JkZXJfdG9wJTIyJTNBbnVsbCUyQyUyMmJvdHRvbSUyMiUzQW51bGwlMkMlMjJkaXNwbGF5JTIyJTNBbnVsbCUyQyUyMmZsZXglMjIlM0FudWxsJTJDJTIyZmxleF9mbG93JTIyJTNBbnVsbCUyQyUyMmdyaWRfYXJlYSUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fY29sdW1ucyUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fZmxvdyUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fcm93cyUyMiUzQW51bGwlMkMlMjJncmlkX2NvbHVtbiUyMiUzQW51bGwlMkMlMjJncmlkX2dhcCUyMiUzQW51bGwlMkMlMjJncmlkX3JvdyUyMiUzQW51bGwlMkMlMjJncmlkX3RlbXBsYXRlX2FyZWFzJTIyJTNBbnVsbCUyQyUyMmdyaWRfdGVtcGxhdGVfY29sdW1ucyUyMiUzQW51bGwlMkMlMjJncmlkX3RlbXBsYXRlX3Jvd3MlMjIlM0FudWxsJTJDJTIyaGVpZ2h0JTIyJTNBbnVsbCUyQyUyMmp1c3RpZnlfY29udGVudCUyMiUzQW51bGwlMkMlMjJqdXN0aWZ5X2l0ZW1zJTIyJTNBbnVsbCUyQyUyMmxlZnQlMjIlM0FudWxsJTJDJTIybWFyZ2luJTIyJTNBbnVsbCUyQyUyMm1heF9oZWlnaHQlMjIlM0FudWxsJTJDJTIybWF4X3dpZHRoJTIyJTNBbnVsbCUyQyUyMm1pbl9oZWlnaHQlMjIlM0FudWxsJTJDJTIybWluX3dpZHRoJTIyJTNBbnVsbCUyQyUyMm9iamVjdF9maXQlMjIlM0FudWxsJTJDJTIyb2JqZWN0X3Bvc2l0aW9uJTIyJTNBbnVsbCUyQyUyMm9yZGVyJTIyJTNBbnVsbCUyQyUyMm92ZXJmbG93JTIyJTNBbnVsbCUyQyUyMnBhZGRpbmclMjIlM0FudWxsJTJDJTIycmlnaHQlMjIlM0FudWxsJTJDJTIydG9wJTIyJTNBbnVsbCUyQyUyMnZpc2liaWxpdHklMjIlM0FudWxsJTJDJTIyd2lkdGglMjIlM0FudWxsJTdEJTdEJTJDJTIyMzU0NDQwZmU5M2FjNDRiNTg1YzRmZThjM2MyODZkNTYlMjIlM0ElN0IlMjJtb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZjb250cm9scyUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMnN0YXRlJTIyJTNBJTdCJTIyX21vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMlNsaWRlclN0eWxlTW9kZWwlMjIlMkMlMjJfdmlld19jb3VudCUyMiUzQW51bGwlMkMlMjJfdmlld19tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZiYXNlJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJTdHlsZVZpZXclMjIlMkMlMjJkZXNjcmlwdGlvbl93aWR0aCUyMiUzQSUyMiUyMiUyQyUyMmhhbmRsZV9jb2xvciUyMiUzQW51bGwlN0QlN0QlMkMlMjI0MTRmYjI5ZTkyNzM0YmJlOWRmYmM1NTk2NmRhY2EyYSUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJTbGlkZXJTdHlsZU1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmJhc2UlMjIlMkMlMjJfdmlld19tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIyX3ZpZXdfbmFtZSUyMiUzQSUyMlN0eWxlVmlldyUyMiUyQyUyMmRlc2NyaXB0aW9uX3dpZHRoJTIyJTNBJTIyJTIyJTJDJTIyaGFuZGxlX2NvbG9yJTIyJTNBbnVsbCU3RCU3RCUyQyUyMjRiNTRhMTQ1NDFmZjRiODliMWEwMTY4YzNjZDNhMjFmJTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGYmFzZSUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyTGF5b3V0TW9kZWwlMjIlMkMlMjJzdGF0ZSUyMiUzQSU3QiUyMl9tb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZiYXNlJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMkxheW91dE1vZGVsJTIyJTJDJTIyX3ZpZXdfY291bnQlMjIlM0FudWxsJTJDJTIyX3ZpZXdfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGYmFzZSUyMiUyQyUyMl92aWV3X21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfdmlld19uYW1lJTIyJTNBJTIyTGF5b3V0VmlldyUyMiUyQyUyMmFsaWduX2NvbnRlbnQlMjIlM0FudWxsJTJDJTIyYWxpZ25faXRlbXMlMjIlM0FudWxsJTJDJTIyYWxpZ25fc2VsZiUyMiUzQW51bGwlMkMlMjJib3JkZXJfYm90dG9tJTIyJTNBbnVsbCUyQyUyMmJvcmRlcl9sZWZ0JTIyJTNBbnVsbCUyQyUyMmJvcmRlcl9yaWdodCUyMiUzQW51bGwlMkMlMjJib3JkZXJfdG9wJTIyJTNBbnVsbCUyQyUyMmJvdHRvbSUyMiUzQW51bGwlMkMlMjJkaXNwbGF5JTIyJTNBbnVsbCUyQyUyMmZsZXglMjIlM0FudWxsJTJDJTIyZmxleF9mbG93JTIyJTNBbnVsbCUyQyUyMmdyaWRfYXJlYSUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fY29sdW1ucyUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fZmxvdyUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fcm93cyUyMiUzQW51bGwlMkMlMjJncmlkX2NvbHVtbiUyMiUzQW51bGwlMkMlMjJncmlkX2dhcCUyMiUzQW51bGwlMkMlMjJncmlkX3JvdyUyMiUzQW51bGwlMkMlMjJncmlkX3RlbXBsYXRlX2FyZWFzJTIyJTNBbnVsbCUyQyUyMmdyaWRfdGVtcGxhdGVfY29sdW1ucyUyMiUzQW51bGwlMkMlMjJncmlkX3RlbXBsYXRlX3Jvd3MlMjIlM0FudWxsJTJDJTIyaGVpZ2h0JTIyJTNBbnVsbCUyQyUyMmp1c3RpZnlfY29udGVudCUyMiUzQW51bGwlMkMlMjJqdXN0aWZ5X2l0ZW1zJTIyJTNBbnVsbCUyQyUyMmxlZnQlMjIlM0FudWxsJTJDJTIybWFyZ2luJTIyJTNBbnVsbCUyQyUyMm1heF9oZWlnaHQlMjIlM0FudWxsJTJDJTIybWF4X3dpZHRoJTIyJTNBbnVsbCUyQyUyMm1pbl9oZWlnaHQlMjIlM0FudWxsJTJDJTIybWluX3dpZHRoJTIyJTNBbnVsbCUyQyUyMm9iamVjdF9maXQlMjIlM0FudWxsJTJDJTIyb2JqZWN0X3Bvc2l0aW9uJTIyJTNBbnVsbCUyQyUyMm9yZGVyJTIyJTNBbnVsbCUyQyUyMm92ZXJmbG93JTIyJTNBbnVsbCUyQyUyMnBhZGRpbmclMjIlM0FudWxsJTJDJTIycmlnaHQlMjIlM0FudWxsJTJDJTIydG9wJTIyJTNBbnVsbCUyQyUyMnZpc2liaWxpdHklMjIlM0FudWxsJTJDJTIyd2lkdGglMjIlM0ElMjI2MDBweCUyMiU3RCU3RCUyQyUyMjViZGQ2ZmIyMGEyODQ0YjM4MDhkOWI4MzAxODU5ZTAzJTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJtb2RlbF9tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIybW9kZWxfbmFtZSUyMiUzQSUyMkZsb2F0U2xpZGVyTW9kZWwlMjIlMkMlMjJzdGF0ZSUyMiUzQSU3QiUyMl9kb21fY2xhc3NlcyUyMiUzQSU1QiU1RCUyQyUyMl9tb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZjb250cm9scyUyMiUyQyUyMl9tb2RlbF9tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIyX21vZGVsX25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlck1vZGVsJTIyJTJDJTIyX3ZpZXdfY291bnQlMjIlM0FudWxsJTJDJTIyX3ZpZXdfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfdmlld19tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIyX3ZpZXdfbmFtZSUyMiUzQSUyMkZsb2F0U2xpZGVyVmlldyUyMiUyQyUyMmJlaGF2aW9yJTIyJTNBJTIyZHJhZy10YXAlMjIlMkMlMjJjb250aW51b3VzX3VwZGF0ZSUyMiUzQXRydWUlMkMlMjJkZXNjcmlwdGlvbiUyMiUzQSUyMk1lZXRpbmclMjBPdmVyaGVhZCUzQSUyMiUyQyUyMmRlc2NyaXB0aW9uX2FsbG93X2h0bWwlMjIlM0FmYWxzZSUyQyUyMmRpc2FibGVkJTIyJTNBZmFsc2UlMkMlMjJsYXlvdXQlMjIlM0ElMjJJUFlfTU9ERUxfNGI1NGExNDU0MWZmNGI4OWIxYTAxNjhjM2NkM2EyMWYlMjIlMkMlMjJtYXglMjIlM0EwLjMlMkMlMjJtaW4lMjIlM0EwJTJDJTIyb3JpZW50YXRpb24lMjIlM0ElMjJob3Jpem9udGFsJTIyJTJDJTIycmVhZG91dCUyMiUzQXRydWUlMkMlMjJyZWFkb3V0X2Zvcm1hdCUyMiUzQSUyMi4yZiUyMiUyQyUyMnN0ZXAlMjIlM0EwLjAxJTJDJTIyc3R5bGUlMjIlM0ElMjJJUFlfTU9ERUxfYTFkOWRmYjhjODk0NDUzZTg0NTI5YjE3NWQzNjZmNDglMjIlMkMlMjJ0YWJiYWJsZSUyMiUzQW51bGwlMkMlMjJ0b29sdGlwJTIyJTNBbnVsbCUyQyUyMnZhbHVlJTIyJTNBMC4xJTdEJTdEJTJDJTIyNzMxYmI5ZDdmNTA5NDFmZDk0N2RlYmI3ODI1ZDg4NmYlMjIlM0ElN0IlMjJtb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZjb250cm9scyUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMnN0YXRlJTIyJTNBJTdCJTIyX21vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMlNsaWRlclN0eWxlTW9kZWwlMjIlMkMlMjJfdmlld19jb3VudCUyMiUzQW51bGwlMkMlMjJfdmlld19tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZiYXNlJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJTdHlsZVZpZXclMjIlMkMlMjJkZXNjcmlwdGlvbl93aWR0aCUyMiUzQSUyMiUyMiUyQyUyMmhhbmRsZV9jb2xvciUyMiUzQW51bGwlN0QlN0QlMkMlMjI3ZmQzZjdmZmJiNDQ0YTM5ODQwZTVhY2NlMWI4YWNhOCUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRm91dHB1dCUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMS4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyT3V0cHV0TW9kZWwlMjIlMkMlMjJzdGF0ZSUyMiUzQSU3QiUyMl9kb21fY2xhc3NlcyUyMiUzQSU1QiU1RCUyQyUyMl9tb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZvdXRwdXQlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIxLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyT3V0cHV0TW9kZWwlMjIlMkMlMjJfdmlld19jb3VudCUyMiUzQW51bGwlMkMlMjJfdmlld19tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZvdXRwdXQlMjIlMkMlMjJfdmlld19tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjEuMC4wJTIyJTJDJTIyX3ZpZXdfbmFtZSUyMiUzQSUyMk91dHB1dFZpZXclMjIlMkMlMjJsYXlvdXQlMjIlM0ElMjJJUFlfTU9ERUxfMzQyZWUyYWY0NjA4NDAyZjkyYWRhYThlMzY2MWQ1MTMlMjIlMkMlMjJtc2dfaWQlMjIlM0ElMjIlMjIlMkMlMjJvdXRwdXRzJTIyJTNBJTVCJTdCJTIyZGF0YSUyMiUzQSU3QiUyMnRleHQlMkZodG1sJTIyJTNBJTIyJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTNDc2NyaXB0JTIwdHlwZSUzRCU1QyUyMnRleHQlMkZqYXZhc2NyaXB0JTVDJTIyJTNFJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMHdpbmRvdy5QbG90bHlDb25maWclMjAlM0QlMjAlN0JNYXRoSmF4Q29uZmlnJTNBJTIwJ2xvY2FsJyU3RCUzQiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBpZiUyMCh3aW5kb3cuTWF0aEpheCUyMCUyNiUyNiUyMHdpbmRvdy5NYXRoSmF4Lkh1YiUyMCUyNiUyNiUyMHdpbmRvdy5NYXRoSmF4Lkh1Yi5Db25maWcpJTIwJTdCd2luZG93Lk1hdGhKYXguSHViLkNvbmZpZyglN0JTVkclM0ElMjAlN0Jmb250JTNBJTIwJTVDJTIyU1RJWC1XZWIlNUMlMjIlN0QlN0QpJTNCJTdEJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUzQyUyRnNjcmlwdCUzRSU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0NzY3JpcHQlMjB0eXBlJTNEJTVDJTIybW9kdWxlJTVDJTIyJTNFaW1wb3J0JTIwJTVDJTIyaHR0cHMlM0ElMkYlMkZjZG4ucGxvdC5seSUyRnBsb3RseS0zLjAuMC5taW4lNUMlMjIlM0MlMkZzY3JpcHQlM0UlNUNuJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyJTdEJTJDJTIybWV0YWRhdGElMjIlM0ElN0IlN0QlMkMlMjJvdXRwdXRfdHlwZSUyMiUzQSUyMmRpc3BsYXlfZGF0YSUyMiU3RCUyQyU3QiUyMmRhdGElMjIlM0ElN0IlMjJ0ZXh0JTJGaHRtbCUyMiUzQSUyMiUzQ2RpdiUzRSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUzQ3NjcmlwdCUyMHNyYyUzRCU1QyUyMmh0dHBzJTNBJTJGJTJGY2RuanMuY2xvdWRmbGFyZS5jb20lMkZhamF4JTJGbGlicyUyRm1hdGhqYXglMkYyLjcuNSUyRk1hdGhKYXguanMlM0Zjb25maWclM0RUZVgtQU1TLU1NTF9TVkclNUMlMjIlM0UlM0MlMkZzY3JpcHQlM0UlM0NzY3JpcHQlMjB0eXBlJTNEJTVDJTIydGV4dCUyRmphdmFzY3JpcHQlNUMlMjIlM0VpZiUyMCh3aW5kb3cuTWF0aEpheCUyMCUyNiUyNiUyMHdpbmRvdy5NYXRoSmF4Lkh1YiUyMCUyNiUyNiUyMHdpbmRvdy5NYXRoSmF4Lkh1Yi5Db25maWcpJTIwJTdCd2luZG93Lk1hdGhKYXguSHViLkNvbmZpZyglN0JTVkclM0ElMjAlN0Jmb250JTNBJTIwJTVDJTIyU1RJWC1XZWIlNUMlMjIlN0QlN0QpJTNCJTdEJTNDJTJGc2NyaXB0JTNFJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTNDc2NyaXB0JTIwdHlwZSUzRCU1QyUyMnRleHQlMkZqYXZhc2NyaXB0JTVDJTIyJTNFd2luZG93LlBsb3RseUNvbmZpZyUyMCUzRCUyMCU3Qk1hdGhKYXhDb25maWclM0ElMjAnbG9jYWwnJTdEJTNCJTNDJTJGc2NyaXB0JTNFJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUzQ3NjcmlwdCUyMGNoYXJzZXQlM0QlNUMlMjJ1dGYtOCU1QyUyMiUyMHNyYyUzRCU1QyUyMmh0dHBzJTNBJTJGJTJGY2RuLnBsb3QubHklMkZwbG90bHktMy4wLjAubWluLmpzJTVDJTIyJTNFJTNDJTJGc2NyaXB0JTNFJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTNDZGl2JTIwaWQlM0QlNUMlMjI5N2UxMmU1OC1hMjdhLTRjMjctYjUzNi0yMDIwNjdlMmY0YjklNUMlMjIlMjBjbGFzcyUzRCU1QyUyMnBsb3RseS1ncmFwaC1kaXYlNUMlMjIlMjBzdHlsZSUzRCU1QyUyMmhlaWdodCUzQTUwMHB4JTNCJTIwd2lkdGglM0ExMDAlMjUlM0IlNUMlMjIlM0UlM0MlMkZkaXYlM0UlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0NzY3JpcHQlMjB0eXBlJTNEJTVDJTIydGV4dCUyRmphdmFzY3JpcHQlNUMlMjIlM0UlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjB3aW5kb3cuUExPVExZRU5WJTNEd2luZG93LlBMT1RMWUVOViUyMCU3QyU3QyUyMCU3QiU3RCUzQiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMGlmJTIwKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCU1QyUyMjk3ZTEyZTU4LWEyN2EtNGMyNy1iNTM2LTIwMjA2N2UyZjRiOSU1QyUyMikpJTIwJTdCJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwUGxvdGx5Lm5ld1Bsb3QoJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTVDJTIyOTdlMTJlNTgtYTI3YS00YzI3LWI1MzYtMjAyMDY3ZTJmNGI5JTVDJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTVCJTdCJTVDJTIyaG9sZSU1QyUyMiUzQTAuMyUyQyU1QyUyMmxhYmVscyU1QyUyMiUzQSU1QiU1QyUyMkNvbnRleHQlMjBTd2l0Y2hpbmclNUMlMjIlMkMlNUMlMjJDb21tdW5pY2F0aW9uJTVDJTIyJTJDJTVDJTIyTWVldGluZ3MlNUMlMjIlMkMlNUMlMjJJbnRlZ3JhdGlvbiU1QyUyMiUyQyU1QyUyMk9uYm9hcmRpbmclNUMlMjIlMkMlNUMlMjJQcm9kdWN0aXZlJTIwSG91cnMlNUMlMjIlNUQlMkMlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcnMlNUMlMjIlM0ElNUIlNUMlMjIlMjNmZjk5OTklNUMlMjIlMkMlNUMlMjIlMjNmZmNjOTklNUMlMjIlMkMlNUMlMjIlMjNmZmZmOTklNUMlMjIlMkMlNUMlMjIlMjM5OWZmOTklNUMlMjIlMkMlNUMlMjIlMjM5OWNjZmYlNUMlMjIlMkMlNUMlMjIlMjM2NmZmNjYlNUMlMjIlNUQlN0QlMkMlNUMlMjJ0ZXh0aW5mbyU1QyUyMiUzQSU1QyUyMmxhYmVsJTJCcGVyY2VudCU1QyUyMiUyQyU1QyUyMnZhbHVlcyU1QyUyMiUzQSU1QjI0MC4wJTJDNjQ4LjAlMkM0ODAuMCUyQzk2LjAlMkMyNDAuMCUyQzMwOTYuMCU1RCUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJwaWUlNUMlMjIlN0QlNUQlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlN0IlNUMlMjJ0ZW1wbGF0ZSU1QyUyMiUzQSU3QiU1QyUyMmRhdGElNUMlMjIlM0ElN0IlNUMlMjJoaXN0b2dyYW0yZGNvbnRvdXIlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyaGlzdG9ncmFtMmRjb250b3VyJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJjb2xvcnNjYWxlJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTdEJTVEJTJDJTVDJTIyY2hvcm9wbGV0aCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJjaG9yb3BsZXRoJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlNUQlMkMlNUMlMjJoaXN0b2dyYW0yZCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJoaXN0b2dyYW0yZCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTJDJTVDJTIyY29sb3JzY2FsZSU1QyUyMiUzQSU1QiU1QjAuMCUyQyU1QyUyMiUyMzBkMDg4NyU1QyUyMiU1RCUyQyU1QjAuMTExMTExMTExMTExMTExMSUyQyU1QyUyMiUyMzQ2MDM5ZiU1QyUyMiU1RCUyQyU1QjAuMjIyMjIyMjIyMjIyMjIyMiUyQyU1QyUyMiUyMzcyMDFhOCU1QyUyMiU1RCUyQyU1QjAuMzMzMzMzMzMzMzMzMzMzMyUyQyU1QyUyMiUyMzljMTc5ZSU1QyUyMiU1RCUyQyU1QjAuNDQ0NDQ0NDQ0NDQ0NDQ0NCUyQyU1QyUyMiUyM2JkMzc4NiU1QyUyMiU1RCUyQyU1QjAuNTU1NTU1NTU1NTU1NTU1NiUyQyU1QyUyMiUyM2Q4NTc2YiU1QyUyMiU1RCUyQyU1QjAuNjY2NjY2NjY2NjY2NjY2NiUyQyU1QyUyMiUyM2VkNzk1MyU1QyUyMiU1RCUyQyU1QjAuNzc3Nzc3Nzc3Nzc3Nzc3OCUyQyU1QyUyMiUyM2ZiOWYzYSU1QyUyMiU1RCUyQyU1QjAuODg4ODg4ODg4ODg4ODg4OCUyQyU1QyUyMiUyM2ZkY2EyNiU1QyUyMiU1RCUyQyU1QjEuMCUyQyU1QyUyMiUyM2YwZjkyMSU1QyUyMiU1RCU1RCU3RCU1RCUyQyU1QyUyMmhlYXRtYXAlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyaGVhdG1hcCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTJDJTVDJTIyY29sb3JzY2FsZSU1QyUyMiUzQSU1QiU1QjAuMCUyQyU1QyUyMiUyMzBkMDg4NyU1QyUyMiU1RCUyQyU1QjAuMTExMTExMTExMTExMTExMSUyQyU1QyUyMiUyMzQ2MDM5ZiU1QyUyMiU1RCUyQyU1QjAuMjIyMjIyMjIyMjIyMjIyMiUyQyU1QyUyMiUyMzcyMDFhOCU1QyUyMiU1RCUyQyU1QjAuMzMzMzMzMzMzMzMzMzMzMyUyQyU1QyUyMiUyMzljMTc5ZSU1QyUyMiU1RCUyQyU1QjAuNDQ0NDQ0NDQ0NDQ0NDQ0NCUyQyU1QyUyMiUyM2JkMzc4NiU1QyUyMiU1RCUyQyU1QjAuNTU1NTU1NTU1NTU1NTU1NiUyQyU1QyUyMiUyM2Q4NTc2YiU1QyUyMiU1RCUyQyU1QjAuNjY2NjY2NjY2NjY2NjY2NiUyQyU1QyUyMiUyM2VkNzk1MyU1QyUyMiU1RCUyQyU1QjAuNzc3Nzc3Nzc3Nzc3Nzc3OCUyQyU1QyUyMiUyM2ZiOWYzYSU1QyUyMiU1RCUyQyU1QjAuODg4ODg4ODg4ODg4ODg4OCUyQyU1QyUyMiUyM2ZkY2EyNiU1QyUyMiU1RCUyQyU1QjEuMCUyQyU1QyUyMiUyM2YwZjkyMSU1QyUyMiU1RCU1RCU3RCU1RCUyQyU1QyUyMmNvbnRvdXJjYXJwZXQlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyY29udG91cmNhcnBldCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTVEJTJDJTVDJTIyY29udG91ciU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJjb250b3VyJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJjb2xvcnNjYWxlJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTdEJTVEJTJDJTVDJTIyc3VyZmFjZSU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzdXJmYWNlJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJjb2xvcnNjYWxlJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTdEJTVEJTJDJTVDJTIybWVzaDNkJTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMm1lc2gzZCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTVEJTJDJTVDJTIyc2NhdHRlciU1QyUyMiUzQSU1QiU3QiU1QyUyMmZpbGxwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyc2NhdHRlciU1QyUyMiU3RCU1RCUyQyU1QyUyMnBhcmNvb3JkcyU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJwYXJjb29yZHMlNUMlMjIlMkMlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVycG9sYXJnbCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzY2F0dGVycG9sYXJnbCU1QyUyMiUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTdEJTVEJTJDJTVDJTIyYmFyJTVDJTIyJTNBJTVCJTdCJTVDJTIyZXJyb3JfeCU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTdEJTJDJTVDJTIyZXJyb3JfeSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTdEJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIybGluZSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyd2lkdGglNUMlMjIlM0EwLjUlN0QlMkMlNUMlMjJwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyYmFyJTVDJTIyJTdEJTVEJTJDJTVDJTIyc2NhdHRlcmdlbyU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzY2F0dGVyZ2VvJTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVycG9sYXIlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyc2NhdHRlcnBvbGFyJTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJoaXN0b2dyYW0lNUMlMjIlM0ElNUIlN0IlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyaGlzdG9ncmFtJTVDJTIyJTdEJTVEJTJDJTVDJTIyc2NhdHRlcmdsJTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJnbCU1QyUyMiUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTdEJTVEJTJDJTVDJTIyc2NhdHRlcjNkJTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXIzZCU1QyUyMiUyQyU1QyUyMmxpbmUlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTdEJTVEJTJDJTVDJTIyc2NhdHRlcm1hcCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzY2F0dGVybWFwJTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVybWFwYm94JTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJtYXBib3glNUMlMjIlMkMlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCU3RCU1RCUyQyU1QyUyMnNjYXR0ZXJ0ZXJuYXJ5JTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJ0ZXJuYXJ5JTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVyY2FycGV0JTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJjYXJwZXQlNUMlMjIlMkMlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCU3RCU1RCUyQyU1QyUyMmNhcnBldCU1QyUyMiUzQSU1QiU3QiU1QyUyMmFheGlzJTVDJTIyJTNBJTdCJTVDJTIyZW5kbGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMm1pbm9yZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJzdGFydGxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMiUyMzJhM2Y1ZiU1QyUyMiU3RCUyQyU1QyUyMmJheGlzJTVDJTIyJTNBJTdCJTVDJTIyZW5kbGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMm1pbm9yZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJzdGFydGxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMiUyMzJhM2Y1ZiU1QyUyMiU3RCUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJjYXJwZXQlNUMlMjIlN0QlNUQlMkMlNUMlMjJ0YWJsZSU1QyUyMiUzQSU1QiU3QiU1QyUyMmNlbGxzJTVDJTIyJTNBJTdCJTVDJTIyZmlsbCU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRUJGMEY4JTVDJTIyJTdEJTJDJTVDJTIybGluZSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlN0QlN0QlMkMlNUMlMjJoZWFkZXIlNUMlMjIlM0ElN0IlNUMlMjJmaWxsJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjIlMjNDOEQ0RTMlNUMlMjIlN0QlMkMlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiU3RCU3RCUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJ0YWJsZSU1QyUyMiU3RCU1RCUyQyU1QyUyMmJhcnBvbGFyJTVDJTIyJTNBJTVCJTdCJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIybGluZSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyd2lkdGglNUMlMjIlM0EwLjUlN0QlMkMlNUMlMjJwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyYmFycG9sYXIlNUMlMjIlN0QlNUQlMkMlNUMlMjJwaWUlNUMlMjIlM0ElNUIlN0IlNUMlMjJhdXRvbWFyZ2luJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJwaWUlNUMlMjIlN0QlNUQlN0QlMkMlNUMlMjJsYXlvdXQlNUMlMjIlM0ElN0IlNUMlMjJhdXRvdHlwZW51bWJlcnMlNUMlMjIlM0ElNUMlMjJzdHJpY3QlNUMlMjIlMkMlNUMlMjJjb2xvcndheSU1QyUyMiUzQSU1QiU1QyUyMiUyMzYzNmVmYSU1QyUyMiUyQyU1QyUyMiUyM0VGNTUzQiU1QyUyMiUyQyU1QyUyMiUyMzAwY2M5NiU1QyUyMiUyQyU1QyUyMiUyM2FiNjNmYSU1QyUyMiUyQyU1QyUyMiUyM0ZGQTE1QSU1QyUyMiUyQyU1QyUyMiUyMzE5ZDNmMyU1QyUyMiUyQyU1QyUyMiUyM0ZGNjY5MiU1QyUyMiUyQyU1QyUyMiUyM0I2RTg4MCU1QyUyMiUyQyU1QyUyMiUyM0ZGOTdGRiU1QyUyMiUyQyU1QyUyMiUyM0ZFQ0I1MiU1QyUyMiU1RCUyQyU1QyUyMmZvbnQlNUMlMjIlM0ElN0IlNUMlMjJjb2xvciU1QyUyMiUzQSU1QyUyMiUyMzJhM2Y1ZiU1QyUyMiU3RCUyQyU1QyUyMmhvdmVybW9kZSU1QyUyMiUzQSU1QyUyMmNsb3Nlc3QlNUMlMjIlMkMlNUMlMjJob3ZlcmxhYmVsJTVDJTIyJTNBJTdCJTVDJTIyYWxpZ24lNUMlMjIlM0ElNUMlMjJsZWZ0JTVDJTIyJTdEJTJDJTVDJTIycGFwZXJfYmdjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIycGxvdF9iZ2NvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIycG9sYXIlNUMlMjIlM0ElN0IlNUMlMjJiZ2NvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyYW5ndWxhcmF4aXMlNUMlMjIlM0ElN0IlNUMlMjJncmlkY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJyYWRpYWxheGlzJTVDJTIyJTNBJTdCJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTJDJTVDJTIydGVybmFyeSU1QyUyMiUzQSU3QiU1QyUyMmJnY29sb3IlNUMlMjIlM0ElNUMlMjIlMjNFNUVDRjYlNUMlMjIlMkMlNUMlMjJhYXhpcyU1QyUyMiUzQSU3QiU1QyUyMmdyaWRjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCUyQyU1QyUyMmJheGlzJTVDJTIyJTNBJTdCJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTJDJTVDJTIyY2F4aXMlNUMlMjIlM0ElN0IlNUMlMjJncmlkY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlMkMlNUMlMjJjb2xvcmF4aXMlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCUyQyU1QyUyMmNvbG9yc2NhbGUlNUMlMjIlM0ElN0IlNUMlMjJzZXF1ZW50aWFsJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTJDJTVDJTIyc2VxdWVudGlhbG1pbnVzJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTJDJTVDJTIyZGl2ZXJnaW5nJTVDJTIyJTNBJTVCJTVCMCUyQyU1QyUyMiUyMzhlMDE1MiU1QyUyMiU1RCUyQyU1QjAuMSUyQyU1QyUyMiUyM2M1MWI3ZCU1QyUyMiU1RCUyQyU1QjAuMiUyQyU1QyUyMiUyM2RlNzdhZSU1QyUyMiU1RCUyQyU1QjAuMyUyQyU1QyUyMiUyM2YxYjZkYSU1QyUyMiU1RCUyQyU1QjAuNCUyQyU1QyUyMiUyM2ZkZTBlZiU1QyUyMiU1RCUyQyU1QjAuNSUyQyU1QyUyMiUyM2Y3ZjdmNyU1QyUyMiU1RCUyQyU1QjAuNiUyQyU1QyUyMiUyM2U2ZjVkMCU1QyUyMiU1RCUyQyU1QjAuNyUyQyU1QyUyMiUyM2I4ZTE4NiU1QyUyMiU1RCUyQyU1QjAuOCUyQyU1QyUyMiUyMzdmYmM0MSU1QyUyMiU1RCUyQyU1QjAuOSUyQyU1QyUyMiUyMzRkOTIyMSU1QyUyMiU1RCUyQyU1QjElMkMlNUMlMjIlMjMyNzY0MTklNUMlMjIlNUQlNUQlN0QlMkMlNUMlMjJ4YXhpcyU1QyUyMiUzQSU3QiU1QyUyMmdyaWRjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiUyQyU1QyUyMnRpdGxlJTVDJTIyJTNBJTdCJTVDJTIyc3RhbmRvZmYlNUMlMjIlM0ExNSU3RCUyQyU1QyUyMnplcm9saW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmF1dG9tYXJnaW4lNUMlMjIlM0F0cnVlJTJDJTVDJTIyemVyb2xpbmV3aWR0aCU1QyUyMiUzQTIlN0QlMkMlNUMlMjJ5YXhpcyU1QyUyMiUzQSU3QiU1QyUyMmdyaWRjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiUyQyU1QyUyMnRpdGxlJTVDJTIyJTNBJTdCJTVDJTIyc3RhbmRvZmYlNUMlMjIlM0ExNSU3RCUyQyU1QyUyMnplcm9saW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmF1dG9tYXJnaW4lNUMlMjIlM0F0cnVlJTJDJTVDJTIyemVyb2xpbmV3aWR0aCU1QyUyMiUzQTIlN0QlMkMlNUMlMjJzY2VuZSU1QyUyMiUzQSU3QiU1QyUyMnhheGlzJTVDJTIyJTNBJTdCJTVDJTIyYmFja2dyb3VuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnNob3diYWNrZ3JvdW5kJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTJDJTVDJTIyemVyb2xpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIyZ3JpZHdpZHRoJTVDJTIyJTNBMiU3RCUyQyU1QyUyMnlheGlzJTVDJTIyJTNBJTdCJTVDJTIyYmFja2dyb3VuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnNob3diYWNrZ3JvdW5kJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTJDJTVDJTIyemVyb2xpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIyZ3JpZHdpZHRoJTVDJTIyJTNBMiU3RCUyQyU1QyUyMnpheGlzJTVDJTIyJTNBJTdCJTVDJTIyYmFja2dyb3VuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnNob3diYWNrZ3JvdW5kJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTJDJTVDJTIyemVyb2xpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIyZ3JpZHdpZHRoJTVDJTIyJTNBMiU3RCU3RCUyQyU1QyUyMnNoYXBlZGVmYXVsdHMlNUMlMjIlM0ElN0IlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjIlMjMyYTNmNWYlNUMlMjIlN0QlN0QlMkMlNUMlMjJhbm5vdGF0aW9uZGVmYXVsdHMlNUMlMjIlM0ElN0IlNUMlMjJhcnJvd2NvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTJDJTVDJTIyYXJyb3doZWFkJTVDJTIyJTNBMCUyQyU1QyUyMmFycm93d2lkdGglNUMlMjIlM0ExJTdEJTJDJTVDJTIyZ2VvJTVDJTIyJTNBJTdCJTVDJTIyYmdjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGFuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyc3VidW5pdGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJzaG93bGFuZCU1QyUyMiUzQXRydWUlMkMlNUMlMjJzaG93bGFrZXMlNUMlMjIlM0F0cnVlJTJDJTVDJTIybGFrZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlN0QlMkMlNUMlMjJ0aXRsZSU1QyUyMiUzQSU3QiU1QyUyMnglNUMlMjIlM0EwLjA1JTdEJTJDJTVDJTIybWFwYm94JTVDJTIyJTNBJTdCJTVDJTIyc3R5bGUlNUMlMjIlM0ElNUMlMjJsaWdodCU1QyUyMiU3RCUyQyU1QyUyMm1hcmdpbiU1QyUyMiUzQSU3QiU1QyUyMmIlNUMlMjIlM0EwJTJDJTVDJTIybCU1QyUyMiUzQTAlMkMlNUMlMjJyJTVDJTIyJTNBMCUyQyU1QyUyMnQlNUMlMjIlM0EzMCU3RCU3RCU3RCUyQyU1QyUyMnRpdGxlJTVDJTIyJTNBJTdCJTVDJTIydGV4dCU1QyUyMiUzQSU1QyUyMlRpbWUlMjBCcmVha2Rvd24lMjAoVGVhbSUyMFNpemUlM0ElMjAxMCUyQyUyMFdlZWtzJTNBJTIwMTIpJTVDJTIyJTdEJTJDJTVDJTIyaGVpZ2h0JTVDJTIyJTNBNTAwJTdEJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTdCJTVDJTIycmVzcG9uc2l2ZSU1QyUyMiUzQSUyMHRydWUlN0QlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjApLnRoZW4oZnVuY3Rpb24oKSU3QiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlNUNudmFyJTIwZ2QlMjAlM0QlMjBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnOTdlMTJlNTgtYTI3YS00YzI3LWI1MzYtMjAyMDY3ZTJmNGI5JyklM0IlNUNudmFyJTIweCUyMCUzRCUyMG5ldyUyME11dGF0aW9uT2JzZXJ2ZXIoZnVuY3Rpb24lMjAobXV0YXRpb25zJTJDJTIwb2JzZXJ2ZXIpJTIwJTdCJTdCJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMHZhciUyMGRpc3BsYXklMjAlM0QlMjB3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZShnZCkuZGlzcGxheSUzQiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBpZiUyMCghZGlzcGxheSUyMCU3QyU3QyUyMGRpc3BsYXklMjAlM0QlM0QlM0QlMjAnbm9uZScpJTIwJTdCJTdCJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMGNvbnNvbGUubG9nKCU1QmdkJTJDJTIwJ3JlbW92ZWQhJyU1RCklM0IlNUNuJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwUGxvdGx5LnB1cmdlKGdkKSUzQiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBvYnNlcnZlci5kaXNjb25uZWN0KCklM0IlNUNuJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTdEJTdEJTVDbiU3RCU3RCklM0IlNUNuJTVDbiUyRiUyRiUyMExpc3RlbiUyMGZvciUyMHRoZSUyMHJlbW92YWwlMjBvZiUyMHRoZSUyMGZ1bGwlMjBub3RlYm9vayUyMGNlbGxzJTVDbnZhciUyMG5vdGVib29rQ29udGFpbmVyJTIwJTNEJTIwZ2QuY2xvc2VzdCgnJTIzbm90ZWJvb2stY29udGFpbmVyJyklM0IlNUNuaWYlMjAobm90ZWJvb2tDb250YWluZXIpJTIwJTdCJTdCJTVDbiUyMCUyMCUyMCUyMHgub2JzZXJ2ZShub3RlYm9va0NvbnRhaW5lciUyQyUyMCU3QmNoaWxkTGlzdCUzQSUyMHRydWUlN0QpJTNCJTVDbiU3RCU3RCU1Q24lNUNuJTJGJTJGJTIwTGlzdGVuJTIwZm9yJTIwdGhlJTIwY2xlYXJpbmclMjBvZiUyMHRoZSUyMGN1cnJlbnQlMjBvdXRwdXQlMjBjZWxsJTVDbnZhciUyMG91dHB1dEVsJTIwJTNEJTIwZ2QuY2xvc2VzdCgnLm91dHB1dCcpJTNCJTVDbmlmJTIwKG91dHB1dEVsKSUyMCU3QiU3QiU1Q24lMjAlMjAlMjAlMjB4Lm9ic2VydmUob3V0cHV0RWwlMkMlMjAlN0JjaGlsZExpc3QlM0ElMjB0cnVlJTdEKSUzQiU1Q24lN0QlN0QlNUNuJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCU3RCklMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlN0QlM0IlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0MlMkZzY3JpcHQlM0UlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0MlMkZkaXYlM0UlMjIlN0QlMkMlMjJtZXRhZGF0YSUyMiUzQSU3QiU3RCUyQyUyMm91dHB1dF90eXBlJTIyJTNBJTIyZGlzcGxheV9kYXRhJTIyJTdEJTJDJTdCJTIyZGF0YSUyMiUzQSU3QiUyMnRleHQlMkZodG1sJTIyJTNBJTIyJTNDZGl2JTNFJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTNDc2NyaXB0JTIwc3JjJTNEJTVDJTIyaHR0cHMlM0ElMkYlMkZjZG5qcy5jbG91ZGZsYXJlLmNvbSUyRmFqYXglMkZsaWJzJTJGbWF0aGpheCUyRjIuNy41JTJGTWF0aEpheC5qcyUzRmNvbmZpZyUzRFRlWC1BTVMtTU1MX1NWRyU1QyUyMiUzRSUzQyUyRnNjcmlwdCUzRSUzQ3NjcmlwdCUyMHR5cGUlM0QlNUMlMjJ0ZXh0JTJGamF2YXNjcmlwdCU1QyUyMiUzRWlmJTIwKHdpbmRvdy5NYXRoSmF4JTIwJTI2JTI2JTIwd2luZG93Lk1hdGhKYXguSHViJTIwJTI2JTI2JTIwd2luZG93Lk1hdGhKYXguSHViLkNvbmZpZyklMjAlN0J3aW5kb3cuTWF0aEpheC5IdWIuQ29uZmlnKCU3QlNWRyUzQSUyMCU3QmZvbnQlM0ElMjAlNUMlMjJTVElYLVdlYiU1QyUyMiU3RCU3RCklM0IlN0QlM0MlMkZzY3JpcHQlM0UlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0NzY3JpcHQlMjB0eXBlJTNEJTVDJTIydGV4dCUyRmphdmFzY3JpcHQlNUMlMjIlM0V3aW5kb3cuUGxvdGx5Q29uZmlnJTIwJTNEJTIwJTdCTWF0aEpheENvbmZpZyUzQSUyMCdsb2NhbCclN0QlM0IlM0MlMkZzY3JpcHQlM0UlNUNuJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTNDc2NyaXB0JTIwY2hhcnNldCUzRCU1QyUyMnV0Zi04JTVDJTIyJTIwc3JjJTNEJTVDJTIyaHR0cHMlM0ElMkYlMkZjZG4ucGxvdC5seSUyRnBsb3RseS0zLjAuMC5taW4uanMlNUMlMjIlM0UlM0MlMkZzY3JpcHQlM0UlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0NkaXYlMjBpZCUzRCU1QyUyMjc0MTY4MTM1LTg5YjQtNDk3Yy04YmY4LTllMzRiZTAzZTQwNCU1QyUyMiUyMGNsYXNzJTNEJTVDJTIycGxvdGx5LWdyYXBoLWRpdiU1QyUyMiUyMHN0eWxlJTNEJTVDJTIyaGVpZ2h0JTNBNTAwcHglM0IlMjB3aWR0aCUzQTEwMCUyNSUzQiU1QyUyMiUzRSUzQyUyRmRpdiUzRSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUzQ3NjcmlwdCUyMHR5cGUlM0QlNUMlMjJ0ZXh0JTJGamF2YXNjcmlwdCU1QyUyMiUzRSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMHdpbmRvdy5QTE9UTFlFTlYlM0R3aW5kb3cuUExPVExZRU5WJTIwJTdDJTdDJTIwJTdCJTdEJTNCJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwaWYlMjAoZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJTVDJTIyNzQxNjgxMzUtODliNC00OTdjLThiZjgtOWUzNGJlMDNlNDA0JTVDJTIyKSklMjAlN0IlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBQbG90bHkubmV3UGxvdCglMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlNUMlMjI3NDE2ODEzNS04OWI0LTQ5N2MtOGJmOC05ZTM0YmUwM2U0MDQlNUMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlNUIlN0IlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjJncmVlbiU1QyUyMiUyQyU1QyUyMndpZHRoJTVDJTIyJTNBMyU3RCUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMnNpemUlNUMlMjIlM0E4JTdEJTJDJTVDJTIybW9kZSU1QyUyMiUzQSU1QyUyMmxpbmVzJTJCbWFya2VycyU1QyUyMiUyQyU1QyUyMm5hbWUlNUMlMjIlM0ElNUMlMjJQcm9kdWN0aXZpdHklMjAlMjUlNUMlMjIlMkMlNUMlMjJ4JTVDJTIyJTNBJTVCMSUyQzIlMkMzJTJDNCUyQzUlMkM2JTJDNyUyQzglMkM5JTJDMTAlMkMxMSUyQzEyJTJDMTMlMkMxNCUyQzE1JTJDMTYlMkMxNyUyQzE4JTJDMTklMkMyMCU1RCUyQyU1QyUyMnklNUMlMjIlM0ElNUI3Ny45OTk5OTk5OTk5OTk5OSUyQzc2LjUlMkM3NS4wJTJDNzMuNSUyQzcyLjAlMkM3MC41JTJDNjkuMCUyQzY3LjUlMkM2NS45OTk5OTk5OTk5OTk5OSUyQzY0LjUlMkM2My4wJTJDNjEuNSUyQzYwLjAlMkM1OC41MDAwMDAwMDAwMDAwMSUyQzU2Ljk5OTk5OTk5OTk5OTk5JTJDNTUuNDk5OTk5OTk5OTk5OTklMkM1My45OTk5OTk5OTk5OTk5OSUyQzUyLjUlMkM1MS4wMDAwMDAwMDAwMDAwMTQlMkM0OS41JTVEJTJDJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXIlNUMlMjIlN0QlNUQlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlN0IlNUMlMjJ0ZW1wbGF0ZSU1QyUyMiUzQSU3QiU1QyUyMmRhdGElNUMlMjIlM0ElN0IlNUMlMjJoaXN0b2dyYW0yZGNvbnRvdXIlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyaGlzdG9ncmFtMmRjb250b3VyJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJjb2xvcnNjYWxlJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTdEJTVEJTJDJTVDJTIyY2hvcm9wbGV0aCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJjaG9yb3BsZXRoJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlNUQlMkMlNUMlMjJoaXN0b2dyYW0yZCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJoaXN0b2dyYW0yZCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTJDJTVDJTIyY29sb3JzY2FsZSU1QyUyMiUzQSU1QiU1QjAuMCUyQyU1QyUyMiUyMzBkMDg4NyU1QyUyMiU1RCUyQyU1QjAuMTExMTExMTExMTExMTExMSUyQyU1QyUyMiUyMzQ2MDM5ZiU1QyUyMiU1RCUyQyU1QjAuMjIyMjIyMjIyMjIyMjIyMiUyQyU1QyUyMiUyMzcyMDFhOCU1QyUyMiU1RCUyQyU1QjAuMzMzMzMzMzMzMzMzMzMzMyUyQyU1QyUyMiUyMzljMTc5ZSU1QyUyMiU1RCUyQyU1QjAuNDQ0NDQ0NDQ0NDQ0NDQ0NCUyQyU1QyUyMiUyM2JkMzc4NiU1QyUyMiU1RCUyQyU1QjAuNTU1NTU1NTU1NTU1NTU1NiUyQyU1QyUyMiUyM2Q4NTc2YiU1QyUyMiU1RCUyQyU1QjAuNjY2NjY2NjY2NjY2NjY2NiUyQyU1QyUyMiUyM2VkNzk1MyU1QyUyMiU1RCUyQyU1QjAuNzc3Nzc3Nzc3Nzc3Nzc3OCUyQyU1QyUyMiUyM2ZiOWYzYSU1QyUyMiU1RCUyQyU1QjAuODg4ODg4ODg4ODg4ODg4OCUyQyU1QyUyMiUyM2ZkY2EyNiU1QyUyMiU1RCUyQyU1QjEuMCUyQyU1QyUyMiUyM2YwZjkyMSU1QyUyMiU1RCU1RCU3RCU1RCUyQyU1QyUyMmhlYXRtYXAlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyaGVhdG1hcCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTJDJTVDJTIyY29sb3JzY2FsZSU1QyUyMiUzQSU1QiU1QjAuMCUyQyU1QyUyMiUyMzBkMDg4NyU1QyUyMiU1RCUyQyU1QjAuMTExMTExMTExMTExMTExMSUyQyU1QyUyMiUyMzQ2MDM5ZiU1QyUyMiU1RCUyQyU1QjAuMjIyMjIyMjIyMjIyMjIyMiUyQyU1QyUyMiUyMzcyMDFhOCU1QyUyMiU1RCUyQyU1QjAuMzMzMzMzMzMzMzMzMzMzMyUyQyU1QyUyMiUyMzljMTc5ZSU1QyUyMiU1RCUyQyU1QjAuNDQ0NDQ0NDQ0NDQ0NDQ0NCUyQyU1QyUyMiUyM2JkMzc4NiU1QyUyMiU1RCUyQyU1QjAuNTU1NTU1NTU1NTU1NTU1NiUyQyU1QyUyMiUyM2Q4NTc2YiU1QyUyMiU1RCUyQyU1QjAuNjY2NjY2NjY2NjY2NjY2NiUyQyU1QyUyMiUyM2VkNzk1MyU1QyUyMiU1RCUyQyU1QjAuNzc3Nzc3Nzc3Nzc3Nzc3OCUyQyU1QyUyMiUyM2ZiOWYzYSU1QyUyMiU1RCUyQyU1QjAuODg4ODg4ODg4ODg4ODg4OCUyQyU1QyUyMiUyM2ZkY2EyNiU1QyUyMiU1RCUyQyU1QjEuMCUyQyU1QyUyMiUyM2YwZjkyMSU1QyUyMiU1RCU1RCU3RCU1RCUyQyU1QyUyMmNvbnRvdXJjYXJwZXQlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyY29udG91cmNhcnBldCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTVEJTJDJTVDJTIyY29udG91ciU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJjb250b3VyJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJjb2xvcnNjYWxlJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTdEJTVEJTJDJTVDJTIyc3VyZmFjZSU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzdXJmYWNlJTVDJTIyJTJDJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJjb2xvcnNjYWxlJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTdEJTVEJTJDJTVDJTIybWVzaDNkJTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMm1lc2gzZCU1QyUyMiUyQyU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTVEJTJDJTVDJTIyc2NhdHRlciU1QyUyMiUzQSU1QiU3QiU1QyUyMmZpbGxwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyc2NhdHRlciU1QyUyMiU3RCU1RCUyQyU1QyUyMnBhcmNvb3JkcyU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJwYXJjb29yZHMlNUMlMjIlMkMlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVycG9sYXJnbCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzY2F0dGVycG9sYXJnbCU1QyUyMiUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTdEJTVEJTJDJTVDJTIyYmFyJTVDJTIyJTNBJTVCJTdCJTVDJTIyZXJyb3JfeCU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTdEJTJDJTVDJTIyZXJyb3JfeSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTdEJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIybGluZSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyd2lkdGglNUMlMjIlM0EwLjUlN0QlMkMlNUMlMjJwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyYmFyJTVDJTIyJTdEJTVEJTJDJTVDJTIyc2NhdHRlcmdlbyU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzY2F0dGVyZ2VvJTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVycG9sYXIlNUMlMjIlM0ElNUIlN0IlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyc2NhdHRlcnBvbGFyJTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJoaXN0b2dyYW0lNUMlMjIlM0ElNUIlN0IlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyaGlzdG9ncmFtJTVDJTIyJTdEJTVEJTJDJTVDJTIyc2NhdHRlcmdsJTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJnbCU1QyUyMiUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTdEJTVEJTJDJTVDJTIyc2NhdHRlcjNkJTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXIzZCU1QyUyMiUyQyU1QyUyMmxpbmUlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCUyQyU1QyUyMm1hcmtlciU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yYmFyJTVDJTIyJTNBJTdCJTVDJTIyb3V0bGluZXdpZHRoJTVDJTIyJTNBMCUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTdEJTVEJTJDJTVDJTIyc2NhdHRlcm1hcCU1QyUyMiUzQSU1QiU3QiU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJzY2F0dGVybWFwJTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVybWFwYm94JTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJtYXBib3glNUMlMjIlMkMlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCU3RCU1RCUyQyU1QyUyMnNjYXR0ZXJ0ZXJuYXJ5JTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJ0ZXJuYXJ5JTVDJTIyJTJDJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIyY29sb3JiYXIlNUMlMjIlM0ElN0IlNUMlMjJvdXRsaW5ld2lkdGglNUMlMjIlM0EwJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlN0QlNUQlMkMlNUMlMjJzY2F0dGVyY2FycGV0JTVDJTIyJTNBJTVCJTdCJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMnNjYXR0ZXJjYXJwZXQlNUMlMjIlMkMlNUMlMjJtYXJrZXIlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCU3RCU1RCUyQyU1QyUyMmNhcnBldCU1QyUyMiUzQSU1QiU3QiU1QyUyMmFheGlzJTVDJTIyJTNBJTdCJTVDJTIyZW5kbGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMm1pbm9yZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJzdGFydGxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMiUyMzJhM2Y1ZiU1QyUyMiU3RCUyQyU1QyUyMmJheGlzJTVDJTIyJTNBJTdCJTVDJTIyZW5kbGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMm1pbm9yZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJzdGFydGxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMiUyMzJhM2Y1ZiU1QyUyMiU3RCUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJjYXJwZXQlNUMlMjIlN0QlNUQlMkMlNUMlMjJ0YWJsZSU1QyUyMiUzQSU1QiU3QiU1QyUyMmNlbGxzJTVDJTIyJTNBJTdCJTVDJTIyZmlsbCU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRUJGMEY4JTVDJTIyJTdEJTJDJTVDJTIybGluZSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlN0QlN0QlMkMlNUMlMjJoZWFkZXIlNUMlMjIlM0ElN0IlNUMlMjJmaWxsJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjIlMjNDOEQ0RTMlNUMlMjIlN0QlMkMlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiU3RCU3RCUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJ0YWJsZSU1QyUyMiU3RCU1RCUyQyU1QyUyMmJhcnBvbGFyJTVDJTIyJTNBJTVCJTdCJTVDJTIybWFya2VyJTVDJTIyJTNBJTdCJTVDJTIybGluZSU1QyUyMiUzQSU3QiU1QyUyMmNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyd2lkdGglNUMlMjIlM0EwLjUlN0QlMkMlNUMlMjJwYXR0ZXJuJTVDJTIyJTNBJTdCJTVDJTIyZmlsbG1vZGUlNUMlMjIlM0ElNUMlMjJvdmVybGF5JTVDJTIyJTJDJTVDJTIyc2l6ZSU1QyUyMiUzQTEwJTJDJTVDJTIyc29saWRpdHklNUMlMjIlM0EwLjIlN0QlN0QlMkMlNUMlMjJ0eXBlJTVDJTIyJTNBJTVDJTIyYmFycG9sYXIlNUMlMjIlN0QlNUQlMkMlNUMlMjJwaWUlNUMlMjIlM0ElNUIlN0IlNUMlMjJhdXRvbWFyZ2luJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnR5cGUlNUMlMjIlM0ElNUMlMjJwaWUlNUMlMjIlN0QlNUQlN0QlMkMlNUMlMjJsYXlvdXQlNUMlMjIlM0ElN0IlNUMlMjJhdXRvdHlwZW51bWJlcnMlNUMlMjIlM0ElNUMlMjJzdHJpY3QlNUMlMjIlMkMlNUMlMjJjb2xvcndheSU1QyUyMiUzQSU1QiU1QyUyMiUyMzYzNmVmYSU1QyUyMiUyQyU1QyUyMiUyM0VGNTUzQiU1QyUyMiUyQyU1QyUyMiUyMzAwY2M5NiU1QyUyMiUyQyU1QyUyMiUyM2FiNjNmYSU1QyUyMiUyQyU1QyUyMiUyM0ZGQTE1QSU1QyUyMiUyQyU1QyUyMiUyMzE5ZDNmMyU1QyUyMiUyQyU1QyUyMiUyM0ZGNjY5MiU1QyUyMiUyQyU1QyUyMiUyM0I2RTg4MCU1QyUyMiUyQyU1QyUyMiUyM0ZGOTdGRiU1QyUyMiUyQyU1QyUyMiUyM0ZFQ0I1MiU1QyUyMiU1RCUyQyU1QyUyMmZvbnQlNUMlMjIlM0ElN0IlNUMlMjJjb2xvciU1QyUyMiUzQSU1QyUyMiUyMzJhM2Y1ZiU1QyUyMiU3RCUyQyU1QyUyMmhvdmVybW9kZSU1QyUyMiUzQSU1QyUyMmNsb3Nlc3QlNUMlMjIlMkMlNUMlMjJob3ZlcmxhYmVsJTVDJTIyJTNBJTdCJTVDJTIyYWxpZ24lNUMlMjIlM0ElNUMlMjJsZWZ0JTVDJTIyJTdEJTJDJTVDJTIycGFwZXJfYmdjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIycGxvdF9iZ2NvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIycG9sYXIlNUMlMjIlM0ElN0IlNUMlMjJiZ2NvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyYW5ndWxhcmF4aXMlNUMlMjIlM0ElN0IlNUMlMjJncmlkY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlMkMlNUMlMjJyYWRpYWxheGlzJTVDJTIyJTNBJTdCJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTdEJTJDJTVDJTIydGVybmFyeSU1QyUyMiUzQSU3QiU1QyUyMmJnY29sb3IlNUMlMjIlM0ElNUMlMjIlMjNFNUVDRjYlNUMlMjIlMkMlNUMlMjJhYXhpcyU1QyUyMiUzQSU3QiU1QyUyMmdyaWRjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCUyQyU1QyUyMmJheGlzJTVDJTIyJTNBJTdCJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTdEJTJDJTVDJTIyY2F4aXMlNUMlMjIlM0ElN0IlNUMlMjJncmlkY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmxpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIydGlja3MlNUMlMjIlM0ElNUMlMjIlNUMlMjIlN0QlN0QlMkMlNUMlMjJjb2xvcmF4aXMlNUMlMjIlM0ElN0IlNUMlMjJjb2xvcmJhciU1QyUyMiUzQSU3QiU1QyUyMm91dGxpbmV3aWR0aCU1QyUyMiUzQTAlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiU3RCU3RCUyQyU1QyUyMmNvbG9yc2NhbGUlNUMlMjIlM0ElN0IlNUMlMjJzZXF1ZW50aWFsJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTJDJTVDJTIyc2VxdWVudGlhbG1pbnVzJTVDJTIyJTNBJTVCJTVCMC4wJTJDJTVDJTIyJTIzMGQwODg3JTVDJTIyJTVEJTJDJTVCMC4xMTExMTExMTExMTExMTExJTJDJTVDJTIyJTIzNDYwMzlmJTVDJTIyJTVEJTJDJTVCMC4yMjIyMjIyMjIyMjIyMjIyJTJDJTVDJTIyJTIzNzIwMWE4JTVDJTIyJTVEJTJDJTVCMC4zMzMzMzMzMzMzMzMzMzMzJTJDJTVDJTIyJTIzOWMxNzllJTVDJTIyJTVEJTJDJTVCMC40NDQ0NDQ0NDQ0NDQ0NDQ0JTJDJTVDJTIyJTIzYmQzNzg2JTVDJTIyJTVEJTJDJTVCMC41NTU1NTU1NTU1NTU1NTU2JTJDJTVDJTIyJTIzZDg1NzZiJTVDJTIyJTVEJTJDJTVCMC42NjY2NjY2NjY2NjY2NjY2JTJDJTVDJTIyJTIzZWQ3OTUzJTVDJTIyJTVEJTJDJTVCMC43Nzc3Nzc3Nzc3Nzc3Nzc4JTJDJTVDJTIyJTIzZmI5ZjNhJTVDJTIyJTVEJTJDJTVCMC44ODg4ODg4ODg4ODg4ODg4JTJDJTVDJTIyJTIzZmRjYTI2JTVDJTIyJTVEJTJDJTVCMS4wJTJDJTVDJTIyJTIzZjBmOTIxJTVDJTIyJTVEJTVEJTJDJTVDJTIyZGl2ZXJnaW5nJTVDJTIyJTNBJTVCJTVCMCUyQyU1QyUyMiUyMzhlMDE1MiU1QyUyMiU1RCUyQyU1QjAuMSUyQyU1QyUyMiUyM2M1MWI3ZCU1QyUyMiU1RCUyQyU1QjAuMiUyQyU1QyUyMiUyM2RlNzdhZSU1QyUyMiU1RCUyQyU1QjAuMyUyQyU1QyUyMiUyM2YxYjZkYSU1QyUyMiU1RCUyQyU1QjAuNCUyQyU1QyUyMiUyM2ZkZTBlZiU1QyUyMiU1RCUyQyU1QjAuNSUyQyU1QyUyMiUyM2Y3ZjdmNyU1QyUyMiU1RCUyQyU1QjAuNiUyQyU1QyUyMiUyM2U2ZjVkMCU1QyUyMiU1RCUyQyU1QjAuNyUyQyU1QyUyMiUyM2I4ZTE4NiU1QyUyMiU1RCUyQyU1QjAuOCUyQyU1QyUyMiUyMzdmYmM0MSU1QyUyMiU1RCUyQyU1QjAuOSUyQyU1QyUyMiUyMzRkOTIyMSU1QyUyMiU1RCUyQyU1QjElMkMlNUMlMjIlMjMyNzY0MTklNUMlMjIlNUQlNUQlN0QlMkMlNUMlMjJ4YXhpcyU1QyUyMiUzQSU3QiU1QyUyMmdyaWRjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiUyQyU1QyUyMnRpdGxlJTVDJTIyJTNBJTdCJTVDJTIyc3RhbmRvZmYlNUMlMjIlM0ExNSU3RCUyQyU1QyUyMnplcm9saW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmF1dG9tYXJnaW4lNUMlMjIlM0F0cnVlJTJDJTVDJTIyemVyb2xpbmV3aWR0aCU1QyUyMiUzQTIlN0QlMkMlNUMlMjJ5YXhpcyU1QyUyMiUzQSU3QiU1QyUyMmdyaWRjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGluZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJ0aWNrcyU1QyUyMiUzQSU1QyUyMiU1QyUyMiUyQyU1QyUyMnRpdGxlJTVDJTIyJTNBJTdCJTVDJTIyc3RhbmRvZmYlNUMlMjIlM0ExNSU3RCUyQyU1QyUyMnplcm9saW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMmF1dG9tYXJnaW4lNUMlMjIlM0F0cnVlJTJDJTVDJTIyemVyb2xpbmV3aWR0aCU1QyUyMiUzQTIlN0QlMkMlNUMlMjJzY2VuZSU1QyUyMiUzQSU3QiU1QyUyMnhheGlzJTVDJTIyJTNBJTdCJTVDJTIyYmFja2dyb3VuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnNob3diYWNrZ3JvdW5kJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTJDJTVDJTIyemVyb2xpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIyZ3JpZHdpZHRoJTVDJTIyJTNBMiU3RCUyQyU1QyUyMnlheGlzJTVDJTIyJTNBJTdCJTVDJTIyYmFja2dyb3VuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnNob3diYWNrZ3JvdW5kJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTJDJTVDJTIyemVyb2xpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIyZ3JpZHdpZHRoJTVDJTIyJTNBMiU3RCUyQyU1QyUyMnpheGlzJTVDJTIyJTNBJTdCJTVDJTIyYmFja2dyb3VuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyZ3JpZGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJsaW5lY29sb3IlNUMlMjIlM0ElNUMlMjJ3aGl0ZSU1QyUyMiUyQyU1QyUyMnNob3diYWNrZ3JvdW5kJTVDJTIyJTNBdHJ1ZSUyQyU1QyUyMnRpY2tzJTVDJTIyJTNBJTVDJTIyJTVDJTIyJTJDJTVDJTIyemVyb2xpbmVjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIyZ3JpZHdpZHRoJTVDJTIyJTNBMiU3RCU3RCUyQyU1QyUyMnNoYXBlZGVmYXVsdHMlNUMlMjIlM0ElN0IlNUMlMjJsaW5lJTVDJTIyJTNBJTdCJTVDJTIyY29sb3IlNUMlMjIlM0ElNUMlMjIlMjMyYTNmNWYlNUMlMjIlN0QlN0QlMkMlNUMlMjJhbm5vdGF0aW9uZGVmYXVsdHMlNUMlMjIlM0ElN0IlNUMlMjJhcnJvd2NvbG9yJTVDJTIyJTNBJTVDJTIyJTIzMmEzZjVmJTVDJTIyJTJDJTVDJTIyYXJyb3doZWFkJTVDJTIyJTNBMCUyQyU1QyUyMmFycm93d2lkdGglNUMlMjIlM0ExJTdEJTJDJTVDJTIyZ2VvJTVDJTIyJTNBJTdCJTVDJTIyYmdjb2xvciU1QyUyMiUzQSU1QyUyMndoaXRlJTVDJTIyJTJDJTVDJTIybGFuZGNvbG9yJTVDJTIyJTNBJTVDJTIyJTIzRTVFQ0Y2JTVDJTIyJTJDJTVDJTIyc3VidW5pdGNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlMkMlNUMlMjJzaG93bGFuZCU1QyUyMiUzQXRydWUlMkMlNUMlMjJzaG93bGFrZXMlNUMlMjIlM0F0cnVlJTJDJTVDJTIybGFrZWNvbG9yJTVDJTIyJTNBJTVDJTIyd2hpdGUlNUMlMjIlN0QlMkMlNUMlMjJ0aXRsZSU1QyUyMiUzQSU3QiU1QyUyMnglNUMlMjIlM0EwLjA1JTdEJTJDJTVDJTIybWFwYm94JTVDJTIyJTNBJTdCJTVDJTIyc3R5bGUlNUMlMjIlM0ElNUMlMjJsaWdodCU1QyUyMiU3RCUyQyU1QyUyMm1hcmdpbiU1QyUyMiUzQSU3QiU1QyUyMmIlNUMlMjIlM0EwJTJDJTVDJTIybCU1QyUyMiUzQTAlMkMlNUMlMjJyJTVDJTIyJTNBMCUyQyU1QyUyMnQlNUMlMjIlM0EzMCU3RCU3RCU3RCUyQyU1QyUyMnNoYXBlcyU1QyUyMiUzQSU1QiU3QiU1QyUyMmxpbmUlNUMlMjIlM0ElN0IlNUMlMjJjb2xvciU1QyUyMiUzQSU1QyUyMnJlZCU1QyUyMiUyQyU1QyUyMmRhc2glNUMlMjIlM0ElNUMlMjJkYXNoJTVDJTIyJTJDJTVDJTIyd2lkdGglNUMlMjIlM0EyJTdEJTJDJTVDJTIydHlwZSU1QyUyMiUzQSU1QyUyMmxpbmUlNUMlMjIlMkMlNUMlMjJ4MCU1QyUyMiUzQTEwJTJDJTVDJTIyeDElNUMlMjIlM0ExMCUyQyU1QyUyMnkwJTVDJTIyJTNBMCUyQyU1QyUyMnkxJTVDJTIyJTNBMTAwJTdEJTVEJTJDJTVDJTIyeWF4aXMlNUMlMjIlM0ElN0IlNUMlMjJ0aXRsZSU1QyUyMiUzQSU3QiU1QyUyMnRleHQlNUMlMjIlM0ElNUMlMjJQcm9kdWN0aXZpdHklMjBQZXJjZW50YWdlJTVDJTIyJTdEJTJDJTVDJTIycmFuZ2UlNUMlMjIlM0ElNUIwJTJDMTAwJTVEJTdEJTJDJTVDJTIydGl0bGUlNUMlMjIlM0ElN0IlNUMlMjJ0ZXh0JTVDJTIyJTNBJTVDJTIyUHJvZHVjdGl2aXR5JTIwUGVyY2VudGFnZSUyMHZzJTIwVGVhbSUyMFNpemUlNUMlMjIlN0QlMkMlNUMlMjJ4YXhpcyU1QyUyMiUzQSU3QiU1QyUyMnRpdGxlJTVDJTIyJTNBJTdCJTVDJTIydGV4dCU1QyUyMiUzQSU1QyUyMlRlYW0lMjBTaXplJTVDJTIyJTdEJTdEJTJDJTVDJTIyaGVpZ2h0JTVDJTIyJTNBNTAwJTdEJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTdCJTVDJTIycmVzcG9uc2l2ZSU1QyUyMiUzQSUyMHRydWUlN0QlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjApLnRoZW4oZnVuY3Rpb24oKSU3QiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlNUNudmFyJTIwZ2QlMjAlM0QlMjBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnNzQxNjgxMzUtODliNC00OTdjLThiZjgtOWUzNGJlMDNlNDA0JyklM0IlNUNudmFyJTIweCUyMCUzRCUyMG5ldyUyME11dGF0aW9uT2JzZXJ2ZXIoZnVuY3Rpb24lMjAobXV0YXRpb25zJTJDJTIwb2JzZXJ2ZXIpJTIwJTdCJTdCJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMHZhciUyMGRpc3BsYXklMjAlM0QlMjB3aW5kb3cuZ2V0Q29tcHV0ZWRTdHlsZShnZCkuZGlzcGxheSUzQiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBpZiUyMCghZGlzcGxheSUyMCU3QyU3QyUyMGRpc3BsYXklMjAlM0QlM0QlM0QlMjAnbm9uZScpJTIwJTdCJTdCJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMGNvbnNvbGUubG9nKCU1QmdkJTJDJTIwJ3JlbW92ZWQhJyU1RCklM0IlNUNuJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwUGxvdGx5LnB1cmdlKGdkKSUzQiU1Q24lMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBvYnNlcnZlci5kaXNjb25uZWN0KCklM0IlNUNuJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTdEJTdEJTVDbiU3RCU3RCklM0IlNUNuJTVDbiUyRiUyRiUyMExpc3RlbiUyMGZvciUyMHRoZSUyMHJlbW92YWwlMjBvZiUyMHRoZSUyMGZ1bGwlMjBub3RlYm9vayUyMGNlbGxzJTVDbnZhciUyMG5vdGVib29rQ29udGFpbmVyJTIwJTNEJTIwZ2QuY2xvc2VzdCgnJTIzbm90ZWJvb2stY29udGFpbmVyJyklM0IlNUNuaWYlMjAobm90ZWJvb2tDb250YWluZXIpJTIwJTdCJTdCJTVDbiUyMCUyMCUyMCUyMHgub2JzZXJ2ZShub3RlYm9va0NvbnRhaW5lciUyQyUyMCU3QmNoaWxkTGlzdCUzQSUyMHRydWUlN0QpJTNCJTVDbiU3RCU3RCU1Q24lNUNuJTJGJTJGJTIwTGlzdGVuJTIwZm9yJTIwdGhlJTIwY2xlYXJpbmclMjBvZiUyMHRoZSUyMGN1cnJlbnQlMjBvdXRwdXQlMjBjZWxsJTVDbnZhciUyMG91dHB1dEVsJTIwJTNEJTIwZ2QuY2xvc2VzdCgnLm91dHB1dCcpJTNCJTVDbmlmJTIwKG91dHB1dEVsKSUyMCU3QiU3QiU1Q24lMjAlMjAlMjAlMjB4Lm9ic2VydmUob3V0cHV0RWwlMkMlMjAlN0JjaGlsZExpc3QlM0ElMjB0cnVlJTdEKSUzQiU1Q24lN0QlN0QlNUNuJTVDbiUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCU3RCklMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlN0QlM0IlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0MlMkZzY3JpcHQlM0UlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlM0MlMkZkaXYlM0UlMjIlN0QlMkMlMjJtZXRhZGF0YSUyMiUzQSU3QiU3RCUyQyUyMm91dHB1dF90eXBlJTIyJTNBJTIyZGlzcGxheV9kYXRhJTIyJTdEJTJDJTdCJTIybmFtZSUyMiUzQSUyMnN0ZG91dCUyMiUyQyUyMm91dHB1dF90eXBlJTIyJTNBJTIyc3RyZWFtJTIyJTJDJTIydGV4dCUyMiUzQSUyMiU1Q24tLS0lMjBTdW1tYXJ5JTIwZm9yJTIwVGVhbSUyMFNpemUlM0ElMjAxMCUyQyUyMFByb2plY3QlMjBEdXJhdGlvbiUzQSUyMDEyJTIwd2Vla3MlMjAtLS0lNUNuVG90YWwlMjBBdmFpbGFibGUlMjBIb3VycyUzQSUyMDQ4MDAlNUNuUHJvZHVjdGl2ZSUyMEhvdXJzJTNBJTIwMzA5NiUyMCg2NC41JTI1KSU1Q25Ub3RhbCUyMFVucHJvZHVjdGl2ZSUyMEhvdXJzJTNBJTIwMTcwNCUyMCgzNS41JTI1KSU1Q24lNUNuQnJlYWtkb3duJTIwb2YlMjBVbnByb2R1Y3RpdmUlMjBIb3VycyUzQSU1Q24lMjAlMjAtJTIwQ29udGV4dCUyMFN3aXRjaGluZyUzQSUyMDI0MCUyMGhvdXJzJTIwKDUuMCUyNSklNUNuJTIwJTIwLSUyMENvbW11bmljYXRpb24lM0ElMjA2NDglMjBob3VycyUyMCgxMy41JTI1KSU1Q24lMjAlMjAtJTIwTWVldGluZ3MlM0ElMjA0ODAlMjBob3VycyUyMCgxMC4wJTI1KSU1Q24lMjAlMjAtJTIwSW50ZWdyYXRpb24lM0ElMjA5NiUyMGhvdXJzJTIwKDIuMCUyNSklNUNuJTIwJTIwLSUyME9uYm9hcmRpbmclM0ElMjAyNDAlMjBob3VycyUyMCg1LjAlMjUpJTVDbiU1Q25PcHRpbWFsJTIwVGVhbSUyMFNpemUlMjBmb3IlMjB0aGlzJTIwcHJvamVjdCUzQSUyMDElMjAoUHJvZHVjdGl2aXR5JTNBJTIwNzguMCUyNSklNUNuJTIyJTdEJTVEJTJDJTIydGFiYmFibGUlMjIlM0FudWxsJTJDJTIydG9vbHRpcCUyMiUzQW51bGwlN0QlN0QlMkMlMjI4OGFiNjQ5MjAwNjE0MThkODVhODVmZTEyNjE1MzcyNSUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlck1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfZG9tX2NsYXNzZXMlMjIlM0ElNUIlNUQlMkMlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyRmxvYXRTbGlkZXJNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlclZpZXclMjIlMkMlMjJiZWhhdmlvciUyMiUzQSUyMmRyYWctdGFwJTIyJTJDJTIyY29udGludW91c191cGRhdGUlMjIlM0F0cnVlJTJDJTIyZGVzY3JpcHRpb24lMjIlM0ElMjJDb21tdW5pY2F0aW9uJTIwT3ZlcmhlYWQlM0ElMjIlMkMlMjJkZXNjcmlwdGlvbl9hbGxvd19odG1sJTIyJTNBZmFsc2UlMkMlMjJkaXNhYmxlZCUyMiUzQWZhbHNlJTJDJTIybGF5b3V0JTIyJTNBJTIySVBZX01PREVMXzRiNTRhMTQ1NDFmZjRiODliMWEwMTY4YzNjZDNhMjFmJTIyJTJDJTIybWF4JTIyJTNBMC4xJTJDJTIybWluJTIyJTNBMCUyQyUyMm9yaWVudGF0aW9uJTIyJTNBJTIyaG9yaXpvbnRhbCUyMiUyQyUyMnJlYWRvdXQlMjIlM0F0cnVlJTJDJTIycmVhZG91dF9mb3JtYXQlMjIlM0ElMjIuMmYlMjIlMkMlMjJzdGVwJTIyJTNBMC4wMDUlMkMlMjJzdHlsZSUyMiUzQSUyMklQWV9NT0RFTF80MTRmYjI5ZTkyNzM0YmJlOWRmYmM1NTk2NmRhY2EyYSUyMiUyQyUyMnRhYmJhYmxlJTIyJTNBbnVsbCUyQyUyMnRvb2x0aXAlMjIlM0FudWxsJTJDJTIydmFsdWUlMjIlM0EwLjAzJTdEJTdEJTJDJTIyOWI4MGExNGQyNDFhNDZlY2IzMjAwMzE5MzBhODc0NWYlMjIlM0ElN0IlMjJtb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZjb250cm9scyUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMnN0YXRlJTIyJTNBJTdCJTIyX21vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMlNsaWRlclN0eWxlTW9kZWwlMjIlMkMlMjJfdmlld19jb3VudCUyMiUzQW51bGwlMkMlMjJfdmlld19tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZiYXNlJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJTdHlsZVZpZXclMjIlMkMlMjJkZXNjcmlwdGlvbl93aWR0aCUyMiUzQSUyMiUyMiUyQyUyMmhhbmRsZV9jb2xvciUyMiUzQW51bGwlN0QlN0QlMkMlMjJhMWQ5ZGZiOGM4OTQ0NTNlODQ1MjliMTc1ZDM2NmY0OCUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJTbGlkZXJTdHlsZU1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyU2xpZGVyU3R5bGVNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmJhc2UlMjIlMkMlMjJfdmlld19tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIyX3ZpZXdfbmFtZSUyMiUzQSUyMlN0eWxlVmlldyUyMiUyQyUyMmRlc2NyaXB0aW9uX3dpZHRoJTIyJTNBJTIyJTIyJTJDJTIyaGFuZGxlX2NvbG9yJTIyJTNBbnVsbCU3RCU3RCUyQyUyMmI0Y2UxNjBhMzI1MDRkNWNiZDdlNWQ3MzVhOWRhNjIzJTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJtb2RlbF9tb2R1bGVfdmVyc2lvbiUyMiUzQSUyMjIuMC4wJTIyJTJDJTIybW9kZWxfbmFtZSUyMiUzQSUyMkludFNsaWRlck1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfZG9tX2NsYXNzZXMlMjIlM0ElNUIlNUQlMkMlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIySW50U2xpZGVyTW9kZWwlMjIlMkMlMjJfdmlld19jb3VudCUyMiUzQW51bGwlMkMlMjJfdmlld19tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZjb250cm9scyUyMiUyQyUyMl92aWV3X21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfdmlld19uYW1lJTIyJTNBJTIySW50U2xpZGVyVmlldyUyMiUyQyUyMmJlaGF2aW9yJTIyJTNBJTIyZHJhZy10YXAlMjIlMkMlMjJjb250aW51b3VzX3VwZGF0ZSUyMiUzQXRydWUlMkMlMjJkZXNjcmlwdGlvbiUyMiUzQSUyMlByb2plY3QlMjBXZWVrcyUzQSUyMiUyQyUyMmRlc2NyaXB0aW9uX2FsbG93X2h0bWwlMjIlM0FmYWxzZSUyQyUyMmRpc2FibGVkJTIyJTNBZmFsc2UlMkMlMjJsYXlvdXQlMjIlM0ElMjJJUFlfTU9ERUxfNGI1NGExNDU0MWZmNGI4OWIxYTAxNjhjM2NkM2EyMWYlMjIlMkMlMjJtYXglMjIlM0E1MiUyQyUyMm1pbiUyMiUzQTElMkMlMjJvcmllbnRhdGlvbiUyMiUzQSUyMmhvcml6b250YWwlMjIlMkMlMjJyZWFkb3V0JTIyJTNBdHJ1ZSUyQyUyMnJlYWRvdXRfZm9ybWF0JTIyJTNBJTIyZCUyMiUyQyUyMnN0ZXAlMjIlM0ExJTJDJTIyc3R5bGUlMjIlM0ElMjJJUFlfTU9ERUxfMDc5YmI4YmFhMWU4NDlmM2I1Y2UwOWM3YmQ0YjllZDUlMjIlMkMlMjJ0YWJiYWJsZSUyMiUzQW51bGwlMkMlMjJ0b29sdGlwJTIyJTNBbnVsbCUyQyUyMnZhbHVlJTIyJTNBMTIlN0QlN0QlMkMlMjJiNmFkNzZlZjI0MWQ0M2MxOGI0MWYyODRhNjdiMDg4NCUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlck1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfZG9tX2NsYXNzZXMlMjIlM0ElNUIlNUQlMkMlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyRmxvYXRTbGlkZXJNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlclZpZXclMjIlMkMlMjJiZWhhdmlvciUyMiUzQSUyMmRyYWctdGFwJTIyJTJDJTIyY29udGludW91c191cGRhdGUlMjIlM0F0cnVlJTJDJTIyZGVzY3JpcHRpb24lMjIlM0ElMjJPbmJvYXJkaW5nJTIwT3ZlcmhlYWQlM0ElMjIlMkMlMjJkZXNjcmlwdGlvbl9hbGxvd19odG1sJTIyJTNBZmFsc2UlMkMlMjJkaXNhYmxlZCUyMiUzQWZhbHNlJTJDJTIybGF5b3V0JTIyJTNBJTIySVBZX01PREVMXzRiNTRhMTQ1NDFmZjRiODliMWEwMTY4YzNjZDNhMjFmJTIyJTJDJTIybWF4JTIyJTNBMC41JTJDJTIybWluJTIyJTNBMCUyQyUyMm9yaWVudGF0aW9uJTIyJTNBJTIyaG9yaXpvbnRhbCUyMiUyQyUyMnJlYWRvdXQlMjIlM0F0cnVlJTJDJTIycmVhZG91dF9mb3JtYXQlMjIlM0ElMjIuMmYlMjIlMkMlMjJzdGVwJTIyJTNBMC4wNSUyQyUyMnN0eWxlJTIyJTNBJTIySVBZX01PREVMXzM1NDQ0MGZlOTNhYzQ0YjU4NWM0ZmU4YzNjMjg2ZDU2JTIyJTJDJTIydGFiYmFibGUlMjIlM0FudWxsJTJDJTIydG9vbHRpcCUyMiUzQW51bGwlMkMlMjJ2YWx1ZSUyMiUzQTAuMTUlN0QlN0QlMkMlMjJjOWQ1YzgzNjBmZDY0N2ZhYTY5YWIxNjZlMmFjZjU2NCUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlck1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfZG9tX2NsYXNzZXMlMjIlM0ElNUIlNUQlMkMlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyRmxvYXRTbGlkZXJNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlclZpZXclMjIlMkMlMjJiZWhhdmlvciUyMiUzQSUyMmRyYWctdGFwJTIyJTJDJTIyY29udGludW91c191cGRhdGUlMjIlM0F0cnVlJTJDJTIyZGVzY3JpcHRpb24lMjIlM0ElMjJDb250ZXh0JTIwU3dpdGNoaW5nJTIwT3ZlcmhlYWQlM0ElMjIlMkMlMjJkZXNjcmlwdGlvbl9hbGxvd19odG1sJTIyJTNBZmFsc2UlMkMlMjJkaXNhYmxlZCUyMiUzQWZhbHNlJTJDJTIybGF5b3V0JTIyJTNBJTIySVBZX01PREVMXzRiNTRhMTQ1NDFmZjRiODliMWEwMTY4YzNjZDNhMjFmJTIyJTJDJTIybWF4JTIyJTNBMC4yJTJDJTIybWluJTIyJTNBMCUyQyUyMm9yaWVudGF0aW9uJTIyJTNBJTIyaG9yaXpvbnRhbCUyMiUyQyUyMnJlYWRvdXQlMjIlM0F0cnVlJTJDJTIycmVhZG91dF9mb3JtYXQlMjIlM0ElMjIuMmYlMjIlMkMlMjJzdGVwJTIyJTNBMC4wMSUyQyUyMnN0eWxlJTIyJTNBJTIySVBZX01PREVMXzczMWJiOWQ3ZjUwOTQxZmQ5NDdkZWJiNzgyNWQ4ODZmJTIyJTJDJTIydGFiYmFibGUlMjIlM0FudWxsJTJDJTIydG9vbHRpcCUyMiUzQW51bGwlMkMlMjJ2YWx1ZSUyMiUzQTAuMDUlN0QlN0QlMkMlMjJjYWI2Njc1MDY5Mzc0YTQ1YmRiMjk4MTcyOWM0MTk5ZSUyMiUzQSU3QiUyMm1vZGVsX21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIybW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMm1vZGVsX25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlck1vZGVsJTIyJTJDJTIyc3RhdGUlMjIlM0ElN0IlMjJfZG9tX2NsYXNzZXMlMjIlM0ElNUIlNUQlMkMlMjJfbW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGY29udHJvbHMlMjIlMkMlMjJfbW9kZWxfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl9tb2RlbF9uYW1lJTIyJTNBJTIyRmxvYXRTbGlkZXJNb2RlbCUyMiUyQyUyMl92aWV3X2NvdW50JTIyJTNBbnVsbCUyQyUyMl92aWV3X21vZHVsZSUyMiUzQSUyMiU0MGp1cHl0ZXItd2lkZ2V0cyUyRmNvbnRyb2xzJTIyJTJDJTIyX3ZpZXdfbW9kdWxlX3ZlcnNpb24lMjIlM0ElMjIyLjAuMCUyMiUyQyUyMl92aWV3X25hbWUlMjIlM0ElMjJGbG9hdFNsaWRlclZpZXclMjIlMkMlMjJiZWhhdmlvciUyMiUzQSUyMmRyYWctdGFwJTIyJTJDJTIyY29udGludW91c191cGRhdGUlMjIlM0F0cnVlJTJDJTIyZGVzY3JpcHRpb24lMjIlM0ElMjJJbnRlZ3JhdGlvbiUyME92ZXJoZWFkJTNBJTIyJTJDJTIyZGVzY3JpcHRpb25fYWxsb3dfaHRtbCUyMiUzQWZhbHNlJTJDJTIyZGlzYWJsZWQlMjIlM0FmYWxzZSUyQyUyMmxheW91dCUyMiUzQSUyMklQWV9NT0RFTF80YjU0YTE0NTQxZmY0Yjg5YjFhMDE2OGMzY2QzYTIxZiUyMiUyQyUyMm1heCUyMiUzQTAuMSUyQyUyMm1pbiUyMiUzQTAlMkMlMjJvcmllbnRhdGlvbiUyMiUzQSUyMmhvcml6b250YWwlMjIlMkMlMjJyZWFkb3V0JTIyJTNBdHJ1ZSUyQyUyMnJlYWRvdXRfZm9ybWF0JTIyJTNBJTIyLjJmJTIyJTJDJTIyc3RlcCUyMiUzQTAuMDA1JTJDJTIyc3R5bGUlMjIlM0ElMjJJUFlfTU9ERUxfOWI4MGExNGQyNDFhNDZlY2IzMjAwMzE5MzBhODc0NWYlMjIlMkMlMjJ0YWJiYWJsZSUyMiUzQW51bGwlMkMlMjJ0b29sdGlwJTIyJTNBbnVsbCUyQyUyMnZhbHVlJTIyJTNBMC4wMiU3RCU3RCUyQyUyMmYwYjJhMmJhZTRhMTQ1YTk4ZmIwMjgyYTgwMzZlOTU2JTIyJTNBJTdCJTIybW9kZWxfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGYmFzZSUyMiUyQyUyMm1vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJtb2RlbF9uYW1lJTIyJTNBJTIyTGF5b3V0TW9kZWwlMjIlMkMlMjJzdGF0ZSUyMiUzQSU3QiUyMl9tb2RlbF9tb2R1bGUlMjIlM0ElMjIlNDBqdXB5dGVyLXdpZGdldHMlMkZiYXNlJTIyJTJDJTIyX21vZGVsX21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfbW9kZWxfbmFtZSUyMiUzQSUyMkxheW91dE1vZGVsJTIyJTJDJTIyX3ZpZXdfY291bnQlMjIlM0FudWxsJTJDJTIyX3ZpZXdfbW9kdWxlJTIyJTNBJTIyJTQwanVweXRlci13aWRnZXRzJTJGYmFzZSUyMiUyQyUyMl92aWV3X21vZHVsZV92ZXJzaW9uJTIyJTNBJTIyMi4wLjAlMjIlMkMlMjJfdmlld19uYW1lJTIyJTNBJTIyTGF5b3V0VmlldyUyMiUyQyUyMmFsaWduX2NvbnRlbnQlMjIlM0FudWxsJTJDJTIyYWxpZ25faXRlbXMlMjIlM0FudWxsJTJDJTIyYWxpZ25fc2VsZiUyMiUzQW51bGwlMkMlMjJib3JkZXJfYm90dG9tJTIyJTNBbnVsbCUyQyUyMmJvcmRlcl9sZWZ0JTIyJTNBbnVsbCUyQyUyMmJvcmRlcl9yaWdodCUyMiUzQW51bGwlMkMlMjJib3JkZXJfdG9wJTIyJTNBbnVsbCUyQyUyMmJvdHRvbSUyMiUzQW51bGwlMkMlMjJkaXNwbGF5JTIyJTNBbnVsbCUyQyUyMmZsZXglMjIlM0FudWxsJTJDJTIyZmxleF9mbG93JTIyJTNBbnVsbCUyQyUyMmdyaWRfYXJlYSUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fY29sdW1ucyUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fZmxvdyUyMiUzQW51bGwlMkMlMjJncmlkX2F1dG9fcm93cyUyMiUzQW51bGwlMkMlMjJncmlkX2NvbHVtbiUyMiUzQW51bGwlMkMlMjJncmlkX2dhcCUyMiUzQW51bGwlMkMlMjJncmlkX3JvdyUyMiUzQW51bGwlMkMlMjJncmlkX3RlbXBsYXRlX2FyZWFzJTIyJTNBbnVsbCUyQyUyMmdyaWRfdGVtcGxhdGVfY29sdW1ucyUyMiUzQW51bGwlMkMlMjJncmlkX3RlbXBsYXRlX3Jvd3MlMjIlM0FudWxsJTJDJTIyaGVpZ2h0JTIyJTNBbnVsbCUyQyUyMmp1c3RpZnlfY29udGVudCUyMiUzQW51bGwlMkMlMjJqdXN0aWZ5X2l0ZW1zJTIyJTNBbnVsbCUyQyUyMmxlZnQlMjIlM0FudWxsJTJDJTIybWFyZ2luJTIyJTNBbnVsbCUyQyUyMm1heF9oZWlnaHQlMjIlM0FudWxsJTJDJTIybWF4X3dpZHRoJTIyJTNBbnVsbCUyQyUyMm1pbl9oZWlnaHQlMjIlM0FudWxsJTJDJTIybWluX3dpZHRoJTIyJTNBbnVsbCUyQyUyMm9iamVjdF9maXQlMjIlM0FudWxsJTJDJTIyb2JqZWN0X3Bvc2l0aW9uJTIyJTNBbnVsbCUyQyUyMm9yZGVyJTIyJTNBbnVsbCUyQyUyMm92ZXJmbG93JTIyJTNBbnVsbCUyQyUyMnBhZGRpbmclMjIlM0FudWxsJTJDJTIycmlnaHQlMjIlM0FudWxsJTJDJTIydG9wJTIyJTNBbnVsbCUyQyUyMnZpc2liaWxpdHklMjIlM0FudWxsJTJDJTIyd2lkdGglMjIlM0FudWxsJTdEJTdEJTdEJTJDJTIydmVyc2lvbl9tYWpvciUyMiUzQTIlMkMlMjJ2ZXJzaW9uX21pbm9yJTIyJTNBMCU3RA==";
+        scriptTag.type = "application/vnd.jupyter.widget-state+json";
+        scriptTag.textContent = decodeURIComponent(atob(base64State));
+        document.body.appendChild(scriptTag);
+      })();
+      </script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Pedro Leitão</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with Quarto</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

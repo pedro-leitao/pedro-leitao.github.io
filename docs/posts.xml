@@ -17,7 +17,17 @@
 <width>144</width>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 03 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 04 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Getting Size Right: How Engineering Teams Scale</title>
+  <link>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/</link>
+  <description><![CDATA[ larger doesn’t always mean better ]]></description>
+  <category>Thoughts</category>
+  <category>Software Engineering</category>
+  <category>Scaling</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/</guid>
+  <pubDate>Tue, 04 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Moving to Quarto</title>
   <link>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/</link>
@@ -103,16 +113,6 @@
   <category>Model Management</category>
   <guid>https://pedroleitao.nl/posts/howtos/mlflow-ui/</guid>
   <pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Will Artificial Intelligence Ever be More than Fancy Curve Fitting ?</title>
-  <link>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/</link>
-  <description><![CDATA[ One of my favourite books from my late 20’s was <a href="https://podcasts.ox.ac.uk/people/roger-penrose">Roger Penrose’s</a> <a href="https://global.oup.com/ukhe/product/the-emperors-new-mind-9780198784920?cc=gb&amp;lang=en&amp;">The Emperor’s New Mind</a>, where he argues that human consciousness is non-algorithmic and non-computable. This is a view that is not shared by many in the AI community, who believe that the brain is a computer and that consciousness is an emergent property of the brain’s computation. ]]></description>
-  <category>Thoughts</category>
-  <category>AI</category>
-  <category>Machine Learning</category>
-  <guid>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/</guid>
-  <pubDate>Thu, 10 Oct 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

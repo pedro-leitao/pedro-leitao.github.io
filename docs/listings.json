@@ -2,22 +2,13 @@
   {
     "listing": "/thoughts.html",
     "items": [
+      "/posts/thoughts/engineering-teams-scale/index.html",
       "/posts/thoughts/moving-to-quarto/index.html",
       "/posts/thoughts/france-ai-investment/index.html",
       "/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.html",
       "/posts/thoughts/kolmogorov/index.html",
       "/posts/thoughts/connundrum-european-tech/index.html",
       "/posts/thoughts/scalling-ai/index.html"
-    ]
-  },
-  {
-    "listing": "/howtos.html",
-    "items": [
-      "/posts/howtos/deepseek-r1-reasoning/index.html",
-      "/posts/howtos/transformers-fine-tuning/index.html",
-      "/posts/howtos/mlx-fine-tuning/index.html",
-      "/posts/howtos/mlflow-ui/index.html",
-      "/posts/howtos/caching-ml/index.html"
     ]
   },
   {
@@ -40,8 +31,19 @@
     ]
   },
   {
+    "listing": "/howtos.html",
+    "items": [
+      "/posts/howtos/deepseek-r1-reasoning/index.html",
+      "/posts/howtos/transformers-fine-tuning/index.html",
+      "/posts/howtos/mlx-fine-tuning/index.html",
+      "/posts/howtos/mlflow-ui/index.html",
+      "/posts/howtos/caching-ml/index.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
+      "/posts/thoughts/engineering-teams-scale/index.html",
       "/posts/thoughts/moving-to-quarto/index.html",
       "/posts/thoughts/france-ai-investment/index.html",
       "/posts/experiments/connect-four-rl/index.html",
