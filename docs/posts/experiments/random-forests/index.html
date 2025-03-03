@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-07">
+
+<title>Understanding Random Forest Classification and Its Effectiveness – Pedro Leitão</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9143d267086697ee6a9fbeed7f968a66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../posts.html"> 
+<span class="menu-text">All posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../experiments.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../thoughts.html"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../howtos.html"> 
+<span class="menu-text">Howto’s</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pedro-leitao"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/nunoleitao"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Understanding Random Forest Classification and Its Effectiveness</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Experiments</div>
+                <div class="quarto-category">Machine Learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 7, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-are-random-forest-models" id="toc-what-are-random-forest-models" class="nav-link active" data-scroll-target="#what-are-random-forest-models">What are Random Forest models ?</a></li>
+  <li><a href="#the-mechanics-of-the-algorithm" id="toc-the-mechanics-of-the-algorithm" class="nav-link" data-scroll-target="#the-mechanics-of-the-algorithm">The mechanics of the algorithm</a></li>
+  <li><a href="#effectiveness" id="toc-effectiveness" class="nav-link" data-scroll-target="#effectiveness">Effectiveness</a></li>
+  <li><a href="#an-example-random-forest-classifier" id="toc-an-example-random-forest-classifier" class="nav-link" data-scroll-target="#an-example-random-forest-classifier">An example Random Forest classifier</a></li>
+  <li><a href="#explainability" id="toc-explainability" class="nav-link" data-scroll-target="#explainability">Explainability</a></li>
+  <li><a href="#random-forests-vs-neural-networks" id="toc-random-forests-vs-neural-networks" class="nav-link" data-scroll-target="#random-forests-vs-neural-networks">Random Forests vs Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance metrics</a></li>
+  <li><a href="#suitability-based-on-data-type" id="toc-suitability-based-on-data-type" class="nav-link" data-scroll-target="#suitability-based-on-data-type">Suitability based on data type</a></li>
+  <li><a href="#example-comparisons" id="toc-example-comparisons" class="nav-link" data-scroll-target="#example-comparisons">Example comparisons</a></li>
+  </ul></li>
+  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks">Final remarks</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>A Random Forest is a versatile and robust machine learning algorithm used for both classification and regression tasks. It builds upon the concept of decision trees, but improves on their accuracy and overcomes their tendency to overfit by combining the predictions of numerous decision trees constructed on different subsets of the data. We have already <a href="../../../posts/experiments/ml-pipeline/index.html">experimented with a Random Tree regressor</a>, and in this experiment, we will focus on Random Forest classification.</p>
+<section id="what-are-random-forest-models" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-random-forest-models">What are Random Forest models ?</h2>
+<p>A Random Forest operates by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) of the individual trees. It is termed as “Random” because of its ability to develop trees based on random subsets of features and data points, which ensures model variance and generally results in a more robust overall prediction.</p>
+<p>Random Forest have the following key characteristics:</p>
+<ul>
+<li><strong>Robustness</strong>: A Random Forest is less likely to overfit than decision trees, because they average multiple trees to give a more accurate prediction.</li>
+<li><strong>Handling of Unbalanced Data</strong>: It can handle unbalanced data from both binary and multiclass classification problems effectively.</li>
+<li><strong>Feature Importance</strong>: It provides insights into which features are most important for the prediction.</li>
+<li><strong>Explainability</strong>: A Random Forest provides good explainability, and isn’t a black box.</li>
+</ul>
+</section>
+<section id="the-mechanics-of-the-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-mechanics-of-the-algorithm">The mechanics of the algorithm</h2>
+<p>The Random Forest algorithm follows these steps:</p>
+<ol type="1">
+<li><strong>Bootstrap Aggregating (Bagging)</strong>: Random subsets of the data are created for training each tree, sampled with replacement.</li>
+<li><strong>Random Feature Selection</strong>: When splitting nodes during the formation of trees, only a random subset of features are considered.</li>
+<li><strong>Building Trees</strong>: Each subset is used to train a decision tree. Trees grow to their maximum length and are not pruned.</li>
+<li><strong>Aggregation</strong>: For classification tasks, the mode of all tree outputs is considered for the final output.</li>
+</ol>
+<p>Random Forest typically outperform single decision trees due to their reduced variance without increasing bias. This means they are less likely to fit noise in the training data, making them significantly more accurate. They are also effective in scenarios where the feature space is large, and robust against overfitting which is a common issue in complex models.</p>
+</section>
+<section id="effectiveness" class="level2">
+<h2 class="anchored" data-anchor-id="effectiveness">Effectiveness</h2>
+<p>Since their inception, it has been shown that Random Forest is highly effective for a wide range of problems. It is particularly known for their effectiveness in:</p>
+<ul>
+<li>Handling large data sets with higher dimensionality. They can handle thousands of input variables without variable deletion.</li>
+<li>Maintaining accuracy even when a large proportion of the data is missing.</li>
+</ul>
+</section>
+<section id="an-example-random-forest-classifier" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-random-forest-classifier">An example Random Forest classifier</h2>
+<p>Below is an example demonstrating the implementation of a Random Forest classifier using the <code>scikit-learn</code> library. This example uses the <code>Breast Cancer</code> dataset. Let us start by describing the data.</p>
+<div id="3e20198a" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>breast_cancer <span class="op">=</span> load_breast_cancer()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(breast_cancer.data, columns<span class="op">=</span>breast_cancer.feature_names)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean radius</th>
+<th data-quarto-table-cell-role="th">mean texture</th>
+<th data-quarto-table-cell-role="th">mean perimeter</th>
+<th data-quarto-table-cell-role="th">mean area</th>
+<th data-quarto-table-cell-role="th">mean smoothness</th>
+<th data-quarto-table-cell-role="th">mean compactness</th>
+<th data-quarto-table-cell-role="th">mean concavity</th>
+<th data-quarto-table-cell-role="th">mean concave points</th>
+<th data-quarto-table-cell-role="th">mean symmetry</th>
+<th data-quarto-table-cell-role="th">mean fractal dimension</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">worst radius</th>
+<th data-quarto-table-cell-role="th">worst texture</th>
+<th data-quarto-table-cell-role="th">worst perimeter</th>
+<th data-quarto-table-cell-role="th">worst area</th>
+<th data-quarto-table-cell-role="th">worst smoothness</th>
+<th data-quarto-table-cell-role="th">worst compactness</th>
+<th data-quarto-table-cell-role="th">worst concavity</th>
+<th data-quarto-table-cell-role="th">worst concave points</th>
+<th data-quarto-table-cell-role="th">worst symmetry</th>
+<th data-quarto-table-cell-role="th">worst fractal dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>17.99</td>
+<td>10.38</td>
+<td>122.80</td>
+<td>1001.0</td>
+<td>0.11840</td>
+<td>0.27760</td>
+<td>0.30010</td>
+<td>0.14710</td>
+<td>0.2419</td>
+<td>0.07871</td>
+<td>...</td>
+<td>25.380</td>
+<td>17.33</td>
+<td>184.60</td>
+<td>2019.0</td>
+<td>0.16220</td>
+<td>0.66560</td>
+<td>0.7119</td>
+<td>0.2654</td>
+<td>0.4601</td>
+<td>0.11890</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>20.57</td>
+<td>17.77</td>
+<td>132.90</td>
+<td>1326.0</td>
+<td>0.08474</td>
+<td>0.07864</td>
+<td>0.08690</td>
+<td>0.07017</td>
+<td>0.1812</td>
+<td>0.05667</td>
+<td>...</td>
+<td>24.990</td>
+<td>23.41</td>
+<td>158.80</td>
+<td>1956.0</td>
+<td>0.12380</td>
+<td>0.18660</td>
+<td>0.2416</td>
+<td>0.1860</td>
+<td>0.2750</td>
+<td>0.08902</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>19.69</td>
+<td>21.25</td>
+<td>130.00</td>
+<td>1203.0</td>
+<td>0.10960</td>
+<td>0.15990</td>
+<td>0.19740</td>
+<td>0.12790</td>
+<td>0.2069</td>
+<td>0.05999</td>
+<td>...</td>
+<td>23.570</td>
+<td>25.53</td>
+<td>152.50</td>
+<td>1709.0</td>
+<td>0.14440</td>
+<td>0.42450</td>
+<td>0.4504</td>
+<td>0.2430</td>
+<td>0.3613</td>
+<td>0.08758</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>11.42</td>
+<td>20.38</td>
+<td>77.58</td>
+<td>386.1</td>
+<td>0.14250</td>
+<td>0.28390</td>
+<td>0.24140</td>
+<td>0.10520</td>
+<td>0.2597</td>
+<td>0.09744</td>
+<td>...</td>
+<td>14.910</td>
+<td>26.50</td>
+<td>98.87</td>
+<td>567.7</td>
+<td>0.20980</td>
+<td>0.86630</td>
+<td>0.6869</td>
+<td>0.2575</td>
+<td>0.6638</td>
+<td>0.17300</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>20.29</td>
+<td>14.34</td>
+<td>135.10</td>
+<td>1297.0</td>
+<td>0.10030</td>
+<td>0.13280</td>
+<td>0.19800</td>
+<td>0.10430</td>
+<td>0.1809</td>
+<td>0.05883</td>
+<td>...</td>
+<td>22.540</td>
+<td>16.67</td>
+<td>152.20</td>
+<td>1575.0</td>
+<td>0.13740</td>
+<td>0.20500</td>
+<td>0.4000</td>
+<td>0.1625</td>
+<td>0.2364</td>
+<td>0.07678</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">564</td>
+<td>21.56</td>
+<td>22.39</td>
+<td>142.00</td>
+<td>1479.0</td>
+<td>0.11100</td>
+<td>0.11590</td>
+<td>0.24390</td>
+<td>0.13890</td>
+<td>0.1726</td>
+<td>0.05623</td>
+<td>...</td>
+<td>25.450</td>
+<td>26.40</td>
+<td>166.10</td>
+<td>2027.0</td>
+<td>0.14100</td>
+<td>0.21130</td>
+<td>0.4107</td>
+<td>0.2216</td>
+<td>0.2060</td>
+<td>0.07115</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">565</td>
+<td>20.13</td>
+<td>28.25</td>
+<td>131.20</td>
+<td>1261.0</td>
+<td>0.09780</td>
+<td>0.10340</td>
+<td>0.14400</td>
+<td>0.09791</td>
+<td>0.1752</td>
+<td>0.05533</td>
+<td>...</td>
+<td>23.690</td>
+<td>38.25</td>
+<td>155.00</td>
+<td>1731.0</td>
+<td>0.11660</td>
+<td>0.19220</td>
+<td>0.3215</td>
+<td>0.1628</td>
+<td>0.2572</td>
+<td>0.06637</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">566</td>
+<td>16.60</td>
+<td>28.08</td>
+<td>108.30</td>
+<td>858.1</td>
+<td>0.08455</td>
+<td>0.10230</td>
+<td>0.09251</td>
+<td>0.05302</td>
+<td>0.1590</td>
+<td>0.05648</td>
+<td>...</td>
+<td>18.980</td>
+<td>34.12</td>
+<td>126.70</td>
+<td>1124.0</td>
+<td>0.11390</td>
+<td>0.30940</td>
+<td>0.3403</td>
+<td>0.1418</td>
+<td>0.2218</td>
+<td>0.07820</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">567</td>
+<td>20.60</td>
+<td>29.33</td>
+<td>140.10</td>
+<td>1265.0</td>
+<td>0.11780</td>
+<td>0.27700</td>
+<td>0.35140</td>
+<td>0.15200</td>
+<td>0.2397</td>
+<td>0.07016</td>
+<td>...</td>
+<td>25.740</td>
+<td>39.42</td>
+<td>184.60</td>
+<td>1821.0</td>
+<td>0.16500</td>
+<td>0.86810</td>
+<td>0.9387</td>
+<td>0.2650</td>
+<td>0.4087</td>
+<td>0.12400</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">568</td>
+<td>7.76</td>
+<td>24.54</td>
+<td>47.92</td>
+<td>181.0</td>
+<td>0.05263</td>
+<td>0.04362</td>
+<td>0.00000</td>
+<td>0.00000</td>
+<td>0.1587</td>
+<td>0.05884</td>
+<td>...</td>
+<td>9.456</td>
+<td>30.37</td>
+<td>59.16</td>
+<td>268.6</td>
+<td>0.08996</td>
+<td>0.06444</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.2871</td>
+<td>0.07039</td>
+</tr>
+</tbody>
+</table>
+
+<p>569 rows × 30 columns</p>
+</div>
+</div>
+</div>
+<p>And let’s get a view into the distribution of the available data.</p>
+<div id="efe5cc68" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<style type="text/css">
+#T_1ce36_row0_col0 {
+  background-color: #8dd08a;
+  color: #000000;
+}
+#T_1ce36_row0_col1 {
+  background-color: #8ed08b;
+  color: #000000;
+}
+#T_1ce36_row0_col2 {
+  background-color: #94d390;
+  color: #000000;
+}
+#T_1ce36_row0_col3, #T_1ce36_row0_col26, #T_1ce36_row5_col14 {
+  background-color: #cfecc9;
+  color: #000000;
+}
+#T_1ce36_row0_col4, #T_1ce36_row5_col27 {
+  background-color: #5eb96b;
+  color: #f1f1f1;
+}
+#T_1ce36_row0_col5, #T_1ce36_row2_col4 {
+  background-color: #c4e8bd;
+  color: #000000;
+}
+#T_1ce36_row0_col6, #T_1ce36_row4_col17 {
+  background-color: #d1edcb;
+  color: #000000;
+}
+#T_1ce36_row0_col7 {
+  background-color: #c9eac2;
+  color: #000000;
+}
+#T_1ce36_row0_col8 {
+  background-color: #5db96b;
+  color: #f1f1f1;
+}
+#T_1ce36_row0_col9, #T_1ce36_row5_col24 {
+  background-color: #45ad5f;
+  color: #f1f1f1;
+}
+#T_1ce36_row0_col10, #T_1ce36_row5_col16 {
+  background-color: #e8f6e3;
+  color: #000000;
+}
+#T_1ce36_row0_col11 {
+  background-color: #d6efd0;
+  color: #000000;
+}
+#T_1ce36_row0_col12, #T_1ce36_row0_col19, #T_1ce36_row1_col23, #T_1ce36_row2_col20, #T_1ce36_row3_col7 {
+  background-color: #e9f7e5;
+  color: #000000;
+}
+#T_1ce36_row0_col13, #T_1ce36_row4_col16 {
+  background-color: #eef8ea;
+  color: #000000;
+}
+#T_1ce36_row0_col14, #T_1ce36_row4_col26 {
+  background-color: #d8f0d2;
+  color: #000000;
+}
+#T_1ce36_row0_col15, #T_1ce36_row4_col3 {
+  background-color: #daf0d4;
+  color: #000000;
+}
+#T_1ce36_row0_col16, #T_1ce36_row1_col16, #T_1ce36_row2_col22, #T_1ce36_row3_col15, #T_1ce36_row3_col23, #T_1ce36_row4_col10, #T_1ce36_row4_col19 {
+  background-color: #ecf8e8;
+  color: #000000;
+}
+#T_1ce36_row0_col17, #T_1ce36_row1_col27, #T_1ce36_row3_col27, #T_1ce36_row4_col5 {
+  background-color: #cdecc7;
+  color: #000000;
+}
+#T_1ce36_row0_col18, #T_1ce36_row4_col25 {
+  background-color: #d9f0d3;
+  color: #000000;
+}
+#T_1ce36_row0_col20, #T_1ce36_row4_col28 {
+  background-color: #a4da9e;
+  color: #000000;
+}
+#T_1ce36_row0_col21 {
+  background-color: #86cc85;
+  color: #000000;
+}
+#T_1ce36_row0_col22, #T_1ce36_row3_col1 {
+  background-color: #acdea6;
+  color: #000000;
+}
+#T_1ce36_row0_col23 {
+  background-color: #dbf1d5;
+  color: #000000;
+}
+#T_1ce36_row0_col24, #T_1ce36_row4_col4, #T_1ce36_row4_col8 {
+  background-color: #60ba6c;
+  color: #f1f1f1;
+}
+#T_1ce36_row0_col25, #T_1ce36_row5_col18, #T_1ce36_row5_col23 {
+  background-color: #ceecc8;
+  color: #000000;
+}
+#T_1ce36_row0_col27, #T_1ce36_row5_col29 {
+  background-color: #9bd696;
+  color: #000000;
+}
+#T_1ce36_row0_col28 {
+  background-color: #9fd899;
+  color: #000000;
+}
+#T_1ce36_row0_col29 {
+  background-color: #a9dca3;
+  color: #000000;
+}
+#T_1ce36_row1_col0, #T_1ce36_row1_col1, #T_1ce36_row1_col2, #T_1ce36_row1_col4, #T_1ce36_row1_col8, #T_1ce36_row1_col9, #T_1ce36_row1_col20, #T_1ce36_row1_col21, #T_1ce36_row1_col22, #T_1ce36_row1_col24, #T_1ce36_row1_col28, #T_1ce36_row1_col29, #T_1ce36_row2_col3, #T_1ce36_row2_col5, #T_1ce36_row2_col6, #T_1ce36_row2_col7, #T_1ce36_row2_col10, #T_1ce36_row2_col11, #T_1ce36_row2_col12, #T_1ce36_row2_col13, #T_1ce36_row2_col14, #T_1ce36_row2_col15, #T_1ce36_row2_col16, #T_1ce36_row2_col17, #T_1ce36_row2_col18, #T_1ce36_row2_col19, #T_1ce36_row2_col23, #T_1ce36_row2_col25, #T_1ce36_row2_col26, #T_1ce36_row2_col27 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_1ce36_row1_col3 {
+  background-color: #ebf7e7;
+  color: #000000;
+}
+#T_1ce36_row1_col5, #T_1ce36_row3_col11, #T_1ce36_row3_col18 {
+  background-color: #e8f6e4;
+  color: #000000;
+}
+#T_1ce36_row1_col6 {
+  background-color: #d7efd1;
+  color: #000000;
+}
+#T_1ce36_row1_col7, #T_1ce36_row2_col29 {
+  background-color: #d5efcf;
+  color: #000000;
+}
+#T_1ce36_row1_col10, #T_1ce36_row1_col12, #T_1ce36_row1_col19 {
+  background-color: #eff9eb;
+  color: #000000;
+}
+#T_1ce36_row1_col11, #T_1ce36_row1_col14, #T_1ce36_row3_col10, #T_1ce36_row3_col12, #T_1ce36_row3_col19 {
+  background-color: #f1faee;
+  color: #000000;
+}
+#T_1ce36_row1_col13, #T_1ce36_row4_col12, #T_1ce36_row5_col13 {
+  background-color: #edf8e9;
+  color: #000000;
+}
+#T_1ce36_row1_col15, #T_1ce36_row2_col2, #T_1ce36_row3_col3, #T_1ce36_row3_col14 {
+  background-color: #e6f5e1;
+  color: #000000;
+}
+#T_1ce36_row1_col17, #T_1ce36_row3_col25 {
+  background-color: #e7f6e2;
+  color: #000000;
+}
+#T_1ce36_row1_col18 {
+  background-color: #f6fcf4;
+  color: #000000;
+}
+#T_1ce36_row1_col25, #T_1ce36_row5_col19 {
+  background-color: #e5f5e0;
+  color: #000000;
+}
+#T_1ce36_row1_col26, #T_1ce36_row4_col7, #T_1ce36_row4_col11 {
+  background-color: #dbf1d6;
+  color: #000000;
+}
+#T_1ce36_row2_col0, #T_1ce36_row3_col5 {
+  background-color: #e2f4dd;
+  color: #000000;
+}
+#T_1ce36_row2_col1, #T_1ce36_row4_col18 {
+  background-color: #def2d9;
+  color: #000000;
+}
+#T_1ce36_row2_col8, #T_1ce36_row3_col29 {
+  background-color: #bde5b6;
+  color: #000000;
+}
+#T_1ce36_row2_col9 {
+  background-color: #7dc87e;
+  color: #000000;
+}
+#T_1ce36_row2_col21, #T_1ce36_row4_col15, #T_1ce36_row5_col10 {
+  background-color: #e3f4de;
+  color: #000000;
+}
+#T_1ce36_row2_col24 {
+  background-color: #caeac3;
+  color: #000000;
+}
+#T_1ce36_row2_col28, #T_1ce36_row4_col14 {
+  background-color: #ddf2d8;
+  color: #000000;
+}
+#T_1ce36_row3_col0 {
+  background-color: #aedea7;
+  color: #000000;
+}
+#T_1ce36_row3_col2 {
+  background-color: #b5e1ae;
+  color: #000000;
+}
+#T_1ce36_row3_col4 {
+  background-color: #7ac77b;
+  color: #000000;
+}
+#T_1ce36_row3_col6 {
+  background-color: #edf8ea;
+  color: #000000;
+}
+#T_1ce36_row3_col8, #T_1ce36_row5_col2 {
+  background-color: #79c67a;
+  color: #000000;
+}
+#T_1ce36_row3_col9 {
+  background-color: #5bb86a;
+  color: #f1f1f1;
+}
+#T_1ce36_row3_col13 {
+  background-color: #f4fbf2;
+  color: #000000;
+}
+#T_1ce36_row3_col16 {
+  background-color: #f2faef;
+  color: #000000;
+}
+#T_1ce36_row3_col17 {
+  background-color: #e0f3db;
+  color: #000000;
+}
+#T_1ce36_row3_col20 {
+  background-color: #c3e7bc;
+  color: #000000;
+}
+#T_1ce36_row3_col21 {
+  background-color: #aadda4;
+  color: #000000;
+}
+#T_1ce36_row3_col22 {
+  background-color: #cbebc5;
+  color: #000000;
+}
+#T_1ce36_row3_col24 {
+  background-color: #7fc97f;
+  color: #000000;
+}
+#T_1ce36_row3_col26 {
+  background-color: #eaf7e6;
+  color: #000000;
+}
+#T_1ce36_row3_col28 {
+  background-color: #b4e1ad;
+  color: #000000;
+}
+#T_1ce36_row4_col0 {
+  background-color: #98d594;
+  color: #000000;
+}
+#T_1ce36_row4_col1 {
+  background-color: #92d28f;
+  color: #000000;
+}
+#T_1ce36_row4_col2 {
+  background-color: #a0d99b;
+  color: #000000;
+}
+#T_1ce36_row4_col6 {
+  background-color: #e1f3dc;
+  color: #000000;
+}
+#T_1ce36_row4_col9 {
+  background-color: #4aaf61;
+  color: #f1f1f1;
+}
+#T_1ce36_row4_col13 {
+  background-color: #f2faf0;
+  color: #000000;
+}
+#T_1ce36_row4_col20, #T_1ce36_row4_col29 {
+  background-color: #b0dfaa;
+  color: #000000;
+}
+#T_1ce36_row4_col21 {
+  background-color: #88ce87;
+  color: #000000;
+}
+#T_1ce36_row4_col22 {
+  background-color: #bae3b3;
+  color: #000000;
+}
+#T_1ce36_row4_col23, #T_1ce36_row5_col12 {
+  background-color: #e5f5e1;
+  color: #000000;
+}
+#T_1ce36_row4_col24, #T_1ce36_row5_col21 {
+  background-color: #62bb6d;
+  color: #f1f1f1;
+}
+#T_1ce36_row4_col27, #T_1ce36_row5_col5 {
+  background-color: #abdda5;
+  color: #000000;
+}
+#T_1ce36_row5_col0 {
+  background-color: #75c477;
+  color: #000000;
+}
+#T_1ce36_row5_col1 {
+  background-color: #73c476;
+  color: #000000;
+}
+#T_1ce36_row5_col3 {
+  background-color: #c1e6ba;
+  color: #000000;
+}
+#T_1ce36_row5_col4 {
+  background-color: #46ae60;
+  color: #f1f1f1;
+}
+#T_1ce36_row5_col6, #T_1ce36_row5_col26 {
+  background-color: #b6e2af;
+  color: #000000;
+}
+#T_1ce36_row5_col7 {
+  background-color: #a3da9d;
+  color: #000000;
+}
+#T_1ce36_row5_col8 {
+  background-color: #48ae60;
+  color: #f1f1f1;
+}
+#T_1ce36_row5_col9 {
+  background-color: #3aa357;
+  color: #f1f1f1;
+}
+#T_1ce36_row5_col11 {
+  background-color: #c8e9c1;
+  color: #000000;
+}
+#T_1ce36_row5_col15 {
+  background-color: #ccebc6;
+  color: #000000;
+}
+#T_1ce36_row5_col17 {
+  background-color: #bee5b8;
+  color: #000000;
+}
+#T_1ce36_row5_col20 {
+  background-color: #87cd86;
+  color: #000000;
+}
+#T_1ce36_row5_col22 {
+  background-color: #91d28e;
+  color: #000000;
+}
+#T_1ce36_row5_col25 {
+  background-color: #b7e2b1;
+  color: #000000;
+}
+#T_1ce36_row5_col28 {
+  background-color: #90d18d;
+  color: #000000;
+}
+#T_1ce36_row6_col0, #T_1ce36_row6_col1, #T_1ce36_row6_col2, #T_1ce36_row6_col3, #T_1ce36_row6_col4, #T_1ce36_row6_col5, #T_1ce36_row6_col6, #T_1ce36_row6_col7, #T_1ce36_row6_col8, #T_1ce36_row6_col9, #T_1ce36_row6_col10, #T_1ce36_row6_col11, #T_1ce36_row6_col12, #T_1ce36_row6_col13, #T_1ce36_row6_col14, #T_1ce36_row6_col15, #T_1ce36_row6_col16, #T_1ce36_row6_col17, #T_1ce36_row6_col18, #T_1ce36_row6_col19, #T_1ce36_row6_col20, #T_1ce36_row6_col21, #T_1ce36_row6_col22, #T_1ce36_row6_col23, #T_1ce36_row6_col24, #T_1ce36_row6_col25, #T_1ce36_row6_col26, #T_1ce36_row6_col27, #T_1ce36_row6_col28, #T_1ce36_row6_col29 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_1ce36" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_1ce36_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">mean radius</th>
+<th id="T_1ce36_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">mean texture</th>
+<th id="T_1ce36_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">mean perimeter</th>
+<th id="T_1ce36_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">mean area</th>
+<th id="T_1ce36_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">mean smoothness</th>
+<th id="T_1ce36_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">mean compactness</th>
+<th id="T_1ce36_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">mean concavity</th>
+<th id="T_1ce36_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">mean concave points</th>
+<th id="T_1ce36_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">mean symmetry</th>
+<th id="T_1ce36_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">mean fractal dimension</th>
+<th id="T_1ce36_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">radius error</th>
+<th id="T_1ce36_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">texture error</th>
+<th id="T_1ce36_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">perimeter error</th>
+<th id="T_1ce36_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">area error</th>
+<th id="T_1ce36_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">smoothness error</th>
+<th id="T_1ce36_level0_col15" class="col_heading level0 col15" data-quarto-table-cell-role="th">compactness error</th>
+<th id="T_1ce36_level0_col16" class="col_heading level0 col16" data-quarto-table-cell-role="th">concavity error</th>
+<th id="T_1ce36_level0_col17" class="col_heading level0 col17" data-quarto-table-cell-role="th">concave points error</th>
+<th id="T_1ce36_level0_col18" class="col_heading level0 col18" data-quarto-table-cell-role="th">symmetry error</th>
+<th id="T_1ce36_level0_col19" class="col_heading level0 col19" data-quarto-table-cell-role="th">fractal dimension error</th>
+<th id="T_1ce36_level0_col20" class="col_heading level0 col20" data-quarto-table-cell-role="th">worst radius</th>
+<th id="T_1ce36_level0_col21" class="col_heading level0 col21" data-quarto-table-cell-role="th">worst texture</th>
+<th id="T_1ce36_level0_col22" class="col_heading level0 col22" data-quarto-table-cell-role="th">worst perimeter</th>
+<th id="T_1ce36_level0_col23" class="col_heading level0 col23" data-quarto-table-cell-role="th">worst area</th>
+<th id="T_1ce36_level0_col24" class="col_heading level0 col24" data-quarto-table-cell-role="th">worst smoothness</th>
+<th id="T_1ce36_level0_col25" class="col_heading level0 col25" data-quarto-table-cell-role="th">worst compactness</th>
+<th id="T_1ce36_level0_col26" class="col_heading level0 col26" data-quarto-table-cell-role="th">worst concavity</th>
+<th id="T_1ce36_level0_col27" class="col_heading level0 col27" data-quarto-table-cell-role="th">worst concave points</th>
+<th id="T_1ce36_level0_col28" class="col_heading level0 col28" data-quarto-table-cell-role="th">worst symmetry</th>
+<th id="T_1ce36_level0_col29" class="col_heading level0 col29" data-quarto-table-cell-role="th">worst fractal dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_1ce36_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
+<td id="T_1ce36_row0_col0" class="data row0 col0">14.127292</td>
+<td id="T_1ce36_row0_col1" class="data row0 col1">19.289649</td>
+<td id="T_1ce36_row0_col2" class="data row0 col2">91.969033</td>
+<td id="T_1ce36_row0_col3" class="data row0 col3">654.889104</td>
+<td id="T_1ce36_row0_col4" class="data row0 col4">0.096360</td>
+<td id="T_1ce36_row0_col5" class="data row0 col5">0.104341</td>
+<td id="T_1ce36_row0_col6" class="data row0 col6">0.088799</td>
+<td id="T_1ce36_row0_col7" class="data row0 col7">0.048919</td>
+<td id="T_1ce36_row0_col8" class="data row0 col8">0.181162</td>
+<td id="T_1ce36_row0_col9" class="data row0 col9">0.062798</td>
+<td id="T_1ce36_row0_col10" class="data row0 col10">0.405172</td>
+<td id="T_1ce36_row0_col11" class="data row0 col11">1.216853</td>
+<td id="T_1ce36_row0_col12" class="data row0 col12">2.866059</td>
+<td id="T_1ce36_row0_col13" class="data row0 col13">40.337079</td>
+<td id="T_1ce36_row0_col14" class="data row0 col14">0.007041</td>
+<td id="T_1ce36_row0_col15" class="data row0 col15">0.025478</td>
+<td id="T_1ce36_row0_col16" class="data row0 col16">0.031894</td>
+<td id="T_1ce36_row0_col17" class="data row0 col17">0.011796</td>
+<td id="T_1ce36_row0_col18" class="data row0 col18">0.020542</td>
+<td id="T_1ce36_row0_col19" class="data row0 col19">0.003795</td>
+<td id="T_1ce36_row0_col20" class="data row0 col20">16.269190</td>
+<td id="T_1ce36_row0_col21" class="data row0 col21">25.677223</td>
+<td id="T_1ce36_row0_col22" class="data row0 col22">107.261213</td>
+<td id="T_1ce36_row0_col23" class="data row0 col23">880.583128</td>
+<td id="T_1ce36_row0_col24" class="data row0 col24">0.132369</td>
+<td id="T_1ce36_row0_col25" class="data row0 col25">0.254265</td>
+<td id="T_1ce36_row0_col26" class="data row0 col26">0.272188</td>
+<td id="T_1ce36_row0_col27" class="data row0 col27">0.114606</td>
+<td id="T_1ce36_row0_col28" class="data row0 col28">0.290076</td>
+<td id="T_1ce36_row0_col29" class="data row0 col29">0.083946</td>
+</tr>
+<tr class="even">
+<td id="T_1ce36_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
+<td id="T_1ce36_row1_col0" class="data row1 col0">3.524049</td>
+<td id="T_1ce36_row1_col1" class="data row1 col1">4.301036</td>
+<td id="T_1ce36_row1_col2" class="data row1 col2">24.298981</td>
+<td id="T_1ce36_row1_col3" class="data row1 col3">351.914129</td>
+<td id="T_1ce36_row1_col4" class="data row1 col4">0.014064</td>
+<td id="T_1ce36_row1_col5" class="data row1 col5">0.052813</td>
+<td id="T_1ce36_row1_col6" class="data row1 col6">0.079720</td>
+<td id="T_1ce36_row1_col7" class="data row1 col7">0.038803</td>
+<td id="T_1ce36_row1_col8" class="data row1 col8">0.027414</td>
+<td id="T_1ce36_row1_col9" class="data row1 col9">0.007060</td>
+<td id="T_1ce36_row1_col10" class="data row1 col10">0.277313</td>
+<td id="T_1ce36_row1_col11" class="data row1 col11">0.551648</td>
+<td id="T_1ce36_row1_col12" class="data row1 col12">2.021855</td>
+<td id="T_1ce36_row1_col13" class="data row1 col13">45.491006</td>
+<td id="T_1ce36_row1_col14" class="data row1 col14">0.003003</td>
+<td id="T_1ce36_row1_col15" class="data row1 col15">0.017908</td>
+<td id="T_1ce36_row1_col16" class="data row1 col16">0.030186</td>
+<td id="T_1ce36_row1_col17" class="data row1 col17">0.006170</td>
+<td id="T_1ce36_row1_col18" class="data row1 col18">0.008266</td>
+<td id="T_1ce36_row1_col19" class="data row1 col19">0.002646</td>
+<td id="T_1ce36_row1_col20" class="data row1 col20">4.833242</td>
+<td id="T_1ce36_row1_col21" class="data row1 col21">6.146258</td>
+<td id="T_1ce36_row1_col22" class="data row1 col22">33.602542</td>
+<td id="T_1ce36_row1_col23" class="data row1 col23">569.356993</td>
+<td id="T_1ce36_row1_col24" class="data row1 col24">0.022832</td>
+<td id="T_1ce36_row1_col25" class="data row1 col25">0.157336</td>
+<td id="T_1ce36_row1_col26" class="data row1 col26">0.208624</td>
+<td id="T_1ce36_row1_col27" class="data row1 col27">0.065732</td>
+<td id="T_1ce36_row1_col28" class="data row1 col28">0.061867</td>
+<td id="T_1ce36_row1_col29" class="data row1 col29">0.018061</td>
+</tr>
+<tr class="odd">
+<td id="T_1ce36_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
+<td id="T_1ce36_row2_col0" class="data row2 col0">6.981000</td>
+<td id="T_1ce36_row2_col1" class="data row2 col1">9.710000</td>
+<td id="T_1ce36_row2_col2" class="data row2 col2">43.790000</td>
+<td id="T_1ce36_row2_col3" class="data row2 col3">143.500000</td>
+<td id="T_1ce36_row2_col4" class="data row2 col4">0.052630</td>
+<td id="T_1ce36_row2_col5" class="data row2 col5">0.019380</td>
+<td id="T_1ce36_row2_col6" class="data row2 col6">0.000000</td>
+<td id="T_1ce36_row2_col7" class="data row2 col7">0.000000</td>
+<td id="T_1ce36_row2_col8" class="data row2 col8">0.106000</td>
+<td id="T_1ce36_row2_col9" class="data row2 col9">0.049960</td>
+<td id="T_1ce36_row2_col10" class="data row2 col10">0.111500</td>
+<td id="T_1ce36_row2_col11" class="data row2 col11">0.360200</td>
+<td id="T_1ce36_row2_col12" class="data row2 col12">0.757000</td>
+<td id="T_1ce36_row2_col13" class="data row2 col13">6.802000</td>
+<td id="T_1ce36_row2_col14" class="data row2 col14">0.001713</td>
+<td id="T_1ce36_row2_col15" class="data row2 col15">0.002252</td>
+<td id="T_1ce36_row2_col16" class="data row2 col16">0.000000</td>
+<td id="T_1ce36_row2_col17" class="data row2 col17">0.000000</td>
+<td id="T_1ce36_row2_col18" class="data row2 col18">0.007882</td>
+<td id="T_1ce36_row2_col19" class="data row2 col19">0.000895</td>
+<td id="T_1ce36_row2_col20" class="data row2 col20">7.930000</td>
+<td id="T_1ce36_row2_col21" class="data row2 col21">12.020000</td>
+<td id="T_1ce36_row2_col22" class="data row2 col22">50.410000</td>
+<td id="T_1ce36_row2_col23" class="data row2 col23">185.200000</td>
+<td id="T_1ce36_row2_col24" class="data row2 col24">0.071170</td>
+<td id="T_1ce36_row2_col25" class="data row2 col25">0.027290</td>
+<td id="T_1ce36_row2_col26" class="data row2 col26">0.000000</td>
+<td id="T_1ce36_row2_col27" class="data row2 col27">0.000000</td>
+<td id="T_1ce36_row2_col28" class="data row2 col28">0.156500</td>
+<td id="T_1ce36_row2_col29" class="data row2 col29">0.055040</td>
+</tr>
+<tr class="even">
+<td id="T_1ce36_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
+<td id="T_1ce36_row3_col0" class="data row3 col0">11.700000</td>
+<td id="T_1ce36_row3_col1" class="data row3 col1">16.170000</td>
+<td id="T_1ce36_row3_col2" class="data row3 col2">75.170000</td>
+<td id="T_1ce36_row3_col3" class="data row3 col3">420.300000</td>
+<td id="T_1ce36_row3_col4" class="data row3 col4">0.086370</td>
+<td id="T_1ce36_row3_col5" class="data row3 col5">0.064920</td>
+<td id="T_1ce36_row3_col6" class="data row3 col6">0.029560</td>
+<td id="T_1ce36_row3_col7" class="data row3 col7">0.020310</td>
+<td id="T_1ce36_row3_col8" class="data row3 col8">0.161900</td>
+<td id="T_1ce36_row3_col9" class="data row3 col9">0.057700</td>
+<td id="T_1ce36_row3_col10" class="data row3 col10">0.232400</td>
+<td id="T_1ce36_row3_col11" class="data row3 col11">0.833900</td>
+<td id="T_1ce36_row3_col12" class="data row3 col12">1.606000</td>
+<td id="T_1ce36_row3_col13" class="data row3 col13">17.850000</td>
+<td id="T_1ce36_row3_col14" class="data row3 col14">0.005169</td>
+<td id="T_1ce36_row3_col15" class="data row3 col15">0.013080</td>
+<td id="T_1ce36_row3_col16" class="data row3 col16">0.015090</td>
+<td id="T_1ce36_row3_col17" class="data row3 col17">0.007638</td>
+<td id="T_1ce36_row3_col18" class="data row3 col18">0.015160</td>
+<td id="T_1ce36_row3_col19" class="data row3 col19">0.002248</td>
+<td id="T_1ce36_row3_col20" class="data row3 col20">13.010000</td>
+<td id="T_1ce36_row3_col21" class="data row3 col21">21.080000</td>
+<td id="T_1ce36_row3_col22" class="data row3 col22">84.110000</td>
+<td id="T_1ce36_row3_col23" class="data row3 col23">515.300000</td>
+<td id="T_1ce36_row3_col24" class="data row3 col24">0.116600</td>
+<td id="T_1ce36_row3_col25" class="data row3 col25">0.147200</td>
+<td id="T_1ce36_row3_col26" class="data row3 col26">0.114500</td>
+<td id="T_1ce36_row3_col27" class="data row3 col27">0.064930</td>
+<td id="T_1ce36_row3_col28" class="data row3 col28">0.250400</td>
+<td id="T_1ce36_row3_col29" class="data row3 col29">0.071460</td>
+</tr>
+<tr class="odd">
+<td id="T_1ce36_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
+<td id="T_1ce36_row4_col0" class="data row4 col0">13.370000</td>
+<td id="T_1ce36_row4_col1" class="data row4 col1">18.840000</td>
+<td id="T_1ce36_row4_col2" class="data row4 col2">86.240000</td>
+<td id="T_1ce36_row4_col3" class="data row4 col3">551.100000</td>
+<td id="T_1ce36_row4_col4" class="data row4 col4">0.095870</td>
+<td id="T_1ce36_row4_col5" class="data row4 col5">0.092630</td>
+<td id="T_1ce36_row4_col6" class="data row4 col6">0.061540</td>
+<td id="T_1ce36_row4_col7" class="data row4 col7">0.033500</td>
+<td id="T_1ce36_row4_col8" class="data row4 col8">0.179200</td>
+<td id="T_1ce36_row4_col9" class="data row4 col9">0.061540</td>
+<td id="T_1ce36_row4_col10" class="data row4 col10">0.324200</td>
+<td id="T_1ce36_row4_col11" class="data row4 col11">1.108000</td>
+<td id="T_1ce36_row4_col12" class="data row4 col12">2.287000</td>
+<td id="T_1ce36_row4_col13" class="data row4 col13">24.530000</td>
+<td id="T_1ce36_row4_col14" class="data row4 col14">0.006380</td>
+<td id="T_1ce36_row4_col15" class="data row4 col15">0.020450</td>
+<td id="T_1ce36_row4_col16" class="data row4 col16">0.025890</td>
+<td id="T_1ce36_row4_col17" class="data row4 col17">0.010930</td>
+<td id="T_1ce36_row4_col18" class="data row4 col18">0.018730</td>
+<td id="T_1ce36_row4_col19" class="data row4 col19">0.003187</td>
+<td id="T_1ce36_row4_col20" class="data row4 col20">14.970000</td>
+<td id="T_1ce36_row4_col21" class="data row4 col21">25.410000</td>
+<td id="T_1ce36_row4_col22" class="data row4 col22">97.660000</td>
+<td id="T_1ce36_row4_col23" class="data row4 col23">686.500000</td>
+<td id="T_1ce36_row4_col24" class="data row4 col24">0.131300</td>
+<td id="T_1ce36_row4_col25" class="data row4 col25">0.211900</td>
+<td id="T_1ce36_row4_col26" class="data row4 col26">0.226700</td>
+<td id="T_1ce36_row4_col27" class="data row4 col27">0.099930</td>
+<td id="T_1ce36_row4_col28" class="data row4 col28">0.282200</td>
+<td id="T_1ce36_row4_col29" class="data row4 col29">0.080040</td>
+</tr>
+<tr class="even">
+<td id="T_1ce36_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
+<td id="T_1ce36_row5_col0" class="data row5 col0">15.780000</td>
+<td id="T_1ce36_row5_col1" class="data row5 col1">21.800000</td>
+<td id="T_1ce36_row5_col2" class="data row5 col2">104.100000</td>
+<td id="T_1ce36_row5_col3" class="data row5 col3">782.700000</td>
+<td id="T_1ce36_row5_col4" class="data row5 col4">0.105300</td>
+<td id="T_1ce36_row5_col5" class="data row5 col5">0.130400</td>
+<td id="T_1ce36_row5_col6" class="data row5 col6">0.130700</td>
+<td id="T_1ce36_row5_col7" class="data row5 col7">0.074000</td>
+<td id="T_1ce36_row5_col8" class="data row5 col8">0.195700</td>
+<td id="T_1ce36_row5_col9" class="data row5 col9">0.066120</td>
+<td id="T_1ce36_row5_col10" class="data row5 col10">0.478900</td>
+<td id="T_1ce36_row5_col11" class="data row5 col11">1.474000</td>
+<td id="T_1ce36_row5_col12" class="data row5 col12">3.357000</td>
+<td id="T_1ce36_row5_col13" class="data row5 col13">45.190000</td>
+<td id="T_1ce36_row5_col14" class="data row5 col14">0.008146</td>
+<td id="T_1ce36_row5_col15" class="data row5 col15">0.032450</td>
+<td id="T_1ce36_row5_col16" class="data row5 col16">0.042050</td>
+<td id="T_1ce36_row5_col17" class="data row5 col17">0.014710</td>
+<td id="T_1ce36_row5_col18" class="data row5 col18">0.023480</td>
+<td id="T_1ce36_row5_col19" class="data row5 col19">0.004558</td>
+<td id="T_1ce36_row5_col20" class="data row5 col20">18.790000</td>
+<td id="T_1ce36_row5_col21" class="data row5 col21">29.720000</td>
+<td id="T_1ce36_row5_col22" class="data row5 col22">125.400000</td>
+<td id="T_1ce36_row5_col23" class="data row5 col23">1084.000000</td>
+<td id="T_1ce36_row5_col24" class="data row5 col24">0.146000</td>
+<td id="T_1ce36_row5_col25" class="data row5 col25">0.339100</td>
+<td id="T_1ce36_row5_col26" class="data row5 col26">0.382900</td>
+<td id="T_1ce36_row5_col27" class="data row5 col27">0.161400</td>
+<td id="T_1ce36_row5_col28" class="data row5 col28">0.317900</td>
+<td id="T_1ce36_row5_col29" class="data row5 col29">0.092080</td>
+</tr>
+<tr class="odd">
+<td id="T_1ce36_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
+<td id="T_1ce36_row6_col0" class="data row6 col0">28.110000</td>
+<td id="T_1ce36_row6_col1" class="data row6 col1">39.280000</td>
+<td id="T_1ce36_row6_col2" class="data row6 col2">188.500000</td>
+<td id="T_1ce36_row6_col3" class="data row6 col3">2501.000000</td>
+<td id="T_1ce36_row6_col4" class="data row6 col4">0.163400</td>
+<td id="T_1ce36_row6_col5" class="data row6 col5">0.345400</td>
+<td id="T_1ce36_row6_col6" class="data row6 col6">0.426800</td>
+<td id="T_1ce36_row6_col7" class="data row6 col7">0.201200</td>
+<td id="T_1ce36_row6_col8" class="data row6 col8">0.304000</td>
+<td id="T_1ce36_row6_col9" class="data row6 col9">0.097440</td>
+<td id="T_1ce36_row6_col10" class="data row6 col10">2.873000</td>
+<td id="T_1ce36_row6_col11" class="data row6 col11">4.885000</td>
+<td id="T_1ce36_row6_col12" class="data row6 col12">21.980000</td>
+<td id="T_1ce36_row6_col13" class="data row6 col13">542.200000</td>
+<td id="T_1ce36_row6_col14" class="data row6 col14">0.031130</td>
+<td id="T_1ce36_row6_col15" class="data row6 col15">0.135400</td>
+<td id="T_1ce36_row6_col16" class="data row6 col16">0.396000</td>
+<td id="T_1ce36_row6_col17" class="data row6 col17">0.052790</td>
+<td id="T_1ce36_row6_col18" class="data row6 col18">0.078950</td>
+<td id="T_1ce36_row6_col19" class="data row6 col19">0.029840</td>
+<td id="T_1ce36_row6_col20" class="data row6 col20">36.040000</td>
+<td id="T_1ce36_row6_col21" class="data row6 col21">49.540000</td>
+<td id="T_1ce36_row6_col22" class="data row6 col22">251.200000</td>
+<td id="T_1ce36_row6_col23" class="data row6 col23">4254.000000</td>
+<td id="T_1ce36_row6_col24" class="data row6 col24">0.222600</td>
+<td id="T_1ce36_row6_col25" class="data row6 col25">1.058000</td>
+<td id="T_1ce36_row6_col26" class="data row6 col26">1.252000</td>
+<td id="T_1ce36_row6_col27" class="data row6 col27">0.291000</td>
+<td id="T_1ce36_row6_col28" class="data row6 col28">0.663800</td>
+<td id="T_1ce36_row6_col29" class="data row6 col29">0.207500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+About Scale Variance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Random Forest algorithm is not sensitive to scale variance, so it is not necessary to preprocess and perform scale normalization on the data. This is one of the advantages of using Random Forest. It also handles missing values well, so imputation is not necessary, as well as handling both continuous and ordinal (categorical) data.</p>
+</div>
+</div>
+<p>Let us build and train a Random Forest model with the data we just loaded.</p>
+<div id="87a8c465" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> breast_cancer.data</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> breast_cancer.target</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Random Forest classifier</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model on the training data</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Accuracy of Random Forest classifier: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy of Random Forest classifier: 0.97</code></pre>
+</div>
+</div>
+<p>This is all good and proper, but what do we mean by a “decision tree”? Let us clarify this by visualizing one of the random trees that has been built by the algorithm during the training. Each node in the tree represents a “decision” point and helps to split the data based on the best possible feature and threshold to differentiate the outcomes.</p>
+<ul>
+<li><p><strong>Root Node</strong>: This is the top-most node of the tree where the first split is made. The split at this node is based on the feature that results in the most significant information gain or the best Gini impurity decrease. Essentially, it chooses the feature and threshold that provide the clearest separation between the classes based on the target variable.</p></li>
+<li><p><strong>Splitting Nodes</strong>: These are the nodes where subsequent splits happen. Each splitting node examines another feature and makes a new decision, slicing the dataset into more homogeneous (or pure) subsets. Splitting continues until the algorithm reaches a predefined maximum depth, a minimum number of samples per node, or no further information gain is possible, among other potential stopping criteria.</p></li>
+<li><p><strong>Leaf Nodes</strong>: Leaf nodes are the terminal nodes of the tree at which no further splitting occurs. Each leaf node represents a decision outcome or prediction. In classification trees, the leaf node assigns the class that is most frequent among the samples in that node. In regression trees, the leaf usually predicts the mean or median of the targets.</p></li>
+<li><p><strong>Branches</strong>: Branches represent the outcome of a test in terms of feature and threshold. Each branch corresponds to one of the possible answers to the question posed at the node: Is the feature value higher or lower than the threshold? This binary splitting makes the structure of a decision tree inherently simple to understand.</p></li>
+</ul>
+<div id="dffeda69" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the tree that you want to visualize (e.g., the fifth tree in the forest)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> clf.estimators_[<span class="dv">5</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure for the plot</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree using plot_tree function</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(estimator,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>               feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>               class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>               filled<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>               max_depth<span class="op">=</span><span class="dv">2</span>,  <span class="co"># Limit the depth of the tree for better readability</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>               ax<span class="op">=</span>axes)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We have seen a single tree, but Random Forest is an ensemble of multiple trees. The final prediction is made by aggregating the predictions of all the trees in the forest. We can also visualise all or a subset of trees in the forest to grasp the complexity and diversity of the model.</p>
+<div id="4fd1a1be" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of trees in the random forest</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>total_trees <span class="op">=</span> <span class="bu">len</span>(clf.estimators_)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of trees to plot</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>num_trees_to_plot <span class="op">=</span> <span class="dv">24</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly pick 'num_trees_to_plot' trees from the random forest</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>selected_trees <span class="op">=</span> random.sample(<span class="bu">range</span>(total_trees), num_trees_to_plot)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure object and an array of axes objects (subplots)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span>(num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span> <span class="op">*</span> ((num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>)))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes (for easy iteration if it's 2D due to multiple rows)</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each randomly selected tree using a subplot</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes[:num_trees_to_plot]):  <span class="co"># Limit axes iteration to number of trees to plot</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    tree_index <span class="op">=</span> selected_trees[i]</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    tree.plot_tree(clf.estimators_[tree_index], feature_names<span class="op">=</span>breast_cancer.feature_names, class_names<span class="op">=</span>[<span class="st">'Malignant'</span>, <span class="st">'Benign'</span>], filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'Tree </span><span class="sc">{</span>tree_index<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are any leftover axes, turn them off (when num_trees_to_plot is not a multiple of 4)</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_trees_to_plot:]:</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="explainability" class="level2">
+<h2 class="anchored" data-anchor-id="explainability">Explainability</h2>
+<p>We’ve established that Random Forest models offer substantial explainability, unlike many other complex model frameworks that are often considered “black boxes.” To elucidate this aspect, one effective method is visualizing the decision paths used by the trees within the forest when making predictions. This can be accomplished using the <a href="https://github.com/parrt/dtreeviz">dtreeviz</a> library, which provides a detailed and interactive visualization of the decision-making process within a tree.</p>
+<p>Using dtreeviz, we can trace the decision path of a single example from the training set across any of the trees in the model. This visualization includes splits made at each node, the criteria for these splits, and the distribution of target classes at each step. Such detailed traceability helps in understanding exactly how the model is arriving at its conclusions, highlighting the individual contributions of features in the decision process.</p>
+<div id="9a050032" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> model</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress warnings - this is just to shut up warnings about fonts in GitHub Actions</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>logging.getLogger(<span class="st">'matplotlib.font_manager'</span>).setLevel(level<span class="op">=</span>logging.CRITICAL)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The training sample to visualize</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[<span class="dv">5</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for benign and malignant</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {<span class="st">'classes'</span>:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                         [<span class="va">None</span>,  <span class="co"># 0 classes</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                          <span class="va">None</span>,  <span class="co"># 1 class</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                          [<span class="st">"#FFAAAA"</span>, <span class="st">"#AAFFAA"</span>],  <span class="co"># 2 classes</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                          ]}</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the selected tree</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> model(estimator,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>               X_train,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>               y_train,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>               target_name<span class="op">=</span><span class="st">'Target'</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>               feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>               class_names<span class="op">=</span><span class="bu">list</span>(breast_cancer.target_names))</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>viz.view(x<span class="op">=</span>x, colors<span class="op">=</span>color_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-7-output-1.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-7-output-1.svg" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Another great feature of Random Forests is that they can explain the relative importance of each feature when predicting results. For our <code>Breast Cancer</code> dataset, here is how each feature impacts the model.</p>
+<div id="d61470e7" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> breast_cancer.feature_names</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> clf.feature_importances_</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argsort(importances)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Feature Importances'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(indices)), importances[indices], color<span class="op">=</span><span class="st">'b'</span>, align<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(indices)), [features[i] <span class="cf">for</span> i <span class="kw">in</span> indices])</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Relative Importance'</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now that we know which features are most important, we can use <code>dtreeviz</code> to visualise the classification boundaries for any pair of features. This can help us understand how the model is making decisions. Let us visualise classification boundaries for <code>worst concave points</code> and <code>worst area</code> features.</p>
+<div id="e823cd90" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> decision_boundaries</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>X_features_for_boundaries <span class="op">=</span> X_train[:, [<span class="dv">27</span>,<span class="dv">23</span>]] <span class="co"># 27 = 'worst concave points', 23 = 'worst area'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>new_clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>new_clf.fit(X_features_for_boundaries, y_train)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>fig,axes <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>decision_boundaries(new_clf, X_features_for_boundaries, y_train, ax<span class="op">=</span>axes,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       feature_names<span class="op">=</span>[<span class="st">'worst concave points'</span>, <span class="st">'worst area'</span>],</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       markers<span class="op">=</span>[<span class="st">'X'</span>, <span class="st">'s'</span>], colors<span class="op">=</span>color_map)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also plot pairs of features and their decision boundaries in a grid, to understand how pairs of features interact in the model. This can help us understand the relationships between features and how they contribute to the model’s predictions. Let us do so for random pairs, just for illustration purposes. In practice, you would choose pairs of features that are most important for your specific problem.</p>
+<div id="54ec1dc9" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 4x4 subplot grid</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the 2D array of axes for easy iteration</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select and plot decision boundaries for 5x5 pairs of features</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly pick two distinct features</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    features_idx <span class="op">=</span> np.random.choice(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]), size<span class="op">=</span><span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries <span class="op">=</span> X[:, features_idx]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train a new classifier</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    clf.fit(X_features_for_boundaries, y)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot decision boundaries using dtreeviz</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    decision_boundaries(clf, X_features_for_boundaries, y, ax<span class="op">=</span>ax,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                        feature_names<span class="op">=</span>features[features_idx],</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                        class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                        markers<span class="op">=</span>[<span class="st">'X'</span>, <span class="st">'s'</span>], colors<span class="op">=</span>color_map)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set titles for the subplots</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>features[features_idx[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>features[features_idx[<span class="dv">1</span>]]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="random-forests-vs-neural-networks" class="level2">
+<h2 class="anchored" data-anchor-id="random-forests-vs-neural-networks">Random Forests vs Neural Networks</h2>
+<p>Comparing Random Forests to neural networks involves considering several factors such as accuracy, training time, interpretability, and scalability across different types of data and tasks. Both algorithms have their unique strengths and weaknesses, making them suitable for specific scenarios.</p>
+<section id="performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="performance-metrics">Performance metrics</h3>
+<p>Random Forests typically offer strong predictive accuracy with less complexity than deep learning models, particularly on structured datasets. By constructing multiple decision trees and averaging their outputs, Random Forests can capture a variety of signals without overfitting too much, making them competitive for many standard data science tasks. In contrast, neural networks, especially deep learning architectures, are known for their prowess on unstructured data like images, text, or audio, due to their ability to learn intricate feature hierarchies.</p>
+<p>When it comes to training, Random Forests are usually quicker on small to medium-sized datasets, thanks to parallel tree building and the lack of iterative tuning. Neural networks, on the other hand, often require intensive computation over multiple epochs, relying heavily on GPUs or TPUs to handle large volumes of data. This extra training overhead can pay off if the dataset is big and complex, but it does mean more time and resources are needed.</p>
+<p>Interpretability is another key distinction. Because each tree’s splits can be traced, Random Forests offer a more transparent look into how decisions are reached, and feature importance scores can be extracted. Neural networks, however, are often seen as “black boxes”, with hidden layers that make it harder to pinpoint exactly how they arrive at their predictions. This can be challenging in fields that require clear explanations for regulatory or trust reasons.</p>
+<p>In terms of robustness, Random Forests mitigate variance by aggregating a large number of individual trees, reducing the chance of overfitting. Neural networks, if not carefully regularized with techniques like dropout or early stopping, can easily overfit. Yet, with proper tuning and enough data, they remain extremely powerful.</p>
+<p>Finally, there’s the matter of scalability. Random Forests scale well in parallel settings for both training and inference, making them handy in distributed environments. Neural networks can also scale effectively to handle massive datasets, especially with specialized hardware, but require a more complex setup. That said, their ability to adapt to various input sizes and modalities remains unmatched for certain tasks.</p>
+</section>
+<section id="suitability-based-on-data-type" class="level3">
+<h3 class="anchored" data-anchor-id="suitability-based-on-data-type">Suitability based on data type</h3>
+<p>Random Forests are particularly well-suited for:</p>
+<ul>
+<li>Classification and regression on structured data</li>
+<li>Large datasets, but with a limitation on the input feature space (high-dimensional spaces might lead to slower performance)</li>
+<li>Applications requiring a balance between accuracy and interpretability</li>
+</ul>
+<p>On the other hand, Neural Networks are more appropriate for:</p>
+<ul>
+<li>High-complexity tasks involving image, text, or audio</li>
+<li>Unstructured data which requires feature learning</li>
+<li>Situations where model interpretability is less critical than performance</li>
+</ul>
+</section>
+<section id="example-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="example-comparisons">Example comparisons</h3>
+<p>In <strong>image recognition</strong>, neural networks (specifically convolutional neural networks) perform significantly better than random forests due to their ability to hierarchically learn features directly from data.</p>
+<p>In <strong>tabular data prediction</strong>, random forests typically outperform neural networks, especially when the dataset isn’t huge, as they can better leverage the structure within the data without the need for extensive parameter tuning.</p>
+</section>
+</section>
+<section id="final-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="final-remarks">Final remarks</h2>
+<p>In summary, Random Forests are excellent for many traditional machine learning tasks and provide a good mix of accuracy, ease of use, and speed, especially on structured data. Neural networks are preferable for tasks involving complex patterns and large scales of unstructured data, although they require more resources and effort to tune and interpret.</p>
+<p>Choosing between the two often depends on the specific requirements of the task, the nature of the data involved, and the computational resources available. In practice, it’s also common to evaluate both types of models along with others to find the best tool for a particular job.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Pedro Leitão</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with Quarto</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

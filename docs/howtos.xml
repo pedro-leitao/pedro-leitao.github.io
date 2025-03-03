@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/howtos.html</link>
+<atom:link href="https://pedroleitao.nl/howtos.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<image>
+<url>https://pedroleitao.nl/_static/logo.png</url>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/howtos.html</link>
+<height>138</height>
+<width>144</width>
+</image>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Sat, 11 Jan 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Reasoning Models for Fun and Profit</title>
+  <link>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</link>
+  <description><![CDATA[ Since the advent of GPT-3, foundation models have rapidly progressed from single pass transformer models, to multi-step models that can reason over multiple passes. Multi-step reasoning can be applied to more complex problems, where the model benefits from iterative reasoning to arrive at the correct answer. ]]></description>
+  <category>HowTo</category>
+  <category>AI</category>
+  <category>Language Models</category>
+  <guid>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</guid>
+  <pubDate>Sat, 11 Jan 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Model Fine-tuning with the Hugging Face transformers Library</title>
+  <link>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</link>
+  <description><![CDATA[ Previously, we learned <a href="../../../howtos/fine-tuning/mlx/">how to use Apple’s MLX framework to fine-tune a language model</a>. This is an Apple specific framework and is not available to everyone. Here we will learn how to fine-tune a language model using the Hugging Face <a href="https://huggingface.co/docs/transformers/en/index"><code>transformers</code></a> library. This library is widely used and supports a variety of models on different platforms and hardware. ]]></description>
+  <category>HowTo</category>
+  <category>AI</category>
+  <category>Language Models</category>
+  <guid>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</guid>
+  <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Fine-tuning an LLM with Apple’s MLX Framework</title>
+  <link>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</link>
+  <description><![CDATA[ Modern GPU’s come with inbuilt memory, which is separate from the CPU’s memory. This means that when training large models, the data has to be copied from the CPU’s memory to the GPU’s memory, which can be slow and inefficient. This is particularly problematic when training large language models (LLM’s), as the data can be too large to fit into the GPU’s memory. ]]></description>
+  <category>HowTo</category>
+  <category>AI</category>
+  <category>Language Models</category>
+  <guid>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</guid>
+  <pubDate>Wed, 11 Dec 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Model Management with MLflow</title>
+  <link>https://pedroleitao.nl/posts/howtos/mlflow-ui/</link>
+  <description><![CDATA[ As you develop machine learning models, you will find that you need to manage many different versions and variations as you move towards the desired outcome. You may want to compare, roll back to previous versions, or deploy multiple versions of a model to A/B test which one is better. <a href="https://MLflow.org">MLflow</a> is one of many tools and frameworks that helps you manage this process. There are lots of alternatives in this space, including <a href="https://www.kubeflow.org">Kubeflow</a>, <a href="https://dvc.org">DVC</a>, and <a href="https://metaflow.org">Metaflow</a>. ]]></description>
+  <category>HowTo</category>
+  <category>Machine Learning</category>
+  <category>Model Management</category>
+  <guid>https://pedroleitao.nl/posts/howtos/mlflow-ui/</guid>
+  <pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Caching long running jobs</title>
+  <link>https://pedroleitao.nl/posts/howtos/caching-ml/</link>
+  <description><![CDATA[ In any data science or machine learning pipeline, one often has to re-try and experiment with long running computations. For example, maybe you will be running some long running embeddings for thousands of text segments, or some long running hyperparameter search. In such cases, it is very useful to cache the results of these computations so that you don’t have to re-run them every time you make a change to your code, just to wait potentially for hours. ]]></description>
+  <guid>https://pedroleitao.nl/posts/howtos/caching-ml/</guid>
+  <pubDate>Fri, 26 Apr 2024 23:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

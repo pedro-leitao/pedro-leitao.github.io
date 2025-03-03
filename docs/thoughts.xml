@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/thoughts.html</link>
+<atom:link href="https://pedroleitao.nl/thoughts.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<image>
+<url>https://pedroleitao.nl/_static/logo.png</url>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/thoughts.html</link>
+<height>138</height>
+<width>144</width>
+</image>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Mon, 10 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>France, AI and Back to Nuclear for Germany ?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</link>
+  <description><![CDATA[ President Macron has <a href="https://www.reuters.com/technology/artificial-intelligence/france-invest-109-billion-euros-ai-macron-announces-2025-02-09/">just signalled that France is about to announce €109 billion private sector investments in AI</a>. This is a significant amount of money, even for a country like France. It is also a clear statement that at least some European countries might be serious about investing in digital. ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Politics</category>
+  <category>Europe</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</guid>
+  <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Will Artificial Intelligence Ever be More than Fancy Curve Fitting ?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/</link>
+  <description><![CDATA[ One of my favourite books from my late 20’s was <a href="https://podcasts.ox.ac.uk/people/roger-penrose">Roger Penrose’s</a> <a href="https://global.oup.com/ukhe/product/the-emperors-new-mind-9780198784920?cc=gb&amp;lang=en&amp;">The Emperor’s New Mind</a>, where he argues that human consciousness is non-algorithmic and non-computable. This is a view that is not shared by many in the AI community, who believe that the brain is a computer and that consciousness is an emergent property of the brain’s computation. ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/</guid>
+  <pubDate>Thu, 10 Oct 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Exploring the Impact of Kolmogorov-Arnold Networks in Machine Learning</title>
+  <link>https://pedroleitao.nl/posts/thoughts/kolmogorov/</link>
+  <description><![CDATA[ Machine learning never sleeps, and its latest wake-up call is the cutting-edge Kolmogorov-Arnold Networks (KANs), as detailed in this <a href="https://arxiv.org/pdf/2404.19756">NSF paper</a>. Stepping up from the tried-and-true Multi-Layer Perceptrons (MLPs), KANs are not just another update — they’re very much a whole new different approach. They’re designed to outpace their predecessors in accuracy and efficiency, and offer a clearer window into how they make decisions. ]]></description>
+  <category>Thoughts</category>
+  <category>Machine Learning</category>
+  <category>Deep Learning</category>
+  <category>AI</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/kolmogorov/</guid>
+  <pubDate>Fri, 24 May 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The Connundrum of European Tech and Artificial Intelligence</title>
+  <link>https://pedroleitao.nl/posts/thoughts/connundrum-european-tech/</link>
+  <description><![CDATA[ The European tech scene is a curious one. It is a region that is home to some of the oldest and most representative companies in the world, yet it is also a region that is often overlooked when it comes to tech investment. This is a paradox that has puzzled many observers, and one that has led to a number of questions about the future of European tech. ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Europe</category>
+  <category>Politics</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/connundrum-european-tech/</guid>
+  <pubDate>Sun, 19 May 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>On Scaling AI: Are we Hitting the Limits of our Current Approaches?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/scalling-ai/</link>
+  <description><![CDATA[ There’s been a lot of speculation on whether we’re hitting the limits of our current approaches to scaling AI. Will OpenAI and others be able to continue to scale up models at the same pace? Will these new models be able to solve new problems, or will GPT-7 be just an iteration over GPT-4 ? ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Scaling</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/scalling-ai/</guid>
+  <pubDate>Sun, 19 May 2024 23:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

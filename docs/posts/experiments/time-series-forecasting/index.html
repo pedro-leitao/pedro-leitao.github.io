@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-20">
+
+<title>Time Series Forecasting with Prophet – Pedro Leitão</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9143d267086697ee6a9fbeed7f968a66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../posts.html"> 
+<span class="menu-text">All posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../experiments.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../thoughts.html"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../howtos.html"> 
+<span class="menu-text">Howto’s</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pedro-leitao"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/nunoleitao"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Time Series Forecasting with Prophet</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Experiments</div>
+                <div class="quarto-category">Time Series Analysis</div>
+                <div class="quarto-category">Machine Learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 20, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#load-the-datasets" id="toc-load-the-datasets" class="nav-link active" data-scroll-target="#load-the-datasets">Load the datasets</a></li>
+  <li><a href="#preprocessing-the-data" id="toc-preprocessing-the-data" class="nav-link" data-scroll-target="#preprocessing-the-data">Preprocessing the data</a></li>
+  <li><a href="#visualising-a-few-features" id="toc-visualising-a-few-features" class="nav-link" data-scroll-target="#visualising-a-few-features">Visualising a few features</a></li>
+  <li><a href="#building-the-model" id="toc-building-the-model" class="nav-link" data-scroll-target="#building-the-model">Building the model</a></li>
+  <li><a href="#predicting-births" id="toc-predicting-births" class="nav-link" data-scroll-target="#predicting-births">Predicting births</a>
+  <ul class="collapse">
+  <li><a href="#cross-validating-the-model" id="toc-cross-validating-the-model" class="nav-link" data-scroll-target="#cross-validating-the-model">Cross validating the model</a></li>
+  </ul></li>
+  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks">Final remarks</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Forecasting future trends is a common application in time series analysis. In this experiment, we will use <a href="https://facebook.github.io/prophet/">Meta’s Prophet</a> library to predict trends for births in Malaysia, based on available public data. Prophet is a forecasting tool developed by Meta that is available in Python and R. It is designed for analyzing time series data with daily observations that display patterns on different time scales.</p>
+<p>Prophet handles missing data, shifts in the trend, and large outliers in a robust manner. It provides a straightforward way to include the effects of holidays and seasonality in the forecast. It decomposes time series data into trend, seasonality, and holiday effects, making it easy to understand the impact of these components on the forecast.</p>
+<p>In this experiment, we will incorporate additional regressors, such as temperature and pollutant levels, to see how these factors influence birth rates. The approach allows us to account for external variables that might affect the trend and seasonality of births.</p>
+<section id="load-the-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-datasets">Load the datasets</h2>
+<p>We will be using public Kaggle datasets, one containing weather data for Malaysia, and the other containing the number of births.</p>
+<div id="fbf55edd" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Download https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia?select=full-weather.csv using the Kaggle API</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>p .data<span class="op">/</span> shahmirvarqha<span class="op">/</span>weather<span class="op">-</span>data<span class="op">-</span>malaysia <span class="op">--</span>unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dataset URL: https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia
+License(s): Attribution 4.0 International (CC BY 4.0)
+Downloading weather-data-malaysia.zip to .data
+  0%|                                                | 0.00/311M [00:00&lt;?, ?B/s]  0%|▏                                      | 1.00M/311M [00:00&lt;01:59, 2.71MB/s]  1%|▎                                      | 2.00M/311M [00:00&lt;01:11, 4.50MB/s]  1%|▍                                      | 3.00M/311M [00:00&lt;00:57, 5.60MB/s]  1%|▌                                      | 4.00M/311M [00:00&lt;00:51, 6.26MB/s]  2%|▋                                      | 5.00M/311M [00:00&lt;00:46, 6.87MB/s]  2%|▊                                      | 6.00M/311M [00:01&lt;00:43, 7.40MB/s]  2%|▉                                      | 7.00M/311M [00:01&lt;00:43, 7.41MB/s]  3%|█                                      | 8.00M/311M [00:01&lt;00:41, 7.61MB/s]  3%|█▏                                     | 9.00M/311M [00:01&lt;00:40, 7.75MB/s]  3%|█▎                                     | 10.0M/311M [00:01&lt;00:39, 8.05MB/s]  4%|█▍                                     | 11.0M/311M [00:01&lt;00:38, 8.20MB/s]  4%|█▌                                     | 12.0M/311M [00:01&lt;00:38, 8.25MB/s]  4%|█▋                                     | 13.0M/311M [00:01&lt;00:37, 8.31MB/s]  5%|█▊                                     | 14.0M/311M [00:02&lt;00:37, 8.21MB/s]  5%|█▉                                     | 15.0M/311M [00:02&lt;00:38, 8.05MB/s]  5%|██                                     | 16.0M/311M [00:02&lt;00:37, 8.14MB/s]  5%|██▏                                    | 17.0M/311M [00:02&lt;00:38, 8.11MB/s]  6%|██▎                                    | 18.0M/311M [00:02&lt;00:36, 8.40MB/s]  6%|██▍                                    | 19.0M/311M [00:02&lt;00:36, 8.44MB/s]  6%|██▌                                    | 20.0M/311M [00:02&lt;00:36, 8.36MB/s]  7%|██▋                                    | 21.0M/311M [00:02&lt;00:36, 8.30MB/s]  7%|██▊                                    | 22.0M/311M [00:03&lt;00:36, 8.27MB/s]  7%|██▉                                    | 23.0M/311M [00:03&lt;00:37, 8.05MB/s]  8%|███                                    | 24.0M/311M [00:03&lt;00:37, 8.05MB/s]  8%|███▏                                   | 25.0M/311M [00:03&lt;00:37, 7.93MB/s]  8%|███▎                                   | 26.0M/311M [00:03&lt;00:37, 7.92MB/s]  9%|███▍                                   | 27.0M/311M [00:03&lt;00:37, 7.95MB/s]  9%|███▌                                   | 28.0M/311M [00:03&lt;00:37, 7.99MB/s]  9%|███▋                                   | 29.0M/311M [00:03&lt;00:37, 7.96MB/s] 10%|███▊                                   | 30.0M/311M [00:04&lt;00:37, 7.87MB/s] 10%|███▉                                   | 31.0M/311M [00:04&lt;00:37, 7.89MB/s] 10%|████                                   | 32.0M/311M [00:04&lt;00:36, 8.00MB/s] 11%|████▏                                  | 33.0M/311M [00:04&lt;00:36, 8.03MB/s] 11%|████▎                                  | 34.0M/311M [00:04&lt;00:36, 7.99MB/s] 11%|████▍                                  | 35.0M/311M [00:04&lt;00:36, 8.04MB/s] 12%|████▌                                  | 36.0M/311M [00:04&lt;00:35, 8.12MB/s] 12%|████▋                                  | 37.0M/311M [00:05&lt;00:35, 8.02MB/s] 12%|████▊                                  | 38.0M/311M [00:05&lt;00:36, 7.94MB/s] 13%|████▉                                  | 39.0M/311M [00:05&lt;00:35, 7.95MB/s] 13%|█████                                  | 40.0M/311M [00:05&lt;00:46, 6.05MB/s] 13%|█████▏                                 | 41.0M/311M [00:05&lt;00:42, 6.58MB/s] 14%|█████▎                                 | 42.0M/311M [00:05&lt;00:41, 6.87MB/s] 14%|█████▍                                 | 43.0M/311M [00:05&lt;00:38, 7.33MB/s] 14%|█████▌                                 | 44.0M/311M [00:06&lt;00:37, 7.56MB/s] 14%|█████▋                                 | 45.0M/311M [00:06&lt;00:35, 7.77MB/s] 15%|█████▊                                 | 46.0M/311M [00:06&lt;00:35, 7.86MB/s] 15%|█████▉                                 | 47.0M/311M [00:06&lt;00:35, 7.91MB/s] 15%|██████                                 | 48.0M/311M [00:06&lt;00:34, 8.02MB/s] 16%|██████▏                                | 49.0M/311M [00:06&lt;00:34, 7.99MB/s] 16%|██████▎                                | 50.0M/311M [00:06&lt;00:34, 8.01MB/s] 16%|██████▍                                | 51.0M/311M [00:06&lt;00:33, 8.10MB/s] 17%|██████▌                                | 52.0M/311M [00:07&lt;00:32, 8.25MB/s] 17%|██████▋                                | 53.0M/311M [00:07&lt;00:32, 8.20MB/s] 17%|██████▊                                | 54.0M/311M [00:07&lt;00:33, 8.13MB/s] 18%|██████▉                                | 55.0M/311M [00:07&lt;00:31, 8.47MB/s] 18%|███████                                | 56.0M/311M [00:07&lt;00:31, 8.48MB/s] 18%|███████▏                               | 57.0M/311M [00:07&lt;00:31, 8.53MB/s] 19%|███████▎                               | 58.0M/311M [00:07&lt;00:31, 8.36MB/s] 19%|███████▍                               | 59.0M/311M [00:07&lt;00:31, 8.51MB/s] 19%|███████▌                               | 60.0M/311M [00:08&lt;00:30, 8.51MB/s] 20%|███████▋                               | 61.0M/311M [00:08&lt;00:30, 8.54MB/s] 20%|███████▊                               | 62.0M/311M [00:08&lt;00:31, 8.40MB/s] 20%|███████▉                               | 63.0M/311M [00:08&lt;00:31, 8.20MB/s] 21%|████████                               | 64.0M/311M [00:08&lt;00:30, 8.49MB/s] 21%|████████▏                              | 65.0M/311M [00:08&lt;00:30, 8.40MB/s] 21%|████████▎                              | 66.0M/311M [00:08&lt;00:30, 8.53MB/s] 22%|████████▍                              | 67.0M/311M [00:08&lt;00:30, 8.49MB/s] 22%|████████▌                              | 68.0M/311M [00:09&lt;00:30, 8.32MB/s] 22%|████████▋                              | 69.0M/311M [00:09&lt;00:30, 8.37MB/s] 23%|████████▊                              | 70.0M/311M [00:09&lt;00:29, 8.48MB/s] 23%|████████▉                              | 71.0M/311M [00:09&lt;00:29, 8.51MB/s] 23%|█████████                              | 72.0M/311M [00:09&lt;00:29, 8.56MB/s] 23%|█████████▏                             | 73.0M/311M [00:09&lt;00:29, 8.57MB/s] 24%|█████████▎                             | 74.0M/311M [00:09&lt;00:29, 8.41MB/s] 24%|█████████▍                             | 75.0M/311M [00:09&lt;00:29, 8.45MB/s] 24%|█████████▌                             | 76.0M/311M [00:10&lt;00:29, 8.28MB/s] 25%|█████████▋                             | 77.0M/311M [00:10&lt;00:29, 8.30MB/s] 25%|█████████▊                             | 78.0M/311M [00:10&lt;00:29, 8.33MB/s] 25%|█████████▉                             | 79.0M/311M [00:10&lt;00:28, 8.43MB/s] 26%|██████████                             | 80.0M/311M [00:10&lt;00:39, 6.08MB/s] 26%|██████████▏                            | 81.0M/311M [00:10&lt;00:36, 6.63MB/s] 26%|██████████▎                            | 82.0M/311M [00:11&lt;00:33, 7.09MB/s] 27%|██████████▍                            | 83.0M/311M [00:11&lt;00:32, 7.46MB/s] 27%|██████████▌                            | 84.0M/311M [00:11&lt;00:30, 7.76MB/s] 27%|██████████▋                            | 85.0M/311M [00:11&lt;00:29, 8.03MB/s] 28%|██████████▊                            | 86.0M/311M [00:11&lt;00:28, 8.17MB/s] 28%|██████████▉                            | 87.0M/311M [00:11&lt;00:28, 8.23MB/s] 28%|███████████                            | 88.0M/311M [00:11&lt;00:27, 8.38MB/s] 29%|███████████▏                           | 89.0M/311M [00:11&lt;00:27, 8.38MB/s] 29%|███████████▎                           | 90.0M/311M [00:11&lt;00:27, 8.51MB/s] 29%|███████████▍                           | 91.0M/311M [00:12&lt;00:27, 8.37MB/s] 30%|███████████▌                           | 92.0M/311M [00:12&lt;00:27, 8.35MB/s] 30%|███████████▋                           | 93.0M/311M [00:12&lt;00:27, 8.35MB/s] 30%|███████████▊                           | 94.0M/311M [00:12&lt;00:26, 8.54MB/s] 31%|███████████▉                           | 95.0M/311M [00:12&lt;00:26, 8.40MB/s] 31%|████████████                           | 96.0M/311M [00:12&lt;00:26, 8.53MB/s] 31%|████████████▏                          | 97.0M/311M [00:12&lt;00:26, 8.55MB/s] 32%|████████████▎                          | 98.0M/311M [00:13&lt;00:27, 8.09MB/s] 32%|████████████▍                          | 99.0M/311M [00:13&lt;00:26, 8.42MB/s] 32%|████████████▊                           | 100M/311M [00:13&lt;00:27, 8.03MB/s] 32%|████████████▉                           | 101M/311M [00:13&lt;00:28, 7.85MB/s] 33%|█████████████                           | 102M/311M [00:13&lt;00:28, 7.73MB/s] 33%|█████████████▎                          | 103M/311M [00:13&lt;00:28, 7.67MB/s] 33%|█████████████▍                          | 104M/311M [00:13&lt;00:28, 7.50MB/s] 34%|█████████████▌                          | 105M/311M [00:13&lt;00:28, 7.52MB/s] 34%|█████████████▋                          | 106M/311M [00:14&lt;00:28, 7.59MB/s] 34%|█████████████▊                          | 107M/311M [00:14&lt;00:28, 7.58MB/s] 35%|█████████████▉                          | 108M/311M [00:14&lt;00:27, 7.75MB/s] 35%|██████████████                          | 109M/311M [00:14&lt;00:26, 7.96MB/s] 35%|██████████████▏                         | 110M/311M [00:14&lt;00:26, 7.97MB/s] 36%|██████████████▎                         | 111M/311M [00:14&lt;00:26, 8.04MB/s] 36%|██████████████▍                         | 112M/311M [00:14&lt;00:25, 8.18MB/s] 36%|██████████████▌                         | 113M/311M [00:14&lt;00:24, 8.39MB/s] 37%|██████████████▋                         | 114M/311M [00:15&lt;00:24, 8.37MB/s] 37%|██████████████▊                         | 115M/311M [00:15&lt;00:28, 7.29MB/s] 37%|██████████████▉                         | 116M/311M [00:15&lt;00:28, 7.26MB/s] 38%|███████████████                         | 117M/311M [00:15&lt;00:27, 7.38MB/s] 38%|███████████████▏                        | 118M/311M [00:15&lt;00:26, 7.73MB/s] 38%|███████████████▎                        | 119M/311M [00:15&lt;00:25, 7.85MB/s] 39%|███████████████▍                        | 120M/311M [00:15&lt;00:25, 7.89MB/s] 39%|███████████████▌                        | 121M/311M [00:16&lt;00:24, 8.00MB/s] 39%|███████████████▋                        | 122M/311M [00:16&lt;00:25, 7.92MB/s] 40%|███████████████▊                        | 123M/311M [00:16&lt;00:25, 7.81MB/s] 40%|███████████████▉                        | 124M/311M [00:16&lt;00:24, 8.13MB/s] 40%|████████████████                        | 125M/311M [00:16&lt;00:23, 8.23MB/s] 41%|████████████████▏                       | 126M/311M [00:16&lt;00:23, 8.35MB/s] 41%|████████████████▎                       | 127M/311M [00:16&lt;00:23, 8.32MB/s] 41%|████████████████▍                       | 128M/311M [00:16&lt;00:23, 8.33MB/s] 41%|████████████████▌                       | 129M/311M [00:17&lt;00:23, 8.13MB/s] 42%|████████████████▋                       | 130M/311M [00:17&lt;00:23, 8.08MB/s] 42%|████████████████▊                       | 131M/311M [00:17&lt;00:23, 8.12MB/s] 42%|████████████████▉                       | 132M/311M [00:17&lt;00:23, 8.02MB/s] 43%|█████████████████                       | 133M/311M [00:17&lt;00:23, 8.00MB/s] 43%|█████████████████▏                      | 134M/311M [00:17&lt;00:23, 8.00MB/s] 43%|█████████████████▎                      | 135M/311M [00:17&lt;00:22, 8.12MB/s] 44%|█████████████████▍                      | 136M/311M [00:18&lt;00:22, 8.30MB/s] 44%|█████████████████▋                      | 137M/311M [00:18&lt;00:21, 8.34MB/s] 44%|█████████████████▊                      | 138M/311M [00:18&lt;00:21, 8.43MB/s] 45%|█████████████████▉                      | 139M/311M [00:18&lt;00:28, 6.24MB/s] 45%|██████████████████                      | 140M/311M [00:18&lt;00:26, 6.75MB/s] 45%|██████████████████▏                     | 141M/311M [00:18&lt;00:25, 7.12MB/s] 46%|██████████████████▎                     | 142M/311M [00:18&lt;00:23, 7.50MB/s] 46%|██████████████████▍                     | 143M/311M [00:19&lt;00:23, 7.57MB/s] 46%|██████████████████▌                     | 144M/311M [00:19&lt;00:22, 7.72MB/s] 47%|██████████████████▋                     | 145M/311M [00:19&lt;00:21, 7.91MB/s] 47%|██████████████████▊                     | 146M/311M [00:19&lt;00:21, 7.95MB/s] 47%|██████████████████▉                     | 147M/311M [00:19&lt;00:21, 7.94MB/s] 48%|███████████████████                     | 148M/311M [00:19&lt;00:21, 8.07MB/s] 48%|███████████████████▏                    | 149M/311M [00:19&lt;00:20, 8.09MB/s] 48%|███████████████████▎                    | 150M/311M [00:19&lt;00:20, 8.21MB/s] 49%|███████████████████▍                    | 151M/311M [00:20&lt;00:20, 8.24MB/s] 49%|███████████████████▌                    | 152M/311M [00:20&lt;00:20, 8.23MB/s] 49%|███████████████████▋                    | 153M/311M [00:20&lt;00:20, 8.21MB/s] 50%|███████████████████▊                    | 154M/311M [00:20&lt;00:19, 8.34MB/s] 50%|███████████████████▉                    | 155M/311M [00:20&lt;00:19, 8.40MB/s] 50%|████████████████████                    | 156M/311M [00:20&lt;00:19, 8.46MB/s] 51%|████████████████████▏                   | 157M/311M [00:20&lt;00:19, 8.42MB/s] 51%|████████████████████▎                   | 158M/311M [00:20&lt;00:19, 8.41MB/s] 51%|████████████████████▍                   | 159M/311M [00:21&lt;00:19, 8.33MB/s] 51%|████████████████████▌                   | 160M/311M [00:21&lt;00:18, 8.41MB/s] 52%|████████████████████▋                   | 161M/311M [00:21&lt;00:18, 8.37MB/s] 52%|████████████████████▊                   | 162M/311M [00:21&lt;00:18, 8.30MB/s] 52%|████████████████████▉                   | 163M/311M [00:21&lt;00:19, 8.04MB/s] 53%|█████████████████████                   | 164M/311M [00:21&lt;00:18, 8.13MB/s] 53%|█████████████████████▏                  | 165M/311M [00:21&lt;00:19, 7.94MB/s] 53%|█████████████████████▎                  | 166M/311M [00:21&lt;00:18, 8.17MB/s] 54%|█████████████████████▍                  | 167M/311M [00:22&lt;00:18, 8.09MB/s] 54%|█████████████████████▌                  | 168M/311M [00:22&lt;00:18, 8.11MB/s] 54%|█████████████████████▋                  | 169M/311M [00:22&lt;00:18, 8.08MB/s] 55%|█████████████████████▊                  | 170M/311M [00:22&lt;00:18, 8.04MB/s] 55%|██████████████████████                  | 171M/311M [00:22&lt;00:18, 8.04MB/s] 55%|██████████████████████▏                 | 172M/311M [00:22&lt;00:18, 8.06MB/s] 56%|██████████████████████▎                 | 173M/311M [00:22&lt;00:17, 8.09MB/s] 56%|██████████████████████▍                 | 174M/311M [00:23&lt;00:17, 8.22MB/s] 56%|██████████████████████▌                 | 175M/311M [00:23&lt;00:17, 8.17MB/s] 57%|██████████████████████▋                 | 176M/311M [00:23&lt;00:17, 8.16MB/s] 57%|██████████████████████▊                 | 177M/311M [00:23&lt;00:17, 8.22MB/s] 57%|██████████████████████▉                 | 178M/311M [00:23&lt;00:16, 8.34MB/s] 58%|███████████████████████                 | 179M/311M [00:23&lt;00:22, 6.24MB/s] 58%|███████████████████████▏                | 180M/311M [00:23&lt;00:20, 6.77MB/s] 58%|███████████████████████▎                | 181M/311M [00:24&lt;00:18, 7.25MB/s] 59%|███████████████████████▍                | 182M/311M [00:24&lt;00:17, 7.55MB/s] 59%|███████████████████████▌                | 183M/311M [00:24&lt;00:17, 7.69MB/s] 59%|███████████████████████▋                | 184M/311M [00:24&lt;00:17, 7.71MB/s] 60%|███████████████████████▊                | 185M/311M [00:24&lt;00:16, 7.92MB/s] 60%|███████████████████████▉                | 186M/311M [00:24&lt;00:16, 7.94MB/s] 60%|████████████████████████                | 187M/311M [00:24&lt;00:16, 8.07MB/s] 60%|████████████████████████▏               | 188M/311M [00:24&lt;00:15, 8.25MB/s] 61%|████████████████████████▎               | 189M/311M [00:25&lt;00:15, 8.32MB/s] 61%|████████████████████████▍               | 190M/311M [00:25&lt;00:15, 8.25MB/s] 61%|████████████████████████▌               | 191M/311M [00:25&lt;00:15, 8.23MB/s] 62%|████████████████████████▋               | 192M/311M [00:25&lt;00:15, 8.20MB/s] 62%|████████████████████████▊               | 193M/311M [00:25&lt;00:14, 8.32MB/s] 62%|████████████████████████▉               | 194M/311M [00:25&lt;00:14, 8.35MB/s] 63%|█████████████████████████               | 195M/311M [00:25&lt;00:14, 8.33MB/s] 63%|█████████████████████████▏              | 196M/311M [00:25&lt;00:14, 8.38MB/s] 63%|█████████████████████████▎              | 197M/311M [00:26&lt;00:14, 8.41MB/s] 64%|█████████████████████████▍              | 198M/311M [00:26&lt;00:14, 8.41MB/s] 64%|█████████████████████████▌              | 199M/311M [00:26&lt;00:14, 8.27MB/s] 64%|█████████████████████████▋              | 200M/311M [00:26&lt;00:14, 8.23MB/s] 65%|█████████████████████████▊              | 201M/311M [00:26&lt;00:14, 8.16MB/s] 65%|█████████████████████████▉              | 202M/311M [00:26&lt;00:14, 8.12MB/s] 65%|██████████████████████████              | 203M/311M [00:26&lt;00:13, 8.15MB/s] 66%|██████████████████████████▏             | 204M/311M [00:26&lt;00:13, 8.22MB/s] 66%|██████████████████████████▍             | 205M/311M [00:27&lt;00:13, 8.28MB/s] 66%|██████████████████████████▌             | 206M/311M [00:27&lt;00:13, 8.15MB/s] 67%|██████████████████████████▋             | 207M/311M [00:27&lt;00:13, 8.26MB/s] 67%|██████████████████████████▊             | 208M/311M [00:27&lt;00:13, 8.17MB/s] 67%|██████████████████████████▉             | 209M/311M [00:27&lt;00:13, 8.14MB/s] 68%|███████████████████████████             | 210M/311M [00:27&lt;00:13, 8.06MB/s] 68%|███████████████████████████▏            | 211M/311M [00:27&lt;00:13, 8.03MB/s] 68%|███████████████████████████▎            | 212M/311M [00:27&lt;00:12, 8.14MB/s] 69%|███████████████████████████▍            | 213M/311M [00:28&lt;00:12, 8.09MB/s] 69%|███████████████████████████▌            | 214M/311M [00:28&lt;00:12, 8.12MB/s] 69%|███████████████████████████▋            | 215M/311M [00:28&lt;00:12, 8.27MB/s] 69%|███████████████████████████▊            | 216M/311M [00:28&lt;00:11, 8.37MB/s] 70%|███████████████████████████▉            | 217M/311M [00:28&lt;00:11, 8.45MB/s] 70%|████████████████████████████            | 218M/311M [00:28&lt;00:11, 8.42MB/s] 70%|████████████████████████████▏           | 219M/311M [00:29&lt;00:15, 6.18MB/s] 71%|████████████████████████████▎           | 220M/311M [00:29&lt;00:14, 6.71MB/s] 71%|████████████████████████████▍           | 221M/311M [00:29&lt;00:13, 7.07MB/s] 71%|████████████████████████████▌           | 222M/311M [00:29&lt;00:12, 7.30MB/s] 72%|████████████████████████████▋           | 223M/311M [00:29&lt;00:12, 7.50MB/s] 72%|████████████████████████████▊           | 224M/311M [00:29&lt;00:11, 7.84MB/s] 72%|████████████████████████████▉           | 225M/311M [00:29&lt;00:11, 8.01MB/s] 73%|█████████████████████████████           | 226M/311M [00:29&lt;00:11, 7.98MB/s] 73%|█████████████████████████████▏          | 227M/311M [00:30&lt;00:10, 8.09MB/s] 73%|█████████████████████████████▎          | 228M/311M [00:30&lt;00:10, 8.12MB/s] 74%|█████████████████████████████▍          | 229M/311M [00:30&lt;00:11, 7.70MB/s] 74%|█████████████████████████████▌          | 230M/311M [00:30&lt;00:10, 7.81MB/s] 74%|█████████████████████████████▋          | 231M/311M [00:30&lt;00:10, 7.98MB/s] 75%|█████████████████████████████▊          | 232M/311M [00:30&lt;00:10, 7.78MB/s] 75%|█████████████████████████████▉          | 233M/311M [00:30&lt;00:10, 7.63MB/s] 75%|██████████████████████████████          | 234M/311M [00:30&lt;00:10, 7.72MB/s] 76%|██████████████████████████████▏         | 235M/311M [00:31&lt;00:10, 7.83MB/s] 76%|██████████████████████████████▎         | 236M/311M [00:31&lt;00:09, 7.91MB/s] 76%|██████████████████████████████▍         | 237M/311M [00:31&lt;00:09, 8.23MB/s] 77%|██████████████████████████████▌         | 238M/311M [00:31&lt;00:09, 8.26MB/s] 77%|██████████████████████████████▊         | 239M/311M [00:31&lt;00:08, 8.40MB/s] 77%|██████████████████████████████▉         | 240M/311M [00:31&lt;00:08, 8.51MB/s] 78%|███████████████████████████████         | 241M/311M [00:31&lt;00:08, 8.53MB/s] 78%|███████████████████████████████▏        | 242M/311M [00:31&lt;00:08, 8.59MB/s] 78%|███████████████████████████████▎        | 243M/311M [00:32&lt;00:08, 8.45MB/s] 78%|███████████████████████████████▍        | 244M/311M [00:32&lt;00:08, 8.49MB/s] 79%|███████████████████████████████▌        | 245M/311M [00:32&lt;00:08, 8.37MB/s] 79%|███████████████████████████████▋        | 246M/311M [00:32&lt;00:08, 8.35MB/s] 79%|███████████████████████████████▊        | 247M/311M [00:32&lt;00:08, 8.20MB/s] 80%|███████████████████████████████▉        | 248M/311M [00:32&lt;00:07, 8.27MB/s] 80%|████████████████████████████████        | 249M/311M [00:32&lt;00:07, 8.33MB/s] 80%|████████████████████████████████▏       | 250M/311M [00:32&lt;00:07, 8.33MB/s] 81%|████████████████████████████████▎       | 251M/311M [00:33&lt;00:07, 8.19MB/s] 81%|████████████████████████████████▍       | 252M/311M [00:33&lt;00:07, 8.23MB/s] 81%|████████████████████████████████▌       | 253M/311M [00:33&lt;00:07, 8.12MB/s] 82%|████████████████████████████████▋       | 254M/311M [00:33&lt;00:07, 8.22MB/s] 82%|████████████████████████████████▊       | 255M/311M [00:33&lt;00:06, 8.41MB/s] 82%|████████████████████████████████▉       | 256M/311M [00:33&lt;00:06, 8.41MB/s] 83%|█████████████████████████████████       | 257M/311M [00:33&lt;00:06, 8.34MB/s] 83%|█████████████████████████████████▏      | 258M/311M [00:33&lt;00:06, 8.58MB/s] 83%|█████████████████████████████████▎      | 259M/311M [00:34&lt;00:08, 6.28MB/s] 84%|█████████████████████████████████▍      | 260M/311M [00:34&lt;00:07, 6.76MB/s] 84%|█████████████████████████████████▌      | 261M/311M [00:34&lt;00:07, 7.16MB/s] 84%|█████████████████████████████████▋      | 262M/311M [00:34&lt;00:06, 7.53MB/s] 85%|█████████████████████████████████▊      | 263M/311M [00:34&lt;00:06, 7.76MB/s] 85%|█████████████████████████████████▉      | 264M/311M [00:34&lt;00:06, 7.93MB/s] 85%|██████████████████████████████████      | 265M/311M [00:34&lt;00:05, 8.03MB/s] 86%|██████████████████████████████████▏     | 266M/311M [00:35&lt;00:05, 8.01MB/s] 86%|██████████████████████████████████▎     | 267M/311M [00:35&lt;00:05, 8.01MB/s] 86%|██████████████████████████████████▍     | 268M/311M [00:35&lt;00:05, 8.17MB/s] 87%|██████████████████████████████████▌     | 269M/311M [00:35&lt;00:05, 8.17MB/s] 87%|██████████████████████████████████▋     | 270M/311M [00:35&lt;00:05, 8.22MB/s] 87%|██████████████████████████████████▊     | 271M/311M [00:35&lt;00:05, 8.25MB/s] 87%|██████████████████████████████████▉     | 272M/311M [00:35&lt;00:04, 8.38MB/s] 88%|███████████████████████████████████▏    | 273M/311M [00:36&lt;00:04, 8.29MB/s] 88%|███████████████████████████████████▎    | 274M/311M [00:36&lt;00:04, 8.24MB/s] 88%|███████████████████████████████████▍    | 275M/311M [00:36&lt;00:04, 8.33MB/s] 89%|███████████████████████████████████▌    | 276M/311M [00:36&lt;00:04, 8.49MB/s] 89%|███████████████████████████████████▋    | 277M/311M [00:36&lt;00:04, 8.43MB/s] 89%|███████████████████████████████████▊    | 278M/311M [00:36&lt;00:04, 8.20MB/s] 90%|███████████████████████████████████▉    | 279M/311M [00:36&lt;00:04, 8.08MB/s] 90%|████████████████████████████████████    | 280M/311M [00:36&lt;00:03, 8.22MB/s] 90%|████████████████████████████████████▏   | 281M/311M [00:37&lt;00:03, 8.12MB/s] 91%|████████████████████████████████████▎   | 282M/311M [00:37&lt;00:03, 8.05MB/s] 91%|████████████████████████████████████▍   | 283M/311M [00:37&lt;00:03, 8.18MB/s] 91%|████████████████████████████████████▌   | 284M/311M [00:37&lt;00:03, 8.23MB/s] 92%|████████████████████████████████████▋   | 285M/311M [00:37&lt;00:03, 8.19MB/s] 92%|████████████████████████████████████▊   | 286M/311M [00:37&lt;00:03, 8.23MB/s] 92%|████████████████████████████████████▉   | 287M/311M [00:37&lt;00:03, 8.25MB/s] 93%|█████████████████████████████████████   | 288M/311M [00:37&lt;00:02, 8.17MB/s] 93%|█████████████████████████████████████▏  | 289M/311M [00:38&lt;00:02, 8.24MB/s] 93%|█████████████████████████████████████▎  | 290M/311M [00:38&lt;00:02, 8.27MB/s] 94%|█████████████████████████████████████▍  | 291M/311M [00:38&lt;00:02, 8.30MB/s] 94%|█████████████████████████████████████▌  | 292M/311M [00:38&lt;00:02, 8.32MB/s] 94%|█████████████████████████████████████▋  | 293M/311M [00:38&lt;00:02, 8.24MB/s] 95%|█████████████████████████████████████▊  | 294M/311M [00:38&lt;00:02, 8.19MB/s] 95%|█████████████████████████████████████▉  | 295M/311M [00:38&lt;00:02, 8.16MB/s] 95%|██████████████████████████████████████  | 296M/311M [00:38&lt;00:01, 8.24MB/s] 96%|██████████████████████████████████████▏ | 297M/311M [00:39&lt;00:01, 7.97MB/s] 96%|██████████████████████████████████████▎ | 298M/311M [00:39&lt;00:01, 8.02MB/s] 96%|██████████████████████████████████████▍ | 299M/311M [00:39&lt;00:02, 5.94MB/s] 97%|██████████████████████████████████████▌ | 300M/311M [00:39&lt;00:01, 6.47MB/s] 97%|██████████████████████████████████████▋ | 301M/311M [00:39&lt;00:01, 6.97MB/s] 97%|██████████████████████████████████████▊ | 302M/311M [00:39&lt;00:01, 7.28MB/s] 97%|██████████████████████████████████████▉ | 303M/311M [00:40&lt;00:01, 7.44MB/s] 98%|███████████████████████████████████████ | 304M/311M [00:40&lt;00:00, 7.60MB/s] 98%|███████████████████████████████████████▏| 305M/311M [00:40&lt;00:00, 7.65MB/s] 98%|███████████████████████████████████████▎| 306M/311M [00:40&lt;00:00, 7.87MB/s] 99%|███████████████████████████████████████▌| 307M/311M [00:40&lt;00:00, 7.81MB/s] 99%|███████████████████████████████████████▋| 308M/311M [00:40&lt;00:00, 8.01MB/s] 99%|███████████████████████████████████████▊| 309M/311M [00:40&lt;00:00, 7.93MB/s]100%|███████████████████████████████████████▉| 310M/311M [00:40&lt;00:00, 7.96MB/s]100%|████████████████████████████████████████| 311M/311M [00:41&lt;00:00, 8.21MB/s]
+100%|████████████████████████████████████████| 311M/311M [00:41&lt;00:00, 7.94MB/s]</code></pre>
+</div>
+</div>
+<div id="799c1cce" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download https://www.kaggle.com/datasets/jylim21/malaysia-public-data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>p .data<span class="op">/</span> jylim21<span class="op">/</span>malaysia<span class="op">-</span>public<span class="op">-</span>data <span class="op">--</span>unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dataset URL: https://www.kaggle.com/datasets/jylim21/malaysia-public-data
+License(s): Community Data License Agreement - Permissive - Version 1.0
+Downloading malaysia-public-data.zip to .data
+  0%|                                                | 0.00/156k [00:00&lt;?, ?B/s]100%|█████████████████████████████████████████| 156k/156k [00:00&lt;00:00, 650kB/s]
+100%|█████████████████████████████████████████| 156k/156k [00:00&lt;00:00, 648kB/s]</code></pre>
+</div>
+</div>
+<div id="bb98feb3" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Disable all warnings</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s load these as dataframes and inspect the first few rows of each dataset.</p>
+<div id="322f4857" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load full_weather.csv and births.csv</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">'.data/full_weather.csv'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>births <span class="op">=</span> pd.read_csv(<span class="st">'.data/births.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="preprocessing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="preprocessing-the-data">Preprocessing the data</h2>
+<p>We will need to adjust the available data to fit our purposes, including filling in gaps and merging the data we are interested in.</p>
+<div id="9ff862d0" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first 5 rows of each dataframe</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>weather.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<style type="text/css">
+#T_934c8_row0_col4, #T_934c8_row0_col10 {
+  background-color: #006c2c;
+  color: #f1f1f1;
+}
+#T_934c8_row0_col5 {
+  background-color: #78c679;
+  color: #000000;
+}
+#T_934c8_row0_col6, #T_934c8_row0_col8, #T_934c8_row0_col12, #T_934c8_row0_col13, #T_934c8_row1_col5, #T_934c8_row1_col7, #T_934c8_row2_col13, #T_934c8_row3_col4, #T_934c8_row3_col10, #T_934c8_row3_col12, #T_934c8_row3_col13, #T_934c8_row4_col13 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+#T_934c8_row0_col7 {
+  background-color: #d3eecd;
+  color: #000000;
+}
+#T_934c8_row0_col9, #T_934c8_row0_col11, #T_934c8_row0_col14, #T_934c8_row0_col15, #T_934c8_row0_col16, #T_934c8_row0_col17, #T_934c8_row1_col9, #T_934c8_row1_col11, #T_934c8_row1_col14, #T_934c8_row1_col15, #T_934c8_row1_col16, #T_934c8_row1_col17, #T_934c8_row2_col9, #T_934c8_row2_col11, #T_934c8_row2_col14, #T_934c8_row2_col15, #T_934c8_row2_col16, #T_934c8_row2_col17, #T_934c8_row3_col8, #T_934c8_row3_col9, #T_934c8_row3_col11, #T_934c8_row3_col14, #T_934c8_row3_col15, #T_934c8_row3_col16, #T_934c8_row3_col17, #T_934c8_row4_col4, #T_934c8_row4_col5, #T_934c8_row4_col6, #T_934c8_row4_col7, #T_934c8_row4_col9, #T_934c8_row4_col10, #T_934c8_row4_col11, #T_934c8_row4_col12, #T_934c8_row4_col14, #T_934c8_row4_col15, #T_934c8_row4_col16, #T_934c8_row4_col17 {
+  background-color: #000000;
+  color: #f1f1f1;
+}
+#T_934c8_row1_col4, #T_934c8_row1_col10, #T_934c8_row1_col12, #T_934c8_row1_col13, #T_934c8_row2_col6, #T_934c8_row2_col8, #T_934c8_row3_col5, #T_934c8_row3_col7 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_934c8_row1_col6, #T_934c8_row2_col4, #T_934c8_row2_col10, #T_934c8_row2_col12, #T_934c8_row3_col6 {
+  background-color: #73c476;
+  color: #000000;
+}
+#T_934c8_row1_col8 {
+  background-color: #bce4b5;
+  color: #000000;
+}
+#T_934c8_row2_col5 {
+  background-color: #39a257;
+  color: #f1f1f1;
+}
+#T_934c8_row2_col7 {
+  background-color: #b4e1ad;
+  color: #000000;
+}
+#T_934c8_row4_col8 {
+  background-color: #2c944c;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_934c8" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_934c8_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">datetime</th>
+<th id="T_934c8_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">place</th>
+<th id="T_934c8_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">city</th>
+<th id="T_934c8_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">state</th>
+<th id="T_934c8_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">temperature</th>
+<th id="T_934c8_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">pressure</th>
+<th id="T_934c8_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">dew_point</th>
+<th id="T_934c8_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">humidity</th>
+<th id="T_934c8_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">wind_speed</th>
+<th id="T_934c8_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">gust</th>
+<th id="T_934c8_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">wind_chill</th>
+<th id="T_934c8_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">uv_index</th>
+<th id="T_934c8_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">feels_like_temperature</th>
+<th id="T_934c8_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">visibility</th>
+<th id="T_934c8_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">solar_radiation</th>
+<th id="T_934c8_level0_col15" class="col_heading level0 col15" data-quarto-table-cell-role="th">pollutant_value</th>
+<th id="T_934c8_level0_col16" class="col_heading level0 col16" data-quarto-table-cell-role="th">precipitation_rate</th>
+<th id="T_934c8_level0_col17" class="col_heading level0 col17" data-quarto-table-cell-role="th">precipitation_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_934c8_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_934c8_row0_col0" class="data row0 col0">1996-08-09 13:30:00</td>
+<td id="T_934c8_row0_col1" class="data row0 col1">Tanjung Aru</td>
+<td id="T_934c8_row0_col2" class="data row0 col2">Kota Kinabalu</td>
+<td id="T_934c8_row0_col3" class="data row0 col3">Sabah</td>
+<td id="T_934c8_row0_col4" class="data row0 col4">32.000000</td>
+<td id="T_934c8_row0_col5" class="data row0 col5">1006.160000</td>
+<td id="T_934c8_row0_col6" class="data row0 col6">25.000000</td>
+<td id="T_934c8_row0_col7" class="data row0 col7">66.000000</td>
+<td id="T_934c8_row0_col8" class="data row0 col8">9.000000</td>
+<td id="T_934c8_row0_col9" class="data row0 col9">nan</td>
+<td id="T_934c8_row0_col10" class="data row0 col10">32.000000</td>
+<td id="T_934c8_row0_col11" class="data row0 col11">nan</td>
+<td id="T_934c8_row0_col12" class="data row0 col12">39.000000</td>
+<td id="T_934c8_row0_col13" class="data row0 col13">9.000000</td>
+<td id="T_934c8_row0_col14" class="data row0 col14">nan</td>
+<td id="T_934c8_row0_col15" class="data row0 col15">nan</td>
+<td id="T_934c8_row0_col16" class="data row0 col16">nan</td>
+<td id="T_934c8_row0_col17" class="data row0 col17">nan</td>
+</tr>
+<tr class="even">
+<td id="T_934c8_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_934c8_row1_col0" class="data row1 col0">1996-08-09 13:30:00</td>
+<td id="T_934c8_row1_col1" class="data row1 col1">Batu Maung</td>
+<td id="T_934c8_row1_col2" class="data row1 col2">Bayan Lepas</td>
+<td id="T_934c8_row1_col3" class="data row1 col3">Pulau Pinang</td>
+<td id="T_934c8_row1_col4" class="data row1 col4">25.000000</td>
+<td id="T_934c8_row1_col5" class="data row1 col5">1008.640000</td>
+<td id="T_934c8_row1_col6" class="data row1 col6">24.000000</td>
+<td id="T_934c8_row1_col7" class="data row1 col7">94.000000</td>
+<td id="T_934c8_row1_col8" class="data row1 col8">4.000000</td>
+<td id="T_934c8_row1_col9" class="data row1 col9">nan</td>
+<td id="T_934c8_row1_col10" class="data row1 col10">25.000000</td>
+<td id="T_934c8_row1_col11" class="data row1 col11">nan</td>
+<td id="T_934c8_row1_col12" class="data row1 col12">25.000000</td>
+<td id="T_934c8_row1_col13" class="data row1 col13">6.000000</td>
+<td id="T_934c8_row1_col14" class="data row1 col14">nan</td>
+<td id="T_934c8_row1_col15" class="data row1 col15">nan</td>
+<td id="T_934c8_row1_col16" class="data row1 col16">nan</td>
+<td id="T_934c8_row1_col17" class="data row1 col17">nan</td>
+</tr>
+<tr class="odd">
+<td id="T_934c8_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_934c8_row2_col0" class="data row2 col0">1996-08-09 13:30:00</td>
+<td id="T_934c8_row2_col1" class="data row2 col1">Sepang</td>
+<td id="T_934c8_row2_col2" class="data row2 col2">Sepang</td>
+<td id="T_934c8_row2_col3" class="data row2 col3">Kuala Lumpur</td>
+<td id="T_934c8_row2_col4" class="data row2 col4">29.000000</td>
+<td id="T_934c8_row2_col5" class="data row2 col5">1006.970000</td>
+<td id="T_934c8_row2_col6" class="data row2 col6">23.000000</td>
+<td id="T_934c8_row2_col7" class="data row2 col7">70.000000</td>
+<td id="T_934c8_row2_col8" class="data row2 col8">2.000000</td>
+<td id="T_934c8_row2_col9" class="data row2 col9">nan</td>
+<td id="T_934c8_row2_col10" class="data row2 col10">29.000000</td>
+<td id="T_934c8_row2_col11" class="data row2 col11">nan</td>
+<td id="T_934c8_row2_col12" class="data row2 col12">32.000000</td>
+<td id="T_934c8_row2_col13" class="data row2 col13">9.000000</td>
+<td id="T_934c8_row2_col14" class="data row2 col14">nan</td>
+<td id="T_934c8_row2_col15" class="data row2 col15">nan</td>
+<td id="T_934c8_row2_col16" class="data row2 col16">nan</td>
+<td id="T_934c8_row2_col17" class="data row2 col17">nan</td>
+</tr>
+<tr class="even">
+<td id="T_934c8_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_934c8_row3_col0" class="data row3 col0">1996-08-09 13:30:00</td>
+<td id="T_934c8_row3_col1" class="data row3 col1">Kota Sentosa</td>
+<td id="T_934c8_row3_col2" class="data row3 col2">Kuching</td>
+<td id="T_934c8_row3_col3" class="data row3 col3">Sarawak</td>
+<td id="T_934c8_row3_col4" class="data row3 col4">33.000000</td>
+<td id="T_934c8_row3_col5" class="data row3 col5">1003.780000</td>
+<td id="T_934c8_row3_col6" class="data row3 col6">24.000000</td>
+<td id="T_934c8_row3_col7" class="data row3 col7">59.000000</td>
+<td id="T_934c8_row3_col8" class="data row3 col8">nan</td>
+<td id="T_934c8_row3_col9" class="data row3 col9">nan</td>
+<td id="T_934c8_row3_col10" class="data row3 col10">33.000000</td>
+<td id="T_934c8_row3_col11" class="data row3 col11">nan</td>
+<td id="T_934c8_row3_col12" class="data row3 col12">39.000000</td>
+<td id="T_934c8_row3_col13" class="data row3 col13">9.000000</td>
+<td id="T_934c8_row3_col14" class="data row3 col14">nan</td>
+<td id="T_934c8_row3_col15" class="data row3 col15">nan</td>
+<td id="T_934c8_row3_col16" class="data row3 col16">nan</td>
+<td id="T_934c8_row3_col17" class="data row3 col17">nan</td>
+</tr>
+<tr class="odd">
+<td id="T_934c8_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_934c8_row4_col0" class="data row4 col0">1996-08-09 14:30:00</td>
+<td id="T_934c8_row4_col1" class="data row4 col1">Sepang</td>
+<td id="T_934c8_row4_col2" class="data row4 col2">Sepang</td>
+<td id="T_934c8_row4_col3" class="data row4 col3">Kuala Lumpur</td>
+<td id="T_934c8_row4_col4" class="data row4 col4">nan</td>
+<td id="T_934c8_row4_col5" class="data row4 col5">nan</td>
+<td id="T_934c8_row4_col6" class="data row4 col6">nan</td>
+<td id="T_934c8_row4_col7" class="data row4 col7">nan</td>
+<td id="T_934c8_row4_col8" class="data row4 col8">7.000000</td>
+<td id="T_934c8_row4_col9" class="data row4 col9">nan</td>
+<td id="T_934c8_row4_col10" class="data row4 col10">nan</td>
+<td id="T_934c8_row4_col11" class="data row4 col11">nan</td>
+<td id="T_934c8_row4_col12" class="data row4 col12">nan</td>
+<td id="T_934c8_row4_col13" class="data row4 col13">9.000000</td>
+<td id="T_934c8_row4_col14" class="data row4 col14">nan</td>
+<td id="T_934c8_row4_col15" class="data row4 col15">nan</td>
+<td id="T_934c8_row4_col16" class="data row4 col16">nan</td>
+<td id="T_934c8_row4_col17" class="data row4 col17">nan</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ca4f701d" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>births.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<style type="text/css">
+#T_fc8a7_row0_col2 {
+  background-color: #f0f9ed;
+  color: #000000;
+}
+#T_fc8a7_row1_col2 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+#T_fc8a7_row2_col2 {
+  background-color: #157f3b;
+  color: #f1f1f1;
+}
+#T_fc8a7_row3_col2 {
+  background-color: #b8e3b2;
+  color: #000000;
+}
+#T_fc8a7_row4_col2 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+</style>
+
+<table id="T_fc8a7" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_fc8a7_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">date</th>
+<th id="T_fc8a7_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">state</th>
+<th id="T_fc8a7_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">births</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_fc8a7_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_fc8a7_row0_col0" class="data row0 col0">1920-01-01</td>
+<td id="T_fc8a7_row0_col1" class="data row0 col1">Malaysia</td>
+<td id="T_fc8a7_row0_col2" class="data row0 col2">96</td>
+</tr>
+<tr class="even">
+<td id="T_fc8a7_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_fc8a7_row1_col0" class="data row1 col0">1920-01-02</td>
+<td id="T_fc8a7_row1_col1" class="data row1 col1">Malaysia</td>
+<td id="T_fc8a7_row1_col2" class="data row1 col2">115</td>
+</tr>
+<tr class="odd">
+<td id="T_fc8a7_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_fc8a7_row2_col0" class="data row2 col0">1920-01-03</td>
+<td id="T_fc8a7_row2_col1" class="data row2 col1">Malaysia</td>
+<td id="T_fc8a7_row2_col2" class="data row2 col2">111</td>
+</tr>
+<tr class="even">
+<td id="T_fc8a7_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_fc8a7_row3_col0" class="data row3 col0">1920-01-04</td>
+<td id="T_fc8a7_row3_col1" class="data row3 col1">Malaysia</td>
+<td id="T_fc8a7_row3_col2" class="data row3 col2">101</td>
+</tr>
+<tr class="odd">
+<td id="T_fc8a7_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_fc8a7_row4_col0" class="data row4 col0">1920-01-05</td>
+<td id="T_fc8a7_row4_col1" class="data row4 col1">Malaysia</td>
+<td id="T_fc8a7_row4_col2" class="data row4 col2">95</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The <code>datetime</code> column is a string, which we want to convert to a Pandas datetime object.</p>
+<div id="6dab683b" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the 'date' column in both dataframes to datetime</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(weather[<span class="st">'datetime'</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>births[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(births[<span class="st">'date'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The weather dataset contains multiple measurements in a single day, which we will need to aggregate to daily values. Also, different measurements are available for different locations - we will average these to get a single value for the whole country, as births are recorded at the national level.</p>
+<div id="8f20f6d8" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average all features in the weather dataframe by day</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'date'</span>] <span class="op">=</span> weather[<span class="st">'datetime'</span>].dt.date</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>births[<span class="st">'date'</span>] <span class="op">=</span> births[<span class="st">'date'</span>].dt.date</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the columns 'place', 'city', 'state', and 'datetime'</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>weather.drop(columns<span class="op">=</span>[<span class="st">'place'</span>, <span class="st">'city'</span>, <span class="st">'state'</span>, <span class="st">'datetime'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by date and calculate the mean</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>daily_average <span class="op">=</span> weather.groupby(<span class="st">'date'</span>).mean().reset_index()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the original DataFrame with the new one</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> daily_average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s check what each column of the weather dataset now looks like, and statistics for each column.</p>
+<div id="4e245209" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<style type="text/css">
+#T_fe424_row0_col0 {
+  background-color: #0c7735;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col1, #T_fe424_row3_col1, #T_fe424_row4_col1 {
+  background-color: #00471c;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col2 {
+  background-color: #006529;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col3, #T_fe424_row5_col0 {
+  background-color: #087432;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col4 {
+  background-color: #e2f4dd;
+  color: #000000;
+}
+#T_fe424_row0_col5, #T_fe424_row1_col13 {
+  background-color: #f1faee;
+  color: #000000;
+}
+#T_fe424_row0_col6, #T_fe424_row3_col3, #T_fe424_row4_col0, #T_fe424_row4_col6 {
+  background-color: #0d7836;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col7 {
+  background-color: #cbebc5;
+  color: #000000;
+}
+#T_fe424_row0_col8 {
+  background-color: #228a44;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col9 {
+  background-color: #005321;
+  color: #f1f1f1;
+}
+#T_fe424_row0_col10 {
+  background-color: #a9dca3;
+  color: #000000;
+}
+#T_fe424_row0_col11 {
+  background-color: #c6e8bf;
+  color: #000000;
+}
+#T_fe424_row0_col12, #T_fe424_row1_col0, #T_fe424_row1_col1, #T_fe424_row1_col2, #T_fe424_row1_col3, #T_fe424_row1_col6, #T_fe424_row1_col8, #T_fe424_row1_col9, #T_fe424_row1_col11, #T_fe424_row2_col4, #T_fe424_row2_col5, #T_fe424_row2_col7, #T_fe424_row2_col10, #T_fe424_row2_col12, #T_fe424_row2_col13, #T_fe424_row3_col7, #T_fe424_row3_col12, #T_fe424_row3_col13, #T_fe424_row4_col7, #T_fe424_row4_col12, #T_fe424_row4_col13, #T_fe424_row5_col12, #T_fe424_row5_col13 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_fe424_row0_col13, #T_fe424_row3_col5 {
+  background-color: #f6fcf4;
+  color: #000000;
+}
+#T_fe424_row1_col4, #T_fe424_row1_col5, #T_fe424_row1_col12, #T_fe424_row2_col11 {
+  background-color: #f2faf0;
+  color: #000000;
+}
+#T_fe424_row1_col7, #T_fe424_row3_col10, #T_fe424_row5_col11 {
+  background-color: #b8e3b2;
+  color: #000000;
+}
+#T_fe424_row1_col10 {
+  background-color: #eaf7e6;
+  color: #000000;
+}
+#T_fe424_row2_col0, #T_fe424_row2_col6 {
+  background-color: #2f974e;
+  color: #f1f1f1;
+}
+#T_fe424_row2_col1 {
+  background-color: #00491d;
+  color: #f1f1f1;
+}
+#T_fe424_row2_col2 {
+  background-color: #73c476;
+  color: #000000;
+}
+#T_fe424_row2_col3 {
+  background-color: #e8f6e3;
+  color: #000000;
+}
+#T_fe424_row2_col8 {
+  background-color: #53b466;
+  color: #f1f1f1;
+}
+#T_fe424_row2_col9 {
+  background-color: #c1e6ba;
+  color: #000000;
+}
+#T_fe424_row3_col0, #T_fe424_row3_col6 {
+  background-color: #127c39;
+  color: #f1f1f1;
+}
+#T_fe424_row3_col2 {
+  background-color: #00692a;
+  color: #f1f1f1;
+}
+#T_fe424_row3_col4 {
+  background-color: #e6f5e1;
+  color: #000000;
+}
+#T_fe424_row3_col8 {
+  background-color: #29914a;
+  color: #f1f1f1;
+}
+#T_fe424_row3_col9 {
+  background-color: #005522;
+  color: #f1f1f1;
+}
+#T_fe424_row3_col11 {
+  background-color: #d2edcc;
+  color: #000000;
+}
+#T_fe424_row4_col2 {
+  background-color: #006428;
+  color: #f1f1f1;
+}
+#T_fe424_row4_col3 {
+  background-color: #05712f;
+  color: #f1f1f1;
+}
+#T_fe424_row4_col4 {
+  background-color: #def2d9;
+  color: #000000;
+}
+#T_fe424_row4_col5 {
+  background-color: #eff9ec;
+  color: #000000;
+}
+#T_fe424_row4_col8 {
+  background-color: #238b45;
+  color: #f1f1f1;
+}
+#T_fe424_row4_col9 {
+  background-color: #005020;
+  color: #f1f1f1;
+}
+#T_fe424_row4_col10 {
+  background-color: #a7dba0;
+  color: #000000;
+}
+#T_fe424_row4_col11 {
+  background-color: #c9eac2;
+  color: #000000;
+}
+#T_fe424_row5_col1 {
+  background-color: #00451c;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col2 {
+  background-color: #005f26;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col3 {
+  background-color: #006b2b;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col4 {
+  background-color: #daf0d4;
+  color: #000000;
+}
+#T_fe424_row5_col5 {
+  background-color: #edf8ea;
+  color: #000000;
+}
+#T_fe424_row5_col6 {
+  background-color: #097532;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col7 {
+  background-color: #60ba6c;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col8 {
+  background-color: #1a843f;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col9 {
+  background-color: #004c1e;
+  color: #f1f1f1;
+}
+#T_fe424_row5_col10 {
+  background-color: #97d492;
+  color: #000000;
+}
+#T_fe424_row6_col0, #T_fe424_row6_col1, #T_fe424_row6_col2, #T_fe424_row6_col3, #T_fe424_row6_col4, #T_fe424_row6_col5, #T_fe424_row6_col6, #T_fe424_row6_col7, #T_fe424_row6_col8, #T_fe424_row6_col9, #T_fe424_row6_col10, #T_fe424_row6_col11, #T_fe424_row6_col12, #T_fe424_row6_col13 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_fe424" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_fe424_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">temperature</th>
+<th id="T_fe424_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">pressure</th>
+<th id="T_fe424_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">dew_point</th>
+<th id="T_fe424_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">humidity</th>
+<th id="T_fe424_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">wind_speed</th>
+<th id="T_fe424_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">gust</th>
+<th id="T_fe424_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">wind_chill</th>
+<th id="T_fe424_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">uv_index</th>
+<th id="T_fe424_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">feels_like_temperature</th>
+<th id="T_fe424_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">visibility</th>
+<th id="T_fe424_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">solar_radiation</th>
+<th id="T_fe424_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">pollutant_value</th>
+<th id="T_fe424_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">precipitation_rate</th>
+<th id="T_fe424_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">precipitation_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_fe424_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
+<td id="T_fe424_row0_col0" class="data row0 col0">27.543296</td>
+<td id="T_fe424_row0_col1" class="data row0 col1">1008.099890</td>
+<td id="T_fe424_row0_col2" class="data row0 col2">23.834273</td>
+<td id="T_fe424_row0_col3" class="data row0 col3">81.327786</td>
+<td id="T_fe424_row0_col4" class="data row0 col4">6.376730</td>
+<td id="T_fe424_row0_col5" class="data row0 col5">26.282709</td>
+<td id="T_fe424_row0_col6" class="data row0 col6">27.471683</td>
+<td id="T_fe424_row0_col7" class="data row0 col7">0.687915</td>
+<td id="T_fe424_row0_col8" class="data row0 col8">30.504578</td>
+<td id="T_fe424_row0_col9" class="data row0 col9">8.582930</td>
+<td id="T_fe424_row0_col10" class="data row0 col10">146.499316</td>
+<td id="T_fe424_row0_col11" class="data row0 col11">42.956782</td>
+<td id="T_fe424_row0_col12" class="data row0 col12">5.215477</td>
+<td id="T_fe424_row0_col13" class="data row0 col13">11.674262</td>
+</tr>
+<tr class="even">
+<td id="T_fe424_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
+<td id="T_fe424_row1_col0" class="data row1 col0">0.889741</td>
+<td id="T_fe424_row1_col1" class="data row1 col1">2.010950</td>
+<td id="T_fe424_row1_col2" class="data row1 col2">1.144247</td>
+<td id="T_fe424_row1_col3" class="data row1 col3">5.867251</td>
+<td id="T_fe424_row1_col4" class="data row1 col4">2.388884</td>
+<td id="T_fe424_row1_col5" class="data row1 col5">19.768379</td>
+<td id="T_fe424_row1_col6" class="data row1 col6">0.835277</td>
+<td id="T_fe424_row1_col7" class="data row1 col7">0.891434</td>
+<td id="T_fe424_row1_col8" class="data row1 col8">1.526218</td>
+<td id="T_fe424_row1_col9" class="data row1 col9">0.458520</td>
+<td id="T_fe424_row1_col10" class="data row1 col10">38.194387</td>
+<td id="T_fe424_row1_col11" class="data row1 col11">10.978799</td>
+<td id="T_fe424_row1_col12" class="data row1 col12">81.753558</td>
+<td id="T_fe424_row1_col13" class="data row1 col13">109.725370</td>
+</tr>
+<tr class="odd">
+<td id="T_fe424_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
+<td id="T_fe424_row2_col0" class="data row2 col0">23.444444</td>
+<td id="T_fe424_row2_col1" class="data row2 col1">997.887076</td>
+<td id="T_fe424_row2_col2" class="data row2 col2">13.897368</td>
+<td id="T_fe424_row2_col3" class="data row2 col3">15.484936</td>
+<td id="T_fe424_row2_col4" class="data row2 col4">1.163329</td>
+<td id="T_fe424_row2_col5" class="data row2 col5">0.220339</td>
+<td id="T_fe424_row2_col6" class="data row2 col6">23.361953</td>
+<td id="T_fe424_row2_col7" class="data row2 col7">0.000000</td>
+<td id="T_fe424_row2_col8" class="data row2 col8">23.777778</td>
+<td id="T_fe424_row2_col9" class="data row2 col9">2.786753</td>
+<td id="T_fe424_row2_col10" class="data row2 col10">0.000000</td>
+<td id="T_fe424_row2_col11" class="data row2 col11">15.125438</td>
+<td id="T_fe424_row2_col12" class="data row2 col12">0.000000</td>
+<td id="T_fe424_row2_col13" class="data row2 col13">0.000000</td>
+</tr>
+<tr class="even">
+<td id="T_fe424_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
+<td id="T_fe424_row3_col0" class="data row3 col0">26.934070</td>
+<td id="T_fe424_row3_col1" class="data row3 col1">1006.932785</td>
+<td id="T_fe424_row3_col2" class="data row3 col2">23.573865</td>
+<td id="T_fe424_row3_col3" class="data row3 col3">79.582090</td>
+<td id="T_fe424_row3_col4" class="data row3 col4">5.683849</td>
+<td id="T_fe424_row3_col5" class="data row3 col5">3.380416</td>
+<td id="T_fe424_row3_col6" class="data row3 col6">26.909586</td>
+<td id="T_fe424_row3_col7" class="data row3 col7">0.000000</td>
+<td id="T_fe424_row3_col8" class="data row3 col8">29.448357</td>
+<td id="T_fe424_row3_col9" class="data row3 col9">8.538924</td>
+<td id="T_fe424_row3_col10" class="data row3 col10">124.749915</td>
+<td id="T_fe424_row3_col11" class="data row3 col11">36.769231</td>
+<td id="T_fe424_row3_col12" class="data row3 col12">0.031584</td>
+<td id="T_fe424_row3_col13" class="data row3 col13">0.390435</td>
+</tr>
+<tr class="odd">
+<td id="T_fe424_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
+<td id="T_fe424_row4_col0" class="data row4 col0">27.457458</td>
+<td id="T_fe424_row4_col1" class="data row4 col1">1008.033583</td>
+<td id="T_fe424_row4_col2" class="data row4 col2">24.001509</td>
+<td id="T_fe424_row4_col3" class="data row4 col3">82.568477</td>
+<td id="T_fe424_row4_col4" class="data row4 col4">6.919926</td>
+<td id="T_fe424_row4_col5" class="data row4 col5">33.250000</td>
+<td id="T_fe424_row4_col6" class="data row4 col6">27.404160</td>
+<td id="T_fe424_row4_col7" class="data row4 col7">0.000000</td>
+<td id="T_fe424_row4_col8" class="data row4 col8">30.364568</td>
+<td id="T_fe424_row4_col9" class="data row4 col9">8.681920</td>
+<td id="T_fe424_row4_col10" class="data row4 col10">149.442652</td>
+<td id="T_fe424_row4_col11" class="data row4 col11">41.880000</td>
+<td id="T_fe424_row4_col12" class="data row4 col12">0.212534</td>
+<td id="T_fe424_row4_col13" class="data row4 col13">2.106173</td>
+</tr>
+<tr class="even">
+<td id="T_fe424_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
+<td id="T_fe424_row5_col0" class="data row5 col0">28.073267</td>
+<td id="T_fe424_row5_col1" class="data row5 col1">1009.330966</td>
+<td id="T_fe424_row5_col2" class="data row5 col2">24.411568</td>
+<td id="T_fe424_row5_col3" class="data row5 col3">84.750354</td>
+<td id="T_fe424_row5_col4" class="data row5 col4">7.739110</td>
+<td id="T_fe424_row5_col5" class="data row5 col5">40.400000</td>
+<td id="T_fe424_row5_col6" class="data row5 col6">27.971838</td>
+<td id="T_fe424_row5_col7" class="data row5 col7">1.635242</td>
+<td id="T_fe424_row5_col8" class="data row5 col8">31.464080</td>
+<td id="T_fe424_row5_col9" class="data row5 col9">8.786272</td>
+<td id="T_fe424_row5_col10" class="data row5 col10">170.528152</td>
+<td id="T_fe424_row5_col11" class="data row5 col11">48.311878</td>
+<td id="T_fe424_row5_col12" class="data row5 col12">0.543907</td>
+<td id="T_fe424_row5_col13" class="data row5 col13">5.624009</td>
+</tr>
+<tr class="odd">
+<td id="T_fe424_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
+<td id="T_fe424_row6_col0" class="data row6 col0">33.000000</td>
+<td id="T_fe424_row6_col1" class="data row6 col1">1016.209393</td>
+<td id="T_fe424_row6_col2" class="data row6 col2">26.504087</td>
+<td id="T_fe424_row6_col3" class="data row6 col3">95.250709</td>
+<td id="T_fe424_row6_col4" class="data row6 col4">38.743243</td>
+<td id="T_fe424_row6_col5" class="data row6 col5">593.000000</td>
+<td id="T_fe424_row6_col6" class="data row6 col6">33.000000</td>
+<td id="T_fe424_row6_col7" class="data row6 col7">2.972896</td>
+<td id="T_fe424_row6_col8" class="data row6 col8">40.000000</td>
+<td id="T_fe424_row6_col9" class="data row6 col9">9.000000</td>
+<td id="T_fe424_row6_col10" class="data row6 col10">419.813559</td>
+<td id="T_fe424_row6_col11" class="data row6 col11">136.627451</td>
+<td id="T_fe424_row6_col12" class="data row6 col12">2539.750000</td>
+<td id="T_fe424_row6_col13" class="data row6 col13">2539.750000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We have two separate datasets, one for weather and one for births. Let us merge these on the date column.</p>
+<div id="25fe2027" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the two dataframes on the 'date' column, where the date is a datetime64 type</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.merge(births, weather, on<span class="op">=</span><span class="st">'date'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>data.drop(columns<span class="op">=</span>[<span class="st">'state'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="5abd2227" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<style type="text/css">
+#T_de62f_row0_col1 {
+  background-color: #bbe4b4;
+  color: #000000;
+}
+#T_de62f_row0_col2 {
+  background-color: #42ab5d;
+  color: #f1f1f1;
+}
+#T_de62f_row0_col3 {
+  background-color: #3ba458;
+  color: #f1f1f1;
+}
+#T_de62f_row0_col4, #T_de62f_row1_col5, #T_de62f_row2_col3, #T_de62f_row3_col1, #T_de62f_row4_col2, #T_de62f_row4_col6, #T_de62f_row4_col8, #T_de62f_row4_col10, #T_de62f_row4_col11 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+#T_de62f_row0_col5 {
+  background-color: #a3da9d;
+  color: #000000;
+}
+#T_de62f_row0_col6 {
+  background-color: #f0f9ec;
+  color: #000000;
+}
+#T_de62f_row0_col7, #T_de62f_row0_col12, #T_de62f_row0_col13, #T_de62f_row0_col14, #T_de62f_row0_col15, #T_de62f_row1_col7, #T_de62f_row1_col12, #T_de62f_row1_col13, #T_de62f_row1_col14, #T_de62f_row1_col15, #T_de62f_row2_col7, #T_de62f_row2_col12, #T_de62f_row2_col13, #T_de62f_row2_col14, #T_de62f_row2_col15, #T_de62f_row3_col7, #T_de62f_row3_col12, #T_de62f_row3_col13, #T_de62f_row3_col14, #T_de62f_row3_col15, #T_de62f_row4_col7, #T_de62f_row4_col12, #T_de62f_row4_col13, #T_de62f_row4_col14, #T_de62f_row4_col15 {
+  background-color: #000000;
+  color: #f1f1f1;
+}
+#T_de62f_row0_col8, #T_de62f_row0_col10 {
+  background-color: #43ac5e;
+  color: #f1f1f1;
+}
+#T_de62f_row0_col9, #T_de62f_row1_col2, #T_de62f_row1_col8, #T_de62f_row1_col9, #T_de62f_row1_col10, #T_de62f_row1_col11, #T_de62f_row2_col1, #T_de62f_row2_col4, #T_de62f_row2_col9, #T_de62f_row3_col6, #T_de62f_row3_col9, #T_de62f_row4_col3, #T_de62f_row4_col5, #T_de62f_row4_col9 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_de62f_row0_col11 {
+  background-color: #52b365;
+  color: #f1f1f1;
+}
+#T_de62f_row1_col1 {
+  background-color: #a9dca3;
+  color: #000000;
+}
+#T_de62f_row1_col3 {
+  background-color: #004c1e;
+  color: #f1f1f1;
+}
+#T_de62f_row1_col4 {
+  background-color: #58b668;
+  color: #f1f1f1;
+}
+#T_de62f_row1_col6 {
+  background-color: #78c679;
+  color: #000000;
+}
+#T_de62f_row2_col2, #T_de62f_row2_col10 {
+  background-color: #eaf7e6;
+  color: #000000;
+}
+#T_de62f_row2_col5 {
+  background-color: #05712f;
+  color: #f1f1f1;
+}
+#T_de62f_row2_col6 {
+  background-color: #c1e6ba;
+  color: #000000;
+}
+#T_de62f_row2_col8, #T_de62f_row3_col2, #T_de62f_row3_col8 {
+  background-color: #f1faee;
+  color: #000000;
+}
+#T_de62f_row2_col11 {
+  background-color: #b6e2af;
+  color: #000000;
+}
+#T_de62f_row3_col3 {
+  background-color: #5eb96b;
+  color: #f1f1f1;
+}
+#T_de62f_row3_col4 {
+  background-color: #83cb82;
+  color: #000000;
+}
+#T_de62f_row3_col5 {
+  background-color: #005622;
+  color: #f1f1f1;
+}
+#T_de62f_row3_col10 {
+  background-color: #f2faef;
+  color: #000000;
+}
+#T_de62f_row3_col11 {
+  background-color: #56b567;
+  color: #f1f1f1;
+}
+#T_de62f_row4_col1 {
+  background-color: #3ca559;
+  color: #f1f1f1;
+}
+#T_de62f_row4_col4 {
+  background-color: #319a50;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_de62f" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_de62f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">date</th>
+<th id="T_de62f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">births</th>
+<th id="T_de62f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">temperature</th>
+<th id="T_de62f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">pressure</th>
+<th id="T_de62f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">dew_point</th>
+<th id="T_de62f_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">humidity</th>
+<th id="T_de62f_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">wind_speed</th>
+<th id="T_de62f_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">gust</th>
+<th id="T_de62f_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">wind_chill</th>
+<th id="T_de62f_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">uv_index</th>
+<th id="T_de62f_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">feels_like_temperature</th>
+<th id="T_de62f_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">visibility</th>
+<th id="T_de62f_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">solar_radiation</th>
+<th id="T_de62f_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">pollutant_value</th>
+<th id="T_de62f_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">precipitation_rate</th>
+<th id="T_de62f_level0_col15" class="col_heading level0 col15" data-quarto-table-cell-role="th">precipitation_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_de62f_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_de62f_row0_col0" class="data row0 col0">1996-08-09</td>
+<td id="T_de62f_row0_col1" class="data row0 col1">1520</td>
+<td id="T_de62f_row0_col2" class="data row0 col2">29.714286</td>
+<td id="T_de62f_row0_col3" class="data row0 col3">1005.877143</td>
+<td id="T_de62f_row0_col4" class="data row0 col4">24.000000</td>
+<td id="T_de62f_row0_col5" class="data row0 col5">72.571429</td>
+<td id="T_de62f_row0_col6" class="data row0 col6">5.857143</td>
+<td id="T_de62f_row0_col7" class="data row0 col7">nan</td>
+<td id="T_de62f_row0_col8" class="data row0 col8">29.714286</td>
+<td id="T_de62f_row0_col9" class="data row0 col9">nan</td>
+<td id="T_de62f_row0_col10" class="data row0 col10">33.571429</td>
+<td id="T_de62f_row0_col11" class="data row0 col11">8.625000</td>
+<td id="T_de62f_row0_col12" class="data row0 col12">nan</td>
+<td id="T_de62f_row0_col13" class="data row0 col13">nan</td>
+<td id="T_de62f_row0_col14" class="data row0 col14">nan</td>
+<td id="T_de62f_row0_col15" class="data row0 col15">nan</td>
+</tr>
+<tr class="even">
+<td id="T_de62f_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_de62f_row1_col0" class="data row1 col0">1996-08-17</td>
+<td id="T_de62f_row1_col1" class="data row1 col1">1539</td>
+<td id="T_de62f_row1_col2" class="data row1 col2">25.407407</td>
+<td id="T_de62f_row1_col3" class="data row1 col3">1007.800690</td>
+<td id="T_de62f_row1_col4" class="data row1 col4">23.769231</td>
+<td id="T_de62f_row1_col5" class="data row1 col5">90.615385</td>
+<td id="T_de62f_row1_col6" class="data row1 col6">7.695652</td>
+<td id="T_de62f_row1_col7" class="data row1 col7">nan</td>
+<td id="T_de62f_row1_col8" class="data row1 col8">25.423077</td>
+<td id="T_de62f_row1_col9" class="data row1 col9">0.000000</td>
+<td id="T_de62f_row1_col10" class="data row1 col10">26.615385</td>
+<td id="T_de62f_row1_col11" class="data row1 col11">8.096774</td>
+<td id="T_de62f_row1_col12" class="data row1 col12">nan</td>
+<td id="T_de62f_row1_col13" class="data row1 col13">nan</td>
+<td id="T_de62f_row1_col14" class="data row1 col14">nan</td>
+<td id="T_de62f_row1_col15" class="data row1 col15">nan</td>
+</tr>
+<tr class="odd">
+<td id="T_de62f_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_de62f_row2_col0" class="data row2 col0">1996-08-18</td>
+<td id="T_de62f_row2_col1" class="data row2 col1">1423</td>
+<td id="T_de62f_row2_col2" class="data row2 col2">26.035714</td>
+<td id="T_de62f_row2_col3" class="data row2 col3">1007.954800</td>
+<td id="T_de62f_row2_col4" class="data row2 col4">23.464286</td>
+<td id="T_de62f_row2_col5" class="data row2 col5">86.500000</td>
+<td id="T_de62f_row2_col6" class="data row2 col6">6.775000</td>
+<td id="T_de62f_row2_col7" class="data row2 col7">nan</td>
+<td id="T_de62f_row2_col8" class="data row2 col8">25.700000</td>
+<td id="T_de62f_row2_col9" class="data row2 col9">0.000000</td>
+<td id="T_de62f_row2_col10" class="data row2 col10">27.660714</td>
+<td id="T_de62f_row2_col11" class="data row2 col11">8.372881</td>
+<td id="T_de62f_row2_col12" class="data row2 col12">nan</td>
+<td id="T_de62f_row2_col13" class="data row2 col13">nan</td>
+<td id="T_de62f_row2_col14" class="data row2 col14">nan</td>
+<td id="T_de62f_row2_col15" class="data row2 col15">nan</td>
+</tr>
+<tr class="even">
+<td id="T_de62f_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_de62f_row3_col0" class="data row3 col0">1996-09-11</td>
+<td id="T_de62f_row3_col1" class="data row3 col1">1756</td>
+<td id="T_de62f_row3_col2" class="data row3 col2">25.709677</td>
+<td id="T_de62f_row3_col3" class="data row3 col3">1005.271724</td>
+<td id="T_de62f_row3_col4" class="data row3 col4">23.709677</td>
+<td id="T_de62f_row3_col5" class="data row3 col5">88.967742</td>
+<td id="T_de62f_row3_col6" class="data row3 col6">5.631579</td>
+<td id="T_de62f_row3_col7" class="data row3 col7">nan</td>
+<td id="T_de62f_row3_col8" class="data row3 col8">25.709677</td>
+<td id="T_de62f_row3_col9" class="data row3 col9">0.000000</td>
+<td id="T_de62f_row3_col10" class="data row3 col10">27.032258</td>
+<td id="T_de62f_row3_col11" class="data row3 col11">8.612903</td>
+<td id="T_de62f_row3_col12" class="data row3 col12">nan</td>
+<td id="T_de62f_row3_col13" class="data row3 col13">nan</td>
+<td id="T_de62f_row3_col14" class="data row3 col14">nan</td>
+<td id="T_de62f_row3_col15" class="data row3 col15">nan</td>
+</tr>
+<tr class="odd">
+<td id="T_de62f_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_de62f_row4_col0" class="data row4 col0">1996-09-12</td>
+<td id="T_de62f_row4_col1" class="data row4 col1">1638</td>
+<td id="T_de62f_row4_col2" class="data row4 col2">32.333333</td>
+<td id="T_de62f_row4_col3" class="data row4 col3">1001.980000</td>
+<td id="T_de62f_row4_col4" class="data row4 col4">23.833333</td>
+<td id="T_de62f_row4_col5" class="data row4 col5">62.000000</td>
+<td id="T_de62f_row4_col6" class="data row4 col6">9.833333</td>
+<td id="T_de62f_row4_col7" class="data row4 col7">nan</td>
+<td id="T_de62f_row4_col8" class="data row4 col8">32.333333</td>
+<td id="T_de62f_row4_col9" class="data row4 col9">nan</td>
+<td id="T_de62f_row4_col10" class="data row4 col10">37.833333</td>
+<td id="T_de62f_row4_col11" class="data row4 col11">9.000000</td>
+<td id="T_de62f_row4_col12" class="data row4 col12">nan</td>
+<td id="T_de62f_row4_col13" class="data row4 col13">nan</td>
+<td id="T_de62f_row4_col14" class="data row4 col14">nan</td>
+<td id="T_de62f_row4_col15" class="data row4 col15">nan</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Let us also fill in any missing values using the mean for each column to fill in the gaps. This is a simple approach, and in practice more sophisticated methods to fill in missing data would need to be considered. For the purposes of this experiment, it will suffice.</p>
+<div id="e70e0e0a" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in missing values for each numerical column with the mean of that column</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mean_values <span class="op">=</span> data.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>).mean()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>data.fillna(mean_values, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="2c3a1255" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<style type="text/css">
+#T_1915a_row0_col1 {
+  background-color: #bbe4b4;
+  color: #000000;
+}
+#T_1915a_row0_col2 {
+  background-color: #42ab5d;
+  color: #f1f1f1;
+}
+#T_1915a_row0_col3 {
+  background-color: #3ba458;
+  color: #f1f1f1;
+}
+#T_1915a_row0_col4, #T_1915a_row0_col9, #T_1915a_row1_col5, #T_1915a_row2_col3, #T_1915a_row3_col1, #T_1915a_row4_col2, #T_1915a_row4_col6, #T_1915a_row4_col8, #T_1915a_row4_col9, #T_1915a_row4_col10, #T_1915a_row4_col11 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+#T_1915a_row0_col5 {
+  background-color: #a3da9d;
+  color: #000000;
+}
+#T_1915a_row0_col6 {
+  background-color: #f0f9ec;
+  color: #000000;
+}
+#T_1915a_row0_col7, #T_1915a_row0_col12, #T_1915a_row0_col13, #T_1915a_row0_col14, #T_1915a_row0_col15, #T_1915a_row1_col2, #T_1915a_row1_col7, #T_1915a_row1_col8, #T_1915a_row1_col9, #T_1915a_row1_col10, #T_1915a_row1_col11, #T_1915a_row1_col12, #T_1915a_row1_col13, #T_1915a_row1_col14, #T_1915a_row1_col15, #T_1915a_row2_col1, #T_1915a_row2_col4, #T_1915a_row2_col7, #T_1915a_row2_col9, #T_1915a_row2_col12, #T_1915a_row2_col13, #T_1915a_row2_col14, #T_1915a_row2_col15, #T_1915a_row3_col6, #T_1915a_row3_col7, #T_1915a_row3_col9, #T_1915a_row3_col12, #T_1915a_row3_col13, #T_1915a_row3_col14, #T_1915a_row3_col15, #T_1915a_row4_col3, #T_1915a_row4_col5, #T_1915a_row4_col7, #T_1915a_row4_col12, #T_1915a_row4_col13, #T_1915a_row4_col14, #T_1915a_row4_col15 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_1915a_row0_col8, #T_1915a_row0_col10 {
+  background-color: #43ac5e;
+  color: #f1f1f1;
+}
+#T_1915a_row0_col11 {
+  background-color: #52b365;
+  color: #f1f1f1;
+}
+#T_1915a_row1_col1 {
+  background-color: #a9dca3;
+  color: #000000;
+}
+#T_1915a_row1_col3 {
+  background-color: #004c1e;
+  color: #f1f1f1;
+}
+#T_1915a_row1_col4 {
+  background-color: #58b668;
+  color: #f1f1f1;
+}
+#T_1915a_row1_col6 {
+  background-color: #78c679;
+  color: #000000;
+}
+#T_1915a_row2_col2, #T_1915a_row2_col10 {
+  background-color: #eaf7e6;
+  color: #000000;
+}
+#T_1915a_row2_col5 {
+  background-color: #05712f;
+  color: #f1f1f1;
+}
+#T_1915a_row2_col6 {
+  background-color: #c1e6ba;
+  color: #000000;
+}
+#T_1915a_row2_col8, #T_1915a_row3_col2, #T_1915a_row3_col8 {
+  background-color: #f1faee;
+  color: #000000;
+}
+#T_1915a_row2_col11 {
+  background-color: #b6e2af;
+  color: #000000;
+}
+#T_1915a_row3_col3 {
+  background-color: #5eb96b;
+  color: #f1f1f1;
+}
+#T_1915a_row3_col4 {
+  background-color: #83cb82;
+  color: #000000;
+}
+#T_1915a_row3_col5 {
+  background-color: #005622;
+  color: #f1f1f1;
+}
+#T_1915a_row3_col10 {
+  background-color: #f2faef;
+  color: #000000;
+}
+#T_1915a_row3_col11 {
+  background-color: #56b567;
+  color: #f1f1f1;
+}
+#T_1915a_row4_col1 {
+  background-color: #3ca559;
+  color: #f1f1f1;
+}
+#T_1915a_row4_col4 {
+  background-color: #319a50;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_1915a" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_1915a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">date</th>
+<th id="T_1915a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">births</th>
+<th id="T_1915a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">temperature</th>
+<th id="T_1915a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">pressure</th>
+<th id="T_1915a_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">dew_point</th>
+<th id="T_1915a_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">humidity</th>
+<th id="T_1915a_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">wind_speed</th>
+<th id="T_1915a_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">gust</th>
+<th id="T_1915a_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">wind_chill</th>
+<th id="T_1915a_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">uv_index</th>
+<th id="T_1915a_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">feels_like_temperature</th>
+<th id="T_1915a_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">visibility</th>
+<th id="T_1915a_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">solar_radiation</th>
+<th id="T_1915a_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">pollutant_value</th>
+<th id="T_1915a_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">precipitation_rate</th>
+<th id="T_1915a_level0_col15" class="col_heading level0 col15" data-quarto-table-cell-role="th">precipitation_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_1915a_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_1915a_row0_col0" class="data row0 col0">1996-08-09</td>
+<td id="T_1915a_row0_col1" class="data row0 col1">1520</td>
+<td id="T_1915a_row0_col2" class="data row0 col2">29.714286</td>
+<td id="T_1915a_row0_col3" class="data row0 col3">1005.877143</td>
+<td id="T_1915a_row0_col4" class="data row0 col4">24.000000</td>
+<td id="T_1915a_row0_col5" class="data row0 col5">72.571429</td>
+<td id="T_1915a_row0_col6" class="data row0 col6">5.857143</td>
+<td id="T_1915a_row0_col7" class="data row0 col7">27.890241</td>
+<td id="T_1915a_row0_col8" class="data row0 col8">29.714286</td>
+<td id="T_1915a_row0_col9" class="data row0 col9">0.651795</td>
+<td id="T_1915a_row0_col10" class="data row0 col10">33.571429</td>
+<td id="T_1915a_row0_col11" class="data row0 col11">8.625000</td>
+<td id="T_1915a_row0_col12" class="data row0 col12">145.609684</td>
+<td id="T_1915a_row0_col13" class="data row0 col13">42.495870</td>
+<td id="T_1915a_row0_col14" class="data row0 col14">5.762057</td>
+<td id="T_1915a_row0_col15" class="data row0 col15">12.349303</td>
+</tr>
+<tr class="even">
+<td id="T_1915a_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_1915a_row1_col0" class="data row1 col0">1996-08-17</td>
+<td id="T_1915a_row1_col1" class="data row1 col1">1539</td>
+<td id="T_1915a_row1_col2" class="data row1 col2">25.407407</td>
+<td id="T_1915a_row1_col3" class="data row1 col3">1007.800690</td>
+<td id="T_1915a_row1_col4" class="data row1 col4">23.769231</td>
+<td id="T_1915a_row1_col5" class="data row1 col5">90.615385</td>
+<td id="T_1915a_row1_col6" class="data row1 col6">7.695652</td>
+<td id="T_1915a_row1_col7" class="data row1 col7">27.890241</td>
+<td id="T_1915a_row1_col8" class="data row1 col8">25.423077</td>
+<td id="T_1915a_row1_col9" class="data row1 col9">0.000000</td>
+<td id="T_1915a_row1_col10" class="data row1 col10">26.615385</td>
+<td id="T_1915a_row1_col11" class="data row1 col11">8.096774</td>
+<td id="T_1915a_row1_col12" class="data row1 col12">145.609684</td>
+<td id="T_1915a_row1_col13" class="data row1 col13">42.495870</td>
+<td id="T_1915a_row1_col14" class="data row1 col14">5.762057</td>
+<td id="T_1915a_row1_col15" class="data row1 col15">12.349303</td>
+</tr>
+<tr class="odd">
+<td id="T_1915a_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_1915a_row2_col0" class="data row2 col0">1996-08-18</td>
+<td id="T_1915a_row2_col1" class="data row2 col1">1423</td>
+<td id="T_1915a_row2_col2" class="data row2 col2">26.035714</td>
+<td id="T_1915a_row2_col3" class="data row2 col3">1007.954800</td>
+<td id="T_1915a_row2_col4" class="data row2 col4">23.464286</td>
+<td id="T_1915a_row2_col5" class="data row2 col5">86.500000</td>
+<td id="T_1915a_row2_col6" class="data row2 col6">6.775000</td>
+<td id="T_1915a_row2_col7" class="data row2 col7">27.890241</td>
+<td id="T_1915a_row2_col8" class="data row2 col8">25.700000</td>
+<td id="T_1915a_row2_col9" class="data row2 col9">0.000000</td>
+<td id="T_1915a_row2_col10" class="data row2 col10">27.660714</td>
+<td id="T_1915a_row2_col11" class="data row2 col11">8.372881</td>
+<td id="T_1915a_row2_col12" class="data row2 col12">145.609684</td>
+<td id="T_1915a_row2_col13" class="data row2 col13">42.495870</td>
+<td id="T_1915a_row2_col14" class="data row2 col14">5.762057</td>
+<td id="T_1915a_row2_col15" class="data row2 col15">12.349303</td>
+</tr>
+<tr class="even">
+<td id="T_1915a_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_1915a_row3_col0" class="data row3 col0">1996-09-11</td>
+<td id="T_1915a_row3_col1" class="data row3 col1">1756</td>
+<td id="T_1915a_row3_col2" class="data row3 col2">25.709677</td>
+<td id="T_1915a_row3_col3" class="data row3 col3">1005.271724</td>
+<td id="T_1915a_row3_col4" class="data row3 col4">23.709677</td>
+<td id="T_1915a_row3_col5" class="data row3 col5">88.967742</td>
+<td id="T_1915a_row3_col6" class="data row3 col6">5.631579</td>
+<td id="T_1915a_row3_col7" class="data row3 col7">27.890241</td>
+<td id="T_1915a_row3_col8" class="data row3 col8">25.709677</td>
+<td id="T_1915a_row3_col9" class="data row3 col9">0.000000</td>
+<td id="T_1915a_row3_col10" class="data row3 col10">27.032258</td>
+<td id="T_1915a_row3_col11" class="data row3 col11">8.612903</td>
+<td id="T_1915a_row3_col12" class="data row3 col12">145.609684</td>
+<td id="T_1915a_row3_col13" class="data row3 col13">42.495870</td>
+<td id="T_1915a_row3_col14" class="data row3 col14">5.762057</td>
+<td id="T_1915a_row3_col15" class="data row3 col15">12.349303</td>
+</tr>
+<tr class="odd">
+<td id="T_1915a_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_1915a_row4_col0" class="data row4 col0">1996-09-12</td>
+<td id="T_1915a_row4_col1" class="data row4 col1">1638</td>
+<td id="T_1915a_row4_col2" class="data row4 col2">32.333333</td>
+<td id="T_1915a_row4_col3" class="data row4 col3">1001.980000</td>
+<td id="T_1915a_row4_col4" class="data row4 col4">23.833333</td>
+<td id="T_1915a_row4_col5" class="data row4 col5">62.000000</td>
+<td id="T_1915a_row4_col6" class="data row4 col6">9.833333</td>
+<td id="T_1915a_row4_col7" class="data row4 col7">27.890241</td>
+<td id="T_1915a_row4_col8" class="data row4 col8">32.333333</td>
+<td id="T_1915a_row4_col9" class="data row4 col9">0.651795</td>
+<td id="T_1915a_row4_col10" class="data row4 col10">37.833333</td>
+<td id="T_1915a_row4_col11" class="data row4 col11">9.000000</td>
+<td id="T_1915a_row4_col12" class="data row4 col12">145.609684</td>
+<td id="T_1915a_row4_col13" class="data row4 col13">42.495870</td>
+<td id="T_1915a_row4_col14" class="data row4 col14">5.762057</td>
+<td id="T_1915a_row4_col15" class="data row4 col15">12.349303</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="c20b3a15" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<style type="text/css">
+#T_e180b_row0_col0 {
+  background-color: #48ae60;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col1 {
+  background-color: #0c7735;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col2, #T_e180b_row3_col2, #T_e180b_row4_col2 {
+  background-color: #00471c;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col3 {
+  background-color: #006428;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col4, #T_e180b_row5_col7 {
+  background-color: #097532;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col5 {
+  background-color: #e1f3dc;
+  color: #000000;
+}
+#T_e180b_row0_col6, #T_e180b_row2_col12, #T_e180b_row3_col6, #T_e180b_row4_col6 {
+  background-color: #f1faee;
+  color: #000000;
+}
+#T_e180b_row0_col7, #T_e180b_row4_col1, #T_e180b_row4_col7 {
+  background-color: #0d7836;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col8 {
+  background-color: #ceecc8;
+  color: #000000;
+}
+#T_e180b_row0_col9, #T_e180b_row4_col9 {
+  background-color: #228a44;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col10 {
+  background-color: #005321;
+  color: #f1f1f1;
+}
+#T_e180b_row0_col11, #T_e180b_row3_col11, #T_e180b_row4_col11, #T_e180b_row5_col11 {
+  background-color: #aadda4;
+  color: #000000;
+}
+#T_e180b_row0_col12, #T_e180b_row4_col12 {
+  background-color: #c4e8bd;
+  color: #000000;
+}
+#T_e180b_row0_col13, #T_e180b_row1_col0, #T_e180b_row1_col1, #T_e180b_row1_col2, #T_e180b_row1_col3, #T_e180b_row1_col4, #T_e180b_row1_col7, #T_e180b_row1_col9, #T_e180b_row1_col10, #T_e180b_row1_col12, #T_e180b_row2_col5, #T_e180b_row2_col6, #T_e180b_row2_col8, #T_e180b_row2_col11, #T_e180b_row2_col13, #T_e180b_row2_col14, #T_e180b_row3_col8, #T_e180b_row3_col13, #T_e180b_row3_col14, #T_e180b_row4_col8, #T_e180b_row4_col13, #T_e180b_row5_col13 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_e180b_row0_col14, #T_e180b_row4_col14, #T_e180b_row5_col14 {
+  background-color: #f6fcf4;
+  color: #000000;
+}
+#T_e180b_row1_col5, #T_e180b_row1_col14 {
+  background-color: #f3faf0;
+  color: #000000;
+}
+#T_e180b_row1_col6 {
+  background-color: #f4fbf1;
+  color: #000000;
+}
+#T_e180b_row1_col8 {
+  background-color: #bae3b3;
+  color: #000000;
+}
+#T_e180b_row1_col11 {
+  background-color: #f0f9ed;
+  color: #000000;
+}
+#T_e180b_row1_col13 {
+  background-color: #f4fbf2;
+  color: #000000;
+}
+#T_e180b_row2_col0 {
+  background-color: #c2e7bb;
+  color: #000000;
+}
+#T_e180b_row2_col1, #T_e180b_row2_col7 {
+  background-color: #2f974e;
+  color: #f1f1f1;
+}
+#T_e180b_row2_col2 {
+  background-color: #00491d;
+  color: #f1f1f1;
+}
+#T_e180b_row2_col3 {
+  background-color: #70c274;
+  color: #000000;
+}
+#T_e180b_row2_col4 {
+  background-color: #e8f6e3;
+  color: #000000;
+}
+#T_e180b_row2_col9 {
+  background-color: #53b466;
+  color: #f1f1f1;
+}
+#T_e180b_row2_col10 {
+  background-color: #c1e6ba;
+  color: #000000;
+}
+#T_e180b_row3_col0 {
+  background-color: #5bb86a;
+  color: #f1f1f1;
+}
+#T_e180b_row3_col1, #T_e180b_row3_col7 {
+  background-color: #127c39;
+  color: #f1f1f1;
+}
+#T_e180b_row3_col3 {
+  background-color: #006729;
+  color: #f1f1f1;
+}
+#T_e180b_row3_col4 {
+  background-color: #0e7936;
+  color: #f1f1f1;
+}
+#T_e180b_row3_col5 {
+  background-color: #e3f4de;
+  color: #000000;
+}
+#T_e180b_row3_col9 {
+  background-color: #289049;
+  color: #f1f1f1;
+}
+#T_e180b_row3_col10 {
+  background-color: #005522;
+  color: #f1f1f1;
+}
+#T_e180b_row3_col12 {
+  background-color: #ccebc6;
+  color: #000000;
+}
+#T_e180b_row4_col0 {
+  background-color: #45ad5f;
+  color: #f1f1f1;
+}
+#T_e180b_row4_col3 {
+  background-color: #006227;
+  color: #f1f1f1;
+}
+#T_e180b_row4_col4 {
+  background-color: #05712f;
+  color: #f1f1f1;
+}
+#T_e180b_row4_col5 {
+  background-color: #def2d9;
+  color: #000000;
+}
+#T_e180b_row4_col10 {
+  background-color: #005020;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col0 {
+  background-color: #38a156;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col1 {
+  background-color: #087432;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col2 {
+  background-color: #00451c;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col3 {
+  background-color: #005c25;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col4 {
+  background-color: #006b2b;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col5 {
+  background-color: #daf0d4;
+  color: #000000;
+}
+#T_e180b_row5_col6 {
+  background-color: #eff9eb;
+  color: #000000;
+}
+#T_e180b_row5_col8 {
+  background-color: #63bc6e;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col9 {
+  background-color: #1c8540;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col10 {
+  background-color: #004c1e;
+  color: #f1f1f1;
+}
+#T_e180b_row5_col12 {
+  background-color: #bee5b8;
+  color: #000000;
+}
+#T_e180b_row6_col0, #T_e180b_row6_col1, #T_e180b_row6_col2, #T_e180b_row6_col3, #T_e180b_row6_col4, #T_e180b_row6_col5, #T_e180b_row6_col6, #T_e180b_row6_col7, #T_e180b_row6_col8, #T_e180b_row6_col9, #T_e180b_row6_col10, #T_e180b_row6_col11, #T_e180b_row6_col12, #T_e180b_row6_col13, #T_e180b_row6_col14 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_e180b" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_e180b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">births</th>
+<th id="T_e180b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">temperature</th>
+<th id="T_e180b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">pressure</th>
+<th id="T_e180b_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">dew_point</th>
+<th id="T_e180b_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">humidity</th>
+<th id="T_e180b_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">wind_speed</th>
+<th id="T_e180b_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">gust</th>
+<th id="T_e180b_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">wind_chill</th>
+<th id="T_e180b_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">uv_index</th>
+<th id="T_e180b_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">feels_like_temperature</th>
+<th id="T_e180b_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">visibility</th>
+<th id="T_e180b_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">solar_radiation</th>
+<th id="T_e180b_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">pollutant_value</th>
+<th id="T_e180b_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">precipitation_rate</th>
+<th id="T_e180b_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">precipitation_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_e180b_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
+<td id="T_e180b_row0_col0" class="data row0 col0">1399.317195</td>
+<td id="T_e180b_row0_col1" class="data row0 col1">27.527325</td>
+<td id="T_e180b_row0_col2" class="data row0 col2">1007.996160</td>
+<td id="T_e180b_row0_col3" class="data row0 col3">23.783828</td>
+<td id="T_e180b_row0_col4" class="data row0 col4">81.213123</td>
+<td id="T_e180b_row0_col5" class="data row0 col5">6.569408</td>
+<td id="T_e180b_row0_col6" class="data row0 col6">27.890241</td>
+<td id="T_e180b_row0_col7" class="data row0 col7">27.451720</td>
+<td id="T_e180b_row0_col8" class="data row0 col8">0.651795</td>
+<td id="T_e180b_row0_col9" class="data row0 col9">30.441393</td>
+<td id="T_e180b_row0_col10" class="data row0 col10">8.582386</td>
+<td id="T_e180b_row0_col11" class="data row0 col11">145.609684</td>
+<td id="T_e180b_row0_col12" class="data row0 col12">42.495870</td>
+<td id="T_e180b_row0_col13" class="data row0 col13">5.762057</td>
+<td id="T_e180b_row0_col14" class="data row0 col14">12.349303</td>
+</tr>
+<tr class="even">
+<td id="T_e180b_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
+<td id="T_e180b_row1_col0" class="data row1 col0">151.534289</td>
+<td id="T_e180b_row1_col1" class="data row1 col1">0.879650</td>
+<td id="T_e180b_row1_col2" class="data row1 col2">1.962270</td>
+<td id="T_e180b_row1_col3" class="data row1 col3">1.131681</td>
+<td id="T_e180b_row1_col4" class="data row1 col4">5.905187</td>
+<td id="T_e180b_row1_col5" class="data row1 col5">2.211017</td>
+<td id="T_e180b_row1_col6" class="data row1 col6">15.385685</td>
+<td id="T_e180b_row1_col7" class="data row1 col7">0.804632</td>
+<td id="T_e180b_row1_col8" class="data row1 col8">0.871842</td>
+<td id="T_e180b_row1_col9" class="data row1 col9">1.454741</td>
+<td id="T_e180b_row1_col10" class="data row1 col10">0.455176</td>
+<td id="T_e180b_row1_col11" class="data row1 col11">20.630437</td>
+<td id="T_e180b_row1_col12" class="data row1 col12">9.242458</td>
+<td id="T_e180b_row1_col13" class="data row1 col13">53.834741</td>
+<td id="T_e180b_row1_col14" class="data row1 col14">72.250576</td>
+</tr>
+<tr class="odd">
+<td id="T_e180b_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
+<td id="T_e180b_row2_col0" class="data row2 col0">697.000000</td>
+<td id="T_e180b_row2_col1" class="data row2 col1">23.444444</td>
+<td id="T_e180b_row2_col2" class="data row2 col2">997.887076</td>
+<td id="T_e180b_row2_col3" class="data row2 col3">13.897368</td>
+<td id="T_e180b_row2_col4" class="data row2 col4">15.484936</td>
+<td id="T_e180b_row2_col5" class="data row2 col5">1.163329</td>
+<td id="T_e180b_row2_col6" class="data row2 col6">0.220339</td>
+<td id="T_e180b_row2_col7" class="data row2 col7">23.361953</td>
+<td id="T_e180b_row2_col8" class="data row2 col8">0.000000</td>
+<td id="T_e180b_row2_col9" class="data row2 col9">23.777778</td>
+<td id="T_e180b_row2_col10" class="data row2 col10">2.786753</td>
+<td id="T_e180b_row2_col11" class="data row2 col11">0.000000</td>
+<td id="T_e180b_row2_col12" class="data row2 col12">15.125438</td>
+<td id="T_e180b_row2_col13" class="data row2 col13">0.000000</td>
+<td id="T_e180b_row2_col14" class="data row2 col14">0.000000</td>
+</tr>
+<tr class="even">
+<td id="T_e180b_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
+<td id="T_e180b_row3_col0" class="data row3 col0">1299.000000</td>
+<td id="T_e180b_row3_col1" class="data row3 col1">26.930111</td>
+<td id="T_e180b_row3_col2" class="data row3 col2">1006.886622</td>
+<td id="T_e180b_row3_col3" class="data row3 col3">23.554108</td>
+<td id="T_e180b_row3_col4" class="data row3 col4">79.513711</td>
+<td id="T_e180b_row3_col5" class="data row3 col5">6.182207</td>
+<td id="T_e180b_row3_col6" class="data row3 col6">27.890241</td>
+<td id="T_e180b_row3_col7" class="data row3 col7">26.924528</td>
+<td id="T_e180b_row3_col8" class="data row3 col8">0.000000</td>
+<td id="T_e180b_row3_col9" class="data row3 col9">29.463124</td>
+<td id="T_e180b_row3_col10" class="data row3 col10">8.549533</td>
+<td id="T_e180b_row3_col11" class="data row3 col11">145.609684</td>
+<td id="T_e180b_row3_col12" class="data row3 col12">38.520319</td>
+<td id="T_e180b_row3_col13" class="data row3 col13">0.356371</td>
+<td id="T_e180b_row3_col14" class="data row3 col14">3.218137</td>
+</tr>
+<tr class="odd">
+<td id="T_e180b_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
+<td id="T_e180b_row4_col0" class="data row4 col0">1411.000000</td>
+<td id="T_e180b_row4_col1" class="data row4 col1">27.449486</td>
+<td id="T_e180b_row4_col2" class="data row4 col2">1007.970255</td>
+<td id="T_e180b_row4_col3" class="data row4 col3">23.967937</td>
+<td id="T_e180b_row4_col4" class="data row4 col4">82.460700</td>
+<td id="T_e180b_row4_col5" class="data row4 col5">6.919526</td>
+<td id="T_e180b_row4_col6" class="data row4 col6">27.890241</td>
+<td id="T_e180b_row4_col7" class="data row4 col7">27.435050</td>
+<td id="T_e180b_row4_col8" class="data row4 col8">0.000000</td>
+<td id="T_e180b_row4_col9" class="data row4 col9">30.406473</td>
+<td id="T_e180b_row4_col10" class="data row4 col10">8.672687</td>
+<td id="T_e180b_row4_col11" class="data row4 col11">145.609684</td>
+<td id="T_e180b_row4_col12" class="data row4 col12">42.495870</td>
+<td id="T_e180b_row4_col13" class="data row4 col13">5.762057</td>
+<td id="T_e180b_row4_col14" class="data row4 col14">12.349303</td>
+</tr>
+<tr class="even">
+<td id="T_e180b_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
+<td id="T_e180b_row5_col0" class="data row5 col0">1509.000000</td>
+<td id="T_e180b_row5_col1" class="data row5 col1">28.041932</td>
+<td id="T_e180b_row5_col2" class="data row5 col2">1009.161633</td>
+<td id="T_e180b_row5_col3" class="data row5 col3">24.359104</td>
+<td id="T_e180b_row5_col4" class="data row5 col4">84.654464</td>
+<td id="T_e180b_row5_col5" class="data row5 col5">7.738506</td>
+<td id="T_e180b_row5_col6" class="data row5 col6">37.000000</td>
+<td id="T_e180b_row5_col7" class="data row5 col7">27.917808</td>
+<td id="T_e180b_row5_col8" class="data row5 col8">1.611262</td>
+<td id="T_e180b_row5_col9" class="data row5 col9">31.328596</td>
+<td id="T_e180b_row5_col10" class="data row5 col10">8.783403</td>
+<td id="T_e180b_row5_col11" class="data row5 col11">145.609684</td>
+<td id="T_e180b_row5_col12" class="data row5 col12">44.772431</td>
+<td id="T_e180b_row5_col13" class="data row5 col13">5.762057</td>
+<td id="T_e180b_row5_col14" class="data row5 col14">12.349303</td>
+</tr>
+<tr class="odd">
+<td id="T_e180b_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
+<td id="T_e180b_row6_col0" class="data row6 col0">2200.000000</td>
+<td id="T_e180b_row6_col1" class="data row6 col1">33.000000</td>
+<td id="T_e180b_row6_col2" class="data row6 col2">1016.209393</td>
+<td id="T_e180b_row6_col3" class="data row6 col3">26.255048</td>
+<td id="T_e180b_row6_col4" class="data row6 col4">95.250709</td>
+<td id="T_e180b_row6_col5" class="data row6 col5">38.743243</td>
+<td id="T_e180b_row6_col6" class="data row6 col6">593.000000</td>
+<td id="T_e180b_row6_col7" class="data row6 col7">33.000000</td>
+<td id="T_e180b_row6_col8" class="data row6 col8">2.972896</td>
+<td id="T_e180b_row6_col9" class="data row6 col9">40.000000</td>
+<td id="T_e180b_row6_col10" class="data row6 col10">9.000000</td>
+<td id="T_e180b_row6_col11" class="data row6 col11">419.813559</td>
+<td id="T_e180b_row6_col12" class="data row6 col12">136.627451</td>
+<td id="T_e180b_row6_col13" class="data row6 col13">2539.750000</td>
+<td id="T_e180b_row6_col14" class="data row6 col14">2539.750000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visualising-a-few-features" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-a-few-features">Visualising a few features</h2>
+<p>Let’s visualise the data to get a better understanding of the trends and seasonality, and to develop an intuition of what we are trying to forecast. We will focus on births, temperature, and pollutant levels.</p>
+<div id="8b421a8d" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">9</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].plot(data[<span class="st">'date'</span>], data[<span class="st">'births'</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">'Daily Births'</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_ylabel(<span class="st">'Births'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].plot(data[<span class="st">'date'</span>], data[<span class="st">'temperature'</span>])</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">'Temperature'</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_ylabel(<span class="st">'Temperature'</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].plot(data[<span class="st">'date'</span>], data[<span class="st">'pollutant_value'</span>])</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_title(<span class="st">'Pollution'</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_ylabel(<span class="st">'Pollution'</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="building-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-model">Building the model</h2>
+<p>We can now build a Prophet model forecasting five years into the future, we will adjust Prophet’s change point prior scale to make the model more flexible. First, we will forecast temperature and pollutant levels, and then we will forecast the number of births using these two features as regressors.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+About the Change Point Prior Scale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The change point prior scale parameter controls the flexibility of the model. A higher value makes the model more flexible, allowing it to capture more fluctuations in the data. However, this can lead to overfitting, so it is important to tune carefully.</p>
+</div>
+</div>
+<p>Prophet requires the input data to have two columns: <code>ds</code> and <code>y</code>. The <code>ds</code> column contains dates, and the <code>y</code> column the values we want to forecast - in our case temperature, pollutant levels, and births.</p>
+<div id="885528c5" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet <span class="im">import</span> Prophet</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>future_period <span class="op">=</span> <span class="dv">365</span><span class="op">*</span><span class="dv">5</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>prior_scale <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data for Prophet</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>df_temperature <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'temperature'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'temperature'</span>: <span class="st">'y'</span>})</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>df_pollutant <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'pollutant_value'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'pollutant_value'</span>: <span class="st">'y'</span>})</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Prophet model</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>model_temperature <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>model_pollutant <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>model_temperature.fit(df_temperature)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe to hold future predictions</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>future_temperature <span class="op">=</span> model_temperature.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>forecast_temperature <span class="op">=</span> model_temperature.predict(future_temperature)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>model_pollutant.fit(df_pollutant)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>future_pollutant <span class="op">=</span> model_pollutant.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>forecast_pollutant <span class="op">=</span> model_pollutant.predict(future_pollutant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Prophet includes inbuilt methods to easily visuallise the forecasted values, as well as uncertainty intervals. We will also include change points in the forecast plot, which are the points where the trend changes direction.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+About Change Points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Prophet uses a piecewise linear model to capture the trend in the data. Change points are where the trend changes direction, and are automatically selected by the model. You can also manually specify individual change points if you have domain knowledge about the data.</p>
+</div>
+</div>
+<div id="e2cedad9" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> add_changepoints_to_plot</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with a 2-row, 1-column grid</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">9</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the temperature forecast on the first subplot</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> model_temperature.plot(forecast_temperature, ax<span class="op">=</span>axs[<span class="dv">0</span>], include_legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">'Temperature Forecast with Changepoints'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>add_changepoints_to_plot(axs[<span class="dv">0</span>], model_temperature, forecast_temperature)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the pollutant forecast on the second subplot</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> model_pollutant.plot(forecast_pollutant, ax<span class="op">=</span>axs[<span class="dv">1</span>], include_legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">'Pollutant Forecast with Changepoints'</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>add_changepoints_to_plot(axs[<span class="dv">1</span>], model_pollutant, forecast_pollutant)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In addition we can plot the components of the forecast, including the trend, seasonality, and holidays. It helps to understand how these components contribute to the forecast. Notice how in the yearly seasonality plot, the model captures the peaks in temperature and pollutant levels during certain months.</p>
+<div id="16d454fa" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of each forecast</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>fig3 <span class="op">=</span> model_temperature.plot_components(forecast_temperature, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig3.suptitle(<span class="st">'Temperature Forecast Components'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>fig4 <span class="op">=</span> model_pollutant.plot_components(forecast_pollutant, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig4.suptitle(<span class="st">'Pollutant Forecast Components'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-19-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-19-output-2.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="predicting-births" class="level1">
+<h1>Predicting births</h1>
+<p>We now want to forecast the number of future births. In addition we want to use temperature and pollutant levels as regressors in the model. Let us build a new Prophet model that includes these regressors.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+About Regressors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Including additional regressors gives the ability to account for external factors that might influence the trend and seasonality of the data. This can improve the accuracy of the forecast, especially if these factors have a significant impact on the target variable. In this case, we are including temperature and pollutant levels as regressors as an illustration of how to use this feature in Prophet, in practice these might not be the most relevant factors for predicting births.</p>
+</div>
+</div>
+<div id="9f071a8e" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_births <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'births'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'births'</span>: <span class="st">'y'</span>})</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add temperature and pollutant values to the dataframe</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>df_births[<span class="st">'temperature'</span>] <span class="op">=</span> data[<span class="st">'temperature'</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>df_births[<span class="st">'pollutant_value'</span>] <span class="op">=</span> data[<span class="st">'pollutant_value'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Prophet also allows us to include factors such as holidays in the model. We can include public holidays in Malaysia, which will help the model to account for the impact of holidays on the number of births. We could also include other seasonalities or events that might affect the number of births, such as cultural or religious events. We are also including the temperature and pollutant levels as regressors in the model, as these might impact birth rates.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Other Regressors and Seasonalities
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As an exercise, can you think of other regressors or seasonalities that might influence the number of births? For example, you could include certain economic indicators, social factors, or other external variables that might affect birth rates.</p>
+</div>
+</div>
+<div id="c91435ed" class="cell" data-execution_count="20">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model_births <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Malaysian holidays to the model</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>model_births.add_country_holidays(country_name<span class="op">=</span><span class="st">'MY'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a monthly seasonality to the model</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>model_births.add_seasonality(name<span class="op">=</span><span class="st">'monthly'</span>, period<span class="op">=</span><span class="fl">30.5</span>, fourier_order<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the temperature and pollutant value to the model as regressors</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>model_births.add_regressor(<span class="st">'temperature'</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>model_births.add_regressor(<span class="st">'pollutant_value'</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>model_births.fit(df_births)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe to hold future predictions</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>future_births <span class="op">=</span> model_births.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add forecasted temperature and pollutant values to future_births</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>future_births[<span class="st">'temperature'</span>] <span class="op">=</span> forecast_temperature[<span class="st">'yhat'</span>][<span class="op">-</span><span class="bu">len</span>(future_births):].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>future_births[<span class="st">'pollutant_value'</span>] <span class="op">=</span> forecast_pollutant[<span class="st">'yhat'</span>][<span class="op">-</span><span class="bu">len</span>(future_births):].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the future</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>forecast_births <span class="op">=</span> model_births.predict(future_births)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now that we have completed a forecast, we can plot the predicted values, as well as uncertainty intervals, just as we did before for temperature and pollutant levels.</p>
+<div id="40473496" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the forecast</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>fig5 <span class="op">=</span> model_births.plot(forecast_births, include_legend<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>fig5.gca().set_title(<span class="st">'Births Forecast with Changepoints'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add changepoints to the plot</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> add_changepoints_to_plot(fig5.gca(), model_births, forecast_births)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-22-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let us also plot the components of the forecast, including the trend, seasonality, holidays, and the impact of the regressors. This allows us to understand how these components contribute to the forecast and if and how the regressors influence the number of births.</p>
+<div id="f43a836c" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of the forecast</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fig6 <span class="op">=</span> model_births.plot_components(forecast_births, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">12</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig6.suptitle(<span class="st">'Births Forecast Components'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interestingly, there is a negative effect of many holidays on the number of births - this might be due to the fact that many births are planned, and people might avoid giving birth on holidays, or there might be other non-represented factors at play. Additionally we see that the number of births is highest between September and November.</p>
+<section id="cross-validating-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="cross-validating-the-model">Cross validating the model</h2>
+<p>Prophet provides a convenient way to cross-validate the model using historical data. This allows us to evaluate the performance of the model on past data and tune the hyperparameters accordingly. We will use cross-validation to assess the forecast accuracy of the model and identify any potential issues. Cross validation in Prophet works on a rolling forecast origin, where the model is trained on historical data up to a certain point and then used to forecast known future data. We can then compare the forecasted values with the actual values to evaluate the model’s performance. The <code>initial</code> parameter specifies the size of the initial training period, and the <code>period</code> parameter specifies the size of the forecast <code>horizon</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+About Cross Validation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cross validation produces a dataframe with <code>yhat</code>, <code>yhat_lower</code>, <code>yhat_upper</code> and <code>y</code> columns. The <code>yhat</code> column contains the forecasted values, the <code>yhat_lower</code> and <code>yhat_upper</code> columns contain the uncertainty intervals, and the <code>y</code> column contains the actual values. We can use this dataframe to calculate evaluation metrics such as mean absolute error (MAE), mean squared error (MSE), and root mean squared error (RMSE).</p>
+</div>
+</div>
+<div id="f4d28ab1" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validate the model</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> cross_validation</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>df_births_cv <span class="op">=</span> cross_validation(model_births, initial<span class="op">=</span><span class="st">'730 days'</span>, period<span class="op">=</span><span class="st">'180 days'</span>, horizon <span class="op">=</span> <span class="st">'365 days'</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>df_births_cv.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"f96111cbbfe1444f8a120b56a2f93b9f","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<style type="text/css">
+#T_b4f12_row0_col1 {
+  background-color: #95d391;
+  color: #000000;
+}
+#T_b4f12_row0_col2 {
+  background-color: #98d594;
+  color: #000000;
+}
+#T_b4f12_row0_col3 {
+  background-color: #91d28e;
+  color: #000000;
+}
+#T_b4f12_row0_col4 {
+  background-color: #acdea6;
+  color: #000000;
+}
+#T_b4f12_row1_col1, #T_b4f12_row1_col2, #T_b4f12_row1_col3, #T_b4f12_row1_col4 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_b4f12_row2_col1 {
+  background-color: #359e53;
+  color: #f1f1f1;
+}
+#T_b4f12_row2_col2 {
+  background-color: #3ca559;
+  color: #f1f1f1;
+}
+#T_b4f12_row2_col3 {
+  background-color: #3aa357;
+  color: #f1f1f1;
+}
+#T_b4f12_row2_col4 {
+  background-color: #18823d;
+  color: #f1f1f1;
+}
+#T_b4f12_row3_col1, #T_b4f12_row3_col3 {
+  background-color: #005723;
+  color: #f1f1f1;
+}
+#T_b4f12_row3_col2 {
+  background-color: #005924;
+  color: #f1f1f1;
+}
+#T_b4f12_row3_col4, #T_b4f12_row4_col1, #T_b4f12_row4_col2, #T_b4f12_row4_col3 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+#T_b4f12_row4_col4 {
+  background-color: #004c1e;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_b4f12" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_b4f12_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ds</th>
+<th id="T_b4f12_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">yhat</th>
+<th id="T_b4f12_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">yhat_lower</th>
+<th id="T_b4f12_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">yhat_upper</th>
+<th id="T_b4f12_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">y</th>
+<th id="T_b4f12_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">cutoff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_b4f12_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_b4f12_row0_col0" class="data row0 col0">1998-12-05 00:00:00</td>
+<td id="T_b4f12_row0_col1" class="data row0 col1">1311.555304</td>
+<td id="T_b4f12_row0_col2" class="data row0 col2">1256.298492</td>
+<td id="T_b4f12_row0_col3" class="data row0 col3">1367.429416</td>
+<td id="T_b4f12_row0_col4" class="data row0 col4">1349</td>
+<td id="T_b4f12_row0_col5" class="data row0 col5">1998-12-04 00:00:00</td>
+</tr>
+<tr class="even">
+<td id="T_b4f12_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_b4f12_row1_col0" class="data row1 col0">1998-12-06 00:00:00</td>
+<td id="T_b4f12_row1_col1" class="data row1 col1">1216.420565</td>
+<td id="T_b4f12_row1_col2" class="data row1 col2">1161.138190</td>
+<td id="T_b4f12_row1_col3" class="data row1 col3">1268.924482</td>
+<td id="T_b4f12_row1_col4" class="data row1 col4">1311</td>
+<td id="T_b4f12_row1_col5" class="data row1 col5">1998-12-04 00:00:00</td>
+</tr>
+<tr class="odd">
+<td id="T_b4f12_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_b4f12_row2_col0" class="data row2 col0">1998-12-07 00:00:00</td>
+<td id="T_b4f12_row2_col1" class="data row2 col1">1373.392566</td>
+<td id="T_b4f12_row2_col2" class="data row2 col2">1314.221541</td>
+<td id="T_b4f12_row2_col3" class="data row2 col3">1423.385528</td>
+<td id="T_b4f12_row2_col4" class="data row2 col4">1399</td>
+<td id="T_b4f12_row2_col5" class="data row2 col5">1998-12-04 00:00:00</td>
+</tr>
+<tr class="even">
+<td id="T_b4f12_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_b4f12_row3_col0" class="data row3 col0">1998-12-08 00:00:00</td>
+<td id="T_b4f12_row3_col1" class="data row3 col1">1434.990681</td>
+<td id="T_b4f12_row3_col2" class="data row3 col2">1383.377583</td>
+<td id="T_b4f12_row3_col3" class="data row3 col3">1489.791256</td>
+<td id="T_b4f12_row3_col4" class="data row3 col4">1423</td>
+<td id="T_b4f12_row3_col5" class="data row3 col5">1998-12-04 00:00:00</td>
+</tr>
+<tr class="odd">
+<td id="T_b4f12_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_b4f12_row4_col0" class="data row4 col0">1998-12-09 00:00:00</td>
+<td id="T_b4f12_row4_col1" class="data row4 col1">1449.400677</td>
+<td id="T_b4f12_row4_col2" class="data row4 col2">1398.352673</td>
+<td id="T_b4f12_row4_col3" class="data row4 col3">1504.466093</td>
+<td id="T_b4f12_row4_col4" class="data row4 col4">1420</td>
+<td id="T_b4f12_row4_col5" class="data row4 col5">1998-12-04 00:00:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>These metrics provide a quantitative measure of the model’s accuracy and can help us evaluate the performance of the model.</p>
+<p>We are particularly interested in MAPE (Mean Absolute Percentage Error), which is a relative measure of the forecast accuracy. It is calculated as the average of the absolute percentage errors between the forecasted and actual values. A lower MAPE indicates a more accurate forecast.</p>
+<p><span class="math inline">\(MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\)</span></p>
+<p>As an example, a MAPE of 0.046 would indicate that the forecast is 4.6% off from the actual value.</p>
+<div id="9729a60d" class="cell" data-execution_count="24">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> performance_metrics</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df_births_cv_p <span class="op">=</span> performance_metrics(df_births_cv)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_births_cv_p.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<style type="text/css">
+#T_77309_row0_col0, #T_77309_row0_col1, #T_77309_row0_col2, #T_77309_row0_col3, #T_77309_row0_col4, #T_77309_row0_col6, #T_77309_row1_col5, #T_77309_row4_col7 {
+  background-color: #f7fcf5;
+  color: #000000;
+}
+#T_77309_row0_col5 {
+  background-color: #9ed798;
+  color: #000000;
+}
+#T_77309_row0_col7, #T_77309_row4_col0, #T_77309_row4_col1, #T_77309_row4_col2, #T_77309_row4_col3, #T_77309_row4_col4, #T_77309_row4_col5, #T_77309_row4_col6 {
+  background-color: #00441b;
+  color: #f1f1f1;
+}
+#T_77309_row1_col0 {
+  background-color: #c7e9c0;
+  color: #000000;
+}
+#T_77309_row1_col1, #T_77309_row1_col2 {
+  background-color: #dbf1d6;
+  color: #000000;
+}
+#T_77309_row1_col3 {
+  background-color: #e8f6e4;
+  color: #000000;
+}
+#T_77309_row1_col4, #T_77309_row1_col6 {
+  background-color: #eff9ec;
+  color: #000000;
+}
+#T_77309_row1_col7 {
+  background-color: #248c46;
+  color: #f1f1f1;
+}
+#T_77309_row2_col0 {
+  background-color: #73c476;
+  color: #000000;
+}
+#T_77309_row2_col1, #T_77309_row2_col2, #T_77309_row3_col7 {
+  background-color: #bbe4b4;
+  color: #000000;
+}
+#T_77309_row2_col3 {
+  background-color: #d0edca;
+  color: #000000;
+}
+#T_77309_row2_col4 {
+  background-color: #def2d9;
+  color: #000000;
+}
+#T_77309_row2_col5 {
+  background-color: #91d28e;
+  color: #000000;
+}
+#T_77309_row2_col6 {
+  background-color: #dff3da;
+  color: #000000;
+}
+#T_77309_row2_col7 {
+  background-color: #3ca559;
+  color: #f1f1f1;
+}
+#T_77309_row3_col0 {
+  background-color: #228a44;
+  color: #f1f1f1;
+}
+#T_77309_row3_col1, #T_77309_row3_col2 {
+  background-color: #006328;
+  color: #f1f1f1;
+}
+#T_77309_row3_col3 {
+  background-color: #17813d;
+  color: #f1f1f1;
+}
+#T_77309_row3_col4 {
+  background-color: #117b38;
+  color: #f1f1f1;
+}
+#T_77309_row3_col5 {
+  background-color: #0c7735;
+  color: #f1f1f1;
+}
+#T_77309_row3_col6 {
+  background-color: #137d39;
+  color: #f1f1f1;
+}
+</style>
+
+<table id="T_77309" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_77309_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">horizon</th>
+<th id="T_77309_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">mse</th>
+<th id="T_77309_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">rmse</th>
+<th id="T_77309_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">mae</th>
+<th id="T_77309_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">mape</th>
+<th id="T_77309_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">mdape</th>
+<th id="T_77309_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">smape</th>
+<th id="T_77309_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_77309_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_77309_row0_col0" class="data row0 col0">37 days 00:00:00</td>
+<td id="T_77309_row0_col1" class="data row0 col1">7044.649211</td>
+<td id="T_77309_row0_col2" class="data row0 col2">83.932409</td>
+<td id="T_77309_row0_col3" class="data row0 col3">64.313467</td>
+<td id="T_77309_row0_col4" class="data row0 col4">0.046796</td>
+<td id="T_77309_row0_col5" class="data row0 col5">0.037140</td>
+<td id="T_77309_row0_col6" class="data row0 col6">0.045922</td>
+<td id="T_77309_row0_col7" class="data row0 col7">0.681334</td>
+</tr>
+<tr class="even">
+<td id="T_77309_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_77309_row1_col0" class="data row1 col0">38 days 00:00:00</td>
+<td id="T_77309_row1_col1" class="data row1 col1">7065.587597</td>
+<td id="T_77309_row1_col2" class="data row1 col2">84.057050</td>
+<td id="T_77309_row1_col3" class="data row1 col3">64.387762</td>
+<td id="T_77309_row1_col4" class="data row1 col4">0.046818</td>
+<td id="T_77309_row1_col5" class="data row1 col5">0.036911</td>
+<td id="T_77309_row1_col6" class="data row1 col6">0.045946</td>
+<td id="T_77309_row1_col7" class="data row1 col7">0.679283</td>
+</tr>
+<tr class="odd">
+<td id="T_77309_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_77309_row2_col0" class="data row2 col0">39 days 00:00:00</td>
+<td id="T_77309_row2_col1" class="data row2 col1">7081.623627</td>
+<td id="T_77309_row2_col2" class="data row2 col2">84.152383</td>
+<td id="T_77309_row2_col3" class="data row2 col3">64.466984</td>
+<td id="T_77309_row2_col4" class="data row2 col4">0.046857</td>
+<td id="T_77309_row2_col5" class="data row2 col5">0.037161</td>
+<td id="T_77309_row2_col6" class="data row2 col6">0.045984</td>
+<td id="T_77309_row2_col7" class="data row2 col7">0.678496</td>
+</tr>
+<tr class="even">
+<td id="T_77309_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_77309_row3_col0" class="data row3 col0">40 days 00:00:00</td>
+<td id="T_77309_row3_col1" class="data row3 col1">7159.995715</td>
+<td id="T_77309_row3_col2" class="data row3 col2">84.616758</td>
+<td id="T_77309_row3_col3" class="data row3 col3">64.878598</td>
+<td id="T_77309_row3_col4" class="data row3 col4">0.047116</td>
+<td id="T_77309_row3_col5" class="data row3 col5">0.037406</td>
+<td id="T_77309_row3_col6" class="data row3 col6">0.046254</td>
+<td id="T_77309_row3_col7" class="data row3 col7">0.675635</td>
+</tr>
+<tr class="odd">
+<td id="T_77309_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_77309_row4_col0" class="data row4 col0">41 days 00:00:00</td>
+<td id="T_77309_row4_col1" class="data row4 col1">7172.213365</td>
+<td id="T_77309_row4_col2" class="data row4 col2">84.688921</td>
+<td id="T_77309_row4_col3" class="data row4 col3">65.028362</td>
+<td id="T_77309_row4_col4" class="data row4 col4">0.047190</td>
+<td id="T_77309_row4_col5" class="data row4 col5">0.037506</td>
+<td id="T_77309_row4_col6" class="data row4 col6">0.046333</td>
+<td id="T_77309_row4_col7" class="data row4 col7">0.673288</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can plot the MAPE values for each forecast horizon to see how the forecast accuracy changes over time.</p>
+<div id="9462d2ae" class="cell" data-execution_count="25">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the MAPE performance metric</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> plot_cross_validation_metric</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>fig7 <span class="op">=</span> plot_cross_validation_metric(df_births_cv, metric<span class="op">=</span><span class="st">'mape'</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice how this metric stays relatively stable over time, around or just below 5%. This indicates that the model is performing well and providing accurate forecasts.</p>
+<p>Let us now plot the output of the cross-validation, showing the actual values and forecasted values superimposed on each other. This allows us to visually inspect the accuracy of the forecast over the period and horizon of the cross-validation.</p>
+<div id="77fe499b" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure and axis</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot actual values (y) as a scatter plot</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_births_cv[<span class="st">'ds'</span>], df_births_cv[<span class="st">'y'</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Births (y)'</span>, alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot predicted values (yhat) as a scatter plot</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_births_cv[<span class="st">'ds'</span>], df_births_cv[<span class="st">'yhat'</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Predicted Births (yhat)'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (ds)'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Births'</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Actual vs Predicted Births Over Time'</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="final-remarks" class="level1">
+<h1>Final remarks</h1>
+<p>This experiment demonstrates how Prophet can be effectively used to forecast births in Malaysia by combining historical data with external factors such as temperature and pollutant levels. Integrating these regressors enabled the model to better capture seasonal patterns and underlying trends, as evidenced by the consistent performance across cross-validation metrics—including a stable MAPE of around 5%. Overall, the approach not only validates the robustness of Prophet for time series forecasting but also lays the groundwork for further enhancements. Future work might explore additional variables, like economic or social indicators, to refine predictions even further.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script type="application/vnd.jupyter.widget-state+json">
+{"state":{"1eb612f72dd54855a4723b35a4f5efb6":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"ProgressView","bar_style":"success","description":"","description_allow_html":false,"layout":"IPY_MODEL_f305e1dac9824d4bb46bfb029d3a398e","max":49,"min":0,"orientation":"horizontal","style":"IPY_MODEL_d833fd5c1971429184453cd1356b6eea","tabbable":null,"tooltip":null,"value":49}},"62fdfcb4bae74ad89f4ebc06e6195203":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_9debd754aa144fc38e21f94bf7a314d2","placeholder":"​","style":"IPY_MODEL_e2d93ccd31fc45b6bf324761498449f2","tabbable":null,"tooltip":null,"value":"100%"}},"79ac37bfd34c49e1ace948c75f3dd42a":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"7ba2993def1b41a5af61c6e9988f562e":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"9debd754aa144fc38e21f94bf7a314d2":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"d833fd5c1971429184453cd1356b6eea":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"e2d93ccd31fc45b6bf324761498449f2":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"f18698587b0c45589181aabdfb55f2fa":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_7ba2993def1b41a5af61c6e9988f562e","placeholder":"​","style":"IPY_MODEL_fa5d8e577ad143ed9e189048822fabdd","tabbable":null,"tooltip":null,"value":" 49/49 [00:58&lt;00:00,  2.61s/it]"}},"f305e1dac9824d4bb46bfb029d3a398e":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"f96111cbbfe1444f8a120b56a2f93b9f":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_62fdfcb4bae74ad89f4ebc06e6195203","IPY_MODEL_1eb612f72dd54855a4723b35a4f5efb6","IPY_MODEL_f18698587b0c45589181aabdfb55f2fa"],"layout":"IPY_MODEL_79ac37bfd34c49e1ace948c75f3dd42a","tabbable":null,"tooltip":null}},"fa5d8e577ad143ed9e189048822fabdd":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}}},"version_major":2,"version_minor":0}
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Pedro Leitão</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with Quarto</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

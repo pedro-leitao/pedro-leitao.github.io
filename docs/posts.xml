@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/posts.html</link>
+<atom:link href="https://pedroleitao.nl/posts.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<image>
+<url>https://pedroleitao.nl/_static/logo.png</url>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/posts.html</link>
+<height>138</height>
+<width>144</width>
+</image>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Mon, 10 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>France, AI and Back to Nuclear for Germany ?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</link>
+  <description><![CDATA[ President Macron has <a href="https://www.reuters.com/technology/artificial-intelligence/france-invest-109-billion-euros-ai-macron-announces-2025-02-09/">just signalled that France is about to announce €109 billion private sector investments in AI</a>. This is a significant amount of money, even for a country like France. It is also a clear statement that at least some European countries might be serious about investing in digital. ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Politics</category>
+  <category>Europe</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</guid>
+  <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Reinforcement Learning - a Primer using Connect Four</title>
+  <link>https://pedroleitao.nl/posts/experiments/connect-four-rl/</link>
+  <description><![CDATA[ One of the mainstay algorithms in machine learning is reinforcement learning (or <em>RL</em> for short). RL is an approach to machine learning that is used to teach an agent how to make decisions. The agent learns to achieve a goal in an uncertain, potentially complex environment. It learns by interacting with the environment and receiving feedback in the form of rewards or penalties. It then uses this feedback to learn the best strategy for achieving its goal. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Reinforcement Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/connect-four-rl/</guid>
+  <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How GPU’s work, an explainer using the Mandelbrot set</title>
+  <link>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</link>
+  <description><![CDATA[ Every day pretty much all of us either uses or hears about the mythical GPU, the Graphics Processing Unit. It’s the thing that makes your games, video renders, and your machine learning models train faster. But how does it achieve that? What makes it different from a CPU? ]]></description>
+  <category>Experiments</category>
+  <category>GPU</category>
+  <guid>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</guid>
+  <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Regularisation in Machine Learning</title>
+  <link>https://pedroleitao.nl/posts/experiments/regularisation/</link>
+  <description><![CDATA[ Regularisation is a technique designed to prevent models from overfitting. In other words, it helps your model generalise better to unseen data by discouraging it from fitting too closely to the quirks and noise present in your training set. This is typically achieved by adding a penalty term to the model’s cost function, nudging the learning process toward simpler, more robust solutions. ]]></description>
+  <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
+  <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Reasoning Models for Fun and Profit</title>
+  <link>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</link>
+  <description><![CDATA[ Since the advent of GPT-3, foundation models have rapidly progressed from single pass transformer models, to multi-step models that can reason over multiple passes. Multi-step reasoning can be applied to more complex problems, where the model benefits from iterative reasoning to arrive at the correct answer. ]]></description>
+  <category>HowTo</category>
+  <category>AI</category>
+  <category>Language Models</category>
+  <guid>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</guid>
+  <pubDate>Sat, 11 Jan 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Model Fine-tuning with the Hugging Face transformers Library</title>
+  <link>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</link>
+  <description><![CDATA[ Previously, we learned <a href="../../../howtos/fine-tuning/mlx/">how to use Apple’s MLX framework to fine-tune a language model</a>. This is an Apple specific framework and is not available to everyone. Here we will learn how to fine-tune a language model using the Hugging Face <a href="https://huggingface.co/docs/transformers/en/index"><code>transformers</code></a> library. This library is widely used and supports a variety of models on different platforms and hardware. ]]></description>
+  <category>HowTo</category>
+  <category>AI</category>
+  <category>Language Models</category>
+  <guid>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</guid>
+  <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Fine-tuning an LLM with Apple’s MLX Framework</title>
+  <link>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</link>
+  <description><![CDATA[ Modern GPU’s come with inbuilt memory, which is separate from the CPU’s memory. This means that when training large models, the data has to be copied from the CPU’s memory to the GPU’s memory, which can be slow and inefficient. This is particularly problematic when training large language models (LLM’s), as the data can be too large to fit into the GPU’s memory. ]]></description>
+  <category>HowTo</category>
+  <category>AI</category>
+  <category>Language Models</category>
+  <guid>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</guid>
+  <pubDate>Wed, 11 Dec 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Model Management with MLflow</title>
+  <link>https://pedroleitao.nl/posts/howtos/mlflow-ui/</link>
+  <description><![CDATA[ As you develop machine learning models, you will find that you need to manage many different versions and variations as you move towards the desired outcome. You may want to compare, roll back to previous versions, or deploy multiple versions of a model to A/B test which one is better. <a href="https://MLflow.org">MLflow</a> is one of many tools and frameworks that helps you manage this process. There are lots of alternatives in this space, including <a href="https://www.kubeflow.org">Kubeflow</a>, <a href="https://dvc.org">DVC</a>, and <a href="https://metaflow.org">Metaflow</a>. ]]></description>
+  <category>HowTo</category>
+  <category>Machine Learning</category>
+  <category>Model Management</category>
+  <guid>https://pedroleitao.nl/posts/howtos/mlflow-ui/</guid>
+  <pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Will Artificial Intelligence Ever be More than Fancy Curve Fitting ?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/</link>
+  <description><![CDATA[ One of my favourite books from my late 20’s was <a href="https://podcasts.ox.ac.uk/people/roger-penrose">Roger Penrose’s</a> <a href="https://global.oup.com/ukhe/product/the-emperors-new-mind-9780198784920?cc=gb&amp;lang=en&amp;">The Emperor’s New Mind</a>, where he argues that human consciousness is non-algorithmic and non-computable. This is a view that is not shared by many in the AI community, who believe that the brain is a computer and that consciousness is an emergent property of the brain’s computation. ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/</guid>
+  <pubDate>Thu, 10 Oct 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>A Classical Machine Learning Problem: Predicting Customer Churn</title>
+  <link>https://pedroleitao.nl/posts/experiments/customer-churn/</link>
+  <description><![CDATA[ Customer churn, where customers stop using a company’s services, is a major concern for businesses as it directly impacts revenue. Traditionally, companies tackled this issue by manually analyzing past data and relying on the intuition of marketing and sales teams. They used methods like customer surveys, simple statistical analysis, and basic segmentation based on purchase history and customer interactions. These approaches provided some insights but were often reactive and lacked precision. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/customer-churn/</guid>
+  <pubDate>Mon, 08 Jul 2024 23:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

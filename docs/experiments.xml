@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/experiments.html</link>
+<atom:link href="https://pedroleitao.nl/experiments.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<image>
+<url>https://pedroleitao.nl/_static/logo.png</url>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/experiments.html</link>
+<height>138</height>
+<width>144</width>
+</image>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Sun, 09 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Reinforcement Learning - a Primer using Connect Four</title>
+  <link>https://pedroleitao.nl/posts/experiments/connect-four-rl/</link>
+  <description><![CDATA[ One of the mainstay algorithms in machine learning is reinforcement learning (or <em>RL</em> for short). RL is an approach to machine learning that is used to teach an agent how to make decisions. The agent learns to achieve a goal in an uncertain, potentially complex environment. It learns by interacting with the environment and receiving feedback in the form of rewards or penalties. It then uses this feedback to learn the best strategy for achieving its goal. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Reinforcement Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/connect-four-rl/</guid>
+  <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How GPU’s work, an explainer using the Mandelbrot set</title>
+  <link>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</link>
+  <description><![CDATA[ Every day pretty much all of us either uses or hears about the mythical GPU, the Graphics Processing Unit. It’s the thing that makes your games, video renders, and your machine learning models train faster. But how does it achieve that? What makes it different from a CPU? ]]></description>
+  <category>Experiments</category>
+  <category>GPU</category>
+  <guid>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</guid>
+  <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Regularisation in Machine Learning</title>
+  <link>https://pedroleitao.nl/posts/experiments/regularisation/</link>
+  <description><![CDATA[ Regularisation is a technique designed to prevent models from overfitting. In other words, it helps your model generalise better to unseen data by discouraging it from fitting too closely to the quirks and noise present in your training set. This is typically achieved by adding a penalty term to the model’s cost function, nudging the learning process toward simpler, more robust solutions. ]]></description>
+  <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
+  <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>A Classical Machine Learning Problem: Predicting Customer Churn</title>
+  <link>https://pedroleitao.nl/posts/experiments/customer-churn/</link>
+  <description><![CDATA[ Customer churn, where customers stop using a company’s services, is a major concern for businesses as it directly impacts revenue. Traditionally, companies tackled this issue by manually analyzing past data and relying on the intuition of marketing and sales teams. They used methods like customer surveys, simple statistical analysis, and basic segmentation based on purchase history and customer interactions. These approaches provided some insights but were often reactive and lacked precision. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/customer-churn/</guid>
+  <pubDate>Mon, 08 Jul 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Text Tasks without Neural Networks</title>
+  <link>https://pedroleitao.nl/posts/experiments/random-forests-embeddings/</link>
+  <description><![CDATA[ Natural language processing (NLP) is often associated with deep learning and neural networks. However, there are efficient methods for text classification that do not rely on neural networks. In this exploration, we will demonstrate a sentiment analysis classification problem using text embeddings combined with traditional machine learning algorithms. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>NLP</category>
+  <guid>https://pedroleitao.nl/posts/experiments/random-forests-embeddings/</guid>
+  <pubDate>Tue, 18 Jun 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The Basics of Unsupervised Learning: Segmenting an Image</title>
+  <link>https://pedroleitao.nl/posts/experiments/unsupervised-image-segmentation/</link>
+  <description><![CDATA[ Unsupervised learning is a type of machine learning that looks for previously undetected patterns in a dataset without pre-existing labels and with minimal human supervision. Unlike supervised learning, where the model is trained on labeled data, unsupervised learning works on its own to identify structures and patterns within the data. This makes it particularly useful in situations where labeled data is scarce or unavailable. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Unsupervised Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/unsupervised-image-segmentation/</guid>
+  <pubDate>Thu, 06 Jun 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Machine Learning and Predictive Maintenance</title>
+  <link>https://pedroleitao.nl/posts/experiments/predictive-maintenance/</link>
+  <description><![CDATA[ Predictive maintenance leverages machine learning to analyze operational data, anticipate potential failures, and schedule timely maintenance. This approach helps avoid unexpected downtime and extends the lifespan of equipment. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/predictive-maintenance/</guid>
+  <pubDate>Fri, 10 May 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Time Series Forecasting with Prophet</title>
+  <link>https://pedroleitao.nl/posts/experiments/time-series-forecasting/</link>
+  <description><![CDATA[ Forecasting future trends is a common application in time series analysis. In this experiment, we will use <a href="https://facebook.github.io/prophet/">Meta’s Prophet</a> library to predict trends for births in Malaysia, based on available public data. Prophet is a forecasting tool developed by Meta that is available in Python and R. It is designed for analyzing time series data with daily observations that display patterns on different time scales. ]]></description>
+  <category>Experiments</category>
+  <category>Time Series Analysis</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/time-series-forecasting/</guid>
+  <pubDate>Fri, 19 Apr 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Understanding Random Forest Classification and Its Effectiveness</title>
+  <link>https://pedroleitao.nl/posts/experiments/random-forests/</link>
+  <description><![CDATA[ A Random Forest is a versatile and robust machine learning algorithm used for both classification and regression tasks. It builds upon the concept of decision trees, but improves on their accuracy and overcomes their tendency to overfit by combining the predictions of numerous decision trees constructed on different subsets of the data. We have already <a href="../../../posts/experiments/ml-pipeline/index.html">experimented with a Random Tree regressor</a>, and in this experiment, we will focus on Random Forest classification. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/random-forests/</guid>
+  <pubDate>Thu, 07 Mar 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Instance vs Model Learning</title>
+  <link>https://pedroleitao.nl/posts/experiments/instance-vs-model/</link>
+  <description><![CDATA[ Instance-based machine learning and model-based machine learning are two broad categories of machine learning algorithms that differ in their approach to learning and making predictions. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/instance-vs-model/</guid>
+  <pubDate>Sat, 02 Mar 2024 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

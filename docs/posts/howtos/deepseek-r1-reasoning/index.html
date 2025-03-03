@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-01-11">
+
+<title>Reasoning Models for Fun and Profit – Pedro Leitão</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-9143d267086697ee6a9fbeed7f968a66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.png" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../posts.html"> 
+<span class="menu-text">All posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../experiments.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../thoughts.html"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../howtos.html"> 
+<span class="menu-text">Howto’s</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pedro-leitao"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/nunoleitao"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Reasoning Models for Fun and Profit</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">HowTo</div>
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">Language Models</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 11, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#enter-the-chinese-room" id="toc-enter-the-chinese-room" class="nav-link active" data-scroll-target="#enter-the-chinese-room">Enter the Chinese room</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting started</a>
+  <ul class="collapse">
+  <li><a href="#installing-ollama" id="toc-installing-ollama" class="nav-link" data-scroll-target="#installing-ollama">Installing Ollama</a></li>
+  <li><a href="#pulling-the-model" id="toc-pulling-the-model" class="nav-link" data-scroll-target="#pulling-the-model">Pulling the model</a></li>
+  </ul></li>
+  <li><a href="#testing-the-model" id="toc-testing-the-model" class="nav-link" data-scroll-target="#testing-the-model">Testing the model</a></li>
+  <li><a href="#integrating-with-python" id="toc-integrating-with-python" class="nav-link" data-scroll-target="#integrating-with-python">Integrating with Python</a></li>
+  <li><a href="#deeper-reasoning" id="toc-deeper-reasoning" class="nav-link" data-scroll-target="#deeper-reasoning">Deeper reasoning</a></li>
+  <li><a href="#enter-maths" id="toc-enter-maths" class="nav-link" data-scroll-target="#enter-maths">Enter maths</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Since the advent of GPT-3, foundation models have rapidly progressed from single pass transformer models, to multi-step models that can reason over multiple passes. Multi-step reasoning can be applied to more complex problems, where the model benefits from iterative reasoning to arrive at the correct answer.</p>
+<p>If you have used <a href="https://openai.com/o1/">Open AI’s o1</a> model, you might have noticed that it “thinks” for longer and goes through a series of steps to arrive at the answer. It does so because it has been trained to produce a <a href="https://openai.com/index/learning-to-reason-with-llms/">“chain of thought”</a> (CoT) as it reasons through the problem. In the case of o1, OpenAI specifically chose to <em>hide</em> the CoT from the user.</p>
+<p>o1 shows quite impressive results in several fields, and is capable of answering certain domain questions <a href="https://venturebeat.com/ai/forget-gpt-5-openai-launches-new-ai-model-family-o1-claiming-phd-level-performance/">as well or better than domain experts</a>. In the case of the <a href="https://mmmu-benchmark.github.io/">MMMU benchmark</a>, o1 is as of September 2024 only about 10 points behind the best human performance, and two points ahead of the worst scores for human experts.</p>
+<p>The thing is, o1 is a closed model, and we don’t know how it reasons besides the little information OpenAI has published. We can’t see its chain of thought, and we can’t evaluate the intermediate steps it takes when tackling any given problem.</p>
+<section id="enter-the-chinese-room" class="level2">
+<h2 class="anchored" data-anchor-id="enter-the-chinese-room">Enter the Chinese room</h2>
+<p>The <a href="https://plato.stanford.edu/entries/chinese-room/#ChinRoomArgu">Chinese Room</a> is a thought experiment that was first proposed by John Searle in 1980. The experiment is designed to show that a computer program cannot have a mind, understanding or consciousness, regardless of how intelligently it may behave.</p>
+<p>Funny that, as <a href="https://www.deepseek.com">Deepseek</a>, a chinese company, <a href="https://arstechnica.com/ai/2025/01/china-is-catching-up-with-americas-best-reasoning-ai-models/">has released a multi-step model</a> which discloses its chain of thought, and is entirely open source.</p>
+<p>It is backed by the chinese <a href="https://www.high-flyer.cn/en/">High-Flier</a> quantitative hedge fund, and was founded by three alumni from <a href="https://en.wikipedia.org/wiki/Zhejiang_University">Zhejiang University</a>. Zhejiang has amongst its alumni the founders of Alibaba and Tsung-Dao Lee (the 1957 physics Nobel Prize laureate), and is considered one of the top universities in China.</p>
+<p><a href="https://api-docs.deepseek.com/news/news250120">Deepseek R1</a> is claimed to be on par with OpenAI’s o1, and shows some impressive results on multiple benchmarks. R1-Zero, the baseline model on which R1 is based, uses reinforcement learning only, without any further <a href="https://nebius.com/blog/posts/fine-tuning/supervised-fine-tuning">supervised fine tuning</a>. R1 is also much cheaper to run than o1 ($2.60 per million tokens, vs $60 per million tokens or a factor of <strong>23x</strong>!), which is a big deal for many applications which require scale.</p>
+<p>Even the distilled versions of R1 show impressive results, with the 32 billion parameter model beating o1-mini on every single benchmark except for GPQA-Diamond, where it is only three points behind.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+About Supervised Fine Tuning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Supervised Fine Tuning (SFT), you take a pretrained large language model and directly show it examples of correct or “good” responses in a labeled dataset. This gives the model a clear roadmap for how to behave, so it tends to produce more predictable, consistent answers within the scope of that data.</p>
+<p>In contrast, a model trained only with Reinforcement Learning (RL) relies on trial-and-error plus reward signals to figure out the best outputs. There aren’t explicit labeled examples; instead, the model explores various responses and updates its strategy based on which ones earn higher rewards.</p>
+<p>A model which produces good results with RL only, without SFT, shows that reasoning capabilities can emerge from the model’s architecture and training process, without the need for explicit examples of correct behavior, which is groundbreaking. With RL only, in principle R1 will be able to reason more generally than a model which has been fine-tuned on a specific dataset.</p>
+</div>
+</div>
+<p>There are already <a href="https://huggingface.co/models?other=base_model:quantized:deepseek-ai/DeepSeek-R1-Distill-Qwen-32B">quantized versions of R1</a> released into the wild by the AI community, meaning that pretty capable versions of R1 can be run on relatively modest hardware.</p>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<section id="installing-ollama" class="level3">
+<h3 class="anchored" data-anchor-id="installing-ollama">Installing Ollama</h3>
+<p>You can run distilled versions of the R1 model locally in multiple ways, but the easiest is to use <a href="https://ollama.com">Ollama</a>. Start by downloading the Ollama app, and proceed to then download a version of the model which will fit your hardware (you will likely need 16GB of RAM to run the 8B model, 32GB for 14B model and 64GB+ for the 32B model). There are multiple parameter sizes available, from 1.5B parameters all the way up to 70B parameters.</p>
+<p>In my case, my version of Ollama is:</p>
+<div id="43aaa2e1" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: could not connect to a running Ollama instance
+Warning: client version is 0.5.12</code></pre>
+</div>
+</div>
+<p>And I am running it on a 96GB RAM Mac Studio M2 Max.</p>
+</section>
+<section id="pulling-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="pulling-the-model">Pulling the model</h3>
+<p>Once Ollama is installed, chose and install an appropriate distilled model. In our case we will use <a href="https://huggingface.co/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF"><code>unsloth/DeepSeek-R1-Distill-Qwen-8B-GGUF</code></a> quantized to 8 bits, which is a 8 billion parameter model, so very small compared to the original R1 model.</p>
+<div id="e9da642b" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama pull hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>pulling manifest ⠋ pulling manifest ⠙ pulling manifest ⠹ pulling manifest ⠸ pulling manifest 
+pulling f8eba201522a... 100% ▕████████████████▏ 4.9 GB                         
+pulling 369ca498f347... 100% ▕████████████████▏  387 B                         
+pulling b31c130852cc... 100% ▕████████████████▏  107 B                         
+pulling eef4a93c7add... 100% ▕████████████████▏  193 B                         
+verifying sha256 digest 
+writing manifest 
+success </code></pre>
+</div>
+</div>
+<div id="6c71eb0e" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="bu">list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>NAME                                                      ID              SIZE      MODIFIED     
+hf.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF:latest    6ab7dc0572eb    4.9 GB    1 second ago    
+hf.co/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF:Q8_0      8e12be36faa4    34 GB     5 weeks ago     </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="testing-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="testing-the-model">Testing the model</h2>
+<p>With the model installed, we can run it in preparation for some prompts to make sure it all works.</p>
+<div id="8f16883a" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama run hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF <span class="st">"Who are you?"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠋ ⠙ ⠸ ⠼ ⠼ ⠴ ⠦ ⠧ ⠏ ⠋ ⠋ ⠙ ⠸ ⠸ ⠼ ⠴ ⠧ ⠇ ⠇ ⠏ ⠙ ⠹ ⠹ ⠼ ⠴ ⠴ ⠧ ⠇ ⠇ ⠏ ⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠸ ⠼ ⠦ ⠦ ⠧ ⠏ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠼ ⠦ ⠦ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠇ ⠏ &lt;think&gt;
+Greetings! I'm DeepSeek-R1, an artificial intelligence assistant created by
+by DeepSeek. I'm at your service and would be delighted to assist you with 
+any inquiries or tasks you may have.
+&lt;/think&gt;
+
+Greetings! I'm DeepSeek-R1, an artificial intelligence assistant created by
+by DeepSeek. I'm at your service and would be delighted to assist you with 
+any inquiries or tasks you may have.
+</code></pre>
+</div>
+</div>
+</section>
+<section id="integrating-with-python" class="level2">
+<h2 class="anchored" data-anchor-id="integrating-with-python">Integrating with Python</h2>
+<p>Ollama can be invoked from Python via the <code>ollama</code> package, which can be installed in your Python environment via <code>pip</code> or <code>conda</code>. You then can use it to interact with the model. Let’s start with a simple fact based question.</p>
+<div id="97059243" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ollama <span class="im">import</span> generate</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>MODEL <span class="op">=</span> <span class="st">'hf.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF'</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> send_message(message:<span class="bu">str</span>, temperature:<span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Sends a prompt to the model and returns the generated response.</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> generate(model<span class="op">=</span>MODEL, prompt<span class="op">=</span>message, options<span class="op">=</span><span class="bu">dict</span>(temperature<span class="op">=</span>temperature)).response</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_response(response: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Extracts the chain of thought (CoT) between &lt;think&gt;...&lt;/think&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">    and the final answer from the response string.</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Then cleans up whitespace and wraps the CoT at 80 characters per line.</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        cot <span class="op">=</span> response.split(<span class="st">'&lt;think&gt;'</span>)[<span class="dv">1</span>].split(<span class="st">'&lt;/think&gt;'</span>)[<span class="dv">0</span>]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">=</span> response.split(<span class="st">'&lt;/think&gt;'</span>)[<span class="dv">1</span>]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">IndexError</span>:</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If the tags aren't present, just return the whole response as the answer</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span>, response.strip()</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove extra whitespace from the CoT</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    cot <span class="op">=</span> <span class="st">' '</span>.join(cot.split())</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wrap the CoT at 80 characters</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    cot <span class="op">=</span> textwrap.fill(cot, width<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cot, answer.strip()</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        message<span class="op">=</span><span class="st">"Explain why the sky is blue to a five year old."</span>,</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.6</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chain of thought:
+
+Okay, so I need to explain why the sky is blue to a five-year-old. Hmm, let's
+think about how to make this simple and engaging for a young child. First, I
+should consider their understanding of the world around them. At five, they
+might have basic knowledge of colors and maybe some simple concepts about light.
+So, using terms they can relate to is key. I remember that when light enters the
+Earth's atmosphere, it scatters in all directions. The shorter wavelengths,
+which are blue and green, scatter more than longer ones like red. But how do I
+convey that without getting too technical? Maybe I can use an analogy they
+understand, like a trampoline or a playground. If the sky is like a big
+trampoline, then when sunlight hits it, some of it bounces up and scatters in
+all directions. The colors with more energy, which are blue and green, bounce
+higher than others. Wait, but I should make sure not to overcomplicate it.
+Keeping it simple, maybe using the idea that the sky is made of air, and when
+light passes through the atmosphere, some colors spread out more. Blue is one of
+those colors that spreads the most, making the sky look blue to us. Another
+angle could be using a prism or something they might have seen in school, but I
+think for a five-year-old, keeping it visual with a trampoline analogy makes
+sense. It's something they can imagine and relate to their own experiences. I
+should also avoid any complex scientific terms. Words like "Rayleigh scattering"
+are probably beyond their understanding, so using a simple explanation about the
+sky being like a trampoline where some colors bounce higher than others is
+better. So putting it all together: The sky is blue because when sunlight goes
+through the Earth's atmosphere, some of the light scatters in all directions.
+Blue light, which has more energy, scatters more and reaches our eyes, making
+the sky appear blue. I think that covers both simplicity and an engaging analogy
+for a young child.</code></pre>
+</div>
+</div>
+</section>
+<section id="deeper-reasoning" class="level2">
+<h2 class="anchored" data-anchor-id="deeper-reasoning">Deeper reasoning</h2>
+<p>Let us give the model something to chew on which goes beyond just some factual questions. We will give it a simple reasoning problem which involves geography, and see how it performs.</p>
+<div id="ac66e24f" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">                    Can an athlete swim from London to Southampton? Not-widthstanding environmental factors or risks, plan how one could do it.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.6</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chain of thought:
+
+Okay, so I want to figure out if someone could swim from London to Southampton.
+First off, I know both cities are in the UK, but I'm not exactly sure about
+their geographical positions. Let me think... London is in the south-east of
+England, right? And Southampton is further down on the south coast. So, the
+distance between them must be a factor here. I should probably look up the
+straight-line distance between London and Southampton. Maybe using something
+like Google Maps to estimate it. From what I remember, it's around 100-120
+miles. But that's by road, which is different from swimming. Swimming would
+require a longer path because you can't cut through land; you have to go along
+rivers or the coast. Wait, there are rivers in between, like the Thames and
+maybe others. The Thames flows into London, so perhaps one could follow it
+downstream towards Southampton. But I'm not sure how navigable the Thames is for
+swimming. I think there's a lot of pollution and maybe some weirs that could
+make it difficult or even dangerous. Alternatively, there are other waterways
+like the Lee River or the Medway. Maybe someone could navigate through those.
+But again, I don't know if they're swimmable. There might be locks or obstacles
+along the way. Also, thinking about tides is important because swimming against
+them would be really exhausting and maybe impossible at certain times. Another
+option is to go around the coast. Southampton is on the south coast, so maybe a
+route that follows the English Channel from London to Southampton could work.
+But that seems like it would add a lot of distance. How long would that be?
+Maybe 150 miles or more? That's a long swim even for a trained athlete. I should
+also consider environmental factors. The Thames Estuary is known for having
+strong currents and maybe some industrial pollution. Swimming through that could
+be harmful, not to mention the risk of getting lost or caught in fishing gear.
+There might also be boat traffic, which is another hazard. What about the time
+it would take? If someone could swim at a steady pace of, say, 4 knots (which is
+about 7.2 km/h), covering 100 miles would take roughly 14 hours. But I don't
+think human swimmers can maintain that speed for such a long time without rest
+or food. Plus, the weather conditions and tides might change during the swim.
+Logistically, planning such a crossing seems complicated. There are no lifelines
+or support teams in the middle of the Thames or English Channel. So, if
+something goes wrong, help would be hard to come by. Navigation aids like buoys
+or markers might not be sufficient for someone swimming without any support. I
+also wonder about the feasibility from a practical standpoint. Why would someone
+want to do this? Maybe as a challenge or a personal record. But it's not exactly
+a common activity, so there might not be much information or resources available
+on how to plan such a swim. In terms of preparation, an athlete would need to
+train extensively for endurance and strength. They'd also have to learn about
+tides, currents, and navigation. Maybe using a GPS device could help track their
+progress, but that adds another layer of complexity. They’d also need to carry
+provisions like food, water, and maybe a survival kit. Thinking about the route
+again, I'm not sure if there's an official channel or a recognized path from
+London to Southampton by swimming. Most long-distance swims have specific
+courses, like the English Channel Swim which is 21 miles, so this would be much
+longer. There might also be legal considerations. Swimming through certain areas
+might require permits or could be against local regulations, especially if it's
+in restricted zones near airports or industrial areas. In summary, while on
+paper it seems possible from a geographical standpoint, the practical aspects
+like distance, environmental hazards, physical endurance, and logistical
+planning make it extremely challenging for a human athlete. Plus, there are
+significant safety concerns that would need to be addressed before attempting
+such an endeavor.</code></pre>
+</div>
+</div>
+<p>The model correctly inferred that there is no direct water route between London and Southampton, and that a swim would be very challenging. It also inferred options between swimming near the coast, or offshore. So it seems to have a basic understanding of the geography, the challenges involved in what was asked, and how to mitigate them.</p>
+</section>
+<section id="enter-maths" class="level2">
+<h2 class="anchored" data-anchor-id="enter-maths">Enter maths</h2>
+<p>Let us now give the model a simple maths problem, and see how it performs. In this case we aren’t asking a question which only requires simple formulation, but instead one which requires more deliberate thinking.</p>
+<div id="3d26e30b" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">                    Bob has 3 boxes of sardine cans. Each can holds 5 sardines. Bob’s cat eats 2 sardines from one of the cans. In the end, there are 28 sardines left. How many sardines did Bob start with?</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.5</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chain of thought:
+
+First, I need to determine how many sardines Bob started with in total. There
+are three boxes containing the sardine cans. Each can holds 5 sardines. Let’s
+denote the number of cans as \( x \). Therefore, the total number of sardines
+initially is \( 5x \). Bob’s cat eats 2 sardines from one of the cans. This
+means that in one can, there are now \( 5 - 2 = 3 \) sardines left. In the end,
+there are 28 sardines remaining. Since only one can was affected by the cat
+eating sardines, all the remaining sardines must be in the other two cans.
+Therefore, the total number of sardines in these two cans is 28. Since each can
+holds 5 sardines, and there are \( x - 1 \) cans left with their original count,
+the equation becomes: \( 5(x - 1) = 28 \) Solving for \( x \): \( x - 1 =
+\frac{28}{5} \) \( x - 1 = 5.6 \) \( x = 6.6 \) Since the number of cans must be
+a whole number, there seems to be an inconsistency in the problem. Perhaps I
+made a mistake or misinterpreted the information. Let me double-check. Wait,
+each can holds 5 sardines, and Bob has three boxes of cans. The cat eats 2
+sardines from one can, leaving 3 sardines in that can. There are still 28
+sardines left in total. So, if there were \( x \) cans initially, after the cat
+ate some, there are \( x - 1 \) cans with 5 sardines each and 1 can with 3
+sardines, making a total of: \( 5(x - 1) + 3 = 28 \) Solving this equation: \(
+5x - 5 + 3 = 28 \) \( 5x - 2 = 28 \) \( 5x = 30 \) \( x = 6 \) So, Bob started
+with 6 cans.</code></pre>
+</div>
+</div>
+<p>The reasoning sequence in the chain of thought is interesting. The model actually goes beyond what was asked, and consistently solves through the <em>whole</em> chain (it would have been enough to stop at <span class="math inline">\(28 + 2 = 30\)</span>), but it shows a decent level of sophistication for an 8 billion parameter model.</p>
+<p>This isn’t exactly a groundbreaking result, but it shows that it can reason through a simple maths problem, and that it can identify the possible solution.</p>
+<p>It finally presents us with the answer.</p>
+<div id="bfb8806e" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Answer:</span><span class="ch">\n\n</span><span class="sc">{</span>answer<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Answer:
+
+**Solution:**
+
+Let's determine how many sardines Bob initially had.
+
+1. **Total Cans and Sardines:**
+   - Bob has **3 boxes** of sardine cans.
+   - Each can holds **5 sardines**.
+   
+   Therefore, the total number of sardines initially is:
+   \[
+   3 \text{ boxes} \times 5 \text{ sardines per box} = 15 \text{ sardines}
+   \]
+
+2. **Cat Eats Sardines:**
+   - The cat eats **2 sardines** from one can.
+   
+   So, the remaining sardines in that particular can are:
+   \[
+   5 \text{ sardines} - 2 \text{ sardines} = 3 \text{ sardines}
+   \]
+
+3. **Sardines Left:**
+   - After the cat eats the sardines, there are **28 sardines** left in total.
+
+4. **Determining Initial Sardines:**
+   - Initially, Bob had:
+     - **1 can** with **3 sardines** (after the cat ate some).
+     - The remaining **2 cans** still have their original **5 sardines each**.
+   
+   So, the total number of sardines is:
+   \[
+   1 \text{ can} \times 3 \text{ sardines} + 2 \text{ cans} \times 5 \text{ sardines per can} = 3 + 10 = 13 \text{ sardines}
+   \]
+   
+   However, this doesn't align with the given total of **28 sardines**. This discrepancy suggests there might be a misunderstanding in the problem setup.
+
+5. **Re-evaluating the Problem:**
+   - If each can holds **5 sardines**, and the cat eats **2 sardines** from one can, leaving **3 sardines** in that can.
+   
+   Given that there are still **28 sardines** left:
+   
+   \[
+   1 \text{ can} \times 3 \text{ sardines} + 2 \text{ cans} \times 5 \text{ sardines} = 3 + 10 = 13 \text{ sardines}
+   \]
+   
+   This does not add up to **28 sardines**. Therefore, there might be an error in the problem's parameters.
+
+6. **Alternative Approach:**
+   - Let's denote the number of cans as \( x \).
+   
+   - Initially, there are \( 5x \) sardines.
+   
+   - After eating:
+     - **1 can** has \( 5 - 2 = 3 \) sardines.
+     - The remaining \( x - 1 \) cans each have **5 sardines**.
+     
+   - Total sardines left:
+     \[
+     (x - 1) \times 5 + 3 = 28
+     \]
+     
+   - Solving for \( x \):
+     \[
+     5(x - 1) + 3 = 28 \\
+     5x - 5 + 3 = 28 \\
+     5x - 2 = 28 \\
+     5x = 30 \\
+     x = 6
+     \]
+     
+   - Therefore, Bob started with **6 cans**.
+
+\[
+\boxed{15}
+\]</code></pre>
+</div>
+</div>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next?</h2>
+<p>It remains to be seen how chain of thought models operate at scale with real world applications, or how cost effective they will be. However it is pretty clear that the race is on, and that OpenAI and its o1 and o3 models isn’t the only game in town. The fact that Deepseek has released an open source model which is on par with o1 is a big deal, especially since this is a model originating in China, and that it is much cheaper to run than o1.</p>
+<p>This is particularly important as it shows how quickly and furiously competitors can emerge, plus how fast China is catching up.</p>
+<p>In the meantime, in Europe, the only foundation model which even comes close is <a href="https://artificialanalysis.ai/models/mistral-large-2">Mistral Large 2</a>. But at least Europe has an <a href="https://artificialintelligenceact.eu">Act</a>!</p>
+<pre class="{bash}"><code>ollama stop hf.co/unsloth/DeepSeek-R1-Distill-Qwen-7B-GGUF:Q8_0</code></pre>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Pedro Leitão</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with Quarto</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
