@@ -260,51 +260,54 @@ window.Quarto = {
 <div id="927bf2c0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;A function which computes all primes between two integers and returns them as a numpy array</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> primes_between(a, b):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    sieve <span class="op">=</span> [<span class="va">True</span>] <span class="op">*</span> (b <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    sieve[<span class="dv">0</span>] <span class="op">=</span> sieve[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span>  <span class="co"># 0 and 1 are not prime numbers</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> start <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(b<span class="op">**</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> sieve[start]:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> multiple <span class="kw">in</span> <span class="bu">range</span>(start<span class="op">*</span>start, b <span class="op">+</span> <span class="dv">1</span>, start):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                sieve[multiple] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    primes <span class="op">=</span> np.array([num <span class="cf">for</span> num <span class="kw">in</span> <span class="bu">range</span>(a, b <span class="op">+</span> <span class="dv">1</span>) <span class="cf">if</span> sieve[num]])</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> primes</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Compute the Ulam Spiral and return it as a numpy array</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ulam_spiral(primes, a, b):</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the grid size n (smallest odd number greater than or equal to sqrt(b))</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    num_elements <span class="op">=</span> b <span class="op">-</span> a <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">int</span>(np.ceil(np.sqrt(num_elements)))</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an n x n grid</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    spiral <span class="op">=</span> np.zeros((n, n), dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the numpy array of primes to a set for O(1) membership testing</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    prime_set <span class="op">=</span> <span class="bu">set</span>(primes)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> n <span class="op">//</span> <span class="dv">2</span>, n <span class="op">//</span> <span class="dv">2</span>  <span class="co"># Start in the center of the grid</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    dx, dy <span class="op">=</span> <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>         <span class="co"># Initial direction: up</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&lt;=</span> i <span class="op">&lt;=</span> b <span class="kw">and</span> i <span class="kw">in</span> prime_set:</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            spiral[x, y] <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Mark the cell if it's a prime number</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Change direction if needed</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (x <span class="op">==</span> y) <span class="kw">or</span> (x <span class="op">&lt;</span> y <span class="kw">and</span> x <span class="op">+</span> y <span class="op">==</span> n <span class="op">-</span> <span class="dv">1</span>) <span class="kw">or</span> (x <span class="op">&gt;</span> y <span class="kw">and</span> x <span class="op">+</span> y <span class="op">==</span> n):</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            dx, dy <span class="op">=</span> <span class="op">-</span>dy, dx</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> x <span class="op">+</span> dx, y <span class="op">+</span> dy</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> spiral</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="927bf2c0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="927bf2c0-1"><a href="#927bf2c0-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="927bf2c0-2"><a href="#927bf2c0-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-3"><a href="#927bf2c0-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A function which computes all primes between two integers and returns them as a numpy array</span></span>
+<span id="927bf2c0-4"><a href="#927bf2c0-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-5"><a href="#927bf2c0-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-6"><a href="#927bf2c0-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> primes_between(a, b):</span>
+<span id="927bf2c0-7"><a href="#927bf2c0-7" aria-hidden="true" tabindex="-1"></a>    sieve <span class="op">=</span> [<span class="va">True</span>] <span class="op">*</span> (b <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="927bf2c0-8"><a href="#927bf2c0-8" aria-hidden="true" tabindex="-1"></a>    sieve[<span class="dv">0</span>] <span class="op">=</span> sieve[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span>  <span class="co"># 0 and 1 are not prime numbers</span></span>
+<span id="927bf2c0-9"><a href="#927bf2c0-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-10"><a href="#927bf2c0-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> start <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(b<span class="op">**</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="927bf2c0-11"><a href="#927bf2c0-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> sieve[start]:</span>
+<span id="927bf2c0-12"><a href="#927bf2c0-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> multiple <span class="kw">in</span> <span class="bu">range</span>(start <span class="op">*</span> start, b <span class="op">+</span> <span class="dv">1</span>, start):</span>
+<span id="927bf2c0-13"><a href="#927bf2c0-13" aria-hidden="true" tabindex="-1"></a>                sieve[multiple] <span class="op">=</span> <span class="va">False</span></span>
+<span id="927bf2c0-14"><a href="#927bf2c0-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-15"><a href="#927bf2c0-15" aria-hidden="true" tabindex="-1"></a>    primes <span class="op">=</span> np.array([num <span class="cf">for</span> num <span class="kw">in</span> <span class="bu">range</span>(a, b <span class="op">+</span> <span class="dv">1</span>) <span class="cf">if</span> sieve[num]])</span>
+<span id="927bf2c0-16"><a href="#927bf2c0-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> primes</span>
+<span id="927bf2c0-17"><a href="#927bf2c0-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-18"><a href="#927bf2c0-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-19"><a href="#927bf2c0-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the Ulam Spiral and return it as a numpy array</span></span>
+<span id="927bf2c0-20"><a href="#927bf2c0-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-21"><a href="#927bf2c0-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-22"><a href="#927bf2c0-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ulam_spiral(primes, a, b):</span>
+<span id="927bf2c0-23"><a href="#927bf2c0-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the grid size n (smallest odd number greater than or equal to sqrt(b))</span></span>
+<span id="927bf2c0-24"><a href="#927bf2c0-24" aria-hidden="true" tabindex="-1"></a>    num_elements <span class="op">=</span> b <span class="op">-</span> a <span class="op">+</span> <span class="dv">1</span></span>
+<span id="927bf2c0-25"><a href="#927bf2c0-25" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">int</span>(np.ceil(np.sqrt(num_elements)))</span>
+<span id="927bf2c0-26"><a href="#927bf2c0-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="927bf2c0-27"><a href="#927bf2c0-27" aria-hidden="true" tabindex="-1"></a>        n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="927bf2c0-28"><a href="#927bf2c0-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-29"><a href="#927bf2c0-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an n x n grid</span></span>
+<span id="927bf2c0-30"><a href="#927bf2c0-30" aria-hidden="true" tabindex="-1"></a>    spiral <span class="op">=</span> np.zeros((n, n), dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="927bf2c0-31"><a href="#927bf2c0-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-32"><a href="#927bf2c0-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the numpy array of primes to a set for O(1) membership testing</span></span>
+<span id="927bf2c0-33"><a href="#927bf2c0-33" aria-hidden="true" tabindex="-1"></a>    prime_set <span class="op">=</span> <span class="bu">set</span>(primes)</span>
+<span id="927bf2c0-34"><a href="#927bf2c0-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-35"><a href="#927bf2c0-35" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> n <span class="op">//</span> <span class="dv">2</span>, n <span class="op">//</span> <span class="dv">2</span>  <span class="co"># Start in the center of the grid</span></span>
+<span id="927bf2c0-36"><a href="#927bf2c0-36" aria-hidden="true" tabindex="-1"></a>    dx, dy <span class="op">=</span> <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>  <span class="co"># Initial direction: up</span></span>
+<span id="927bf2c0-37"><a href="#927bf2c0-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-38"><a href="#927bf2c0-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="927bf2c0-39"><a href="#927bf2c0-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&lt;=</span> i <span class="op">&lt;=</span> b <span class="kw">and</span> i <span class="kw">in</span> prime_set:</span>
+<span id="927bf2c0-40"><a href="#927bf2c0-40" aria-hidden="true" tabindex="-1"></a>            spiral[x, y] <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Mark the cell if it's a prime number</span></span>
+<span id="927bf2c0-41"><a href="#927bf2c0-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-42"><a href="#927bf2c0-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Change direction if needed</span></span>
+<span id="927bf2c0-43"><a href="#927bf2c0-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (x <span class="op">==</span> y) <span class="kw">or</span> (x <span class="op">&lt;</span> y <span class="kw">and</span> x <span class="op">+</span> y <span class="op">==</span> n <span class="op">-</span> <span class="dv">1</span>) <span class="kw">or</span> (x <span class="op">&gt;</span> y <span class="kw">and</span> x <span class="op">+</span> y <span class="op">==</span> n):</span>
+<span id="927bf2c0-44"><a href="#927bf2c0-44" aria-hidden="true" tabindex="-1"></a>            dx, dy <span class="op">=</span> <span class="op">-</span>dy, dx</span>
+<span id="927bf2c0-45"><a href="#927bf2c0-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-46"><a href="#927bf2c0-46" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> x <span class="op">+</span> dx, y <span class="op">+</span> dy</span>
+<span id="927bf2c0-47"><a href="#927bf2c0-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="927bf2c0-48"><a href="#927bf2c0-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> spiral</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Running the <code>primes_between</code> and <code>ulam_spiral</code> generation functions can take significant time for large ranges of <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(\mathbf{b}\)</span>, and the goal is to cache the results so that you don’t have to re-run it every time you make a change to your code. Let’s illustrate this with an example of <span class="math inline">\(\mathbf{[1, 500000000]}\)</span>.</p>
@@ -324,16 +327,16 @@ Note
 <div id="86f61ccb" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute all primes</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">500000000</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> primes_between(a, b)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Number of primes between </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">len</span>(primes)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="86f61ccb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="86f61ccb-1"><a href="#86f61ccb-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="86f61ccb-2"><a href="#86f61ccb-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="86f61ccb-3"><a href="#86f61ccb-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute all primes</span></span>
+<span id="86f61ccb-4"><a href="#86f61ccb-4" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="86f61ccb-5"><a href="#86f61ccb-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="86f61ccb-6"><a href="#86f61ccb-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">500000000</span></span>
+<span id="86f61ccb-7"><a href="#86f61ccb-7" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> primes_between(a, b)</span>
+<span id="86f61ccb-8"><a href="#86f61ccb-8" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="86f61ccb-9"><a href="#86f61ccb-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of primes between </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">len</span>(primes)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="86f61ccb-10"><a href="#86f61ccb-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of primes between 1 and 500000000: 26355867
@@ -343,21 +346,21 @@ Time taken:  52.26889610290527</code></pre>
 <div id="24d8fd9b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Ulam Spiral</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>zoom_b <span class="op">=</span> b<span class="op">/</span><span class="dv">10000</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>spiral <span class="op">=</span> ulam_spiral(primes, a, zoom_b)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Ulam Spiral</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.imshow(spiral, cmap<span class="op">=</span><span class="st">'Oranges'</span>, extent<span class="op">=</span>[<span class="dv">0</span>, spiral.shape[<span class="dv">0</span>], <span class="dv">0</span>, spiral.shape[<span class="dv">1</span>]])</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'Ulam Spiral of Primes Between </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>zoom_b<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="24d8fd9b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="24d8fd9b-1"><a href="#24d8fd9b-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="24d8fd9b-2"><a href="#24d8fd9b-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="24d8fd9b-3"><a href="#24d8fd9b-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="24d8fd9b-4"><a href="#24d8fd9b-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Ulam Spiral</span></span>
+<span id="24d8fd9b-5"><a href="#24d8fd9b-5" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="24d8fd9b-6"><a href="#24d8fd9b-6" aria-hidden="true" tabindex="-1"></a>zoom_b <span class="op">=</span> b <span class="op">/</span> <span class="dv">10000</span></span>
+<span id="24d8fd9b-7"><a href="#24d8fd9b-7" aria-hidden="true" tabindex="-1"></a>spiral <span class="op">=</span> ulam_spiral(primes, a, zoom_b)</span>
+<span id="24d8fd9b-8"><a href="#24d8fd9b-8" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="24d8fd9b-9"><a href="#24d8fd9b-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span>
+<span id="24d8fd9b-10"><a href="#24d8fd9b-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="24d8fd9b-11"><a href="#24d8fd9b-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Ulam Spiral</span></span>
+<span id="24d8fd9b-12"><a href="#24d8fd9b-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="24d8fd9b-13"><a href="#24d8fd9b-13" aria-hidden="true" tabindex="-1"></a>plt.imshow(spiral, cmap<span class="op">=</span><span class="st">"Oranges"</span>, extent<span class="op">=</span>[<span class="dv">0</span>, spiral.shape[<span class="dv">0</span>], <span class="dv">0</span>, spiral.shape[<span class="dv">1</span>]])</span>
+<span id="24d8fd9b-14"><a href="#24d8fd9b-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Ulam Spiral of Primes Between </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>zoom_b<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="24d8fd9b-15"><a href="#24d8fd9b-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Time taken:  1.7239110469818115</code></pre>
@@ -377,47 +380,49 @@ Time taken:  52.26889610290527</code></pre>
 <div id="699cdd4f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap the 'ulam_spiral' method call with joblib's 'Memory' class</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> joblib <span class="im">import</span> Memory</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>memory <span class="op">=</span> Memory(location<span class="op">=</span><span class="st">'/tmp'</span>, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">@memory.cache</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ulam_spiral_cached(primes, a, b):</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ulam_spiral(primes, a, b)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">@memory.cache</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> primes_between_cached(a, b):</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> primes_between(a, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="699cdd4f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="699cdd4f-1"><a href="#699cdd4f-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap the 'ulam_spiral' method call with joblib's 'Memory' class</span></span>
+<span id="699cdd4f-2"><a href="#699cdd4f-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="699cdd4f-3"><a href="#699cdd4f-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> joblib <span class="im">import</span> Memory</span>
+<span id="699cdd4f-4"><a href="#699cdd4f-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="699cdd4f-5"><a href="#699cdd4f-5" aria-hidden="true" tabindex="-1"></a>memory <span class="op">=</span> Memory(location<span class="op">=</span><span class="st">"/tmp"</span>, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="699cdd4f-6"><a href="#699cdd4f-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="699cdd4f-7"><a href="#699cdd4f-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="699cdd4f-8"><a href="#699cdd4f-8" aria-hidden="true" tabindex="-1"></a><span class="at">@memory.cache</span></span>
+<span id="699cdd4f-9"><a href="#699cdd4f-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ulam_spiral_cached(primes, a, b):</span>
+<span id="699cdd4f-10"><a href="#699cdd4f-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ulam_spiral(primes, a, b)</span>
+<span id="699cdd4f-11"><a href="#699cdd4f-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="699cdd4f-12"><a href="#699cdd4f-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="699cdd4f-13"><a href="#699cdd4f-13" aria-hidden="true" tabindex="-1"></a><span class="at">@memory.cache</span></span>
+<span id="699cdd4f-14"><a href="#699cdd4f-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> primes_between_cached(a, b):</span>
+<span id="699cdd4f-15"><a href="#699cdd4f-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> primes_between(a, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="64f7ad80" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute all primes</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> primes_between_cached(a, b)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it again</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> primes_between_cached(a, b)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken (cached): "</span>, end_time <span class="op">-</span> start_time)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Ulam Spiral</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>spiral <span class="op">=</span> ulam_spiral_cached(primes, a, b)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it again</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>spiral <span class="op">=</span> ulam_spiral_cached(primes, a, b)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken (cached): "</span>, end_time <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="64f7ad80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="64f7ad80-1"><a href="#64f7ad80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute all primes</span></span>
+<span id="64f7ad80-2"><a href="#64f7ad80-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-3"><a href="#64f7ad80-3" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> primes_between_cached(a, b)</span>
+<span id="64f7ad80-4"><a href="#64f7ad80-4" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-5"><a href="#64f7ad80-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span>
+<span id="64f7ad80-6"><a href="#64f7ad80-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="64f7ad80-7"><a href="#64f7ad80-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it again</span></span>
+<span id="64f7ad80-8"><a href="#64f7ad80-8" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-9"><a href="#64f7ad80-9" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> primes_between_cached(a, b)</span>
+<span id="64f7ad80-10"><a href="#64f7ad80-10" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-11"><a href="#64f7ad80-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken (cached): "</span>, end_time <span class="op">-</span> start_time)</span>
+<span id="64f7ad80-12"><a href="#64f7ad80-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="64f7ad80-13"><a href="#64f7ad80-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Ulam Spiral</span></span>
+<span id="64f7ad80-14"><a href="#64f7ad80-14" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-15"><a href="#64f7ad80-15" aria-hidden="true" tabindex="-1"></a>spiral <span class="op">=</span> ulam_spiral_cached(primes, a, b)</span>
+<span id="64f7ad80-16"><a href="#64f7ad80-16" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-17"><a href="#64f7ad80-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken: "</span>, end_time <span class="op">-</span> start_time)</span>
+<span id="64f7ad80-18"><a href="#64f7ad80-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="64f7ad80-19"><a href="#64f7ad80-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Run it again</span></span>
+<span id="64f7ad80-20"><a href="#64f7ad80-20" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-21"><a href="#64f7ad80-21" aria-hidden="true" tabindex="-1"></a>spiral <span class="op">=</span> ulam_spiral_cached(primes, a, b)</span>
+<span id="64f7ad80-22"><a href="#64f7ad80-22" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="64f7ad80-23"><a href="#64f7ad80-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken (cached): "</span>, end_time <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Time taken:  0.06633901596069336

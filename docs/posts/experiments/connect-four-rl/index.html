@@ -296,67 +296,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="f814bb4b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ROW_COUNT <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>COLUMN_COUNT <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> drop_piece(board, row, col, piece):</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    board[row][col] <span class="op">=</span> piece</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_win(board, piece):</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Horizontal</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r][c<span class="op">+</span>i] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Vertical</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r<span class="op">+</span>i][c] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Positive diagonal</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r<span class="op">+</span>i][c<span class="op">+</span>i] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Negative diagonal</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, ROW_COUNT):</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r<span class="op">-</span>i][c<span class="op">+</span>i] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_board_full(board):</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">all</span>(board[<span class="dv">0</span>][c] <span class="op">!=</span> <span class="dv">0</span> <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT))</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_next_open_row(board, col):</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> board[r][col] <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> r</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_valid_location(board, col):</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> board[<span class="dv">0</span>][col] <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adversary_move(board, random):</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First, check for a winning move for the adversary (piece = 2)</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_valid_location(board, col):</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            temp_board <span class="op">=</span> board.copy()</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> get_next_open_row(temp_board, col)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            drop_piece(temp_board, row, col, <span class="dv">2</span>)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> check_win(temp_board, <span class="dv">2</span>):</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> col</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If no winning move, block the agent's winning move (piece = 1)</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_valid_location(board, col):</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>            temp_board <span class="op">=</span> board.copy()</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> get_next_open_row(temp_board, col)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>            drop_piece(temp_board, row, col, <span class="dv">1</span>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> check_win(temp_board, <span class="dv">1</span>):</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> col</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Otherwise, choose a random valid column using the provided random generator.</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    valid_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT) <span class="cf">if</span> is_valid_location(board, c)]</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.choice(valid_cols) <span class="cf">if</span> valid_cols <span class="cf">else</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f814bb4b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f814bb4b-1"><a href="#f814bb4b-1" aria-hidden="true" tabindex="-1"></a>ROW_COUNT <span class="op">=</span> <span class="dv">6</span></span>
+<span id="f814bb4b-2"><a href="#f814bb4b-2" aria-hidden="true" tabindex="-1"></a>COLUMN_COUNT <span class="op">=</span> <span class="dv">7</span></span>
+<span id="f814bb4b-3"><a href="#f814bb4b-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-4"><a href="#f814bb4b-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-5"><a href="#f814bb4b-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> drop_piece(board, row, col, piece):</span>
+<span id="f814bb4b-6"><a href="#f814bb4b-6" aria-hidden="true" tabindex="-1"></a>    board[row][col] <span class="op">=</span> piece</span>
+<span id="f814bb4b-7"><a href="#f814bb4b-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-8"><a href="#f814bb4b-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-9"><a href="#f814bb4b-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_win(board, piece):</span>
+<span id="f814bb4b-10"><a href="#f814bb4b-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Horizontal</span></span>
+<span id="f814bb4b-11"><a href="#f814bb4b-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
+<span id="f814bb4b-12"><a href="#f814bb4b-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
+<span id="f814bb4b-13"><a href="#f814bb4b-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r][c <span class="op">+</span> i] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
+<span id="f814bb4b-14"><a href="#f814bb4b-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="f814bb4b-15"><a href="#f814bb4b-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Vertical</span></span>
+<span id="f814bb4b-16"><a href="#f814bb4b-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="f814bb4b-17"><a href="#f814bb4b-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
+<span id="f814bb4b-18"><a href="#f814bb4b-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r <span class="op">+</span> i][c] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
+<span id="f814bb4b-19"><a href="#f814bb4b-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="f814bb4b-20"><a href="#f814bb4b-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Positive diagonal</span></span>
+<span id="f814bb4b-21"><a href="#f814bb4b-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
+<span id="f814bb4b-22"><a href="#f814bb4b-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
+<span id="f814bb4b-23"><a href="#f814bb4b-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r <span class="op">+</span> i][c <span class="op">+</span> i] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
+<span id="f814bb4b-24"><a href="#f814bb4b-24" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="f814bb4b-25"><a href="#f814bb4b-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Negative diagonal</span></span>
+<span id="f814bb4b-26"><a href="#f814bb4b-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, ROW_COUNT):</span>
+<span id="f814bb4b-27"><a href="#f814bb4b-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT <span class="op">-</span> <span class="dv">3</span>):</span>
+<span id="f814bb4b-28"><a href="#f814bb4b-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">all</span>(board[r <span class="op">-</span> i][c <span class="op">+</span> i] <span class="op">==</span> piece <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)):</span>
+<span id="f814bb4b-29"><a href="#f814bb4b-29" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="f814bb4b-30"><a href="#f814bb4b-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="f814bb4b-31"><a href="#f814bb4b-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-32"><a href="#f814bb4b-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-33"><a href="#f814bb4b-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_board_full(board):</span>
+<span id="f814bb4b-34"><a href="#f814bb4b-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">all</span>(board[<span class="dv">0</span>][c] <span class="op">!=</span> <span class="dv">0</span> <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT))</span>
+<span id="f814bb4b-35"><a href="#f814bb4b-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-36"><a href="#f814bb4b-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-37"><a href="#f814bb4b-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_next_open_row(board, col):</span>
+<span id="f814bb4b-38"><a href="#f814bb4b-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT <span class="op">-</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="f814bb4b-39"><a href="#f814bb4b-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> board[r][col] <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="f814bb4b-40"><a href="#f814bb4b-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> r</span>
+<span id="f814bb4b-41"><a href="#f814bb4b-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="f814bb4b-42"><a href="#f814bb4b-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-43"><a href="#f814bb4b-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-44"><a href="#f814bb4b-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_valid_location(board, col):</span>
+<span id="f814bb4b-45"><a href="#f814bb4b-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> board[<span class="dv">0</span>][col] <span class="op">==</span> <span class="dv">0</span></span>
+<span id="f814bb4b-46"><a href="#f814bb4b-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-47"><a href="#f814bb4b-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f814bb4b-48"><a href="#f814bb4b-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adversary_move(board, random):</span>
+<span id="f814bb4b-49"><a href="#f814bb4b-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First, check for a winning move for the adversary (piece = 2)</span></span>
+<span id="f814bb4b-50"><a href="#f814bb4b-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="f814bb4b-51"><a href="#f814bb4b-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_valid_location(board, col):</span>
+<span id="f814bb4b-52"><a href="#f814bb4b-52" aria-hidden="true" tabindex="-1"></a>            temp_board <span class="op">=</span> board.copy()</span>
+<span id="f814bb4b-53"><a href="#f814bb4b-53" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> get_next_open_row(temp_board, col)</span>
+<span id="f814bb4b-54"><a href="#f814bb4b-54" aria-hidden="true" tabindex="-1"></a>            drop_piece(temp_board, row, col, <span class="dv">2</span>)</span>
+<span id="f814bb4b-55"><a href="#f814bb4b-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> check_win(temp_board, <span class="dv">2</span>):</span>
+<span id="f814bb4b-56"><a href="#f814bb4b-56" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> col</span>
+<span id="f814bb4b-57"><a href="#f814bb4b-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If no winning move, block the agent's winning move (piece = 1)</span></span>
+<span id="f814bb4b-58"><a href="#f814bb4b-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="f814bb4b-59"><a href="#f814bb4b-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_valid_location(board, col):</span>
+<span id="f814bb4b-60"><a href="#f814bb4b-60" aria-hidden="true" tabindex="-1"></a>            temp_board <span class="op">=</span> board.copy()</span>
+<span id="f814bb4b-61"><a href="#f814bb4b-61" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> get_next_open_row(temp_board, col)</span>
+<span id="f814bb4b-62"><a href="#f814bb4b-62" aria-hidden="true" tabindex="-1"></a>            drop_piece(temp_board, row, col, <span class="dv">1</span>)</span>
+<span id="f814bb4b-63"><a href="#f814bb4b-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> check_win(temp_board, <span class="dv">1</span>):</span>
+<span id="f814bb4b-64"><a href="#f814bb4b-64" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> col</span>
+<span id="f814bb4b-65"><a href="#f814bb4b-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Otherwise, choose a random valid column using the provided random generator.</span></span>
+<span id="f814bb4b-66"><a href="#f814bb4b-66" aria-hidden="true" tabindex="-1"></a>    valid_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT) <span class="cf">if</span> is_valid_location(board, c)]</span>
+<span id="f814bb4b-67"><a href="#f814bb4b-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random.choice(valid_cols) <span class="cf">if</span> valid_cols <span class="cf">else</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -368,59 +374,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="387e238c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gymnasium <span class="im">as</span> gym</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gymnasium <span class="im">import</span> spaces</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ConnectFourEnv(gym.Env):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>(ConnectFourEnv, <span class="va">self</span>).<span class="fu">__init__</span>()</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.action_space <span class="op">=</span> spaces.Discrete(COLUMN_COUNT)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The board is 6x7 with values: 0 (empty), 1 (agent), 2 (computer)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.observation_space <span class="op">=</span> spaces.Box(low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>, shape<span class="op">=</span>(ROW_COUNT, COLUMN_COUNT), dtype<span class="op">=</span>np.int8)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.reset()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reset(<span class="va">self</span>, seed<span class="op">=</span><span class="va">None</span>, options<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If self.board exists, copy it to self.last_board</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">hasattr</span>(<span class="va">self</span>, <span class="st">"board"</span>):</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.last_board <span class="op">=</span> <span class="va">self</span>.board.copy()</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.board <span class="op">=</span> np.zeros((ROW_COUNT, COLUMN_COUNT), dtype<span class="op">=</span>np.int8)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.done <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.board.copy(), {}</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> seed(<span class="va">self</span>, seed<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.random <span class="op">=</span> random.Random(seed)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [seed]</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> step(<span class="va">self</span>, action):</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> is_valid_location(<span class="va">self</span>.board, action):</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Return invalid move penalty</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="op">-</span><span class="dv">10</span>, <span class="va">True</span>, <span class="va">False</span>, {<span class="st">"error"</span>: <span class="st">"Invalid move"</span>}</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if board is full</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_board_full(<span class="va">self</span>.board):</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="dv">0</span>, <span class="va">True</span>, <span class="va">False</span>, {}</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Agent's move (piece = 1)</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        row <span class="op">=</span> get_next_open_row(<span class="va">self</span>.board, action)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        drop_piece(<span class="va">self</span>.board, row, action, <span class="dv">1</span>)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> check_win(<span class="va">self</span>.board, <span class="dv">1</span>):</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>, {<span class="st">"winner"</span>: <span class="dv">1</span>}</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adversary's move (piece = 2)</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        comp_action <span class="op">=</span> adversary_move(<span class="va">self</span>.board, <span class="va">self</span>.random)</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> comp_action <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> get_next_open_row(<span class="va">self</span>.board, comp_action)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>            drop_piece(<span class="va">self</span>.board, row, comp_action, <span class="dv">2</span>)</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> check_win(<span class="va">self</span>.board, <span class="dv">2</span>):</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="op">-</span><span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>, {<span class="st">"winner"</span>: <span class="dv">2</span>}</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># No win or board full, continue the game.</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="dv">0</span>, <span class="va">False</span>, <span class="va">False</span>, {}</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> render(<span class="va">self</span>, mode<span class="op">=</span><span class="st">'human'</span>):</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="387e238c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="387e238c-1"><a href="#387e238c-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gymnasium <span class="im">as</span> gym</span>
+<span id="387e238c-2"><a href="#387e238c-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> gymnasium <span class="im">import</span> spaces</span>
+<span id="387e238c-3"><a href="#387e238c-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="387e238c-4"><a href="#387e238c-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="387e238c-5"><a href="#387e238c-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-6"><a href="#387e238c-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-7"><a href="#387e238c-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ConnectFourEnv(gym.Env):</span>
+<span id="387e238c-8"><a href="#387e238c-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="387e238c-9"><a href="#387e238c-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>(ConnectFourEnv, <span class="va">self</span>).<span class="fu">__init__</span>()</span>
+<span id="387e238c-10"><a href="#387e238c-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.action_space <span class="op">=</span> spaces.Discrete(COLUMN_COUNT)</span>
+<span id="387e238c-11"><a href="#387e238c-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The board is 6x7 with values: 0 (empty), 1 (agent), 2 (computer)</span></span>
+<span id="387e238c-12"><a href="#387e238c-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.observation_space <span class="op">=</span> spaces.Box(</span>
+<span id="387e238c-13"><a href="#387e238c-13" aria-hidden="true" tabindex="-1"></a>            low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>, shape<span class="op">=</span>(ROW_COUNT, COLUMN_COUNT), dtype<span class="op">=</span>np.int8</span>
+<span id="387e238c-14"><a href="#387e238c-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="387e238c-15"><a href="#387e238c-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.reset()</span>
+<span id="387e238c-16"><a href="#387e238c-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-17"><a href="#387e238c-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reset(<span class="va">self</span>, seed<span class="op">=</span><span class="va">None</span>, options<span class="op">=</span><span class="va">None</span>):</span>
+<span id="387e238c-18"><a href="#387e238c-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If self.board exists, copy it to self.last_board</span></span>
+<span id="387e238c-19"><a href="#387e238c-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">hasattr</span>(<span class="va">self</span>, <span class="st">"board"</span>):</span>
+<span id="387e238c-20"><a href="#387e238c-20" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.last_board <span class="op">=</span> <span class="va">self</span>.board.copy()</span>
+<span id="387e238c-21"><a href="#387e238c-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.board <span class="op">=</span> np.zeros((ROW_COUNT, COLUMN_COUNT), dtype<span class="op">=</span>np.int8)</span>
+<span id="387e238c-22"><a href="#387e238c-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.done <span class="op">=</span> <span class="va">False</span></span>
+<span id="387e238c-23"><a href="#387e238c-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.board.copy(), {}</span>
+<span id="387e238c-24"><a href="#387e238c-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-25"><a href="#387e238c-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> seed(<span class="va">self</span>, seed<span class="op">=</span><span class="va">None</span>):</span>
+<span id="387e238c-26"><a href="#387e238c-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.random <span class="op">=</span> random.Random(seed)</span>
+<span id="387e238c-27"><a href="#387e238c-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [seed]</span>
+<span id="387e238c-28"><a href="#387e238c-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-29"><a href="#387e238c-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> step(<span class="va">self</span>, action):</span>
+<span id="387e238c-30"><a href="#387e238c-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> is_valid_location(<span class="va">self</span>.board, action):</span>
+<span id="387e238c-31"><a href="#387e238c-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Return invalid move penalty</span></span>
+<span id="387e238c-32"><a href="#387e238c-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="op">-</span><span class="dv">10</span>, <span class="va">True</span>, <span class="va">False</span>, {<span class="st">"error"</span>: <span class="st">"Invalid move"</span>}</span>
+<span id="387e238c-33"><a href="#387e238c-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-34"><a href="#387e238c-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if board is full</span></span>
+<span id="387e238c-35"><a href="#387e238c-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_board_full(<span class="va">self</span>.board):</span>
+<span id="387e238c-36"><a href="#387e238c-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="dv">0</span>, <span class="va">True</span>, <span class="va">False</span>, {}</span>
+<span id="387e238c-37"><a href="#387e238c-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-38"><a href="#387e238c-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Agent's move (piece = 1)</span></span>
+<span id="387e238c-39"><a href="#387e238c-39" aria-hidden="true" tabindex="-1"></a>        row <span class="op">=</span> get_next_open_row(<span class="va">self</span>.board, action)</span>
+<span id="387e238c-40"><a href="#387e238c-40" aria-hidden="true" tabindex="-1"></a>        drop_piece(<span class="va">self</span>.board, row, action, <span class="dv">1</span>)</span>
+<span id="387e238c-41"><a href="#387e238c-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> check_win(<span class="va">self</span>.board, <span class="dv">1</span>):</span>
+<span id="387e238c-42"><a href="#387e238c-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>, {<span class="st">"winner"</span>: <span class="dv">1</span>}</span>
+<span id="387e238c-43"><a href="#387e238c-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-44"><a href="#387e238c-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Adversary's move (piece = 2)</span></span>
+<span id="387e238c-45"><a href="#387e238c-45" aria-hidden="true" tabindex="-1"></a>        comp_action <span class="op">=</span> adversary_move(<span class="va">self</span>.board, <span class="va">self</span>.random)</span>
+<span id="387e238c-46"><a href="#387e238c-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> comp_action <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="387e238c-47"><a href="#387e238c-47" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> get_next_open_row(<span class="va">self</span>.board, comp_action)</span>
+<span id="387e238c-48"><a href="#387e238c-48" aria-hidden="true" tabindex="-1"></a>            drop_piece(<span class="va">self</span>.board, row, comp_action, <span class="dv">2</span>)</span>
+<span id="387e238c-49"><a href="#387e238c-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> check_win(<span class="va">self</span>.board, <span class="dv">2</span>):</span>
+<span id="387e238c-50"><a href="#387e238c-50" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="op">-</span><span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>, {<span class="st">"winner"</span>: <span class="dv">2</span>}</span>
+<span id="387e238c-51"><a href="#387e238c-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-52"><a href="#387e238c-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># No win or board full, continue the game.</span></span>
+<span id="387e238c-53"><a href="#387e238c-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.board.copy(), <span class="dv">0</span>, <span class="va">False</span>, <span class="va">False</span>, {}</span>
+<span id="387e238c-54"><a href="#387e238c-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="387e238c-55"><a href="#387e238c-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> render(<span class="va">self</span>, mode<span class="op">=</span><span class="st">"human"</span>):</span>
+<span id="387e238c-56"><a href="#387e238c-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>You will notice the <code>step</code> method returns a tuple of five values: the new state (the Connect Four board), the reward, if we have reached a terminal state, a truncation flag (which we will not use), and a dictionary of additional information (which we will also not use). For example, when the adversary moves and wins, we return a reward of -1, and the game is over (<code>return self.board.copy(), -1, True, False, {"winner": 2}</code>).</p>
@@ -454,48 +463,53 @@ About Rewards
 <div id="d3904d4e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pygame</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>SQUARE_SIZE <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_board_pygame_to_image(board, title<span class="op">=</span><span class="st">"Connect Four Board"</span>):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    pygame.init()</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> COLUMN_COUNT <span class="op">*</span> SQUARE_SIZE</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> (ROW_COUNT <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> SQUARE_SIZE</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an offscreen surface</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    surface <span class="op">=</span> pygame.Surface((width, height))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    RADIUS <span class="op">=</span> <span class="bu">int</span>(SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    BLUE <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    BLACK <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    RED <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    YELLOW <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw board background</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            rect <span class="op">=</span> pygame.Rect(c <span class="op">*</span> SQUARE_SIZE, r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            pygame.draw.rect(surface, BLUE, rect)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>            center <span class="op">=</span> (<span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                      <span class="bu">int</span>(r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>))</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>            pygame.draw.circle(surface, BLACK, center, RADIUS)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw the pieces</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>            piece <span class="op">=</span> board[r][c]</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            pos_x <span class="op">=</span> <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>            pos_y <span class="op">=</span> height <span class="op">-</span> <span class="bu">int</span>((r <span class="op">+</span> <span class="fl">0.5</span>) <span class="op">*</span> SQUARE_SIZE)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> piece <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, RED, (pos_x, pos_y), RADIUS)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> piece <span class="op">==</span> <span class="dv">2</span>:</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, YELLOW, (pos_x, pos_y), RADIUS)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the surface to a NumPy array</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> pygame.surfarray.array3d(surface)</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> np.transpose(image_data, (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>))[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    pygame.quit()</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d3904d4e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d3904d4e-1"><a href="#d3904d4e-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pygame</span>
+<span id="d3904d4e-2"><a href="#d3904d4e-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-3"><a href="#d3904d4e-3" aria-hidden="true" tabindex="-1"></a>SQUARE_SIZE <span class="op">=</span> <span class="dv">100</span></span>
+<span id="d3904d4e-4"><a href="#d3904d4e-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-5"><a href="#d3904d4e-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-6"><a href="#d3904d4e-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_board_pygame_to_image(board, title<span class="op">=</span><span class="st">"Connect Four Board"</span>):</span>
+<span id="d3904d4e-7"><a href="#d3904d4e-7" aria-hidden="true" tabindex="-1"></a>    pygame.init()</span>
+<span id="d3904d4e-8"><a href="#d3904d4e-8" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> COLUMN_COUNT <span class="op">*</span> SQUARE_SIZE</span>
+<span id="d3904d4e-9"><a href="#d3904d4e-9" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> (ROW_COUNT <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> SQUARE_SIZE</span>
+<span id="d3904d4e-10"><a href="#d3904d4e-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an offscreen surface</span></span>
+<span id="d3904d4e-11"><a href="#d3904d4e-11" aria-hidden="true" tabindex="-1"></a>    surface <span class="op">=</span> pygame.Surface((width, height))</span>
+<span id="d3904d4e-12"><a href="#d3904d4e-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-13"><a href="#d3904d4e-13" aria-hidden="true" tabindex="-1"></a>    RADIUS <span class="op">=</span> <span class="bu">int</span>(SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span>)</span>
+<span id="d3904d4e-14"><a href="#d3904d4e-14" aria-hidden="true" tabindex="-1"></a>    BLUE <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
+<span id="d3904d4e-15"><a href="#d3904d4e-15" aria-hidden="true" tabindex="-1"></a>    BLACK <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="d3904d4e-16"><a href="#d3904d4e-16" aria-hidden="true" tabindex="-1"></a>    RED <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="d3904d4e-17"><a href="#d3904d4e-17" aria-hidden="true" tabindex="-1"></a>    YELLOW <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="d3904d4e-18"><a href="#d3904d4e-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-19"><a href="#d3904d4e-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw board background</span></span>
+<span id="d3904d4e-20"><a href="#d3904d4e-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="d3904d4e-21"><a href="#d3904d4e-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
+<span id="d3904d4e-22"><a href="#d3904d4e-22" aria-hidden="true" tabindex="-1"></a>            rect <span class="op">=</span> pygame.Rect(</span>
+<span id="d3904d4e-23"><a href="#d3904d4e-23" aria-hidden="true" tabindex="-1"></a>                c <span class="op">*</span> SQUARE_SIZE, r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE</span>
+<span id="d3904d4e-24"><a href="#d3904d4e-24" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="d3904d4e-25"><a href="#d3904d4e-25" aria-hidden="true" tabindex="-1"></a>            pygame.draw.rect(surface, BLUE, rect)</span>
+<span id="d3904d4e-26"><a href="#d3904d4e-26" aria-hidden="true" tabindex="-1"></a>            center <span class="op">=</span> (</span>
+<span id="d3904d4e-27"><a href="#d3904d4e-27" aria-hidden="true" tabindex="-1"></a>                <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
+<span id="d3904d4e-28"><a href="#d3904d4e-28" aria-hidden="true" tabindex="-1"></a>                <span class="bu">int</span>(r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
+<span id="d3904d4e-29"><a href="#d3904d4e-29" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="d3904d4e-30"><a href="#d3904d4e-30" aria-hidden="true" tabindex="-1"></a>            pygame.draw.circle(surface, BLACK, center, RADIUS)</span>
+<span id="d3904d4e-31"><a href="#d3904d4e-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-32"><a href="#d3904d4e-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw the pieces</span></span>
+<span id="d3904d4e-33"><a href="#d3904d4e-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="d3904d4e-34"><a href="#d3904d4e-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
+<span id="d3904d4e-35"><a href="#d3904d4e-35" aria-hidden="true" tabindex="-1"></a>            piece <span class="op">=</span> board[r][c]</span>
+<span id="d3904d4e-36"><a href="#d3904d4e-36" aria-hidden="true" tabindex="-1"></a>            pos_x <span class="op">=</span> <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="d3904d4e-37"><a href="#d3904d4e-37" aria-hidden="true" tabindex="-1"></a>            pos_y <span class="op">=</span> height <span class="op">-</span> <span class="bu">int</span>((r <span class="op">+</span> <span class="fl">0.5</span>) <span class="op">*</span> SQUARE_SIZE)</span>
+<span id="d3904d4e-38"><a href="#d3904d4e-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> piece <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="d3904d4e-39"><a href="#d3904d4e-39" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, RED, (pos_x, pos_y), RADIUS)</span>
+<span id="d3904d4e-40"><a href="#d3904d4e-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> piece <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="d3904d4e-41"><a href="#d3904d4e-41" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, YELLOW, (pos_x, pos_y), RADIUS)</span>
+<span id="d3904d4e-42"><a href="#d3904d4e-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-43"><a href="#d3904d4e-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the surface to a NumPy array</span></span>
+<span id="d3904d4e-44"><a href="#d3904d4e-44" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> pygame.surfarray.array3d(surface)</span>
+<span id="d3904d4e-45"><a href="#d3904d4e-45" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> np.transpose(image_data, (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>))[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="d3904d4e-46"><a href="#d3904d4e-46" aria-hidden="true" tabindex="-1"></a>    pygame.quit()</span>
+<span id="d3904d4e-47"><a href="#d3904d4e-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -534,45 +548,46 @@ About Proximal Policy Optimization (PPO)
 <div id="2ada208c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3 <span class="im">import</span> PPO</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3.common.logger <span class="im">import</span> configure</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3.common.vec_env <span class="im">import</span> SubprocVecEnv</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3.common.utils <span class="im">import</span> set_random_seed</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>rnd_seed <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a new environment instance</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_env(<span class="bu">id</span>, seed<span class="op">=</span>rnd_seed):</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _init():</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        env <span class="op">=</span> ConnectFourEnv()</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        env.seed(seed <span class="op">+</span> <span class="bu">id</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> env</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    set_random_seed(seed)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _init</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of parallel environments</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>n_cpu <span class="op">=</span> <span class="dv">16</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>env <span class="op">=</span> SubprocVecEnv(</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    [make_env(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_cpu)]</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>log_dir <span class="op">=</span> <span class="st">"/tmp/connect4/"</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>new_logger <span class="op">=</span> configure(log_dir, [<span class="st">"csv"</span>])</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> PPO(</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MlpPolicy"</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    env,</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">0.0001</span>,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    n_steps<span class="op">=</span><span class="dv">500</span>,       <span class="co"># n_steps per environment</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">64</span>,</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    n_epochs<span class="op">=</span><span class="dv">10</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>model.set_logger(new_logger)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co"># total_timesteps is the sum across all environments</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.learn(total_timesteps<span class="op">=</span><span class="dv">12000000</span>, progress_bar<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="2ada208c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2ada208c-1"><a href="#2ada208c-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3 <span class="im">import</span> PPO</span>
+<span id="2ada208c-2"><a href="#2ada208c-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3.common.logger <span class="im">import</span> configure</span>
+<span id="2ada208c-3"><a href="#2ada208c-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3.common.vec_env <span class="im">import</span> SubprocVecEnv</span>
+<span id="2ada208c-4"><a href="#2ada208c-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stable_baselines3.common.utils <span class="im">import</span> set_random_seed</span>
+<span id="2ada208c-5"><a href="#2ada208c-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-6"><a href="#2ada208c-6" aria-hidden="true" tabindex="-1"></a>rnd_seed <span class="op">=</span> <span class="dv">42</span></span>
+<span id="2ada208c-7"><a href="#2ada208c-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-8"><a href="#2ada208c-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-9"><a href="#2ada208c-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create a new environment instance</span></span>
+<span id="2ada208c-10"><a href="#2ada208c-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_env(<span class="bu">id</span>, seed<span class="op">=</span>rnd_seed):</span>
+<span id="2ada208c-11"><a href="#2ada208c-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _init():</span>
+<span id="2ada208c-12"><a href="#2ada208c-12" aria-hidden="true" tabindex="-1"></a>        env <span class="op">=</span> ConnectFourEnv()</span>
+<span id="2ada208c-13"><a href="#2ada208c-13" aria-hidden="true" tabindex="-1"></a>        env.seed(seed <span class="op">+</span> <span class="bu">id</span>)</span>
+<span id="2ada208c-14"><a href="#2ada208c-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> env</span>
+<span id="2ada208c-15"><a href="#2ada208c-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-16"><a href="#2ada208c-16" aria-hidden="true" tabindex="-1"></a>    set_random_seed(seed)</span>
+<span id="2ada208c-17"><a href="#2ada208c-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _init</span>
+<span id="2ada208c-18"><a href="#2ada208c-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-19"><a href="#2ada208c-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-20"><a href="#2ada208c-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of parallel environments</span></span>
+<span id="2ada208c-21"><a href="#2ada208c-21" aria-hidden="true" tabindex="-1"></a>n_cpu <span class="op">=</span> <span class="dv">16</span></span>
+<span id="2ada208c-22"><a href="#2ada208c-22" aria-hidden="true" tabindex="-1"></a>env <span class="op">=</span> SubprocVecEnv([make_env(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_cpu)])</span>
+<span id="2ada208c-23"><a href="#2ada208c-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-24"><a href="#2ada208c-24" aria-hidden="true" tabindex="-1"></a>log_dir <span class="op">=</span> <span class="st">"/tmp/connect4/"</span></span>
+<span id="2ada208c-25"><a href="#2ada208c-25" aria-hidden="true" tabindex="-1"></a>new_logger <span class="op">=</span> configure(log_dir, [<span class="st">"csv"</span>])</span>
+<span id="2ada208c-26"><a href="#2ada208c-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-27"><a href="#2ada208c-27" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> PPO(</span>
+<span id="2ada208c-28"><a href="#2ada208c-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MlpPolicy"</span>,</span>
+<span id="2ada208c-29"><a href="#2ada208c-29" aria-hidden="true" tabindex="-1"></a>    env,</span>
+<span id="2ada208c-30"><a href="#2ada208c-30" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="2ada208c-31"><a href="#2ada208c-31" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">0.0001</span>,</span>
+<span id="2ada208c-32"><a href="#2ada208c-32" aria-hidden="true" tabindex="-1"></a>    n_steps<span class="op">=</span><span class="dv">500</span>,  <span class="co"># n_steps per environment</span></span>
+<span id="2ada208c-33"><a href="#2ada208c-33" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">64</span>,</span>
+<span id="2ada208c-34"><a href="#2ada208c-34" aria-hidden="true" tabindex="-1"></a>    n_epochs<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="2ada208c-35"><a href="#2ada208c-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="2ada208c-36"><a href="#2ada208c-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-37"><a href="#2ada208c-37" aria-hidden="true" tabindex="-1"></a>model.set_logger(new_logger)</span>
+<span id="2ada208c-38"><a href="#2ada208c-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2ada208c-39"><a href="#2ada208c-39" aria-hidden="true" tabindex="-1"></a><span class="co"># total_timesteps is the sum across all environments</span></span>
+<span id="2ada208c-40"><a href="#2ada208c-40" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.learn(total_timesteps<span class="op">=</span><span class="dv">12000000</span>, progress_bar<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
@@ -592,10 +607,10 @@ About Proximal Policy Optimization (PPO)
 <div id="b4a0270d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>log_dir<span class="sc">}</span><span class="ss">/progress.csv"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b4a0270d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b4a0270d-1"><a href="#b4a0270d-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="b4a0270d-2"><a href="#b4a0270d-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b4a0270d-3"><a href="#b4a0270d-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>log_dir<span class="sc">}</span><span class="ss">/progress.csv"</span>)</span>
+<span id="b4a0270d-4"><a href="#b4a0270d-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Index(['time/fps', 'time/iterations', 'time/time_elapsed',
@@ -610,31 +625,48 @@ About Proximal Policy Optimization (PPO)
 <div id="4789c9e2" class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the main losses on the primary axis (left-hand side)</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ax1.plot(df[<span class="st">"train/loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(), label<span class="op">=</span><span class="st">"Loss (Smoothed)"</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax1.plot(df[<span class="st">"train/entropy_loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(), label<span class="op">=</span><span class="st">"Entropy Loss (Smoothed)"</span>, color<span class="op">=</span><span class="st">'darkblue'</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax1.plot(df[<span class="st">"train/value_loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(), label<span class="op">=</span><span class="st">"Value Loss (Smoothed)"</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Model Updates"</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Loss"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a secondary axis for policy gradient loss</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>ax2.plot(df[<span class="st">"train/policy_gradient_loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(), </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="st">"Policy Gradient Loss (Smoothed)"</span>, color<span class="op">=</span><span class="st">'purple'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Policy Gradient Loss"</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine legends from both axes</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>lines1, labels1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>lines2, labels2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines1 <span class="op">+</span> lines2, labels1 <span class="op">+</span> labels2, loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Training Metrics"</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4789c9e2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4789c9e2-1"><a href="#4789c9e2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="4789c9e2-2"><a href="#4789c9e2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4789c9e2-3"><a href="#4789c9e2-3" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="4789c9e2-4"><a href="#4789c9e2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4789c9e2-5"><a href="#4789c9e2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the main losses on the primary axis (left-hand side)</span></span>
+<span id="4789c9e2-6"><a href="#4789c9e2-6" aria-hidden="true" tabindex="-1"></a>ax1.plot(</span>
+<span id="4789c9e2-7"><a href="#4789c9e2-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"train/loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(),</span>
+<span id="4789c9e2-8"><a href="#4789c9e2-8" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Loss (Smoothed)"</span>,</span>
+<span id="4789c9e2-9"><a href="#4789c9e2-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"darkgreen"</span>,</span>
+<span id="4789c9e2-10"><a href="#4789c9e2-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="4789c9e2-11"><a href="#4789c9e2-11" aria-hidden="true" tabindex="-1"></a>ax1.plot(</span>
+<span id="4789c9e2-12"><a href="#4789c9e2-12" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"train/entropy_loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(),</span>
+<span id="4789c9e2-13"><a href="#4789c9e2-13" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Entropy Loss (Smoothed)"</span>,</span>
+<span id="4789c9e2-14"><a href="#4789c9e2-14" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"darkblue"</span>,</span>
+<span id="4789c9e2-15"><a href="#4789c9e2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="4789c9e2-16"><a href="#4789c9e2-16" aria-hidden="true" tabindex="-1"></a>ax1.plot(</span>
+<span id="4789c9e2-17"><a href="#4789c9e2-17" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"train/value_loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(),</span>
+<span id="4789c9e2-18"><a href="#4789c9e2-18" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Value Loss (Smoothed)"</span>,</span>
+<span id="4789c9e2-19"><a href="#4789c9e2-19" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="4789c9e2-20"><a href="#4789c9e2-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="4789c9e2-21"><a href="#4789c9e2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="4789c9e2-22"><a href="#4789c9e2-22" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Model Updates"</span>)</span>
+<span id="4789c9e2-23"><a href="#4789c9e2-23" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Loss"</span>)</span>
+<span id="4789c9e2-24"><a href="#4789c9e2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4789c9e2-25"><a href="#4789c9e2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a secondary axis for policy gradient loss</span></span>
+<span id="4789c9e2-26"><a href="#4789c9e2-26" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="4789c9e2-27"><a href="#4789c9e2-27" aria-hidden="true" tabindex="-1"></a>ax2.plot(</span>
+<span id="4789c9e2-28"><a href="#4789c9e2-28" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"train/policy_gradient_loss"</span>].rolling(window<span class="op">=</span><span class="dv">21</span>).mean(),</span>
+<span id="4789c9e2-29"><a href="#4789c9e2-29" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Policy Gradient Loss (Smoothed)"</span>,</span>
+<span id="4789c9e2-30"><a href="#4789c9e2-30" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"purple"</span>,</span>
+<span id="4789c9e2-31"><a href="#4789c9e2-31" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="4789c9e2-32"><a href="#4789c9e2-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="4789c9e2-33"><a href="#4789c9e2-33" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Policy Gradient Loss"</span>)</span>
+<span id="4789c9e2-34"><a href="#4789c9e2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4789c9e2-35"><a href="#4789c9e2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine legends from both axes</span></span>
+<span id="4789c9e2-36"><a href="#4789c9e2-36" aria-hidden="true" tabindex="-1"></a>lines1, labels1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
+<span id="4789c9e2-37"><a href="#4789c9e2-37" aria-hidden="true" tabindex="-1"></a>lines2, labels2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
+<span id="4789c9e2-38"><a href="#4789c9e2-38" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines1 <span class="op">+</span> lines2, labels1 <span class="op">+</span> labels2, loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="4789c9e2-39"><a href="#4789c9e2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4789c9e2-40"><a href="#4789c9e2-40" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Training Metrics"</span>)</span>
+<span id="4789c9e2-41"><a href="#4789c9e2-41" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="4789c9e2-42"><a href="#4789c9e2-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -704,46 +736,46 @@ About Actor-Critic Methods
 <div id="882c2b47" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>num_episodes <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {<span class="st">'win'</span>: <span class="dv">0</span>, <span class="st">'loss'</span>: <span class="dv">0</span>, <span class="st">'draw'</span>: <span class="dv">0</span>}</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>games_finished <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>obs <span class="op">=</span> env.reset()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>final_boards <span class="op">=</span> []</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>done_count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> games_finished <span class="op">&lt;</span> num_episodes:</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    actions, _ <span class="op">=</span> model.predict(obs, deterministic<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    obs, rewards, dones, infos <span class="op">=</span> env.step(actions)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Process each finished environment instance.</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, done <span class="kw">in</span> <span class="bu">enumerate</span>(dones):</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> done:</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>            done_count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>            final_boards.append(infos[i][<span class="st">'terminal_observation'</span>])</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            r <span class="op">=</span> rewards[i]</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> r <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                results[<span class="st">'win'</span>] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> r <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                results[<span class="st">'loss'</span>] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                results[<span class="st">'draw'</span>] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>            games_finished <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> games_finished <span class="op">&gt;=</span> num_episodes:</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="882c2b47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="882c2b47-1"><a href="#882c2b47-1" aria-hidden="true" tabindex="-1"></a>num_episodes <span class="op">=</span> <span class="dv">100</span></span>
+<span id="882c2b47-2"><a href="#882c2b47-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {<span class="st">"win"</span>: <span class="dv">0</span>, <span class="st">"loss"</span>: <span class="dv">0</span>, <span class="st">"draw"</span>: <span class="dv">0</span>}</span>
+<span id="882c2b47-3"><a href="#882c2b47-3" aria-hidden="true" tabindex="-1"></a>games_finished <span class="op">=</span> <span class="dv">0</span></span>
+<span id="882c2b47-4"><a href="#882c2b47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="882c2b47-5"><a href="#882c2b47-5" aria-hidden="true" tabindex="-1"></a>obs <span class="op">=</span> env.reset()</span>
+<span id="882c2b47-6"><a href="#882c2b47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="882c2b47-7"><a href="#882c2b47-7" aria-hidden="true" tabindex="-1"></a>final_boards <span class="op">=</span> []</span>
+<span id="882c2b47-8"><a href="#882c2b47-8" aria-hidden="true" tabindex="-1"></a>done_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="882c2b47-9"><a href="#882c2b47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="882c2b47-10"><a href="#882c2b47-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> games_finished <span class="op">&lt;</span> num_episodes:</span>
+<span id="882c2b47-11"><a href="#882c2b47-11" aria-hidden="true" tabindex="-1"></a>    actions, _ <span class="op">=</span> model.predict(obs, deterministic<span class="op">=</span><span class="va">True</span>)</span>
+<span id="882c2b47-12"><a href="#882c2b47-12" aria-hidden="true" tabindex="-1"></a>    obs, rewards, dones, infos <span class="op">=</span> env.step(actions)</span>
+<span id="882c2b47-13"><a href="#882c2b47-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="882c2b47-14"><a href="#882c2b47-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Process each finished environment instance.</span></span>
+<span id="882c2b47-15"><a href="#882c2b47-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, done <span class="kw">in</span> <span class="bu">enumerate</span>(dones):</span>
+<span id="882c2b47-16"><a href="#882c2b47-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> done:</span>
+<span id="882c2b47-17"><a href="#882c2b47-17" aria-hidden="true" tabindex="-1"></a>            done_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="882c2b47-18"><a href="#882c2b47-18" aria-hidden="true" tabindex="-1"></a>            final_boards.append(infos[i][<span class="st">"terminal_observation"</span>])</span>
+<span id="882c2b47-19"><a href="#882c2b47-19" aria-hidden="true" tabindex="-1"></a>            r <span class="op">=</span> rewards[i]</span>
+<span id="882c2b47-20"><a href="#882c2b47-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> r <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="882c2b47-21"><a href="#882c2b47-21" aria-hidden="true" tabindex="-1"></a>                results[<span class="st">"win"</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="882c2b47-22"><a href="#882c2b47-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> r <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="882c2b47-23"><a href="#882c2b47-23" aria-hidden="true" tabindex="-1"></a>                results[<span class="st">"loss"</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="882c2b47-24"><a href="#882c2b47-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="882c2b47-25"><a href="#882c2b47-25" aria-hidden="true" tabindex="-1"></a>                results[<span class="st">"draw"</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="882c2b47-26"><a href="#882c2b47-26" aria-hidden="true" tabindex="-1"></a>            games_finished <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="882c2b47-27"><a href="#882c2b47-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> games_finished <span class="op">&gt;=</span> num_episodes:</span>
+<span id="882c2b47-28"><a href="#882c2b47-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>With the evaluation complete, we can plot the results to see how the agent performed against the adversary.</p>
 <div id="05e311ba" class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.pie(results.values(), labels<span class="op">=</span>results.keys(), autopct<span class="op">=</span><span class="st">'%1.0f</span><span class="sc">%%</span><span class="st">'</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evaluation Results"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'equal'</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="05e311ba"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="05e311ba-1"><a href="#05e311ba-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="05e311ba-2"><a href="#05e311ba-2" aria-hidden="true" tabindex="-1"></a>plt.pie(results.values(), labels<span class="op">=</span>results.keys(), autopct<span class="op">=</span><span class="st">"%1.0f</span><span class="sc">%%</span><span class="st">"</span>)</span>
+<span id="05e311ba-3"><a href="#05e311ba-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Evaluation Results"</span>)</span>
+<span id="05e311ba-4"><a href="#05e311ba-4" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"equal"</span>)</span>
+<span id="05e311ba-5"><a href="#05e311ba-5" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="05e311ba-6"><a href="#05e311ba-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -761,20 +793,20 @@ About Actor-Critic Methods
 <div id="ee21507e" class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Yellow = Computer, Red = Agent"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly sample 16 final boards for the grid plot</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>selected_boards <span class="op">=</span> random.sample(final_boards, <span class="dv">16</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot these boards in a 4x4 grid</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, board <span class="kw">in</span> <span class="bu">enumerate</span>(selected_boards):</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> render_board_pygame_to_image(board)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axs[i <span class="op">//</span> <span class="dv">4</span>, i <span class="op">%</span> <span class="dv">4</span>]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    ax.imshow(img)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Board </span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ee21507e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ee21507e-1"><a href="#ee21507e-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Yellow = Computer, Red = Agent"</span>)</span>
+<span id="ee21507e-2"><a href="#ee21507e-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly sample 16 final boards for the grid plot</span></span>
+<span id="ee21507e-3"><a href="#ee21507e-3" aria-hidden="true" tabindex="-1"></a>selected_boards <span class="op">=</span> random.sample(final_boards, <span class="dv">16</span>)</span>
+<span id="ee21507e-4"><a href="#ee21507e-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee21507e-5"><a href="#ee21507e-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot these boards in a 4x4 grid</span></span>
+<span id="ee21507e-6"><a href="#ee21507e-6" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="ee21507e-7"><a href="#ee21507e-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, board <span class="kw">in</span> <span class="bu">enumerate</span>(selected_boards):</span>
+<span id="ee21507e-8"><a href="#ee21507e-8" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> render_board_pygame_to_image(board)</span>
+<span id="ee21507e-9"><a href="#ee21507e-9" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axs[i <span class="op">//</span> <span class="dv">4</span>, i <span class="op">%</span> <span class="dv">4</span>]</span>
+<span id="ee21507e-10"><a href="#ee21507e-10" aria-hidden="true" tabindex="-1"></a>    ax.imshow(img)</span>
+<span id="ee21507e-11"><a href="#ee21507e-11" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Board </span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="ee21507e-12"><a href="#ee21507e-12" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="ee21507e-13"><a href="#ee21507e-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="ee21507e-14"><a href="#ee21507e-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Yellow = Computer, Red = Agent</code></pre>

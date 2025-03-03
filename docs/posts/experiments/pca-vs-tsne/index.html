@@ -229,31 +229,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fe752080" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show an image of digits 0 to 9 from the digits dataset</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the digits dataset</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> datasets.load_digits()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with subplots in a 2x5 grid</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the first occurrence of each digit</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> digits.target.tolist().index(i)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot on the ith subplot</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    axes[i].imshow(digits.images[index], cmap<span class="op">=</span>plt.cm.gray_r, interpolation<span class="op">=</span><span class="st">'nearest'</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f'Digit: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    axes[i].axis(<span class="st">'off'</span>)  <span class="co"># Hide the axes</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="fe752080"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fe752080-1"><a href="#fe752080-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show an image of digits 0 to 9 from the digits dataset</span></span>
+<span id="fe752080-2"><a href="#fe752080-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-3"><a href="#fe752080-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="fe752080-4"><a href="#fe752080-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="fe752080-5"><a href="#fe752080-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-6"><a href="#fe752080-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the digits dataset</span></span>
+<span id="fe752080-7"><a href="#fe752080-7" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> datasets.load_digits()</span>
+<span id="fe752080-8"><a href="#fe752080-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-9"><a href="#fe752080-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with subplots in a 2x5 grid</span></span>
+<span id="fe752080-10"><a href="#fe752080-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="fe752080-11"><a href="#fe752080-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-12"><a href="#fe752080-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes</span></span>
+<span id="fe752080-13"><a href="#fe752080-13" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="fe752080-14"><a href="#fe752080-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-15"><a href="#fe752080-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="fe752080-16"><a href="#fe752080-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the first occurrence of each digit</span></span>
+<span id="fe752080-17"><a href="#fe752080-17" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> digits.target.tolist().index(i)</span>
+<span id="fe752080-18"><a href="#fe752080-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-19"><a href="#fe752080-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot on the ith subplot</span></span>
+<span id="fe752080-20"><a href="#fe752080-20" aria-hidden="true" tabindex="-1"></a>    axes[i].imshow(digits.images[index], cmap<span class="op">=</span>plt.cm.gray_r, interpolation<span class="op">=</span><span class="st">"nearest"</span>)</span>
+<span id="fe752080-21"><a href="#fe752080-21" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f"Digit: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="fe752080-22"><a href="#fe752080-22" aria-hidden="true" tabindex="-1"></a>    axes[i].axis(<span class="st">"off"</span>)  <span class="co"># Hide the axes</span></span>
+<span id="fe752080-23"><a href="#fe752080-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fe752080-24"><a href="#fe752080-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="fe752080-25"><a href="#fe752080-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -269,54 +269,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="7a276a37" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> digits.data</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> digits.target</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before Dimensionality Reduction"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After PCA"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_pca.shape)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply t-SNE</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After t-SNE"</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_tsne.shape)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting function</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_reduction(X, y, title):</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a colormap</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> plt.cm.Spectral(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>))</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot each digit with a unique color from the colormap</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, color <span class="kw">in</span> <span class="bu">zip</span>(<span class="bu">range</span>(<span class="dv">10</span>), colors):</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        plt.scatter(X[y <span class="op">==</span> i, <span class="dv">0</span>], X[y <span class="op">==</span> i, <span class="dv">1</span>], color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f'Digit </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'First Principal Component'</span>)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Second Principal Component'</span>)</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'best'</span>, shadow<span class="op">=</span><span class="va">False</span>, scatterpoints<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">'equal'</span>)  <span class="co"># Equal aspect ratio ensures that PCA1 and PCA2 are scaled the same</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a legend</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot results</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_pca, y, <span class="st">'PCA Result'</span>)</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_tsne, y, <span class="st">'t-SNE Result'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="7a276a37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7a276a37-1"><a href="#7a276a37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="7a276a37-2"><a href="#7a276a37-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="7a276a37-3"><a href="#7a276a37-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="7a276a37-4"><a href="#7a276a37-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="7a276a37-5"><a href="#7a276a37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-6"><a href="#7a276a37-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> digits.data</span>
+<span id="7a276a37-7"><a href="#7a276a37-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> digits.target</span>
+<span id="7a276a37-8"><a href="#7a276a37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-9"><a href="#7a276a37-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before Dimensionality Reduction"</span>)</span>
+<span id="7a276a37-10"><a href="#7a276a37-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
+<span id="7a276a37-11"><a href="#7a276a37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-12"><a href="#7a276a37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
+<span id="7a276a37-13"><a href="#7a276a37-13" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="7a276a37-14"><a href="#7a276a37-14" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X)</span>
+<span id="7a276a37-15"><a href="#7a276a37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-16"><a href="#7a276a37-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After PCA"</span>)</span>
+<span id="7a276a37-17"><a href="#7a276a37-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_pca.shape)</span>
+<span id="7a276a37-18"><a href="#7a276a37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-19"><a href="#7a276a37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply t-SNE</span></span>
+<span id="7a276a37-20"><a href="#7a276a37-20" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="7a276a37-21"><a href="#7a276a37-21" aria-hidden="true" tabindex="-1"></a>X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
+<span id="7a276a37-22"><a href="#7a276a37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-23"><a href="#7a276a37-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After t-SNE"</span>)</span>
+<span id="7a276a37-24"><a href="#7a276a37-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_tsne.shape)</span>
+<span id="7a276a37-25"><a href="#7a276a37-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-26"><a href="#7a276a37-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-27"><a href="#7a276a37-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting function</span></span>
+<span id="7a276a37-28"><a href="#7a276a37-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_reduction(X, y, title):</span>
+<span id="7a276a37-29"><a href="#7a276a37-29" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="7a276a37-30"><a href="#7a276a37-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a colormap</span></span>
+<span id="7a276a37-31"><a href="#7a276a37-31" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> plt.cm.Spectral(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>))</span>
+<span id="7a276a37-32"><a href="#7a276a37-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-33"><a href="#7a276a37-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot each digit with a unique color from the colormap</span></span>
+<span id="7a276a37-34"><a href="#7a276a37-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, color <span class="kw">in</span> <span class="bu">zip</span>(<span class="bu">range</span>(<span class="dv">10</span>), colors):</span>
+<span id="7a276a37-35"><a href="#7a276a37-35" aria-hidden="true" tabindex="-1"></a>        plt.scatter(X[y <span class="op">==</span> i, <span class="dv">0</span>], X[y <span class="op">==</span> i, <span class="dv">1</span>], color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f"Digit </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="7a276a37-36"><a href="#7a276a37-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-37"><a href="#7a276a37-37" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="7a276a37-38"><a href="#7a276a37-38" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"First Principal Component"</span>)</span>
+<span id="7a276a37-39"><a href="#7a276a37-39" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Second Principal Component"</span>)</span>
+<span id="7a276a37-40"><a href="#7a276a37-40" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">"best"</span>, shadow<span class="op">=</span><span class="va">False</span>, scatterpoints<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="7a276a37-41"><a href="#7a276a37-41" aria-hidden="true" tabindex="-1"></a>    plt.axis(</span>
+<span id="7a276a37-42"><a href="#7a276a37-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"equal"</span></span>
+<span id="7a276a37-43"><a href="#7a276a37-43" aria-hidden="true" tabindex="-1"></a>    )  <span class="co"># Equal aspect ratio ensures that PCA1 and PCA2 are scaled the same</span></span>
+<span id="7a276a37-44"><a href="#7a276a37-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a legend</span></span>
+<span id="7a276a37-45"><a href="#7a276a37-45" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="7a276a37-46"><a href="#7a276a37-46" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="7a276a37-47"><a href="#7a276a37-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-48"><a href="#7a276a37-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7a276a37-49"><a href="#7a276a37-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot results</span></span>
+<span id="7a276a37-50"><a href="#7a276a37-50" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_pca, y, <span class="st">"PCA Result"</span>)</span>
+<span id="7a276a37-51"><a href="#7a276a37-51" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_tsne, y, <span class="st">"t-SNE Result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Before Dimensionality Reduction
@@ -368,15 +371,15 @@ About Silhouette Score
 <div id="84cceb96" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for PCA</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>silhouette_pca <span class="op">=</span> silhouette_score(X_pca, y)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Silhouette Score: </span><span class="sc">{</span>silhouette_pca<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for t-SNE</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>silhouette_tsne <span class="op">=</span> silhouette_score(X_tsne, y)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Silhouette Score: </span><span class="sc">{</span>silhouette_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="84cceb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="84cceb96-1"><a href="#84cceb96-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="84cceb96-2"><a href="#84cceb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="84cceb96-3"><a href="#84cceb96-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for PCA</span></span>
+<span id="84cceb96-4"><a href="#84cceb96-4" aria-hidden="true" tabindex="-1"></a>silhouette_pca <span class="op">=</span> silhouette_score(X_pca, y)</span>
+<span id="84cceb96-5"><a href="#84cceb96-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Silhouette Score: </span><span class="sc">{</span>silhouette_pca<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="84cceb96-6"><a href="#84cceb96-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="84cceb96-7"><a href="#84cceb96-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for t-SNE</span></span>
+<span id="84cceb96-8"><a href="#84cceb96-8" aria-hidden="true" tabindex="-1"></a>silhouette_tsne <span class="op">=</span> silhouette_score(X_tsne, y)</span>
+<span id="84cceb96-9"><a href="#84cceb96-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Silhouette Score: </span><span class="sc">{</span>silhouette_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PCA Silhouette Score: 0.10505275105361912
@@ -390,27 +393,31 @@ t-SNE Silhouette Score: 0.554421067237854</code></pre>
 <div id="a826bfbb" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset for PCA and t-SNE results</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>X_train_pca, X_test_pca, y_train, y_test <span class="op">=</span> train_test_split(X_pca, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>X_train_tsne, X_test_tsne, _, _ <span class="op">=</span> train_test_split(X_tsne, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on PCA results</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>clf_pca <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>clf_pca.fit(X_train_pca, y_train)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>y_pred_pca <span class="op">=</span> clf_pca.predict(X_test_pca)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>accuracy_pca <span class="op">=</span> accuracy_score(y_test, y_pred_pca)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Classification Accuracy: </span><span class="sc">{</span>accuracy_pca<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on t-SNE results</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>clf_tsne <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>clf_tsne.fit(X_train_tsne, y_train)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>y_pred_tsne <span class="op">=</span> clf_tsne.predict(X_test_tsne)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>accuracy_tsne <span class="op">=</span> accuracy_score(y_test, y_pred_tsne)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Classification Accuracy: </span><span class="sc">{</span>accuracy_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a826bfbb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a826bfbb-1"><a href="#a826bfbb-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="a826bfbb-2"><a href="#a826bfbb-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="a826bfbb-3"><a href="#a826bfbb-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="a826bfbb-4"><a href="#a826bfbb-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a826bfbb-5"><a href="#a826bfbb-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset for PCA and t-SNE results</span></span>
+<span id="a826bfbb-6"><a href="#a826bfbb-6" aria-hidden="true" tabindex="-1"></a>X_train_pca, X_test_pca, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="a826bfbb-7"><a href="#a826bfbb-7" aria-hidden="true" tabindex="-1"></a>    X_pca, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="a826bfbb-8"><a href="#a826bfbb-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="a826bfbb-9"><a href="#a826bfbb-9" aria-hidden="true" tabindex="-1"></a>X_train_tsne, X_test_tsne, _, _ <span class="op">=</span> train_test_split(</span>
+<span id="a826bfbb-10"><a href="#a826bfbb-10" aria-hidden="true" tabindex="-1"></a>    X_tsne, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="a826bfbb-11"><a href="#a826bfbb-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="a826bfbb-12"><a href="#a826bfbb-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a826bfbb-13"><a href="#a826bfbb-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on PCA results</span></span>
+<span id="a826bfbb-14"><a href="#a826bfbb-14" aria-hidden="true" tabindex="-1"></a>clf_pca <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="a826bfbb-15"><a href="#a826bfbb-15" aria-hidden="true" tabindex="-1"></a>clf_pca.fit(X_train_pca, y_train)</span>
+<span id="a826bfbb-16"><a href="#a826bfbb-16" aria-hidden="true" tabindex="-1"></a>y_pred_pca <span class="op">=</span> clf_pca.predict(X_test_pca)</span>
+<span id="a826bfbb-17"><a href="#a826bfbb-17" aria-hidden="true" tabindex="-1"></a>accuracy_pca <span class="op">=</span> accuracy_score(y_test, y_pred_pca)</span>
+<span id="a826bfbb-18"><a href="#a826bfbb-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Classification Accuracy: </span><span class="sc">{</span>accuracy_pca<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="a826bfbb-19"><a href="#a826bfbb-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a826bfbb-20"><a href="#a826bfbb-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on t-SNE results</span></span>
+<span id="a826bfbb-21"><a href="#a826bfbb-21" aria-hidden="true" tabindex="-1"></a>clf_tsne <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="a826bfbb-22"><a href="#a826bfbb-22" aria-hidden="true" tabindex="-1"></a>clf_tsne.fit(X_train_tsne, y_train)</span>
+<span id="a826bfbb-23"><a href="#a826bfbb-23" aria-hidden="true" tabindex="-1"></a>y_pred_tsne <span class="op">=</span> clf_tsne.predict(X_test_tsne)</span>
+<span id="a826bfbb-24"><a href="#a826bfbb-24" aria-hidden="true" tabindex="-1"></a>accuracy_tsne <span class="op">=</span> accuracy_score(y_test, y_pred_tsne)</span>
+<span id="a826bfbb-25"><a href="#a826bfbb-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Classification Accuracy: </span><span class="sc">{</span>accuracy_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PCA Classification Accuracy: 0.6203703703703703
@@ -424,19 +431,19 @@ t-SNE Classification Accuracy: 0.987037037037037</code></pre>
 <div id="2db870c1" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Time PCA</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>pca.fit_transform(X)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Time t-SNE</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>tsne.fit_transform(X)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="2db870c1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2db870c1-1"><a href="#2db870c1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="2db870c1-2"><a href="#2db870c1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2db870c1-3"><a href="#2db870c1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Time PCA</span></span>
+<span id="2db870c1-4"><a href="#2db870c1-4" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="2db870c1-5"><a href="#2db870c1-5" aria-hidden="true" tabindex="-1"></a>pca.fit_transform(X)</span>
+<span id="2db870c1-6"><a href="#2db870c1-6" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
+<span id="2db870c1-7"><a href="#2db870c1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="2db870c1-8"><a href="#2db870c1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2db870c1-9"><a href="#2db870c1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Time t-SNE</span></span>
+<span id="2db870c1-10"><a href="#2db870c1-10" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="2db870c1-11"><a href="#2db870c1-11" aria-hidden="true" tabindex="-1"></a>tsne.fit_transform(X)</span>
+<span id="2db870c1-12"><a href="#2db870c1-12" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
+<span id="2db870c1-13"><a href="#2db870c1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PCA Time: 0.0012040138244628906 seconds

@@ -231,29 +231,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="be2380af" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'China'</span>, <span class="st">'United Kingdom'</span>, <span class="st">'Israel'</span>, <span class="st">'India'</span>, </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">'South Korea'</span>, <span class="st">'Germany'</span>, <span class="st">'Canada'</span>, <span class="st">'France'</span>, <span class="st">'Argentina'</span>, </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">'Australia'</span>, <span class="st">'Singapore'</span>, <span class="st">'Switzerland'</span>, <span class="st">'Japan'</span>, <span class="st">'Finland'</span>]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="fl">44.04</span>, <span class="fl">12.47</span>, <span class="fl">4.06</span>, <span class="fl">3.01</span>, <span class="fl">3.01</span>, </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>          <span class="fl">2.88</span>, <span class="fl">2.19</span>, <span class="fl">1.7</span>, <span class="fl">1.65</span>, <span class="fl">1.41</span>, </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.26</span>, <span class="fl">1.05</span>, <span class="fl">0.97</span>, <span class="fl">0.67</span>, <span class="fl">0.57</span>]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a horizontal bar chart</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.barh(countries[::<span class="op">-</span><span class="dv">1</span>], values[::<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'grey'</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">14</span>].set_color(<span class="st">'powderblue'</span>)  <span class="co"># Highlight the United States with a different color</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">13</span>].set_color(<span class="st">'lightcoral'</span>)   <span class="co"># Highlight China with a different color</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">11</span>].set_color(<span class="st">'palegreen'</span>) <span class="co"># Highlight Israel with a different color</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding labels and title</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'US$ (in billions)'</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Investment in AI by Country'</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'x'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="be2380af"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="be2380af-1"><a href="#be2380af-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="be2380af-2"><a href="#be2380af-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be2380af-3"><a href="#be2380af-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
+<span id="be2380af-4"><a href="#be2380af-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United States"</span>,</span>
+<span id="be2380af-5"><a href="#be2380af-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"China"</span>,</span>
+<span id="be2380af-6"><a href="#be2380af-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United Kingdom"</span>,</span>
+<span id="be2380af-7"><a href="#be2380af-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Israel"</span>,</span>
+<span id="be2380af-8"><a href="#be2380af-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"India"</span>,</span>
+<span id="be2380af-9"><a href="#be2380af-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"South Korea"</span>,</span>
+<span id="be2380af-10"><a href="#be2380af-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Germany"</span>,</span>
+<span id="be2380af-11"><a href="#be2380af-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="be2380af-12"><a href="#be2380af-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"France"</span>,</span>
+<span id="be2380af-13"><a href="#be2380af-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Argentina"</span>,</span>
+<span id="be2380af-14"><a href="#be2380af-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Australia"</span>,</span>
+<span id="be2380af-15"><a href="#be2380af-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Singapore"</span>,</span>
+<span id="be2380af-16"><a href="#be2380af-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Switzerland"</span>,</span>
+<span id="be2380af-17"><a href="#be2380af-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Japan"</span>,</span>
+<span id="be2380af-18"><a href="#be2380af-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Finland"</span>,</span>
+<span id="be2380af-19"><a href="#be2380af-19" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="be2380af-20"><a href="#be2380af-20" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [</span>
+<span id="be2380af-21"><a href="#be2380af-21" aria-hidden="true" tabindex="-1"></a>    <span class="fl">44.04</span>,</span>
+<span id="be2380af-22"><a href="#be2380af-22" aria-hidden="true" tabindex="-1"></a>    <span class="fl">12.47</span>,</span>
+<span id="be2380af-23"><a href="#be2380af-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">4.06</span>,</span>
+<span id="be2380af-24"><a href="#be2380af-24" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.01</span>,</span>
+<span id="be2380af-25"><a href="#be2380af-25" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.01</span>,</span>
+<span id="be2380af-26"><a href="#be2380af-26" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.88</span>,</span>
+<span id="be2380af-27"><a href="#be2380af-27" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.19</span>,</span>
+<span id="be2380af-28"><a href="#be2380af-28" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.7</span>,</span>
+<span id="be2380af-29"><a href="#be2380af-29" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.65</span>,</span>
+<span id="be2380af-30"><a href="#be2380af-30" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.41</span>,</span>
+<span id="be2380af-31"><a href="#be2380af-31" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.26</span>,</span>
+<span id="be2380af-32"><a href="#be2380af-32" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.05</span>,</span>
+<span id="be2380af-33"><a href="#be2380af-33" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.97</span>,</span>
+<span id="be2380af-34"><a href="#be2380af-34" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.67</span>,</span>
+<span id="be2380af-35"><a href="#be2380af-35" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.57</span>,</span>
+<span id="be2380af-36"><a href="#be2380af-36" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="be2380af-37"><a href="#be2380af-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be2380af-38"><a href="#be2380af-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a horizontal bar chart</span></span>
+<span id="be2380af-39"><a href="#be2380af-39" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="be2380af-40"><a href="#be2380af-40" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.barh(countries[::<span class="op">-</span><span class="dv">1</span>], values[::<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="be2380af-41"><a href="#be2380af-41" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">14</span>].set_color(<span class="st">"powderblue"</span>)  <span class="co"># Highlight the United States with a different color</span></span>
+<span id="be2380af-42"><a href="#be2380af-42" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">13</span>].set_color(<span class="st">"lightcoral"</span>)  <span class="co"># Highlight China with a different color</span></span>
+<span id="be2380af-43"><a href="#be2380af-43" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">11</span>].set_color(<span class="st">"palegreen"</span>)  <span class="co"># Highlight Israel with a different color</span></span>
+<span id="be2380af-44"><a href="#be2380af-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be2380af-45"><a href="#be2380af-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding labels and title</span></span>
+<span id="be2380af-46"><a href="#be2380af-46" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"US$ (in billions)"</span>)</span>
+<span id="be2380af-47"><a href="#be2380af-47" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Investment in AI by Country"</span>)</span>
+<span id="be2380af-48"><a href="#be2380af-48" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="be2380af-49"><a href="#be2380af-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be2380af-50"><a href="#be2380af-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="be2380af-51"><a href="#be2380af-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -267,52 +295,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="6ee4ab18" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given data for AI investments (in billion USD) and populations (in millions for simplification)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'China'</span>, <span class="st">'United Kingdom'</span>, <span class="st">'Israel'</span>, <span class="st">'India'</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">'South Korea'</span>, <span class="st">'Germany'</span>, <span class="st">'Canada'</span>, <span class="st">'France'</span>, <span class="st">'Argentina'</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">'Australia'</span>, <span class="st">'Singapore'</span>, <span class="st">'Switzerland'</span>, <span class="st">'Japan'</span>, <span class="st">'Finland'</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>investments <span class="op">=</span> [<span class="fl">44.04</span>, <span class="fl">12.47</span>, <span class="fl">4.06</span>, <span class="fl">3.01</span>, <span class="fl">3.01</span>, </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>               <span class="fl">2.88</span>, <span class="fl">2.19</span>, <span class="fl">1.7</span>, <span class="fl">1.65</span>, <span class="fl">1.41</span>, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>               <span class="fl">1.26</span>, <span class="fl">1.05</span>, <span class="fl">0.97</span>, <span class="fl">0.67</span>, <span class="fl">0.57</span>]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximate populations in millions (2022 data)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>populations <span class="op">=</span> [<span class="dv">331</span>, <span class="dv">1441</span>, <span class="dv">68</span>, <span class="fl">9.2</span>, <span class="dv">1380</span>, </span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>               <span class="dv">52</span>, <span class="dv">83</span>, <span class="dv">38</span>, <span class="dv">67</span>, <span class="dv">45</span>, </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>               <span class="dv">26</span>, <span class="fl">5.9</span>, <span class="fl">8.6</span>, <span class="dv">126</span>, <span class="fl">5.5</span>]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate investment per capita (investment amount / population)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>investments_per_capita <span class="op">=</span> [(invest <span class="op">*</span> <span class="dv">1000000000</span>) <span class="op">/</span> (pop <span class="op">*</span> <span class="dv">1000000</span>) <span class="cf">for</span> invest, pop <span class="kw">in</span> <span class="bu">zip</span>(investments, populations)]</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data by investment per capita in descending order</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(countries, investments_per_capita), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>sorted_countries, sorted_investments_per_capita <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>sorted_data)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate ratios in comparison to the US</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>us_investment_per_capita <span class="op">=</span> sorted_investments_per_capita[<span class="dv">12</span>]</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ratios <span class="op">=</span> [x <span class="op">/</span> us_investment_per_capita <span class="cf">for</span> x <span class="kw">in</span> sorted_investments_per_capita]</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a horizontal bar chart with sorted data</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.barh(sorted_countries, sorted_investments_per_capita, color<span class="op">=</span><span class="st">'grey'</span>)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">12</span>].set_color(<span class="st">'powderblue'</span>)  <span class="co"># Highlight the United States with a different color</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">2</span>].set_color(<span class="st">'lightcoral'</span>)   <span class="co"># Highlight China with a different color</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">14</span>].set_color(<span class="st">'palegreen'</span>) <span class="co"># Highlight Israel with a different color</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding labels and title</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Investment per Capita (USD)'</span>)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'AI Investment Per Capita by Country, Sorted'</span>)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding ratio labels</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, ratio <span class="kw">in</span> <span class="bu">zip</span>(bars, ratios):</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    plt.text(bar.get_width(), bar.get_y() <span class="op">+</span> bar.get_height()<span class="op">/</span><span class="dv">2</span>, <span class="ss">f"</span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">x"</span>,</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>             va<span class="op">=</span><span class="st">'center'</span>, ha<span class="op">=</span><span class="st">'left'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'x'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6ee4ab18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6ee4ab18-1"><a href="#6ee4ab18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="6ee4ab18-2"><a href="#6ee4ab18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-3"><a href="#6ee4ab18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Given data for AI investments (in billion USD) and populations (in millions for simplification)</span></span>
+<span id="6ee4ab18-4"><a href="#6ee4ab18-4" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
+<span id="6ee4ab18-5"><a href="#6ee4ab18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United States"</span>,</span>
+<span id="6ee4ab18-6"><a href="#6ee4ab18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"China"</span>,</span>
+<span id="6ee4ab18-7"><a href="#6ee4ab18-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United Kingdom"</span>,</span>
+<span id="6ee4ab18-8"><a href="#6ee4ab18-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Israel"</span>,</span>
+<span id="6ee4ab18-9"><a href="#6ee4ab18-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"India"</span>,</span>
+<span id="6ee4ab18-10"><a href="#6ee4ab18-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"South Korea"</span>,</span>
+<span id="6ee4ab18-11"><a href="#6ee4ab18-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Germany"</span>,</span>
+<span id="6ee4ab18-12"><a href="#6ee4ab18-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="6ee4ab18-13"><a href="#6ee4ab18-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"France"</span>,</span>
+<span id="6ee4ab18-14"><a href="#6ee4ab18-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Argentina"</span>,</span>
+<span id="6ee4ab18-15"><a href="#6ee4ab18-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Australia"</span>,</span>
+<span id="6ee4ab18-16"><a href="#6ee4ab18-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Singapore"</span>,</span>
+<span id="6ee4ab18-17"><a href="#6ee4ab18-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Switzerland"</span>,</span>
+<span id="6ee4ab18-18"><a href="#6ee4ab18-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Japan"</span>,</span>
+<span id="6ee4ab18-19"><a href="#6ee4ab18-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Finland"</span>,</span>
+<span id="6ee4ab18-20"><a href="#6ee4ab18-20" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="6ee4ab18-21"><a href="#6ee4ab18-21" aria-hidden="true" tabindex="-1"></a>investments <span class="op">=</span> [</span>
+<span id="6ee4ab18-22"><a href="#6ee4ab18-22" aria-hidden="true" tabindex="-1"></a>    <span class="fl">44.04</span>,</span>
+<span id="6ee4ab18-23"><a href="#6ee4ab18-23" aria-hidden="true" tabindex="-1"></a>    <span class="fl">12.47</span>,</span>
+<span id="6ee4ab18-24"><a href="#6ee4ab18-24" aria-hidden="true" tabindex="-1"></a>    <span class="fl">4.06</span>,</span>
+<span id="6ee4ab18-25"><a href="#6ee4ab18-25" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.01</span>,</span>
+<span id="6ee4ab18-26"><a href="#6ee4ab18-26" aria-hidden="true" tabindex="-1"></a>    <span class="fl">3.01</span>,</span>
+<span id="6ee4ab18-27"><a href="#6ee4ab18-27" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.88</span>,</span>
+<span id="6ee4ab18-28"><a href="#6ee4ab18-28" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.19</span>,</span>
+<span id="6ee4ab18-29"><a href="#6ee4ab18-29" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.7</span>,</span>
+<span id="6ee4ab18-30"><a href="#6ee4ab18-30" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.65</span>,</span>
+<span id="6ee4ab18-31"><a href="#6ee4ab18-31" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.41</span>,</span>
+<span id="6ee4ab18-32"><a href="#6ee4ab18-32" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.26</span>,</span>
+<span id="6ee4ab18-33"><a href="#6ee4ab18-33" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.05</span>,</span>
+<span id="6ee4ab18-34"><a href="#6ee4ab18-34" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.97</span>,</span>
+<span id="6ee4ab18-35"><a href="#6ee4ab18-35" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.67</span>,</span>
+<span id="6ee4ab18-36"><a href="#6ee4ab18-36" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.57</span>,</span>
+<span id="6ee4ab18-37"><a href="#6ee4ab18-37" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="6ee4ab18-38"><a href="#6ee4ab18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-39"><a href="#6ee4ab18-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximate populations in millions (2022 data)</span></span>
+<span id="6ee4ab18-40"><a href="#6ee4ab18-40" aria-hidden="true" tabindex="-1"></a>populations <span class="op">=</span> [<span class="dv">331</span>, <span class="dv">1441</span>, <span class="dv">68</span>, <span class="fl">9.2</span>, <span class="dv">1380</span>, <span class="dv">52</span>, <span class="dv">83</span>, <span class="dv">38</span>, <span class="dv">67</span>, <span class="dv">45</span>, <span class="dv">26</span>, <span class="fl">5.9</span>, <span class="fl">8.6</span>, <span class="dv">126</span>, <span class="fl">5.5</span>]</span>
+<span id="6ee4ab18-41"><a href="#6ee4ab18-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-42"><a href="#6ee4ab18-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate investment per capita (investment amount / population)</span></span>
+<span id="6ee4ab18-43"><a href="#6ee4ab18-43" aria-hidden="true" tabindex="-1"></a>investments_per_capita <span class="op">=</span> [</span>
+<span id="6ee4ab18-44"><a href="#6ee4ab18-44" aria-hidden="true" tabindex="-1"></a>    (invest <span class="op">*</span> <span class="dv">1000000000</span>) <span class="op">/</span> (pop <span class="op">*</span> <span class="dv">1000000</span>)</span>
+<span id="6ee4ab18-45"><a href="#6ee4ab18-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> invest, pop <span class="kw">in</span> <span class="bu">zip</span>(investments, populations)</span>
+<span id="6ee4ab18-46"><a href="#6ee4ab18-46" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="6ee4ab18-47"><a href="#6ee4ab18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-48"><a href="#6ee4ab18-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data by investment per capita in descending order</span></span>
+<span id="6ee4ab18-49"><a href="#6ee4ab18-49" aria-hidden="true" tabindex="-1"></a>sorted_data <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="6ee4ab18-50"><a href="#6ee4ab18-50" aria-hidden="true" tabindex="-1"></a>    <span class="bu">zip</span>(countries, investments_per_capita), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">False</span></span>
+<span id="6ee4ab18-51"><a href="#6ee4ab18-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="6ee4ab18-52"><a href="#6ee4ab18-52" aria-hidden="true" tabindex="-1"></a>sorted_countries, sorted_investments_per_capita <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>sorted_data)</span>
+<span id="6ee4ab18-53"><a href="#6ee4ab18-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-54"><a href="#6ee4ab18-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate ratios in comparison to the US</span></span>
+<span id="6ee4ab18-55"><a href="#6ee4ab18-55" aria-hidden="true" tabindex="-1"></a>us_investment_per_capita <span class="op">=</span> sorted_investments_per_capita[<span class="dv">12</span>]</span>
+<span id="6ee4ab18-56"><a href="#6ee4ab18-56" aria-hidden="true" tabindex="-1"></a>ratios <span class="op">=</span> [x <span class="op">/</span> us_investment_per_capita <span class="cf">for</span> x <span class="kw">in</span> sorted_investments_per_capita]</span>
+<span id="6ee4ab18-57"><a href="#6ee4ab18-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-58"><a href="#6ee4ab18-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a horizontal bar chart with sorted data</span></span>
+<span id="6ee4ab18-59"><a href="#6ee4ab18-59" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="6ee4ab18-60"><a href="#6ee4ab18-60" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> plt.barh(sorted_countries, sorted_investments_per_capita, color<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="6ee4ab18-61"><a href="#6ee4ab18-61" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">12</span>].set_color(<span class="st">"powderblue"</span>)  <span class="co"># Highlight the United States with a different color</span></span>
+<span id="6ee4ab18-62"><a href="#6ee4ab18-62" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">2</span>].set_color(<span class="st">"lightcoral"</span>)  <span class="co"># Highlight China with a different color</span></span>
+<span id="6ee4ab18-63"><a href="#6ee4ab18-63" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">14</span>].set_color(<span class="st">"palegreen"</span>)  <span class="co"># Highlight Israel with a different color</span></span>
+<span id="6ee4ab18-64"><a href="#6ee4ab18-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-65"><a href="#6ee4ab18-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding labels and title</span></span>
+<span id="6ee4ab18-66"><a href="#6ee4ab18-66" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Investment per Capita (USD)"</span>)</span>
+<span id="6ee4ab18-67"><a href="#6ee4ab18-67" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"AI Investment Per Capita by Country, Sorted"</span>)</span>
+<span id="6ee4ab18-68"><a href="#6ee4ab18-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-69"><a href="#6ee4ab18-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding ratio labels</span></span>
+<span id="6ee4ab18-70"><a href="#6ee4ab18-70" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, ratio <span class="kw">in</span> <span class="bu">zip</span>(bars, ratios):</span>
+<span id="6ee4ab18-71"><a href="#6ee4ab18-71" aria-hidden="true" tabindex="-1"></a>    plt.text(</span>
+<span id="6ee4ab18-72"><a href="#6ee4ab18-72" aria-hidden="true" tabindex="-1"></a>        bar.get_width(),</span>
+<span id="6ee4ab18-73"><a href="#6ee4ab18-73" aria-hidden="true" tabindex="-1"></a>        bar.get_y() <span class="op">+</span> bar.get_height() <span class="op">/</span> <span class="dv">2</span>,</span>
+<span id="6ee4ab18-74"><a href="#6ee4ab18-74" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>ratio<span class="sc">:.2f}</span><span class="ss">x"</span>,</span>
+<span id="6ee4ab18-75"><a href="#6ee4ab18-75" aria-hidden="true" tabindex="-1"></a>        va<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="6ee4ab18-76"><a href="#6ee4ab18-76" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">"left"</span>,</span>
+<span id="6ee4ab18-77"><a href="#6ee4ab18-77" aria-hidden="true" tabindex="-1"></a>        fontweight<span class="op">=</span><span class="st">"bold"</span>,</span>
+<span id="6ee4ab18-78"><a href="#6ee4ab18-78" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="6ee4ab18-79"><a href="#6ee4ab18-79" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6ee4ab18-80"><a href="#6ee4ab18-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-81"><a href="#6ee4ab18-81" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="6ee4ab18-82"><a href="#6ee4ab18-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6ee4ab18-83"><a href="#6ee4ab18-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="6ee4ab18-84"><a href="#6ee4ab18-84" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -335,38 +401,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="1ed99d3f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data from the provided chart</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'Europe'</span>, <span class="st">'Asia'</span>, <span class="st">'Rest of the world'</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>vc_investment <span class="op">=</span> [<span class="fl">17.2</span>, <span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">0.773</span>]  <span class="co"># in billions</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>openai_investment <span class="op">=</span> [<span class="fl">12.3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]  <span class="co"># in billions</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Reversing the order of the data to display the bars from top to bottom</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>vc_investment_reversed <span class="op">=</span> vc_investment[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>openai_investment_reversed <span class="op">=</span> openai_investment[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>regions_reversed <span class="op">=</span> regions[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Recreate the horizontal bar plot with reversed data</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Recalculate positions for reversed data</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>bar_width <span class="op">=</span> <span class="fl">0.35</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>r1 <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(vc_investment_reversed))</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> [x <span class="op">+</span> bar_width <span class="cf">for</span> x <span class="kw">in</span> r1]</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the plot</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax.barh(r1, vc_investment_reversed, color<span class="op">=</span><span class="st">'powderblue'</span>, height<span class="op">=</span>bar_width, edgecolor<span class="op">=</span><span class="st">'powderblue'</span>, label<span class="op">=</span><span class="st">'VC investment (2019-2023)'</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax.barh(r2, openai_investment_reversed, color<span class="op">=</span><span class="st">'grey'</span>, height<span class="op">=</span>bar_width, edgecolor<span class="op">=</span><span class="st">'grey'</span>, label<span class="op">=</span><span class="st">'OpenAI'</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add yticks on the middle of the group bars</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Investment in billions USD'</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Generative AI VC Funding by Regions'</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([r <span class="op">+</span> bar_width<span class="op">/</span><span class="dv">2</span> <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vc_investment_reversed))])</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>ax.set_yticklabels(regions_reversed)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create legend &amp; Show graphic</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="1ed99d3f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1ed99d3f-1"><a href="#1ed99d3f-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="1ed99d3f-2"><a href="#1ed99d3f-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1ed99d3f-3"><a href="#1ed99d3f-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data from the provided chart</span></span>
+<span id="1ed99d3f-4"><a href="#1ed99d3f-4" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> [<span class="st">"United States"</span>, <span class="st">"Europe"</span>, <span class="st">"Asia"</span>, <span class="st">"Rest of the world"</span>]</span>
+<span id="1ed99d3f-5"><a href="#1ed99d3f-5" aria-hidden="true" tabindex="-1"></a>vc_investment <span class="op">=</span> [<span class="fl">17.2</span>, <span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">0.773</span>]  <span class="co"># in billions</span></span>
+<span id="1ed99d3f-6"><a href="#1ed99d3f-6" aria-hidden="true" tabindex="-1"></a>openai_investment <span class="op">=</span> [<span class="fl">12.3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]  <span class="co"># in billions</span></span>
+<span id="1ed99d3f-7"><a href="#1ed99d3f-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Reversing the order of the data to display the bars from top to bottom</span></span>
+<span id="1ed99d3f-8"><a href="#1ed99d3f-8" aria-hidden="true" tabindex="-1"></a>vc_investment_reversed <span class="op">=</span> vc_investment[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="1ed99d3f-9"><a href="#1ed99d3f-9" aria-hidden="true" tabindex="-1"></a>openai_investment_reversed <span class="op">=</span> openai_investment[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="1ed99d3f-10"><a href="#1ed99d3f-10" aria-hidden="true" tabindex="-1"></a>regions_reversed <span class="op">=</span> regions[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="1ed99d3f-11"><a href="#1ed99d3f-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1ed99d3f-12"><a href="#1ed99d3f-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Recreate the horizontal bar plot with reversed data</span></span>
+<span id="1ed99d3f-13"><a href="#1ed99d3f-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="1ed99d3f-14"><a href="#1ed99d3f-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1ed99d3f-15"><a href="#1ed99d3f-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Recalculate positions for reversed data</span></span>
+<span id="1ed99d3f-16"><a href="#1ed99d3f-16" aria-hidden="true" tabindex="-1"></a>bar_width <span class="op">=</span> <span class="fl">0.35</span></span>
+<span id="1ed99d3f-17"><a href="#1ed99d3f-17" aria-hidden="true" tabindex="-1"></a>r1 <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(vc_investment_reversed))</span>
+<span id="1ed99d3f-18"><a href="#1ed99d3f-18" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> [x <span class="op">+</span> bar_width <span class="cf">for</span> x <span class="kw">in</span> r1]</span>
+<span id="1ed99d3f-19"><a href="#1ed99d3f-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1ed99d3f-20"><a href="#1ed99d3f-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the plot</span></span>
+<span id="1ed99d3f-21"><a href="#1ed99d3f-21" aria-hidden="true" tabindex="-1"></a>ax.barh(</span>
+<span id="1ed99d3f-22"><a href="#1ed99d3f-22" aria-hidden="true" tabindex="-1"></a>    r1,</span>
+<span id="1ed99d3f-23"><a href="#1ed99d3f-23" aria-hidden="true" tabindex="-1"></a>    vc_investment_reversed,</span>
+<span id="1ed99d3f-24"><a href="#1ed99d3f-24" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"powderblue"</span>,</span>
+<span id="1ed99d3f-25"><a href="#1ed99d3f-25" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span>bar_width,</span>
+<span id="1ed99d3f-26"><a href="#1ed99d3f-26" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"powderblue"</span>,</span>
+<span id="1ed99d3f-27"><a href="#1ed99d3f-27" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"VC investment (2019-2023)"</span>,</span>
+<span id="1ed99d3f-28"><a href="#1ed99d3f-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="1ed99d3f-29"><a href="#1ed99d3f-29" aria-hidden="true" tabindex="-1"></a>ax.barh(</span>
+<span id="1ed99d3f-30"><a href="#1ed99d3f-30" aria-hidden="true" tabindex="-1"></a>    r2,</span>
+<span id="1ed99d3f-31"><a href="#1ed99d3f-31" aria-hidden="true" tabindex="-1"></a>    openai_investment_reversed,</span>
+<span id="1ed99d3f-32"><a href="#1ed99d3f-32" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="1ed99d3f-33"><a href="#1ed99d3f-33" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span>bar_width,</span>
+<span id="1ed99d3f-34"><a href="#1ed99d3f-34" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="1ed99d3f-35"><a href="#1ed99d3f-35" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"OpenAI"</span>,</span>
+<span id="1ed99d3f-36"><a href="#1ed99d3f-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="1ed99d3f-37"><a href="#1ed99d3f-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1ed99d3f-38"><a href="#1ed99d3f-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Add yticks on the middle of the group bars</span></span>
+<span id="1ed99d3f-39"><a href="#1ed99d3f-39" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Investment in billions USD"</span>)</span>
+<span id="1ed99d3f-40"><a href="#1ed99d3f-40" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Generative AI VC Funding by Regions"</span>)</span>
+<span id="1ed99d3f-41"><a href="#1ed99d3f-41" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([r <span class="op">+</span> bar_width <span class="op">/</span> <span class="dv">2</span> <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(vc_investment_reversed))])</span>
+<span id="1ed99d3f-42"><a href="#1ed99d3f-42" aria-hidden="true" tabindex="-1"></a>ax.set_yticklabels(regions_reversed)</span>
+<span id="1ed99d3f-43"><a href="#1ed99d3f-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1ed99d3f-44"><a href="#1ed99d3f-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Create legend &amp; Show graphic</span></span>
+<span id="1ed99d3f-45"><a href="#1ed99d3f-45" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="1ed99d3f-46"><a href="#1ed99d3f-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -380,30 +460,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="ce520864" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data from the provided table</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"United States"</span>, <span class="st">"China"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"Israel"</span>, <span class="st">"Canada"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">"France"</span>, <span class="st">"India"</span>, <span class="st">"Japan"</span>, <span class="st">"Germany"</span>, <span class="st">"Singapore"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">"South Korea"</span>, <span class="st">"Australia"</span>, <span class="st">"Switzerland"</span>, <span class="st">"Sweden"</span>, <span class="st">"Spain"</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>startups_funded <span class="op">=</span> [<span class="dv">5509</span>, <span class="dv">1446</span>, <span class="dv">727</span>, <span class="dv">442</span>, <span class="dv">397</span>, <span class="dv">391</span>, <span class="dv">338</span>, <span class="dv">333</span>, <span class="dv">319</span>, <span class="dv">193</span>, <span class="dv">189</span>, <span class="dv">147</span>, <span class="dv">123</span>, <span class="dv">94</span>, <span class="dv">94</span>]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data from largest to smallest number of startups</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>sorted_indices <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">range</span>(<span class="bu">len</span>(startups_funded)), key<span class="op">=</span><span class="kw">lambda</span> k: startups_funded[k], reverse<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>countries_sorted <span class="op">=</span> [countries[i] <span class="cf">for</span> i <span class="kw">in</span> sorted_indices]</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>startups_funded_sorted <span class="op">=</span> [startups_funded[i] <span class="cf">for</span> i <span class="kw">in</span> sorted_indices]</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the horizontal bar plot</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.barh(countries_sorted, startups_funded_sorted, color<span class="op">=</span><span class="st">'powderblue'</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">0</span>].set_color(<span class="st">'powderblue'</span>)  <span class="co"># Highlight the United States with a different color</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">1</span>].set_color(<span class="st">'lightcoral'</span>)   <span class="co"># Highlight China with a different color</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">3</span>].set_color(<span class="st">'palegreen'</span>) <span class="co"># Highlight Israel with a different color</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Number of Newly Funded AI Startups (2013-2023)'</span>)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'AI Startups Newly Funded by Country (2013-2023)'</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_yaxis()  <span class="co"># Invert axis to have the highest values on top</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ce520864"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ce520864-1"><a href="#ce520864-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="ce520864-2"><a href="#ce520864-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ce520864-3"><a href="#ce520864-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data from the provided table</span></span>
+<span id="ce520864-4"><a href="#ce520864-4" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
+<span id="ce520864-5"><a href="#ce520864-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United States"</span>,</span>
+<span id="ce520864-6"><a href="#ce520864-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"China"</span>,</span>
+<span id="ce520864-7"><a href="#ce520864-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"United Kingdom"</span>,</span>
+<span id="ce520864-8"><a href="#ce520864-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Israel"</span>,</span>
+<span id="ce520864-9"><a href="#ce520864-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="ce520864-10"><a href="#ce520864-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"France"</span>,</span>
+<span id="ce520864-11"><a href="#ce520864-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"India"</span>,</span>
+<span id="ce520864-12"><a href="#ce520864-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Japan"</span>,</span>
+<span id="ce520864-13"><a href="#ce520864-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Germany"</span>,</span>
+<span id="ce520864-14"><a href="#ce520864-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Singapore"</span>,</span>
+<span id="ce520864-15"><a href="#ce520864-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"South Korea"</span>,</span>
+<span id="ce520864-16"><a href="#ce520864-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Australia"</span>,</span>
+<span id="ce520864-17"><a href="#ce520864-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Switzerland"</span>,</span>
+<span id="ce520864-18"><a href="#ce520864-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sweden"</span>,</span>
+<span id="ce520864-19"><a href="#ce520864-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Spain"</span>,</span>
+<span id="ce520864-20"><a href="#ce520864-20" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="ce520864-21"><a href="#ce520864-21" aria-hidden="true" tabindex="-1"></a>startups_funded <span class="op">=</span> [</span>
+<span id="ce520864-22"><a href="#ce520864-22" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5509</span>,</span>
+<span id="ce520864-23"><a href="#ce520864-23" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1446</span>,</span>
+<span id="ce520864-24"><a href="#ce520864-24" aria-hidden="true" tabindex="-1"></a>    <span class="dv">727</span>,</span>
+<span id="ce520864-25"><a href="#ce520864-25" aria-hidden="true" tabindex="-1"></a>    <span class="dv">442</span>,</span>
+<span id="ce520864-26"><a href="#ce520864-26" aria-hidden="true" tabindex="-1"></a>    <span class="dv">397</span>,</span>
+<span id="ce520864-27"><a href="#ce520864-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">391</span>,</span>
+<span id="ce520864-28"><a href="#ce520864-28" aria-hidden="true" tabindex="-1"></a>    <span class="dv">338</span>,</span>
+<span id="ce520864-29"><a href="#ce520864-29" aria-hidden="true" tabindex="-1"></a>    <span class="dv">333</span>,</span>
+<span id="ce520864-30"><a href="#ce520864-30" aria-hidden="true" tabindex="-1"></a>    <span class="dv">319</span>,</span>
+<span id="ce520864-31"><a href="#ce520864-31" aria-hidden="true" tabindex="-1"></a>    <span class="dv">193</span>,</span>
+<span id="ce520864-32"><a href="#ce520864-32" aria-hidden="true" tabindex="-1"></a>    <span class="dv">189</span>,</span>
+<span id="ce520864-33"><a href="#ce520864-33" aria-hidden="true" tabindex="-1"></a>    <span class="dv">147</span>,</span>
+<span id="ce520864-34"><a href="#ce520864-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">123</span>,</span>
+<span id="ce520864-35"><a href="#ce520864-35" aria-hidden="true" tabindex="-1"></a>    <span class="dv">94</span>,</span>
+<span id="ce520864-36"><a href="#ce520864-36" aria-hidden="true" tabindex="-1"></a>    <span class="dv">94</span>,</span>
+<span id="ce520864-37"><a href="#ce520864-37" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="ce520864-38"><a href="#ce520864-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ce520864-39"><a href="#ce520864-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data from largest to smallest number of startups</span></span>
+<span id="ce520864-40"><a href="#ce520864-40" aria-hidden="true" tabindex="-1"></a>sorted_indices <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="ce520864-41"><a href="#ce520864-41" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="bu">len</span>(startups_funded)), key<span class="op">=</span><span class="kw">lambda</span> k: startups_funded[k], reverse<span class="op">=</span><span class="va">True</span></span>
+<span id="ce520864-42"><a href="#ce520864-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="ce520864-43"><a href="#ce520864-43" aria-hidden="true" tabindex="-1"></a>countries_sorted <span class="op">=</span> [countries[i] <span class="cf">for</span> i <span class="kw">in</span> sorted_indices]</span>
+<span id="ce520864-44"><a href="#ce520864-44" aria-hidden="true" tabindex="-1"></a>startups_funded_sorted <span class="op">=</span> [startups_funded[i] <span class="cf">for</span> i <span class="kw">in</span> sorted_indices]</span>
+<span id="ce520864-45"><a href="#ce520864-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ce520864-46"><a href="#ce520864-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the horizontal bar plot</span></span>
+<span id="ce520864-47"><a href="#ce520864-47" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="ce520864-48"><a href="#ce520864-48" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.barh(countries_sorted, startups_funded_sorted, color<span class="op">=</span><span class="st">"powderblue"</span>)</span>
+<span id="ce520864-49"><a href="#ce520864-49" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">0</span>].set_color(<span class="st">"powderblue"</span>)  <span class="co"># Highlight the United States with a different color</span></span>
+<span id="ce520864-50"><a href="#ce520864-50" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">1</span>].set_color(<span class="st">"lightcoral"</span>)  <span class="co"># Highlight China with a different color</span></span>
+<span id="ce520864-51"><a href="#ce520864-51" aria-hidden="true" tabindex="-1"></a>bars[<span class="dv">3</span>].set_color(<span class="st">"palegreen"</span>)  <span class="co"># Highlight Israel with a different color</span></span>
+<span id="ce520864-52"><a href="#ce520864-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ce520864-53"><a href="#ce520864-53" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Number of Newly Funded AI Startups (2013-2023)"</span>)</span>
+<span id="ce520864-54"><a href="#ce520864-54" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"AI Startups Newly Funded by Country (2013-2023)"</span>)</span>
+<span id="ce520864-55"><a href="#ce520864-55" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_yaxis()  <span class="co"># Invert axis to have the highest values on top</span></span>
+<span id="ce520864-56"><a href="#ce520864-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>

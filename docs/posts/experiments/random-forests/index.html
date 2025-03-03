@@ -271,17 +271,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="3e20198a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>breast_cancer <span class="op">=</span> load_breast_cancer()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(breast_cancer.data, columns<span class="op">=</span>breast_cancer.feature_names)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="3e20198a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3e20198a-1"><a href="#3e20198a-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="3e20198a-2"><a href="#3e20198a-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="3e20198a-3"><a href="#3e20198a-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="3e20198a-4"><a href="#3e20198a-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="3e20198a-5"><a href="#3e20198a-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="3e20198a-6"><a href="#3e20198a-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3e20198a-7"><a href="#3e20198a-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="3e20198a-8"><a href="#3e20198a-8" aria-hidden="true" tabindex="-1"></a>breast_cancer <span class="op">=</span> load_breast_cancer()</span>
+<span id="3e20198a-9"><a href="#3e20198a-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3e20198a-10"><a href="#3e20198a-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(breast_cancer.data, columns<span class="op">=</span>breast_cancer.feature_names)</span>
+<span id="3e20198a-11"><a href="#3e20198a-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
@@ -590,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="efe5cc68" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="efe5cc68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="efe5cc68-1"><a href="#efe5cc68-1" aria-hidden="true" tabindex="-1"></a>df.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <style type="text/css">
@@ -1249,25 +1249,27 @@ About Scale Variance
 <div id="87a8c465" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> breast_cancer.data</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> breast_cancer.target</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Random Forest classifier</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model on the training data</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Accuracy of Random Forest classifier: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="87a8c465"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="87a8c465-1"><a href="#87a8c465-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
+<span id="87a8c465-2"><a href="#87a8c465-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> breast_cancer.data</span>
+<span id="87a8c465-3"><a href="#87a8c465-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> breast_cancer.target</span>
+<span id="87a8c465-4"><a href="#87a8c465-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87a8c465-5"><a href="#87a8c465-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets</span></span>
+<span id="87a8c465-6"><a href="#87a8c465-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="87a8c465-7"><a href="#87a8c465-7" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="87a8c465-8"><a href="#87a8c465-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="87a8c465-9"><a href="#87a8c465-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87a8c465-10"><a href="#87a8c465-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Random Forest classifier</span></span>
+<span id="87a8c465-11"><a href="#87a8c465-11" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="87a8c465-12"><a href="#87a8c465-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87a8c465-13"><a href="#87a8c465-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model on the training data</span></span>
+<span id="87a8c465-14"><a href="#87a8c465-14" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="87a8c465-15"><a href="#87a8c465-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87a8c465-16"><a href="#87a8c465-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="87a8c465-17"><a href="#87a8c465-17" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
+<span id="87a8c465-18"><a href="#87a8c465-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87a8c465-19"><a href="#87a8c465-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
+<span id="87a8c465-20"><a href="#87a8c465-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="87a8c465-21"><a href="#87a8c465-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy of Random Forest classifier: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy of Random Forest classifier: 0.97</code></pre>
@@ -1283,25 +1285,27 @@ About Scale Variance
 <div id="dffeda69" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the tree that you want to visualize (e.g., the fifth tree in the forest)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> clf.estimators_[<span class="dv">5</span>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure for the plot</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree using plot_tree function</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(estimator,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>               feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>               class_names<span class="op">=</span>breast_cancer.target_names,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>               filled<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>               max_depth<span class="op">=</span><span class="dv">2</span>,  <span class="co"># Limit the depth of the tree for better readability</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>               ax<span class="op">=</span>axes)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="dffeda69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dffeda69-1"><a href="#dffeda69-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="dffeda69-2"><a href="#dffeda69-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
+<span id="dffeda69-3"><a href="#dffeda69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dffeda69-4"><a href="#dffeda69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the tree that you want to visualize (e.g., the fifth tree in the forest)</span></span>
+<span id="dffeda69-5"><a href="#dffeda69-5" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> clf.estimators_[<span class="dv">5</span>]</span>
+<span id="dffeda69-6"><a href="#dffeda69-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dffeda69-7"><a href="#dffeda69-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure for the plot</span></span>
+<span id="dffeda69-8"><a href="#dffeda69-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="dffeda69-9"><a href="#dffeda69-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dffeda69-10"><a href="#dffeda69-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree using plot_tree function</span></span>
+<span id="dffeda69-11"><a href="#dffeda69-11" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(</span>
+<span id="dffeda69-12"><a href="#dffeda69-12" aria-hidden="true" tabindex="-1"></a>    estimator,</span>
+<span id="dffeda69-13"><a href="#dffeda69-13" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="dffeda69-14"><a href="#dffeda69-14" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="dffeda69-15"><a href="#dffeda69-15" aria-hidden="true" tabindex="-1"></a>    filled<span class="op">=</span><span class="va">True</span>,</span>
+<span id="dffeda69-16"><a href="#dffeda69-16" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">2</span>,  <span class="co"># Limit the depth of the tree for better readability</span></span>
+<span id="dffeda69-17"><a href="#dffeda69-17" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
+<span id="dffeda69-18"><a href="#dffeda69-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="dffeda69-19"><a href="#dffeda69-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dffeda69-20"><a href="#dffeda69-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="dffeda69-21"><a href="#dffeda69-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1315,38 +1319,50 @@ About Scale Variance
 <div id="4fd1a1be" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of trees in the random forest</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>total_trees <span class="op">=</span> <span class="bu">len</span>(clf.estimators_)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of trees to plot</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>num_trees_to_plot <span class="op">=</span> <span class="dv">24</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly pick 'num_trees_to_plot' trees from the random forest</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>selected_trees <span class="op">=</span> random.sample(<span class="bu">range</span>(total_trees), num_trees_to_plot)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure object and an array of axes objects (subplots)</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span>(num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span> <span class="op">*</span> ((num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>)))</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes (for easy iteration if it's 2D due to multiple rows)</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each randomly selected tree using a subplot</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes[:num_trees_to_plot]):  <span class="co"># Limit axes iteration to number of trees to plot</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    tree_index <span class="op">=</span> selected_trees[i]</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    tree.plot_tree(clf.estimators_[tree_index], feature_names<span class="op">=</span>breast_cancer.feature_names, class_names<span class="op">=</span>[<span class="st">'Malignant'</span>, <span class="st">'Benign'</span>], filled<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'Tree </span><span class="sc">{</span>tree_index<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are any leftover axes, turn them off (when num_trees_to_plot is not a multiple of 4)</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_trees_to_plot:]:</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">'off'</span>)</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4fd1a1be"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4fd1a1be-1"><a href="#4fd1a1be-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="4fd1a1be-2"><a href="#4fd1a1be-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-3"><a href="#4fd1a1be-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of trees in the random forest</span></span>
+<span id="4fd1a1be-4"><a href="#4fd1a1be-4" aria-hidden="true" tabindex="-1"></a>total_trees <span class="op">=</span> <span class="bu">len</span>(clf.estimators_)</span>
+<span id="4fd1a1be-5"><a href="#4fd1a1be-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-6"><a href="#4fd1a1be-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of trees to plot</span></span>
+<span id="4fd1a1be-7"><a href="#4fd1a1be-7" aria-hidden="true" tabindex="-1"></a>num_trees_to_plot <span class="op">=</span> <span class="dv">24</span></span>
+<span id="4fd1a1be-8"><a href="#4fd1a1be-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-9"><a href="#4fd1a1be-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly pick 'num_trees_to_plot' trees from the random forest</span></span>
+<span id="4fd1a1be-10"><a href="#4fd1a1be-10" aria-hidden="true" tabindex="-1"></a>selected_trees <span class="op">=</span> random.sample(<span class="bu">range</span>(total_trees), num_trees_to_plot)</span>
+<span id="4fd1a1be-11"><a href="#4fd1a1be-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-12"><a href="#4fd1a1be-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure object and an array of axes objects (subplots)</span></span>
+<span id="4fd1a1be-13"><a href="#4fd1a1be-13" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(</span>
+<span id="4fd1a1be-14"><a href="#4fd1a1be-14" aria-hidden="true" tabindex="-1"></a>    nrows<span class="op">=</span>(num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="4fd1a1be-15"><a href="#4fd1a1be-15" aria-hidden="true" tabindex="-1"></a>    ncols<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="4fd1a1be-16"><a href="#4fd1a1be-16" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span> <span class="op">*</span> ((num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>)),</span>
+<span id="4fd1a1be-17"><a href="#4fd1a1be-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="4fd1a1be-18"><a href="#4fd1a1be-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-19"><a href="#4fd1a1be-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes (for easy iteration if it's 2D due to multiple rows)</span></span>
+<span id="4fd1a1be-20"><a href="#4fd1a1be-20" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="4fd1a1be-21"><a href="#4fd1a1be-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-22"><a href="#4fd1a1be-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each randomly selected tree using a subplot</span></span>
+<span id="4fd1a1be-23"><a href="#4fd1a1be-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(</span>
+<span id="4fd1a1be-24"><a href="#4fd1a1be-24" aria-hidden="true" tabindex="-1"></a>    axes[:num_trees_to_plot]</span>
+<span id="4fd1a1be-25"><a href="#4fd1a1be-25" aria-hidden="true" tabindex="-1"></a>):  <span class="co"># Limit axes iteration to number of trees to plot</span></span>
+<span id="4fd1a1be-26"><a href="#4fd1a1be-26" aria-hidden="true" tabindex="-1"></a>    tree_index <span class="op">=</span> selected_trees[i]</span>
+<span id="4fd1a1be-27"><a href="#4fd1a1be-27" aria-hidden="true" tabindex="-1"></a>    tree.plot_tree(</span>
+<span id="4fd1a1be-28"><a href="#4fd1a1be-28" aria-hidden="true" tabindex="-1"></a>        clf.estimators_[tree_index],</span>
+<span id="4fd1a1be-29"><a href="#4fd1a1be-29" aria-hidden="true" tabindex="-1"></a>        feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="4fd1a1be-30"><a href="#4fd1a1be-30" aria-hidden="true" tabindex="-1"></a>        class_names<span class="op">=</span>[<span class="st">"Malignant"</span>, <span class="st">"Benign"</span>],</span>
+<span id="4fd1a1be-31"><a href="#4fd1a1be-31" aria-hidden="true" tabindex="-1"></a>        filled<span class="op">=</span><span class="va">True</span>,</span>
+<span id="4fd1a1be-32"><a href="#4fd1a1be-32" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="4fd1a1be-33"><a href="#4fd1a1be-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="4fd1a1be-34"><a href="#4fd1a1be-34" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Tree </span><span class="sc">{</span>tree_index<span class="sc">}</span><span class="ss">"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="4fd1a1be-35"><a href="#4fd1a1be-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-36"><a href="#4fd1a1be-36" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are any leftover axes, turn them off (when num_trees_to_plot is not a multiple of 4)</span></span>
+<span id="4fd1a1be-37"><a href="#4fd1a1be-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_trees_to_plot:]:</span>
+<span id="4fd1a1be-38"><a href="#4fd1a1be-38" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="4fd1a1be-39"><a href="#4fd1a1be-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-40"><a href="#4fd1a1be-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
+<span id="4fd1a1be-41"><a href="#4fd1a1be-41" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="4fd1a1be-42"><a href="#4fd1a1be-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fd1a1be-43"><a href="#4fd1a1be-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="4fd1a1be-44"><a href="#4fd1a1be-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1364,31 +1380,36 @@ About Scale Variance
 <div id="9a050032" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> model</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress warnings - this is just to shut up warnings about fonts in GitHub Actions</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>logging.getLogger(<span class="st">'matplotlib.font_manager'</span>).setLevel(level<span class="op">=</span>logging.CRITICAL)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The training sample to visualize</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[<span class="dv">5</span>]</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for benign and malignant</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {<span class="st">'classes'</span>:</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                         [<span class="va">None</span>,  <span class="co"># 0 classes</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                          <span class="va">None</span>,  <span class="co"># 1 class</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                          [<span class="st">"#FFAAAA"</span>, <span class="st">"#AAFFAA"</span>],  <span class="co"># 2 classes</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                          ]}</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the selected tree</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> model(estimator,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>               X_train,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>               y_train,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>               target_name<span class="op">=</span><span class="st">'Target'</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>               feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>               class_names<span class="op">=</span><span class="bu">list</span>(breast_cancer.target_names))</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>viz.view(x<span class="op">=</span>x, colors<span class="op">=</span>color_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9a050032"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9a050032-1"><a href="#9a050032-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> model</span>
+<span id="9a050032-2"><a href="#9a050032-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9a050032-3"><a href="#9a050032-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress warnings - this is just to shut up warnings about fonts in GitHub Actions</span></span>
+<span id="9a050032-4"><a href="#9a050032-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="9a050032-5"><a href="#9a050032-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9a050032-6"><a href="#9a050032-6" aria-hidden="true" tabindex="-1"></a>logging.getLogger(<span class="st">"matplotlib.font_manager"</span>).setLevel(level<span class="op">=</span>logging.CRITICAL)</span>
+<span id="9a050032-7"><a href="#9a050032-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9a050032-8"><a href="#9a050032-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The training sample to visualize</span></span>
+<span id="9a050032-9"><a href="#9a050032-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[<span class="dv">5</span>]</span>
+<span id="9a050032-10"><a href="#9a050032-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9a050032-11"><a href="#9a050032-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for benign and malignant</span></span>
+<span id="9a050032-12"><a href="#9a050032-12" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {</span>
+<span id="9a050032-13"><a href="#9a050032-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"classes"</span>: [</span>
+<span id="9a050032-14"><a href="#9a050032-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">None</span>,  <span class="co"># 0 classes</span></span>
+<span id="9a050032-15"><a href="#9a050032-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">None</span>,  <span class="co"># 1 class</span></span>
+<span id="9a050032-16"><a href="#9a050032-16" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"#FFAAAA"</span>, <span class="st">"#AAFFAA"</span>],  <span class="co"># 2 classes</span></span>
+<span id="9a050032-17"><a href="#9a050032-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="9a050032-18"><a href="#9a050032-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="9a050032-19"><a href="#9a050032-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9a050032-20"><a href="#9a050032-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the selected tree</span></span>
+<span id="9a050032-21"><a href="#9a050032-21" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> model(</span>
+<span id="9a050032-22"><a href="#9a050032-22" aria-hidden="true" tabindex="-1"></a>    estimator,</span>
+<span id="9a050032-23"><a href="#9a050032-23" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="9a050032-24"><a href="#9a050032-24" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="9a050032-25"><a href="#9a050032-25" aria-hidden="true" tabindex="-1"></a>    target_name<span class="op">=</span><span class="st">"Target"</span>,</span>
+<span id="9a050032-26"><a href="#9a050032-26" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="9a050032-27"><a href="#9a050032-27" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span><span class="bu">list</span>(breast_cancer.target_names),</span>
+<span id="9a050032-28"><a href="#9a050032-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="9a050032-29"><a href="#9a050032-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9a050032-30"><a href="#9a050032-30" aria-hidden="true" tabindex="-1"></a>viz.view(x<span class="op">=</span>x, colors<span class="op">=</span>color_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -1402,18 +1423,18 @@ About Scale Variance
 <div id="d61470e7" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> breast_cancer.feature_names</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> clf.feature_importances_</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argsort(importances)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Feature Importances'</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(indices)), importances[indices], color<span class="op">=</span><span class="st">'b'</span>, align<span class="op">=</span><span class="st">'center'</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(indices)), [features[i] <span class="cf">for</span> i <span class="kw">in</span> indices])</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Relative Importance'</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d61470e7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d61470e7-1"><a href="#d61470e7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="d61470e7-2"><a href="#d61470e7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d61470e7-3"><a href="#d61470e7-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> breast_cancer.feature_names</span>
+<span id="d61470e7-4"><a href="#d61470e7-4" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> clf.feature_importances_</span>
+<span id="d61470e7-5"><a href="#d61470e7-5" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argsort(importances)</span>
+<span id="d61470e7-6"><a href="#d61470e7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d61470e7-7"><a href="#d61470e7-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="d61470e7-8"><a href="#d61470e7-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Importances"</span>)</span>
+<span id="d61470e7-9"><a href="#d61470e7-9" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(indices)), importances[indices], color<span class="op">=</span><span class="st">"b"</span>, align<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="d61470e7-10"><a href="#d61470e7-10" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(indices)), [features[i] <span class="cf">for</span> i <span class="kw">in</span> indices])</span>
+<span id="d61470e7-11"><a href="#d61470e7-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Relative Importance"</span>)</span>
+<span id="d61470e7-12"><a href="#d61470e7-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1427,18 +1448,26 @@ About Scale Variance
 <div id="e823cd90" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> decision_boundaries</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>X_features_for_boundaries <span class="op">=</span> X_train[:, [<span class="dv">27</span>,<span class="dv">23</span>]] <span class="co"># 27 = 'worst concave points', 23 = 'worst area'</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>new_clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>new_clf.fit(X_features_for_boundaries, y_train)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>fig,axes <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>decision_boundaries(new_clf, X_features_for_boundaries, y_train, ax<span class="op">=</span>axes,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       feature_names<span class="op">=</span>[<span class="st">'worst concave points'</span>, <span class="st">'worst area'</span>],</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       class_names<span class="op">=</span>breast_cancer.target_names,</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       markers<span class="op">=</span>[<span class="st">'X'</span>, <span class="st">'s'</span>], colors<span class="op">=</span>color_map)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e823cd90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e823cd90-1"><a href="#e823cd90-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> decision_boundaries</span>
+<span id="e823cd90-2"><a href="#e823cd90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e823cd90-3"><a href="#e823cd90-3" aria-hidden="true" tabindex="-1"></a>X_features_for_boundaries <span class="op">=</span> X_train[</span>
+<span id="e823cd90-4"><a href="#e823cd90-4" aria-hidden="true" tabindex="-1"></a>    :, [<span class="dv">27</span>, <span class="dv">23</span>]</span>
+<span id="e823cd90-5"><a href="#e823cd90-5" aria-hidden="true" tabindex="-1"></a>]  <span class="co"># 27 = 'worst concave points', 23 = 'worst area'</span></span>
+<span id="e823cd90-6"><a href="#e823cd90-6" aria-hidden="true" tabindex="-1"></a>new_clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="e823cd90-7"><a href="#e823cd90-7" aria-hidden="true" tabindex="-1"></a>new_clf.fit(X_features_for_boundaries, y_train)</span>
+<span id="e823cd90-8"><a href="#e823cd90-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e823cd90-9"><a href="#e823cd90-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="e823cd90-10"><a href="#e823cd90-10" aria-hidden="true" tabindex="-1"></a>decision_boundaries(</span>
+<span id="e823cd90-11"><a href="#e823cd90-11" aria-hidden="true" tabindex="-1"></a>    new_clf,</span>
+<span id="e823cd90-12"><a href="#e823cd90-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries,</span>
+<span id="e823cd90-13"><a href="#e823cd90-13" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="e823cd90-14"><a href="#e823cd90-14" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
+<span id="e823cd90-15"><a href="#e823cd90-15" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>[<span class="st">"worst concave points"</span>, <span class="st">"worst area"</span>],</span>
+<span id="e823cd90-16"><a href="#e823cd90-16" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="e823cd90-17"><a href="#e823cd90-17" aria-hidden="true" tabindex="-1"></a>    markers<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"s"</span>],</span>
+<span id="e823cd90-18"><a href="#e823cd90-18" aria-hidden="true" tabindex="-1"></a>    colors<span class="op">=</span>color_map,</span>
+<span id="e823cd90-19"><a href="#e823cd90-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="e823cd90-20"><a href="#e823cd90-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1452,35 +1481,41 @@ About Scale Variance
 <div id="54ec1dc9" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 4x4 subplot grid</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the 2D array of axes for easy iteration</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select and plot decision boundaries for 5x5 pairs of features</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly pick two distinct features</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    features_idx <span class="op">=</span> np.random.choice(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]), size<span class="op">=</span><span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries <span class="op">=</span> X[:, features_idx]</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train a new classifier</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    clf.fit(X_features_for_boundaries, y)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot decision boundaries using dtreeviz</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    decision_boundaries(clf, X_features_for_boundaries, y, ax<span class="op">=</span>ax,</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>                        feature_names<span class="op">=</span>features[features_idx],</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>                        class_names<span class="op">=</span>breast_cancer.target_names,</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                        markers<span class="op">=</span>[<span class="st">'X'</span>, <span class="st">'s'</span>], colors<span class="op">=</span>color_map)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set titles for the subplots</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>features[features_idx[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>features[features_idx[<span class="dv">1</span>]]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="54ec1dc9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="54ec1dc9-1"><a href="#54ec1dc9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>
+<span id="54ec1dc9-2"><a href="#54ec1dc9-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="54ec1dc9-3"><a href="#54ec1dc9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54ec1dc9-4"><a href="#54ec1dc9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 4x4 subplot grid</span></span>
+<span id="54ec1dc9-5"><a href="#54ec1dc9-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
+<span id="54ec1dc9-6"><a href="#54ec1dc9-6" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the 2D array of axes for easy iteration</span></span>
+<span id="54ec1dc9-7"><a href="#54ec1dc9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54ec1dc9-8"><a href="#54ec1dc9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select and plot decision boundaries for 5x5 pairs of features</span></span>
+<span id="54ec1dc9-9"><a href="#54ec1dc9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
+<span id="54ec1dc9-10"><a href="#54ec1dc9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly pick two distinct features</span></span>
+<span id="54ec1dc9-11"><a href="#54ec1dc9-11" aria-hidden="true" tabindex="-1"></a>    features_idx <span class="op">=</span> np.random.choice(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]), size<span class="op">=</span><span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="54ec1dc9-12"><a href="#54ec1dc9-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries <span class="op">=</span> X[:, features_idx]</span>
+<span id="54ec1dc9-13"><a href="#54ec1dc9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54ec1dc9-14"><a href="#54ec1dc9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train a new classifier</span></span>
+<span id="54ec1dc9-15"><a href="#54ec1dc9-15" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="54ec1dc9-16"><a href="#54ec1dc9-16" aria-hidden="true" tabindex="-1"></a>    clf.fit(X_features_for_boundaries, y)</span>
+<span id="54ec1dc9-17"><a href="#54ec1dc9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54ec1dc9-18"><a href="#54ec1dc9-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot decision boundaries using dtreeviz</span></span>
+<span id="54ec1dc9-19"><a href="#54ec1dc9-19" aria-hidden="true" tabindex="-1"></a>    decision_boundaries(</span>
+<span id="54ec1dc9-20"><a href="#54ec1dc9-20" aria-hidden="true" tabindex="-1"></a>        clf,</span>
+<span id="54ec1dc9-21"><a href="#54ec1dc9-21" aria-hidden="true" tabindex="-1"></a>        X_features_for_boundaries,</span>
+<span id="54ec1dc9-22"><a href="#54ec1dc9-22" aria-hidden="true" tabindex="-1"></a>        y,</span>
+<span id="54ec1dc9-23"><a href="#54ec1dc9-23" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="54ec1dc9-24"><a href="#54ec1dc9-24" aria-hidden="true" tabindex="-1"></a>        feature_names<span class="op">=</span>features[features_idx],</span>
+<span id="54ec1dc9-25"><a href="#54ec1dc9-25" aria-hidden="true" tabindex="-1"></a>        class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="54ec1dc9-26"><a href="#54ec1dc9-26" aria-hidden="true" tabindex="-1"></a>        markers<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"s"</span>],</span>
+<span id="54ec1dc9-27"><a href="#54ec1dc9-27" aria-hidden="true" tabindex="-1"></a>        colors<span class="op">=</span>color_map,</span>
+<span id="54ec1dc9-28"><a href="#54ec1dc9-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="54ec1dc9-29"><a href="#54ec1dc9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54ec1dc9-30"><a href="#54ec1dc9-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set titles for the subplots</span></span>
+<span id="54ec1dc9-31"><a href="#54ec1dc9-31" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>features[features_idx[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>features[features_idx[<span class="dv">1</span>]]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="54ec1dc9-32"><a href="#54ec1dc9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54ec1dc9-33"><a href="#54ec1dc9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
+<span id="54ec1dc9-34"><a href="#54ec1dc9-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="54ec1dc9-35"><a href="#54ec1dc9-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>

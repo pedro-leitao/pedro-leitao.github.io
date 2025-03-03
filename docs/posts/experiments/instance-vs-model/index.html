@@ -279,21 +279,30 @@ About Linearly Separable
 <div id="ec873cf1" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_california_housing</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the California housing dataset</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>housing <span class="op">=</span> fetch_california_housing()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>housing_df <span class="op">=</span> pd.DataFrame(housing.data, columns<span class="op">=</span>housing.feature_names)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(housing.DESCR)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>housing_df[<span class="st">'MedianHouseValue'</span>] <span class="op">=</span> housing.target</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>housing_df.plot(kind<span class="op">=</span><span class="st">"scatter"</span>, x<span class="op">=</span><span class="st">"Longitude"</span>, y<span class="op">=</span><span class="st">"Latitude"</span>, alpha<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                s<span class="op">=</span>housing_df[<span class="st">"Population"</span>]<span class="op">/</span><span class="dv">100</span>, label<span class="op">=</span><span class="st">"Population"</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span><span class="st">"MedianHouseValue"</span>, cmap<span class="op">=</span>plt.get_cmap(<span class="st">"jet"</span>), colorbar<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ec873cf1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ec873cf1-1"><a href="#ec873cf1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="ec873cf1-2"><a href="#ec873cf1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_california_housing</span>
+<span id="ec873cf1-3"><a href="#ec873cf1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="ec873cf1-4"><a href="#ec873cf1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="ec873cf1-5"><a href="#ec873cf1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ec873cf1-6"><a href="#ec873cf1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ec873cf1-7"><a href="#ec873cf1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the California housing dataset</span></span>
+<span id="ec873cf1-8"><a href="#ec873cf1-8" aria-hidden="true" tabindex="-1"></a>housing <span class="op">=</span> fetch_california_housing()</span>
+<span id="ec873cf1-9"><a href="#ec873cf1-9" aria-hidden="true" tabindex="-1"></a>housing_df <span class="op">=</span> pd.DataFrame(housing.data, columns<span class="op">=</span>housing.feature_names)</span>
+<span id="ec873cf1-10"><a href="#ec873cf1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(housing.DESCR)</span>
+<span id="ec873cf1-11"><a href="#ec873cf1-11" aria-hidden="true" tabindex="-1"></a>housing_df[<span class="st">"MedianHouseValue"</span>] <span class="op">=</span> housing.target</span>
+<span id="ec873cf1-12"><a href="#ec873cf1-12" aria-hidden="true" tabindex="-1"></a>housing_df.plot(</span>
+<span id="ec873cf1-13"><a href="#ec873cf1-13" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
+<span id="ec873cf1-14"><a href="#ec873cf1-14" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Longitude"</span>,</span>
+<span id="ec873cf1-15"><a href="#ec873cf1-15" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Latitude"</span>,</span>
+<span id="ec873cf1-16"><a href="#ec873cf1-16" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="ec873cf1-17"><a href="#ec873cf1-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>housing_df[<span class="st">"Population"</span>] <span class="op">/</span> <span class="dv">100</span>,</span>
+<span id="ec873cf1-18"><a href="#ec873cf1-18" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Population"</span>,</span>
+<span id="ec873cf1-19"><a href="#ec873cf1-19" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>),</span>
+<span id="ec873cf1-20"><a href="#ec873cf1-20" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"MedianHouseValue"</span>,</span>
+<span id="ec873cf1-21"><a href="#ec873cf1-21" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.get_cmap(<span class="st">"jet"</span>),</span>
+<span id="ec873cf1-22"><a href="#ec873cf1-22" aria-hidden="true" tabindex="-1"></a>    colorbar<span class="op">=</span><span class="va">True</span>,</span>
+<span id="ec873cf1-23"><a href="#ec873cf1-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="ec873cf1-24"><a href="#ec873cf1-24" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>.. _california_housing_dataset:
@@ -369,55 +378,59 @@ About k-Nearest Neighbors
 <div id="89559447" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> housing.data, housing.target</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and seed random number generators</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>random.seed(seed)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(seed)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.cuda.is_available():</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed(seed)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed_all(seed)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    torch.manual_seed(seed)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and split the California housing dataset</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>X_train_full, X_test, y_train_full, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(X_train_full, y_train_full)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the features</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>X_valid_scaled <span class="op">=</span> scaler.transform(X_valid)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the k-NN regressor</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>knn_reg <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the k-NN model</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>knn_reg.fit(X_train_scaled, y_train)</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> knn_reg.score(X_test_scaled, y_test)  <span class="co"># This returns the R^2 score of the prediction</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Making predictions</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> knn_reg.predict(X_test_scaled[:<span class="dv">5</span>])</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model R^2 score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="89559447"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="89559447-1"><a href="#89559447-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="89559447-2"><a href="#89559447-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="89559447-3"><a href="#89559447-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="89559447-4"><a href="#89559447-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="89559447-5"><a href="#89559447-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="89559447-6"><a href="#89559447-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-7"><a href="#89559447-7" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> housing.data, housing.target</span>
+<span id="89559447-8"><a href="#89559447-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-9"><a href="#89559447-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and seed random number generators</span></span>
+<span id="89559447-10"><a href="#89559447-10" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">42</span></span>
+<span id="89559447-11"><a href="#89559447-11" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
+<span id="89559447-12"><a href="#89559447-12" aria-hidden="true" tabindex="-1"></a>random.seed(seed)</span>
+<span id="89559447-13"><a href="#89559447-13" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(seed)</span>
+<span id="89559447-14"><a href="#89559447-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.cuda.is_available():</span>
+<span id="89559447-15"><a href="#89559447-15" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed(seed)</span>
+<span id="89559447-16"><a href="#89559447-16" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed_all(seed)</span>
+<span id="89559447-17"><a href="#89559447-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
+<span id="89559447-18"><a href="#89559447-18" aria-hidden="true" tabindex="-1"></a>    torch.manual_seed(seed)</span>
+<span id="89559447-19"><a href="#89559447-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-20"><a href="#89559447-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-21"><a href="#89559447-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and split the California housing dataset</span></span>
+<span id="89559447-22"><a href="#89559447-22" aria-hidden="true" tabindex="-1"></a>X_train_full, X_test, y_train_full, y_test <span class="op">=</span> train_test_split(</span>
+<span id="89559447-23"><a href="#89559447-23" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed</span>
+<span id="89559447-24"><a href="#89559447-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="89559447-25"><a href="#89559447-25" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(X_train_full, y_train_full)</span>
+<span id="89559447-26"><a href="#89559447-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-27"><a href="#89559447-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the features</span></span>
+<span id="89559447-28"><a href="#89559447-28" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="89559447-29"><a href="#89559447-29" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="89559447-30"><a href="#89559447-30" aria-hidden="true" tabindex="-1"></a>X_valid_scaled <span class="op">=</span> scaler.transform(X_valid)</span>
+<span id="89559447-31"><a href="#89559447-31" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="89559447-32"><a href="#89559447-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-33"><a href="#89559447-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the k-NN regressor</span></span>
+<span id="89559447-34"><a href="#89559447-34" aria-hidden="true" tabindex="-1"></a>knn_reg <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="89559447-35"><a href="#89559447-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-36"><a href="#89559447-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the k-NN model</span></span>
+<span id="89559447-37"><a href="#89559447-37" aria-hidden="true" tabindex="-1"></a>knn_reg.fit(X_train_scaled, y_train)</span>
+<span id="89559447-38"><a href="#89559447-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-39"><a href="#89559447-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
+<span id="89559447-40"><a href="#89559447-40" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> knn_reg.score(</span>
+<span id="89559447-41"><a href="#89559447-41" aria-hidden="true" tabindex="-1"></a>    X_test_scaled, y_test</span>
+<span id="89559447-42"><a href="#89559447-42" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># This returns the R^2 score of the prediction</span></span>
+<span id="89559447-43"><a href="#89559447-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-44"><a href="#89559447-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Making predictions</span></span>
+<span id="89559447-45"><a href="#89559447-45" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> knn_reg.predict(X_test_scaled[:<span class="dv">5</span>])</span>
+<span id="89559447-46"><a href="#89559447-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-47"><a href="#89559447-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
+<span id="89559447-48"><a href="#89559447-48" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="89559447-49"><a href="#89559447-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89559447-50"><a href="#89559447-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model R^2 score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="89559447-51"><a href="#89559447-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="89559447-52"><a href="#89559447-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="89559447-53"><a href="#89559447-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model R^2 score: 0.6863935783148378
@@ -435,95 +448,98 @@ Relative differences (%): [ 19.79035639  44.84716157 -12.1000758   20.37968893  
 <div id="2f0b6b2f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytorch_lightning <span class="im">as</span> pl</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> DataLoader, TensorDataset</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_lightning.callbacks.early_stopping <span class="im">import</span> EarlyStopping</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the LightningModule</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RegressionModel(pl.LightningModule):</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim):</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> nn.Sequential(</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            nn.Linear(input_dim, <span class="dv">50</span>),</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            nn.ReLU(),</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            nn.Linear(<span class="dv">50</span>, <span class="dv">1</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.loss_fn <span class="op">=</span> nn.MSELoss()</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.model(x)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> training_step(<span class="va">self</span>, batch, batch_idx):</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)  <span class="co"># Ensure proper shape</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">'train_loss'</span>, loss)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validation_step(<span class="va">self</span>, batch, batch_idx):</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">'val_loss'</span>, loss, prog_bar<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_step(<span class="va">self</span>, batch, batch_idx):</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">'test_loss'</span>, loss)</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> configure_optimizers(<span class="va">self</span>):</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        optimizer <span class="op">=</span> torch.optim.SGD(<span class="va">self</span>.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> optimizer</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Create TensorDatasets and DataLoaders</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>train_dataset <span class="op">=</span> TensorDataset(torch.tensor(X_train_scaled, dtype<span class="op">=</span>torch.float32),</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>                              torch.tensor(y_train, dtype<span class="op">=</span>torch.float32))</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>valid_dataset <span class="op">=</span> TensorDataset(torch.tensor(X_valid_scaled, dtype<span class="op">=</span>torch.float32),</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                              torch.tensor(y_valid, dtype<span class="op">=</span>torch.float32))</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>test_dataset <span class="op">=</span> TensorDataset(torch.tensor(X_test_scaled, dtype<span class="op">=</span>torch.float32),</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>                             torch.tensor(y_test, dtype<span class="op">=</span>torch.float32))</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_dataset, batch_size<span class="op">=</span><span class="dv">32</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>valid_loader <span class="op">=</span> DataLoader(valid_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>test_loader <span class="op">=</span> DataLoader(test_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the model with the correct input dimension</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> X_train_scaled.shape[<span class="dv">1</span>]</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RegressionModel(input_dim<span class="op">=</span>input_dim)</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up EarlyStopping callback</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>early_stop_callback <span class="op">=</span> EarlyStopping(</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    monitor<span class="op">=</span><span class="st">'val_loss'</span>,</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    patience<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    mode<span class="op">=</span><span class="st">'min'</span>,</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="va">False</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model using PyTorch-Lightning's Trainer</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> pl.Trainer(</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    max_epochs<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[early_stop_callback],</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    logger<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    enable_progress_bar<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    enable_checkpointing<span class="op">=</span><span class="va">False</span></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>trainer.fit(model, train_loader, valid_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="2f0b6b2f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2f0b6b2f-1"><a href="#2f0b6b2f-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="2f0b6b2f-2"><a href="#2f0b6b2f-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytorch_lightning <span class="im">as</span> pl</span>
+<span id="2f0b6b2f-3"><a href="#2f0b6b2f-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> DataLoader, TensorDataset</span>
+<span id="2f0b6b2f-4"><a href="#2f0b6b2f-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_lightning.callbacks.early_stopping <span class="im">import</span> EarlyStopping</span>
+<span id="2f0b6b2f-5"><a href="#2f0b6b2f-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-6"><a href="#2f0b6b2f-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-7"><a href="#2f0b6b2f-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the LightningModule</span></span>
+<span id="2f0b6b2f-8"><a href="#2f0b6b2f-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RegressionModel(pl.LightningModule):</span>
+<span id="2f0b6b2f-9"><a href="#2f0b6b2f-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim):</span>
+<span id="2f0b6b2f-10"><a href="#2f0b6b2f-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="2f0b6b2f-11"><a href="#2f0b6b2f-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> nn.Sequential(</span>
+<span id="2f0b6b2f-12"><a href="#2f0b6b2f-12" aria-hidden="true" tabindex="-1"></a>            nn.Linear(input_dim, <span class="dv">50</span>), nn.ReLU(), nn.Linear(<span class="dv">50</span>, <span class="dv">1</span>)</span>
+<span id="2f0b6b2f-13"><a href="#2f0b6b2f-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="2f0b6b2f-14"><a href="#2f0b6b2f-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.loss_fn <span class="op">=</span> nn.MSELoss()</span>
+<span id="2f0b6b2f-15"><a href="#2f0b6b2f-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-16"><a href="#2f0b6b2f-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="2f0b6b2f-17"><a href="#2f0b6b2f-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.model(x)</span>
+<span id="2f0b6b2f-18"><a href="#2f0b6b2f-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-19"><a href="#2f0b6b2f-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> training_step(<span class="va">self</span>, batch, batch_idx):</span>
+<span id="2f0b6b2f-20"><a href="#2f0b6b2f-20" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
+<span id="2f0b6b2f-21"><a href="#2f0b6b2f-21" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)  <span class="co"># Ensure proper shape</span></span>
+<span id="2f0b6b2f-22"><a href="#2f0b6b2f-22" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
+<span id="2f0b6b2f-23"><a href="#2f0b6b2f-23" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
+<span id="2f0b6b2f-24"><a href="#2f0b6b2f-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"train_loss"</span>, loss)</span>
+<span id="2f0b6b2f-25"><a href="#2f0b6b2f-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
+<span id="2f0b6b2f-26"><a href="#2f0b6b2f-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-27"><a href="#2f0b6b2f-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validation_step(<span class="va">self</span>, batch, batch_idx):</span>
+<span id="2f0b6b2f-28"><a href="#2f0b6b2f-28" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
+<span id="2f0b6b2f-29"><a href="#2f0b6b2f-29" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="2f0b6b2f-30"><a href="#2f0b6b2f-30" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
+<span id="2f0b6b2f-31"><a href="#2f0b6b2f-31" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
+<span id="2f0b6b2f-32"><a href="#2f0b6b2f-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"val_loss"</span>, loss, prog_bar<span class="op">=</span><span class="va">True</span>)</span>
+<span id="2f0b6b2f-33"><a href="#2f0b6b2f-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
+<span id="2f0b6b2f-34"><a href="#2f0b6b2f-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-35"><a href="#2f0b6b2f-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_step(<span class="va">self</span>, batch, batch_idx):</span>
+<span id="2f0b6b2f-36"><a href="#2f0b6b2f-36" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
+<span id="2f0b6b2f-37"><a href="#2f0b6b2f-37" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="2f0b6b2f-38"><a href="#2f0b6b2f-38" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
+<span id="2f0b6b2f-39"><a href="#2f0b6b2f-39" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
+<span id="2f0b6b2f-40"><a href="#2f0b6b2f-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"test_loss"</span>, loss)</span>
+<span id="2f0b6b2f-41"><a href="#2f0b6b2f-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
+<span id="2f0b6b2f-42"><a href="#2f0b6b2f-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-43"><a href="#2f0b6b2f-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> configure_optimizers(<span class="va">self</span>):</span>
+<span id="2f0b6b2f-44"><a href="#2f0b6b2f-44" aria-hidden="true" tabindex="-1"></a>        optimizer <span class="op">=</span> torch.optim.SGD(<span class="va">self</span>.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="2f0b6b2f-45"><a href="#2f0b6b2f-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> optimizer</span>
+<span id="2f0b6b2f-46"><a href="#2f0b6b2f-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-47"><a href="#2f0b6b2f-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-48"><a href="#2f0b6b2f-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Create TensorDatasets and DataLoaders</span></span>
+<span id="2f0b6b2f-49"><a href="#2f0b6b2f-49" aria-hidden="true" tabindex="-1"></a>train_dataset <span class="op">=</span> TensorDataset(</span>
+<span id="2f0b6b2f-50"><a href="#2f0b6b2f-50" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_train_scaled, dtype<span class="op">=</span>torch.float32),</span>
+<span id="2f0b6b2f-51"><a href="#2f0b6b2f-51" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_train, dtype<span class="op">=</span>torch.float32),</span>
+<span id="2f0b6b2f-52"><a href="#2f0b6b2f-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="2f0b6b2f-53"><a href="#2f0b6b2f-53" aria-hidden="true" tabindex="-1"></a>valid_dataset <span class="op">=</span> TensorDataset(</span>
+<span id="2f0b6b2f-54"><a href="#2f0b6b2f-54" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_valid_scaled, dtype<span class="op">=</span>torch.float32),</span>
+<span id="2f0b6b2f-55"><a href="#2f0b6b2f-55" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_valid, dtype<span class="op">=</span>torch.float32),</span>
+<span id="2f0b6b2f-56"><a href="#2f0b6b2f-56" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="2f0b6b2f-57"><a href="#2f0b6b2f-57" aria-hidden="true" tabindex="-1"></a>test_dataset <span class="op">=</span> TensorDataset(</span>
+<span id="2f0b6b2f-58"><a href="#2f0b6b2f-58" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_test_scaled, dtype<span class="op">=</span>torch.float32),</span>
+<span id="2f0b6b2f-59"><a href="#2f0b6b2f-59" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_test, dtype<span class="op">=</span>torch.float32),</span>
+<span id="2f0b6b2f-60"><a href="#2f0b6b2f-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="2f0b6b2f-61"><a href="#2f0b6b2f-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-62"><a href="#2f0b6b2f-62" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_dataset, batch_size<span class="op">=</span><span class="dv">32</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
+<span id="2f0b6b2f-63"><a href="#2f0b6b2f-63" aria-hidden="true" tabindex="-1"></a>valid_loader <span class="op">=</span> DataLoader(valid_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="2f0b6b2f-64"><a href="#2f0b6b2f-64" aria-hidden="true" tabindex="-1"></a>test_loader <span class="op">=</span> DataLoader(test_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="2f0b6b2f-65"><a href="#2f0b6b2f-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-66"><a href="#2f0b6b2f-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the model with the correct input dimension</span></span>
+<span id="2f0b6b2f-67"><a href="#2f0b6b2f-67" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> X_train_scaled.shape[<span class="dv">1</span>]</span>
+<span id="2f0b6b2f-68"><a href="#2f0b6b2f-68" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RegressionModel(input_dim<span class="op">=</span>input_dim)</span>
+<span id="2f0b6b2f-69"><a href="#2f0b6b2f-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-70"><a href="#2f0b6b2f-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up EarlyStopping callback</span></span>
+<span id="2f0b6b2f-71"><a href="#2f0b6b2f-71" aria-hidden="true" tabindex="-1"></a>early_stop_callback <span class="op">=</span> EarlyStopping(</span>
+<span id="2f0b6b2f-72"><a href="#2f0b6b2f-72" aria-hidden="true" tabindex="-1"></a>    monitor<span class="op">=</span><span class="st">"val_loss"</span>, patience<span class="op">=</span><span class="dv">3</span>, mode<span class="op">=</span><span class="st">"min"</span>, verbose<span class="op">=</span><span class="va">False</span></span>
+<span id="2f0b6b2f-73"><a href="#2f0b6b2f-73" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="2f0b6b2f-74"><a href="#2f0b6b2f-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="2f0b6b2f-75"><a href="#2f0b6b2f-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model using PyTorch-Lightning's Trainer</span></span>
+<span id="2f0b6b2f-76"><a href="#2f0b6b2f-76" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> pl.Trainer(</span>
+<span id="2f0b6b2f-77"><a href="#2f0b6b2f-77" aria-hidden="true" tabindex="-1"></a>    max_epochs<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="2f0b6b2f-78"><a href="#2f0b6b2f-78" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[early_stop_callback],</span>
+<span id="2f0b6b2f-79"><a href="#2f0b6b2f-79" aria-hidden="true" tabindex="-1"></a>    logger<span class="op">=</span><span class="va">False</span>,</span>
+<span id="2f0b6b2f-80"><a href="#2f0b6b2f-80" aria-hidden="true" tabindex="-1"></a>    enable_progress_bar<span class="op">=</span><span class="va">False</span>,</span>
+<span id="2f0b6b2f-81"><a href="#2f0b6b2f-81" aria-hidden="true" tabindex="-1"></a>    enable_checkpointing<span class="op">=</span><span class="va">False</span>,</span>
+<span id="2f0b6b2f-82"><a href="#2f0b6b2f-82" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="2f0b6b2f-83"><a href="#2f0b6b2f-83" aria-hidden="true" tabindex="-1"></a>trainer.fit(model, train_loader, valid_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>With the model trained, let us evaluate performance and run a few predictions.</p>
 <div id="1ee31f36" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on the test set</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> trainer.test(model, test_loader)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE: </span><span class="sc">{</span>test_results<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="1ee31f36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1ee31f36-1"><a href="#1ee31f36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on the test set</span></span>
+<span id="1ee31f36-2"><a href="#1ee31f36-2" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> trainer.test(model, test_loader)</span>
+<span id="1ee31f36-3"><a href="#1ee31f36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE: </span><span class="sc">{</span>test_results<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -537,18 +553,18 @@ Test MSE: [{'test_loss': 0.3777255415916443}]</code></pre>
 <div id="4c0f6a21" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions for the first 5 test instances</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> torch.no_grad():</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    test_samples <span class="op">=</span> torch.tensor(X_test_scaled[:<span class="dv">5</span>], dtype<span class="op">=</span>torch.float32)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> model(test_samples).view(<span class="op">-</span><span class="dv">1</span>).numpy()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4c0f6a21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4c0f6a21-1"><a href="#4c0f6a21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions for the first 5 test instances</span></span>
+<span id="4c0f6a21-2"><a href="#4c0f6a21-2" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="4c0f6a21-3"><a href="#4c0f6a21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> torch.no_grad():</span>
+<span id="4c0f6a21-4"><a href="#4c0f6a21-4" aria-hidden="true" tabindex="-1"></a>    test_samples <span class="op">=</span> torch.tensor(X_test_scaled[:<span class="dv">5</span>], dtype<span class="op">=</span>torch.float32)</span>
+<span id="4c0f6a21-5"><a href="#4c0f6a21-5" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> model(test_samples).view(<span class="op">-</span><span class="dv">1</span>).numpy()</span>
+<span id="4c0f6a21-6"><a href="#4c0f6a21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4c0f6a21-7"><a href="#4c0f6a21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
+<span id="4c0f6a21-8"><a href="#4c0f6a21-8" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="4c0f6a21-9"><a href="#4c0f6a21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4c0f6a21-10"><a href="#4c0f6a21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="4c0f6a21-11"><a href="#4c0f6a21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="4c0f6a21-12"><a href="#4c0f6a21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predictions for first 5 instances: [0.5031792 1.6951654 3.744416  2.57257   2.807933 ]

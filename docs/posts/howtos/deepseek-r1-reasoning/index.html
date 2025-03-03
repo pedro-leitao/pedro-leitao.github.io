@@ -294,7 +294,7 @@ About Supervised Fine Tuning
 <div id="43aaa2e1" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="43aaa2e1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="43aaa2e1-1"><a href="#43aaa2e1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="op">-</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Warning: could not connect to a running Ollama instance
@@ -309,7 +309,7 @@ Warning: client version is 0.5.12</code></pre>
 <div id="e9da642b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama pull hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e9da642b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e9da642b-1"><a href="#e9da642b-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama pull hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>pulling manifest ⠋ pulling manifest ⠙ pulling manifest ⠹ pulling manifest ⠸ pulling manifest 
@@ -325,7 +325,7 @@ success </code></pre>
 <div id="6c71eb0e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="bu">list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6c71eb0e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6c71eb0e-1"><a href="#6c71eb0e-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama <span class="bu">list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>NAME                                                      ID              SIZE      MODIFIED     
@@ -341,7 +341,7 @@ hf.co/unsloth/DeepSeek-R1-Distill-Qwen-32B-GGUF:Q8_0      8e12be36faa4    34 GB 
 <div id="8f16883a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama run hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF <span class="st">"Who are you?"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="8f16883a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8f16883a-1"><a href="#8f16883a-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ollama run hf.co<span class="op">/</span>unsloth<span class="op">/</span>DeepSeek<span class="op">-</span>R1<span class="op">-</span>Distill<span class="op">-</span>Llama<span class="op">-</span><span class="dv">8</span><span class="er">B</span><span class="op">-</span>GGUF <span class="st">"Who are you?"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠋ ⠙ ⠸ ⠼ ⠼ ⠴ ⠦ ⠧ ⠏ ⠋ ⠋ ⠙ ⠸ ⠸ ⠼ ⠴ ⠧ ⠇ ⠇ ⠏ ⠙ ⠹ ⠹ ⠼ ⠴ ⠴ ⠧ ⠇ ⠇ ⠏ ⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠸ ⠼ ⠦ ⠦ ⠧ ⠏ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠼ ⠦ ⠦ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠇ ⠏ &lt;think&gt;
@@ -363,45 +363,49 @@ any inquiries or tasks you may have.
 <div id="97059243" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ollama <span class="im">import</span> generate</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>MODEL <span class="op">=</span> <span class="st">'hf.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF'</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> send_message(message:<span class="bu">str</span>, temperature:<span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Sends a prompt to the model and returns the generated response.</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> generate(model<span class="op">=</span>MODEL, prompt<span class="op">=</span>message, options<span class="op">=</span><span class="bu">dict</span>(temperature<span class="op">=</span>temperature)).response</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_response(response: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Extracts the chain of thought (CoT) between &lt;think&gt;...&lt;/think&gt;</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">    and the final answer from the response string.</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">    Then cleans up whitespace and wraps the CoT at 80 characters per line.</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        cot <span class="op">=</span> response.split(<span class="st">'&lt;think&gt;'</span>)[<span class="dv">1</span>].split(<span class="st">'&lt;/think&gt;'</span>)[<span class="dv">0</span>]</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">=</span> response.split(<span class="st">'&lt;/think&gt;'</span>)[<span class="dv">1</span>]</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">IndexError</span>:</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If the tags aren't present, just return the whole response as the answer</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span>, response.strip()</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove extra whitespace from the CoT</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    cot <span class="op">=</span> <span class="st">' '</span>.join(cot.split())</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wrap the CoT at 80 characters</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    cot <span class="op">=</span> textwrap.fill(cot, width<span class="op">=</span><span class="dv">80</span>)</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cot, answer.strip()</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        message<span class="op">=</span><span class="st">"Explain why the sky is blue to a five year old."</span>,</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.6</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="97059243"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="97059243-1"><a href="#97059243-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
+<span id="97059243-2"><a href="#97059243-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ollama <span class="im">import</span> generate</span>
+<span id="97059243-3"><a href="#97059243-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-4"><a href="#97059243-4" aria-hidden="true" tabindex="-1"></a>MODEL <span class="op">=</span> <span class="st">"hf.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF"</span></span>
+<span id="97059243-5"><a href="#97059243-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-6"><a href="#97059243-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-7"><a href="#97059243-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> send_message(message: <span class="bu">str</span>, temperature: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="97059243-8"><a href="#97059243-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="97059243-9"><a href="#97059243-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Sends a prompt to the model and returns the generated response.</span></span>
+<span id="97059243-10"><a href="#97059243-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="97059243-11"><a href="#97059243-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> generate(</span>
+<span id="97059243-12"><a href="#97059243-12" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span>MODEL, prompt<span class="op">=</span>message, options<span class="op">=</span><span class="bu">dict</span>(temperature<span class="op">=</span>temperature)</span>
+<span id="97059243-13"><a href="#97059243-13" aria-hidden="true" tabindex="-1"></a>    ).response</span>
+<span id="97059243-14"><a href="#97059243-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-15"><a href="#97059243-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-16"><a href="#97059243-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_response(response: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="97059243-17"><a href="#97059243-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="97059243-18"><a href="#97059243-18" aria-hidden="true" tabindex="-1"></a><span class="co">    Extracts the chain of thought (CoT) between &lt;think&gt;...&lt;/think&gt;</span></span>
+<span id="97059243-19"><a href="#97059243-19" aria-hidden="true" tabindex="-1"></a><span class="co">    and the final answer from the response string.</span></span>
+<span id="97059243-20"><a href="#97059243-20" aria-hidden="true" tabindex="-1"></a><span class="co">    Then cleans up whitespace and wraps the CoT at 80 characters per line.</span></span>
+<span id="97059243-21"><a href="#97059243-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="97059243-22"><a href="#97059243-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="97059243-23"><a href="#97059243-23" aria-hidden="true" tabindex="-1"></a>        cot <span class="op">=</span> response.split(<span class="st">"&lt;think&gt;"</span>)[<span class="dv">1</span>].split(<span class="st">"&lt;/think&gt;"</span>)[<span class="dv">0</span>]</span>
+<span id="97059243-24"><a href="#97059243-24" aria-hidden="true" tabindex="-1"></a>        answer <span class="op">=</span> response.split(<span class="st">"&lt;/think&gt;"</span>)[<span class="dv">1</span>]</span>
+<span id="97059243-25"><a href="#97059243-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">IndexError</span>:</span>
+<span id="97059243-26"><a href="#97059243-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If the tags aren't present, just return the whole response as the answer</span></span>
+<span id="97059243-27"><a href="#97059243-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">""</span>, response.strip()</span>
+<span id="97059243-28"><a href="#97059243-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-29"><a href="#97059243-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove extra whitespace from the CoT</span></span>
+<span id="97059243-30"><a href="#97059243-30" aria-hidden="true" tabindex="-1"></a>    cot <span class="op">=</span> <span class="st">" "</span>.join(cot.split())</span>
+<span id="97059243-31"><a href="#97059243-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wrap the CoT at 80 characters</span></span>
+<span id="97059243-32"><a href="#97059243-32" aria-hidden="true" tabindex="-1"></a>    cot <span class="op">=</span> textwrap.fill(cot, width<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="97059243-33"><a href="#97059243-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-34"><a href="#97059243-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cot, answer.strip()</span>
+<span id="97059243-35"><a href="#97059243-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-36"><a href="#97059243-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-37"><a href="#97059243-37" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
+<span id="97059243-38"><a href="#97059243-38" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
+<span id="97059243-39"><a href="#97059243-39" aria-hidden="true" tabindex="-1"></a>        message<span class="op">=</span><span class="st">"Explain why the sky is blue to a five year old."</span>, temperature<span class="op">=</span><span class="fl">0.6</span></span>
+<span id="97059243-40"><a href="#97059243-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="97059243-41"><a href="#97059243-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="97059243-42"><a href="#97059243-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="97059243-43"><a href="#97059243-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Chain of thought:
@@ -441,16 +445,16 @@ for a young child.</code></pre>
 <div id="ac66e24f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">                    Can an athlete swim from London to Southampton? Not-widthstanding environmental factors or risks, plan how one could do it.</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.6</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ac66e24f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ac66e24f-1"><a href="#ac66e24f-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
+<span id="ac66e24f-2"><a href="#ac66e24f-2" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
+<span id="ac66e24f-3"><a href="#ac66e24f-3" aria-hidden="true" tabindex="-1"></a>        message<span class="op">=</span><span class="st">"""</span></span>
+<span id="ac66e24f-4"><a href="#ac66e24f-4" aria-hidden="true" tabindex="-1"></a><span class="st">                    Can an athlete swim from London to Southampton? Not-widthstanding environmental factors or risks, plan how one could do it.</span></span>
+<span id="ac66e24f-5"><a href="#ac66e24f-5" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>,</span>
+<span id="ac66e24f-6"><a href="#ac66e24f-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="ac66e24f-7"><a href="#ac66e24f-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="ac66e24f-8"><a href="#ac66e24f-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="ac66e24f-9"><a href="#ac66e24f-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ac66e24f-10"><a href="#ac66e24f-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Chain of thought:
@@ -518,16 +522,16 @@ such an endeavor.</code></pre>
 <div id="3d26e30b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        message <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">                    Bob has 3 boxes of sardine cans. Each can holds 5 sardines. Bob’s cat eats 2 sardines from one of the cans. In the end, there are 28 sardines left. How many sardines did Bob start with?</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.5</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="3d26e30b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3d26e30b-1"><a href="#3d26e30b-1" aria-hidden="true" tabindex="-1"></a>cot, answer <span class="op">=</span> format_response(</span>
+<span id="3d26e30b-2"><a href="#3d26e30b-2" aria-hidden="true" tabindex="-1"></a>    send_message(</span>
+<span id="3d26e30b-3"><a href="#3d26e30b-3" aria-hidden="true" tabindex="-1"></a>        message<span class="op">=</span><span class="st">"""</span></span>
+<span id="3d26e30b-4"><a href="#3d26e30b-4" aria-hidden="true" tabindex="-1"></a><span class="st">                    Bob has 3 boxes of sardine cans. Each can holds 5 sardines. Bob’s cat eats 2 sardines from one of the cans. In the end, there are 28 sardines left. How many sardines did Bob start with?</span></span>
+<span id="3d26e30b-5"><a href="#3d26e30b-5" aria-hidden="true" tabindex="-1"></a><span class="st">                """</span>,</span>
+<span id="3d26e30b-6"><a href="#3d26e30b-6" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="3d26e30b-7"><a href="#3d26e30b-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="3d26e30b-8"><a href="#3d26e30b-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="3d26e30b-9"><a href="#3d26e30b-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3d26e30b-10"><a href="#3d26e30b-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Chain of thought:</span><span class="ch">\n\n</span><span class="sc">{</span>cot<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Chain of thought:
@@ -560,7 +564,7 @@ with 6 cans.</code></pre>
 <div id="bfb8806e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Answer:</span><span class="ch">\n\n</span><span class="sc">{</span>answer<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="bfb8806e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="bfb8806e-1"><a href="#bfb8806e-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Answer:</span><span class="ch">\n\n</span><span class="sc">{</span>answer<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Answer:

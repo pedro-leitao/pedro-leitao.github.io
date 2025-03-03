@@ -271,9 +271,9 @@ window.Quarto = {
 <div id="fbf55edd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Download https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia?select=full-weather.csv using the Kaggle API</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>p .data<span class="op">/</span> shahmirvarqha<span class="op">/</span>weather<span class="op">-</span>data<span class="op">-</span>malaysia <span class="op">--</span>unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="fbf55edd"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fbf55edd-1"><a href="#fbf55edd-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Download https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia?select=full-weather.csv using the Kaggle API</span></span>
+<span id="fbf55edd-2"><a href="#fbf55edd-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fbf55edd-3"><a href="#fbf55edd-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>p .data<span class="op">/</span> shahmirvarqha<span class="op">/</span>weather<span class="op">-</span>data<span class="op">-</span>malaysia <span class="op">--</span>unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dataset URL: https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia
@@ -286,9 +286,9 @@ Downloading weather-data-malaysia.zip to .data
 <div id="799c1cce" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download https://www.kaggle.com/datasets/jylim21/malaysia-public-data</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>p .data<span class="op">/</span> jylim21<span class="op">/</span>malaysia<span class="op">-</span>public<span class="op">-</span>data <span class="op">--</span>unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="799c1cce"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="799c1cce-1"><a href="#799c1cce-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download https://www.kaggle.com/datasets/jylim21/malaysia-public-data</span></span>
+<span id="799c1cce-2"><a href="#799c1cce-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="799c1cce-3"><a href="#799c1cce-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>p .data<span class="op">/</span> jylim21<span class="op">/</span>malaysia<span class="op">-</span>public<span class="op">-</span>data <span class="op">--</span>unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dataset URL: https://www.kaggle.com/datasets/jylim21/malaysia-public-data
@@ -301,23 +301,23 @@ Downloading malaysia-public-data.zip to .data
 <div id="bb98feb3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Disable all warnings</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="bb98feb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="bb98feb3-1"><a href="#bb98feb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable all warnings</span></span>
+<span id="bb98feb3-2"><a href="#bb98feb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="bb98feb3-3"><a href="#bb98feb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="bb98feb3-4"><a href="#bb98feb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="bb98feb3-5"><a href="#bb98feb3-5" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let’s load these as dataframes and inspect the first few rows of each dataset.</p>
 <div id="322f4857" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load full_weather.csv and births.csv</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">'.data/full_weather.csv'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>births <span class="op">=</span> pd.read_csv(<span class="st">'.data/births.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="322f4857"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="322f4857-1"><a href="#322f4857-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load full_weather.csv and births.csv</span></span>
+<span id="322f4857-2"><a href="#322f4857-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="322f4857-3"><a href="#322f4857-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="322f4857-4"><a href="#322f4857-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="322f4857-5"><a href="#322f4857-5" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">".data/full_weather.csv"</span>)</span>
+<span id="322f4857-6"><a href="#322f4857-6" aria-hidden="true" tabindex="-1"></a>births <span class="op">=</span> pd.read_csv(<span class="st">".data/births.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -327,9 +327,9 @@ Downloading malaysia-public-data.zip to .data
 <div id="9ff862d0" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first 5 rows of each dataframe</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>weather.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9ff862d0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9ff862d0-1"><a href="#9ff862d0-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first 5 rows of each dataframe</span></span>
+<span id="9ff862d0-2"><a href="#9ff862d0-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9ff862d0-3"><a href="#9ff862d0-3" aria-hidden="true" tabindex="-1"></a>weather.head().style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <style type="text/css">
@@ -516,7 +516,7 @@ Downloading malaysia-public-data.zip to .data
 <div id="ca4f701d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>births.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ca4f701d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ca4f701d-1"><a href="#ca4f701d-1" aria-hidden="true" tabindex="-1"></a>births.head().style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <style type="text/css">
@@ -590,36 +590,36 @@ Downloading malaysia-public-data.zip to .data
 <div id="6dab683b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the 'date' column in both dataframes to datetime</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'datetime'</span>] <span class="op">=</span> pd.to_datetime(weather[<span class="st">'datetime'</span>])</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>births[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(births[<span class="st">'date'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6dab683b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6dab683b-1"><a href="#6dab683b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the 'date' column in both dataframes to datetime</span></span>
+<span id="6dab683b-2"><a href="#6dab683b-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6dab683b-3"><a href="#6dab683b-3" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">"datetime"</span>] <span class="op">=</span> pd.to_datetime(weather[<span class="st">"datetime"</span>])</span>
+<span id="6dab683b-4"><a href="#6dab683b-4" aria-hidden="true" tabindex="-1"></a>births[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(births[<span class="st">"date"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The weather dataset contains multiple measurements in a single day, which we will need to aggregate to daily values. Also, different measurements are available for different locations - we will average these to get a single value for the whole country, as births are recorded at the national level.</p>
 <div id="8f20f6d8" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average all features in the weather dataframe by day</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">'date'</span>] <span class="op">=</span> weather[<span class="st">'datetime'</span>].dt.date</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>births[<span class="st">'date'</span>] <span class="op">=</span> births[<span class="st">'date'</span>].dt.date</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the columns 'place', 'city', 'state', and 'datetime'</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>weather.drop(columns<span class="op">=</span>[<span class="st">'place'</span>, <span class="st">'city'</span>, <span class="st">'state'</span>, <span class="st">'datetime'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by date and calculate the mean</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>daily_average <span class="op">=</span> weather.groupby(<span class="st">'date'</span>).mean().reset_index()</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the original DataFrame with the new one</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> daily_average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="8f20f6d8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8f20f6d8-1"><a href="#8f20f6d8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average all features in the weather dataframe by day</span></span>
+<span id="8f20f6d8-2"><a href="#8f20f6d8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8f20f6d8-3"><a href="#8f20f6d8-3" aria-hidden="true" tabindex="-1"></a>weather[<span class="st">"date"</span>] <span class="op">=</span> weather[<span class="st">"datetime"</span>].dt.date</span>
+<span id="8f20f6d8-4"><a href="#8f20f6d8-4" aria-hidden="true" tabindex="-1"></a>births[<span class="st">"date"</span>] <span class="op">=</span> births[<span class="st">"date"</span>].dt.date</span>
+<span id="8f20f6d8-5"><a href="#8f20f6d8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8f20f6d8-6"><a href="#8f20f6d8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the columns 'place', 'city', 'state', and 'datetime'</span></span>
+<span id="8f20f6d8-7"><a href="#8f20f6d8-7" aria-hidden="true" tabindex="-1"></a>weather.drop(columns<span class="op">=</span>[<span class="st">"place"</span>, <span class="st">"city"</span>, <span class="st">"state"</span>, <span class="st">"datetime"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="8f20f6d8-8"><a href="#8f20f6d8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8f20f6d8-9"><a href="#8f20f6d8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by date and calculate the mean</span></span>
+<span id="8f20f6d8-10"><a href="#8f20f6d8-10" aria-hidden="true" tabindex="-1"></a>daily_average <span class="op">=</span> weather.groupby(<span class="st">"date"</span>).mean().reset_index()</span>
+<span id="8f20f6d8-11"><a href="#8f20f6d8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8f20f6d8-12"><a href="#8f20f6d8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the original DataFrame with the new one</span></span>
+<span id="8f20f6d8-13"><a href="#8f20f6d8-13" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> daily_average</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let’s check what each column of the weather dataset now looks like, and statistics for each column.</p>
 <div id="4e245209" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4e245209"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4e245209-1"><a href="#4e245209-1" aria-hidden="true" tabindex="-1"></a>weather.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <style type="text/css">
@@ -965,16 +965,16 @@ Downloading malaysia-public-data.zip to .data
 <div id="25fe2027" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the two dataframes on the 'date' column, where the date is a datetime64 type</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.merge(births, weather, on<span class="op">=</span><span class="st">'date'</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>data.drop(columns<span class="op">=</span>[<span class="st">'state'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="25fe2027"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="25fe2027-1"><a href="#25fe2027-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the two dataframes on the 'date' column, where the date is a datetime64 type</span></span>
+<span id="25fe2027-2"><a href="#25fe2027-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="25fe2027-3"><a href="#25fe2027-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.merge(births, weather, on<span class="op">=</span><span class="st">"date"</span>)</span>
+<span id="25fe2027-4"><a href="#25fe2027-4" aria-hidden="true" tabindex="-1"></a>data.drop(columns<span class="op">=</span>[<span class="st">"state"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="5abd2227" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="5abd2227"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5abd2227-1"><a href="#5abd2227-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <style type="text/css">
@@ -1210,16 +1210,16 @@ Downloading malaysia-public-data.zip to .data
 <div id="e70e0e0a" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in missing values for each numerical column with the mean of that column</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mean_values <span class="op">=</span> data.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>).mean()</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>data.fillna(mean_values, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e70e0e0a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e70e0e0a-1"><a href="#e70e0e0a-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in missing values for each numerical column with the mean of that column</span></span>
+<span id="e70e0e0a-2"><a href="#e70e0e0a-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e70e0e0a-3"><a href="#e70e0e0a-3" aria-hidden="true" tabindex="-1"></a>mean_values <span class="op">=</span> data.select_dtypes(include<span class="op">=</span><span class="st">"number"</span>).mean()</span>
+<span id="e70e0e0a-4"><a href="#e70e0e0a-4" aria-hidden="true" tabindex="-1"></a>data.fillna(mean_values, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="2c3a1255" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="2c3a1255"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2c3a1255-1"><a href="#2c3a1255-1" aria-hidden="true" tabindex="-1"></a>data.head().style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <style type="text/css">
@@ -1450,7 +1450,7 @@ Downloading malaysia-public-data.zip to .data
 <div id="c20b3a15" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c20b3a15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c20b3a15-1"><a href="#c20b3a15-1" aria-hidden="true" tabindex="-1"></a>data.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <style type="text/css">
@@ -1823,27 +1823,27 @@ Downloading malaysia-public-data.zip to .data
 <div id="8b421a8d" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">9</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].plot(data[<span class="st">'date'</span>], data[<span class="st">'births'</span>])</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">'Daily Births'</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_ylabel(<span class="st">'Births'</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].plot(data[<span class="st">'date'</span>], data[<span class="st">'temperature'</span>])</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">'Temperature'</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_ylabel(<span class="st">'Temperature'</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].plot(data[<span class="st">'date'</span>], data[<span class="st">'pollutant_value'</span>])</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_title(<span class="st">'Pollution'</span>)</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_ylabel(<span class="st">'Pollution'</span>)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="8b421a8d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8b421a8d-1"><a href="#8b421a8d-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="8b421a8d-2"><a href="#8b421a8d-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8b421a8d-3"><a href="#8b421a8d-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">9</span>))</span>
+<span id="8b421a8d-4"><a href="#8b421a8d-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8b421a8d-5"><a href="#8b421a8d-5" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].plot(data[<span class="st">"date"</span>], data[<span class="st">"births"</span>])</span>
+<span id="8b421a8d-6"><a href="#8b421a8d-6" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"Daily Births"</span>)</span>
+<span id="8b421a8d-7"><a href="#8b421a8d-7" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xlabel(<span class="st">"Date"</span>)</span>
+<span id="8b421a8d-8"><a href="#8b421a8d-8" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_ylabel(<span class="st">"Births"</span>)</span>
+<span id="8b421a8d-9"><a href="#8b421a8d-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8b421a8d-10"><a href="#8b421a8d-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].plot(data[<span class="st">"date"</span>], data[<span class="st">"temperature"</span>])</span>
+<span id="8b421a8d-11"><a href="#8b421a8d-11" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"Temperature"</span>)</span>
+<span id="8b421a8d-12"><a href="#8b421a8d-12" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_xlabel(<span class="st">"Date"</span>)</span>
+<span id="8b421a8d-13"><a href="#8b421a8d-13" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_ylabel(<span class="st">"Temperature"</span>)</span>
+<span id="8b421a8d-14"><a href="#8b421a8d-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8b421a8d-15"><a href="#8b421a8d-15" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].plot(data[<span class="st">"date"</span>], data[<span class="st">"pollutant_value"</span>])</span>
+<span id="8b421a8d-16"><a href="#8b421a8d-16" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_title(<span class="st">"Pollution"</span>)</span>
+<span id="8b421a8d-17"><a href="#8b421a8d-17" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_xlabel(<span class="st">"Date"</span>)</span>
+<span id="8b421a8d-18"><a href="#8b421a8d-18" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">2</span>].set_ylabel(<span class="st">"Pollution"</span>)</span>
+<span id="8b421a8d-19"><a href="#8b421a8d-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8b421a8d-20"><a href="#8b421a8d-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="8b421a8d-21"><a href="#8b421a8d-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1874,29 +1874,33 @@ About the Change Point Prior Scale
 <div id="885528c5" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet <span class="im">import</span> Prophet</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>future_period <span class="op">=</span> <span class="dv">365</span><span class="op">*</span><span class="dv">5</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>prior_scale <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data for Prophet</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>df_temperature <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'temperature'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'temperature'</span>: <span class="st">'y'</span>})</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>df_pollutant <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'pollutant_value'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'pollutant_value'</span>: <span class="st">'y'</span>})</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Prophet model</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>model_temperature <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>model_pollutant <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>model_temperature.fit(df_temperature)</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe to hold future predictions</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>future_temperature <span class="op">=</span> model_temperature.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>forecast_temperature <span class="op">=</span> model_temperature.predict(future_temperature)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>model_pollutant.fit(df_pollutant)</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>future_pollutant <span class="op">=</span> model_pollutant.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>forecast_pollutant <span class="op">=</span> model_pollutant.predict(future_pollutant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="885528c5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="885528c5-1"><a href="#885528c5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet <span class="im">import</span> Prophet</span>
+<span id="885528c5-2"><a href="#885528c5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="885528c5-3"><a href="#885528c5-3" aria-hidden="true" tabindex="-1"></a>future_period <span class="op">=</span> <span class="dv">365</span> <span class="op">*</span> <span class="dv">5</span></span>
+<span id="885528c5-4"><a href="#885528c5-4" aria-hidden="true" tabindex="-1"></a>prior_scale <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="885528c5-5"><a href="#885528c5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="885528c5-6"><a href="#885528c5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data for Prophet</span></span>
+<span id="885528c5-7"><a href="#885528c5-7" aria-hidden="true" tabindex="-1"></a>df_temperature <span class="op">=</span> data[[<span class="st">"date"</span>, <span class="st">"temperature"</span>]].rename(</span>
+<span id="885528c5-8"><a href="#885528c5-8" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"ds"</span>, <span class="st">"temperature"</span>: <span class="st">"y"</span>}</span>
+<span id="885528c5-9"><a href="#885528c5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="885528c5-10"><a href="#885528c5-10" aria-hidden="true" tabindex="-1"></a>df_pollutant <span class="op">=</span> data[[<span class="st">"date"</span>, <span class="st">"pollutant_value"</span>]].rename(</span>
+<span id="885528c5-11"><a href="#885528c5-11" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"ds"</span>, <span class="st">"pollutant_value"</span>: <span class="st">"y"</span>}</span>
+<span id="885528c5-12"><a href="#885528c5-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="885528c5-13"><a href="#885528c5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="885528c5-14"><a href="#885528c5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Prophet model</span></span>
+<span id="885528c5-15"><a href="#885528c5-15" aria-hidden="true" tabindex="-1"></a>model_temperature <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
+<span id="885528c5-16"><a href="#885528c5-16" aria-hidden="true" tabindex="-1"></a>model_pollutant <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
+<span id="885528c5-17"><a href="#885528c5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="885528c5-18"><a href="#885528c5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="885528c5-19"><a href="#885528c5-19" aria-hidden="true" tabindex="-1"></a>model_temperature.fit(df_temperature)</span>
+<span id="885528c5-20"><a href="#885528c5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="885528c5-21"><a href="#885528c5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe to hold future predictions</span></span>
+<span id="885528c5-22"><a href="#885528c5-22" aria-hidden="true" tabindex="-1"></a>future_temperature <span class="op">=</span> model_temperature.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
+<span id="885528c5-23"><a href="#885528c5-23" aria-hidden="true" tabindex="-1"></a>forecast_temperature <span class="op">=</span> model_temperature.predict(future_temperature)</span>
+<span id="885528c5-24"><a href="#885528c5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="885528c5-25"><a href="#885528c5-25" aria-hidden="true" tabindex="-1"></a>model_pollutant.fit(df_pollutant)</span>
+<span id="885528c5-26"><a href="#885528c5-26" aria-hidden="true" tabindex="-1"></a>future_pollutant <span class="op">=</span> model_pollutant.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
+<span id="885528c5-27"><a href="#885528c5-27" aria-hidden="true" tabindex="-1"></a>forecast_pollutant <span class="op">=</span> model_pollutant.predict(future_pollutant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Prophet includes inbuilt methods to easily visuallise the forecasted values, as well as uncertainty intervals. We will also include change points in the forecast plot, which are the points where the trend changes direction.</p>
@@ -1916,24 +1920,24 @@ About Change Points
 <div id="e2cedad9" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> add_changepoints_to_plot</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with a 2-row, 1-column grid</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">9</span>))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the temperature forecast on the first subplot</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> model_temperature.plot(forecast_temperature, ax<span class="op">=</span>axs[<span class="dv">0</span>], include_legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">'Temperature Forecast with Changepoints'</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>add_changepoints_to_plot(axs[<span class="dv">0</span>], model_temperature, forecast_temperature)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the pollutant forecast on the second subplot</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> model_pollutant.plot(forecast_pollutant, ax<span class="op">=</span>axs[<span class="dv">1</span>], include_legend<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">'Pollutant Forecast with Changepoints'</span>)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>add_changepoints_to_plot(axs[<span class="dv">1</span>], model_pollutant, forecast_pollutant)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e2cedad9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e2cedad9-1"><a href="#e2cedad9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> add_changepoints_to_plot</span>
+<span id="e2cedad9-2"><a href="#e2cedad9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="e2cedad9-3"><a href="#e2cedad9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e2cedad9-4"><a href="#e2cedad9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with a 2-row, 1-column grid</span></span>
+<span id="e2cedad9-5"><a href="#e2cedad9-5" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">9</span>))</span>
+<span id="e2cedad9-6"><a href="#e2cedad9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e2cedad9-7"><a href="#e2cedad9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the temperature forecast on the first subplot</span></span>
+<span id="e2cedad9-8"><a href="#e2cedad9-8" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> model_temperature.plot(forecast_temperature, ax<span class="op">=</span>axs[<span class="dv">0</span>], include_legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="e2cedad9-9"><a href="#e2cedad9-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_title(<span class="st">"Temperature Forecast with Changepoints"</span>)</span>
+<span id="e2cedad9-10"><a href="#e2cedad9-10" aria-hidden="true" tabindex="-1"></a>add_changepoints_to_plot(axs[<span class="dv">0</span>], model_temperature, forecast_temperature)</span>
+<span id="e2cedad9-11"><a href="#e2cedad9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e2cedad9-12"><a href="#e2cedad9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the pollutant forecast on the second subplot</span></span>
+<span id="e2cedad9-13"><a href="#e2cedad9-13" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> model_pollutant.plot(forecast_pollutant, ax<span class="op">=</span>axs[<span class="dv">1</span>], include_legend<span class="op">=</span><span class="va">True</span>)</span>
+<span id="e2cedad9-14"><a href="#e2cedad9-14" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_title(<span class="st">"Pollutant Forecast with Changepoints"</span>)</span>
+<span id="e2cedad9-15"><a href="#e2cedad9-15" aria-hidden="true" tabindex="-1"></a>add_changepoints_to_plot(axs[<span class="dv">1</span>], model_pollutant, forecast_pollutant)</span>
+<span id="e2cedad9-16"><a href="#e2cedad9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e2cedad9-17"><a href="#e2cedad9-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="e2cedad9-18"><a href="#e2cedad9-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1947,12 +1951,12 @@ About Change Points
 <div id="16d454fa" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of each forecast</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>fig3 <span class="op">=</span> model_temperature.plot_components(forecast_temperature, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig3.suptitle(<span class="st">'Temperature Forecast Components'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>fig4 <span class="op">=</span> model_pollutant.plot_components(forecast_pollutant, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig4.suptitle(<span class="st">'Pollutant Forecast Components'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="16d454fa"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="16d454fa-1"><a href="#16d454fa-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of each forecast</span></span>
+<span id="16d454fa-2"><a href="#16d454fa-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="16d454fa-3"><a href="#16d454fa-3" aria-hidden="true" tabindex="-1"></a>fig3 <span class="op">=</span> model_temperature.plot_components(forecast_temperature, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="16d454fa-4"><a href="#16d454fa-4" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig3.suptitle(<span class="st">"Temperature Forecast Components"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="16d454fa-5"><a href="#16d454fa-5" aria-hidden="true" tabindex="-1"></a>fig4 <span class="op">=</span> model_pollutant.plot_components(forecast_pollutant, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="16d454fa-6"><a href="#16d454fa-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig4.suptitle(<span class="st">"Pollutant Forecast Components"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1989,11 +1993,11 @@ About Regressors
 <div id="9f071a8e" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_births <span class="op">=</span> data[[<span class="st">'date'</span>, <span class="st">'births'</span>]].rename(columns<span class="op">=</span>{<span class="st">'date'</span>: <span class="st">'ds'</span>, <span class="st">'births'</span>: <span class="st">'y'</span>})</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add temperature and pollutant values to the dataframe</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>df_births[<span class="st">'temperature'</span>] <span class="op">=</span> data[<span class="st">'temperature'</span>]</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>df_births[<span class="st">'pollutant_value'</span>] <span class="op">=</span> data[<span class="st">'pollutant_value'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9f071a8e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9f071a8e-1"><a href="#9f071a8e-1" aria-hidden="true" tabindex="-1"></a>df_births <span class="op">=</span> data[[<span class="st">"date"</span>, <span class="st">"births"</span>]].rename(columns<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"ds"</span>, <span class="st">"births"</span>: <span class="st">"y"</span>})</span>
+<span id="9f071a8e-2"><a href="#9f071a8e-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9f071a8e-3"><a href="#9f071a8e-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add temperature and pollutant values to the dataframe</span></span>
+<span id="9f071a8e-4"><a href="#9f071a8e-4" aria-hidden="true" tabindex="-1"></a>df_births[<span class="st">"temperature"</span>] <span class="op">=</span> data[<span class="st">"temperature"</span>]</span>
+<span id="9f071a8e-5"><a href="#9f071a8e-5" aria-hidden="true" tabindex="-1"></a>df_births[<span class="st">"pollutant_value"</span>] <span class="op">=</span> data[<span class="st">"pollutant_value"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Prophet also allows us to include factors such as holidays in the model. We can include public holidays in Malaysia, which will help the model to account for the impact of holidays on the number of births. We could also include other seasonalities or events that might affect the number of births, such as cultural or religious events. We are also including the temperature and pollutant levels as regressors in the model, as these might impact birth rates.</p>
@@ -2013,43 +2017,47 @@ Other Regressors and Seasonalities
 <div id="c91435ed" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model_births <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Malaysian holidays to the model</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>model_births.add_country_holidays(country_name<span class="op">=</span><span class="st">'MY'</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a monthly seasonality to the model</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>model_births.add_seasonality(name<span class="op">=</span><span class="st">'monthly'</span>, period<span class="op">=</span><span class="fl">30.5</span>, fourier_order<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the temperature and pollutant value to the model as regressors</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>model_births.add_regressor(<span class="st">'temperature'</span>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>model_births.add_regressor(<span class="st">'pollutant_value'</span>)</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>model_births.fit(df_births)</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe to hold future predictions</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>future_births <span class="op">=</span> model_births.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add forecasted temperature and pollutant values to future_births</span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>future_births[<span class="st">'temperature'</span>] <span class="op">=</span> forecast_temperature[<span class="st">'yhat'</span>][<span class="op">-</span><span class="bu">len</span>(future_births):].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>future_births[<span class="st">'pollutant_value'</span>] <span class="op">=</span> forecast_pollutant[<span class="st">'yhat'</span>][<span class="op">-</span><span class="bu">len</span>(future_births):].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the future</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>forecast_births <span class="op">=</span> model_births.predict(future_births)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c91435ed"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c91435ed-1"><a href="#c91435ed-1" aria-hidden="true" tabindex="-1"></a>model_births <span class="op">=</span> Prophet(changepoint_prior_scale<span class="op">=</span>prior_scale)</span>
+<span id="c91435ed-2"><a href="#c91435ed-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-3"><a href="#c91435ed-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add Malaysian holidays to the model</span></span>
+<span id="c91435ed-4"><a href="#c91435ed-4" aria-hidden="true" tabindex="-1"></a>model_births.add_country_holidays(country_name<span class="op">=</span><span class="st">"MY"</span>)</span>
+<span id="c91435ed-5"><a href="#c91435ed-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-6"><a href="#c91435ed-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a monthly seasonality to the model</span></span>
+<span id="c91435ed-7"><a href="#c91435ed-7" aria-hidden="true" tabindex="-1"></a>model_births.add_seasonality(name<span class="op">=</span><span class="st">"monthly"</span>, period<span class="op">=</span><span class="fl">30.5</span>, fourier_order<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="c91435ed-8"><a href="#c91435ed-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-9"><a href="#c91435ed-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the temperature and pollutant value to the model as regressors</span></span>
+<span id="c91435ed-10"><a href="#c91435ed-10" aria-hidden="true" tabindex="-1"></a>model_births.add_regressor(<span class="st">"temperature"</span>)</span>
+<span id="c91435ed-11"><a href="#c91435ed-11" aria-hidden="true" tabindex="-1"></a>model_births.add_regressor(<span class="st">"pollutant_value"</span>)</span>
+<span id="c91435ed-12"><a href="#c91435ed-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-13"><a href="#c91435ed-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="c91435ed-14"><a href="#c91435ed-14" aria-hidden="true" tabindex="-1"></a>model_births.fit(df_births)</span>
+<span id="c91435ed-15"><a href="#c91435ed-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-16"><a href="#c91435ed-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a dataframe to hold future predictions</span></span>
+<span id="c91435ed-17"><a href="#c91435ed-17" aria-hidden="true" tabindex="-1"></a>future_births <span class="op">=</span> model_births.make_future_dataframe(periods<span class="op">=</span>future_period)</span>
+<span id="c91435ed-18"><a href="#c91435ed-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-19"><a href="#c91435ed-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add forecasted temperature and pollutant values to future_births</span></span>
+<span id="c91435ed-20"><a href="#c91435ed-20" aria-hidden="true" tabindex="-1"></a>future_births[<span class="st">"temperature"</span>] <span class="op">=</span> forecast_temperature[<span class="st">"yhat"</span>][</span>
+<span id="c91435ed-21"><a href="#c91435ed-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span><span class="bu">len</span>(future_births) :</span>
+<span id="c91435ed-22"><a href="#c91435ed-22" aria-hidden="true" tabindex="-1"></a>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="c91435ed-23"><a href="#c91435ed-23" aria-hidden="true" tabindex="-1"></a>future_births[<span class="st">"pollutant_value"</span>] <span class="op">=</span> forecast_pollutant[<span class="st">"yhat"</span>][</span>
+<span id="c91435ed-24"><a href="#c91435ed-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span><span class="bu">len</span>(future_births) :</span>
+<span id="c91435ed-25"><a href="#c91435ed-25" aria-hidden="true" tabindex="-1"></a>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="c91435ed-26"><a href="#c91435ed-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c91435ed-27"><a href="#c91435ed-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the future</span></span>
+<span id="c91435ed-28"><a href="#c91435ed-28" aria-hidden="true" tabindex="-1"></a>forecast_births <span class="op">=</span> model_births.predict(future_births)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now that we have completed a forecast, we can plot the predicted values, as well as uncertainty intervals, just as we did before for temperature and pollutant levels.</p>
 <div id="40473496" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the forecast</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>fig5 <span class="op">=</span> model_births.plot(forecast_births, include_legend<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>fig5.gca().set_title(<span class="st">'Births Forecast with Changepoints'</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add changepoints to the plot</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> add_changepoints_to_plot(fig5.gca(), model_births, forecast_births)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="40473496"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="40473496-1"><a href="#40473496-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the forecast</span></span>
+<span id="40473496-2"><a href="#40473496-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40473496-3"><a href="#40473496-3" aria-hidden="true" tabindex="-1"></a>fig5 <span class="op">=</span> model_births.plot(forecast_births, include_legend<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="40473496-4"><a href="#40473496-4" aria-hidden="true" tabindex="-1"></a>fig5.gca().set_title(<span class="st">"Births Forecast with Changepoints"</span>)</span>
+<span id="40473496-5"><a href="#40473496-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40473496-6"><a href="#40473496-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add changepoints to the plot</span></span>
+<span id="40473496-7"><a href="#40473496-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> add_changepoints_to_plot(fig5.gca(), model_births, forecast_births)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -2063,10 +2071,10 @@ Other Regressors and Seasonalities
 <div id="f43a836c" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of the forecast</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fig6 <span class="op">=</span> model_births.plot_components(forecast_births, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">12</span>))</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig6.suptitle(<span class="st">'Births Forecast Components'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f43a836c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f43a836c-1"><a href="#f43a836c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualise the components of the forecast</span></span>
+<span id="f43a836c-2"><a href="#f43a836c-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f43a836c-3"><a href="#f43a836c-3" aria-hidden="true" tabindex="-1"></a>fig6 <span class="op">=</span> model_births.plot_components(forecast_births, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">12</span>))</span>
+<span id="f43a836c-4"><a href="#f43a836c-4" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> fig6.suptitle(<span class="st">"Births Forecast Components"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -2096,12 +2104,14 @@ About Cross Validation
 <div id="f4d28ab1" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validate the model</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> cross_validation</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>df_births_cv <span class="op">=</span> cross_validation(model_births, initial<span class="op">=</span><span class="st">'730 days'</span>, period<span class="op">=</span><span class="st">'180 days'</span>, horizon <span class="op">=</span> <span class="st">'365 days'</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>df_births_cv.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f4d28ab1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f4d28ab1-1"><a href="#f4d28ab1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validate the model</span></span>
+<span id="f4d28ab1-2"><a href="#f4d28ab1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f4d28ab1-3"><a href="#f4d28ab1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> cross_validation</span>
+<span id="f4d28ab1-4"><a href="#f4d28ab1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f4d28ab1-5"><a href="#f4d28ab1-5" aria-hidden="true" tabindex="-1"></a>df_births_cv <span class="op">=</span> cross_validation(</span>
+<span id="f4d28ab1-6"><a href="#f4d28ab1-6" aria-hidden="true" tabindex="-1"></a>    model_births, initial<span class="op">=</span><span class="st">"730 days"</span>, period<span class="op">=</span><span class="st">"180 days"</span>, horizon<span class="op">=</span><span class="st">"365 days"</span></span>
+<span id="f4d28ab1-7"><a href="#f4d28ab1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="f4d28ab1-8"><a href="#f4d28ab1-8" aria-hidden="true" tabindex="-1"></a>df_births_cv.head().style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
@@ -2233,10 +2243,10 @@ About Cross Validation
 <div id="9729a60d" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> performance_metrics</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df_births_cv_p <span class="op">=</span> performance_metrics(df_births_cv)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_births_cv_p.head().style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9729a60d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9729a60d-1"><a href="#9729a60d-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.diagnostics <span class="im">import</span> performance_metrics</span>
+<span id="9729a60d-2"><a href="#9729a60d-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9729a60d-3"><a href="#9729a60d-3" aria-hidden="true" tabindex="-1"></a>df_births_cv_p <span class="op">=</span> performance_metrics(df_births_cv)</span>
+<span id="9729a60d-4"><a href="#9729a60d-4" aria-hidden="true" tabindex="-1"></a>df_births_cv_p.head().style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <style type="text/css">
@@ -2404,11 +2414,11 @@ About Cross Validation
 <div id="9462d2ae" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the MAPE performance metric</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> plot_cross_validation_metric</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>fig7 <span class="op">=</span> plot_cross_validation_metric(df_births_cv, metric<span class="op">=</span><span class="st">'mape'</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9462d2ae"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9462d2ae-1"><a href="#9462d2ae-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the MAPE performance metric</span></span>
+<span id="9462d2ae-2"><a href="#9462d2ae-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9462d2ae-3"><a href="#9462d2ae-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prophet.plot <span class="im">import</span> plot_cross_validation_metric</span>
+<span id="9462d2ae-4"><a href="#9462d2ae-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9462d2ae-5"><a href="#9462d2ae-5" aria-hidden="true" tabindex="-1"></a>fig7 <span class="op">=</span> plot_cross_validation_metric(df_births_cv, metric<span class="op">=</span><span class="st">"mape"</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -2423,24 +2433,36 @@ About Cross Validation
 <div id="77fe499b" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure and axis</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot actual values (y) as a scatter plot</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_births_cv[<span class="st">'ds'</span>], df_births_cv[<span class="st">'y'</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Births (y)'</span>, alpha<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot predicted values (yhat) as a scatter plot</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_births_cv[<span class="st">'ds'</span>], df_births_cv[<span class="st">'yhat'</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Predicted Births (yhat)'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Date (ds)'</span>)</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Births'</span>)</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Actual vs Predicted Births Over Time'</span>)</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="77fe499b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="77fe499b-1"><a href="#77fe499b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure and axis</span></span>
+<span id="77fe499b-2"><a href="#77fe499b-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77fe499b-3"><a href="#77fe499b-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="77fe499b-4"><a href="#77fe499b-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77fe499b-5"><a href="#77fe499b-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot actual values (y) as a scatter plot</span></span>
+<span id="77fe499b-6"><a href="#77fe499b-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="77fe499b-7"><a href="#77fe499b-7" aria-hidden="true" tabindex="-1"></a>    df_births_cv[<span class="st">"ds"</span>],</span>
+<span id="77fe499b-8"><a href="#77fe499b-8" aria-hidden="true" tabindex="-1"></a>    df_births_cv[<span class="st">"y"</span>],</span>
+<span id="77fe499b-9"><a href="#77fe499b-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"blue"</span>,</span>
+<span id="77fe499b-10"><a href="#77fe499b-10" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Actual Births (y)"</span>,</span>
+<span id="77fe499b-11"><a href="#77fe499b-11" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="77fe499b-12"><a href="#77fe499b-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="77fe499b-13"><a href="#77fe499b-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77fe499b-14"><a href="#77fe499b-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot predicted values (yhat) as a scatter plot</span></span>
+<span id="77fe499b-15"><a href="#77fe499b-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="77fe499b-16"><a href="#77fe499b-16" aria-hidden="true" tabindex="-1"></a>    df_births_cv[<span class="st">"ds"</span>],</span>
+<span id="77fe499b-17"><a href="#77fe499b-17" aria-hidden="true" tabindex="-1"></a>    df_births_cv[<span class="st">"yhat"</span>],</span>
+<span id="77fe499b-18"><a href="#77fe499b-18" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="77fe499b-19"><a href="#77fe499b-19" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Predicted Births (yhat)"</span>,</span>
+<span id="77fe499b-20"><a href="#77fe499b-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="77fe499b-21"><a href="#77fe499b-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="77fe499b-22"><a href="#77fe499b-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77fe499b-23"><a href="#77fe499b-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
+<span id="77fe499b-24"><a href="#77fe499b-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Date (ds)"</span>)</span>
+<span id="77fe499b-25"><a href="#77fe499b-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Births"</span>)</span>
+<span id="77fe499b-26"><a href="#77fe499b-26" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Actual vs Predicted Births Over Time"</span>)</span>
+<span id="77fe499b-27"><a href="#77fe499b-27" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="77fe499b-28"><a href="#77fe499b-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77fe499b-29"><a href="#77fe499b-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="77fe499b-30"><a href="#77fe499b-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>

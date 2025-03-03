@@ -230,30 +230,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="b6d71a91" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextlib</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gensim.downloader <span class="im">as</span> api</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a context manager to suppress stdout and stderr</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">@contextlib.contextmanager</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> suppress_stdout_stderr():</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A context manager that redirects stdout and stderr to devnull"""</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(os.devnull, <span class="st">'w'</span>) <span class="im">as</span> fnull:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        old_stdout <span class="op">=</span> sys.stdout</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        old_stderr <span class="op">=</span> sys.stderr</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        sys.stdout <span class="op">=</span> fnull</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        sys.stderr <span class="op">=</span> fnull</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">finally</span>:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            sys.stdout <span class="op">=</span> old_stdout</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            sys.stderr <span class="op">=</span> old_stderr</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the context manager to suppress output from the model download</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> suppress_stdout_stderr():</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> api.load(<span class="st">"glove-wiki-gigaword-50"</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b6d71a91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b6d71a91-1"><a href="#b6d71a91-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="b6d71a91-2"><a href="#b6d71a91-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="b6d71a91-3"><a href="#b6d71a91-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextlib</span>
+<span id="b6d71a91-4"><a href="#b6d71a91-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gensim.downloader <span class="im">as</span> api</span>
+<span id="b6d71a91-5"><a href="#b6d71a91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b6d71a91-6"><a href="#b6d71a91-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b6d71a91-7"><a href="#b6d71a91-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a context manager to suppress stdout and stderr</span></span>
+<span id="b6d71a91-8"><a href="#b6d71a91-8" aria-hidden="true" tabindex="-1"></a><span class="at">@contextlib.contextmanager</span></span>
+<span id="b6d71a91-9"><a href="#b6d71a91-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> suppress_stdout_stderr():</span>
+<span id="b6d71a91-10"><a href="#b6d71a91-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A context manager that redirects stdout and stderr to devnull"""</span></span>
+<span id="b6d71a91-11"><a href="#b6d71a91-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(os.devnull, <span class="st">"w"</span>) <span class="im">as</span> fnull:</span>
+<span id="b6d71a91-12"><a href="#b6d71a91-12" aria-hidden="true" tabindex="-1"></a>        old_stdout <span class="op">=</span> sys.stdout</span>
+<span id="b6d71a91-13"><a href="#b6d71a91-13" aria-hidden="true" tabindex="-1"></a>        old_stderr <span class="op">=</span> sys.stderr</span>
+<span id="b6d71a91-14"><a href="#b6d71a91-14" aria-hidden="true" tabindex="-1"></a>        sys.stdout <span class="op">=</span> fnull</span>
+<span id="b6d71a91-15"><a href="#b6d71a91-15" aria-hidden="true" tabindex="-1"></a>        sys.stderr <span class="op">=</span> fnull</span>
+<span id="b6d71a91-16"><a href="#b6d71a91-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="b6d71a91-17"><a href="#b6d71a91-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span></span>
+<span id="b6d71a91-18"><a href="#b6d71a91-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">finally</span>:</span>
+<span id="b6d71a91-19"><a href="#b6d71a91-19" aria-hidden="true" tabindex="-1"></a>            sys.stdout <span class="op">=</span> old_stdout</span>
+<span id="b6d71a91-20"><a href="#b6d71a91-20" aria-hidden="true" tabindex="-1"></a>            sys.stderr <span class="op">=</span> old_stderr</span>
+<span id="b6d71a91-21"><a href="#b6d71a91-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b6d71a91-22"><a href="#b6d71a91-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b6d71a91-23"><a href="#b6d71a91-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the context manager to suppress output from the model download</span></span>
+<span id="b6d71a91-24"><a href="#b6d71a91-24" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> suppress_stdout_stderr():</span>
+<span id="b6d71a91-25"><a href="#b6d71a91-25" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> api.load(<span class="st">"glove-wiki-gigaword-50"</span>)</span>
+<span id="b6d71a91-26"><a href="#b6d71a91-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>KeyedVectors&lt;vector_size=50, 400000 keys&gt;</code></pre>
@@ -265,13 +267,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="6ed0e003" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the "br - pt + es" vector and find the closest word</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">'brazil'</span>, <span class="st">'spain'</span>], negative<span class="op">=</span>[<span class="st">'portugal'</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>result_word <span class="op">=</span> result[<span class="dv">0</span>][<span class="dv">0</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the shape of the result vector</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> model[result[<span class="dv">0</span>][<span class="dv">0</span>]].shape[<span class="dv">0</span>]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of vector dimensions: "</span>, dimensions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6ed0e003"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6ed0e003-1"><a href="#6ed0e003-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the "br - pt + es" vector and find the closest word</span></span>
+<span id="6ed0e003-2"><a href="#6ed0e003-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">"brazil"</span>, <span class="st">"spain"</span>], negative<span class="op">=</span>[<span class="st">"portugal"</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="6ed0e003-3"><a href="#6ed0e003-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="6ed0e003-4"><a href="#6ed0e003-4" aria-hidden="true" tabindex="-1"></a>result_word <span class="op">=</span> result[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="6ed0e003-5"><a href="#6ed0e003-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the shape of the result vector</span></span>
+<span id="6ed0e003-6"><a href="#6ed0e003-6" aria-hidden="true" tabindex="-1"></a>dimensions <span class="op">=</span> model[result[<span class="dv">0</span>][<span class="dv">0</span>]].shape[<span class="dv">0</span>]</span>
+<span id="6ed0e003-7"><a href="#6ed0e003-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of vector dimensions: "</span>, dimensions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[('mexico', 0.8388405442237854)]
@@ -282,7 +284,7 @@ Number of vector dimensions:  50</code></pre>
 <div id="77caf723" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model[result[<span class="dv">0</span>][<span class="dv">0</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="77caf723"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="77caf723-1"><a href="#77caf723-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model[result[<span class="dv">0</span>][<span class="dv">0</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[ 4.1189e-01 -9.3082e-02 -1.8871e-01  1.0692e+00 -5.3433e-01 -9.9734e-01
@@ -304,17 +306,19 @@ Number of vector dimensions:  50</code></pre>
 <div id="dcbdba12" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the "brazil + spain - portugal" vector</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>true_vector <span class="op">=</span> model[<span class="st">'brazil'</span>] <span class="op">+</span> model[<span class="st">'spain'</span>] <span class="op">-</span> model[<span class="st">'portugal'</span>]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> [<span class="st">'portugal'</span>, <span class="st">'spain'</span>, <span class="st">'brazil'</span>, result_word]</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get vectors for each word</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> np.array([model[w] <span class="cf">for</span> w <span class="kw">in</span> words])</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> np.vstack([vectors, true_vector])  <span class="co"># Add the true vector to the list of vectors</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>words <span class="op">+=</span> [<span class="st">'brazil + spain - portugal'</span>]  <span class="co"># Add the label for the true vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="dcbdba12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dcbdba12-1"><a href="#dcbdba12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="dcbdba12-2"><a href="#dcbdba12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dcbdba12-3"><a href="#dcbdba12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the "brazil + spain - portugal" vector</span></span>
+<span id="dcbdba12-4"><a href="#dcbdba12-4" aria-hidden="true" tabindex="-1"></a>true_vector <span class="op">=</span> model[<span class="st">"brazil"</span>] <span class="op">+</span> model[<span class="st">"spain"</span>] <span class="op">-</span> model[<span class="st">"portugal"</span>]</span>
+<span id="dcbdba12-5"><a href="#dcbdba12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dcbdba12-6"><a href="#dcbdba12-6" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> [<span class="st">"portugal"</span>, <span class="st">"spain"</span>, <span class="st">"brazil"</span>, result_word]</span>
+<span id="dcbdba12-7"><a href="#dcbdba12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dcbdba12-8"><a href="#dcbdba12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get vectors for each word</span></span>
+<span id="dcbdba12-9"><a href="#dcbdba12-9" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> np.array([model[w] <span class="cf">for</span> w <span class="kw">in</span> words])</span>
+<span id="dcbdba12-10"><a href="#dcbdba12-10" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> np.vstack(</span>
+<span id="dcbdba12-11"><a href="#dcbdba12-11" aria-hidden="true" tabindex="-1"></a>    [vectors, true_vector]</span>
+<span id="dcbdba12-12"><a href="#dcbdba12-12" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># Add the true vector to the list of vectors</span></span>
+<span id="dcbdba12-13"><a href="#dcbdba12-13" aria-hidden="true" tabindex="-1"></a>words <span class="op">+=</span> [<span class="st">"brazil + spain - portugal"</span>]  <span class="co"># Add the label for the true vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now, how do we visualize 50 dimensions? We’ll need to reduce the dimensionality of our vector space to something manageable!</p>
@@ -334,45 +338,59 @@ PCA or t-SNE?
 <div id="4ff11ac3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D  <span class="co"># enables 3D plotting</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA to reduce to 3 dimensions</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>reduced_vectors <span class="op">=</span> pca.fit_transform(vectors)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate colors using matplotlib's tab10 colormap</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.cm.tab10(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="bu">len</span>(words)))</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 3D figure</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot scatter points with text labels</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, word <span class="kw">in</span> <span class="bu">enumerate</span>(words):</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Scatter each point</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    ax.scatter(reduced_vectors[i, <span class="dv">0</span>], reduced_vectors[i, <span class="dv">1</span>], reduced_vectors[i, <span class="dv">2</span>],</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>colors[i], s<span class="op">=</span><span class="dv">50</span>)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Annotate the point with its corresponding word</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    ax.text(reduced_vectors[i, <span class="dv">0</span>], reduced_vectors[i, <span class="dv">1</span>], reduced_vectors[i, <span class="dv">2</span>],</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>            word, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>colors[i])</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally add lines from the origin to each point</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, word <span class="kw">in</span> <span class="bu">enumerate</span>(words):</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    linestyle <span class="op">=</span> <span class="st">'dashed'</span> <span class="cf">if</span> word.lower() <span class="op">==</span> <span class="st">'mexico'</span> <span class="cf">else</span> <span class="st">'solid'</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">0</span>, reduced_vectors[i, <span class="dv">0</span>]],</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">0</span>, reduced_vectors[i, <span class="dv">1</span>]],</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">0</span>, reduced_vectors[i, <span class="dv">2</span>]],</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>colors[i], linestyle<span class="op">=</span>linestyle)</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Set axis labels and title</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X Axis'</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y Axis'</span>)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Z Axis'</span>)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"3D PCA Projection of Word Vectors"</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4ff11ac3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4ff11ac3-1"><a href="#4ff11ac3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="4ff11ac3-2"><a href="#4ff11ac3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D  <span class="co"># enables 3D plotting</span></span>
+<span id="4ff11ac3-3"><a href="#4ff11ac3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="4ff11ac3-4"><a href="#4ff11ac3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-5"><a href="#4ff11ac3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA to reduce to 3 dimensions</span></span>
+<span id="4ff11ac3-6"><a href="#4ff11ac3-6" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="4ff11ac3-7"><a href="#4ff11ac3-7" aria-hidden="true" tabindex="-1"></a>reduced_vectors <span class="op">=</span> pca.fit_transform(vectors)</span>
+<span id="4ff11ac3-8"><a href="#4ff11ac3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-9"><a href="#4ff11ac3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate colors using matplotlib's tab10 colormap</span></span>
+<span id="4ff11ac3-10"><a href="#4ff11ac3-10" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.cm.tab10(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="bu">len</span>(words)))</span>
+<span id="4ff11ac3-11"><a href="#4ff11ac3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-12"><a href="#4ff11ac3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 3D figure</span></span>
+<span id="4ff11ac3-13"><a href="#4ff11ac3-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="4ff11ac3-14"><a href="#4ff11ac3-14" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
+<span id="4ff11ac3-15"><a href="#4ff11ac3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-16"><a href="#4ff11ac3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot scatter points with text labels</span></span>
+<span id="4ff11ac3-17"><a href="#4ff11ac3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, word <span class="kw">in</span> <span class="bu">enumerate</span>(words):</span>
+<span id="4ff11ac3-18"><a href="#4ff11ac3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Scatter each point</span></span>
+<span id="4ff11ac3-19"><a href="#4ff11ac3-19" aria-hidden="true" tabindex="-1"></a>    ax.scatter(</span>
+<span id="4ff11ac3-20"><a href="#4ff11ac3-20" aria-hidden="true" tabindex="-1"></a>        reduced_vectors[i, <span class="dv">0</span>],</span>
+<span id="4ff11ac3-21"><a href="#4ff11ac3-21" aria-hidden="true" tabindex="-1"></a>        reduced_vectors[i, <span class="dv">1</span>],</span>
+<span id="4ff11ac3-22"><a href="#4ff11ac3-22" aria-hidden="true" tabindex="-1"></a>        reduced_vectors[i, <span class="dv">2</span>],</span>
+<span id="4ff11ac3-23"><a href="#4ff11ac3-23" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>colors[i],</span>
+<span id="4ff11ac3-24"><a href="#4ff11ac3-24" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="4ff11ac3-25"><a href="#4ff11ac3-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="4ff11ac3-26"><a href="#4ff11ac3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Annotate the point with its corresponding word</span></span>
+<span id="4ff11ac3-27"><a href="#4ff11ac3-27" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="4ff11ac3-28"><a href="#4ff11ac3-28" aria-hidden="true" tabindex="-1"></a>        reduced_vectors[i, <span class="dv">0</span>],</span>
+<span id="4ff11ac3-29"><a href="#4ff11ac3-29" aria-hidden="true" tabindex="-1"></a>        reduced_vectors[i, <span class="dv">1</span>],</span>
+<span id="4ff11ac3-30"><a href="#4ff11ac3-30" aria-hidden="true" tabindex="-1"></a>        reduced_vectors[i, <span class="dv">2</span>],</span>
+<span id="4ff11ac3-31"><a href="#4ff11ac3-31" aria-hidden="true" tabindex="-1"></a>        word,</span>
+<span id="4ff11ac3-32"><a href="#4ff11ac3-32" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">9</span>,</span>
+<span id="4ff11ac3-33"><a href="#4ff11ac3-33" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>colors[i],</span>
+<span id="4ff11ac3-34"><a href="#4ff11ac3-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="4ff11ac3-35"><a href="#4ff11ac3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-36"><a href="#4ff11ac3-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally add lines from the origin to each point</span></span>
+<span id="4ff11ac3-37"><a href="#4ff11ac3-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, word <span class="kw">in</span> <span class="bu">enumerate</span>(words):</span>
+<span id="4ff11ac3-38"><a href="#4ff11ac3-38" aria-hidden="true" tabindex="-1"></a>    linestyle <span class="op">=</span> <span class="st">"dashed"</span> <span class="cf">if</span> word.lower() <span class="op">==</span> <span class="st">"mexico"</span> <span class="cf">else</span> <span class="st">"solid"</span></span>
+<span id="4ff11ac3-39"><a href="#4ff11ac3-39" aria-hidden="true" tabindex="-1"></a>    ax.plot(</span>
+<span id="4ff11ac3-40"><a href="#4ff11ac3-40" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>, reduced_vectors[i, <span class="dv">0</span>]],</span>
+<span id="4ff11ac3-41"><a href="#4ff11ac3-41" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>, reduced_vectors[i, <span class="dv">1</span>]],</span>
+<span id="4ff11ac3-42"><a href="#4ff11ac3-42" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>, reduced_vectors[i, <span class="dv">2</span>]],</span>
+<span id="4ff11ac3-43"><a href="#4ff11ac3-43" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>colors[i],</span>
+<span id="4ff11ac3-44"><a href="#4ff11ac3-44" aria-hidden="true" tabindex="-1"></a>        linestyle<span class="op">=</span>linestyle,</span>
+<span id="4ff11ac3-45"><a href="#4ff11ac3-45" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="4ff11ac3-46"><a href="#4ff11ac3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-47"><a href="#4ff11ac3-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Set axis labels and title</span></span>
+<span id="4ff11ac3-48"><a href="#4ff11ac3-48" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"X Axis"</span>)</span>
+<span id="4ff11ac3-49"><a href="#4ff11ac3-49" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Y Axis"</span>)</span>
+<span id="4ff11ac3-50"><a href="#4ff11ac3-50" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">"Z Axis"</span>)</span>
+<span id="4ff11ac3-51"><a href="#4ff11ac3-51" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"3D PCA Projection of Word Vectors"</span>)</span>
+<span id="4ff11ac3-52"><a href="#4ff11ac3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ff11ac3-53"><a href="#4ff11ac3-53" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -387,58 +405,175 @@ PCA or t-SNE?
 <div id="74423b4b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># List of countries</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">'afghanistan'</span>, <span class="st">'algeria'</span>, <span class="st">'angola'</span>, <span class="st">'argentina'</span>, <span class="st">'australia'</span>, <span class="st">'austria'</span>, <span class="st">'azerbaijan'</span>, <span class="st">'bahrain'</span>, <span class="st">'bangladesh'</span>, <span class="st">'barbados'</span>, <span class="st">'belarus'</span>, <span class="st">'belgium'</span>, <span class="st">'bhutan'</span>, <span class="st">'bolivia'</span>, <span class="st">'botswana'</span>, <span class="st">'brazil'</span>, <span class="st">'brunei'</span>, <span class="st">'bulgaria'</span>, <span class="st">'canada'</span>, <span class="st">'chile'</span>, <span class="st">'china'</span>, <span class="st">'colombia'</span>, <span class="st">'cuba'</span>, <span class="st">'cyprus'</span>, <span class="st">'denmark'</span>, <span class="st">'djibouti'</span>, <span class="st">'ecuador'</span>, <span class="st">'egypt'</span>, <span class="st">'estonia'</span>, <span class="st">'ethiopia'</span>, <span class="st">'finland'</span>, <span class="st">'france'</span>, <span class="st">'gambia'</span>, <span class="st">'germany'</span>, <span class="st">'ghana'</span>, <span class="st">'greece'</span>, <span class="st">'guinea'</span>, <span class="st">'guinea-bissau'</span>, <span class="st">'guyana'</span>, <span class="st">'honduras'</span>, <span class="st">'hungary'</span>, <span class="st">'iceland'</span>, <span class="st">'india'</span>, <span class="st">'indonesia'</span>, <span class="st">'iran'</span>, <span class="st">'iraq'</span>, <span class="st">'ireland'</span>, <span class="st">'israel'</span>, <span class="st">'italy'</span>, <span class="st">'jamaica'</span>, <span class="st">'japan'</span>, <span class="st">'kenya'</span>, <span class="st">'kuwait'</span>, <span class="st">'kyrgyzstan'</span>, <span class="st">'lebanon'</span>, <span class="st">'lesotho'</span>, <span class="st">'libya'</span>, <span class="st">'lithuania'</span>, <span class="st">'luxembourg'</span>, <span class="st">'madagascar'</span>, <span class="st">'malawi'</span>, <span class="st">'malaysia'</span>, <span class="st">'maldives'</span>, <span class="st">'mali'</span>, <span class="st">'malta'</span>, <span class="st">'mauritania'</span>, <span class="st">'mauritius'</span>, <span class="st">'mexico'</span>, <span class="st">'micronesia'</span>, <span class="st">'moldova'</span>, <span class="st">'monaco'</span>, <span class="st">'mongolia'</span>, <span class="st">'montenegro'</span>, <span class="st">'morocco'</span>, <span class="st">'mozambique'</span>, <span class="st">'namibia'</span>, <span class="st">'netherlands'</span>, <span class="st">'nicaragua'</span>, <span class="st">'niger'</span>, <span class="st">'nigeria'</span>, <span class="st">'norway'</span>, <span class="st">'oman'</span>, <span class="st">'pakistan'</span>, <span class="st">'panama'</span>, <span class="st">'paraguay'</span>, <span class="st">'peru'</span>, <span class="st">'philippines'</span>, <span class="st">'poland'</span>, <span class="st">'portugal'</span>, <span class="st">'qatar'</span>, <span class="st">'romania'</span>, <span class="st">'russia'</span>, <span class="st">'rwanda'</span>, <span class="st">'samoa'</span>, <span class="st">'senegal'</span>, <span class="st">'serbia'</span>, <span class="st">'singapore'</span>, <span class="st">'slovakia'</span>, <span class="st">'slovenia'</span>, <span class="st">'somalia'</span>, <span class="st">'spain'</span>, <span class="st">'sweden'</span>, <span class="st">'switzerland'</span>, <span class="st">'tanzania'</span>, <span class="st">'thailand'</span>, <span class="st">'tunisia'</span>, <span class="st">'turkey'</span>, <span class="st">'turkmenistan'</span>, <span class="st">'uganda'</span>, <span class="st">'ukraine'</span>, <span class="st">'uruguay'</span>, <span class="st">'venezuela'</span>, <span class="st">'vietnam'</span>, <span class="st">'yemen'</span>, <span class="st">'zambia'</span>, <span class="st">'zimbabwe'</span>]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have a pre-trained model that maps each country to a vector</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> np.array([model[country] <span class="cf">for</span> country <span class="kw">in</span> countries])</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform t-SNE to reduce to 3 dimensions</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>reduced_vectors <span class="op">=</span> tsne.fit_transform(vectors)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Cluster the reduced vectors into groups using KMeans</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>num_clusters <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>num_clusters, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> kmeans.fit_predict(reduced_vectors)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coordinates</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> reduced_vectors[:, <span class="dv">0</span>]</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> reduced_vectors[:, <span class="dv">1</span>]</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>zs <span class="op">=</span> reduced_vectors[:, <span class="dv">2</span>]</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 3D figure</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">6</span>))</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot scatter points, coloring by cluster using a discrete colormap (tab10)</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(xs, ys, zs, c<span class="op">=</span>clusters, cmap<span class="op">=</span><span class="st">'tab10'</span>, s<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a legend with colored patches for each cluster</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>handles <span class="op">=</span> []</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> plt.cm.tab10</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cluster <span class="kw">in</span> <span class="bu">range</span>(num_clusters):</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> cmap(cluster)</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    patch <span class="op">=</span> mpatches.Patch(color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f'Cluster </span><span class="sc">{</span>cluster<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    handles.append(patch)</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>handles, title<span class="op">=</span><span class="st">"Cluster"</span>)</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate each point with the country name</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, country <span class="kw">in</span> <span class="bu">enumerate</span>(countries):</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    ax.text(xs[i], ys[i], zs[i], country, fontsize<span class="op">=</span><span class="dv">8</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>)</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Set axis labels and title</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X Axis'</span>)</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y Axis'</span>)</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Z Axis'</span>)</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"3D t-SNE Projection of Country Word Vectors (Colored by Cluster)"</span>)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="74423b4b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="74423b4b-1"><a href="#74423b4b-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="74423b4b-2"><a href="#74423b4b-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="74423b4b-3"><a href="#74423b4b-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
+<span id="74423b4b-4"><a href="#74423b4b-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-5"><a href="#74423b4b-5" aria-hidden="true" tabindex="-1"></a><span class="co"># List of countries</span></span>
+<span id="74423b4b-6"><a href="#74423b4b-6" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
+<span id="74423b4b-7"><a href="#74423b4b-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"afghanistan"</span>,</span>
+<span id="74423b4b-8"><a href="#74423b4b-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"algeria"</span>,</span>
+<span id="74423b4b-9"><a href="#74423b4b-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"angola"</span>,</span>
+<span id="74423b4b-10"><a href="#74423b4b-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"argentina"</span>,</span>
+<span id="74423b4b-11"><a href="#74423b4b-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"australia"</span>,</span>
+<span id="74423b4b-12"><a href="#74423b4b-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"austria"</span>,</span>
+<span id="74423b4b-13"><a href="#74423b4b-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"azerbaijan"</span>,</span>
+<span id="74423b4b-14"><a href="#74423b4b-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bahrain"</span>,</span>
+<span id="74423b4b-15"><a href="#74423b4b-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bangladesh"</span>,</span>
+<span id="74423b4b-16"><a href="#74423b4b-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"barbados"</span>,</span>
+<span id="74423b4b-17"><a href="#74423b4b-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"belarus"</span>,</span>
+<span id="74423b4b-18"><a href="#74423b4b-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"belgium"</span>,</span>
+<span id="74423b4b-19"><a href="#74423b4b-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bhutan"</span>,</span>
+<span id="74423b4b-20"><a href="#74423b4b-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bolivia"</span>,</span>
+<span id="74423b4b-21"><a href="#74423b4b-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"botswana"</span>,</span>
+<span id="74423b4b-22"><a href="#74423b4b-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"brazil"</span>,</span>
+<span id="74423b4b-23"><a href="#74423b4b-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"brunei"</span>,</span>
+<span id="74423b4b-24"><a href="#74423b4b-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bulgaria"</span>,</span>
+<span id="74423b4b-25"><a href="#74423b4b-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"canada"</span>,</span>
+<span id="74423b4b-26"><a href="#74423b4b-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"chile"</span>,</span>
+<span id="74423b4b-27"><a href="#74423b4b-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"china"</span>,</span>
+<span id="74423b4b-28"><a href="#74423b4b-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"colombia"</span>,</span>
+<span id="74423b4b-29"><a href="#74423b4b-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cuba"</span>,</span>
+<span id="74423b4b-30"><a href="#74423b4b-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cyprus"</span>,</span>
+<span id="74423b4b-31"><a href="#74423b4b-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"denmark"</span>,</span>
+<span id="74423b4b-32"><a href="#74423b4b-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"djibouti"</span>,</span>
+<span id="74423b4b-33"><a href="#74423b4b-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ecuador"</span>,</span>
+<span id="74423b4b-34"><a href="#74423b4b-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"egypt"</span>,</span>
+<span id="74423b4b-35"><a href="#74423b4b-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estonia"</span>,</span>
+<span id="74423b4b-36"><a href="#74423b4b-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ethiopia"</span>,</span>
+<span id="74423b4b-37"><a href="#74423b4b-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"finland"</span>,</span>
+<span id="74423b4b-38"><a href="#74423b4b-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"france"</span>,</span>
+<span id="74423b4b-39"><a href="#74423b4b-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gambia"</span>,</span>
+<span id="74423b4b-40"><a href="#74423b4b-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"germany"</span>,</span>
+<span id="74423b4b-41"><a href="#74423b4b-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ghana"</span>,</span>
+<span id="74423b4b-42"><a href="#74423b4b-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"greece"</span>,</span>
+<span id="74423b4b-43"><a href="#74423b4b-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"guinea"</span>,</span>
+<span id="74423b4b-44"><a href="#74423b4b-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"guinea-bissau"</span>,</span>
+<span id="74423b4b-45"><a href="#74423b4b-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"guyana"</span>,</span>
+<span id="74423b4b-46"><a href="#74423b4b-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"honduras"</span>,</span>
+<span id="74423b4b-47"><a href="#74423b4b-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hungary"</span>,</span>
+<span id="74423b4b-48"><a href="#74423b4b-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"iceland"</span>,</span>
+<span id="74423b4b-49"><a href="#74423b4b-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"india"</span>,</span>
+<span id="74423b4b-50"><a href="#74423b4b-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"indonesia"</span>,</span>
+<span id="74423b4b-51"><a href="#74423b4b-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">"iran"</span>,</span>
+<span id="74423b4b-52"><a href="#74423b4b-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"iraq"</span>,</span>
+<span id="74423b4b-53"><a href="#74423b4b-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ireland"</span>,</span>
+<span id="74423b4b-54"><a href="#74423b4b-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"israel"</span>,</span>
+<span id="74423b4b-55"><a href="#74423b4b-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"italy"</span>,</span>
+<span id="74423b4b-56"><a href="#74423b4b-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jamaica"</span>,</span>
+<span id="74423b4b-57"><a href="#74423b4b-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"japan"</span>,</span>
+<span id="74423b4b-58"><a href="#74423b4b-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"kenya"</span>,</span>
+<span id="74423b4b-59"><a href="#74423b4b-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"kuwait"</span>,</span>
+<span id="74423b4b-60"><a href="#74423b4b-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"kyrgyzstan"</span>,</span>
+<span id="74423b4b-61"><a href="#74423b4b-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lebanon"</span>,</span>
+<span id="74423b4b-62"><a href="#74423b4b-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lesotho"</span>,</span>
+<span id="74423b4b-63"><a href="#74423b4b-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"libya"</span>,</span>
+<span id="74423b4b-64"><a href="#74423b4b-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lithuania"</span>,</span>
+<span id="74423b4b-65"><a href="#74423b4b-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"luxembourg"</span>,</span>
+<span id="74423b4b-66"><a href="#74423b4b-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"madagascar"</span>,</span>
+<span id="74423b4b-67"><a href="#74423b4b-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"malawi"</span>,</span>
+<span id="74423b4b-68"><a href="#74423b4b-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">"malaysia"</span>,</span>
+<span id="74423b4b-69"><a href="#74423b4b-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">"maldives"</span>,</span>
+<span id="74423b4b-70"><a href="#74423b4b-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mali"</span>,</span>
+<span id="74423b4b-71"><a href="#74423b4b-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"malta"</span>,</span>
+<span id="74423b4b-72"><a href="#74423b4b-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mauritania"</span>,</span>
+<span id="74423b4b-73"><a href="#74423b4b-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mauritius"</span>,</span>
+<span id="74423b4b-74"><a href="#74423b4b-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mexico"</span>,</span>
+<span id="74423b4b-75"><a href="#74423b4b-75" aria-hidden="true" tabindex="-1"></a>    <span class="st">"micronesia"</span>,</span>
+<span id="74423b4b-76"><a href="#74423b4b-76" aria-hidden="true" tabindex="-1"></a>    <span class="st">"moldova"</span>,</span>
+<span id="74423b4b-77"><a href="#74423b4b-77" aria-hidden="true" tabindex="-1"></a>    <span class="st">"monaco"</span>,</span>
+<span id="74423b4b-78"><a href="#74423b4b-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mongolia"</span>,</span>
+<span id="74423b4b-79"><a href="#74423b4b-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">"montenegro"</span>,</span>
+<span id="74423b4b-80"><a href="#74423b4b-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">"morocco"</span>,</span>
+<span id="74423b4b-81"><a href="#74423b4b-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mozambique"</span>,</span>
+<span id="74423b4b-82"><a href="#74423b4b-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">"namibia"</span>,</span>
+<span id="74423b4b-83"><a href="#74423b4b-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">"netherlands"</span>,</span>
+<span id="74423b4b-84"><a href="#74423b4b-84" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nicaragua"</span>,</span>
+<span id="74423b4b-85"><a href="#74423b4b-85" aria-hidden="true" tabindex="-1"></a>    <span class="st">"niger"</span>,</span>
+<span id="74423b4b-86"><a href="#74423b4b-86" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nigeria"</span>,</span>
+<span id="74423b4b-87"><a href="#74423b4b-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">"norway"</span>,</span>
+<span id="74423b4b-88"><a href="#74423b4b-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">"oman"</span>,</span>
+<span id="74423b4b-89"><a href="#74423b4b-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pakistan"</span>,</span>
+<span id="74423b4b-90"><a href="#74423b4b-90" aria-hidden="true" tabindex="-1"></a>    <span class="st">"panama"</span>,</span>
+<span id="74423b4b-91"><a href="#74423b4b-91" aria-hidden="true" tabindex="-1"></a>    <span class="st">"paraguay"</span>,</span>
+<span id="74423b4b-92"><a href="#74423b4b-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"peru"</span>,</span>
+<span id="74423b4b-93"><a href="#74423b4b-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">"philippines"</span>,</span>
+<span id="74423b4b-94"><a href="#74423b4b-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">"poland"</span>,</span>
+<span id="74423b4b-95"><a href="#74423b4b-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">"portugal"</span>,</span>
+<span id="74423b4b-96"><a href="#74423b4b-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">"qatar"</span>,</span>
+<span id="74423b4b-97"><a href="#74423b4b-97" aria-hidden="true" tabindex="-1"></a>    <span class="st">"romania"</span>,</span>
+<span id="74423b4b-98"><a href="#74423b4b-98" aria-hidden="true" tabindex="-1"></a>    <span class="st">"russia"</span>,</span>
+<span id="74423b4b-99"><a href="#74423b4b-99" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rwanda"</span>,</span>
+<span id="74423b4b-100"><a href="#74423b4b-100" aria-hidden="true" tabindex="-1"></a>    <span class="st">"samoa"</span>,</span>
+<span id="74423b4b-101"><a href="#74423b4b-101" aria-hidden="true" tabindex="-1"></a>    <span class="st">"senegal"</span>,</span>
+<span id="74423b4b-102"><a href="#74423b4b-102" aria-hidden="true" tabindex="-1"></a>    <span class="st">"serbia"</span>,</span>
+<span id="74423b4b-103"><a href="#74423b4b-103" aria-hidden="true" tabindex="-1"></a>    <span class="st">"singapore"</span>,</span>
+<span id="74423b4b-104"><a href="#74423b4b-104" aria-hidden="true" tabindex="-1"></a>    <span class="st">"slovakia"</span>,</span>
+<span id="74423b4b-105"><a href="#74423b4b-105" aria-hidden="true" tabindex="-1"></a>    <span class="st">"slovenia"</span>,</span>
+<span id="74423b4b-106"><a href="#74423b4b-106" aria-hidden="true" tabindex="-1"></a>    <span class="st">"somalia"</span>,</span>
+<span id="74423b4b-107"><a href="#74423b4b-107" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spain"</span>,</span>
+<span id="74423b4b-108"><a href="#74423b4b-108" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sweden"</span>,</span>
+<span id="74423b4b-109"><a href="#74423b4b-109" aria-hidden="true" tabindex="-1"></a>    <span class="st">"switzerland"</span>,</span>
+<span id="74423b4b-110"><a href="#74423b4b-110" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tanzania"</span>,</span>
+<span id="74423b4b-111"><a href="#74423b4b-111" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thailand"</span>,</span>
+<span id="74423b4b-112"><a href="#74423b4b-112" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tunisia"</span>,</span>
+<span id="74423b4b-113"><a href="#74423b4b-113" aria-hidden="true" tabindex="-1"></a>    <span class="st">"turkey"</span>,</span>
+<span id="74423b4b-114"><a href="#74423b4b-114" aria-hidden="true" tabindex="-1"></a>    <span class="st">"turkmenistan"</span>,</span>
+<span id="74423b4b-115"><a href="#74423b4b-115" aria-hidden="true" tabindex="-1"></a>    <span class="st">"uganda"</span>,</span>
+<span id="74423b4b-116"><a href="#74423b4b-116" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ukraine"</span>,</span>
+<span id="74423b4b-117"><a href="#74423b4b-117" aria-hidden="true" tabindex="-1"></a>    <span class="st">"uruguay"</span>,</span>
+<span id="74423b4b-118"><a href="#74423b4b-118" aria-hidden="true" tabindex="-1"></a>    <span class="st">"venezuela"</span>,</span>
+<span id="74423b4b-119"><a href="#74423b4b-119" aria-hidden="true" tabindex="-1"></a>    <span class="st">"vietnam"</span>,</span>
+<span id="74423b4b-120"><a href="#74423b4b-120" aria-hidden="true" tabindex="-1"></a>    <span class="st">"yemen"</span>,</span>
+<span id="74423b4b-121"><a href="#74423b4b-121" aria-hidden="true" tabindex="-1"></a>    <span class="st">"zambia"</span>,</span>
+<span id="74423b4b-122"><a href="#74423b4b-122" aria-hidden="true" tabindex="-1"></a>    <span class="st">"zimbabwe"</span>,</span>
+<span id="74423b4b-123"><a href="#74423b4b-123" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="74423b4b-124"><a href="#74423b4b-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-125"><a href="#74423b4b-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have a pre-trained model that maps each country to a vector</span></span>
+<span id="74423b4b-126"><a href="#74423b4b-126" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> np.array([model[country] <span class="cf">for</span> country <span class="kw">in</span> countries])</span>
+<span id="74423b4b-127"><a href="#74423b4b-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-128"><a href="#74423b4b-128" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform t-SNE to reduce to 3 dimensions</span></span>
+<span id="74423b4b-129"><a href="#74423b4b-129" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="74423b4b-130"><a href="#74423b4b-130" aria-hidden="true" tabindex="-1"></a>reduced_vectors <span class="op">=</span> tsne.fit_transform(vectors)</span>
+<span id="74423b4b-131"><a href="#74423b4b-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-132"><a href="#74423b4b-132" aria-hidden="true" tabindex="-1"></a><span class="co"># Cluster the reduced vectors into groups using KMeans</span></span>
+<span id="74423b4b-133"><a href="#74423b4b-133" aria-hidden="true" tabindex="-1"></a>num_clusters <span class="op">=</span> <span class="dv">8</span></span>
+<span id="74423b4b-134"><a href="#74423b4b-134" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>num_clusters, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="74423b4b-135"><a href="#74423b4b-135" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> kmeans.fit_predict(reduced_vectors)</span>
+<span id="74423b4b-136"><a href="#74423b4b-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-137"><a href="#74423b4b-137" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coordinates</span></span>
+<span id="74423b4b-138"><a href="#74423b4b-138" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> reduced_vectors[:, <span class="dv">0</span>]</span>
+<span id="74423b4b-139"><a href="#74423b4b-139" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> reduced_vectors[:, <span class="dv">1</span>]</span>
+<span id="74423b4b-140"><a href="#74423b4b-140" aria-hidden="true" tabindex="-1"></a>zs <span class="op">=</span> reduced_vectors[:, <span class="dv">2</span>]</span>
+<span id="74423b4b-141"><a href="#74423b4b-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-142"><a href="#74423b4b-142" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 3D figure</span></span>
+<span id="74423b4b-143"><a href="#74423b4b-143" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">6</span>))</span>
+<span id="74423b4b-144"><a href="#74423b4b-144" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
+<span id="74423b4b-145"><a href="#74423b4b-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-146"><a href="#74423b4b-146" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot scatter points, coloring by cluster using a discrete colormap (tab10)</span></span>
+<span id="74423b4b-147"><a href="#74423b4b-147" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(xs, ys, zs, c<span class="op">=</span>clusters, cmap<span class="op">=</span><span class="st">"tab10"</span>, s<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="74423b4b-148"><a href="#74423b4b-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-149"><a href="#74423b4b-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a legend with colored patches for each cluster</span></span>
+<span id="74423b4b-150"><a href="#74423b4b-150" aria-hidden="true" tabindex="-1"></a>handles <span class="op">=</span> []</span>
+<span id="74423b4b-151"><a href="#74423b4b-151" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> plt.cm.tab10</span>
+<span id="74423b4b-152"><a href="#74423b4b-152" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cluster <span class="kw">in</span> <span class="bu">range</span>(num_clusters):</span>
+<span id="74423b4b-153"><a href="#74423b4b-153" aria-hidden="true" tabindex="-1"></a>    color <span class="op">=</span> cmap(cluster)</span>
+<span id="74423b4b-154"><a href="#74423b4b-154" aria-hidden="true" tabindex="-1"></a>    patch <span class="op">=</span> mpatches.Patch(color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f"Cluster </span><span class="sc">{</span>cluster<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="74423b4b-155"><a href="#74423b4b-155" aria-hidden="true" tabindex="-1"></a>    handles.append(patch)</span>
+<span id="74423b4b-156"><a href="#74423b4b-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-157"><a href="#74423b4b-157" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>handles, title<span class="op">=</span><span class="st">"Cluster"</span>)</span>
+<span id="74423b4b-158"><a href="#74423b4b-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-159"><a href="#74423b4b-159" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate each point with the country name</span></span>
+<span id="74423b4b-160"><a href="#74423b4b-160" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, country <span class="kw">in</span> <span class="bu">enumerate</span>(countries):</span>
+<span id="74423b4b-161"><a href="#74423b4b-161" aria-hidden="true" tabindex="-1"></a>    ax.text(xs[i], ys[i], zs[i], country, fontsize<span class="op">=</span><span class="dv">8</span>, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"bottom"</span>)</span>
+<span id="74423b4b-162"><a href="#74423b4b-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-163"><a href="#74423b4b-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Set axis labels and title</span></span>
+<span id="74423b4b-164"><a href="#74423b4b-164" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"X Axis"</span>)</span>
+<span id="74423b4b-165"><a href="#74423b4b-165" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Y Axis"</span>)</span>
+<span id="74423b4b-166"><a href="#74423b4b-166" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">"Z Axis"</span>)</span>
+<span id="74423b4b-167"><a href="#74423b4b-167" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"3D t-SNE Projection of Country Word Vectors (Colored by Cluster)"</span>)</span>
+<span id="74423b4b-168"><a href="#74423b4b-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="74423b4b-169"><a href="#74423b4b-169" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -455,21 +590,27 @@ PCA or t-SNE?
 <div id="371eb0a4" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Codfish is to Portugal as ? is to Spain</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">'spain'</span>, <span class="st">'codfish'</span>], negative<span class="op">=</span>[<span class="st">'portugal'</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barcelona is to Spain as ? is to Portugal</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">'portugal'</span>, <span class="st">'barcelona'</span>], negative<span class="op">=</span>[<span class="st">'spain'</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Lisbon is to Portugal as ? is to Britain</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">'britain'</span>, <span class="st">'lisbon'</span>], negative<span class="op">=</span>[<span class="st">'portugal'</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Stalin is to Russia as ? is to China</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">'china'</span>, <span class="st">'stalin'</span>], negative<span class="op">=</span>[<span class="st">'russia'</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="371eb0a4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="371eb0a4-1"><a href="#371eb0a4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Codfish is to Portugal as ? is to Spain</span></span>
+<span id="371eb0a4-2"><a href="#371eb0a4-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(</span>
+<span id="371eb0a4-3"><a href="#371eb0a4-3" aria-hidden="true" tabindex="-1"></a>    positive<span class="op">=</span>[<span class="st">"spain"</span>, <span class="st">"codfish"</span>], negative<span class="op">=</span>[<span class="st">"portugal"</span>], topn<span class="op">=</span><span class="dv">1</span></span>
+<span id="371eb0a4-4"><a href="#371eb0a4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="371eb0a4-5"><a href="#371eb0a4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="371eb0a4-6"><a href="#371eb0a4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="371eb0a4-7"><a href="#371eb0a4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Barcelona is to Spain as ? is to Portugal</span></span>
+<span id="371eb0a4-8"><a href="#371eb0a4-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(</span>
+<span id="371eb0a4-9"><a href="#371eb0a4-9" aria-hidden="true" tabindex="-1"></a>    positive<span class="op">=</span>[<span class="st">"portugal"</span>, <span class="st">"barcelona"</span>], negative<span class="op">=</span>[<span class="st">"spain"</span>], topn<span class="op">=</span><span class="dv">1</span></span>
+<span id="371eb0a4-10"><a href="#371eb0a4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="371eb0a4-11"><a href="#371eb0a4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="371eb0a4-12"><a href="#371eb0a4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="371eb0a4-13"><a href="#371eb0a4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Lisbon is to Portugal as ? is to Britain</span></span>
+<span id="371eb0a4-14"><a href="#371eb0a4-14" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(</span>
+<span id="371eb0a4-15"><a href="#371eb0a4-15" aria-hidden="true" tabindex="-1"></a>    positive<span class="op">=</span>[<span class="st">"britain"</span>, <span class="st">"lisbon"</span>], negative<span class="op">=</span>[<span class="st">"portugal"</span>], topn<span class="op">=</span><span class="dv">1</span></span>
+<span id="371eb0a4-16"><a href="#371eb0a4-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="371eb0a4-17"><a href="#371eb0a4-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="371eb0a4-18"><a href="#371eb0a4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="371eb0a4-19"><a href="#371eb0a4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Stalin is to Russia as ? is to China</span></span>
+<span id="371eb0a4-20"><a href="#371eb0a4-20" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> model.most_similar(positive<span class="op">=</span>[<span class="st">"china"</span>, <span class="st">"stalin"</span>], negative<span class="op">=</span>[<span class="st">"russia"</span>], topn<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="371eb0a4-21"><a href="#371eb0a4-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[('fritters', 0.6981065273284912)]

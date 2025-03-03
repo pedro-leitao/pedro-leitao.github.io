@@ -285,31 +285,31 @@ f(z) = z^2 + c
 <div id="68e56eb5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_iterations(width, height, max_iter):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    real_min, real_max <span class="op">=</span> <span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    imag_min, imag_max <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    real_step <span class="op">=</span> (real_max <span class="op">-</span> real_min) <span class="op">/</span> (width <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    imag_step <span class="op">=</span> (imag_max <span class="op">-</span> imag_min) <span class="op">/</span> (height <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize a 2D list to hold iteration counts.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> [[<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(width)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(height)]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(height):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        imag <span class="op">=</span> imag_min <span class="op">+</span> j <span class="op">*</span> imag_step</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(width):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            real <span class="op">=</span> real_min <span class="op">+</span> i <span class="op">*</span> real_step</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            c <span class="op">=</span> <span class="bu">complex</span>(real, imag)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            z <span class="op">=</span> <span class="ot">0j</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> count <span class="op">&lt;</span> max_iter:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                z <span class="op">=</span> z <span class="op">*</span> z <span class="op">+</span> c</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Check divergence: if |z|^2 &gt; 4 then break.</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (z.real <span class="op">*</span> z.real <span class="op">+</span> z.imag <span class="op">*</span> z.imag) <span class="op">&gt;</span> <span class="dv">4</span>:</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            iter_counts[j][i] <span class="op">=</span> count</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="68e56eb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="68e56eb5-1"><a href="#68e56eb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_iterations(width, height, max_iter):</span>
+<span id="68e56eb5-2"><a href="#68e56eb5-2" aria-hidden="true" tabindex="-1"></a>    real_min, real_max <span class="op">=</span> <span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span></span>
+<span id="68e56eb5-3"><a href="#68e56eb5-3" aria-hidden="true" tabindex="-1"></a>    imag_min, imag_max <span class="op">=</span> <span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span></span>
+<span id="68e56eb5-4"><a href="#68e56eb5-4" aria-hidden="true" tabindex="-1"></a>    real_step <span class="op">=</span> (real_max <span class="op">-</span> real_min) <span class="op">/</span> (width <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="68e56eb5-5"><a href="#68e56eb5-5" aria-hidden="true" tabindex="-1"></a>    imag_step <span class="op">=</span> (imag_max <span class="op">-</span> imag_min) <span class="op">/</span> (height <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="68e56eb5-6"><a href="#68e56eb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="68e56eb5-7"><a href="#68e56eb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize a 2D list to hold iteration counts.</span></span>
+<span id="68e56eb5-8"><a href="#68e56eb5-8" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> [[<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(width)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(height)]</span>
+<span id="68e56eb5-9"><a href="#68e56eb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="68e56eb5-10"><a href="#68e56eb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(height):</span>
+<span id="68e56eb5-11"><a href="#68e56eb5-11" aria-hidden="true" tabindex="-1"></a>        imag <span class="op">=</span> imag_min <span class="op">+</span> j <span class="op">*</span> imag_step</span>
+<span id="68e56eb5-12"><a href="#68e56eb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(width):</span>
+<span id="68e56eb5-13"><a href="#68e56eb5-13" aria-hidden="true" tabindex="-1"></a>            real <span class="op">=</span> real_min <span class="op">+</span> i <span class="op">*</span> real_step</span>
+<span id="68e56eb5-14"><a href="#68e56eb5-14" aria-hidden="true" tabindex="-1"></a>            c <span class="op">=</span> <span class="bu">complex</span>(real, imag)</span>
+<span id="68e56eb5-15"><a href="#68e56eb5-15" aria-hidden="true" tabindex="-1"></a>            z <span class="op">=</span> <span class="ot">0j</span></span>
+<span id="68e56eb5-16"><a href="#68e56eb5-16" aria-hidden="true" tabindex="-1"></a>            count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="68e56eb5-17"><a href="#68e56eb5-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> count <span class="op">&lt;</span> max_iter:</span>
+<span id="68e56eb5-18"><a href="#68e56eb5-18" aria-hidden="true" tabindex="-1"></a>                z <span class="op">=</span> z <span class="op">*</span> z <span class="op">+</span> c</span>
+<span id="68e56eb5-19"><a href="#68e56eb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Check divergence: if |z|^2 &gt; 4 then break.</span></span>
+<span id="68e56eb5-20"><a href="#68e56eb5-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (z.real <span class="op">*</span> z.real <span class="op">+</span> z.imag <span class="op">*</span> z.imag) <span class="op">&gt;</span> <span class="dv">4</span>:</span>
+<span id="68e56eb5-21"><a href="#68e56eb5-21" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="68e56eb5-22"><a href="#68e56eb5-22" aria-hidden="true" tabindex="-1"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="68e56eb5-23"><a href="#68e56eb5-23" aria-hidden="true" tabindex="-1"></a>            iter_counts[j][i] <span class="op">=</span> count</span>
+<span id="68e56eb5-24"><a href="#68e56eb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="68e56eb5-25"><a href="#68e56eb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -329,30 +329,33 @@ f(z) = z^2 + c
 <div id="4f011e40" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_numpy(width:<span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, height:<span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, max_iter:<span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>) <span class="op">-&gt;</span> np.ndarray:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create linearly spaced real and imaginary parts and generate a complex grid.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    real <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, width)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    imag <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, height)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> np.meshgrid(real, imag, indexing<span class="op">=</span><span class="st">'xy'</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> X <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> Y</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize z and an array to hold the iteration counts</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.zeros_like(c)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> np.zeros(c.shape, dtype<span class="op">=</span>np.int32)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a mask for points that have not yet diverged</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> np.<span class="bu">abs</span>(z) <span class="op">&lt;</span> <span class="dv">4</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> mask.<span class="bu">any</span>():</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update z and iteration counts only where |z| &lt; 4</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> np.where(mask, z <span class="op">*</span> z <span class="op">+</span> c, z)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        iter_counts <span class="op">=</span> np.where(mask, iter_counts <span class="op">+</span> <span class="dv">1</span>, iter_counts)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4f011e40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4f011e40-1"><a href="#4f011e40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="4f011e40-2"><a href="#4f011e40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4f011e40-3"><a href="#4f011e40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4f011e40-4"><a href="#4f011e40-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_numpy(</span>
+<span id="4f011e40-5"><a href="#4f011e40-5" aria-hidden="true" tabindex="-1"></a>    width: <span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, height: <span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, max_iter: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span></span>
+<span id="4f011e40-6"><a href="#4f011e40-6" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> np.ndarray:</span>
+<span id="4f011e40-7"><a href="#4f011e40-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create linearly spaced real and imaginary parts and generate a complex grid.</span></span>
+<span id="4f011e40-8"><a href="#4f011e40-8" aria-hidden="true" tabindex="-1"></a>    real <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, width)</span>
+<span id="4f011e40-9"><a href="#4f011e40-9" aria-hidden="true" tabindex="-1"></a>    imag <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, height)</span>
+<span id="4f011e40-10"><a href="#4f011e40-10" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> np.meshgrid(real, imag, indexing<span class="op">=</span><span class="st">"xy"</span>)</span>
+<span id="4f011e40-11"><a href="#4f011e40-11" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> X <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> Y</span>
+<span id="4f011e40-12"><a href="#4f011e40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4f011e40-13"><a href="#4f011e40-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize z and an array to hold the iteration counts</span></span>
+<span id="4f011e40-14"><a href="#4f011e40-14" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.zeros_like(c)</span>
+<span id="4f011e40-15"><a href="#4f011e40-15" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> np.zeros(c.shape, dtype<span class="op">=</span>np.int32)</span>
+<span id="4f011e40-16"><a href="#4f011e40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4f011e40-17"><a href="#4f011e40-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="4f011e40-18"><a href="#4f011e40-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a mask for points that have not yet diverged</span></span>
+<span id="4f011e40-19"><a href="#4f011e40-19" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> np.<span class="bu">abs</span>(z) <span class="op">&lt;</span> <span class="dv">4</span></span>
+<span id="4f011e40-20"><a href="#4f011e40-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> mask.<span class="bu">any</span>():</span>
+<span id="4f011e40-21"><a href="#4f011e40-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="4f011e40-22"><a href="#4f011e40-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4f011e40-23"><a href="#4f011e40-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update z and iteration counts only where |z| &lt; 4</span></span>
+<span id="4f011e40-24"><a href="#4f011e40-24" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> np.where(mask, z <span class="op">*</span> z <span class="op">+</span> c, z)</span>
+<span id="4f011e40-25"><a href="#4f011e40-25" aria-hidden="true" tabindex="-1"></a>        iter_counts <span class="op">=</span> np.where(mask, iter_counts <span class="op">+</span> <span class="dv">1</span>, iter_counts)</span>
+<span id="4f011e40-26"><a href="#4f011e40-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4f011e40-27"><a href="#4f011e40-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>This function starts by generating a grid of complex numbers using matrix operations, which is key for parallel computation. It first creates two linearly spaced arrays for the real and imaginary parts using <code>np.linspace</code>, and then builds two 2D grids with <code>np.meshgrid</code> — one for the real values and one for the imaginary values. These grids are combined into a single complex grid <code>c</code> (where each element is of the form <code>x + 1j * y</code>), and this process happens all at once without the need for explicit loops, leveraging NumPy’s vectorized operations.</p>
@@ -378,26 +381,29 @@ Tip
 <div id="b8cd3dee" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_torch(width:<span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, height:<span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, max_iter:<span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>, device:<span class="bu">str</span> <span class="op">=</span> <span class="st">'cpu'</span>) <span class="op">-&gt;</span> torch.Tensor:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    real <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, steps<span class="op">=</span>width, device<span class="op">=</span>device)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    imag <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, steps<span class="op">=</span>height, device<span class="op">=</span>device)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> torch.meshgrid(real, imag, indexing<span class="op">=</span><span class="st">'xy'</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> X.t() <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> Y.t()</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> torch.zeros_like(c)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> torch.zeros(c.shape, device<span class="op">=</span>device, dtype<span class="op">=</span>torch.int32)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> torch.<span class="bu">abs</span>(z) <span class="op">&lt;</span> <span class="dv">4</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> mask.<span class="bu">any</span>():</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> torch.where(mask, z <span class="op">*</span> z <span class="op">+</span> c, z)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        iter_counts <span class="op">=</span> torch.where(mask, iter_counts <span class="op">+</span> <span class="dv">1</span>, iter_counts)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b8cd3dee"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b8cd3dee-1"><a href="#b8cd3dee-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="b8cd3dee-2"><a href="#b8cd3dee-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8cd3dee-3"><a href="#b8cd3dee-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8cd3dee-4"><a href="#b8cd3dee-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_torch(</span>
+<span id="b8cd3dee-5"><a href="#b8cd3dee-5" aria-hidden="true" tabindex="-1"></a>    width: <span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, height: <span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, max_iter: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>, device: <span class="bu">str</span> <span class="op">=</span> <span class="st">"cpu"</span></span>
+<span id="b8cd3dee-6"><a href="#b8cd3dee-6" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> torch.Tensor:</span>
+<span id="b8cd3dee-7"><a href="#b8cd3dee-7" aria-hidden="true" tabindex="-1"></a>    real <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, steps<span class="op">=</span>width, device<span class="op">=</span>device)</span>
+<span id="b8cd3dee-8"><a href="#b8cd3dee-8" aria-hidden="true" tabindex="-1"></a>    imag <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, steps<span class="op">=</span>height, device<span class="op">=</span>device)</span>
+<span id="b8cd3dee-9"><a href="#b8cd3dee-9" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> torch.meshgrid(real, imag, indexing<span class="op">=</span><span class="st">"xy"</span>)</span>
+<span id="b8cd3dee-10"><a href="#b8cd3dee-10" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> X.t() <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> Y.t()</span>
+<span id="b8cd3dee-11"><a href="#b8cd3dee-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8cd3dee-12"><a href="#b8cd3dee-12" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> torch.zeros_like(c)</span>
+<span id="b8cd3dee-13"><a href="#b8cd3dee-13" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> torch.zeros(c.shape, device<span class="op">=</span>device, dtype<span class="op">=</span>torch.int32)</span>
+<span id="b8cd3dee-14"><a href="#b8cd3dee-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8cd3dee-15"><a href="#b8cd3dee-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="b8cd3dee-16"><a href="#b8cd3dee-16" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> torch.<span class="bu">abs</span>(z) <span class="op">&lt;</span> <span class="dv">4</span></span>
+<span id="b8cd3dee-17"><a href="#b8cd3dee-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> mask.<span class="bu">any</span>():</span>
+<span id="b8cd3dee-18"><a href="#b8cd3dee-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="b8cd3dee-19"><a href="#b8cd3dee-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8cd3dee-20"><a href="#b8cd3dee-20" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> torch.where(mask, z <span class="op">*</span> z <span class="op">+</span> c, z)</span>
+<span id="b8cd3dee-21"><a href="#b8cd3dee-21" aria-hidden="true" tabindex="-1"></a>        iter_counts <span class="op">=</span> torch.where(mask, iter_counts <span class="op">+</span> <span class="dv">1</span>, iter_counts)</span>
+<span id="b8cd3dee-22"><a href="#b8cd3dee-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8cd3dee-23"><a href="#b8cd3dee-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Because we are using <code>pytorch</code> tensors, we can offload the workload onto a GPU by setting the <code>device</code> parameter to <code>'cuda'</code> or <code>'mps'</code>. This tells <code>pytorch</code> to use the GPU for all subsequent operations, which will significantly speed up the computation. The rest of the code remains the same, with the same vectorized operations and conditional updates as in the NumPy version.</p>
@@ -409,26 +415,29 @@ Tip
 <div id="eab842b5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlx.core <span class="im">as</span> mx</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_mlx(width:<span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, height:<span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, max_iter:<span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span>) <span class="op">-&gt;</span> mx.array:</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    real <span class="op">=</span> mx.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, width)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    imag <span class="op">=</span> mx.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, height)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> mx.meshgrid(real, imag, indexing<span class="op">=</span><span class="st">'xy'</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> X <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> Y</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> mx.zeros_like(c)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> mx.zeros(c.shape, dtype<span class="op">=</span>mx.int32)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> mx.<span class="bu">abs</span>(z) <span class="op">&lt;</span> <span class="dv">4</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> mask.<span class="bu">any</span>():</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> mx.where(mask, z <span class="op">*</span> z <span class="op">+</span> c, z)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        iter_counts <span class="op">=</span> mx.where(mask, iter_counts <span class="op">+</span> <span class="dv">1</span>, iter_counts)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="eab842b5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eab842b5-1"><a href="#eab842b5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mlx.core <span class="im">as</span> mx</span>
+<span id="eab842b5-2"><a href="#eab842b5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eab842b5-3"><a href="#eab842b5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eab842b5-4"><a href="#eab842b5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mandelbrot_mlx(</span>
+<span id="eab842b5-5"><a href="#eab842b5-5" aria-hidden="true" tabindex="-1"></a>    width: <span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, height: <span class="bu">int</span> <span class="op">=</span> <span class="dv">500</span>, max_iter: <span class="bu">int</span> <span class="op">=</span> <span class="dv">30</span></span>
+<span id="eab842b5-6"><a href="#eab842b5-6" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> mx.array:</span>
+<span id="eab842b5-7"><a href="#eab842b5-7" aria-hidden="true" tabindex="-1"></a>    real <span class="op">=</span> mx.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, width)</span>
+<span id="eab842b5-8"><a href="#eab842b5-8" aria-hidden="true" tabindex="-1"></a>    imag <span class="op">=</span> mx.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, height)</span>
+<span id="eab842b5-9"><a href="#eab842b5-9" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> mx.meshgrid(real, imag, indexing<span class="op">=</span><span class="st">"xy"</span>)</span>
+<span id="eab842b5-10"><a href="#eab842b5-10" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> X <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> Y</span>
+<span id="eab842b5-11"><a href="#eab842b5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eab842b5-12"><a href="#eab842b5-12" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> mx.zeros_like(c)</span>
+<span id="eab842b5-13"><a href="#eab842b5-13" aria-hidden="true" tabindex="-1"></a>    iter_counts <span class="op">=</span> mx.zeros(c.shape, dtype<span class="op">=</span>mx.int32)</span>
+<span id="eab842b5-14"><a href="#eab842b5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eab842b5-15"><a href="#eab842b5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="eab842b5-16"><a href="#eab842b5-16" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> mx.<span class="bu">abs</span>(z) <span class="op">&lt;</span> <span class="dv">4</span></span>
+<span id="eab842b5-17"><a href="#eab842b5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> mask.<span class="bu">any</span>():</span>
+<span id="eab842b5-18"><a href="#eab842b5-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="eab842b5-19"><a href="#eab842b5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eab842b5-20"><a href="#eab842b5-20" aria-hidden="true" tabindex="-1"></a>        z <span class="op">=</span> mx.where(mask, z <span class="op">*</span> z <span class="op">+</span> c, z)</span>
+<span id="eab842b5-21"><a href="#eab842b5-21" aria-hidden="true" tabindex="-1"></a>        iter_counts <span class="op">=</span> mx.where(mask, iter_counts <span class="op">+</span> <span class="dv">1</span>, iter_counts)</span>
+<span id="eab842b5-22"><a href="#eab842b5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eab842b5-23"><a href="#eab842b5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iter_counts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -439,24 +448,24 @@ Tip
 <div id="9f10a0d6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mps_available <span class="op">=</span> torch.backends.mps.is_available()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>width, height <span class="op">=</span> <span class="dv">500</span>, <span class="dv">500</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>iter_counts <span class="op">=</span> []</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>iter_counts_iterations <span class="op">=</span> compute_mandelbrot_iterations(width, height, max_iter)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_iterations)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>iter_counts_numpy <span class="op">=</span> compute_mandelbrot_numpy(width, height, max_iter)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_numpy)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>iter_counts_torch_cpu <span class="op">=</span> compute_mandelbrot_torch(width, height, max_iter, <span class="st">"cpu"</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_torch_cpu.T.cpu())</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mps_available:</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    iter_counts_torch_mps <span class="op">=</span> compute_mandelbrot_torch(width, height, max_iter, <span class="st">"mps"</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    iter_counts.append(iter_counts_torch_mps.T.cpu())</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>iter_counts_mlx <span class="op">=</span> compute_mandelbrot_mlx(width, height, max_iter)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_mlx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9f10a0d6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9f10a0d6-1"><a href="#9f10a0d6-1" aria-hidden="true" tabindex="-1"></a>mps_available <span class="op">=</span> torch.backends.mps.is_available()</span>
+<span id="9f10a0d6-2"><a href="#9f10a0d6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9f10a0d6-3"><a href="#9f10a0d6-3" aria-hidden="true" tabindex="-1"></a>width, height <span class="op">=</span> <span class="dv">500</span>, <span class="dv">500</span></span>
+<span id="9f10a0d6-4"><a href="#9f10a0d6-4" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">30</span></span>
+<span id="9f10a0d6-5"><a href="#9f10a0d6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9f10a0d6-6"><a href="#9f10a0d6-6" aria-hidden="true" tabindex="-1"></a>iter_counts <span class="op">=</span> []</span>
+<span id="9f10a0d6-7"><a href="#9f10a0d6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9f10a0d6-8"><a href="#9f10a0d6-8" aria-hidden="true" tabindex="-1"></a>iter_counts_iterations <span class="op">=</span> compute_mandelbrot_iterations(width, height, max_iter)</span>
+<span id="9f10a0d6-9"><a href="#9f10a0d6-9" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_iterations)</span>
+<span id="9f10a0d6-10"><a href="#9f10a0d6-10" aria-hidden="true" tabindex="-1"></a>iter_counts_numpy <span class="op">=</span> compute_mandelbrot_numpy(width, height, max_iter)</span>
+<span id="9f10a0d6-11"><a href="#9f10a0d6-11" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_numpy)</span>
+<span id="9f10a0d6-12"><a href="#9f10a0d6-12" aria-hidden="true" tabindex="-1"></a>iter_counts_torch_cpu <span class="op">=</span> compute_mandelbrot_torch(width, height, max_iter, <span class="st">"cpu"</span>)</span>
+<span id="9f10a0d6-13"><a href="#9f10a0d6-13" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_torch_cpu.T.cpu())</span>
+<span id="9f10a0d6-14"><a href="#9f10a0d6-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mps_available:</span>
+<span id="9f10a0d6-15"><a href="#9f10a0d6-15" aria-hidden="true" tabindex="-1"></a>    iter_counts_torch_mps <span class="op">=</span> compute_mandelbrot_torch(width, height, max_iter, <span class="st">"mps"</span>)</span>
+<span id="9f10a0d6-16"><a href="#9f10a0d6-16" aria-hidden="true" tabindex="-1"></a>    iter_counts.append(iter_counts_torch_mps.T.cpu())</span>
+<span id="9f10a0d6-17"><a href="#9f10a0d6-17" aria-hidden="true" tabindex="-1"></a>iter_counts_mlx <span class="op">=</span> compute_mandelbrot_mlx(width, height, max_iter)</span>
+<span id="9f10a0d6-18"><a href="#9f10a0d6-18" aria-hidden="true" tabindex="-1"></a>iter_counts.append(iter_counts_mlx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -466,57 +475,66 @@ Tip
 <div id="47ba4c8c" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_mandelbrot_grid(iter_counts_list:<span class="bu">list</span>, titles:<span class="bu">list</span> <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(iter_counts_list)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No Mandelbrot sets to plot."</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determine grid dimensions (roughly square)</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> math.ceil(math.sqrt(n))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> math.ceil(n <span class="op">/</span> n_cols)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="fl">2.5</span> <span class="op">*</span> n_cols, <span class="fl">2.5</span> <span class="op">*</span> n_rows))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Flatten axes array for easier iteration</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> [axes]</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> axes.flatten()</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (ax, counts) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(axes, iter_counts_list)):</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        ax.imshow(counts, cmap<span class="op">=</span><span class="st">'plasma'</span>, interpolation<span class="op">=</span><span class="st">'nearest'</span>, origin<span class="op">=</span><span class="st">'lower'</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use provided title if available, else default to "Mandelbrot"</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> titles[i] <span class="cf">if</span> titles <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> i <span class="op">&lt;</span> <span class="bu">len</span>(titles) <span class="cf">else</span> <span class="st">"Mandelbrot"</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add title text inside the plot at the top-left corner</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        ax.text(<span class="fl">0.05</span>, <span class="fl">0.95</span>, title, transform<span class="op">=</span>ax.transAxes, </span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">'white'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, verticalalignment<span class="op">=</span><span class="st">'top'</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">'black'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">'off'</span>)</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hide any unused subplots</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> axes[n:]:</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">'off'</span>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="47ba4c8c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="47ba4c8c-1"><a href="#47ba4c8c-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="47ba4c8c-2"><a href="#47ba4c8c-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="47ba4c8c-3"><a href="#47ba4c8c-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-4"><a href="#47ba4c8c-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-5"><a href="#47ba4c8c-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_mandelbrot_grid(iter_counts_list: <span class="bu">list</span>, titles: <span class="bu">list</span> <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="47ba4c8c-6"><a href="#47ba4c8c-6" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(iter_counts_list)</span>
+<span id="47ba4c8c-7"><a href="#47ba4c8c-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="47ba4c8c-8"><a href="#47ba4c8c-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No Mandelbrot sets to plot."</span>)</span>
+<span id="47ba4c8c-9"><a href="#47ba4c8c-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="47ba4c8c-10"><a href="#47ba4c8c-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-11"><a href="#47ba4c8c-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determine grid dimensions (roughly square)</span></span>
+<span id="47ba4c8c-12"><a href="#47ba4c8c-12" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> math.ceil(math.sqrt(n))</span>
+<span id="47ba4c8c-13"><a href="#47ba4c8c-13" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> math.ceil(n <span class="op">/</span> n_cols)</span>
+<span id="47ba4c8c-14"><a href="#47ba4c8c-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-15"><a href="#47ba4c8c-15" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="fl">2.5</span> <span class="op">*</span> n_cols, <span class="fl">2.5</span> <span class="op">*</span> n_rows))</span>
+<span id="47ba4c8c-16"><a href="#47ba4c8c-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-17"><a href="#47ba4c8c-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Flatten axes array for easier iteration</span></span>
+<span id="47ba4c8c-18"><a href="#47ba4c8c-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="47ba4c8c-19"><a href="#47ba4c8c-19" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> [axes]</span>
+<span id="47ba4c8c-20"><a href="#47ba4c8c-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="47ba4c8c-21"><a href="#47ba4c8c-21" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> axes.flatten()</span>
+<span id="47ba4c8c-22"><a href="#47ba4c8c-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-23"><a href="#47ba4c8c-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (ax, counts) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(axes, iter_counts_list)):</span>
+<span id="47ba4c8c-24"><a href="#47ba4c8c-24" aria-hidden="true" tabindex="-1"></a>        ax.imshow(counts, cmap<span class="op">=</span><span class="st">"plasma"</span>, interpolation<span class="op">=</span><span class="st">"nearest"</span>, origin<span class="op">=</span><span class="st">"lower"</span>)</span>
+<span id="47ba4c8c-25"><a href="#47ba4c8c-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use provided title if available, else default to "Mandelbrot"</span></span>
+<span id="47ba4c8c-26"><a href="#47ba4c8c-26" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> titles[i] <span class="cf">if</span> titles <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> i <span class="op">&lt;</span> <span class="bu">len</span>(titles) <span class="cf">else</span> <span class="st">"Mandelbrot"</span></span>
+<span id="47ba4c8c-27"><a href="#47ba4c8c-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add title text inside the plot at the top-left corner</span></span>
+<span id="47ba4c8c-28"><a href="#47ba4c8c-28" aria-hidden="true" tabindex="-1"></a>        ax.text(</span>
+<span id="47ba4c8c-29"><a href="#47ba4c8c-29" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.05</span>,</span>
+<span id="47ba4c8c-30"><a href="#47ba4c8c-30" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.95</span>,</span>
+<span id="47ba4c8c-31"><a href="#47ba4c8c-31" aria-hidden="true" tabindex="-1"></a>            title,</span>
+<span id="47ba4c8c-32"><a href="#47ba4c8c-32" aria-hidden="true" tabindex="-1"></a>            transform<span class="op">=</span>ax.transAxes,</span>
+<span id="47ba4c8c-33"><a href="#47ba4c8c-33" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="47ba4c8c-34"><a href="#47ba4c8c-34" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="dv">14</span>,</span>
+<span id="47ba4c8c-35"><a href="#47ba4c8c-35" aria-hidden="true" tabindex="-1"></a>            verticalalignment<span class="op">=</span><span class="st">"top"</span>,</span>
+<span id="47ba4c8c-36"><a href="#47ba4c8c-36" aria-hidden="true" tabindex="-1"></a>            bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>),</span>
+<span id="47ba4c8c-37"><a href="#47ba4c8c-37" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="47ba4c8c-38"><a href="#47ba4c8c-38" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="47ba4c8c-39"><a href="#47ba4c8c-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-40"><a href="#47ba4c8c-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hide any unused subplots</span></span>
+<span id="47ba4c8c-41"><a href="#47ba4c8c-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> axes[n:]:</span>
+<span id="47ba4c8c-42"><a href="#47ba4c8c-42" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="47ba4c8c-43"><a href="#47ba4c8c-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="47ba4c8c-44"><a href="#47ba4c8c-44" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="47ba4c8c-45"><a href="#47ba4c8c-45" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="d4fa6b04" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plot_mandelbrot_grid(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    iter_counts,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    titles<span class="op">=</span>[</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Python (iterations)"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NumPy"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PyTorch (CPU)"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PyTorch (MPS)"</span> <span class="cf">if</span> mps_available <span class="cf">else</span> <span class="va">None</span>, <span class="st">"Apple MLX"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d4fa6b04"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d4fa6b04-1"><a href="#d4fa6b04-1" aria-hidden="true" tabindex="-1"></a>plot_mandelbrot_grid(</span>
+<span id="d4fa6b04-2"><a href="#d4fa6b04-2" aria-hidden="true" tabindex="-1"></a>    iter_counts,</span>
+<span id="d4fa6b04-3"><a href="#d4fa6b04-3" aria-hidden="true" tabindex="-1"></a>    titles<span class="op">=</span>[</span>
+<span id="d4fa6b04-4"><a href="#d4fa6b04-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Python (iterations)"</span>,</span>
+<span id="d4fa6b04-5"><a href="#d4fa6b04-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NumPy"</span>,</span>
+<span id="d4fa6b04-6"><a href="#d4fa6b04-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PyTorch (CPU)"</span>,</span>
+<span id="d4fa6b04-7"><a href="#d4fa6b04-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PyTorch (MPS)"</span> <span class="cf">if</span> mps_available <span class="cf">else</span> <span class="va">None</span>,</span>
+<span id="d4fa6b04-8"><a href="#d4fa6b04-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Apple MLX"</span>,</span>
+<span id="d4fa6b04-9"><a href="#d4fa6b04-9" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="d4fa6b04-10"><a href="#d4fa6b04-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -534,62 +552,59 @@ Tip
 <div id="b334194e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>resolutions <span class="op">=</span> [<span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>]</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>header <span class="op">=</span> [</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Resolution"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Iterations"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"NumPy"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PyTorch/cpu"</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PyTorch/mps"</span>, </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"MLX"</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>table_data <span class="op">=</span> []</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> resolutions:</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> height <span class="op">=</span> n</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    timings <span class="op">=</span> {}</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_iterations(width, height, max_iter)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"Iterations"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_numpy(width, height, max_iter)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"NumPy"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_torch(width, height, max_iter, <span class="st">"cpu"</span>)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"PyTorch/cpu"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mps_available:</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        start_time <span class="op">=</span> time.time()</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        compute_mandelbrot_torch(width, height, max_iter, <span class="st">"mps"</span>)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>        timings[<span class="st">"PyTorch/mps"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        timings[<span class="st">"PyTorch/mps"</span>] <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_mlx(width, height, max_iter)</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"MLX"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> [</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'Iterations'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'NumPy'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'PyTorch/cpu'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'PyTorch/mps'</span>]<span class="sc">:.3f}</span><span class="ss">"</span> <span class="cf">if</span> timings[<span class="st">'PyTorch/mps'</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> <span class="st">"N/A"</span>,</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'MLX'</span>]<span class="sc">:.3f}</span><span class="ss">"</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    table_data.append(row)</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="op">*</span>header))</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> table_data:</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="op">*</span>row))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b334194e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b334194e-1"><a href="#b334194e-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="b334194e-2"><a href="#b334194e-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-3"><a href="#b334194e-3" aria-hidden="true" tabindex="-1"></a>resolutions <span class="op">=</span> [<span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>]</span>
+<span id="b334194e-4"><a href="#b334194e-4" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="b334194e-5"><a href="#b334194e-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-6"><a href="#b334194e-6" aria-hidden="true" tabindex="-1"></a>header <span class="op">=</span> [<span class="st">"Resolution"</span>, <span class="st">"Iterations"</span>, <span class="st">"NumPy"</span>, <span class="st">"PyTorch/cpu"</span>, <span class="st">"PyTorch/mps"</span>, <span class="st">"MLX"</span>]</span>
+<span id="b334194e-7"><a href="#b334194e-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-8"><a href="#b334194e-8" aria-hidden="true" tabindex="-1"></a>table_data <span class="op">=</span> []</span>
+<span id="b334194e-9"><a href="#b334194e-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-10"><a href="#b334194e-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> resolutions:</span>
+<span id="b334194e-11"><a href="#b334194e-11" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> height <span class="op">=</span> n</span>
+<span id="b334194e-12"><a href="#b334194e-12" aria-hidden="true" tabindex="-1"></a>    timings <span class="op">=</span> {}</span>
+<span id="b334194e-13"><a href="#b334194e-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-14"><a href="#b334194e-14" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
+<span id="b334194e-15"><a href="#b334194e-15" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_iterations(width, height, max_iter)</span>
+<span id="b334194e-16"><a href="#b334194e-16" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"Iterations"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="b334194e-17"><a href="#b334194e-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-18"><a href="#b334194e-18" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
+<span id="b334194e-19"><a href="#b334194e-19" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_numpy(width, height, max_iter)</span>
+<span id="b334194e-20"><a href="#b334194e-20" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"NumPy"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="b334194e-21"><a href="#b334194e-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-22"><a href="#b334194e-22" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
+<span id="b334194e-23"><a href="#b334194e-23" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_torch(width, height, max_iter, <span class="st">"cpu"</span>)</span>
+<span id="b334194e-24"><a href="#b334194e-24" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"PyTorch/cpu"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="b334194e-25"><a href="#b334194e-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-26"><a href="#b334194e-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mps_available:</span>
+<span id="b334194e-27"><a href="#b334194e-27" aria-hidden="true" tabindex="-1"></a>        start_time <span class="op">=</span> time.time()</span>
+<span id="b334194e-28"><a href="#b334194e-28" aria-hidden="true" tabindex="-1"></a>        compute_mandelbrot_torch(width, height, max_iter, <span class="st">"mps"</span>)</span>
+<span id="b334194e-29"><a href="#b334194e-29" aria-hidden="true" tabindex="-1"></a>        timings[<span class="st">"PyTorch/mps"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="b334194e-30"><a href="#b334194e-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="b334194e-31"><a href="#b334194e-31" aria-hidden="true" tabindex="-1"></a>        timings[<span class="st">"PyTorch/mps"</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="b334194e-32"><a href="#b334194e-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-33"><a href="#b334194e-33" aria-hidden="true" tabindex="-1"></a>    start_time <span class="op">=</span> time.time()</span>
+<span id="b334194e-34"><a href="#b334194e-34" aria-hidden="true" tabindex="-1"></a>    compute_mandelbrot_mlx(width, height, max_iter)</span>
+<span id="b334194e-35"><a href="#b334194e-35" aria-hidden="true" tabindex="-1"></a>    timings[<span class="st">"MLX"</span>] <span class="op">=</span> time.time() <span class="op">-</span> start_time</span>
+<span id="b334194e-36"><a href="#b334194e-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-37"><a href="#b334194e-37" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> [</span>
+<span id="b334194e-38"><a href="#b334194e-38" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="b334194e-39"><a href="#b334194e-39" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'Iterations'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
+<span id="b334194e-40"><a href="#b334194e-40" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'NumPy'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
+<span id="b334194e-41"><a href="#b334194e-41" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'PyTorch/cpu'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
+<span id="b334194e-42"><a href="#b334194e-42" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="b334194e-43"><a href="#b334194e-43" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'PyTorch/mps'</span>]<span class="sc">:.3f}</span><span class="ss">"</span></span>
+<span id="b334194e-44"><a href="#b334194e-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> timings[<span class="st">"PyTorch/mps"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="b334194e-45"><a href="#b334194e-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span> <span class="st">"N/A"</span></span>
+<span id="b334194e-46"><a href="#b334194e-46" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="b334194e-47"><a href="#b334194e-47" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>timings[<span class="st">'MLX'</span>]<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
+<span id="b334194e-48"><a href="#b334194e-48" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="b334194e-49"><a href="#b334194e-49" aria-hidden="true" tabindex="-1"></a>    table_data.append(row)</span>
+<span id="b334194e-50"><a href="#b334194e-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b334194e-51"><a href="#b334194e-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="op">*</span>header))</span>
+<span id="b334194e-52"><a href="#b334194e-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> table_data:</span>
+<span id="b334194e-53"><a href="#b334194e-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;15}</span><span class="st"> </span><span class="sc">{:&lt;12}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="op">*</span>row))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Resolution   Iterations   NumPy        PyTorch/cpu     PyTorch/mps     MLX         
@@ -603,42 +618,42 @@ Tip
 <div id="b1ebaf4b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> ticker</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>resolutions_numeric <span class="op">=</span> [<span class="bu">int</span>(row[<span class="dv">0</span>].split(<span class="st">'x'</span>)[<span class="dv">0</span>]) <span class="cf">for</span> row <span class="kw">in</span> table_data]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>methods <span class="op">=</span> header[<span class="dv">1</span>:]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>num_res <span class="op">=</span> <span class="bu">len</span>(resolutions_numeric)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>num_methods <span class="op">=</span> <span class="bu">len</span>(methods)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(num_res)  <span class="co"># x locations for the groups</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">0.15</span>            <span class="co"># width of each bar</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot bars for each method</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, method <span class="kw">in</span> <span class="bu">enumerate</span>(methods):</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    times <span class="op">=</span> []</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> table_data:</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> row[i<span class="op">+</span><span class="dv">1</span>]  <span class="co"># skip the resolution column</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use 0 for "N/A", or you could choose to skip/handle it differently</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        times.append(<span class="bu">float</span>(value) <span class="cf">if</span> value <span class="op">!=</span> <span class="st">"N/A"</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate offset for each method within the group</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    offset <span class="op">=</span> (i <span class="op">-</span> num_methods<span class="op">/</span><span class="dv">2</span>) <span class="op">*</span> width <span class="op">+</span> width<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    ax.bar(x <span class="op">+</span> offset, times, width, label<span class="op">=</span>method)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and ticks</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Resolution (pixels)"</span>)</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Time (s)"</span>)</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(x)</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels([<span class="ss">f"</span><span class="sc">{</span>res<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>res<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> res <span class="kw">in</span> resolutions_numeric])</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable scientific notation on the y-axis</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>formatter <span class="op">=</span> ticker.ScalarFormatter()</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>formatter.set_scientific(<span class="va">False</span>)</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(formatter)</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b1ebaf4b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b1ebaf4b-1"><a href="#b1ebaf4b-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> ticker</span>
+<span id="b1ebaf4b-2"><a href="#b1ebaf4b-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-3"><a href="#b1ebaf4b-3" aria-hidden="true" tabindex="-1"></a>resolutions_numeric <span class="op">=</span> [<span class="bu">int</span>(row[<span class="dv">0</span>].split(<span class="st">"x"</span>)[<span class="dv">0</span>]) <span class="cf">for</span> row <span class="kw">in</span> table_data]</span>
+<span id="b1ebaf4b-4"><a href="#b1ebaf4b-4" aria-hidden="true" tabindex="-1"></a>methods <span class="op">=</span> header[<span class="dv">1</span>:]</span>
+<span id="b1ebaf4b-5"><a href="#b1ebaf4b-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-6"><a href="#b1ebaf4b-6" aria-hidden="true" tabindex="-1"></a>num_res <span class="op">=</span> <span class="bu">len</span>(resolutions_numeric)</span>
+<span id="b1ebaf4b-7"><a href="#b1ebaf4b-7" aria-hidden="true" tabindex="-1"></a>num_methods <span class="op">=</span> <span class="bu">len</span>(methods)</span>
+<span id="b1ebaf4b-8"><a href="#b1ebaf4b-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(num_res)  <span class="co"># x locations for the groups</span></span>
+<span id="b1ebaf4b-9"><a href="#b1ebaf4b-9" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">0.15</span>  <span class="co"># width of each bar</span></span>
+<span id="b1ebaf4b-10"><a href="#b1ebaf4b-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-11"><a href="#b1ebaf4b-11" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="b1ebaf4b-12"><a href="#b1ebaf4b-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-13"><a href="#b1ebaf4b-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot bars for each method</span></span>
+<span id="b1ebaf4b-14"><a href="#b1ebaf4b-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, method <span class="kw">in</span> <span class="bu">enumerate</span>(methods):</span>
+<span id="b1ebaf4b-15"><a href="#b1ebaf4b-15" aria-hidden="true" tabindex="-1"></a>    times <span class="op">=</span> []</span>
+<span id="b1ebaf4b-16"><a href="#b1ebaf4b-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> table_data:</span>
+<span id="b1ebaf4b-17"><a href="#b1ebaf4b-17" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> row[i <span class="op">+</span> <span class="dv">1</span>]  <span class="co"># skip the resolution column</span></span>
+<span id="b1ebaf4b-18"><a href="#b1ebaf4b-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use 0 for "N/A", or you could choose to skip/handle it differently</span></span>
+<span id="b1ebaf4b-19"><a href="#b1ebaf4b-19" aria-hidden="true" tabindex="-1"></a>        times.append(<span class="bu">float</span>(value) <span class="cf">if</span> value <span class="op">!=</span> <span class="st">"N/A"</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
+<span id="b1ebaf4b-20"><a href="#b1ebaf4b-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate offset for each method within the group</span></span>
+<span id="b1ebaf4b-21"><a href="#b1ebaf4b-21" aria-hidden="true" tabindex="-1"></a>    offset <span class="op">=</span> (i <span class="op">-</span> num_methods <span class="op">/</span> <span class="dv">2</span>) <span class="op">*</span> width <span class="op">+</span> width <span class="op">/</span> <span class="dv">2</span></span>
+<span id="b1ebaf4b-22"><a href="#b1ebaf4b-22" aria-hidden="true" tabindex="-1"></a>    ax.bar(x <span class="op">+</span> offset, times, width, label<span class="op">=</span>method)</span>
+<span id="b1ebaf4b-23"><a href="#b1ebaf4b-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-24"><a href="#b1ebaf4b-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and ticks</span></span>
+<span id="b1ebaf4b-25"><a href="#b1ebaf4b-25" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Resolution (pixels)"</span>)</span>
+<span id="b1ebaf4b-26"><a href="#b1ebaf4b-26" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Time (s)"</span>)</span>
+<span id="b1ebaf4b-27"><a href="#b1ebaf4b-27" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(x)</span>
+<span id="b1ebaf4b-28"><a href="#b1ebaf4b-28" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels([<span class="ss">f"</span><span class="sc">{</span>res<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>res<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> res <span class="kw">in</span> resolutions_numeric])</span>
+<span id="b1ebaf4b-29"><a href="#b1ebaf4b-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-30"><a href="#b1ebaf4b-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable scientific notation on the y-axis</span></span>
+<span id="b1ebaf4b-31"><a href="#b1ebaf4b-31" aria-hidden="true" tabindex="-1"></a>formatter <span class="op">=</span> ticker.ScalarFormatter()</span>
+<span id="b1ebaf4b-32"><a href="#b1ebaf4b-32" aria-hidden="true" tabindex="-1"></a>formatter.set_scientific(<span class="va">False</span>)</span>
+<span id="b1ebaf4b-33"><a href="#b1ebaf4b-33" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(formatter)</span>
+<span id="b1ebaf4b-34"><a href="#b1ebaf4b-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b1ebaf4b-35"><a href="#b1ebaf4b-35" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="b1ebaf4b-36"><a href="#b1ebaf4b-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>

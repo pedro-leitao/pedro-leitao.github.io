@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="9b3bb229" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>d yasserh<span class="op">/</span>wine<span class="op">-</span>quality<span class="op">-</span>dataset <span class="op">--</span>unzip <span class="op">-</span>p .data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9b3bb229"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9b3bb229-1"><a href="#9b3bb229-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>d yasserh<span class="op">/</span>wine<span class="op">-</span>quality<span class="op">-</span>dataset <span class="op">--</span>unzip <span class="op">-</span>p .data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dataset URL: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
@@ -245,18 +245,18 @@ Downloading wine-quality-dataset.zip to .data
 <div id="d94ff68b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in '.data/WineQT.csv' as a pandas dataframe</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> pd.read_csv(<span class="st">'.data/WineQT.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d94ff68b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d94ff68b-1"><a href="#d94ff68b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in '.data/WineQT.csv' as a pandas dataframe</span></span>
+<span id="d94ff68b-2"><a href="#d94ff68b-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d94ff68b-3"><a href="#d94ff68b-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="d94ff68b-4"><a href="#d94ff68b-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d94ff68b-5"><a href="#d94ff68b-5" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> pd.read_csv(<span class="st">".data/WineQT.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let us look at a few data examples.</p>
 <div id="9ead71c3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9ead71c3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9ead71c3-1"><a href="#9ead71c3-1" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -469,7 +469,7 @@ Downloading wine-quality-dataset.zip to .data
 <div id="f82cde4f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wine.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f82cde4f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f82cde4f-1"><a href="#f82cde4f-1" aria-hidden="true" tabindex="-1"></a>wine.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -498,14 +498,14 @@ memory usage: 116.2 KB</code></pre>
 <div id="577fd9e5" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>wine.drop(<span class="st">'Id'</span>, inplace<span class="op">=</span><span class="va">True</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="577fd9e5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="577fd9e5-1"><a href="#577fd9e5-1" aria-hidden="true" tabindex="-1"></a>wine.drop(<span class="st">"Id"</span>, inplace<span class="op">=</span><span class="va">True</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let us further describe the dataset to understand the distribution of the data.</p>
 <div id="6a3311af" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wine.describe().drop(<span class="st">'count'</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">'Greens'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6a3311af"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6a3311af-1"><a href="#6a3311af-1" aria-hidden="true" tabindex="-1"></a>wine.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <style type="text/css">
@@ -847,15 +847,15 @@ memory usage: 116.2 KB</code></pre>
 <div id="c2efbb7f" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>wine, palette<span class="op">=</span><span class="st">"Greens"</span>)  <span class="co"># This applies the green palette directly</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)  <span class="co"># Rotate x-tick labels for better readability</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Value'</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c2efbb7f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c2efbb7f-1"><a href="#c2efbb7f-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="c2efbb7f-2"><a href="#c2efbb7f-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="c2efbb7f-3"><a href="#c2efbb7f-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c2efbb7f-4"><a href="#c2efbb7f-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="c2efbb7f-5"><a href="#c2efbb7f-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>wine, palette<span class="op">=</span><span class="st">"Greens"</span>)  <span class="co"># This applies the green palette directly</span></span>
+<span id="c2efbb7f-6"><a href="#c2efbb7f-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c2efbb7f-7"><a href="#c2efbb7f-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)  <span class="co"># Rotate x-tick labels for better readability</span></span>
+<span id="c2efbb7f-8"><a href="#c2efbb7f-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Value"</span>)</span>
+<span id="c2efbb7f-9"><a href="#c2efbb7f-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -883,9 +883,9 @@ About Scaling Features
 <div id="b5d85ce7" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality'</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(wine[<span class="st">'quality'</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b5d85ce7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b5d85ce7-1"><a href="#b5d85ce7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality'</span></span>
+<span id="b5d85ce7-2"><a href="#b5d85ce7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b5d85ce7-3"><a href="#b5d85ce7-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(wine[<span class="st">"quality"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -937,14 +937,14 @@ About Scaling Features
 <div id="c51f055a" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality' as a histogram</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>wine, x<span class="op">=</span><span class="st">'quality'</span>, bins<span class="op">=</span><span class="dv">10</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Quality'</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Quality'</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c51f055a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c51f055a-1"><a href="#c51f055a-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality' as a histogram</span></span>
+<span id="c51f055a-2"><a href="#c51f055a-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="c51f055a-3"><a href="#c51f055a-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>wine, x<span class="op">=</span><span class="st">"quality"</span>, bins<span class="op">=</span><span class="dv">10</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="c51f055a-4"><a href="#c51f055a-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c51f055a-5"><a href="#c51f055a-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Quality"</span>)</span>
+<span id="c51f055a-6"><a href="#c51f055a-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="c51f055a-7"><a href="#c51f055a-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Quality"</span>)</span>
+<span id="c51f055a-8"><a href="#c51f055a-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -971,25 +971,23 @@ About Dropping Features
 <div id="8788f615" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation chart of the features against the 'quality' target variable.</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> wine.corr()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify features with correlation to 'quality' less than 0.2</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use absolute value to consider both positive and negative correlations</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>features_to_keep <span class="op">=</span> correlation_matrix.index[<span class="bu">abs</span>(correlation_matrix[<span class="st">"quality"</span>]) <span class="op">&gt;=</span> <span class="fl">0.2</span>]</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(correlation_matrix,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            annot<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span><span class="st">'summer_r'</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            fmt<span class="op">=</span><span class="st">'.2f'</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>            linewidths<span class="op">=</span><span class="dv">2</span>).set_title(<span class="st">"Wine Chemistry/Quality Correlation Heatmap"</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep these features in the DataFrame, including the target variable 'quality'</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> wine[features_to_keep]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="8788f615"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8788f615-1"><a href="#8788f615-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation chart of the features against the 'quality' target variable.</span></span>
+<span id="8788f615-2"><a href="#8788f615-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8788f615-3"><a href="#8788f615-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
+<span id="8788f615-4"><a href="#8788f615-4" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> wine.corr()</span>
+<span id="8788f615-5"><a href="#8788f615-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8788f615-6"><a href="#8788f615-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify features with correlation to 'quality' less than 0.2</span></span>
+<span id="8788f615-7"><a href="#8788f615-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use absolute value to consider both positive and negative correlations</span></span>
+<span id="8788f615-8"><a href="#8788f615-8" aria-hidden="true" tabindex="-1"></a>features_to_keep <span class="op">=</span> correlation_matrix.index[<span class="bu">abs</span>(correlation_matrix[<span class="st">"quality"</span>]) <span class="op">&gt;=</span> <span class="fl">0.2</span>]</span>
+<span id="8788f615-9"><a href="#8788f615-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8788f615-10"><a href="#8788f615-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="8788f615-11"><a href="#8788f615-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
+<span id="8788f615-12"><a href="#8788f615-12" aria-hidden="true" tabindex="-1"></a>    correlation_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"summer_r"</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, linewidths<span class="op">=</span><span class="dv">2</span></span>
+<span id="8788f615-13"><a href="#8788f615-13" aria-hidden="true" tabindex="-1"></a>).set_title(<span class="st">"Wine Chemistry/Quality Correlation Heatmap"</span>)</span>
+<span id="8788f615-14"><a href="#8788f615-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="8788f615-15"><a href="#8788f615-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8788f615-16"><a href="#8788f615-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep these features in the DataFrame, including the target variable 'quality'</span></span>
+<span id="8788f615-17"><a href="#8788f615-17" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> wine[features_to_keep]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1004,18 +1002,18 @@ About Dropping Features
 <div id="c6692253" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us chart a matrix of plots, with X vs Y between all features.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This will effectively give us a chemical composition matrix, where the color of the plot will indicate the quality.</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair plot using seaborn</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(context<span class="op">=</span><span class="st">"paper"</span>, style<span class="op">=</span><span class="st">"ticks"</span>)  <span class="co"># Set the style of the visualization</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>pairplot <span class="op">=</span> sns.pairplot(wine, hue<span class="op">=</span><span class="st">"quality"</span>, palette<span class="op">=</span><span class="st">"Greens"</span>, corner<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>pairplot.figure.suptitle(<span class="st">"Wine chemical features by Quality"</span>, size<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c6692253"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c6692253-1"><a href="#c6692253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us chart a matrix of plots, with X vs Y between all features.</span></span>
+<span id="c6692253-2"><a href="#c6692253-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This will effectively give us a chemical composition matrix, where the color of the plot will indicate the quality.</span></span>
+<span id="c6692253-3"><a href="#c6692253-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c6692253-4"><a href="#c6692253-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair plot using seaborn</span></span>
+<span id="c6692253-5"><a href="#c6692253-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(context<span class="op">=</span><span class="st">"paper"</span>, style<span class="op">=</span><span class="st">"ticks"</span>)  <span class="co"># Set the style of the visualization</span></span>
+<span id="c6692253-6"><a href="#c6692253-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="c6692253-7"><a href="#c6692253-7" aria-hidden="true" tabindex="-1"></a>pairplot <span class="op">=</span> sns.pairplot(wine, hue<span class="op">=</span><span class="st">"quality"</span>, palette<span class="op">=</span><span class="st">"Greens"</span>, corner<span class="op">=</span><span class="va">True</span>)</span>
+<span id="c6692253-8"><a href="#c6692253-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c6692253-9"><a href="#c6692253-9" aria-hidden="true" tabindex="-1"></a>pairplot.figure.suptitle(<span class="st">"Wine chemical features by Quality"</span>, size<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="c6692253-10"><a href="#c6692253-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="c6692253-11"><a href="#c6692253-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c6692253-12"><a href="#c6692253-12" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 768x576 with 0 Axes&gt;</code></pre>
@@ -1142,44 +1140,51 @@ About Dropping Features
 <div id="dcf64a92" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality <span class="op">=</span> wine.groupby(<span class="st">'quality'</span>).mean()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="dcf64a92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dcf64a92-1"><a href="#dcf64a92-1" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality <span class="op">=</span> wine.groupby(<span class="st">"quality"</span>).mean()</span>
+<span id="dcf64a92-2"><a href="#dcf64a92-2" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>And now let us plot the positioning for the three best correlators.</p>
 <div id="c37409e5" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize 'quality' values for color mapping</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> plt.Normalize(wine_grouped_by_quality[<span class="st">'quality'</span>].<span class="bu">min</span>(), wine_grouped_by_quality[<span class="st">'quality'</span>].<span class="bu">max</span>())</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.get_cmap(<span class="st">'Greens'</span>)(norm(wine_grouped_by_quality[<span class="st">'quality'</span>]))</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D scatter plot</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(wine_grouped_by_quality[<span class="st">'alcohol'</span>], </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                wine_grouped_by_quality[<span class="st">'sulphates'</span>], </span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                wine_grouped_by_quality[<span class="st">'citric acid'</span>], </span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                c<span class="op">=</span>colors, edgecolor<span class="op">=</span><span class="st">'k'</span>, s<span class="op">=</span><span class="dv">40</span>, depthshade<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a color bar with the correct mapping</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(plt.cm.ScalarMappable(norm<span class="op">=</span>norm, cmap<span class="op">=</span><span class="st">'Greens'</span>), ax<span class="op">=</span>ax, pad<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">'Quality'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the color bar tick labels</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>cbar.ax.tick_params(labelsize<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Adjust labelsize as needed</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Alcohol'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Sulphates'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Citric Acid'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Highest Positive Correlator Positions'</span>)</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the tick labels on all axes</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'minor'</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c37409e5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c37409e5-1"><a href="#c37409e5-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="c37409e5-2"><a href="#c37409e5-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
+<span id="c37409e5-3"><a href="#c37409e5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c37409e5-4"><a href="#c37409e5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize 'quality' values for color mapping</span></span>
+<span id="c37409e5-5"><a href="#c37409e5-5" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> plt.Normalize(</span>
+<span id="c37409e5-6"><a href="#c37409e5-6" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"quality"</span>].<span class="bu">min</span>(), wine_grouped_by_quality[<span class="st">"quality"</span>].<span class="bu">max</span>()</span>
+<span id="c37409e5-7"><a href="#c37409e5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="c37409e5-8"><a href="#c37409e5-8" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.get_cmap(<span class="st">"Greens"</span>)(norm(wine_grouped_by_quality[<span class="st">"quality"</span>]))</span>
+<span id="c37409e5-9"><a href="#c37409e5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c37409e5-10"><a href="#c37409e5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D scatter plot</span></span>
+<span id="c37409e5-11"><a href="#c37409e5-11" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(</span>
+<span id="c37409e5-12"><a href="#c37409e5-12" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"alcohol"</span>],</span>
+<span id="c37409e5-13"><a href="#c37409e5-13" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"sulphates"</span>],</span>
+<span id="c37409e5-14"><a href="#c37409e5-14" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"citric acid"</span>],</span>
+<span id="c37409e5-15"><a href="#c37409e5-15" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>colors,</span>
+<span id="c37409e5-16"><a href="#c37409e5-16" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="c37409e5-17"><a href="#c37409e5-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">40</span>,</span>
+<span id="c37409e5-18"><a href="#c37409e5-18" aria-hidden="true" tabindex="-1"></a>    depthshade<span class="op">=</span><span class="va">True</span>,</span>
+<span id="c37409e5-19"><a href="#c37409e5-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="c37409e5-20"><a href="#c37409e5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c37409e5-21"><a href="#c37409e5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a color bar with the correct mapping</span></span>
+<span id="c37409e5-22"><a href="#c37409e5-22" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(plt.cm.ScalarMappable(norm<span class="op">=</span>norm, cmap<span class="op">=</span><span class="st">"Greens"</span>), ax<span class="op">=</span>ax, pad<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="c37409e5-23"><a href="#c37409e5-23" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Quality"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="c37409e5-24"><a href="#c37409e5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the color bar tick labels</span></span>
+<span id="c37409e5-25"><a href="#c37409e5-25" aria-hidden="true" tabindex="-1"></a>cbar.ax.tick_params(labelsize<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Adjust labelsize as needed</span></span>
+<span id="c37409e5-26"><a href="#c37409e5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c37409e5-27"><a href="#c37409e5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
+<span id="c37409e5-28"><a href="#c37409e5-28" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Alcohol"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="c37409e5-29"><a href="#c37409e5-29" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Sulphates"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="c37409e5-30"><a href="#c37409e5-30" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">"Citric Acid"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="c37409e5-31"><a href="#c37409e5-31" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Highest Positive Correlator Positions"</span>)</span>
+<span id="c37409e5-32"><a href="#c37409e5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c37409e5-33"><a href="#c37409e5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the tick labels on all axes</span></span>
+<span id="c37409e5-34"><a href="#c37409e5-34" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, which<span class="op">=</span><span class="st">"major"</span>, labelsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="c37409e5-35"><a href="#c37409e5-35" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, which<span class="op">=</span><span class="st">"minor"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="c37409e5-36"><a href="#c37409e5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c37409e5-37"><a href="#c37409e5-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1204,96 +1209,124 @@ About Dropping Features
 <div id="e92e41d9" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV, cross_val_score</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVR</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Split 'wine' into features (X, all columns except quality) and target (y, only quality)</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> wine.drop(<span class="st">'quality'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> wine[<span class="st">'quality'</span>]</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset into training and testing sets</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Define models and their respective parameter grids. Note that the parameter grid keys must be prefixed by the model name in the pipeline.</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>models_params <span class="op">=</span> [</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Linear Regression'</span>, LinearRegression(), {}),</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Random Forest'</span>, RandomForestRegressor(), {</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Random Forest__n_estimators'</span>: [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">200</span>],</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Random Forest__max_depth'</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    }),</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'SVR'</span>, SVR(), {</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'SVR__C'</span>: [<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>],</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'SVR__kernel'</span>: [<span class="st">'linear'</span>, <span class="st">'rbf'</span>],</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    }),</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'XGBoost'</span>, XGBRegressor(), {</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">'XGBoost__n_estimators'</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">800</span>],</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">'XGBoost__learning_rate'</span>: [<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>],</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">'XGBoost__max_depth'</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">'XGBoost__seed'</span>: [<span class="dv">42</span>],</span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    }),</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'KNeighbors'</span>, KNeighborsRegressor(), {</span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">'KNeighbors__n_neighbors'</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">'KNeighbors__weights'</span>: [<span class="st">'uniform'</span>, <span class="st">'distance'</span>],</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>best_regressor <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>model_names <span class="op">=</span> []</span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> []</span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, regressor, params <span class="kw">in</span> models_params:</span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>    pipeline <span class="op">=</span> Pipeline([</span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'scaler'</span>, MinMaxScaler()),  <span class="co"># Scale features</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>        (name, regressor)  <span class="co"># Use the model name as the step name in the pipeline</span></span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>    ])</span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> params:</span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Perform hyperparameter tuning for models with a defined parameter grid</span></span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>        grid_search <span class="op">=</span> GridSearchCV(pipeline, param_grid<span class="op">=</span>params, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>)</span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>        grid_search.fit(X_train, y_train)</span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> grid_search.best_score_</span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> grid_search.best_params_</span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For simplicity, directly evaluate models without a parameter grid</span></span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> np.mean(cross_val_score(pipeline, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>))</span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store the model name and score</span></span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>    model_names.append(name)</span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>    scores.append(score)</span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score <span class="op">&gt;</span> best_score:</span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>        best_score <span class="op">=</span> score</span>
-<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>        best_regressor <span class="op">=</span> name</span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>        best_params <span class="op">=</span> params</span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MSE by negating the best_score</span></span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> best_score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best regressor: </span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss"> with neg_mean_squared_error score: </span><span class="sc">{</span>best_score<span class="sc">}</span><span class="ss">, MSE: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">, and parameters: </span><span class="sc">{</span>best_params<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair each model name with its score, sort by score, and then unzip back into separate lists</span></span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a>sorted_pairs <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(scores, model_names), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>])</span>
-<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzipping the sorted pairs</span></span>
-<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>sorted_scores, sorted_model_names <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>sorted_pairs)</span>
-<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the performance of each model with sorted values</span></span>
-<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>ax.barh(sorted_model_names, [score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> score <span class="kw">in</span> sorted_scores], color<span class="op">=</span><span class="st">'#2CA02C'</span>)</span>
-<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Mean Squared Error (MSE)'</span>)</span>
-<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Model Performance (smaller is better)'</span>)</span>
-<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e92e41d9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e92e41d9-1"><a href="#e92e41d9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="e92e41d9-2"><a href="#e92e41d9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV, cross_val_score</span>
+<span id="e92e41d9-3"><a href="#e92e41d9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="e92e41d9-4"><a href="#e92e41d9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="e92e41d9-5"><a href="#e92e41d9-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="e92e41d9-6"><a href="#e92e41d9-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="e92e41d9-7"><a href="#e92e41d9-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVR</span>
+<span id="e92e41d9-8"><a href="#e92e41d9-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="e92e41d9-9"><a href="#e92e41d9-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor</span>
+<span id="e92e41d9-10"><a href="#e92e41d9-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="e92e41d9-11"><a href="#e92e41d9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-12"><a href="#e92e41d9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Split 'wine' into features (X, all columns except quality) and target (y, only quality)</span></span>
+<span id="e92e41d9-13"><a href="#e92e41d9-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> wine.drop(<span class="st">"quality"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="e92e41d9-14"><a href="#e92e41d9-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> wine[<span class="st">"quality"</span>]</span>
+<span id="e92e41d9-15"><a href="#e92e41d9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-16"><a href="#e92e41d9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset into training and testing sets</span></span>
+<span id="e92e41d9-17"><a href="#e92e41d9-17" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="e92e41d9-18"><a href="#e92e41d9-18" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="e92e41d9-19"><a href="#e92e41d9-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="e92e41d9-20"><a href="#e92e41d9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-21"><a href="#e92e41d9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define models and their respective parameter grids. Note that the parameter grid keys must be prefixed by the model name in the pipeline.</span></span>
+<span id="e92e41d9-22"><a href="#e92e41d9-22" aria-hidden="true" tabindex="-1"></a>models_params <span class="op">=</span> [</span>
+<span id="e92e41d9-23"><a href="#e92e41d9-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Linear Regression"</span>, LinearRegression(), {}),</span>
+<span id="e92e41d9-24"><a href="#e92e41d9-24" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="e92e41d9-25"><a href="#e92e41d9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Random Forest"</span>,</span>
+<span id="e92e41d9-26"><a href="#e92e41d9-26" aria-hidden="true" tabindex="-1"></a>        RandomForestRegressor(),</span>
+<span id="e92e41d9-27"><a href="#e92e41d9-27" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="e92e41d9-28"><a href="#e92e41d9-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Random Forest__n_estimators"</span>: [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">200</span>],</span>
+<span id="e92e41d9-29"><a href="#e92e41d9-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Random Forest__max_depth"</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
+<span id="e92e41d9-30"><a href="#e92e41d9-30" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="e92e41d9-31"><a href="#e92e41d9-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="e92e41d9-32"><a href="#e92e41d9-32" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="e92e41d9-33"><a href="#e92e41d9-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SVR"</span>,</span>
+<span id="e92e41d9-34"><a href="#e92e41d9-34" aria-hidden="true" tabindex="-1"></a>        SVR(),</span>
+<span id="e92e41d9-35"><a href="#e92e41d9-35" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="e92e41d9-36"><a href="#e92e41d9-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SVR__C"</span>: [<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>],</span>
+<span id="e92e41d9-37"><a href="#e92e41d9-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SVR__kernel"</span>: [<span class="st">"linear"</span>, <span class="st">"rbf"</span>],</span>
+<span id="e92e41d9-38"><a href="#e92e41d9-38" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="e92e41d9-39"><a href="#e92e41d9-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="e92e41d9-40"><a href="#e92e41d9-40" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="e92e41d9-41"><a href="#e92e41d9-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"XGBoost"</span>,</span>
+<span id="e92e41d9-42"><a href="#e92e41d9-42" aria-hidden="true" tabindex="-1"></a>        XGBRegressor(),</span>
+<span id="e92e41d9-43"><a href="#e92e41d9-43" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="e92e41d9-44"><a href="#e92e41d9-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__n_estimators"</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">800</span>],</span>
+<span id="e92e41d9-45"><a href="#e92e41d9-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__learning_rate"</span>: [<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>],</span>
+<span id="e92e41d9-46"><a href="#e92e41d9-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__max_depth"</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
+<span id="e92e41d9-47"><a href="#e92e41d9-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__seed"</span>: [<span class="dv">42</span>],</span>
+<span id="e92e41d9-48"><a href="#e92e41d9-48" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="e92e41d9-49"><a href="#e92e41d9-49" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="e92e41d9-50"><a href="#e92e41d9-50" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="e92e41d9-51"><a href="#e92e41d9-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"KNeighbors"</span>,</span>
+<span id="e92e41d9-52"><a href="#e92e41d9-52" aria-hidden="true" tabindex="-1"></a>        KNeighborsRegressor(),</span>
+<span id="e92e41d9-53"><a href="#e92e41d9-53" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="e92e41d9-54"><a href="#e92e41d9-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KNeighbors__n_neighbors"</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
+<span id="e92e41d9-55"><a href="#e92e41d9-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KNeighbors__weights"</span>: [<span class="st">"uniform"</span>, <span class="st">"distance"</span>],</span>
+<span id="e92e41d9-56"><a href="#e92e41d9-56" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="e92e41d9-57"><a href="#e92e41d9-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="e92e41d9-58"><a href="#e92e41d9-58" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="e92e41d9-59"><a href="#e92e41d9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-60"><a href="#e92e41d9-60" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> <span class="bu">float</span>(<span class="st">"-inf"</span>)</span>
+<span id="e92e41d9-61"><a href="#e92e41d9-61" aria-hidden="true" tabindex="-1"></a>best_regressor <span class="op">=</span> <span class="va">None</span></span>
+<span id="e92e41d9-62"><a href="#e92e41d9-62" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> <span class="va">None</span></span>
+<span id="e92e41d9-63"><a href="#e92e41d9-63" aria-hidden="true" tabindex="-1"></a>model_names <span class="op">=</span> []</span>
+<span id="e92e41d9-64"><a href="#e92e41d9-64" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> []</span>
+<span id="e92e41d9-65"><a href="#e92e41d9-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-66"><a href="#e92e41d9-66" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, regressor, params <span class="kw">in</span> models_params:</span>
+<span id="e92e41d9-67"><a href="#e92e41d9-67" aria-hidden="true" tabindex="-1"></a>    pipeline <span class="op">=</span> Pipeline(</span>
+<span id="e92e41d9-68"><a href="#e92e41d9-68" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="e92e41d9-69"><a href="#e92e41d9-69" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"scaler"</span>, MinMaxScaler()),  <span class="co"># Scale features</span></span>
+<span id="e92e41d9-70"><a href="#e92e41d9-70" aria-hidden="true" tabindex="-1"></a>            (name, regressor),  <span class="co"># Use the model name as the step name in the pipeline</span></span>
+<span id="e92e41d9-71"><a href="#e92e41d9-71" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="e92e41d9-72"><a href="#e92e41d9-72" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="e92e41d9-73"><a href="#e92e41d9-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-74"><a href="#e92e41d9-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> params:</span>
+<span id="e92e41d9-75"><a href="#e92e41d9-75" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Perform hyperparameter tuning for models with a defined parameter grid</span></span>
+<span id="e92e41d9-76"><a href="#e92e41d9-76" aria-hidden="true" tabindex="-1"></a>        grid_search <span class="op">=</span> GridSearchCV(</span>
+<span id="e92e41d9-77"><a href="#e92e41d9-77" aria-hidden="true" tabindex="-1"></a>            pipeline, param_grid<span class="op">=</span>params, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span></span>
+<span id="e92e41d9-78"><a href="#e92e41d9-78" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="e92e41d9-79"><a href="#e92e41d9-79" aria-hidden="true" tabindex="-1"></a>        grid_search.fit(X_train, y_train)</span>
+<span id="e92e41d9-80"><a href="#e92e41d9-80" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> grid_search.best_score_</span>
+<span id="e92e41d9-81"><a href="#e92e41d9-81" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> grid_search.best_params_</span>
+<span id="e92e41d9-82"><a href="#e92e41d9-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="e92e41d9-83"><a href="#e92e41d9-83" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For simplicity, directly evaluate models without a parameter grid</span></span>
+<span id="e92e41d9-84"><a href="#e92e41d9-84" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> np.mean(</span>
+<span id="e92e41d9-85"><a href="#e92e41d9-85" aria-hidden="true" tabindex="-1"></a>            cross_val_score(</span>
+<span id="e92e41d9-86"><a href="#e92e41d9-86" aria-hidden="true" tabindex="-1"></a>                pipeline, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span></span>
+<span id="e92e41d9-87"><a href="#e92e41d9-87" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="e92e41d9-88"><a href="#e92e41d9-88" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="e92e41d9-89"><a href="#e92e41d9-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-90"><a href="#e92e41d9-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store the model name and score</span></span>
+<span id="e92e41d9-91"><a href="#e92e41d9-91" aria-hidden="true" tabindex="-1"></a>    model_names.append(name)</span>
+<span id="e92e41d9-92"><a href="#e92e41d9-92" aria-hidden="true" tabindex="-1"></a>    scores.append(score)</span>
+<span id="e92e41d9-93"><a href="#e92e41d9-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-94"><a href="#e92e41d9-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score <span class="op">&gt;</span> best_score:</span>
+<span id="e92e41d9-95"><a href="#e92e41d9-95" aria-hidden="true" tabindex="-1"></a>        best_score <span class="op">=</span> score</span>
+<span id="e92e41d9-96"><a href="#e92e41d9-96" aria-hidden="true" tabindex="-1"></a>        best_regressor <span class="op">=</span> name</span>
+<span id="e92e41d9-97"><a href="#e92e41d9-97" aria-hidden="true" tabindex="-1"></a>        best_params <span class="op">=</span> params</span>
+<span id="e92e41d9-98"><a href="#e92e41d9-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-99"><a href="#e92e41d9-99" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MSE by negating the best_score</span></span>
+<span id="e92e41d9-100"><a href="#e92e41d9-100" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> best_score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="e92e41d9-101"><a href="#e92e41d9-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-102"><a href="#e92e41d9-102" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="e92e41d9-103"><a href="#e92e41d9-103" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Best regressor: </span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss"> with neg_mean_squared_error score: </span><span class="sc">{</span>best_score<span class="sc">}</span><span class="ss">, MSE: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">, and parameters: </span><span class="sc">{</span>best_params<span class="sc">}</span><span class="ss">"</span></span>
+<span id="e92e41d9-104"><a href="#e92e41d9-104" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="e92e41d9-105"><a href="#e92e41d9-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-106"><a href="#e92e41d9-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair each model name with its score, sort by score, and then unzip back into separate lists</span></span>
+<span id="e92e41d9-107"><a href="#e92e41d9-107" aria-hidden="true" tabindex="-1"></a>sorted_pairs <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(scores, model_names), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>])</span>
+<span id="e92e41d9-108"><a href="#e92e41d9-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-109"><a href="#e92e41d9-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzipping the sorted pairs</span></span>
+<span id="e92e41d9-110"><a href="#e92e41d9-110" aria-hidden="true" tabindex="-1"></a>sorted_scores, sorted_model_names <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>sorted_pairs)</span>
+<span id="e92e41d9-111"><a href="#e92e41d9-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-112"><a href="#e92e41d9-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the performance of each model with sorted values</span></span>
+<span id="e92e41d9-113"><a href="#e92e41d9-113" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="e92e41d9-114"><a href="#e92e41d9-114" aria-hidden="true" tabindex="-1"></a>ax.barh(sorted_model_names, [score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> score <span class="kw">in</span> sorted_scores], color<span class="op">=</span><span class="st">"#2CA02C"</span>)</span>
+<span id="e92e41d9-115"><a href="#e92e41d9-115" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Mean Squared Error (MSE)"</span>)</span>
+<span id="e92e41d9-116"><a href="#e92e41d9-116" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Model Performance (smaller is better)"</span>)</span>
+<span id="e92e41d9-117"><a href="#e92e41d9-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e92e41d9-118"><a href="#e92e41d9-118" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best regressor: KNeighbors with neg_mean_squared_error score: -0.38768439914783254, MSE: 0.38768439914783254, and parameters: {'KNeighbors__n_neighbors': 9, 'KNeighbors__weights': 'distance'}</code></pre>
@@ -1324,60 +1357,60 @@ About Residuals
 <div id="cf148c97" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Since we're using named steps in the pipeline, update `best_params` to work with `set_params`</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>best_params_updated <span class="op">=</span> {key.replace(<span class="ss">f'</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">__'</span>, <span class="st">''</span>, <span class="dv">1</span>): value <span class="cf">for</span> key, value <span class="kw">in</span> best_params.items()}</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Recreate the best pipeline with the best parameters</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> best_regressor <span class="op">==</span> <span class="st">'Linear Regression'</span>:</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> LinearRegression(<span class="op">**</span>best_params_updated)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">'Random Forest'</span>:</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> RandomForestRegressor(<span class="op">**</span>best_params_updated)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">'SVR'</span>:</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> SVR(<span class="op">**</span>best_params_updated)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">'XGBoost'</span>:</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> XGBRegressor(<span class="op">**</span>best_params_updated)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">'KNeighbors'</span>:</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> KNeighborsRegressor(<span class="op">**</span>best_params_updated)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the pipeline with the best model</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>best_pipeline <span class="op">=</span> Pipeline([</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'scaler'</span>, MinMaxScaler()),</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    (best_regressor, best_model)</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrain on the full training set</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>best_pipeline.fit(X_train, y_train)</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_pipeline.predict(X_test)</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and print the MSE on the test set for evaluation</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>test_mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE for the best regressor (</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>test_mse<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary statistics of the residuals</span></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Residuals Summary Statistics:"</span>)</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(residuals.describe())</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual plot using seaborn and matplotlib</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>y_test, y<span class="op">=</span>residuals, color<span class="op">=</span><span class="st">'#2CA02C'</span>)</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'red'</span>)  <span class="co"># Adding a horizontal line at 0</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Residual Plot'</span>)</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Actual Values'</span>)</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of residuals</span></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>sns.histplot(residuals, kde<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span><span class="st">'#2CA02C'</span>, bins<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of Residuals'</span>)</span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Residuals'</span>)</span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cf148c97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cf148c97-1"><a href="#cf148c97-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cf148c97-2"><a href="#cf148c97-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-3"><a href="#cf148c97-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Since we're using named steps in the pipeline, update `best_params` to work with `set_params`</span></span>
+<span id="cf148c97-4"><a href="#cf148c97-4" aria-hidden="true" tabindex="-1"></a>best_params_updated <span class="op">=</span> {</span>
+<span id="cf148c97-5"><a href="#cf148c97-5" aria-hidden="true" tabindex="-1"></a>    key.replace(<span class="ss">f"</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">__"</span>, <span class="st">""</span>, <span class="dv">1</span>): value</span>
+<span id="cf148c97-6"><a href="#cf148c97-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> best_params.items()</span>
+<span id="cf148c97-7"><a href="#cf148c97-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cf148c97-8"><a href="#cf148c97-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-9"><a href="#cf148c97-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Recreate the best pipeline with the best parameters</span></span>
+<span id="cf148c97-10"><a href="#cf148c97-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> best_regressor <span class="op">==</span> <span class="st">"Linear Regression"</span>:</span>
+<span id="cf148c97-11"><a href="#cf148c97-11" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> LinearRegression(<span class="op">**</span>best_params_updated)</span>
+<span id="cf148c97-12"><a href="#cf148c97-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"Random Forest"</span>:</span>
+<span id="cf148c97-13"><a href="#cf148c97-13" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> RandomForestRegressor(<span class="op">**</span>best_params_updated)</span>
+<span id="cf148c97-14"><a href="#cf148c97-14" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"SVR"</span>:</span>
+<span id="cf148c97-15"><a href="#cf148c97-15" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> SVR(<span class="op">**</span>best_params_updated)</span>
+<span id="cf148c97-16"><a href="#cf148c97-16" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"XGBoost"</span>:</span>
+<span id="cf148c97-17"><a href="#cf148c97-17" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> XGBRegressor(<span class="op">**</span>best_params_updated)</span>
+<span id="cf148c97-18"><a href="#cf148c97-18" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"KNeighbors"</span>:</span>
+<span id="cf148c97-19"><a href="#cf148c97-19" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> KNeighborsRegressor(<span class="op">**</span>best_params_updated)</span>
+<span id="cf148c97-20"><a href="#cf148c97-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-21"><a href="#cf148c97-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the pipeline with the best model</span></span>
+<span id="cf148c97-22"><a href="#cf148c97-22" aria-hidden="true" tabindex="-1"></a>best_pipeline <span class="op">=</span> Pipeline([(<span class="st">"scaler"</span>, MinMaxScaler()), (best_regressor, best_model)])</span>
+<span id="cf148c97-23"><a href="#cf148c97-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-24"><a href="#cf148c97-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrain on the full training set</span></span>
+<span id="cf148c97-25"><a href="#cf148c97-25" aria-hidden="true" tabindex="-1"></a>best_pipeline.fit(X_train, y_train)</span>
+<span id="cf148c97-26"><a href="#cf148c97-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-27"><a href="#cf148c97-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
+<span id="cf148c97-28"><a href="#cf148c97-28" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_pipeline.predict(X_test)</span>
+<span id="cf148c97-29"><a href="#cf148c97-29" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
+<span id="cf148c97-30"><a href="#cf148c97-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-31"><a href="#cf148c97-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and print the MSE on the test set for evaluation</span></span>
+<span id="cf148c97-32"><a href="#cf148c97-32" aria-hidden="true" tabindex="-1"></a>test_mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
+<span id="cf148c97-33"><a href="#cf148c97-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE for the best regressor (</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>test_mse<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cf148c97-34"><a href="#cf148c97-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-35"><a href="#cf148c97-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary statistics of the residuals</span></span>
+<span id="cf148c97-36"><a href="#cf148c97-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Residuals Summary Statistics:"</span>)</span>
+<span id="cf148c97-37"><a href="#cf148c97-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(residuals.describe())</span>
+<span id="cf148c97-38"><a href="#cf148c97-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-39"><a href="#cf148c97-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual plot using seaborn and matplotlib</span></span>
+<span id="cf148c97-40"><a href="#cf148c97-40" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cf148c97-41"><a href="#cf148c97-41" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>y_test, y<span class="op">=</span>residuals, color<span class="op">=</span><span class="st">"#2CA02C"</span>)</span>
+<span id="cf148c97-42"><a href="#cf148c97-42" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"red"</span>)  <span class="co"># Adding a horizontal line at 0</span></span>
+<span id="cf148c97-43"><a href="#cf148c97-43" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Residual Plot"</span>)</span>
+<span id="cf148c97-44"><a href="#cf148c97-44" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Actual Values"</span>)</span>
+<span id="cf148c97-45"><a href="#cf148c97-45" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residuals"</span>)</span>
+<span id="cf148c97-46"><a href="#cf148c97-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cf148c97-47"><a href="#cf148c97-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cf148c97-48"><a href="#cf148c97-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of residuals</span></span>
+<span id="cf148c97-49"><a href="#cf148c97-49" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cf148c97-50"><a href="#cf148c97-50" aria-hidden="true" tabindex="-1"></a>sns.histplot(residuals, kde<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span><span class="st">"#2CA02C"</span>, bins<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cf148c97-51"><a href="#cf148c97-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Residuals"</span>)</span>
+<span id="cf148c97-52"><a href="#cf148c97-52" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Residuals"</span>)</span>
+<span id="cf148c97-53"><a href="#cf148c97-53" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cf148c97-54"><a href="#cf148c97-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Test MSE for the best regressor (KNeighbors): 0.3381499055639954

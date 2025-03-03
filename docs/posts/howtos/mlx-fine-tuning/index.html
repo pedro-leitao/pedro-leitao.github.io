@@ -378,10 +378,10 @@ About LoRA
 <div id="b1ece29e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.generate <span class="op">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>model $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span> <span class="op">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>prompt <span class="st">'When did Michael Jackson die? Stick to facts.'</span> \</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span><span class="bu">max</span><span class="op">-</span>tokens <span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b1ece29e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b1ece29e-1"><a href="#b1ece29e-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.generate <span class="op">\</span></span>
+<span id="b1ece29e-2"><a href="#b1ece29e-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>model $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span> <span class="op">\</span></span>
+<span id="b1ece29e-3"><a href="#b1ece29e-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>prompt <span class="st">'When did Michael Jackson die? Stick to facts.'</span> \</span>
+<span id="b1ece29e-4"><a href="#b1ece29e-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span><span class="bu">max</span><span class="op">-</span>tokens <span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>==========
@@ -428,17 +428,17 @@ Note
 <div id="02a839b6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datasets <span class="im">import</span> load_dataset</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tqdm <span class="im">as</span> notebook_tqdm</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> load_dataset(<span class="st">"HuggingFaceH4/no_robots"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Split train into train and validation</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> dataset[<span class="st">"train"</span>].train_test_split(test_size<span class="op">=</span><span class="fl">0.15</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train"</span>] <span class="op">=</span> train[<span class="st">"train"</span>]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"validation"</span>] <span class="op">=</span> train[<span class="st">"test"</span>]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="02a839b6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="02a839b6-1"><a href="#02a839b6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datasets <span class="im">import</span> load_dataset</span>
+<span id="02a839b6-2"><a href="#02a839b6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tqdm <span class="im">as</span> notebook_tqdm</span>
+<span id="02a839b6-3"><a href="#02a839b6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="02a839b6-4"><a href="#02a839b6-4" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> load_dataset(<span class="st">"HuggingFaceH4/no_robots"</span>)</span>
+<span id="02a839b6-5"><a href="#02a839b6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="02a839b6-6"><a href="#02a839b6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Split train into train and validation</span></span>
+<span id="02a839b6-7"><a href="#02a839b6-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> dataset[<span class="st">"train"</span>].train_test_split(test_size<span class="op">=</span><span class="fl">0.15</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="02a839b6-8"><a href="#02a839b6-8" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train"</span>] <span class="op">=</span> train[<span class="st">"train"</span>]</span>
+<span id="02a839b6-9"><a href="#02a839b6-9" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"validation"</span>] <span class="op">=</span> train[<span class="st">"test"</span>]</span>
+<span id="02a839b6-10"><a href="#02a839b6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="02a839b6-11"><a href="#02a839b6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>DatasetDict({
@@ -460,7 +460,7 @@ Note
 <div id="529d23a8" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dataset[<span class="st">"train"</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="529d23a8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="529d23a8-1"><a href="#529d23a8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dataset[<span class="st">"train"</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'prompt': 'Pretend you are a dog. Send out a text to all your dog friends inviting them to the dog park. Specify that everyone should meet at 2pm today.', 'prompt_id': '4b474f9f59c64e8e32ad346051bb4f8d9b864110c2dda0d481e8f13898dc4511', 'messages': [{'content': 'Pretend you are a dog. Send out a text to all your dog friends inviting them to the dog park. Specify that everyone should meet at 2pm today.', 'role': 'user'}, {'content': "Hello, my dog friends!\n\nIt is such a beautiful day today! Does anyone want to go to the dog park to play catch and chase each other's tails with me? I will be there at 2 pm today. \n\nLet me know if you will be there! I'm looking forward to playing with you all!", 'role': 'assistant'}], 'category': 'Generation'}</code></pre>
@@ -470,17 +470,17 @@ Note
 <div id="d347d611" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>output_dir <span class="op">=</span> <span class="st">"no_robots"</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>os.makedirs(output_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Rename 'validation' to 'valid'</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"valid"</span>] <span class="op">=</span> dataset.pop(<span class="st">"validation"</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> split <span class="kw">in</span> [<span class="st">"train"</span>, <span class="st">"test"</span>, <span class="st">"valid"</span>]:</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    dataset[split].to_json(<span class="ss">f"</span><span class="sc">{</span>output_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>split<span class="sc">}</span><span class="ss">.jsonl"</span>, lines<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d347d611"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d347d611-1"><a href="#d347d611-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="d347d611-2"><a href="#d347d611-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="d347d611-3"><a href="#d347d611-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d347d611-4"><a href="#d347d611-4" aria-hidden="true" tabindex="-1"></a>output_dir <span class="op">=</span> <span class="st">"no_robots"</span></span>
+<span id="d347d611-5"><a href="#d347d611-5" aria-hidden="true" tabindex="-1"></a>os.makedirs(output_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="d347d611-6"><a href="#d347d611-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d347d611-7"><a href="#d347d611-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename 'validation' to 'valid'</span></span>
+<span id="d347d611-8"><a href="#d347d611-8" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"valid"</span>] <span class="op">=</span> dataset.pop(<span class="st">"validation"</span>)</span>
+<span id="d347d611-9"><a href="#d347d611-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d347d611-10"><a href="#d347d611-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> split <span class="kw">in</span> [<span class="st">"train"</span>, <span class="st">"test"</span>, <span class="st">"valid"</span>]:</span>
+<span id="d347d611-11"><a href="#d347d611-11" aria-hidden="true" tabindex="-1"></a>    dataset[split].to_json(<span class="ss">f"</span><span class="sc">{</span>output_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>split<span class="sc">}</span><span class="ss">.jsonl"</span>, lines<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
@@ -502,7 +502,7 @@ Note
 <div id="9b06fa97" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat no_robots<span class="op">-</span>train<span class="op">-</span>params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9b06fa97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9b06fa97-1"><a href="#9b06fa97-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat no_robots<span class="op">-</span>train<span class="op">-</span>params.yaml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># The path to the local model directory or Hugging Face repo.
@@ -548,10 +548,10 @@ grad_checkpoint: true</code></pre>
 <div id="4894d246" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.lora <span class="op">\</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>config no_robots<span class="op">-</span>train<span class="op">-</span>params.yaml <span class="op">\</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>train <span class="op">\</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4894d246"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4894d246-1"><a href="#4894d246-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.lora <span class="op">\</span></span>
+<span id="4894d246-2"><a href="#4894d246-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>config no_robots<span class="op">-</span>train<span class="op">-</span>params.yaml <span class="op">\</span></span>
+<span id="4894d246-3"><a href="#4894d246-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>train <span class="op">\</span></span>
+<span id="4894d246-4"><a href="#4894d246-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Loading configuration file no_robots-train-params.yaml
@@ -595,7 +595,7 @@ About Gradient Checkpointing
 <div id="0ad581af" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls <span class="op">-</span>lh adapter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="0ad581af"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0ad581af-1"><a href="#0ad581af-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls <span class="op">-</span>lh adapter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>total 8504
@@ -609,10 +609,10 @@ About Gradient Checkpointing
 <div id="86def030" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.fuse <span class="op">\</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>model $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span> <span class="op">\</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>adapter<span class="op">-</span>path .<span class="op">/</span>adapter <span class="op">\</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>save<span class="op">-</span>path $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span><span class="op">-</span>tuned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="86def030"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="86def030-1"><a href="#86def030-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.fuse <span class="op">\</span></span>
+<span id="86def030-2"><a href="#86def030-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>model $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span> <span class="op">\</span></span>
+<span id="86def030-3"><a href="#86def030-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>adapter<span class="op">-</span>path .<span class="op">/</span>adapter <span class="op">\</span></span>
+<span id="86def030-4"><a href="#86def030-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>save<span class="op">-</span>path $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span><span class="op">-</span>tuned</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Loading pretrained model</code></pre>
@@ -622,10 +622,10 @@ About Gradient Checkpointing
 <div id="1e285ffa" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.generate <span class="op">\</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>model $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span><span class="op">-</span>tuned <span class="op">\</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>prompt <span class="st">'When did Michael Jackson die? Stick to facts.'</span> \</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span><span class="bu">max</span><span class="op">-</span>tokens <span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="1e285ffa"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1e285ffa-1"><a href="#1e285ffa-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mlx_lm.generate <span class="op">\</span></span>
+<span id="1e285ffa-2"><a href="#1e285ffa-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>model $HOME<span class="op">/</span>.lmstudio<span class="op">/</span>models<span class="op">/</span>lmstudio<span class="op">-</span>community<span class="op">/</span>Qwen2<span class="fl">.5</span><span class="op">-</span><span class="fl">0.5</span><span class="er">B</span><span class="op">-</span>Instruct<span class="op">-</span>MLX<span class="op">-</span><span class="dv">8</span><span class="er">bit</span><span class="op">-</span>tuned <span class="op">\</span></span>
+<span id="1e285ffa-3"><a href="#1e285ffa-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>prompt <span class="st">'When did Michael Jackson die? Stick to facts.'</span> \</span>
+<span id="1e285ffa-4"><a href="#1e285ffa-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span><span class="bu">max</span><span class="op">-</span>tokens <span class="dv">256</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>==========

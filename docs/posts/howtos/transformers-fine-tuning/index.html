@@ -242,21 +242,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="30f28f0c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>random.seed(SEED)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="30f28f0c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="30f28f0c-1"><a href="#30f28f0c-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="30f28f0c-2"><a href="#30f28f0c-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="30f28f0c-3"><a href="#30f28f0c-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="30f28f0c-4"><a href="#30f28f0c-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="30f28f0c-5"><a href="#30f28f0c-5" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">42</span></span>
+<span id="30f28f0c-6"><a href="#30f28f0c-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="30f28f0c-7"><a href="#30f28f0c-7" aria-hidden="true" tabindex="-1"></a>random.seed(SEED)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="a95e87d3" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> set_seed</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>set_seed(SEED)  <span class="co"># Covers Transformers, Tokenizers, and Datasets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a95e87d3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a95e87d3-1"><a href="#a95e87d3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> set_seed</span>
+<span id="a95e87d3-2"><a href="#a95e87d3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a95e87d3-3"><a href="#a95e87d3-3" aria-hidden="true" tabindex="-1"></a>set_seed(SEED)  <span class="co"># Covers Transformers, Tokenizers, and Datasets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="producing-a-training-dataset" class="level2">
@@ -289,100 +289,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="a909a234" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datasets <span class="im">import</span> Dataset</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_arithmetic_dataset(n_samples: <span class="bu">int</span>) <span class="op">-&gt;</span> Dataset:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates arithmetic problems using numbers 0-100 in the specified message format</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    operations <span class="op">=</span> [<span class="st">'+'</span>, <span class="st">'-'</span>, <span class="st">'*'</span>]</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> []</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Generate arithmetic problem with 0-100 numbers</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        op <span class="op">=</span> random.choice(operations)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">200</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">200</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate result with clean formatting</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> op <span class="op">==</span> <span class="st">'+'</span>:</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> x <span class="op">+</span> y</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> op <span class="op">==</span> <span class="st">'-'</span>:</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> random.randint(<span class="dv">0</span>, x)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> x <span class="op">-</span> y</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> op <span class="op">==</span> <span class="st">'*'</span>:</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> x <span class="op">*</span> y</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create problem string without negative formatting</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>x<span class="sc">}{</span>op<span class="sc">}{</span>y<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Format final equation</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">#full_equation = f"x is {result}"</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        full_equation <span class="op">=</span> <span class="ss">f"x is </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        variations <span class="op">=</span> [  </span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Prepositional Variations  </span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Assuming x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Provided x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"With x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> given, solve for x."</span>,  </span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Under the condition x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Using x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Conditional Clause Variations  </span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"If x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> is provided, solve for x."</span>,  </span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"When x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> is given, solve for x."</span>,  </span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"In the case where x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"For the equation x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Given that x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Participial Phrase Variations  </span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Starting from x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Taking x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> into account, solve for x."</span>,  </span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Having x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Basing your work on x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Considering x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Imperative Variations  </span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Solve for x, given x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">."</span>,  </span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Use x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> to solve for x."</span>,  </span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Work with x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> and solve for x."</span>,  </span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Begin with x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, then solve for x."</span>,  </span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Take x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> and solve for x."</span>,  </span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Expanded/Explicit Variations  </span></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Given the value x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, determine the solution for x."</span>,  </span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Using the premise that x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, find the value of x."</span>,  </span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Under the assumption that x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, compute x."</span>,  </span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"If we define x as </span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Based on the equation x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,  </span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create conversation structure</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        prompt <span class="op">=</span> random.choice(variations)</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        samples.append({</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>            <span class="st">"messages"</span>: [</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>                {</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"content"</span>: prompt,</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"role"</span>: <span class="st">"user"</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>                },</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>                {</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"content"</span>: full_equation,</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"role"</span>: <span class="st">"assistant"</span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>                }</span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>            ],</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Dataset.from_list(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a909a234"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a909a234-1"><a href="#a909a234-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="a909a234-2"><a href="#a909a234-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datasets <span class="im">import</span> Dataset</span>
+<span id="a909a234-3"><a href="#a909a234-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-4"><a href="#a909a234-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-5"><a href="#a909a234-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_arithmetic_dataset(n_samples: <span class="bu">int</span>) <span class="op">-&gt;</span> Dataset:</span>
+<span id="a909a234-6"><a href="#a909a234-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="a909a234-7"><a href="#a909a234-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates arithmetic problems using numbers 0-100 in the specified message format</span></span>
+<span id="a909a234-8"><a href="#a909a234-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="a909a234-9"><a href="#a909a234-9" aria-hidden="true" tabindex="-1"></a>    operations <span class="op">=</span> [<span class="st">"+"</span>, <span class="st">"-"</span>, <span class="st">"*"</span>]</span>
+<span id="a909a234-10"><a href="#a909a234-10" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> []</span>
+<span id="a909a234-11"><a href="#a909a234-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-12"><a href="#a909a234-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
+<span id="a909a234-13"><a href="#a909a234-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Generate arithmetic problem with 0-100 numbers</span></span>
+<span id="a909a234-14"><a href="#a909a234-14" aria-hidden="true" tabindex="-1"></a>        op <span class="op">=</span> random.choice(operations)</span>
+<span id="a909a234-15"><a href="#a909a234-15" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">200</span>)</span>
+<span id="a909a234-16"><a href="#a909a234-16" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">200</span>)</span>
+<span id="a909a234-17"><a href="#a909a234-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-18"><a href="#a909a234-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate result with clean formatting</span></span>
+<span id="a909a234-19"><a href="#a909a234-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> op <span class="op">==</span> <span class="st">"+"</span>:</span>
+<span id="a909a234-20"><a href="#a909a234-20" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> x <span class="op">+</span> y</span>
+<span id="a909a234-21"><a href="#a909a234-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> op <span class="op">==</span> <span class="st">"-"</span>:</span>
+<span id="a909a234-22"><a href="#a909a234-22" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> random.randint(<span class="dv">0</span>, x)</span>
+<span id="a909a234-23"><a href="#a909a234-23" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> x <span class="op">-</span> y</span>
+<span id="a909a234-24"><a href="#a909a234-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> op <span class="op">==</span> <span class="st">"*"</span>:</span>
+<span id="a909a234-25"><a href="#a909a234-25" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> x <span class="op">*</span> y</span>
+<span id="a909a234-26"><a href="#a909a234-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-27"><a href="#a909a234-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create problem string without negative formatting</span></span>
+<span id="a909a234-28"><a href="#a909a234-28" aria-hidden="true" tabindex="-1"></a>        problem <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>x<span class="sc">}{</span>op<span class="sc">}{</span>y<span class="sc">}</span><span class="ss">"</span></span>
+<span id="a909a234-29"><a href="#a909a234-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-30"><a href="#a909a234-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Format final equation</span></span>
+<span id="a909a234-31"><a href="#a909a234-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># full_equation = f"x is {result}"</span></span>
+<span id="a909a234-32"><a href="#a909a234-32" aria-hidden="true" tabindex="-1"></a>        full_equation <span class="op">=</span> <span class="ss">f"x is </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span></span>
+<span id="a909a234-33"><a href="#a909a234-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-34"><a href="#a909a234-34" aria-hidden="true" tabindex="-1"></a>        variations <span class="op">=</span> [</span>
+<span id="a909a234-35"><a href="#a909a234-35" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Prepositional Variations</span></span>
+<span id="a909a234-36"><a href="#a909a234-36" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Assuming x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-37"><a href="#a909a234-37" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Provided x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-38"><a href="#a909a234-38" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"With x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> given, solve for x."</span>,</span>
+<span id="a909a234-39"><a href="#a909a234-39" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Under the condition x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-40"><a href="#a909a234-40" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Using x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-41"><a href="#a909a234-41" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Conditional Clause Variations</span></span>
+<span id="a909a234-42"><a href="#a909a234-42" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"If x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> is provided, solve for x."</span>,</span>
+<span id="a909a234-43"><a href="#a909a234-43" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"When x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> is given, solve for x."</span>,</span>
+<span id="a909a234-44"><a href="#a909a234-44" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"In the case where x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-45"><a href="#a909a234-45" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"For the equation x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-46"><a href="#a909a234-46" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Given that x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-47"><a href="#a909a234-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Participial Phrase Variations</span></span>
+<span id="a909a234-48"><a href="#a909a234-48" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Starting from x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-49"><a href="#a909a234-49" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Taking x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> into account, solve for x."</span>,</span>
+<span id="a909a234-50"><a href="#a909a234-50" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Having x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-51"><a href="#a909a234-51" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Basing your work on x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-52"><a href="#a909a234-52" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Considering x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-53"><a href="#a909a234-53" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Imperative Variations</span></span>
+<span id="a909a234-54"><a href="#a909a234-54" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Solve for x, given x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">."</span>,</span>
+<span id="a909a234-55"><a href="#a909a234-55" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Use x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> to solve for x."</span>,</span>
+<span id="a909a234-56"><a href="#a909a234-56" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Work with x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> and solve for x."</span>,</span>
+<span id="a909a234-57"><a href="#a909a234-57" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Begin with x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, then solve for x."</span>,</span>
+<span id="a909a234-58"><a href="#a909a234-58" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Take x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss"> and solve for x."</span>,</span>
+<span id="a909a234-59"><a href="#a909a234-59" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Expanded/Explicit Variations</span></span>
+<span id="a909a234-60"><a href="#a909a234-60" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Given the value x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, determine the solution for x."</span>,</span>
+<span id="a909a234-61"><a href="#a909a234-61" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Using the premise that x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, find the value of x."</span>,</span>
+<span id="a909a234-62"><a href="#a909a234-62" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Under the assumption that x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, compute x."</span>,</span>
+<span id="a909a234-63"><a href="#a909a234-63" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"If we define x as </span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-64"><a href="#a909a234-64" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"Based on the equation x=</span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">, solve for x."</span>,</span>
+<span id="a909a234-65"><a href="#a909a234-65" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="a909a234-66"><a href="#a909a234-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-67"><a href="#a909a234-67" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create conversation structure</span></span>
+<span id="a909a234-68"><a href="#a909a234-68" aria-hidden="true" tabindex="-1"></a>        prompt <span class="op">=</span> random.choice(variations)</span>
+<span id="a909a234-69"><a href="#a909a234-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-70"><a href="#a909a234-70" aria-hidden="true" tabindex="-1"></a>        samples.append(</span>
+<span id="a909a234-71"><a href="#a909a234-71" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="a909a234-72"><a href="#a909a234-72" aria-hidden="true" tabindex="-1"></a>                <span class="st">"messages"</span>: [</span>
+<span id="a909a234-73"><a href="#a909a234-73" aria-hidden="true" tabindex="-1"></a>                    {<span class="st">"content"</span>: prompt, <span class="st">"role"</span>: <span class="st">"user"</span>},</span>
+<span id="a909a234-74"><a href="#a909a234-74" aria-hidden="true" tabindex="-1"></a>                    {<span class="st">"content"</span>: full_equation, <span class="st">"role"</span>: <span class="st">"assistant"</span>},</span>
+<span id="a909a234-75"><a href="#a909a234-75" aria-hidden="true" tabindex="-1"></a>                ],</span>
+<span id="a909a234-76"><a href="#a909a234-76" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="a909a234-77"><a href="#a909a234-77" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="a909a234-78"><a href="#a909a234-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a909a234-79"><a href="#a909a234-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Dataset.from_list(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="84c8dd42" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> generate_arithmetic_dataset(<span class="dv">20000</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="84c8dd42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="84c8dd42-1"><a href="#84c8dd42-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> generate_arithmetic_dataset(<span class="dv">20000</span>)</span>
+<span id="84c8dd42-2"><a href="#84c8dd42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="84c8dd42-3"><a href="#84c8dd42-3" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>Dataset({
@@ -395,9 +388,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="2562f0c8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show first few dataset entries</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(dataset[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="2562f0c8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2562f0c8-1"><a href="#2562f0c8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show first few dataset entries</span></span>
+<span id="2562f0c8-2"><a href="#2562f0c8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="2562f0c8-3"><a href="#2562f0c8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(dataset[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'messages': [{'content': 'If we define x as 28*6, solve for x.', 'role': 'user'}, {'content': 'x is 168', 'role': 'assistant'}]}
@@ -433,25 +426,21 @@ Exercise suggestion
 <div id="d565b73a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoModelForCausalLM, AutoTokenizer</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>model_name <span class="op">=</span> <span class="st">"Qwen/Qwen2.5-0.5B-Instruct"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    model_name</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    model_name</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>model.config.use_cache <span class="op">=</span> <span class="va">False</span>  <span class="co"># important with gradient checkpointing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d565b73a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d565b73a-1"><a href="#d565b73a-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoModelForCausalLM, AutoTokenizer</span>
+<span id="d565b73a-2"><a href="#d565b73a-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d565b73a-3"><a href="#d565b73a-3" aria-hidden="true" tabindex="-1"></a>model_name <span class="op">=</span> <span class="st">"Qwen/Qwen2.5-0.5B-Instruct"</span></span>
+<span id="d565b73a-4"><a href="#d565b73a-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d565b73a-5"><a href="#d565b73a-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(model_name)</span>
+<span id="d565b73a-6"><a href="#d565b73a-6" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(model_name)</span>
+<span id="d565b73a-7"><a href="#d565b73a-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d565b73a-8"><a href="#d565b73a-8" aria-hidden="true" tabindex="-1"></a>model.config.use_cache <span class="op">=</span> <span class="va">False</span>  <span class="co"># important with gradient checkpointing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>For reference, the input to the model will be tokenized using the model’s tokenizer, and the output will be a sequence of tokens, in a format called <code>ChatML</code>, which includes special tokens which are meaningful the pre-trained model.</p>
 <div id="81a2371a" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tokenizer.apply_chat_template(dataset[<span class="dv">0</span>][<span class="st">"messages"</span>], tokenize<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="81a2371a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="81a2371a-1"><a href="#81a2371a-1" aria-hidden="true" tabindex="-1"></a>tokenizer.apply_chat_template(dataset[<span class="dv">0</span>][<span class="st">"messages"</span>], tokenize<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>'&lt;|im_start|&gt;system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.&lt;|im_end|&gt;\n&lt;|im_start|&gt;user\nIf we define x as 28*6, solve for x.&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\nx is 168&lt;|im_end|&gt;\n'</code></pre>
@@ -462,9 +451,9 @@ Exercise suggestion
 <div id="ae64740d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.train_test_split(test_size<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ae64740d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ae64740d-1"><a href="#ae64740d-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> dataset.train_test_split(test_size<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="ae64740d-2"><a href="#ae64740d-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ae64740d-3"><a href="#ae64740d-3" aria-hidden="true" tabindex="-1"></a>dataset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>DatasetDict({
@@ -483,9 +472,9 @@ Exercise suggestion
 <div id="c343e386" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>pprint(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c343e386"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c343e386-1"><a href="#c343e386-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="c343e386-2"><a href="#c343e386-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c343e386-3"><a href="#c343e386-3" aria-hidden="true" tabindex="-1"></a>pprint(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Qwen2ForCausalLM(
@@ -546,17 +535,17 @@ About the LoRA rank
 <div id="44ce37b3" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> peft <span class="im">import</span> LoraConfig</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lora_config <span class="op">=</span> LoraConfig(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    r<span class="op">=</span><span class="dv">16</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    lora_alpha<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    lora_dropout<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    bias<span class="op">=</span><span class="st">"none"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    target_modules<span class="op">=</span><span class="st">"all-linear"</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    modules_to_save<span class="op">=</span>[<span class="st">"lm_head"</span>, <span class="st">"embed_token"</span>],</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    task_type<span class="op">=</span><span class="st">"CAUSAL_LM"</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="44ce37b3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="44ce37b3-1"><a href="#44ce37b3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> peft <span class="im">import</span> LoraConfig</span>
+<span id="44ce37b3-2"><a href="#44ce37b3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="44ce37b3-3"><a href="#44ce37b3-3" aria-hidden="true" tabindex="-1"></a>lora_config <span class="op">=</span> LoraConfig(</span>
+<span id="44ce37b3-4"><a href="#44ce37b3-4" aria-hidden="true" tabindex="-1"></a>    r<span class="op">=</span><span class="dv">16</span>,</span>
+<span id="44ce37b3-5"><a href="#44ce37b3-5" aria-hidden="true" tabindex="-1"></a>    lora_alpha<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="44ce37b3-6"><a href="#44ce37b3-6" aria-hidden="true" tabindex="-1"></a>    lora_dropout<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="44ce37b3-7"><a href="#44ce37b3-7" aria-hidden="true" tabindex="-1"></a>    bias<span class="op">=</span><span class="st">"none"</span>,</span>
+<span id="44ce37b3-8"><a href="#44ce37b3-8" aria-hidden="true" tabindex="-1"></a>    target_modules<span class="op">=</span><span class="st">"all-linear"</span>,</span>
+<span id="44ce37b3-9"><a href="#44ce37b3-9" aria-hidden="true" tabindex="-1"></a>    modules_to_save<span class="op">=</span>[<span class="st">"lm_head"</span>, <span class="st">"embed_token"</span>],</span>
+<span id="44ce37b3-10"><a href="#44ce37b3-10" aria-hidden="true" tabindex="-1"></a>    task_type<span class="op">=</span><span class="st">"CAUSAL_LM"</span>,</span>
+<span id="44ce37b3-11"><a href="#44ce37b3-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -567,30 +556,30 @@ About the LoRA rank
 <div id="1b332f78" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> trl <span class="im">import</span> SFTConfig</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For this to work on Apple Silicon, PYTORCH_ENABLE_MPS_FALLBACK=1 must be set as an environment variable</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>training_args <span class="op">=</span> SFTConfig(</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    output_dir<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    logging_dir<span class="op">=</span><span class="st">"logs"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    num_train_epochs<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    per_device_train_batch_size<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    gradient_accumulation_steps<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">2e-5</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    warmup_ratio<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    logging_steps<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    eval_strategy<span class="op">=</span><span class="st">"steps"</span>,</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    eval_steps<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    save_strategy<span class="op">=</span><span class="st">"steps"</span>,</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    save_steps<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    max_seq_length<span class="op">=</span><span class="dv">128</span>,</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    gradient_checkpointing<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    report_to<span class="op">=</span><span class="st">"none"</span>,</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    fp16<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    load_best_model_at_end<span class="op">=</span><span class="va">True</span>,   <span class="co"># Necessary for early stopping</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    metric_for_best_model<span class="op">=</span><span class="st">"eval_loss"</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="1b332f78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1b332f78-1"><a href="#1b332f78-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> trl <span class="im">import</span> SFTConfig</span>
+<span id="1b332f78-2"><a href="#1b332f78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1b332f78-3"><a href="#1b332f78-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For this to work on Apple Silicon, PYTORCH_ENABLE_MPS_FALLBACK=1 must be set as an environment variable</span></span>
+<span id="1b332f78-4"><a href="#1b332f78-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1b332f78-5"><a href="#1b332f78-5" aria-hidden="true" tabindex="-1"></a>training_args <span class="op">=</span> SFTConfig(</span>
+<span id="1b332f78-6"><a href="#1b332f78-6" aria-hidden="true" tabindex="-1"></a>    output_dir<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned"</span>,</span>
+<span id="1b332f78-7"><a href="#1b332f78-7" aria-hidden="true" tabindex="-1"></a>    logging_dir<span class="op">=</span><span class="st">"logs"</span>,</span>
+<span id="1b332f78-8"><a href="#1b332f78-8" aria-hidden="true" tabindex="-1"></a>    num_train_epochs<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="1b332f78-9"><a href="#1b332f78-9" aria-hidden="true" tabindex="-1"></a>    per_device_train_batch_size<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="1b332f78-10"><a href="#1b332f78-10" aria-hidden="true" tabindex="-1"></a>    gradient_accumulation_steps<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="1b332f78-11"><a href="#1b332f78-11" aria-hidden="true" tabindex="-1"></a>    learning_rate<span class="op">=</span><span class="fl">2e-5</span>,</span>
+<span id="1b332f78-12"><a href="#1b332f78-12" aria-hidden="true" tabindex="-1"></a>    warmup_ratio<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="1b332f78-13"><a href="#1b332f78-13" aria-hidden="true" tabindex="-1"></a>    logging_steps<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="1b332f78-14"><a href="#1b332f78-14" aria-hidden="true" tabindex="-1"></a>    eval_strategy<span class="op">=</span><span class="st">"steps"</span>,</span>
+<span id="1b332f78-15"><a href="#1b332f78-15" aria-hidden="true" tabindex="-1"></a>    eval_steps<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="1b332f78-16"><a href="#1b332f78-16" aria-hidden="true" tabindex="-1"></a>    save_strategy<span class="op">=</span><span class="st">"steps"</span>,</span>
+<span id="1b332f78-17"><a href="#1b332f78-17" aria-hidden="true" tabindex="-1"></a>    save_steps<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="1b332f78-18"><a href="#1b332f78-18" aria-hidden="true" tabindex="-1"></a>    max_seq_length<span class="op">=</span><span class="dv">128</span>,</span>
+<span id="1b332f78-19"><a href="#1b332f78-19" aria-hidden="true" tabindex="-1"></a>    gradient_checkpointing<span class="op">=</span><span class="va">True</span>,</span>
+<span id="1b332f78-20"><a href="#1b332f78-20" aria-hidden="true" tabindex="-1"></a>    report_to<span class="op">=</span><span class="st">"none"</span>,</span>
+<span id="1b332f78-21"><a href="#1b332f78-21" aria-hidden="true" tabindex="-1"></a>    fp16<span class="op">=</span><span class="va">False</span>,</span>
+<span id="1b332f78-22"><a href="#1b332f78-22" aria-hidden="true" tabindex="-1"></a>    load_best_model_at_end<span class="op">=</span><span class="va">True</span>,  <span class="co"># Necessary for early stopping</span></span>
+<span id="1b332f78-23"><a href="#1b332f78-23" aria-hidden="true" tabindex="-1"></a>    metric_for_best_model<span class="op">=</span><span class="st">"eval_loss"</span>,</span>
+<span id="1b332f78-24"><a href="#1b332f78-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We are using an evaluation strategy (<code>eval_strategy</code>) of <code>steps</code>, which means that the model will be evaluated every 100 steps. Again, depending on your dataset and model, you will need to adjust this value. Other evaluation strategies include no evaluation, and <code>epoch</code>, which evaluates the model at the end of each epoch. The warmup ratio (<code>warmup_ratio</code>) is set to 0.05, which means that the learning rate will increase linearly for the first 5% of the training steps.</p>
@@ -614,21 +603,20 @@ About the warmup ratio
 <div id="3090486b" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> trl <span class="im">import</span> SFTTrainer</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> EarlyStoppingCallback</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> SFTTrainer(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>model,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span>training_args,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    train_dataset<span class="op">=</span>dataset[<span class="st">"train"</span>],</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    eval_dataset<span class="op">=</span>dataset[<span class="st">"test"</span>],</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dataset_text_field="messages",</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    peft_config<span class="op">=</span>lora_config,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[EarlyStoppingCallback(</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        early_stopping_patience<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        early_stopping_threshold<span class="op">=</span><span class="fl">0.005</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    )]</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="3090486b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3090486b-1"><a href="#3090486b-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> trl <span class="im">import</span> SFTTrainer</span>
+<span id="3090486b-2"><a href="#3090486b-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> EarlyStoppingCallback</span>
+<span id="3090486b-3"><a href="#3090486b-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3090486b-4"><a href="#3090486b-4" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> SFTTrainer(</span>
+<span id="3090486b-5"><a href="#3090486b-5" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>model,</span>
+<span id="3090486b-6"><a href="#3090486b-6" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span>training_args,</span>
+<span id="3090486b-7"><a href="#3090486b-7" aria-hidden="true" tabindex="-1"></a>    train_dataset<span class="op">=</span>dataset[<span class="st">"train"</span>],</span>
+<span id="3090486b-8"><a href="#3090486b-8" aria-hidden="true" tabindex="-1"></a>    eval_dataset<span class="op">=</span>dataset[<span class="st">"test"</span>],</span>
+<span id="3090486b-9"><a href="#3090486b-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dataset_text_field="messages",</span></span>
+<span id="3090486b-10"><a href="#3090486b-10" aria-hidden="true" tabindex="-1"></a>    peft_config<span class="op">=</span>lora_config,</span>
+<span id="3090486b-11"><a href="#3090486b-11" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[</span>
+<span id="3090486b-12"><a href="#3090486b-12" aria-hidden="true" tabindex="-1"></a>        EarlyStoppingCallback(early_stopping_patience<span class="op">=</span><span class="dv">2</span>, early_stopping_threshold<span class="op">=</span><span class="fl">0.005</span>)</span>
+<span id="3090486b-13"><a href="#3090486b-13" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="3090486b-14"><a href="#3090486b-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
@@ -675,13 +663,11 @@ About the warmup ratio
 <div id="a4fee266" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers.trainer_utils <span class="im">import</span> get_last_checkpoint</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>last_checkpoint <span class="op">=</span> get_last_checkpoint(training_args.output_dir)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>trainer.train(</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    resume_from_checkpoint<span class="op">=</span>last_checkpoint</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a4fee266"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a4fee266-1"><a href="#a4fee266-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers.trainer_utils <span class="im">import</span> get_last_checkpoint</span>
+<span id="a4fee266-2"><a href="#a4fee266-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a4fee266-3"><a href="#a4fee266-3" aria-hidden="true" tabindex="-1"></a>last_checkpoint <span class="op">=</span> get_last_checkpoint(training_args.output_dir)</span>
+<span id="a4fee266-4"><a href="#a4fee266-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a4fee266-5"><a href="#a4fee266-5" aria-hidden="true" tabindex="-1"></a>trainer.train(resume_from_checkpoint<span class="op">=</span>last_checkpoint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -741,13 +727,13 @@ About perplexity
 <div id="3e889791" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>eval_results <span class="op">=</span> trainer.evaluate()</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eval_results)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>final_loss <span class="op">=</span> eval_results[<span class="st">"eval_loss"</span>]</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>final_ppl <span class="op">=</span> math.exp(final_loss)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perplexity:"</span>, final_ppl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="3e889791"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3e889791-1"><a href="#3e889791-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="3e889791-2"><a href="#3e889791-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3e889791-3"><a href="#3e889791-3" aria-hidden="true" tabindex="-1"></a>eval_results <span class="op">=</span> trainer.evaluate()</span>
+<span id="3e889791-4"><a href="#3e889791-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eval_results)</span>
+<span id="3e889791-5"><a href="#3e889791-5" aria-hidden="true" tabindex="-1"></a>final_loss <span class="op">=</span> eval_results[<span class="st">"eval_loss"</span>]</span>
+<span id="3e889791-6"><a href="#3e889791-6" aria-hidden="true" tabindex="-1"></a>final_ppl <span class="op">=</span> math.exp(final_loss)</span>
+<span id="3e889791-7"><a href="#3e889791-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Perplexity:"</span>, final_ppl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -767,31 +753,31 @@ Perplexity: 1.3474345551889422</code></pre>
 <div id="5d3e4166" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Collect training history</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> trainer.state.log_history</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract metrics</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>train_loss <span class="op">=</span> [x[<span class="st">'loss'</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">'loss'</span> <span class="kw">in</span> x]</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>eval_loss <span class="op">=</span> [x[<span class="st">'eval_loss'</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">'eval_loss'</span> <span class="kw">in</span> x]</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create steps for x-axis</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>train_steps <span class="op">=</span> [x[<span class="st">'step'</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">'loss'</span> <span class="kw">in</span> x]</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>eval_steps <span class="op">=</span> [x[<span class="st">'step'</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">'eval_loss'</span> <span class="kw">in</span> x]</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot training and evaluation loss</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.plot(train_steps, train_loss, label<span class="op">=</span><span class="st">'Training Loss'</span>, marker<span class="op">=</span><span class="st">'x'</span>)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.plot(eval_steps, eval_loss, label<span class="op">=</span><span class="st">'Evaluation Loss'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Training vs Evaluation Loss'</span>)</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Steps'</span>)</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Loss'</span>)</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="5d3e4166"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5d3e4166-1"><a href="#5d3e4166-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="5d3e4166-2"><a href="#5d3e4166-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d3e4166-3"><a href="#5d3e4166-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Collect training history</span></span>
+<span id="5d3e4166-4"><a href="#5d3e4166-4" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> trainer.state.log_history</span>
+<span id="5d3e4166-5"><a href="#5d3e4166-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d3e4166-6"><a href="#5d3e4166-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract metrics</span></span>
+<span id="5d3e4166-7"><a href="#5d3e4166-7" aria-hidden="true" tabindex="-1"></a>train_loss <span class="op">=</span> [x[<span class="st">"loss"</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">"loss"</span> <span class="kw">in</span> x]</span>
+<span id="5d3e4166-8"><a href="#5d3e4166-8" aria-hidden="true" tabindex="-1"></a>eval_loss <span class="op">=</span> [x[<span class="st">"eval_loss"</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">"eval_loss"</span> <span class="kw">in</span> x]</span>
+<span id="5d3e4166-9"><a href="#5d3e4166-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d3e4166-10"><a href="#5d3e4166-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create steps for x-axis</span></span>
+<span id="5d3e4166-11"><a href="#5d3e4166-11" aria-hidden="true" tabindex="-1"></a>train_steps <span class="op">=</span> [x[<span class="st">"step"</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">"loss"</span> <span class="kw">in</span> x]</span>
+<span id="5d3e4166-12"><a href="#5d3e4166-12" aria-hidden="true" tabindex="-1"></a>eval_steps <span class="op">=</span> [x[<span class="st">"step"</span>] <span class="cf">for</span> x <span class="kw">in</span> history <span class="cf">if</span> <span class="st">"eval_loss"</span> <span class="kw">in</span> x]</span>
+<span id="5d3e4166-13"><a href="#5d3e4166-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d3e4166-14"><a href="#5d3e4166-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot training and evaluation loss</span></span>
+<span id="5d3e4166-15"><a href="#5d3e4166-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="5d3e4166-16"><a href="#5d3e4166-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d3e4166-17"><a href="#5d3e4166-17" aria-hidden="true" tabindex="-1"></a>plt.plot(train_steps, train_loss, label<span class="op">=</span><span class="st">"Training Loss"</span>, marker<span class="op">=</span><span class="st">"x"</span>)</span>
+<span id="5d3e4166-18"><a href="#5d3e4166-18" aria-hidden="true" tabindex="-1"></a>plt.plot(eval_steps, eval_loss, label<span class="op">=</span><span class="st">"Evaluation Loss"</span>, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="5d3e4166-19"><a href="#5d3e4166-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Training vs Evaluation Loss"</span>)</span>
+<span id="5d3e4166-20"><a href="#5d3e4166-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Steps"</span>)</span>
+<span id="5d3e4166-21"><a href="#5d3e4166-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Loss"</span>)</span>
+<span id="5d3e4166-22"><a href="#5d3e4166-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="5d3e4166-23"><a href="#5d3e4166-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d3e4166-24"><a href="#5d3e4166-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="5d3e4166-25"><a href="#5d3e4166-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -810,14 +796,16 @@ Perplexity: 1.3474345551889422</code></pre>
 <div id="64e962db" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> peft <span class="im">import</span> PeftModel</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>trainer.model.save_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/adapters"</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>merged_model <span class="op">=</span> PeftModel.from_pretrained(model, <span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/adapters"</span>).merge_and_unload()</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>merged_model.save_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>tokenizer.save_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="64e962db"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="64e962db-1"><a href="#64e962db-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> peft <span class="im">import</span> PeftModel</span>
+<span id="64e962db-2"><a href="#64e962db-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="64e962db-3"><a href="#64e962db-3" aria-hidden="true" tabindex="-1"></a>trainer.model.save_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/adapters"</span>)</span>
+<span id="64e962db-4"><a href="#64e962db-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="64e962db-5"><a href="#64e962db-5" aria-hidden="true" tabindex="-1"></a>merged_model <span class="op">=</span> PeftModel.from_pretrained(</span>
+<span id="64e962db-6"><a href="#64e962db-6" aria-hidden="true" tabindex="-1"></a>    model, <span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/adapters"</span></span>
+<span id="64e962db-7"><a href="#64e962db-7" aria-hidden="true" tabindex="-1"></a>).merge_and_unload()</span>
+<span id="64e962db-8"><a href="#64e962db-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="64e962db-9"><a href="#64e962db-9" aria-hidden="true" tabindex="-1"></a>merged_model.save_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span>
+<span id="64e962db-10"><a href="#64e962db-10" aria-hidden="true" tabindex="-1"></a>tokenizer.save_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>('Qwen/Qwen2.5-0.5B-Instruct-finetuned/model/tokenizer_config.json',
@@ -848,48 +836,39 @@ Exercise suggestion
 <div id="9eea4b46" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt the model with a few arithmetic problems</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> pipeline</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the correct pipeline type for causal LMs</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>arithmetic_solver <span class="op">=</span> pipeline(</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text-generation"</span>,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>model,</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    tokenizer<span class="op">=</span>tokenizer</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure generation properly</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>generation_config <span class="op">=</span> {</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"max_new_tokens"</span>: <span class="dv">100</span>,</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"eos_token_id"</span>: tokenizer.eos_token_id,</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"early_stopping"</span>: <span class="va">True</span>,            <span class="co"># Stop if EOS is generated</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>problems <span class="op">=</span> [</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Given x=12+3, solve for x."</span>,</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Given x=56*10, solve for x."</span>,</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"If x=10-4, what is x?"</span>,</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Solve for x, given x=3*4."</span>,</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"With x=13-3, x is what?"</span>,</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Given x=11*3, solve for x."</span></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> problem <span class="kw">in</span> problems:</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: problem}</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> arithmetic_solver(</span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>        messages,</span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>generation_config</span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Prompt: </span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Model: </span><span class="sc">{</span>result[<span class="dv">0</span>][<span class="st">'generated_text'</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9eea4b46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9eea4b46-1"><a href="#9eea4b46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt the model with a few arithmetic problems</span></span>
+<span id="9eea4b46-2"><a href="#9eea4b46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-3"><a href="#9eea4b46-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> pipeline</span>
+<span id="9eea4b46-4"><a href="#9eea4b46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-5"><a href="#9eea4b46-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span>
+<span id="9eea4b46-6"><a href="#9eea4b46-6" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ss">-finetuned/model"</span>)</span>
+<span id="9eea4b46-7"><a href="#9eea4b46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-8"><a href="#9eea4b46-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the correct pipeline type for causal LMs</span></span>
+<span id="9eea4b46-9"><a href="#9eea4b46-9" aria-hidden="true" tabindex="-1"></a>arithmetic_solver <span class="op">=</span> pipeline(<span class="st">"text-generation"</span>, model<span class="op">=</span>model, tokenizer<span class="op">=</span>tokenizer)</span>
+<span id="9eea4b46-10"><a href="#9eea4b46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-11"><a href="#9eea4b46-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure generation properly</span></span>
+<span id="9eea4b46-12"><a href="#9eea4b46-12" aria-hidden="true" tabindex="-1"></a>generation_config <span class="op">=</span> {</span>
+<span id="9eea4b46-13"><a href="#9eea4b46-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"max_new_tokens"</span>: <span class="dv">100</span>,</span>
+<span id="9eea4b46-14"><a href="#9eea4b46-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"eos_token_id"</span>: tokenizer.eos_token_id,</span>
+<span id="9eea4b46-15"><a href="#9eea4b46-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"early_stopping"</span>: <span class="va">True</span>,  <span class="co"># Stop if EOS is generated</span></span>
+<span id="9eea4b46-16"><a href="#9eea4b46-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="9eea4b46-17"><a href="#9eea4b46-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-18"><a href="#9eea4b46-18" aria-hidden="true" tabindex="-1"></a>problems <span class="op">=</span> [</span>
+<span id="9eea4b46-19"><a href="#9eea4b46-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Given x=12+3, solve for x."</span>,</span>
+<span id="9eea4b46-20"><a href="#9eea4b46-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Given x=56*10, solve for x."</span>,</span>
+<span id="9eea4b46-21"><a href="#9eea4b46-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"If x=10-4, what is x?"</span>,</span>
+<span id="9eea4b46-22"><a href="#9eea4b46-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Solve for x, given x=3*4."</span>,</span>
+<span id="9eea4b46-23"><a href="#9eea4b46-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"With x=13-3, x is what?"</span>,</span>
+<span id="9eea4b46-24"><a href="#9eea4b46-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Given x=11*3, solve for x."</span>,</span>
+<span id="9eea4b46-25"><a href="#9eea4b46-25" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="9eea4b46-26"><a href="#9eea4b46-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-27"><a href="#9eea4b46-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> problem <span class="kw">in</span> problems:</span>
+<span id="9eea4b46-28"><a href="#9eea4b46-28" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: problem}]</span>
+<span id="9eea4b46-29"><a href="#9eea4b46-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-30"><a href="#9eea4b46-30" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> arithmetic_solver(messages, <span class="op">**</span>generation_config)</span>
+<span id="9eea4b46-31"><a href="#9eea4b46-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9eea4b46-32"><a href="#9eea4b46-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Prompt: </span><span class="sc">{</span>problem<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="9eea4b46-33"><a href="#9eea4b46-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Model: </span><span class="sc">{</span>result[<span class="dv">0</span>][<span class="st">'generated_text'</span>]<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Prompt: Given x=12+3, solve for x.

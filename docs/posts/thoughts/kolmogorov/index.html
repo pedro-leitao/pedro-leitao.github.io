@@ -305,30 +305,28 @@ N(d) = 10^d
 <div id="c7b992b9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> datasets</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> torch</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Circles_points_train, Circles_label_train <span class="op">=</span> datasets.make_circles(n_samples<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                                                  shuffle<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                                                                  factor<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                                                                  noise<span class="op">=</span><span class="fl">0.10</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                                                                  random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Circles_points_test, Circles_label_test <span class="op">=</span> datasets.make_circles(n_samples<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                                                                shuffle<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                                                factor<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                                                                noise<span class="op">=</span><span class="fl">0.10</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                                                random_state<span class="op">=</span><span class="dv">43</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> {}</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">'train_input'</span>] <span class="op">=</span> torch.from_numpy(Circles_points_train).<span class="bu">float</span>() <span class="co"># Ensure that the data is float</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">'train_label'</span>] <span class="op">=</span> torch.from_numpy(Circles_label_train)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">'test_input'</span>] <span class="op">=</span> torch.from_numpy(Circles_points_test).<span class="bu">float</span>()</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">'test_label'</span>] <span class="op">=</span> torch.from_numpy(Circles_label_test)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset[<span class="st">'train_input'</span>]</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset[<span class="st">'train_label'</span>]</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c7b992b9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c7b992b9-1"><a href="#c7b992b9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> datasets</span>
+<span id="c7b992b9-2"><a href="#c7b992b9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> torch</span>
+<span id="c7b992b9-3"><a href="#c7b992b9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c7b992b9-4"><a href="#c7b992b9-4" aria-hidden="true" tabindex="-1"></a>Circles_points_train, Circles_label_train <span class="op">=</span> datasets.make_circles(</span>
+<span id="c7b992b9-5"><a href="#c7b992b9-5" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>, shuffle<span class="op">=</span><span class="va">True</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.10</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="c7b992b9-6"><a href="#c7b992b9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="c7b992b9-7"><a href="#c7b992b9-7" aria-hidden="true" tabindex="-1"></a>Circles_points_test, Circles_label_test <span class="op">=</span> datasets.make_circles(</span>
+<span id="c7b992b9-8"><a href="#c7b992b9-8" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>, shuffle<span class="op">=</span><span class="va">True</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.10</span>, random_state<span class="op">=</span><span class="dv">43</span></span>
+<span id="c7b992b9-9"><a href="#c7b992b9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="c7b992b9-10"><a href="#c7b992b9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c7b992b9-11"><a href="#c7b992b9-11" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> {}</span>
+<span id="c7b992b9-12"><a href="#c7b992b9-12" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train_input"</span>] <span class="op">=</span> torch.from_numpy(</span>
+<span id="c7b992b9-13"><a href="#c7b992b9-13" aria-hidden="true" tabindex="-1"></a>    Circles_points_train</span>
+<span id="c7b992b9-14"><a href="#c7b992b9-14" aria-hidden="true" tabindex="-1"></a>).<span class="bu">float</span>()  <span class="co"># Ensure that the data is float</span></span>
+<span id="c7b992b9-15"><a href="#c7b992b9-15" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train_label"</span>] <span class="op">=</span> torch.from_numpy(Circles_label_train)</span>
+<span id="c7b992b9-16"><a href="#c7b992b9-16" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"test_input"</span>] <span class="op">=</span> torch.from_numpy(Circles_points_test).<span class="bu">float</span>()</span>
+<span id="c7b992b9-17"><a href="#c7b992b9-17" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"test_label"</span>] <span class="op">=</span> torch.from_numpy(Circles_label_test)</span>
+<span id="c7b992b9-18"><a href="#c7b992b9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c7b992b9-19"><a href="#c7b992b9-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset[<span class="st">"train_input"</span>]</span>
+<span id="c7b992b9-20"><a href="#c7b992b9-20" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset[<span class="st">"train_label"</span>]</span>
+<span id="c7b992b9-21"><a href="#c7b992b9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c7b992b9-22"><a href="#c7b992b9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>torch.Size([1000, 2]) torch.Size([1000])</code></pre>
@@ -338,13 +336,13 @@ N(d) = 10^d
 <div id="34df014c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot X and y as 2D scatter plot</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="34df014c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="34df014c-1"><a href="#34df014c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot X and y as 2D scatter plot</span></span>
+<span id="34df014c-2"><a href="#34df014c-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="34df014c-3"><a href="#34df014c-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="34df014c-4"><a href="#34df014c-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="34df014c-5"><a href="#34df014c-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"blue"</span>)</span>
+<span id="34df014c-6"><a href="#34df014c-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="34df014c-7"><a href="#34df014c-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -359,9 +357,9 @@ N(d) = 10^d
 <div id="4ae8fe22" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kan <span class="im">as</span> kan</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> kan.KAN(width<span class="op">=</span>[<span class="dv">2</span>,<span class="dv">2</span>], grid<span class="op">=</span><span class="dv">3</span>, k<span class="op">=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4ae8fe22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4ae8fe22-1"><a href="#4ae8fe22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kan <span class="im">as</span> kan</span>
+<span id="4ae8fe22-2"><a href="#4ae8fe22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4ae8fe22-3"><a href="#4ae8fe22-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> kan.KAN(width<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], grid<span class="op">=</span><span class="dv">3</span>, k<span class="op">=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>checkpoint directory created: ./model
@@ -372,13 +370,15 @@ saving model version 0.0</code></pre>
 <div id="ec58093c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the uninitialized model</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model(X)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>model.plot(beta<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>           in_vars<span class="op">=</span>[<span class="vs">r'$x_1$'</span>, <span class="vs">r'$x_2$'</span>],</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>           out_vars<span class="op">=</span>[<span class="vs">r'$y_1$'</span>, <span class="vs">r'$y_2$'</span>],</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>           title<span class="op">=</span><span class="st">'Uninitialized model'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ec58093c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ec58093c-1"><a href="#ec58093c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the uninitialized model</span></span>
+<span id="ec58093c-2"><a href="#ec58093c-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ec58093c-3"><a href="#ec58093c-3" aria-hidden="true" tabindex="-1"></a>model(X)</span>
+<span id="ec58093c-4"><a href="#ec58093c-4" aria-hidden="true" tabindex="-1"></a>model.plot(</span>
+<span id="ec58093c-5"><a href="#ec58093c-5" aria-hidden="true" tabindex="-1"></a>    beta<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="ec58093c-6"><a href="#ec58093c-6" aria-hidden="true" tabindex="-1"></a>    in_vars<span class="op">=</span>[<span class="vs">r"$x_1$"</span>, <span class="vs">r"$x_2$"</span>],</span>
+<span id="ec58093c-7"><a href="#ec58093c-7" aria-hidden="true" tabindex="-1"></a>    out_vars<span class="op">=</span>[<span class="vs">r"$y_1$"</span>, <span class="vs">r"$y_2$"</span>],</span>
+<span id="ec58093c-8"><a href="#ec58093c-8" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Uninitialized model"</span>,</span>
+<span id="ec58093c-9"><a href="#ec58093c-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -392,28 +392,38 @@ saving model version 0.0</code></pre>
 <div id="6670f0c3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_acc():</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        (torch.argmax(model(dataset[<span class="st">'train_input'</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">'train_label'</span>]).<span class="bu">float</span>())</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_acc():</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        (torch.argmax(model(dataset[<span class="st">'test_input'</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">'test_label'</span>]).<span class="bu">float</span>())</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Make use of MPS device if available (for Apple Silicon)</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    mps_device <span class="op">=</span> torch.device(<span class="st">"mps"</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> torch.ones(<span class="dv">1</span>, device<span class="op">=</span>mps_device)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (x)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="st">"MPS device not found."</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit(dataset,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                      opt<span class="op">=</span><span class="st">"LBFGS"</span>,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                      steps<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                      metrics<span class="op">=</span>(train_acc, test_acc),</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                      loss_fn<span class="op">=</span>torch.nn.CrossEntropyLoss())</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>results[<span class="st">'train_acc'</span>][<span class="op">-</span><span class="dv">1</span>], results[<span class="st">'test_acc'</span>][<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6670f0c3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6670f0c3-1"><a href="#6670f0c3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_acc():</span>
+<span id="6670f0c3-2"><a href="#6670f0c3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
+<span id="6670f0c3-3"><a href="#6670f0c3-3" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="6670f0c3-4"><a href="#6670f0c3-4" aria-hidden="true" tabindex="-1"></a>            torch.argmax(model(dataset[<span class="st">"train_input"</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">"train_label"</span>]</span>
+<span id="6670f0c3-5"><a href="#6670f0c3-5" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">float</span>()</span>
+<span id="6670f0c3-6"><a href="#6670f0c3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6670f0c3-7"><a href="#6670f0c3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6670f0c3-8"><a href="#6670f0c3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6670f0c3-9"><a href="#6670f0c3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_acc():</span>
+<span id="6670f0c3-10"><a href="#6670f0c3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
+<span id="6670f0c3-11"><a href="#6670f0c3-11" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="6670f0c3-12"><a href="#6670f0c3-12" aria-hidden="true" tabindex="-1"></a>            torch.argmax(model(dataset[<span class="st">"test_input"</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">"test_label"</span>]</span>
+<span id="6670f0c3-13"><a href="#6670f0c3-13" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">float</span>()</span>
+<span id="6670f0c3-14"><a href="#6670f0c3-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="6670f0c3-15"><a href="#6670f0c3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6670f0c3-16"><a href="#6670f0c3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6670f0c3-17"><a href="#6670f0c3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Make use of MPS device if available (for Apple Silicon)</span></span>
+<span id="6670f0c3-18"><a href="#6670f0c3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
+<span id="6670f0c3-19"><a href="#6670f0c3-19" aria-hidden="true" tabindex="-1"></a>    mps_device <span class="op">=</span> torch.device(<span class="st">"mps"</span>)</span>
+<span id="6670f0c3-20"><a href="#6670f0c3-20" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> torch.ones(<span class="dv">1</span>, device<span class="op">=</span>mps_device)</span>
+<span id="6670f0c3-21"><a href="#6670f0c3-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span>
+<span id="6670f0c3-22"><a href="#6670f0c3-22" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="6670f0c3-23"><a href="#6670f0c3-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"MPS device not found."</span>)</span>
+<span id="6670f0c3-24"><a href="#6670f0c3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6670f0c3-25"><a href="#6670f0c3-25" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit(</span>
+<span id="6670f0c3-26"><a href="#6670f0c3-26" aria-hidden="true" tabindex="-1"></a>    dataset,</span>
+<span id="6670f0c3-27"><a href="#6670f0c3-27" aria-hidden="true" tabindex="-1"></a>    opt<span class="op">=</span><span class="st">"LBFGS"</span>,</span>
+<span id="6670f0c3-28"><a href="#6670f0c3-28" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="6670f0c3-29"><a href="#6670f0c3-29" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>(train_acc, test_acc),</span>
+<span id="6670f0c3-30"><a href="#6670f0c3-30" aria-hidden="true" tabindex="-1"></a>    loss_fn<span class="op">=</span>torch.nn.CrossEntropyLoss(),</span>
+<span id="6670f0c3-31"><a href="#6670f0c3-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="6670f0c3-32"><a href="#6670f0c3-32" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"train_acc"</span>][<span class="op">-</span><span class="dv">1</span>], results[<span class="st">"test_acc"</span>][<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>tensor([1.], device='mps:0')</code></pre>
@@ -430,13 +440,13 @@ saving model version 0.0</code></pre>
 <div id="131515a1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;Plot the training and test accuracy</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">'train_acc'</span>], label<span class="op">=</span><span class="st">'train'</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">'test_acc'</span>], label<span class="op">=</span><span class="st">'test'</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="131515a1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="131515a1-1"><a href="#131515a1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the training and test accuracy</span></span>
+<span id="131515a1-2"><a href="#131515a1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="131515a1-3"><a href="#131515a1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="131515a1-4"><a href="#131515a1-4" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">"train_acc"</span>], label<span class="op">=</span><span class="st">"train"</span>)</span>
+<span id="131515a1-5"><a href="#131515a1-5" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">"test_acc"</span>], label<span class="op">=</span><span class="st">"test"</span>)</span>
+<span id="131515a1-6"><a href="#131515a1-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="131515a1-7"><a href="#131515a1-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -451,10 +461,12 @@ saving model version 0.0</code></pre>
 <div id="c75311b0" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model.plot(title<span class="op">=</span><span class="st">"Circles, 5 neurons"</span>,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>           in_vars<span class="op">=</span>[<span class="vs">r'$x_1$'</span>, <span class="vs">r'$x_2$'</span>],</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           out_vars<span class="op">=</span>[<span class="vs">r'$y_1$'</span>, <span class="vs">r'$y_2$'</span>],</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>           beta<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="c75311b0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c75311b0-1"><a href="#c75311b0-1" aria-hidden="true" tabindex="-1"></a>model.plot(</span>
+<span id="c75311b0-2"><a href="#c75311b0-2" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Circles, 5 neurons"</span>,</span>
+<span id="c75311b0-3"><a href="#c75311b0-3" aria-hidden="true" tabindex="-1"></a>    in_vars<span class="op">=</span>[<span class="vs">r"$x_1$"</span>, <span class="vs">r"$x_2$"</span>],</span>
+<span id="c75311b0-4"><a href="#c75311b0-4" aria-hidden="true" tabindex="-1"></a>    out_vars<span class="op">=</span>[<span class="vs">r"$y_1$"</span>, <span class="vs">r"$y_2$"</span>],</span>
+<span id="c75311b0-5"><a href="#c75311b0-5" aria-hidden="true" tabindex="-1"></a>    beta<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="c75311b0-6"><a href="#c75311b0-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -469,9 +481,21 @@ saving model version 0.0</code></pre>
 <div id="fb1ef69d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>function_library <span class="op">=</span> [<span class="st">'x'</span>,<span class="st">'x^2'</span>,<span class="st">'x^3'</span>,<span class="st">'x^4'</span>,<span class="st">'exp'</span>,<span class="st">'log'</span>,<span class="st">'sqrt'</span>,<span class="st">'tanh'</span>,<span class="st">'sin'</span>,<span class="st">'tan'</span>,<span class="st">'abs'</span>]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model.auto_symbolic(lib<span class="op">=</span>function_library)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>formula1, formula2 <span class="op">=</span> model.symbolic_formula()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="fb1ef69d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fb1ef69d-1"><a href="#fb1ef69d-1" aria-hidden="true" tabindex="-1"></a>function_library <span class="op">=</span> [</span>
+<span id="fb1ef69d-2"><a href="#fb1ef69d-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>,</span>
+<span id="fb1ef69d-3"><a href="#fb1ef69d-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^2"</span>,</span>
+<span id="fb1ef69d-4"><a href="#fb1ef69d-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^3"</span>,</span>
+<span id="fb1ef69d-5"><a href="#fb1ef69d-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^4"</span>,</span>
+<span id="fb1ef69d-6"><a href="#fb1ef69d-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"exp"</span>,</span>
+<span id="fb1ef69d-7"><a href="#fb1ef69d-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log"</span>,</span>
+<span id="fb1ef69d-8"><a href="#fb1ef69d-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sqrt"</span>,</span>
+<span id="fb1ef69d-9"><a href="#fb1ef69d-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tanh"</span>,</span>
+<span id="fb1ef69d-10"><a href="#fb1ef69d-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sin"</span>,</span>
+<span id="fb1ef69d-11"><a href="#fb1ef69d-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tan"</span>,</span>
+<span id="fb1ef69d-12"><a href="#fb1ef69d-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"abs"</span>,</span>
+<span id="fb1ef69d-13"><a href="#fb1ef69d-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="fb1ef69d-14"><a href="#fb1ef69d-14" aria-hidden="true" tabindex="-1"></a>model.auto_symbolic(lib<span class="op">=</span>function_library)</span>
+<span id="fb1ef69d-15"><a href="#fb1ef69d-15" aria-hidden="true" tabindex="-1"></a>formula1, formula2 <span class="op">=</span> model.symbolic_formula()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>fixing (0,0,0) with sin, r2=0.9502711892127991, c=2
@@ -484,7 +508,7 @@ saving model version 0.2</code></pre>
 <div id="377af703" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>formula1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="377af703"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="377af703-1"><a href="#377af703-1" aria-hidden="true" tabindex="-1"></a>formula1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
 <p><span class="math inline">\(\displaystyle - 395.614929199219 \sin{\left(0.600559830665588 x_{1} + 7.81623983383179 \right)} - 41.3908004760742 \sin{\left(2.02695989608765 x_{2} + 1.60479974746704 \right)} + 392.057125091553\)</span></p>
@@ -493,7 +517,7 @@ saving model version 0.2</code></pre>
 <div id="f5180dda" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>formula2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f5180dda"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f5180dda-1"><a href="#f5180dda-1" aria-hidden="true" tabindex="-1"></a>formula2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="10">
 <p><span class="math inline">\(\displaystyle - 59.2461098803678 \left(0.0664703610853865 - x_{1}\right)^{2} + 42.0637092590332 \sin{\left(2.03351974487305 x_{2} + 1.61191976070404 \right)} - 7.05126571655273\)</span></p>
@@ -503,20 +527,32 @@ saving model version 0.2</code></pre>
 <div id="82053fc6" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the accuracy of the formula</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> symbolic_acc(formula1, formula2, X, y):</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(batch):</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">'x_1'</span>, X[i,<span class="dv">0</span>]).subs(<span class="st">'x_2'</span>, X[i,<span class="dv">1</span>])).astype(np.float64)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">'x_1'</span>, X[i,<span class="dv">0</span>]).subs(<span class="st">'x_2'</span>, X[i,<span class="dv">1</span>])).astype(np.float64)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        correct <span class="op">+=</span> (logit2 <span class="op">&gt;</span> logit1) <span class="op">==</span> y[i]</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> correct<span class="op">/</span>batch</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'formula train accuracy:'</span>, symbolic_acc(formula1, formula2, dataset[<span class="st">'train_input'</span>], dataset[<span class="st">'train_label'</span>]))</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'formula test accuracy:'</span>, symbolic_acc(formula1, formula2, dataset[<span class="st">'test_input'</span>], dataset[<span class="st">'test_label'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="82053fc6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="82053fc6-1"><a href="#82053fc6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the accuracy of the formula</span></span>
+<span id="82053fc6-2"><a href="#82053fc6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="82053fc6-3"><a href="#82053fc6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="82053fc6-4"><a href="#82053fc6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="82053fc6-5"><a href="#82053fc6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> symbolic_acc(formula1, formula2, X, y):</span>
+<span id="82053fc6-6"><a href="#82053fc6-6" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="82053fc6-7"><a href="#82053fc6-7" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
+<span id="82053fc6-8"><a href="#82053fc6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(batch):</span>
+<span id="82053fc6-9"><a href="#82053fc6-9" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">"x_1"</span>, X[i, <span class="dv">0</span>]).subs(<span class="st">"x_2"</span>, X[i, <span class="dv">1</span>])).astype(</span>
+<span id="82053fc6-10"><a href="#82053fc6-10" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="82053fc6-11"><a href="#82053fc6-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="82053fc6-12"><a href="#82053fc6-12" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">"x_1"</span>, X[i, <span class="dv">0</span>]).subs(<span class="st">"x_2"</span>, X[i, <span class="dv">1</span>])).astype(</span>
+<span id="82053fc6-13"><a href="#82053fc6-13" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="82053fc6-14"><a href="#82053fc6-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="82053fc6-15"><a href="#82053fc6-15" aria-hidden="true" tabindex="-1"></a>        correct <span class="op">+=</span> (logit2 <span class="op">&gt;</span> logit1) <span class="op">==</span> y[i]</span>
+<span id="82053fc6-16"><a href="#82053fc6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> correct <span class="op">/</span> batch</span>
+<span id="82053fc6-17"><a href="#82053fc6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="82053fc6-18"><a href="#82053fc6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="82053fc6-19"><a href="#82053fc6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="82053fc6-20"><a href="#82053fc6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formula train accuracy:"</span>,</span>
+<span id="82053fc6-21"><a href="#82053fc6-21" aria-hidden="true" tabindex="-1"></a>    symbolic_acc(formula1, formula2, dataset[<span class="st">"train_input"</span>], dataset[<span class="st">"train_label"</span>]),</span>
+<span id="82053fc6-22"><a href="#82053fc6-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="82053fc6-23"><a href="#82053fc6-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="82053fc6-24"><a href="#82053fc6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formula test accuracy:"</span>,</span>
+<span id="82053fc6-25"><a href="#82053fc6-25" aria-hidden="true" tabindex="-1"></a>    symbolic_acc(formula1, formula2, dataset[<span class="st">"test_input"</span>], dataset[<span class="st">"test_label"</span>]),</span>
+<span id="82053fc6-26"><a href="#82053fc6-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>formula train accuracy: tensor(0.9870)
@@ -528,26 +564,35 @@ formula test accuracy: tensor(0.9860)</code></pre>
 <div id="a4222c66" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the symbolic formula as a Plotly contour plot</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.zeros_like(X)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">'x_1'</span>, X[i,j]).subs(<span class="st">'x_2'</span>, Y[i,j])).astype(np.float64)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">'x_1'</span>, X[i,j]).subs(<span class="st">'x_2'</span>, Y[i,j])).astype(np.float64)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Determine the class by comparing the logits</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        Z[i,j] <span class="op">=</span> logit2 <span class="op">&gt;</span> logit1</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.contourf(X, Y, Z)</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>plt.scatter(Circles_points_train[:,<span class="dv">0</span>], Circles_points_train[:,<span class="dv">1</span>], c<span class="op">=</span>Circles_label_train, cmap<span class="op">=</span><span class="st">'coolwarm'</span>)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a4222c66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a4222c66-1"><a href="#a4222c66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the symbolic formula as a Plotly contour plot</span></span>
+<span id="a4222c66-2"><a href="#a4222c66-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="a4222c66-3"><a href="#a4222c66-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="a4222c66-4"><a href="#a4222c66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a4222c66-5"><a href="#a4222c66-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
+<span id="a4222c66-6"><a href="#a4222c66-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
+<span id="a4222c66-7"><a href="#a4222c66-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="a4222c66-8"><a href="#a4222c66-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.zeros_like(X)</span>
+<span id="a4222c66-9"><a href="#a4222c66-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="a4222c66-10"><a href="#a4222c66-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="a4222c66-11"><a href="#a4222c66-11" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">"x_1"</span>, X[i, j]).subs(<span class="st">"x_2"</span>, Y[i, j])).astype(</span>
+<span id="a4222c66-12"><a href="#a4222c66-12" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="a4222c66-13"><a href="#a4222c66-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="a4222c66-14"><a href="#a4222c66-14" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">"x_1"</span>, X[i, j]).subs(<span class="st">"x_2"</span>, Y[i, j])).astype(</span>
+<span id="a4222c66-15"><a href="#a4222c66-15" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="a4222c66-16"><a href="#a4222c66-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="a4222c66-17"><a href="#a4222c66-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Determine the class by comparing the logits</span></span>
+<span id="a4222c66-18"><a href="#a4222c66-18" aria-hidden="true" tabindex="-1"></a>        Z[i, j] <span class="op">=</span> logit2 <span class="op">&gt;</span> logit1</span>
+<span id="a4222c66-19"><a href="#a4222c66-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a4222c66-20"><a href="#a4222c66-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="a4222c66-21"><a href="#a4222c66-21" aria-hidden="true" tabindex="-1"></a>plt.contourf(X, Y, Z)</span>
+<span id="a4222c66-22"><a href="#a4222c66-22" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="a4222c66-23"><a href="#a4222c66-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="a4222c66-24"><a href="#a4222c66-24" aria-hidden="true" tabindex="-1"></a>    Circles_points_train[:, <span class="dv">0</span>],</span>
+<span id="a4222c66-25"><a href="#a4222c66-25" aria-hidden="true" tabindex="-1"></a>    Circles_points_train[:, <span class="dv">1</span>],</span>
+<span id="a4222c66-26"><a href="#a4222c66-26" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>Circles_label_train,</span>
+<span id="a4222c66-27"><a href="#a4222c66-27" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="a4222c66-28"><a href="#a4222c66-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="a4222c66-29"><a href="#a4222c66-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
