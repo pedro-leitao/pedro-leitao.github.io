@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bokeh Plot</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.3.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.3.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+  </head>
+  <body>
+    <div id="d529c4ea-f55e-4b07-8c5e-0a620f951fab" data-root-id="p1051" style="display: contents;"></div>
+  
+    <script type="application/json" id="cd4b6c68-ee63-437e-88bb-2438de8689d9">
+      {"d1f32190-4fb1-4af3-a990-c0aa24910d99":{"version":"3.6.3","title":"Bokeh Application","roots":[{"type":"object","name":"Column","id":"p1051","attributes":{"children":[{"type":"object","name":"Figure","id":"p1004","attributes":{"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1005"},"y_range":{"type":"object","name":"DataRange1d","id":"p1006"},"x_scale":{"type":"object","name":"LinearScale","id":"p1014"},"y_scale":{"type":"object","name":"LinearScale","id":"p1015"},"title":{"type":"object","name":"Title","id":"p1007","attributes":{"text":"Meeting Impact vs. Duration"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1045","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1001","attributes":{"selected":{"type":"object","name":"Selection","id":"p1002","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1003"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1046","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1047"}}},"glyph":{"type":"object","name":"Line","id":"p1042","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"green","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1043","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"green","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1044","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"green","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1013","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1026"},{"type":"object","name":"WheelZoomTool","id":"p1027","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1028","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1029","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1035","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1034","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1036"},{"type":"object","name":"ResetTool","id":"p1037"},{"type":"object","name":"HelpTool","id":"p1038"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1021","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1022","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1023"},"axis_label":"Meeting Impact","major_label_policy":{"type":"object","name":"AllLabels","id":"p1024"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1016","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1017","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1018"},"axis_label":"Meeting Duration (minutes)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1019"}}}],"center":[{"type":"object","name":"Grid","id":"p1020","attributes":{"axis":{"id":"p1016"}}},{"type":"object","name":"Grid","id":"p1025","attributes":{"dimension":1,"axis":{"id":"p1021"}}}]}},{"type":"object","name":"Slider","id":"p1048","attributes":{"js_property_callbacks":{"type":"map","entries":[["change:value",[{"type":"object","name":"CustomJS","id":"p1050","attributes":{"args":{"type":"map","entries":[["source",{"id":"p1001"}],["slider_size",{"id":"p1048"}],["slider_freq",{"type":"object","name":"Slider","id":"p1049","attributes":{"js_property_callbacks":{"type":"map","entries":[["change:value",[{"id":"p1050"}]]]},"title":"Meeting Frequency (per day)","start":0,"end":10,"value":2,"step":0.1}}]]},"code":"\n    const data = source.data;\n    const x = data['x'];\n    const y = data['y'];\n    const meeting_size = slider_size.value;\n    const meeting_freq = slider_freq.value;\n    \n    // Parameters for duration impact.\n    const d_opt = 30.0;\n    const sigma = 15.0;\n    // Ideal meeting size.\n    const ideal_size = 6.0;\n    \n    // Calculate impact factors based on slider values.\n    const impact_size = Math.exp(-Math.abs(meeting_size - ideal_size) / 4.0);\n    const impact_freq = Math.exp(-meeting_freq / 5.0);\n    \n    for (let i = 0; i &lt; x.length; i++) {\n        // Gaussian curve for duration impact.\n        const impact_duration = Math.exp(-Math.pow(x[i] - d_opt, 2) / (2 * sigma * sigma));\n        y[i] = impact_duration * impact_size * impact_freq;\n    }\n    source.change.emit();\n"}}]]]},"title":"Meeting Size (number of participants)","start":1,"end":20,"value":6,"step":0.1}},{"id":"p1049"}]}}]}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('cd4b6c68-ee63-437e-88bb-2438de8689d9').textContent;
+              const render_items = [{"docid":"d1f32190-4fb1-4af3-a990-c0aa24910d99","roots":{"p1051":"d529c4ea-f55e-4b07-8c5e-0a620f951fab"},"root_ids":["p1051"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>
