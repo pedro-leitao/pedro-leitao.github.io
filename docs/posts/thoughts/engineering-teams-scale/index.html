@@ -273,7 +273,7 @@ window.Quarto = {
   <li><a href="#pizza-teams" id="toc-pizza-teams" class="nav-link" data-scroll-target="#pizza-teams">Pizza teams</a></li>
   <li><a href="#small-and-incremental-but-keep-an-eye-on-the-target-picture" id="toc-small-and-incremental-but-keep-an-eye-on-the-target-picture" class="nav-link" data-scroll-target="#small-and-incremental-but-keep-an-eye-on-the-target-picture">Small and incremental, but keep an eye on the target picture</a></li>
   <li><a href="#a-model-for-team-productivity" id="toc-a-model-for-team-productivity" class="nav-link" data-scroll-target="#a-model-for-team-productivity">A model for team productivity</a></li>
-  <li><a href="#going-forwards" id="toc-going-forwards" class="nav-link" data-scroll-target="#going-forwards">Going forwards</a></li>
+  <li><a href="#moving-forward" id="toc-moving-forward" class="nav-link" data-scroll-target="#moving-forward">Moving forward</a></li>
   </ul>
 </nav>
     </div>
@@ -340,7 +340,7 @@ window.Quarto = {
 <p>Software engineering requires deep thought, concentration, and a lot of time ideating and trying different things out. This can be done on one to one’s or in very small, cohesive groups, but hardly by more than two or three people at a time. The more people in a meeting, the less effective it is, and the more time is wasted.</p>
 <p>Ideally, a meeting should last an amount of time that is inversely proportional to the number of attendees and frequency. The more people, the less time, and the less frequent the better. If a meeting is held every day for an hour, one should probably question <em>why</em> it is needed, and what is the desired <em>outcome</em> of it.</p>
 <p>A good rule of thumb is that a meeting should have a duration of <span class="math inline">\(4/n\)</span>, where <span class="math inline">\(n\)</span> is the number of participants. Anything beyond that is probably a waste of time.</p>
-<div id="a3fbbca7" class="cell" data-execution_count="1">
+<div id="a3fbbca7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="a3fbbca7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a3fbbca7-1"><a href="#a3fbbca7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -692,7 +692,7 @@ function(Bokeh) {
 <p>There are a few scaling principles that anyone working in technology should be able to grasp. The first is <em><a href="https://en.wikipedia.org/wiki/Conway%27s_law">:link Conway’s law</a></em>, which states that “organizations which design systems (…) are constrained to produce designs which are copies of the communication structures of these organizations.” In practice, a system’s architecture tends to mirror the org chart and communication paths of its creators​. A misaligned software architecture and team structure can lead to inefficiencies or unintended design complexity.</p>
 <p>You have probably seen this in practice, where a monolithic codebase becomes unwieldy as the team grows, or distributed teams struggle with tightly coupled microservices. For instance, a startup’s early system—built by a single cohesive team—often evolves into a tangled mess of dependencies once the company scales into departmental silos (engineering, product, DevOps). Suddenly, the software reflects fragmented priorities and communication gaps, with teams duplicating efforts or bypassing critical integrations. Many businesses now even use the inverse Conway maneuver - reorganizing teams to achieve a desired software architecture​.</p>
 <p>Another important principle is Brooks’ Law - “Adding manpower to a late software project makes it later.” Fred Brooks’ classic lesson warns that simply throwing more developers at a slipping project often backfires​. New team members take time to ramp up and increase communication overhead, which can further slow progress. This law has been validated “project after project across engineering teams of all sizes”​, reminding us to be cautious about scaling headcount as a solution, as it leads to diminishing returns due to increased coordination costs.</p>
-<div id="df375390" class="cell" data-execution_count="2">
+<div id="df375390" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="df375390"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="df375390-1"><a href="#df375390-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
@@ -768,7 +768,7 @@ function(Bokeh) {
 <p>It is always useful to visually intuit how some of the factors we discussed interact with each other and impact the ability of an engineering team to deliver. Let us quickly model how team integration, communication, and technical debt can affect team productivity as project size increases. The following widget allows you to adjust the sliders for team integration, communication, and technical debt, and see how the productivity curve changes. Each slider represents the amount of friction introduced by the corresponding factor, i.e., as you move the sliders to the right you are saying that the team has more friction due to that factor. The productivity curve is based on a simple model that combines these factors to estimate the team’s mid productivity level, as well as the uncertainty range around it.</p>
 <p>You can estimate where the team is in regards to these factors, and put each slide at the right level to estimate where they are in the productivity curve. “Productivity” in this case means the amount of time the team spends delivering value, rather than spending time just fixing things, trying to understand what is needed, just talking to each other, or attempting to integrate various aspects of what they developed (a productivity of zero means the team is basically not delivering anything, while a value of one means they are delivering at full capacity).</p>
 <p>The model is very simplified, but should give you a good intuition on how these factors interact.</p>
-<div id="54b8a519" class="cell" data-execution_count="3">
+<div id="54b8a519" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="54b8a519"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="54b8a519-1"><a href="#54b8a519-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -940,8 +940,8 @@ function(Bokeh) {
 <iframe src="team_productivity.html" width="100%" height="540px" style="border:none;">
 </iframe>
 </section>
-<section id="going-forwards" class="level2">
-<h2 data-anchor-id="going-forwards">Going forwards</h2>
+<section id="moving-forward" class="level2">
+<h2 data-anchor-id="moving-forward">Moving forward</h2>
 <p>To conclude what is now a long list of ideas and learnings, what absolutely matters is that teams are supported in <em>moving forward</em> and in <em>delivering value</em>. This is not about adding more people, or about finding a hero to save the day, but about helping the team work better together, and to make the right decisions along the way. It is about reducing friction, and about helping the team to communicate more effectively, to integrate better, and to work towards a common goal.</p>
 <p>It is also about <a href="https://en.wikipedia.org/wiki/Decentralized_decision-making">:link decentralising decision making</a> rather than making it entirely top-down, and about empowering the team to make the right decisions themselves. Ultimately consensus should be an emergent property, from giving the team the right information, the right tools, and the right incentives to make their way forward in a way that fosters autonomy and accountability. It is about helping everyone to learn from their mistakes, to pivot quickly, and to adapt to new information. It is about helping the team to experiment, to prototype, and to validate new ideas. It is about helping them to fail fast, and to learn from their failures as well as their successes. All this I believe is essential for fostering a culture of innovation and continuous improvement.</p>
 
