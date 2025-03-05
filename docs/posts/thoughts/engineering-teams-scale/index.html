@@ -340,33 +340,33 @@ window.Quarto = {
 <p>Software engineering requires deep thought, concentration, and a lot of time ideating and trying different things out. This can be done on one to one’s or in very small, cohesive groups, but hardly by more than two or three people at a time. The more people in a meeting, the less effective it is, and the more time is wasted.</p>
 <p>Ideally, a meeting should last an amount of time that is inversely proportional to the number of attendees and frequency. The more people, the less time, and the less frequent the better. If a meeting is held every day for an hour, one should probably question <em>why</em> it is needed, and what is the desired <em>outcome</em> of it.</p>
 <p>A good rule of thumb is that a meeting should have a duration of <span class="math inline">\(4/n\)</span>, where <span class="math inline">\(n\)</span> is the number of participants. Anything beyond that is probably a waste of time.</p>
-<div id="248414f2" class="cell" data-execution_count="1">
+<div id="a3fbbca7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="248414f2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="248414f2-1"><a href="#248414f2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="248414f2-2"><a href="#248414f2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, output_file, save, show, output_notebook</span>
-<span id="248414f2-3"><a href="#248414f2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource</span>
-<span id="248414f2-4"><a href="#248414f2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="248414f2-5"><a href="#248414f2-5" aria-hidden="true" tabindex="-1"></a>output_notebook(hide_banner<span class="op">=</span><span class="va">True</span>)</span>
-<span id="248414f2-6"><a href="#248414f2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="248414f2-7"><a href="#248414f2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the range of participants (n)</span></span>
-<span id="248414f2-8"><a href="#248414f2-8" aria-hidden="true" tabindex="-1"></a>n_values <span class="op">=</span> np.linspace(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
-<span id="248414f2-9"><a href="#248414f2-9" aria-hidden="true" tabindex="-1"></a>d_values <span class="op">=</span> <span class="dv">4</span> <span class="op">/</span> n_values</span>
-<span id="248414f2-10"><a href="#248414f2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="248414f2-11"><a href="#248414f2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the Bokeh data source</span></span>
-<span id="248414f2-12"><a href="#248414f2-12" aria-hidden="true" tabindex="-1"></a>source <span class="op">=</span> ColumnDataSource(data<span class="op">=</span><span class="bu">dict</span>(n<span class="op">=</span>n_values, d<span class="op">=</span>d_values))</span>
-<span id="248414f2-13"><a href="#248414f2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="248414f2-14"><a href="#248414f2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Bokeh figure</span></span>
-<span id="248414f2-15"><a href="#248414f2-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> figure(</span>
-<span id="248414f2-16"><a href="#248414f2-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Meeting Duration vs. Number of Participants"</span>,</span>
-<span id="248414f2-17"><a href="#248414f2-17" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"Number of Participants (n)"</span>,</span>
-<span id="248414f2-18"><a href="#248414f2-18" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"Duration (hours)"</span>,</span>
-<span id="248414f2-19"><a href="#248414f2-19" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>,</span>
-<span id="248414f2-20"><a href="#248414f2-20" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span>,</span>
-<span id="248414f2-21"><a href="#248414f2-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="248414f2-22"><a href="#248414f2-22" aria-hidden="true" tabindex="-1"></a>p.line(<span class="st">"n"</span>, <span class="st">"d"</span>, source<span class="op">=</span>source, line_width<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
-<span id="248414f2-23"><a href="#248414f2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="248414f2-24"><a href="#248414f2-24" aria-hidden="true" tabindex="-1"></a>show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a3fbbca7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a3fbbca7-1"><a href="#a3fbbca7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="a3fbbca7-2"><a href="#a3fbbca7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, output_file, save, show, output_notebook</span>
+<span id="a3fbbca7-3"><a href="#a3fbbca7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource</span>
+<span id="a3fbbca7-4"><a href="#a3fbbca7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a3fbbca7-5"><a href="#a3fbbca7-5" aria-hidden="true" tabindex="-1"></a>output_notebook(hide_banner<span class="op">=</span><span class="va">True</span>)</span>
+<span id="a3fbbca7-6"><a href="#a3fbbca7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a3fbbca7-7"><a href="#a3fbbca7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the range of participants (n)</span></span>
+<span id="a3fbbca7-8"><a href="#a3fbbca7-8" aria-hidden="true" tabindex="-1"></a>n_values <span class="op">=</span> np.linspace(<span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="a3fbbca7-9"><a href="#a3fbbca7-9" aria-hidden="true" tabindex="-1"></a>d_values <span class="op">=</span> <span class="dv">4</span> <span class="op">/</span> n_values</span>
+<span id="a3fbbca7-10"><a href="#a3fbbca7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a3fbbca7-11"><a href="#a3fbbca7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the Bokeh data source</span></span>
+<span id="a3fbbca7-12"><a href="#a3fbbca7-12" aria-hidden="true" tabindex="-1"></a>source <span class="op">=</span> ColumnDataSource(data<span class="op">=</span><span class="bu">dict</span>(n<span class="op">=</span>n_values, d<span class="op">=</span>d_values))</span>
+<span id="a3fbbca7-13"><a href="#a3fbbca7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a3fbbca7-14"><a href="#a3fbbca7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Bokeh figure</span></span>
+<span id="a3fbbca7-15"><a href="#a3fbbca7-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> figure(</span>
+<span id="a3fbbca7-16"><a href="#a3fbbca7-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Meeting Duration vs. Number of Participants"</span>,</span>
+<span id="a3fbbca7-17"><a href="#a3fbbca7-17" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"Number of Participants (n)"</span>,</span>
+<span id="a3fbbca7-18"><a href="#a3fbbca7-18" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"Duration (hours)"</span>,</span>
+<span id="a3fbbca7-19"><a href="#a3fbbca7-19" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="a3fbbca7-20"><a href="#a3fbbca7-20" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="a3fbbca7-21"><a href="#a3fbbca7-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="a3fbbca7-22"><a href="#a3fbbca7-22" aria-hidden="true" tabindex="-1"></a>p.line(<span class="st">"n"</span>, <span class="st">"d"</span>, source<span class="op">=</span>source, line_width<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="a3fbbca7-23"><a href="#a3fbbca7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a3fbbca7-24"><a href="#a3fbbca7-24" aria-hidden="true" tabindex="-1"></a>show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <script>'use strict';
@@ -643,11 +643,11 @@ function(Bokeh) {
     });
   }
 }(window));</script>
-  <div id="f92d1a14-73fd-4dff-a1a2-e86c6d433383" data-root-id="p1004" style="display: contents;"></div>
+  <div id="eccdb248-ef27-4529-aeaf-337f061f1ffb" data-root-id="p1004" style="display: contents;"></div>
 <script>(function(root) {
   function embed_document(root) {
-  const docs_json = {"5839eba1-793c-4d59-ab37-407b28bb2259":{"version":"3.6.3","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1004","attributes":{"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1005"},"y_range":{"type":"object","name":"DataRange1d","id":"p1006"},"x_scale":{"type":"object","name":"LinearScale","id":"p1014"},"y_scale":{"type":"object","name":"LinearScale","id":"p1015"},"title":{"type":"object","name":"Title","id":"p1007","attributes":{"text":"Meeting Duration vs. Number of Participants"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1045","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1001","attributes":{"selected":{"type":"object","name":"Selection","id":"p1002","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1003"},"data":{"type":"map","entries":[["n",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAEDHcRzHcRwHQI7jOI7jOA5AqqqqqqqqEkCO4ziO4zgWQHIcx3EcxxlAVVVVVVVVHUAcx3Ecx3EgQI7jOI7jOCJAAAAAAAAAJEA="},"shape":[10],"dtype":"float64","order":"little"}],["d",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAEB2Yid2Yif2P/Hw8PDw8PA/3LZt27Zt6z8K16NwPQrnPwnLPY2w3OM/ddFFF1104T8q8lk3mCLfPxmcj8H5GNw/mpmZmZmZ2T8="},"shape":[10],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1046","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1047"}}},"glyph":{"type":"object","name":"Line","id":"p1042","attributes":{"x":{"type":"field","field":"n"},"y":{"type":"field","field":"d"},"line_color":"green","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1043","attributes":{"x":{"type":"field","field":"n"},"y":{"type":"field","field":"d"},"line_color":"green","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1044","attributes":{"x":{"type":"field","field":"n"},"y":{"type":"field","field":"d"},"line_color":"green","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1013","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1026"},{"type":"object","name":"WheelZoomTool","id":"p1027","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1028","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1029","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1035","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1034","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1036"},{"type":"object","name":"ResetTool","id":"p1037"},{"type":"object","name":"HelpTool","id":"p1038"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1021","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1022","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1023"},"axis_label":"Duration (hours)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1024"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1016","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1017","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1018"},"axis_label":"Number of Participants (n)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1019"}}}],"center":[{"type":"object","name":"Grid","id":"p1020","attributes":{"axis":{"id":"p1016"}}},{"type":"object","name":"Grid","id":"p1025","attributes":{"dimension":1,"axis":{"id":"p1021"}}}]}}]}};
-  const render_items = [{"docid":"5839eba1-793c-4d59-ab37-407b28bb2259","roots":{"p1004":"f92d1a14-73fd-4dff-a1a2-e86c6d433383"},"root_ids":["p1004"]}];
+  const docs_json = {"d0ba75b5-5e31-442b-a6ad-99bbd0fb2b85":{"version":"3.6.3","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1004","attributes":{"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1005"},"y_range":{"type":"object","name":"DataRange1d","id":"p1006"},"x_scale":{"type":"object","name":"LinearScale","id":"p1014"},"y_scale":{"type":"object","name":"LinearScale","id":"p1015"},"title":{"type":"object","name":"Title","id":"p1007","attributes":{"text":"Meeting Duration vs. Number of Participants"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1045","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1001","attributes":{"selected":{"type":"object","name":"Selection","id":"p1002","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1003"},"data":{"type":"map","entries":[["n",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAEDHcRzHcRwHQI7jOI7jOA5AqqqqqqqqEkCO4ziO4zgWQHIcx3EcxxlAVVVVVVVVHUAcx3Ecx3EgQI7jOI7jOCJAAAAAAAAAJEA="},"shape":[10],"dtype":"float64","order":"little"}],["d",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAEB2Yid2Yif2P/Hw8PDw8PA/3LZt27Zt6z8K16NwPQrnPwnLPY2w3OM/ddFFF1104T8q8lk3mCLfPxmcj8H5GNw/mpmZmZmZ2T8="},"shape":[10],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1046","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1047"}}},"glyph":{"type":"object","name":"Line","id":"p1042","attributes":{"x":{"type":"field","field":"n"},"y":{"type":"field","field":"d"},"line_color":"green","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1043","attributes":{"x":{"type":"field","field":"n"},"y":{"type":"field","field":"d"},"line_color":"green","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1044","attributes":{"x":{"type":"field","field":"n"},"y":{"type":"field","field":"d"},"line_color":"green","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1013","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1026"},{"type":"object","name":"WheelZoomTool","id":"p1027","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1028","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1029","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1035","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1034","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1036"},{"type":"object","name":"ResetTool","id":"p1037"},{"type":"object","name":"HelpTool","id":"p1038"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1021","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1022","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1023"},"axis_label":"Duration (hours)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1024"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1016","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1017","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1018"},"axis_label":"Number of Participants (n)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1019"}}}],"center":[{"type":"object","name":"Grid","id":"p1020","attributes":{"axis":{"id":"p1016"}}},{"type":"object","name":"Grid","id":"p1025","attributes":{"dimension":1,"axis":{"id":"p1021"}}}]}}]}};
+  const render_items = [{"docid":"d0ba75b5-5e31-442b-a6ad-99bbd0fb2b85","roots":{"p1004":"eccdb248-ef27-4529-aeaf-337f061f1ffb"},"root_ids":["p1004"]}];
   void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
   }
   if (root.Bokeh !== undefined) {
@@ -692,55 +692,55 @@ function(Bokeh) {
 <p>There are a few scaling principles that anyone working in technology should be able to grasp. The first is <em><a href="https://en.wikipedia.org/wiki/Conway%27s_law">:link Conway’s law</a></em>, which states that “organizations which design systems (…) are constrained to produce designs which are copies of the communication structures of these organizations.” In practice, a system’s architecture tends to mirror the org chart and communication paths of its creators​. A misaligned software architecture and team structure can lead to inefficiencies or unintended design complexity.</p>
 <p>You have probably seen this in practice, where a monolithic codebase becomes unwieldy as the team grows, or distributed teams struggle with tightly coupled microservices. For instance, a startup’s early system—built by a single cohesive team—often evolves into a tangled mess of dependencies once the company scales into departmental silos (engineering, product, DevOps). Suddenly, the software reflects fragmented priorities and communication gaps, with teams duplicating efforts or bypassing critical integrations. Many businesses now even use the inverse Conway maneuver - reorganizing teams to achieve a desired software architecture​.</p>
 <p>Another important principle is Brooks’ Law - “Adding manpower to a late software project makes it later.” Fred Brooks’ classic lesson warns that simply throwing more developers at a slipping project often backfires​. New team members take time to ramp up and increase communication overhead, which can further slow progress. This law has been validated “project after project across engineering teams of all sizes”​, reminding us to be cautious about scaling headcount as a solution, as it leads to diminishing returns due to increased coordination costs.</p>
-<div id="eb12c225" class="cell" data-execution_count="2">
+<div id="df375390" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="eb12c225"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eb12c225-1"><a href="#eb12c225-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="eb12c225-2"><a href="#eb12c225-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="eb12c225-3"><a href="#eb12c225-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-4"><a href="#eb12c225-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define range for n values</span></span>
-<span id="eb12c225-5"><a href="#eb12c225-5" aria-hidden="true" tabindex="-1"></a>n_values <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">12</span>))</span>
-<span id="eb12c225-6"><a href="#eb12c225-6" aria-hidden="true" tabindex="-1"></a>num_plots <span class="op">=</span> <span class="bu">len</span>(n_values)</span>
-<span id="eb12c225-7"><a href="#eb12c225-7" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> <span class="dv">3</span></span>
-<span id="eb12c225-8"><a href="#eb12c225-8" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> (num_plots <span class="op">+</span> cols <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> cols  <span class="co"># Ceiling division for rows</span></span>
-<span id="eb12c225-9"><a href="#eb12c225-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-10"><a href="#eb12c225-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots</span></span>
-<span id="eb12c225-11"><a href="#eb12c225-11" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(rows, cols, figsize<span class="op">=</span>(cols <span class="op">*</span> <span class="dv">2</span>, rows <span class="op">*</span> <span class="dv">3</span>))</span>
-<span id="eb12c225-12"><a href="#eb12c225-12" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Make it easier to iterate</span></span>
-<span id="eb12c225-13"><a href="#eb12c225-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-14"><a href="#eb12c225-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, n <span class="kw">in</span> <span class="bu">zip</span>(axes, n_values):</span>
-<span id="eb12c225-15"><a href="#eb12c225-15" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> people, </span><span class="sc">{</span>n<span class="op">*</span>(n<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">2</span><span class="sc">}</span><span class="ss"> lines"</span>)</span>
-<span id="eb12c225-16"><a href="#eb12c225-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-17"><a href="#eb12c225-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set equal aspect and limits</span></span>
-<span id="eb12c225-18"><a href="#eb12c225-18" aria-hidden="true" tabindex="-1"></a>    ax.set_aspect(<span class="st">"equal"</span>)</span>
-<span id="eb12c225-19"><a href="#eb12c225-19" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="fl">1.2</span>, <span class="fl">1.2</span>)</span>
-<span id="eb12c225-20"><a href="#eb12c225-20" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="fl">1.2</span>, <span class="fl">1.2</span>)</span>
-<span id="eb12c225-21"><a href="#eb12c225-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-22"><a href="#eb12c225-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hide axes</span></span>
-<span id="eb12c225-23"><a href="#eb12c225-23" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="eb12c225-24"><a href="#eb12c225-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-25"><a href="#eb12c225-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute circular coordinates</span></span>
-<span id="eb12c225-26"><a href="#eb12c225-26" aria-hidden="true" tabindex="-1"></a>    coords <span class="op">=</span> [</span>
-<span id="eb12c225-27"><a href="#eb12c225-27" aria-hidden="true" tabindex="-1"></a>        (math.cos(<span class="dv">2</span> <span class="op">*</span> math.pi <span class="op">*</span> i <span class="op">/</span> n), math.sin(<span class="dv">2</span> <span class="op">*</span> math.pi <span class="op">*</span> i <span class="op">/</span> n)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)</span>
-<span id="eb12c225-28"><a href="#eb12c225-28" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="eb12c225-29"><a href="#eb12c225-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-30"><a href="#eb12c225-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw all connecting lines</span></span>
-<span id="eb12c225-31"><a href="#eb12c225-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="eb12c225-32"><a href="#eb12c225-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):</span>
-<span id="eb12c225-33"><a href="#eb12c225-33" aria-hidden="true" tabindex="-1"></a>            x_coords <span class="op">=</span> [coords[i][<span class="dv">0</span>], coords[j][<span class="dv">0</span>]]</span>
-<span id="eb12c225-34"><a href="#eb12c225-34" aria-hidden="true" tabindex="-1"></a>            y_coords <span class="op">=</span> [coords[i][<span class="dv">1</span>], coords[j][<span class="dv">1</span>]]</span>
-<span id="eb12c225-35"><a href="#eb12c225-35" aria-hidden="true" tabindex="-1"></a>            ax.plot(x_coords, y_coords, linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="eb12c225-36"><a href="#eb12c225-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-37"><a href="#eb12c225-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw vertices</span></span>
-<span id="eb12c225-38"><a href="#eb12c225-38" aria-hidden="true" tabindex="-1"></a>    xs, ys <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>coords)</span>
-<span id="eb12c225-39"><a href="#eb12c225-39" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xs, ys, s<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="eb12c225-40"><a href="#eb12c225-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-41"><a href="#eb12c225-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Hide any unused subplots</span></span>
-<span id="eb12c225-42"><a href="#eb12c225-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_plots:]:</span>
-<span id="eb12c225-43"><a href="#eb12c225-43" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="eb12c225-44"><a href="#eb12c225-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb12c225-45"><a href="#eb12c225-45" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="eb12c225-46"><a href="#eb12c225-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="df375390"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="df375390-1"><a href="#df375390-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="df375390-2"><a href="#df375390-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="df375390-3"><a href="#df375390-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-4"><a href="#df375390-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define range for n values</span></span>
+<span id="df375390-5"><a href="#df375390-5" aria-hidden="true" tabindex="-1"></a>n_values <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">12</span>))</span>
+<span id="df375390-6"><a href="#df375390-6" aria-hidden="true" tabindex="-1"></a>num_plots <span class="op">=</span> <span class="bu">len</span>(n_values)</span>
+<span id="df375390-7"><a href="#df375390-7" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> <span class="dv">3</span></span>
+<span id="df375390-8"><a href="#df375390-8" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> (num_plots <span class="op">+</span> cols <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> cols  <span class="co"># Ceiling division for rows</span></span>
+<span id="df375390-9"><a href="#df375390-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-10"><a href="#df375390-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create subplots</span></span>
+<span id="df375390-11"><a href="#df375390-11" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(rows, cols, figsize<span class="op">=</span>(cols <span class="op">*</span> <span class="dv">2</span>, rows <span class="op">*</span> <span class="dv">3</span>))</span>
+<span id="df375390-12"><a href="#df375390-12" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Make it easier to iterate</span></span>
+<span id="df375390-13"><a href="#df375390-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-14"><a href="#df375390-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, n <span class="kw">in</span> <span class="bu">zip</span>(axes, n_values):</span>
+<span id="df375390-15"><a href="#df375390-15" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> people, </span><span class="sc">{</span>n<span class="op">*</span>(n<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">2</span><span class="sc">}</span><span class="ss"> lines"</span>)</span>
+<span id="df375390-16"><a href="#df375390-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-17"><a href="#df375390-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set equal aspect and limits</span></span>
+<span id="df375390-18"><a href="#df375390-18" aria-hidden="true" tabindex="-1"></a>    ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="df375390-19"><a href="#df375390-19" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="fl">1.2</span>, <span class="fl">1.2</span>)</span>
+<span id="df375390-20"><a href="#df375390-20" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="fl">1.2</span>, <span class="fl">1.2</span>)</span>
+<span id="df375390-21"><a href="#df375390-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-22"><a href="#df375390-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hide axes</span></span>
+<span id="df375390-23"><a href="#df375390-23" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="df375390-24"><a href="#df375390-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-25"><a href="#df375390-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute circular coordinates</span></span>
+<span id="df375390-26"><a href="#df375390-26" aria-hidden="true" tabindex="-1"></a>    coords <span class="op">=</span> [</span>
+<span id="df375390-27"><a href="#df375390-27" aria-hidden="true" tabindex="-1"></a>        (math.cos(<span class="dv">2</span> <span class="op">*</span> math.pi <span class="op">*</span> i <span class="op">/</span> n), math.sin(<span class="dv">2</span> <span class="op">*</span> math.pi <span class="op">*</span> i <span class="op">/</span> n)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)</span>
+<span id="df375390-28"><a href="#df375390-28" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="df375390-29"><a href="#df375390-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-30"><a href="#df375390-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw all connecting lines</span></span>
+<span id="df375390-31"><a href="#df375390-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="df375390-32"><a href="#df375390-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):</span>
+<span id="df375390-33"><a href="#df375390-33" aria-hidden="true" tabindex="-1"></a>            x_coords <span class="op">=</span> [coords[i][<span class="dv">0</span>], coords[j][<span class="dv">0</span>]]</span>
+<span id="df375390-34"><a href="#df375390-34" aria-hidden="true" tabindex="-1"></a>            y_coords <span class="op">=</span> [coords[i][<span class="dv">1</span>], coords[j][<span class="dv">1</span>]]</span>
+<span id="df375390-35"><a href="#df375390-35" aria-hidden="true" tabindex="-1"></a>            ax.plot(x_coords, y_coords, linewidth<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="df375390-36"><a href="#df375390-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-37"><a href="#df375390-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw vertices</span></span>
+<span id="df375390-38"><a href="#df375390-38" aria-hidden="true" tabindex="-1"></a>    xs, ys <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>coords)</span>
+<span id="df375390-39"><a href="#df375390-39" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xs, ys, s<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">"darkgreen"</span>)</span>
+<span id="df375390-40"><a href="#df375390-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-41"><a href="#df375390-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Hide any unused subplots</span></span>
+<span id="df375390-42"><a href="#df375390-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_plots:]:</span>
+<span id="df375390-43"><a href="#df375390-43" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="df375390-44"><a href="#df375390-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df375390-45"><a href="#df375390-45" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="df375390-46"><a href="#df375390-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -768,173 +768,173 @@ function(Bokeh) {
 <p>It is always useful to visually intuit how some of the factors we discussed interact with each other and impact the ability of an engineering team to deliver. Let us quickly model how team integration, communication, and technical debt can affect team productivity as project size increases. The following widget allows you to adjust the sliders for team integration, communication, and technical debt, and see how the productivity curve changes. Each slider represents the amount of friction introduced by the corresponding factor, i.e., as you move the sliders to the right you are saying that the team has more friction due to that factor. The productivity curve is based on a simple model that combines these factors to estimate the team’s mid productivity level, as well as the uncertainty range around it.</p>
 <p>You can estimate where the team is in regards to these factors, and put each slide at the right level to estimate where they are in the productivity curve. “Productivity” in this case means the amount of time the team spends delivering value, rather than spending time just fixing things, trying to understand what is needed, just talking to each other, or attempting to integrate various aspects of what they developed (a productivity of zero means the team is basically not delivering anything, while a value of one means they are delivering at full capacity).</p>
 <p>The model is very simplified, but should give you a good intuition on how these factors interact.</p>
-<div id="0483c324" class="cell" data-execution_count="3">
+<div id="54b8a519" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="0483c324"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0483c324-1"><a href="#0483c324-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="0483c324-2"><a href="#0483c324-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, output_file, save</span>
-<span id="0483c324-3"><a href="#0483c324-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource, Slider, CustomJS, Band</span>
-<span id="0483c324-4"><a href="#0483c324-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.layouts <span class="im">import</span> column</span>
-<span id="0483c324-5"><a href="#0483c324-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-6"><a href="#0483c324-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Decay factor for technical debt</span></span>
-<span id="0483c324-7"><a href="#0483c324-7" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="0483c324-8"><a href="#0483c324-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-9"><a href="#0483c324-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-10"><a href="#0483c324-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to compute mid productivity based on project size and factors.</span></span>
-<span id="0483c324-11"><a href="#0483c324-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mid_productivity(sizes, team_integration, communication, technical_debt):</span>
-<span id="0483c324-12"><a href="#0483c324-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Base factor: higher integration &amp; communication reduce friction.</span></span>
-<span id="0483c324-13"><a href="#0483c324-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Technical debt now decays productivity exponentially.</span></span>
-<span id="0483c324-14"><a href="#0483c324-14" aria-hidden="true" tabindex="-1"></a>    base <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (team_integration <span class="op">+</span> communication)) <span class="op">*</span> np.exp(<span class="op">-</span>k <span class="op">*</span> technical_debt)</span>
-<span id="0483c324-15"><a href="#0483c324-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Exponential decay with increasing project size.</span></span>
-<span id="0483c324-16"><a href="#0483c324-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> base <span class="op">*</span> np.exp(<span class="op">-</span><span class="fl">0.03</span> <span class="op">*</span> (sizes <span class="op">-</span> <span class="dv">1</span>))</span>
-<span id="0483c324-17"><a href="#0483c324-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-18"><a href="#0483c324-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-19"><a href="#0483c324-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Baseline uncertainty fraction at maximum project size</span></span>
-<span id="0483c324-20"><a href="#0483c324-20" aria-hidden="true" tabindex="-1"></a>baseline_uncertainty <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="0483c324-21"><a href="#0483c324-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-22"><a href="#0483c324-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial parameter values</span></span>
-<span id="0483c324-23"><a href="#0483c324-23" aria-hidden="true" tabindex="-1"></a>initial_team_integration <span class="op">=</span> <span class="fl">0.2</span></span>
-<span id="0483c324-24"><a href="#0483c324-24" aria-hidden="true" tabindex="-1"></a>initial_communication <span class="op">=</span> <span class="fl">0.2</span></span>
-<span id="0483c324-25"><a href="#0483c324-25" aria-hidden="true" tabindex="-1"></a>initial_technical_debt <span class="op">=</span> <span class="fl">0.2</span></span>
-<span id="0483c324-26"><a href="#0483c324-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-27"><a href="#0483c324-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an array for project sizes</span></span>
-<span id="0483c324-28"><a href="#0483c324-28" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">100</span>)</span>
-<span id="0483c324-29"><a href="#0483c324-29" aria-hidden="true" tabindex="-1"></a>max_size <span class="op">=</span> sizes[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="0483c324-30"><a href="#0483c324-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-31"><a href="#0483c324-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mid productivity curve.</span></span>
-<span id="0483c324-32"><a href="#0483c324-32" aria-hidden="true" tabindex="-1"></a>mid_productivity <span class="op">=</span> compute_mid_productivity(</span>
-<span id="0483c324-33"><a href="#0483c324-33" aria-hidden="true" tabindex="-1"></a>    sizes, initial_team_integration, initial_communication, initial_technical_debt</span>
-<span id="0483c324-34"><a href="#0483c324-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-35"><a href="#0483c324-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute effective uncertainty: baseline uncertainty scaled by the average friction factor.</span></span>
-<span id="0483c324-36"><a href="#0483c324-36" aria-hidden="true" tabindex="-1"></a>effective_uncertainty <span class="op">=</span> baseline_uncertainty <span class="op">*</span> (</span>
-<span id="0483c324-37"><a href="#0483c324-37" aria-hidden="true" tabindex="-1"></a>    (initial_team_integration <span class="op">+</span> initial_communication <span class="op">+</span> initial_technical_debt) <span class="op">/</span> <span class="dv">3</span></span>
-<span id="0483c324-38"><a href="#0483c324-38" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-39"><a href="#0483c324-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale uncertainty: linear from 0 at size=1 to effective_uncertainty at max_size.</span></span>
-<span id="0483c324-40"><a href="#0483c324-40" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> (sizes <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> (max_size <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="0483c324-41"><a href="#0483c324-41" aria-hidden="true" tabindex="-1"></a>lower_productivity <span class="op">=</span> mid_productivity <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> effective_uncertainty <span class="op">*</span> scale)</span>
-<span id="0483c324-42"><a href="#0483c324-42" aria-hidden="true" tabindex="-1"></a>upper_productivity <span class="op">=</span> mid_productivity <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> effective_uncertainty <span class="op">*</span> scale)</span>
-<span id="0483c324-43"><a href="#0483c324-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-44"><a href="#0483c324-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the Bokeh data source.</span></span>
-<span id="0483c324-45"><a href="#0483c324-45" aria-hidden="true" tabindex="-1"></a>source <span class="op">=</span> ColumnDataSource(</span>
-<span id="0483c324-46"><a href="#0483c324-46" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="0483c324-47"><a href="#0483c324-47" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>sizes,</span>
-<span id="0483c324-48"><a href="#0483c324-48" aria-hidden="true" tabindex="-1"></a>        y_mid<span class="op">=</span>mid_productivity,</span>
-<span id="0483c324-49"><a href="#0483c324-49" aria-hidden="true" tabindex="-1"></a>        y_lower<span class="op">=</span>lower_productivity,</span>
-<span id="0483c324-50"><a href="#0483c324-50" aria-hidden="true" tabindex="-1"></a>        y_upper<span class="op">=</span>upper_productivity,</span>
-<span id="0483c324-51"><a href="#0483c324-51" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="0483c324-52"><a href="#0483c324-52" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-53"><a href="#0483c324-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-54"><a href="#0483c324-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Bokeh figure.</span></span>
-<span id="0483c324-55"><a href="#0483c324-55" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> figure(</span>
-<span id="0483c324-56"><a href="#0483c324-56" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Team Productivity vs. Project Size"</span>,</span>
-<span id="0483c324-57"><a href="#0483c324-57" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"Project Size"</span>,</span>
-<span id="0483c324-58"><a href="#0483c324-58" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"Productivity"</span>,</span>
-<span id="0483c324-59"><a href="#0483c324-59" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>,</span>
-<span id="0483c324-60"><a href="#0483c324-60" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span>,</span>
-<span id="0483c324-61"><a href="#0483c324-61" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-62"><a href="#0483c324-62" aria-hidden="true" tabindex="-1"></a>p.line(</span>
-<span id="0483c324-63"><a href="#0483c324-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>,</span>
-<span id="0483c324-64"><a href="#0483c324-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y_mid"</span>,</span>
-<span id="0483c324-65"><a href="#0483c324-65" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span>source,</span>
-<span id="0483c324-66"><a href="#0483c324-66" aria-hidden="true" tabindex="-1"></a>    line_width<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="0483c324-67"><a href="#0483c324-67" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"green"</span>,</span>
-<span id="0483c324-68"><a href="#0483c324-68" aria-hidden="true" tabindex="-1"></a>    legend_label<span class="op">=</span><span class="st">"Mid Productivity"</span>,</span>
-<span id="0483c324-69"><a href="#0483c324-69" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-70"><a href="#0483c324-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-71"><a href="#0483c324-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a band between lower and upper curves.</span></span>
-<span id="0483c324-72"><a href="#0483c324-72" aria-hidden="true" tabindex="-1"></a>band <span class="op">=</span> Band(</span>
-<span id="0483c324-73"><a href="#0483c324-73" aria-hidden="true" tabindex="-1"></a>    base<span class="op">=</span><span class="st">"x"</span>,</span>
-<span id="0483c324-74"><a href="#0483c324-74" aria-hidden="true" tabindex="-1"></a>    lower<span class="op">=</span><span class="st">"y_lower"</span>,</span>
-<span id="0483c324-75"><a href="#0483c324-75" aria-hidden="true" tabindex="-1"></a>    upper<span class="op">=</span><span class="st">"y_upper"</span>,</span>
-<span id="0483c324-76"><a href="#0483c324-76" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span>source,</span>
-<span id="0483c324-77"><a href="#0483c324-77" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span><span class="st">"underlay"</span>,</span>
-<span id="0483c324-78"><a href="#0483c324-78" aria-hidden="true" tabindex="-1"></a>    fill_alpha<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="0483c324-79"><a href="#0483c324-79" aria-hidden="true" tabindex="-1"></a>    line_width<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="0483c324-80"><a href="#0483c324-80" aria-hidden="true" tabindex="-1"></a>    line_color<span class="op">=</span><span class="st">"gray"</span>,</span>
-<span id="0483c324-81"><a href="#0483c324-81" aria-hidden="true" tabindex="-1"></a>    fill_color<span class="op">=</span><span class="st">"green"</span>,</span>
-<span id="0483c324-82"><a href="#0483c324-82" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-83"><a href="#0483c324-83" aria-hidden="true" tabindex="-1"></a>p.add_layout(band)</span>
-<span id="0483c324-84"><a href="#0483c324-84" aria-hidden="true" tabindex="-1"></a>p.legend.location <span class="op">=</span> <span class="st">"top_right"</span></span>
-<span id="0483c324-85"><a href="#0483c324-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-86"><a href="#0483c324-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sliders for team integration, communication, and technical debt.</span></span>
-<span id="0483c324-87"><a href="#0483c324-87" aria-hidden="true" tabindex="-1"></a>slider_team <span class="op">=</span> Slider(</span>
-<span id="0483c324-88"><a href="#0483c324-88" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="0483c324-89"><a href="#0483c324-89" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="0483c324-90"><a href="#0483c324-90" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span>initial_team_integration,</span>
-<span id="0483c324-91"><a href="#0483c324-91" aria-hidden="true" tabindex="-1"></a>    step<span class="op">=</span><span class="fl">0.01</span>,</span>
-<span id="0483c324-92"><a href="#0483c324-92" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Team Integration"</span>,</span>
-<span id="0483c324-93"><a href="#0483c324-93" aria-hidden="true" tabindex="-1"></a>    show_value<span class="op">=</span><span class="va">False</span>,</span>
-<span id="0483c324-94"><a href="#0483c324-94" aria-hidden="true" tabindex="-1"></a>    tooltips<span class="op">=</span><span class="va">False</span>,</span>
-<span id="0483c324-95"><a href="#0483c324-95" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-96"><a href="#0483c324-96" aria-hidden="true" tabindex="-1"></a>slider_comm <span class="op">=</span> Slider(</span>
-<span id="0483c324-97"><a href="#0483c324-97" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="0483c324-98"><a href="#0483c324-98" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="0483c324-99"><a href="#0483c324-99" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span>initial_communication,</span>
-<span id="0483c324-100"><a href="#0483c324-100" aria-hidden="true" tabindex="-1"></a>    step<span class="op">=</span><span class="fl">0.01</span>,</span>
-<span id="0483c324-101"><a href="#0483c324-101" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Communication"</span>,</span>
-<span id="0483c324-102"><a href="#0483c324-102" aria-hidden="true" tabindex="-1"></a>    show_value<span class="op">=</span><span class="va">False</span>,</span>
-<span id="0483c324-103"><a href="#0483c324-103" aria-hidden="true" tabindex="-1"></a>    tooltips<span class="op">=</span><span class="va">False</span>,</span>
-<span id="0483c324-104"><a href="#0483c324-104" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-105"><a href="#0483c324-105" aria-hidden="true" tabindex="-1"></a>slider_td <span class="op">=</span> Slider(</span>
-<span id="0483c324-106"><a href="#0483c324-106" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="0483c324-107"><a href="#0483c324-107" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="0483c324-108"><a href="#0483c324-108" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span>initial_technical_debt,</span>
-<span id="0483c324-109"><a href="#0483c324-109" aria-hidden="true" tabindex="-1"></a>    step<span class="op">=</span><span class="fl">0.01</span>,</span>
-<span id="0483c324-110"><a href="#0483c324-110" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Technical Debt"</span>,</span>
-<span id="0483c324-111"><a href="#0483c324-111" aria-hidden="true" tabindex="-1"></a>    show_value<span class="op">=</span><span class="va">False</span>,</span>
-<span id="0483c324-112"><a href="#0483c324-112" aria-hidden="true" tabindex="-1"></a>    tooltips<span class="op">=</span><span class="va">False</span>,</span>
-<span id="0483c324-113"><a href="#0483c324-113" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-114"><a href="#0483c324-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-115"><a href="#0483c324-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a JavaScript callback to update the productivity curves when slider values change.</span></span>
-<span id="0483c324-116"><a href="#0483c324-116" aria-hidden="true" tabindex="-1"></a>callback <span class="op">=</span> CustomJS(</span>
-<span id="0483c324-117"><a href="#0483c324-117" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="0483c324-118"><a href="#0483c324-118" aria-hidden="true" tabindex="-1"></a>        source<span class="op">=</span>source,</span>
-<span id="0483c324-119"><a href="#0483c324-119" aria-hidden="true" tabindex="-1"></a>        slider_team<span class="op">=</span>slider_team,</span>
-<span id="0483c324-120"><a href="#0483c324-120" aria-hidden="true" tabindex="-1"></a>        slider_comm<span class="op">=</span>slider_comm,</span>
-<span id="0483c324-121"><a href="#0483c324-121" aria-hidden="true" tabindex="-1"></a>        slider_td<span class="op">=</span>slider_td,</span>
-<span id="0483c324-122"><a href="#0483c324-122" aria-hidden="true" tabindex="-1"></a>        baseline_uncertainty<span class="op">=</span>baseline_uncertainty,</span>
-<span id="0483c324-123"><a href="#0483c324-123" aria-hidden="true" tabindex="-1"></a>        max_size<span class="op">=</span>max_size,</span>
-<span id="0483c324-124"><a href="#0483c324-124" aria-hidden="true" tabindex="-1"></a>        k<span class="op">=</span>k,</span>
-<span id="0483c324-125"><a href="#0483c324-125" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="0483c324-126"><a href="#0483c324-126" aria-hidden="true" tabindex="-1"></a>    code<span class="op">=</span><span class="st">"""</span></span>
-<span id="0483c324-127"><a href="#0483c324-127" aria-hidden="true" tabindex="-1"></a><span class="st">    const data = source.data;</span></span>
-<span id="0483c324-128"><a href="#0483c324-128" aria-hidden="true" tabindex="-1"></a><span class="st">    const x = data['x'];</span></span>
-<span id="0483c324-129"><a href="#0483c324-129" aria-hidden="true" tabindex="-1"></a><span class="st">    const y_mid = data['y_mid'];</span></span>
-<span id="0483c324-130"><a href="#0483c324-130" aria-hidden="true" tabindex="-1"></a><span class="st">    const y_lower = data['y_lower'];</span></span>
-<span id="0483c324-131"><a href="#0483c324-131" aria-hidden="true" tabindex="-1"></a><span class="st">    const y_upper = data['y_upper'];</span></span>
-<span id="0483c324-132"><a href="#0483c324-132" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
-<span id="0483c324-133"><a href="#0483c324-133" aria-hidden="true" tabindex="-1"></a><span class="st">    const team = slider_team.value;</span></span>
-<span id="0483c324-134"><a href="#0483c324-134" aria-hidden="true" tabindex="-1"></a><span class="st">    const comm = slider_comm.value;</span></span>
-<span id="0483c324-135"><a href="#0483c324-135" aria-hidden="true" tabindex="-1"></a><span class="st">    const td = slider_td.value;</span></span>
-<span id="0483c324-136"><a href="#0483c324-136" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
-<span id="0483c324-137"><a href="#0483c324-137" aria-hidden="true" tabindex="-1"></a><span class="st">    // Compute the base factor with exponential decay for technical debt.</span></span>
-<span id="0483c324-138"><a href="#0483c324-138" aria-hidden="true" tabindex="-1"></a><span class="st">    const baseFactor = (1 - 0.5 * (team + comm)) * Math.exp(-k * td);</span></span>
-<span id="0483c324-139"><a href="#0483c324-139" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
-<span id="0483c324-140"><a href="#0483c324-140" aria-hidden="true" tabindex="-1"></a><span class="st">    // Effective uncertainty scales with the average of the friction factors.</span></span>
-<span id="0483c324-141"><a href="#0483c324-141" aria-hidden="true" tabindex="-1"></a><span class="st">    const effective_uncertainty = baseline_uncertainty * ((team + comm + td) / 3);</span></span>
-<span id="0483c324-142"><a href="#0483c324-142" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
-<span id="0483c324-143"><a href="#0483c324-143" aria-hidden="true" tabindex="-1"></a><span class="st">    // Update productivity curves.</span></span>
-<span id="0483c324-144"><a href="#0483c324-144" aria-hidden="true" tabindex="-1"></a><span class="st">    for (let i = 0; i &lt; x.length; i++) {</span></span>
-<span id="0483c324-145"><a href="#0483c324-145" aria-hidden="true" tabindex="-1"></a><span class="st">        y_mid[i] = baseFactor * Math.exp(-0.03 * (x[i] - 1));</span></span>
-<span id="0483c324-146"><a href="#0483c324-146" aria-hidden="true" tabindex="-1"></a><span class="st">        let scale = (x[i] - 1) / (max_size - 1);</span></span>
-<span id="0483c324-147"><a href="#0483c324-147" aria-hidden="true" tabindex="-1"></a><span class="st">        y_lower[i] = y_mid[i] * (1 - effective_uncertainty * scale);</span></span>
-<span id="0483c324-148"><a href="#0483c324-148" aria-hidden="true" tabindex="-1"></a><span class="st">        y_upper[i] = y_mid[i] * (1 + effective_uncertainty * scale);</span></span>
-<span id="0483c324-149"><a href="#0483c324-149" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
-<span id="0483c324-150"><a href="#0483c324-150" aria-hidden="true" tabindex="-1"></a><span class="st">    source.change.emit();</span></span>
-<span id="0483c324-151"><a href="#0483c324-151" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>,</span>
-<span id="0483c324-152"><a href="#0483c324-152" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="0483c324-153"><a href="#0483c324-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-154"><a href="#0483c324-154" aria-hidden="true" tabindex="-1"></a><span class="co"># Attach the callback to slider value changes.</span></span>
-<span id="0483c324-155"><a href="#0483c324-155" aria-hidden="true" tabindex="-1"></a>slider_team.js_on_change(<span class="st">"value"</span>, callback)</span>
-<span id="0483c324-156"><a href="#0483c324-156" aria-hidden="true" tabindex="-1"></a>slider_comm.js_on_change(<span class="st">"value"</span>, callback)</span>
-<span id="0483c324-157"><a href="#0483c324-157" aria-hidden="true" tabindex="-1"></a>slider_td.js_on_change(<span class="st">"value"</span>, callback)</span>
-<span id="0483c324-158"><a href="#0483c324-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-159"><a href="#0483c324-159" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the plot and sliders in a layout.</span></span>
-<span id="0483c324-160"><a href="#0483c324-160" aria-hidden="true" tabindex="-1"></a>layout <span class="op">=</span> column(p, slider_team, slider_comm, slider_td)</span>
-<span id="0483c324-161"><a href="#0483c324-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0483c324-162"><a href="#0483c324-162" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the interactive plot as an HTML file.</span></span>
-<span id="0483c324-163"><a href="#0483c324-163" aria-hidden="true" tabindex="-1"></a>output_file(<span class="st">"team_productivity.html"</span>)</span>
-<span id="0483c324-164"><a href="#0483c324-164" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> save(layout)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="54b8a519"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="54b8a519-1"><a href="#54b8a519-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="54b8a519-2"><a href="#54b8a519-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure, output_file, save</span>
+<span id="54b8a519-3"><a href="#54b8a519-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource, Slider, CustomJS, Band</span>
+<span id="54b8a519-4"><a href="#54b8a519-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.layouts <span class="im">import</span> column</span>
+<span id="54b8a519-5"><a href="#54b8a519-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-6"><a href="#54b8a519-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Decay factor for technical debt</span></span>
+<span id="54b8a519-7"><a href="#54b8a519-7" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="54b8a519-8"><a href="#54b8a519-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-9"><a href="#54b8a519-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-10"><a href="#54b8a519-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to compute mid productivity based on project size and factors.</span></span>
+<span id="54b8a519-11"><a href="#54b8a519-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_mid_productivity(sizes, team_integration, communication, technical_debt):</span>
+<span id="54b8a519-12"><a href="#54b8a519-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Base factor: higher integration &amp; communication reduce friction.</span></span>
+<span id="54b8a519-13"><a href="#54b8a519-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Technical debt now decays productivity exponentially.</span></span>
+<span id="54b8a519-14"><a href="#54b8a519-14" aria-hidden="true" tabindex="-1"></a>    base <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (team_integration <span class="op">+</span> communication)) <span class="op">*</span> np.exp(<span class="op">-</span>k <span class="op">*</span> technical_debt)</span>
+<span id="54b8a519-15"><a href="#54b8a519-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Exponential decay with increasing project size.</span></span>
+<span id="54b8a519-16"><a href="#54b8a519-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> base <span class="op">*</span> np.exp(<span class="op">-</span><span class="fl">0.03</span> <span class="op">*</span> (sizes <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="54b8a519-17"><a href="#54b8a519-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-18"><a href="#54b8a519-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-19"><a href="#54b8a519-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Baseline uncertainty fraction at maximum project size</span></span>
+<span id="54b8a519-20"><a href="#54b8a519-20" aria-hidden="true" tabindex="-1"></a>baseline_uncertainty <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="54b8a519-21"><a href="#54b8a519-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-22"><a href="#54b8a519-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial parameter values</span></span>
+<span id="54b8a519-23"><a href="#54b8a519-23" aria-hidden="true" tabindex="-1"></a>initial_team_integration <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="54b8a519-24"><a href="#54b8a519-24" aria-hidden="true" tabindex="-1"></a>initial_communication <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="54b8a519-25"><a href="#54b8a519-25" aria-hidden="true" tabindex="-1"></a>initial_technical_debt <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="54b8a519-26"><a href="#54b8a519-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-27"><a href="#54b8a519-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an array for project sizes</span></span>
+<span id="54b8a519-28"><a href="#54b8a519-28" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">100</span>)</span>
+<span id="54b8a519-29"><a href="#54b8a519-29" aria-hidden="true" tabindex="-1"></a>max_size <span class="op">=</span> sizes[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="54b8a519-30"><a href="#54b8a519-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-31"><a href="#54b8a519-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mid productivity curve.</span></span>
+<span id="54b8a519-32"><a href="#54b8a519-32" aria-hidden="true" tabindex="-1"></a>mid_productivity <span class="op">=</span> compute_mid_productivity(</span>
+<span id="54b8a519-33"><a href="#54b8a519-33" aria-hidden="true" tabindex="-1"></a>    sizes, initial_team_integration, initial_communication, initial_technical_debt</span>
+<span id="54b8a519-34"><a href="#54b8a519-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-35"><a href="#54b8a519-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute effective uncertainty: baseline uncertainty scaled by the average friction factor.</span></span>
+<span id="54b8a519-36"><a href="#54b8a519-36" aria-hidden="true" tabindex="-1"></a>effective_uncertainty <span class="op">=</span> baseline_uncertainty <span class="op">*</span> (</span>
+<span id="54b8a519-37"><a href="#54b8a519-37" aria-hidden="true" tabindex="-1"></a>    (initial_team_integration <span class="op">+</span> initial_communication <span class="op">+</span> initial_technical_debt) <span class="op">/</span> <span class="dv">3</span></span>
+<span id="54b8a519-38"><a href="#54b8a519-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-39"><a href="#54b8a519-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale uncertainty: linear from 0 at size=1 to effective_uncertainty at max_size.</span></span>
+<span id="54b8a519-40"><a href="#54b8a519-40" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> (sizes <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> (max_size <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="54b8a519-41"><a href="#54b8a519-41" aria-hidden="true" tabindex="-1"></a>lower_productivity <span class="op">=</span> mid_productivity <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> effective_uncertainty <span class="op">*</span> scale)</span>
+<span id="54b8a519-42"><a href="#54b8a519-42" aria-hidden="true" tabindex="-1"></a>upper_productivity <span class="op">=</span> mid_productivity <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> effective_uncertainty <span class="op">*</span> scale)</span>
+<span id="54b8a519-43"><a href="#54b8a519-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-44"><a href="#54b8a519-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the Bokeh data source.</span></span>
+<span id="54b8a519-45"><a href="#54b8a519-45" aria-hidden="true" tabindex="-1"></a>source <span class="op">=</span> ColumnDataSource(</span>
+<span id="54b8a519-46"><a href="#54b8a519-46" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="54b8a519-47"><a href="#54b8a519-47" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>sizes,</span>
+<span id="54b8a519-48"><a href="#54b8a519-48" aria-hidden="true" tabindex="-1"></a>        y_mid<span class="op">=</span>mid_productivity,</span>
+<span id="54b8a519-49"><a href="#54b8a519-49" aria-hidden="true" tabindex="-1"></a>        y_lower<span class="op">=</span>lower_productivity,</span>
+<span id="54b8a519-50"><a href="#54b8a519-50" aria-hidden="true" tabindex="-1"></a>        y_upper<span class="op">=</span>upper_productivity,</span>
+<span id="54b8a519-51"><a href="#54b8a519-51" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="54b8a519-52"><a href="#54b8a519-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-53"><a href="#54b8a519-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-54"><a href="#54b8a519-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Bokeh figure.</span></span>
+<span id="54b8a519-55"><a href="#54b8a519-55" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> figure(</span>
+<span id="54b8a519-56"><a href="#54b8a519-56" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Team Productivity vs. Project Size"</span>,</span>
+<span id="54b8a519-57"><a href="#54b8a519-57" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"Project Size"</span>,</span>
+<span id="54b8a519-58"><a href="#54b8a519-58" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"Productivity"</span>,</span>
+<span id="54b8a519-59"><a href="#54b8a519-59" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="54b8a519-60"><a href="#54b8a519-60" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="54b8a519-61"><a href="#54b8a519-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-62"><a href="#54b8a519-62" aria-hidden="true" tabindex="-1"></a>p.line(</span>
+<span id="54b8a519-63"><a href="#54b8a519-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>,</span>
+<span id="54b8a519-64"><a href="#54b8a519-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y_mid"</span>,</span>
+<span id="54b8a519-65"><a href="#54b8a519-65" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span>source,</span>
+<span id="54b8a519-66"><a href="#54b8a519-66" aria-hidden="true" tabindex="-1"></a>    line_width<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="54b8a519-67"><a href="#54b8a519-67" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"green"</span>,</span>
+<span id="54b8a519-68"><a href="#54b8a519-68" aria-hidden="true" tabindex="-1"></a>    legend_label<span class="op">=</span><span class="st">"Mid Productivity"</span>,</span>
+<span id="54b8a519-69"><a href="#54b8a519-69" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-70"><a href="#54b8a519-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-71"><a href="#54b8a519-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a band between lower and upper curves.</span></span>
+<span id="54b8a519-72"><a href="#54b8a519-72" aria-hidden="true" tabindex="-1"></a>band <span class="op">=</span> Band(</span>
+<span id="54b8a519-73"><a href="#54b8a519-73" aria-hidden="true" tabindex="-1"></a>    base<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="54b8a519-74"><a href="#54b8a519-74" aria-hidden="true" tabindex="-1"></a>    lower<span class="op">=</span><span class="st">"y_lower"</span>,</span>
+<span id="54b8a519-75"><a href="#54b8a519-75" aria-hidden="true" tabindex="-1"></a>    upper<span class="op">=</span><span class="st">"y_upper"</span>,</span>
+<span id="54b8a519-76"><a href="#54b8a519-76" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span>source,</span>
+<span id="54b8a519-77"><a href="#54b8a519-77" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span><span class="st">"underlay"</span>,</span>
+<span id="54b8a519-78"><a href="#54b8a519-78" aria-hidden="true" tabindex="-1"></a>    fill_alpha<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="54b8a519-79"><a href="#54b8a519-79" aria-hidden="true" tabindex="-1"></a>    line_width<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="54b8a519-80"><a href="#54b8a519-80" aria-hidden="true" tabindex="-1"></a>    line_color<span class="op">=</span><span class="st">"gray"</span>,</span>
+<span id="54b8a519-81"><a href="#54b8a519-81" aria-hidden="true" tabindex="-1"></a>    fill_color<span class="op">=</span><span class="st">"green"</span>,</span>
+<span id="54b8a519-82"><a href="#54b8a519-82" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-83"><a href="#54b8a519-83" aria-hidden="true" tabindex="-1"></a>p.add_layout(band)</span>
+<span id="54b8a519-84"><a href="#54b8a519-84" aria-hidden="true" tabindex="-1"></a>p.legend.location <span class="op">=</span> <span class="st">"top_right"</span></span>
+<span id="54b8a519-85"><a href="#54b8a519-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-86"><a href="#54b8a519-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sliders for team integration, communication, and technical debt.</span></span>
+<span id="54b8a519-87"><a href="#54b8a519-87" aria-hidden="true" tabindex="-1"></a>slider_team <span class="op">=</span> Slider(</span>
+<span id="54b8a519-88"><a href="#54b8a519-88" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="54b8a519-89"><a href="#54b8a519-89" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="54b8a519-90"><a href="#54b8a519-90" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span>initial_team_integration,</span>
+<span id="54b8a519-91"><a href="#54b8a519-91" aria-hidden="true" tabindex="-1"></a>    step<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="54b8a519-92"><a href="#54b8a519-92" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Team Integration"</span>,</span>
+<span id="54b8a519-93"><a href="#54b8a519-93" aria-hidden="true" tabindex="-1"></a>    show_value<span class="op">=</span><span class="va">False</span>,</span>
+<span id="54b8a519-94"><a href="#54b8a519-94" aria-hidden="true" tabindex="-1"></a>    tooltips<span class="op">=</span><span class="va">False</span>,</span>
+<span id="54b8a519-95"><a href="#54b8a519-95" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-96"><a href="#54b8a519-96" aria-hidden="true" tabindex="-1"></a>slider_comm <span class="op">=</span> Slider(</span>
+<span id="54b8a519-97"><a href="#54b8a519-97" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="54b8a519-98"><a href="#54b8a519-98" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="54b8a519-99"><a href="#54b8a519-99" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span>initial_communication,</span>
+<span id="54b8a519-100"><a href="#54b8a519-100" aria-hidden="true" tabindex="-1"></a>    step<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="54b8a519-101"><a href="#54b8a519-101" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Communication"</span>,</span>
+<span id="54b8a519-102"><a href="#54b8a519-102" aria-hidden="true" tabindex="-1"></a>    show_value<span class="op">=</span><span class="va">False</span>,</span>
+<span id="54b8a519-103"><a href="#54b8a519-103" aria-hidden="true" tabindex="-1"></a>    tooltips<span class="op">=</span><span class="va">False</span>,</span>
+<span id="54b8a519-104"><a href="#54b8a519-104" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-105"><a href="#54b8a519-105" aria-hidden="true" tabindex="-1"></a>slider_td <span class="op">=</span> Slider(</span>
+<span id="54b8a519-106"><a href="#54b8a519-106" aria-hidden="true" tabindex="-1"></a>    start<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="54b8a519-107"><a href="#54b8a519-107" aria-hidden="true" tabindex="-1"></a>    end<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="54b8a519-108"><a href="#54b8a519-108" aria-hidden="true" tabindex="-1"></a>    value<span class="op">=</span>initial_technical_debt,</span>
+<span id="54b8a519-109"><a href="#54b8a519-109" aria-hidden="true" tabindex="-1"></a>    step<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="54b8a519-110"><a href="#54b8a519-110" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Technical Debt"</span>,</span>
+<span id="54b8a519-111"><a href="#54b8a519-111" aria-hidden="true" tabindex="-1"></a>    show_value<span class="op">=</span><span class="va">False</span>,</span>
+<span id="54b8a519-112"><a href="#54b8a519-112" aria-hidden="true" tabindex="-1"></a>    tooltips<span class="op">=</span><span class="va">False</span>,</span>
+<span id="54b8a519-113"><a href="#54b8a519-113" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-114"><a href="#54b8a519-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-115"><a href="#54b8a519-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a JavaScript callback to update the productivity curves when slider values change.</span></span>
+<span id="54b8a519-116"><a href="#54b8a519-116" aria-hidden="true" tabindex="-1"></a>callback <span class="op">=</span> CustomJS(</span>
+<span id="54b8a519-117"><a href="#54b8a519-117" aria-hidden="true" tabindex="-1"></a>    args<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="54b8a519-118"><a href="#54b8a519-118" aria-hidden="true" tabindex="-1"></a>        source<span class="op">=</span>source,</span>
+<span id="54b8a519-119"><a href="#54b8a519-119" aria-hidden="true" tabindex="-1"></a>        slider_team<span class="op">=</span>slider_team,</span>
+<span id="54b8a519-120"><a href="#54b8a519-120" aria-hidden="true" tabindex="-1"></a>        slider_comm<span class="op">=</span>slider_comm,</span>
+<span id="54b8a519-121"><a href="#54b8a519-121" aria-hidden="true" tabindex="-1"></a>        slider_td<span class="op">=</span>slider_td,</span>
+<span id="54b8a519-122"><a href="#54b8a519-122" aria-hidden="true" tabindex="-1"></a>        baseline_uncertainty<span class="op">=</span>baseline_uncertainty,</span>
+<span id="54b8a519-123"><a href="#54b8a519-123" aria-hidden="true" tabindex="-1"></a>        max_size<span class="op">=</span>max_size,</span>
+<span id="54b8a519-124"><a href="#54b8a519-124" aria-hidden="true" tabindex="-1"></a>        k<span class="op">=</span>k,</span>
+<span id="54b8a519-125"><a href="#54b8a519-125" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="54b8a519-126"><a href="#54b8a519-126" aria-hidden="true" tabindex="-1"></a>    code<span class="op">=</span><span class="st">"""</span></span>
+<span id="54b8a519-127"><a href="#54b8a519-127" aria-hidden="true" tabindex="-1"></a><span class="st">    const data = source.data;</span></span>
+<span id="54b8a519-128"><a href="#54b8a519-128" aria-hidden="true" tabindex="-1"></a><span class="st">    const x = data['x'];</span></span>
+<span id="54b8a519-129"><a href="#54b8a519-129" aria-hidden="true" tabindex="-1"></a><span class="st">    const y_mid = data['y_mid'];</span></span>
+<span id="54b8a519-130"><a href="#54b8a519-130" aria-hidden="true" tabindex="-1"></a><span class="st">    const y_lower = data['y_lower'];</span></span>
+<span id="54b8a519-131"><a href="#54b8a519-131" aria-hidden="true" tabindex="-1"></a><span class="st">    const y_upper = data['y_upper'];</span></span>
+<span id="54b8a519-132"><a href="#54b8a519-132" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="54b8a519-133"><a href="#54b8a519-133" aria-hidden="true" tabindex="-1"></a><span class="st">    const team = slider_team.value;</span></span>
+<span id="54b8a519-134"><a href="#54b8a519-134" aria-hidden="true" tabindex="-1"></a><span class="st">    const comm = slider_comm.value;</span></span>
+<span id="54b8a519-135"><a href="#54b8a519-135" aria-hidden="true" tabindex="-1"></a><span class="st">    const td = slider_td.value;</span></span>
+<span id="54b8a519-136"><a href="#54b8a519-136" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="54b8a519-137"><a href="#54b8a519-137" aria-hidden="true" tabindex="-1"></a><span class="st">    // Compute the base factor with exponential decay for technical debt.</span></span>
+<span id="54b8a519-138"><a href="#54b8a519-138" aria-hidden="true" tabindex="-1"></a><span class="st">    const baseFactor = (1 - 0.5 * (team + comm)) * Math.exp(-k * td);</span></span>
+<span id="54b8a519-139"><a href="#54b8a519-139" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="54b8a519-140"><a href="#54b8a519-140" aria-hidden="true" tabindex="-1"></a><span class="st">    // Effective uncertainty scales with the average of the friction factors.</span></span>
+<span id="54b8a519-141"><a href="#54b8a519-141" aria-hidden="true" tabindex="-1"></a><span class="st">    const effective_uncertainty = baseline_uncertainty * ((team + comm + td) / 3);</span></span>
+<span id="54b8a519-142"><a href="#54b8a519-142" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="54b8a519-143"><a href="#54b8a519-143" aria-hidden="true" tabindex="-1"></a><span class="st">    // Update productivity curves.</span></span>
+<span id="54b8a519-144"><a href="#54b8a519-144" aria-hidden="true" tabindex="-1"></a><span class="st">    for (let i = 0; i &lt; x.length; i++) {</span></span>
+<span id="54b8a519-145"><a href="#54b8a519-145" aria-hidden="true" tabindex="-1"></a><span class="st">        y_mid[i] = baseFactor * Math.exp(-0.03 * (x[i] - 1));</span></span>
+<span id="54b8a519-146"><a href="#54b8a519-146" aria-hidden="true" tabindex="-1"></a><span class="st">        let scale = (x[i] - 1) / (max_size - 1);</span></span>
+<span id="54b8a519-147"><a href="#54b8a519-147" aria-hidden="true" tabindex="-1"></a><span class="st">        y_lower[i] = y_mid[i] * (1 - effective_uncertainty * scale);</span></span>
+<span id="54b8a519-148"><a href="#54b8a519-148" aria-hidden="true" tabindex="-1"></a><span class="st">        y_upper[i] = y_mid[i] * (1 + effective_uncertainty * scale);</span></span>
+<span id="54b8a519-149"><a href="#54b8a519-149" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="54b8a519-150"><a href="#54b8a519-150" aria-hidden="true" tabindex="-1"></a><span class="st">    source.change.emit();</span></span>
+<span id="54b8a519-151"><a href="#54b8a519-151" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>,</span>
+<span id="54b8a519-152"><a href="#54b8a519-152" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="54b8a519-153"><a href="#54b8a519-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-154"><a href="#54b8a519-154" aria-hidden="true" tabindex="-1"></a><span class="co"># Attach the callback to slider value changes.</span></span>
+<span id="54b8a519-155"><a href="#54b8a519-155" aria-hidden="true" tabindex="-1"></a>slider_team.js_on_change(<span class="st">"value"</span>, callback)</span>
+<span id="54b8a519-156"><a href="#54b8a519-156" aria-hidden="true" tabindex="-1"></a>slider_comm.js_on_change(<span class="st">"value"</span>, callback)</span>
+<span id="54b8a519-157"><a href="#54b8a519-157" aria-hidden="true" tabindex="-1"></a>slider_td.js_on_change(<span class="st">"value"</span>, callback)</span>
+<span id="54b8a519-158"><a href="#54b8a519-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-159"><a href="#54b8a519-159" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange the plot and sliders in a layout.</span></span>
+<span id="54b8a519-160"><a href="#54b8a519-160" aria-hidden="true" tabindex="-1"></a>layout <span class="op">=</span> column(p, slider_team, slider_comm, slider_td)</span>
+<span id="54b8a519-161"><a href="#54b8a519-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="54b8a519-162"><a href="#54b8a519-162" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the interactive plot as an HTML file.</span></span>
+<span id="54b8a519-163"><a href="#54b8a519-163" aria-hidden="true" tabindex="-1"></a>output_file(<span class="st">"team_productivity.html"</span>)</span>
+<span id="54b8a519-164"><a href="#54b8a519-164" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> save(layout)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <iframe src="team_productivity.html" width="100%" height="540px" style="border:none;">
