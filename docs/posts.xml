@@ -10,11 +10,9 @@
 <atom:link href="https://pedroleitao.nl/posts.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <image>
-<url>https://pedroleitao.nl/_static/logo.png</url>
+<url>https://pedroleitao.nl/_static/logo.jpg</url>
 <title>Pedro Leitão</title>
 <link>https://pedroleitao.nl/posts.html</link>
-<height>138</height>
-<width>144</width>
 </image>
 <generator>quarto-1.6.42</generator>
 <lastBuildDate>Tue, 04 Mar 2025 00:00:00 GMT</lastBuildDate>
@@ -71,6 +69,8 @@
   <title>Regularisation in Machine Learning</title>
   <link>https://pedroleitao.nl/posts/experiments/regularisation/</link>
   <description><![CDATA[ Regularisation is a technique designed to prevent models from overfitting. In other words, it helps your model generalise better to unseen data by discouraging it from fitting too closely to the quirks and noise present in your training set. This is typically achieved by adding a penalty term to the model’s cost function, nudging the learning process toward simpler, more robust solutions. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
   <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
 </item>
