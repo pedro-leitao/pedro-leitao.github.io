@@ -15,7 +15,16 @@
 <link>https://pedroleitao.nl/experiments.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Sun, 09 Feb 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 10 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Maps and More Maps</title>
+  <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
+  <description><![CDATA[ Recently I was trying to figure out sun exposure for a specific location, except I am a couple of thousand kilometers away, and I needed to get a sense of the sun’s path. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much do the job. But, I really wanted to find out if I could do it myself from first principles. ]]></description>
+  <category>Experiments</category>
+  <category>Software Engineering</category>
+  <guid>https://pedroleitao.nl/posts/experiments/maps-and-maps/</guid>
+  <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Reinforcement Learning - a Primer using Connect Four</title>
   <link>https://pedroleitao.nl/posts/experiments/connect-four-rl/</link>
@@ -100,15 +109,6 @@
   <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/random-forests/</guid>
   <pubDate>Thu, 07 Mar 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Instance vs Model Learning</title>
-  <link>https://pedroleitao.nl/posts/experiments/instance-vs-model/</link>
-  <description><![CDATA[ Instance-based machine learning and model-based machine learning are two broad categories of machine learning algorithms that differ in their approach to learning and making predictions. ]]></description>
-  <category>Experiments</category>
-  <category>Machine Learning</category>
-  <guid>https://pedroleitao.nl/posts/experiments/instance-vs-model/</guid>
-  <pubDate>Sat, 02 Mar 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

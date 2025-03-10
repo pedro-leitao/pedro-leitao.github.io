@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-03-10">
+
+<title>Maps and More Maps – Pedro Leitão</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-dd9bfc32d3675b3baf78b59fb821356c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
+<script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background-image: url(../../../_static/banner-waves-partial.jpg);
+background-size: cover;
+      }
+</style>
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Maps and More Maps – Pedro Leitão">
+<meta property="og:description" content="sometimes a map and a few lines of code are all you need">
+<meta property="og:site_name" content="Pedro Leitão">
+<meta name="twitter:title" content="Maps and More Maps – Pedro Leitão">
+<meta name="twitter:description" content="sometimes a map and a few lines of code are all you need">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.jpg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../posts.html"> 
+<span class="menu-text">All posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../experiments.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../thoughts.html"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../howtos.html"> 
+<span class="menu-text">Howto’s</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pedro-leitao"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/nunoleitao"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Maps and More Maps</h1>
+            <p class="subtitle lead">sometimes a map and a few lines of code are all you need</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Experiments</div>
+                <div class="quarto-category">Software Engineering</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 10, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Recently I was trying to figure out sun exposure for a specific location, except I am a couple of thousand kilometers away, and I needed to get a sense of the sun’s path. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much do the job. But, I really wanted to find out if I could do it myself from first principles.</p>
+<p>The problem here is that although I vaguely remember the area, I don’t have a clear picture of the surroundings. So, an overlay on a map of the sun’s path at different times of the day and year would be really helpful and give an intuition of the kind of sun exposure the area gets.</p>
+<p>To solve this we would need a few steps - we need map the area, and for that we have Python’s <a href="https://github.com/python-visualization/folium"><code>folium</code></a> library which is a wrapper around <code>leaflet.js</code>. We also need to calculate the sun’s position at different times of the day and year, and for that we have the <a href="https://pysolar.readthedocs.io/en/latest/"><code>pysolar</code></a> library. Finally we need to figure out how to overlay the sun’s path on the map, and for that we need to do some basic geometry.</p>
+<p>Let us start by visualising the area on a map. I know the coordinates of the area of interest, which we can use to create a simple polygon on a map.</p>
+<div id="ee2ea156" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="ee2ea156"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ee2ea156-1"><a href="#ee2ea156-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="ee2ea156-2"><a href="#ee2ea156-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-3"><a href="#ee2ea156-3" aria-hidden="true" tabindex="-1"></a>lon <span class="op">=</span> <span class="op">-</span><span class="fl">8.649779901717114</span></span>
+<span id="ee2ea156-4"><a href="#ee2ea156-4" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> <span class="fl">41.14898866596278</span></span>
+<span id="ee2ea156-5"><a href="#ee2ea156-5" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> (lat, lon)</span>
+<span id="ee2ea156-6"><a href="#ee2ea156-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-7"><a href="#ee2ea156-7" aria-hidden="true" tabindex="-1"></a>shape <span class="op">=</span> [</span>
+<span id="ee2ea156-8"><a href="#ee2ea156-8" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.14897506901333</span>, <span class="op">-</span><span class="fl">8.649853359565837</span>],</span>
+<span id="ee2ea156-9"><a href="#ee2ea156-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.14893442240481</span>, <span class="op">-</span><span class="fl">8.6497568000413</span>],</span>
+<span id="ee2ea156-10"><a href="#ee2ea156-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.14898264291275</span>, <span class="op">-</span><span class="fl">8.64971958439122</span>],</span>
+<span id="ee2ea156-11"><a href="#ee2ea156-11" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.1489942562235</span>, <span class="op">-</span><span class="fl">8.649717237458331</span>],</span>
+<span id="ee2ea156-12"><a href="#ee2ea156-12" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.14908867741279</span>, <span class="op">-</span><span class="fl">8.64980273287068</span>],</span>
+<span id="ee2ea156-13"><a href="#ee2ea156-13" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.149035155258005</span>, <span class="op">-</span><span class="fl">8.649911027059657</span>],</span>
+<span id="ee2ea156-14"><a href="#ee2ea156-14" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">41.14897506901333</span>, <span class="op">-</span><span class="fl">8.649853359565837</span>],</span>
+<span id="ee2ea156-15"><a href="#ee2ea156-15" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="ee2ea156-16"><a href="#ee2ea156-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-17"><a href="#ee2ea156-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-18"><a href="#ee2ea156-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the zoom level</span></span>
+<span id="ee2ea156-19"><a href="#ee2ea156-19" aria-hidden="true" tabindex="-1"></a>zoom_start <span class="op">=</span> <span class="dv">19</span></span>
+<span id="ee2ea156-20"><a href="#ee2ea156-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-21"><a href="#ee2ea156-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the map</span></span>
+<span id="ee2ea156-22"><a href="#ee2ea156-22" aria-hidden="true" tabindex="-1"></a>map_osm <span class="op">=</span> folium.Map(location<span class="op">=</span>base, zoom_start<span class="op">=</span>zoom_start)</span>
+<span id="ee2ea156-23"><a href="#ee2ea156-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-24"><a href="#ee2ea156-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a polygon to the map</span></span>
+<span id="ee2ea156-25"><a href="#ee2ea156-25" aria-hidden="true" tabindex="-1"></a>folium.Polygon(</span>
+<span id="ee2ea156-26"><a href="#ee2ea156-26" aria-hidden="true" tabindex="-1"></a>    shape, color<span class="op">=</span><span class="st">"blue"</span>, fill<span class="op">=</span><span class="va">True</span>, weight<span class="op">=</span><span class="dv">1</span>, fill_color<span class="op">=</span><span class="st">"blue"</span>, fill_opacity<span class="op">=</span><span class="fl">0.2</span></span>
+<span id="ee2ea156-27"><a href="#ee2ea156-27" aria-hidden="true" tabindex="-1"></a>).add_to(map_osm)</span>
+<span id="ee2ea156-28"><a href="#ee2ea156-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ee2ea156-29"><a href="#ee2ea156-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the map to an HTML file</span></span>
+<span id="ee2ea156-30"><a href="#ee2ea156-30" aria-hidden="true" tabindex="-1"></a>map_osm.save(<span class="st">"osm_map.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="osm_map.html" width="100%" height="450">
+</iframe>
+<p>Now that we have the area mapped, we can start adding the sun’s path at different times of the day. Let us create a function that will add lines to the map indicating the position and altitude of the sun at different times of the day. We need to calculate the <em>azimuth</em> and <em>altitude</em> of the sun at a given location and time, and then draw a line from the base to the calculated position. <code>pysolar</code> does this job tremendously well for us - we can give the function a specific date, and it will then calculate the sun’s position at different times of the day and draw lines on the map. The lines will have distinct lengths depending on the sun’s altitude (the shorter, the higher the sun), which should give us a sense of how strongly the sun shines on different parts of the area at different times of the day.</p>
+<div id="fa1a9e06" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="fa1a9e06"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fa1a9e06-1"><a href="#fa1a9e06-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysolar.solar <span class="im">import</span> get_azimuth, get_altitude</span>
+<span id="fa1a9e06-2"><a href="#fa1a9e06-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> geopy.distance <span class="im">import</span> distance</span>
+<span id="fa1a9e06-3"><a href="#fa1a9e06-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> folium.features <span class="im">import</span> DivIcon</span>
+<span id="fa1a9e06-4"><a href="#fa1a9e06-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="fa1a9e06-5"><a href="#fa1a9e06-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="fa1a9e06-6"><a href="#fa1a9e06-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-7"><a href="#fa1a9e06-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-8"><a href="#fa1a9e06-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_sun_lines(</span>
+<span id="fa1a9e06-9"><a href="#fa1a9e06-9" aria-hidden="true" tabindex="-1"></a>    map_obj,</span>
+<span id="fa1a9e06-10"><a href="#fa1a9e06-10" aria-hidden="true" tabindex="-1"></a>    month,</span>
+<span id="fa1a9e06-11"><a href="#fa1a9e06-11" aria-hidden="true" tabindex="-1"></a>    day,</span>
+<span id="fa1a9e06-12"><a href="#fa1a9e06-12" aria-hidden="true" tabindex="-1"></a>    line_color,</span>
+<span id="fa1a9e06-13"><a href="#fa1a9e06-13" aria-hidden="true" tabindex="-1"></a>    line_weight,</span>
+<span id="fa1a9e06-14"><a href="#fa1a9e06-14" aria-hidden="true" tabindex="-1"></a>    label_pos_end<span class="op">=</span><span class="va">False</span>,</span>
+<span id="fa1a9e06-15"><a href="#fa1a9e06-15" aria-hidden="true" tabindex="-1"></a>    line_style<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span id="fa1a9e06-16"><a href="#fa1a9e06-16" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="fa1a9e06-17"><a href="#fa1a9e06-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the hours (7am to 7pm, every 2 hours)</span></span>
+<span id="fa1a9e06-18"><a href="#fa1a9e06-18" aria-hidden="true" tabindex="-1"></a>    hours <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>]</span>
+<span id="fa1a9e06-19"><a href="#fa1a9e06-19" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="dv">2025</span></span>
+<span id="fa1a9e06-20"><a href="#fa1a9e06-20" aria-hidden="true" tabindex="-1"></a>    base_distance <span class="op">=</span> <span class="dv">50</span>  <span class="co"># maximum distance when sun is at horizon</span></span>
+<span id="fa1a9e06-21"><a href="#fa1a9e06-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-22"><a href="#fa1a9e06-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> hour <span class="kw">in</span> hours:</span>
+<span id="fa1a9e06-23"><a href="#fa1a9e06-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a UTC datetime for the given hour</span></span>
+<span id="fa1a9e06-24"><a href="#fa1a9e06-24" aria-hidden="true" tabindex="-1"></a>        dt <span class="op">=</span> datetime.datetime(</span>
+<span id="fa1a9e06-25"><a href="#fa1a9e06-25" aria-hidden="true" tabindex="-1"></a>            year, month, day, hour, <span class="dv">0</span>, <span class="dv">0</span>, tzinfo<span class="op">=</span>datetime.timezone.utc</span>
+<span id="fa1a9e06-26"><a href="#fa1a9e06-26" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="fa1a9e06-27"><a href="#fa1a9e06-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-28"><a href="#fa1a9e06-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute the sun's azimuth and altitude at your location</span></span>
+<span id="fa1a9e06-29"><a href="#fa1a9e06-29" aria-hidden="true" tabindex="-1"></a>        azimuth <span class="op">=</span> get_azimuth(lat, lon, dt)</span>
+<span id="fa1a9e06-30"><a href="#fa1a9e06-30" aria-hidden="true" tabindex="-1"></a>        altitude <span class="op">=</span> get_altitude(lat, lon, dt)</span>
+<span id="fa1a9e06-31"><a href="#fa1a9e06-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-32"><a href="#fa1a9e06-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Ensure altitude is non-negative for the calculation</span></span>
+<span id="fa1a9e06-33"><a href="#fa1a9e06-33" aria-hidden="true" tabindex="-1"></a>        altitude_for_calc <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, altitude)</span>
+<span id="fa1a9e06-34"><a href="#fa1a9e06-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-35"><a href="#fa1a9e06-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The higher the sun, the shorter the line</span></span>
+<span id="fa1a9e06-36"><a href="#fa1a9e06-36" aria-hidden="true" tabindex="-1"></a>        effective_distance <span class="op">=</span> base_distance <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> altitude_for_calc <span class="op">/</span> <span class="dv">90</span>)</span>
+<span id="fa1a9e06-37"><a href="#fa1a9e06-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-38"><a href="#fa1a9e06-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate a destination point using the effective distance</span></span>
+<span id="fa1a9e06-39"><a href="#fa1a9e06-39" aria-hidden="true" tabindex="-1"></a>        dest <span class="op">=</span> distance(meters<span class="op">=</span>effective_distance).destination(</span>
+<span id="fa1a9e06-40"><a href="#fa1a9e06-40" aria-hidden="true" tabindex="-1"></a>            point<span class="op">=</span>base, bearing<span class="op">=</span>azimuth</span>
+<span id="fa1a9e06-41"><a href="#fa1a9e06-41" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="fa1a9e06-42"><a href="#fa1a9e06-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-43"><a href="#fa1a9e06-43" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Setup polyline options based on line_style</span></span>
+<span id="fa1a9e06-44"><a href="#fa1a9e06-44" aria-hidden="true" tabindex="-1"></a>        polyline_options <span class="op">=</span> {}</span>
+<span id="fa1a9e06-45"><a href="#fa1a9e06-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line_style.lower() <span class="op">==</span> <span class="st">"dashed"</span>:</span>
+<span id="fa1a9e06-46"><a href="#fa1a9e06-46" aria-hidden="true" tabindex="-1"></a>            polyline_options[<span class="st">"dash_array"</span>] <span class="op">=</span> <span class="st">"5, 5"</span></span>
+<span id="fa1a9e06-47"><a href="#fa1a9e06-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-48"><a href="#fa1a9e06-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Draw the line (polyline) from the base to the destination</span></span>
+<span id="fa1a9e06-49"><a href="#fa1a9e06-49" aria-hidden="true" tabindex="-1"></a>        folium.PolyLine(</span>
+<span id="fa1a9e06-50"><a href="#fa1a9e06-50" aria-hidden="true" tabindex="-1"></a>            locations<span class="op">=</span>[[lat, lon], [dest.latitude, dest.longitude]],</span>
+<span id="fa1a9e06-51"><a href="#fa1a9e06-51" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>line_color,</span>
+<span id="fa1a9e06-52"><a href="#fa1a9e06-52" aria-hidden="true" tabindex="-1"></a>            weight<span class="op">=</span>line_weight,</span>
+<span id="fa1a9e06-53"><a href="#fa1a9e06-53" aria-hidden="true" tabindex="-1"></a>            popup<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>dt<span class="sc">.</span>strftime(<span class="st">'%b </span><span class="sc">%d</span><span class="st">, %H:%M'</span>)<span class="sc">}</span><span class="ss"> - Azimuth: </span><span class="sc">{</span>azimuth<span class="sc">:.1f}</span><span class="ss">°, Altitude: </span><span class="sc">{</span>altitude<span class="sc">:.1f}</span><span class="ss">°"</span>,</span>
+<span id="fa1a9e06-54"><a href="#fa1a9e06-54" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>polyline_options,</span>
+<span id="fa1a9e06-55"><a href="#fa1a9e06-55" aria-hidden="true" tabindex="-1"></a>        ).add_to(map_obj)</span>
+<span id="fa1a9e06-56"><a href="#fa1a9e06-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-57"><a href="#fa1a9e06-57" aria-hidden="true" tabindex="-1"></a>        pos_lat <span class="op">=</span> dest.latitude <span class="cf">if</span> label_pos_end <span class="cf">else</span> (lat <span class="op">+</span> dest.latitude) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="fa1a9e06-58"><a href="#fa1a9e06-58" aria-hidden="true" tabindex="-1"></a>        pos_lon <span class="op">=</span> dest.longitude <span class="cf">if</span> label_pos_end <span class="cf">else</span> (lon <span class="op">+</span> dest.longitude) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="fa1a9e06-59"><a href="#fa1a9e06-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fa1a9e06-60"><a href="#fa1a9e06-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add a label and star icon only for specific hours (7, 13, 19)</span></span>
+<span id="fa1a9e06-61"><a href="#fa1a9e06-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> hour <span class="kw">in</span> (<span class="dv">7</span>, <span class="dv">13</span>, <span class="dv">19</span>):</span>
+<span id="fa1a9e06-62"><a href="#fa1a9e06-62" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add time label marker</span></span>
+<span id="fa1a9e06-63"><a href="#fa1a9e06-63" aria-hidden="true" tabindex="-1"></a>            folium.Marker(</span>
+<span id="fa1a9e06-64"><a href="#fa1a9e06-64" aria-hidden="true" tabindex="-1"></a>                [pos_lat, pos_lon],</span>
+<span id="fa1a9e06-65"><a href="#fa1a9e06-65" aria-hidden="true" tabindex="-1"></a>                icon<span class="op">=</span>DivIcon(</span>
+<span id="fa1a9e06-66"><a href="#fa1a9e06-66" aria-hidden="true" tabindex="-1"></a>                    html<span class="op">=</span><span class="ss">f'&lt;div style="font-size: 11pt; color: black;"&gt;</span><span class="sc">{</span>hour<span class="sc">}</span><span class="ss">:00&lt;/div&gt;'</span></span>
+<span id="fa1a9e06-67"><a href="#fa1a9e06-67" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="fa1a9e06-68"><a href="#fa1a9e06-68" aria-hidden="true" tabindex="-1"></a>            ).add_to(map_obj)</span>
+<span id="fa1a9e06-69"><a href="#fa1a9e06-69" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add a star icon (UTF star character) at the destination, shifted with CSS</span></span>
+<span id="fa1a9e06-70"><a href="#fa1a9e06-70" aria-hidden="true" tabindex="-1"></a>            folium.Marker(</span>
+<span id="fa1a9e06-71"><a href="#fa1a9e06-71" aria-hidden="true" tabindex="-1"></a>                [dest.latitude, dest.longitude],</span>
+<span id="fa1a9e06-72"><a href="#fa1a9e06-72" aria-hidden="true" tabindex="-1"></a>                icon<span class="op">=</span>DivIcon(</span>
+<span id="fa1a9e06-73"><a href="#fa1a9e06-73" aria-hidden="true" tabindex="-1"></a>                    html<span class="op">=</span><span class="st">'&lt;div style="font-size: 14pt; color: orange; transform: translate(10px, -10px);"&gt;★&lt;/div&gt;'</span></span>
+<span id="fa1a9e06-74"><a href="#fa1a9e06-74" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="fa1a9e06-75"><a href="#fa1a9e06-75" aria-hidden="true" tabindex="-1"></a>            ).add_to(map_obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>With that, let us add the sun lines to the map for August 1 (summer) and January 1 (winter). We will use red lines for August 1 and blue lines for January 1.</p>
+<div id="ca1032f5" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="ca1032f5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ca1032f5-1"><a href="#ca1032f5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sun lines for August 1 (bold red lines) and January 1 (thin blue lines)</span></span>
+<span id="ca1032f5-2"><a href="#ca1032f5-2" aria-hidden="true" tabindex="-1"></a>add_sun_lines(</span>
+<span id="ca1032f5-3"><a href="#ca1032f5-3" aria-hidden="true" tabindex="-1"></a>    map_osm, month<span class="op">=</span><span class="dv">8</span>, day<span class="op">=</span><span class="dv">1</span>, line_color<span class="op">=</span><span class="st">"red"</span>, line_weight<span class="op">=</span><span class="dv">3</span>, label_pos_end<span class="op">=</span><span class="va">True</span></span>
+<span id="ca1032f5-4"><a href="#ca1032f5-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="ca1032f5-5"><a href="#ca1032f5-5" aria-hidden="true" tabindex="-1"></a>add_sun_lines(</span>
+<span id="ca1032f5-6"><a href="#ca1032f5-6" aria-hidden="true" tabindex="-1"></a>    map_osm,</span>
+<span id="ca1032f5-7"><a href="#ca1032f5-7" aria-hidden="true" tabindex="-1"></a>    month<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="ca1032f5-8"><a href="#ca1032f5-8" aria-hidden="true" tabindex="-1"></a>    day<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="ca1032f5-9"><a href="#ca1032f5-9" aria-hidden="true" tabindex="-1"></a>    line_color<span class="op">=</span><span class="st">"blue"</span>,</span>
+<span id="ca1032f5-10"><a href="#ca1032f5-10" aria-hidden="true" tabindex="-1"></a>    line_weight<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="ca1032f5-11"><a href="#ca1032f5-11" aria-hidden="true" tabindex="-1"></a>    label_pos_end<span class="op">=</span><span class="va">True</span>,</span>
+<span id="ca1032f5-12"><a href="#ca1032f5-12" aria-hidden="true" tabindex="-1"></a>    line_style<span class="op">=</span><span class="st">"dashed"</span>,</span>
+<span id="ca1032f5-13"><a href="#ca1032f5-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><code>folium</code> relies on <code>leaflet.js</code> which produces Javascript for rendering maps, so we need to save the map to an HTML file to view it.</p>
+<div id="5f1a8012" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="5f1a8012"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5f1a8012-1"><a href="#5f1a8012-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the map to an HTML file</span></span>
+<span id="5f1a8012-2"><a href="#5f1a8012-2" aria-hidden="true" tabindex="-1"></a>map_osm.save(<span class="st">"osm_map_with_sun_markers.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="osm_map_with_sun_markers.html" width="100%" height="450">
+</iframe>
+<p>That worked very well! We want a map which gives the best visual sense of the area and the sun’s path, so let us add a tile layer to the map. We can use the <code>CartoDB Positron</code> tile layer, which is a light, minimalistic map style.</p>
+<div id="3b40bcb7" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="3b40bcb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3b40bcb7-1"><a href="#3b40bcb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a tile layer to the map</span></span>
+<span id="3b40bcb7-2"><a href="#3b40bcb7-2" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(<span class="st">"CartoDB Positron"</span>, opacity<span class="op">=</span><span class="fl">1.0</span>).add_to(map_osm)</span>
+<span id="3b40bcb7-3"><a href="#3b40bcb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3b40bcb7-4"><a href="#3b40bcb7-4" aria-hidden="true" tabindex="-1"></a>map_osm.save(<span class="st">"osm_map_with_sun_markers_and_tiles.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="osm_map_with_sun_markers_and_tiles.html" width="100%" height="450">
+</iframe>
+<p>It would also be interesting to see the sun’s path throughout the day as an arc. We can add a continuous line to the map that represents the sun’s path from sunrise to sunset. Let us create another function which will compute the sun’s position more frequently and draw a continuous line on the map.</p>
+<div id="9435efc9" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="9435efc9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9435efc9-1"><a href="#9435efc9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_sun_path(map_obj, month, day, line_color<span class="op">=</span><span class="st">"orange"</span>, line_weight<span class="op">=</span><span class="dv">2</span>, interval<span class="op">=</span><span class="dv">15</span>):</span>
+<span id="9435efc9-2"><a href="#9435efc9-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="dv">2025</span></span>
+<span id="9435efc9-3"><a href="#9435efc9-3" aria-hidden="true" tabindex="-1"></a>    base_distance <span class="op">=</span> <span class="dv">50</span></span>
+<span id="9435efc9-4"><a href="#9435efc9-4" aria-hidden="true" tabindex="-1"></a>    sun_path_coords <span class="op">=</span> []</span>
+<span id="9435efc9-5"><a href="#9435efc9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9435efc9-6"><a href="#9435efc9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute sun positions every `interval` minutes between 7:00 and 19:00 UTC</span></span>
+<span id="9435efc9-7"><a href="#9435efc9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span> <span class="op">*</span> <span class="dv">60</span>, <span class="dv">19</span> <span class="op">*</span> <span class="dv">60</span>, interval):</span>
+<span id="9435efc9-8"><a href="#9435efc9-8" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">=</span> t <span class="op">//</span> <span class="dv">60</span></span>
+<span id="9435efc9-9"><a href="#9435efc9-9" aria-hidden="true" tabindex="-1"></a>        minute <span class="op">=</span> t <span class="op">%</span> <span class="dv">60</span></span>
+<span id="9435efc9-10"><a href="#9435efc9-10" aria-hidden="true" tabindex="-1"></a>        dt <span class="op">=</span> datetime.datetime(</span>
+<span id="9435efc9-11"><a href="#9435efc9-11" aria-hidden="true" tabindex="-1"></a>            year, month, day, hour, minute, <span class="dv">0</span>, tzinfo<span class="op">=</span>datetime.timezone.utc</span>
+<span id="9435efc9-12"><a href="#9435efc9-12" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="9435efc9-13"><a href="#9435efc9-13" aria-hidden="true" tabindex="-1"></a>        azimuth <span class="op">=</span> get_azimuth(lat, lon, dt)</span>
+<span id="9435efc9-14"><a href="#9435efc9-14" aria-hidden="true" tabindex="-1"></a>        altitude <span class="op">=</span> get_altitude(lat, lon, dt)</span>
+<span id="9435efc9-15"><a href="#9435efc9-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Ensure a non-negative altitude for the calculation</span></span>
+<span id="9435efc9-16"><a href="#9435efc9-16" aria-hidden="true" tabindex="-1"></a>        altitude_for_calc <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, altitude)</span>
+<span id="9435efc9-17"><a href="#9435efc9-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Scale the distance: the higher the sun, the shorter the line</span></span>
+<span id="9435efc9-18"><a href="#9435efc9-18" aria-hidden="true" tabindex="-1"></a>        effective_distance <span class="op">=</span> base_distance <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> altitude_for_calc <span class="op">/</span> <span class="dv">90</span>)</span>
+<span id="9435efc9-19"><a href="#9435efc9-19" aria-hidden="true" tabindex="-1"></a>        dest <span class="op">=</span> distance(meters<span class="op">=</span>effective_distance).destination(</span>
+<span id="9435efc9-20"><a href="#9435efc9-20" aria-hidden="true" tabindex="-1"></a>            point<span class="op">=</span>base, bearing<span class="op">=</span>azimuth</span>
+<span id="9435efc9-21"><a href="#9435efc9-21" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="9435efc9-22"><a href="#9435efc9-22" aria-hidden="true" tabindex="-1"></a>        sun_path_coords.append([dest.latitude, dest.longitude])</span>
+<span id="9435efc9-23"><a href="#9435efc9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="9435efc9-24"><a href="#9435efc9-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw the continuous sun path</span></span>
+<span id="9435efc9-25"><a href="#9435efc9-25" aria-hidden="true" tabindex="-1"></a>    folium.PolyLine(</span>
+<span id="9435efc9-26"><a href="#9435efc9-26" aria-hidden="true" tabindex="-1"></a>        locations<span class="op">=</span>sun_path_coords,</span>
+<span id="9435efc9-27"><a href="#9435efc9-27" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>line_color,</span>
+<span id="9435efc9-28"><a href="#9435efc9-28" aria-hidden="true" tabindex="-1"></a>        weight<span class="op">=</span>line_weight,</span>
+<span id="9435efc9-29"><a href="#9435efc9-29" aria-hidden="true" tabindex="-1"></a>        opacity<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="9435efc9-30"><a href="#9435efc9-30" aria-hidden="true" tabindex="-1"></a>        popup<span class="op">=</span><span class="st">"Sun Path"</span>,</span>
+<span id="9435efc9-31"><a href="#9435efc9-31" aria-hidden="true" tabindex="-1"></a>    ).add_to(map_obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This allows us to add the sun path for August 1 and January 1, with different line colors and weights.</p>
+<div id="24aebace" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="24aebace"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="24aebace-1"><a href="#24aebace-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sun path for August 1</span></span>
+<span id="24aebace-2"><a href="#24aebace-2" aria-hidden="true" tabindex="-1"></a>add_sun_path(map_osm, month<span class="op">=</span><span class="dv">8</span>, day<span class="op">=</span><span class="dv">1</span>, line_color<span class="op">=</span><span class="st">"darkorange"</span>, line_weight<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="24aebace-3"><a href="#24aebace-3" aria-hidden="true" tabindex="-1"></a>add_sun_path(map_osm, month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>, line_color<span class="op">=</span><span class="st">"orange"</span>, line_weight<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="24aebace-4"><a href="#24aebace-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="24aebace-5"><a href="#24aebace-5" aria-hidden="true" tabindex="-1"></a>map_osm.save(<span class="st">"osm_map_with_sun_markers_tiles_and_path.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="osm_map_with_sun_markers_tiles_and_path.html" width="100%" height="450">
+</iframe>
+<p>That works very well, but we are lacking a sense of depth - we can add a satellite layer to the map to give a better sense of the area, the geometry, and potential obstacles which could occlude the sun’s path.</p>
+<div id="c2bf9a95" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="c2bf9a95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c2bf9a95-1"><a href="#c2bf9a95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add an ESRI Satellite layer to the map</span></span>
+<span id="c2bf9a95-2"><a href="#c2bf9a95-2" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">"StadiaAlidadeSatellite"</span>, opacity<span class="op">=</span><span class="fl">1.0</span>).add_to(map_osm)</span>
+<span id="c2bf9a95-3"><a href="#c2bf9a95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="c2bf9a95-4"><a href="#c2bf9a95-4" aria-hidden="true" tabindex="-1"></a>map_osm.save(<span class="st">"osm_map_with_sun_markers_tiles_path_and_satellite.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="osm_map_with_sun_markers_tiles_path_and_satellite.html" width="100%" height="450">
+</iframe>
+<p>Although not perfect, it gives a really good sense of the area and the sun’s path, any potential shaded zones, and the kind of sun exposure it will get. It’s a testament as to what a few lines of code can do!</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Written with love, take time to think and ponder.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://quarto.org">
+      <i class="bi bi-arrow-through-heart" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="http://www.frankscanteen.com">
+      <i class="bi bi-cup-hot" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/bilhanovarestaurante">
+      <i class="bi bi-egg-fried" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -15,7 +15,16 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Tue, 04 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 10 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Maps and More Maps</title>
+  <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
+  <description><![CDATA[ Recently I was trying to figure out sun exposure for a specific location, except I am a couple of thousand kilometers away, and I needed to get a sense of the sun’s path. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much do the job. But, I really wanted to find out if I could do it myself from first principles. ]]></description>
+  <category>Experiments</category>
+  <category>Software Engineering</category>
+  <guid>https://pedroleitao.nl/posts/experiments/maps-and-maps/</guid>
+  <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Getting Things Right: How Engineering Teams Scale and Achieve Great Things</title>
   <link>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/</link>
@@ -103,16 +112,6 @@
   <category>Language Models</category>
   <guid>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</guid>
   <pubDate>Wed, 11 Dec 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Model Management with MLflow</title>
-  <link>https://pedroleitao.nl/posts/howtos/mlflow-ui/</link>
-  <description><![CDATA[ As you develop machine learning models, you will find that you need to manage many different versions and variations as you move towards the desired outcome. You may want to compare, roll back to previous versions, or deploy multiple versions of a model to A/B test which one is better. <a href="https://MLflow.org">MLflow</a> is one of many tools and frameworks that helps you manage this process. There are lots of alternatives in this space, including <a href="https://www.kubeflow.org">Kubeflow</a>, <a href="https://dvc.org">DVC</a>, and <a href="https://metaflow.org">Metaflow</a>. ]]></description>
-  <category>HowTo</category>
-  <category>Machine Learning</category>
-  <category>Model Management</category>
-  <guid>https://pedroleitao.nl/posts/howtos/mlflow-ui/</guid>
-  <pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
