@@ -231,7 +231,7 @@ background-size: cover;
 <p>The problem here is that although I vaguely remember the area, I don’t have a clear picture of the surroundings. So, an overlay on a map of the sun’s path at different times of the day and year would be really helpful and give an intuition of the kind of sun exposure the area gets.</p>
 <p>To solve this we would need a few steps - we need map the area, and for that we have Python’s <a href="https://github.com/python-visualization/folium"><code>folium</code></a> library which is a wrapper around <code>leaflet.js</code>. We also need to calculate the sun’s position at different times of the day and year, and for that we have the <a href="https://pysolar.readthedocs.io/en/latest/"><code>pysolar</code></a> library. Finally we need to figure out how to overlay the sun’s path on the map, and for that we need to do some basic geometry.</p>
 <p>Let us start by visualising the area on a map. I know the coordinates of the area of interest, which we can use to create a simple polygon on a map.</p>
-<div id="ee2ea156" class="cell" data-execution_count="1">
+<div id="ee2ea156" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="ee2ea156"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ee2ea156-1"><a href="#ee2ea156-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
@@ -269,7 +269,7 @@ background-size: cover;
 <iframe src="osm_map.html" width="100%" height="450">
 </iframe>
 <p>Now that we have the area mapped, we can start adding the sun’s path at different times of the day. Let us create a function that will add lines to the map indicating the position and altitude of the sun at different times of the day. We need to calculate the <em>azimuth</em> and <em>altitude</em> of the sun at a given location and time, and then draw a line from the base to the calculated position. <code>pysolar</code> does this job tremendously well for us - we can give the function a specific date, and it will then calculate the sun’s position at different times of the day and draw lines on the map. The lines will have distinct lengths depending on the sun’s altitude (the shorter, the higher the sun), which should give us a sense of how strongly the sun shines on different parts of the area at different times of the day.</p>
-<div id="fa1a9e06" class="cell" data-execution_count="2">
+<div id="fa1a9e06" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="fa1a9e06"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fa1a9e06-1"><a href="#fa1a9e06-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysolar.solar <span class="im">import</span> get_azimuth, get_altitude</span>
@@ -349,8 +349,8 @@ background-size: cover;
 <span id="fa1a9e06-75"><a href="#fa1a9e06-75" aria-hidden="true" tabindex="-1"></a>            ).add_to(map_obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>With that, let us add the sun lines to the map for August 1 (summer) and January 1 (winter). We will use red lines for August 1 and blue lines for January 1.</p>
-<div id="ca1032f5" class="cell" data-execution_count="3">
+<p>With that, let us add the sun lines to the map for August 1 (summer) and January 1 (winter). We will use <em>red lines</em> for August 1 and <em>blue lines</em> for January 1.</p>
+<div id="ca1032f5" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="ca1032f5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ca1032f5-1"><a href="#ca1032f5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sun lines for August 1 (bold red lines) and January 1 (thin blue lines)</span></span>
@@ -369,7 +369,7 @@ background-size: cover;
 </details>
 </div>
 <p><code>folium</code> relies on <code>leaflet.js</code> which produces Javascript for rendering maps, so we need to save the map to an HTML file to view it.</p>
-<div id="5f1a8012" class="cell" data-execution_count="4">
+<div id="5f1a8012" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="5f1a8012"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5f1a8012-1"><a href="#5f1a8012-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the map to an HTML file</span></span>
@@ -379,7 +379,7 @@ background-size: cover;
 <iframe src="osm_map_with_sun_markers.html" width="100%" height="450">
 </iframe>
 <p>That worked very well! We want a map which gives the best visual sense of the area and the sun’s path, so let us add a tile layer to the map. We can use the <code>CartoDB Positron</code> tile layer, which is a light, minimalistic map style.</p>
-<div id="3b40bcb7" class="cell" data-execution_count="5">
+<div id="3b40bcb7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="3b40bcb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3b40bcb7-1"><a href="#3b40bcb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a tile layer to the map</span></span>
@@ -391,7 +391,7 @@ background-size: cover;
 <iframe src="osm_map_with_sun_markers_and_tiles.html" width="100%" height="450">
 </iframe>
 <p>It would also be interesting to see the sun’s path throughout the day as an arc. We can add a continuous line to the map that represents the sun’s path from sunrise to sunset. Let us create another function which will compute the sun’s position more frequently and draw a continuous line on the map.</p>
-<div id="9435efc9" class="cell" data-execution_count="6">
+<div id="9435efc9" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="9435efc9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9435efc9-1"><a href="#9435efc9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_sun_path(map_obj, month, day, line_color<span class="op">=</span><span class="st">"orange"</span>, line_weight<span class="op">=</span><span class="dv">2</span>, interval<span class="op">=</span><span class="dv">15</span>):</span>
@@ -428,7 +428,7 @@ background-size: cover;
 </details>
 </div>
 <p>This allows us to add the sun path for August 1 and January 1, with different line colors and weights.</p>
-<div id="24aebace" class="cell" data-execution_count="7">
+<div id="24aebace" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="24aebace"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="24aebace-1"><a href="#24aebace-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sun path for August 1</span></span>
@@ -441,7 +441,7 @@ background-size: cover;
 <iframe src="osm_map_with_sun_markers_tiles_and_path.html" width="100%" height="450">
 </iframe>
 <p>That works very well, but we are lacking a sense of depth - we can add a satellite layer to the map to give a better sense of the area, the geometry, and potential obstacles which could occlude the sun’s path.</p>
-<div id="c2bf9a95" class="cell" data-execution_count="8">
+<div id="c2bf9a95" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="c2bf9a95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c2bf9a95-1"><a href="#c2bf9a95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add an ESRI Satellite layer to the map</span></span>
