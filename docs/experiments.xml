@@ -19,7 +19,7 @@
 <item>
   <title>Maps and More Maps</title>
   <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
-  <description><![CDATA[ Recently I was trying to figure out sun exposure for a specific location, except I am a couple of thousand kilometers away, and I needed to get a sense of the sun’s path. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much do the job. But, I really wanted to find out if I could do it myself from first principles. ]]></description>
+  <description><![CDATA[ Recently I was trying to figure out sun exposure for a specific location, except I was a couple of thousand kilometers away, and needed to get a sense of the sun’s path relative to a rooftop. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much can do the job. But, I really wanted to find out if I could do it myself from first principles. ]]></description>
   <category>Experiments</category>
   <category>Software Engineering</category>
   <guid>https://pedroleitao.nl/posts/experiments/maps-and-maps/</guid>
