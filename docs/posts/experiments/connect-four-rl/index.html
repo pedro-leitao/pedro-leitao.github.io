@@ -130,13 +130,13 @@ background-size: cover;
 <meta property="og:description" content="the basics of reinforcement learning using connect four as an example, with the gymnasium and baselines libraries">
 <meta property="og:image" content="https://pedroleitao.nl/posts/experiments/connect-four-rl/index_files/figure-html/cell-7-output-1.png">
 <meta property="og:site_name" content="Pedro Leitão">
-<meta property="og:image:height" content="545">
-<meta property="og:image:width" content="1093">
+<meta property="og:image:height" content="525">
+<meta property="og:image:width" content="753">
 <meta name="twitter:title" content="Reinforcement Learning - a Primer using Connect Four – Pedro Leitão">
 <meta name="twitter:description" content="the basics of reinforcement learning using connect four as an example, with the gymnasium and baselines libraries">
 <meta name="twitter:image" content="https://pedroleitao.nl/posts/experiments/connect-four-rl/index_files/figure-html/cell-7-output-1.png">
-<meta name="twitter:image-height" content="545">
-<meta name="twitter:image-width" content="1093">
+<meta name="twitter:image-height" content="525">
+<meta name="twitter:image-width" content="753">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -485,53 +485,56 @@ About Rewards
 <div id="d3904d4e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="d3904d4e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d3904d4e-1"><a href="#d3904d4e-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pygame</span>
+<div class="sourceCode cell-code" id="d3904d4e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d3904d4e-1"><a href="#d3904d4e-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="d3904d4e-2"><a href="#d3904d4e-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d3904d4e-3"><a href="#d3904d4e-3" aria-hidden="true" tabindex="-1"></a>SQUARE_SIZE <span class="op">=</span> <span class="dv">100</span></span>
-<span id="d3904d4e-4"><a href="#d3904d4e-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-3"><a href="#d3904d4e-3" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"SDL_VIDEODRIVER"</span>] <span class="op">=</span> <span class="st">"dummy"</span></span>
+<span id="d3904d4e-4"><a href="#d3904d4e-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pygame</span>
 <span id="d3904d4e-5"><a href="#d3904d4e-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d3904d4e-6"><a href="#d3904d4e-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_board_pygame_to_image(board, title<span class="op">=</span><span class="st">"Connect Four Board"</span>):</span>
-<span id="d3904d4e-7"><a href="#d3904d4e-7" aria-hidden="true" tabindex="-1"></a>    pygame.init()</span>
-<span id="d3904d4e-8"><a href="#d3904d4e-8" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> COLUMN_COUNT <span class="op">*</span> SQUARE_SIZE</span>
-<span id="d3904d4e-9"><a href="#d3904d4e-9" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> (ROW_COUNT <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> SQUARE_SIZE</span>
-<span id="d3904d4e-10"><a href="#d3904d4e-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an offscreen surface</span></span>
-<span id="d3904d4e-11"><a href="#d3904d4e-11" aria-hidden="true" tabindex="-1"></a>    surface <span class="op">=</span> pygame.Surface((width, height))</span>
-<span id="d3904d4e-12"><a href="#d3904d4e-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d3904d4e-13"><a href="#d3904d4e-13" aria-hidden="true" tabindex="-1"></a>    RADIUS <span class="op">=</span> <span class="bu">int</span>(SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span>)</span>
-<span id="d3904d4e-14"><a href="#d3904d4e-14" aria-hidden="true" tabindex="-1"></a>    BLUE <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
-<span id="d3904d4e-15"><a href="#d3904d4e-15" aria-hidden="true" tabindex="-1"></a>    BLACK <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="d3904d4e-16"><a href="#d3904d4e-16" aria-hidden="true" tabindex="-1"></a>    RED <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="d3904d4e-17"><a href="#d3904d4e-17" aria-hidden="true" tabindex="-1"></a>    YELLOW <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span>
-<span id="d3904d4e-18"><a href="#d3904d4e-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d3904d4e-19"><a href="#d3904d4e-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw board background</span></span>
-<span id="d3904d4e-20"><a href="#d3904d4e-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="d3904d4e-21"><a href="#d3904d4e-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
-<span id="d3904d4e-22"><a href="#d3904d4e-22" aria-hidden="true" tabindex="-1"></a>            rect <span class="op">=</span> pygame.Rect(</span>
-<span id="d3904d4e-23"><a href="#d3904d4e-23" aria-hidden="true" tabindex="-1"></a>                c <span class="op">*</span> SQUARE_SIZE, r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE</span>
-<span id="d3904d4e-24"><a href="#d3904d4e-24" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="d3904d4e-25"><a href="#d3904d4e-25" aria-hidden="true" tabindex="-1"></a>            pygame.draw.rect(surface, BLUE, rect)</span>
-<span id="d3904d4e-26"><a href="#d3904d4e-26" aria-hidden="true" tabindex="-1"></a>            center <span class="op">=</span> (</span>
-<span id="d3904d4e-27"><a href="#d3904d4e-27" aria-hidden="true" tabindex="-1"></a>                <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
-<span id="d3904d4e-28"><a href="#d3904d4e-28" aria-hidden="true" tabindex="-1"></a>                <span class="bu">int</span>(r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
-<span id="d3904d4e-29"><a href="#d3904d4e-29" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="d3904d4e-30"><a href="#d3904d4e-30" aria-hidden="true" tabindex="-1"></a>            pygame.draw.circle(surface, BLACK, center, RADIUS)</span>
-<span id="d3904d4e-31"><a href="#d3904d4e-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d3904d4e-32"><a href="#d3904d4e-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw the pieces</span></span>
-<span id="d3904d4e-33"><a href="#d3904d4e-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
-<span id="d3904d4e-34"><a href="#d3904d4e-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
-<span id="d3904d4e-35"><a href="#d3904d4e-35" aria-hidden="true" tabindex="-1"></a>            piece <span class="op">=</span> board[r][c]</span>
-<span id="d3904d4e-36"><a href="#d3904d4e-36" aria-hidden="true" tabindex="-1"></a>            pos_x <span class="op">=</span> <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="d3904d4e-37"><a href="#d3904d4e-37" aria-hidden="true" tabindex="-1"></a>            pos_y <span class="op">=</span> height <span class="op">-</span> <span class="bu">int</span>((r <span class="op">+</span> <span class="fl">0.5</span>) <span class="op">*</span> SQUARE_SIZE)</span>
-<span id="d3904d4e-38"><a href="#d3904d4e-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> piece <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="d3904d4e-39"><a href="#d3904d4e-39" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, RED, (pos_x, pos_y), RADIUS)</span>
-<span id="d3904d4e-40"><a href="#d3904d4e-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> piece <span class="op">==</span> <span class="dv">2</span>:</span>
-<span id="d3904d4e-41"><a href="#d3904d4e-41" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, YELLOW, (pos_x, pos_y), RADIUS)</span>
-<span id="d3904d4e-42"><a href="#d3904d4e-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d3904d4e-43"><a href="#d3904d4e-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the surface to a NumPy array</span></span>
-<span id="d3904d4e-44"><a href="#d3904d4e-44" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> pygame.surfarray.array3d(surface)</span>
-<span id="d3904d4e-45"><a href="#d3904d4e-45" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> np.transpose(image_data, (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>))[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="d3904d4e-46"><a href="#d3904d4e-46" aria-hidden="true" tabindex="-1"></a>    pygame.quit()</span>
-<span id="d3904d4e-47"><a href="#d3904d4e-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="d3904d4e-6"><a href="#d3904d4e-6" aria-hidden="true" tabindex="-1"></a>SQUARE_SIZE <span class="op">=</span> <span class="dv">100</span></span>
+<span id="d3904d4e-7"><a href="#d3904d4e-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-8"><a href="#d3904d4e-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-9"><a href="#d3904d4e-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_board_pygame_to_image(board, title<span class="op">=</span><span class="st">"Connect Four Board"</span>):</span>
+<span id="d3904d4e-10"><a href="#d3904d4e-10" aria-hidden="true" tabindex="-1"></a>    pygame.init()</span>
+<span id="d3904d4e-11"><a href="#d3904d4e-11" aria-hidden="true" tabindex="-1"></a>    width <span class="op">=</span> COLUMN_COUNT <span class="op">*</span> SQUARE_SIZE</span>
+<span id="d3904d4e-12"><a href="#d3904d4e-12" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> (ROW_COUNT <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> SQUARE_SIZE</span>
+<span id="d3904d4e-13"><a href="#d3904d4e-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an offscreen surface</span></span>
+<span id="d3904d4e-14"><a href="#d3904d4e-14" aria-hidden="true" tabindex="-1"></a>    surface <span class="op">=</span> pygame.Surface((width, height))</span>
+<span id="d3904d4e-15"><a href="#d3904d4e-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-16"><a href="#d3904d4e-16" aria-hidden="true" tabindex="-1"></a>    RADIUS <span class="op">=</span> <span class="bu">int</span>(SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span>)</span>
+<span id="d3904d4e-17"><a href="#d3904d4e-17" aria-hidden="true" tabindex="-1"></a>    BLUE <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>)</span>
+<span id="d3904d4e-18"><a href="#d3904d4e-18" aria-hidden="true" tabindex="-1"></a>    BLACK <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="d3904d4e-19"><a href="#d3904d4e-19" aria-hidden="true" tabindex="-1"></a>    RED <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="d3904d4e-20"><a href="#d3904d4e-20" aria-hidden="true" tabindex="-1"></a>    YELLOW <span class="op">=</span> (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>)</span>
+<span id="d3904d4e-21"><a href="#d3904d4e-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-22"><a href="#d3904d4e-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw board background</span></span>
+<span id="d3904d4e-23"><a href="#d3904d4e-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="d3904d4e-24"><a href="#d3904d4e-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
+<span id="d3904d4e-25"><a href="#d3904d4e-25" aria-hidden="true" tabindex="-1"></a>            rect <span class="op">=</span> pygame.Rect(</span>
+<span id="d3904d4e-26"><a href="#d3904d4e-26" aria-hidden="true" tabindex="-1"></a>                c <span class="op">*</span> SQUARE_SIZE, r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE</span>
+<span id="d3904d4e-27"><a href="#d3904d4e-27" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="d3904d4e-28"><a href="#d3904d4e-28" aria-hidden="true" tabindex="-1"></a>            pygame.draw.rect(surface, BLUE, rect)</span>
+<span id="d3904d4e-29"><a href="#d3904d4e-29" aria-hidden="true" tabindex="-1"></a>            center <span class="op">=</span> (</span>
+<span id="d3904d4e-30"><a href="#d3904d4e-30" aria-hidden="true" tabindex="-1"></a>                <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
+<span id="d3904d4e-31"><a href="#d3904d4e-31" aria-hidden="true" tabindex="-1"></a>                <span class="bu">int</span>(r <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>),</span>
+<span id="d3904d4e-32"><a href="#d3904d4e-32" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="d3904d4e-33"><a href="#d3904d4e-33" aria-hidden="true" tabindex="-1"></a>            pygame.draw.circle(surface, BLACK, center, RADIUS)</span>
+<span id="d3904d4e-34"><a href="#d3904d4e-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-35"><a href="#d3904d4e-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw the pieces</span></span>
+<span id="d3904d4e-36"><a href="#d3904d4e-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(COLUMN_COUNT):</span>
+<span id="d3904d4e-37"><a href="#d3904d4e-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(ROW_COUNT):</span>
+<span id="d3904d4e-38"><a href="#d3904d4e-38" aria-hidden="true" tabindex="-1"></a>            piece <span class="op">=</span> board[r][c]</span>
+<span id="d3904d4e-39"><a href="#d3904d4e-39" aria-hidden="true" tabindex="-1"></a>            pos_x <span class="op">=</span> <span class="bu">int</span>(c <span class="op">*</span> SQUARE_SIZE <span class="op">+</span> SQUARE_SIZE <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="d3904d4e-40"><a href="#d3904d4e-40" aria-hidden="true" tabindex="-1"></a>            pos_y <span class="op">=</span> height <span class="op">-</span> <span class="bu">int</span>((r <span class="op">+</span> <span class="fl">0.5</span>) <span class="op">*</span> SQUARE_SIZE)</span>
+<span id="d3904d4e-41"><a href="#d3904d4e-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> piece <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="d3904d4e-42"><a href="#d3904d4e-42" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, RED, (pos_x, pos_y), RADIUS)</span>
+<span id="d3904d4e-43"><a href="#d3904d4e-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> piece <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="d3904d4e-44"><a href="#d3904d4e-44" aria-hidden="true" tabindex="-1"></a>                pygame.draw.circle(surface, YELLOW, (pos_x, pos_y), RADIUS)</span>
+<span id="d3904d4e-45"><a href="#d3904d4e-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d3904d4e-46"><a href="#d3904d4e-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the surface to a NumPy array</span></span>
+<span id="d3904d4e-47"><a href="#d3904d4e-47" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> pygame.surfarray.array3d(surface)</span>
+<span id="d3904d4e-48"><a href="#d3904d4e-48" aria-hidden="true" tabindex="-1"></a>    image_data <span class="op">=</span> np.transpose(image_data, (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>))[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="d3904d4e-49"><a href="#d3904d4e-49" aria-hidden="true" tabindex="-1"></a>    pygame.display.quit()</span>
+<span id="d3904d4e-50"><a href="#d3904d4e-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -613,11 +616,8 @@ About Proximal Policy Optimization (PPO)
 </details>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"84122a2260ac4bf391d43e05b4e99796","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"135f5218f5fb47a9b21feb3555cf04bc","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
-</div>
-<div class="cell-output cell-output-display">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
 </div>
 </div>
 <p>When training the model, we set a <code>total_timesteps</code> of 12,000,000 - this is the total number of actions the agent will take in the environment during training, <em>not</em> the number of Connect Four games it should complete. If we assume an average number of 21 moves per completed game, we would be training on approximately 570,000 games.</p>
@@ -635,16 +635,16 @@ About Proximal Policy Optimization (PPO)
 <span id="b4a0270d-4"><a href="#b4a0270d-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Index(['time/fps', 'time/iterations', 'time/time_elapsed',
-       'time/total_timesteps', 'train/entropy_loss', 'train/value_loss',
-       'train/approx_kl', 'train/explained_variance', 'train/clip_range',
-       'train/loss', 'train/clip_fraction', 'train/policy_gradient_loss',
-       'train/n_updates', 'train/learning_rate'],
+<pre><code>Index(['time/fps', 'time/iterations', 'time/total_timesteps',
+       'time/time_elapsed', 'train/value_loss', 'train/explained_variance',
+       'train/n_updates', 'train/loss', 'train/learning_rate',
+       'train/approx_kl', 'train/clip_range', 'train/entropy_loss',
+       'train/clip_fraction', 'train/policy_gradient_loss'],
       dtype='object')</code></pre>
 </div>
 </div>
 <p>Let us plot a few selected training metrics to evaluate how the agent performed while learning to play Connect Four.</p>
-<div id="4789c9e2" class="cell">
+<div id="4789c9e2" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="4789c9e2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4789c9e2-1"><a href="#4789c9e2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -789,7 +789,7 @@ About Actor-Critic Methods
 </details>
 </div>
 <p>With the evaluation complete, we can plot the results to see how the agent performed against the adversary.</p>
-<div id="05e311ba" class="cell">
+<div id="05e311ba" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="05e311ba"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="05e311ba-1"><a href="#05e311ba-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -812,7 +812,7 @@ About Actor-Critic Methods
 <section id="visually-inspecting-some-of-the-game-boards" class="level2">
 <h2 class="anchored" data-anchor-id="visually-inspecting-some-of-the-game-boards">Visually inspecting some of the game boards</h2>
 <p>Finally, we can visually inspect some of the game boards to see how the agent played against the adversary. Let us render a sample of the final game boards using the <code>render_board_pygame_to_image</code> function we created earlier.</p>
-<div id="ee21507e" class="cell">
+<div id="ee21507e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="ee21507e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ee21507e-1"><a href="#ee21507e-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Yellow = Computer, Red = Agent"</span>)</span>
@@ -840,17 +840,6 @@ About Actor-Critic Methods
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg ansi-bold">The Kernel crashed while executing code in the current cell or a previous cell. 
-
-</span><span class="ansi-red-fg ansi-bold">Please review the code in the cell(s) to identify a possible cause of the failure. 
-
-</span><span class="ansi-red-fg ansi-bold">Click &lt;a href='https://aka.ms/vscodeJupyterKernelCrash'&gt;here&lt;/a&gt; for more info. 
-
-</span><span class="ansi-red-fg ansi-bold">View Jupyter &lt;a href='command:jupyter.viewOutput'&gt;log&lt;/a&gt; for further details.</span></pre>
-</div>
-</div>
 </div>
 </section>
 <section id="whats-next" class="level2">
@@ -861,6 +850,9 @@ About Actor-Critic Methods
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
+<script type="application/vnd.jupyter.widget-state+json">
+{"state":{"135f5218f5fb47a9b21feb3555cf04bc":{"model_module":"@jupyter-widgets/output","model_module_version":"1.0.0","model_name":"OutputModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/output","_model_module_version":"1.0.0","_model_name":"OutputModel","_view_count":null,"_view_module":"@jupyter-widgets/output","_view_module_version":"1.0.0","_view_name":"OutputView","layout":"IPY_MODEL_b2124b1d85ea465c81fef33fb0e46581","msg_id":"36cbf4d1-8b307d2e5ae5c76227a5985f_33246_7","outputs":[{"data":{"text/html":"<pre style=\"white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace\"><span style=\"color: #800080; text-decoration-color: #800080\">   6%</span> <span style=\"color: #f92672; text-decoration-color: #f92672\">━━━</span><span style=\"color: #3a3a3a; text-decoration-color: #3a3a3a\">╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span style=\"color: #008000; text-decoration-color: #008000\">696,000/12,000,000 </span> [ <span style=\"color: #808000; text-decoration-color: #808000\">0:04:37</span> &lt; <span style=\"color: #008080; text-decoration-color: #008080\">1:11:04</span> , <span style=\"color: #800000; text-decoration-color: #800000\">2,652 it/s</span> ]\n</pre>\n","text/plain":"\u001b[35m   6%\u001b[0m \u001b[38;2;249;38;114m━━━\u001b[0m\u001b[38;5;237m╺\u001b[0m\u001b[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m696,000/12,000,000 \u001b[0m [ \u001b[33m0:04:37\u001b[0m < \u001b[36m1:11:04\u001b[0m , \u001b[31m2,652 it/s\u001b[0m ]\n"},"metadata":{},"output_type":"display_data"}],"tabbable":null,"tooltip":null}},"b2124b1d85ea465c81fef33fb0e46581":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}}},"version_major":2,"version_minor":0}
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
