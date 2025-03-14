@@ -19,7 +19,7 @@
 <item>
   <title>Adam’s Apple</title>
   <link>https://pedroleitao.nl/posts/experiments/adam-optimisation/</link>
-  <description><![CDATA[ A key component of training deep learning models is the choice of optimisation algorithm. There are several approaches, ranging from <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">:link simple stochastic gradient descent</a> (SGD) to more advanced methods like Adam. In this experiment, we’ll try to give an intuitive understanding of what optimisation means in the context of machine learning, briefly discuss the Adam algorithm. ]]></description>
+  <description><![CDATA[ A key component of training deep learning models is the choice of optimisation algorithm. There are several approaches, ranging from <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">:link simple stochastic gradient descent</a> (SGD) to more advanced methods like Adam. In this experiment, we’ll try to give an intuitive understanding of what optimisation means in the context of machine learning, briefly discussing the Adam algorithm. ]]></description>
   <category>Experiments</category>
   <category>Machine Learning</category>
   <category>Deep Learning</category>

@@ -282,17 +282,29 @@ window.Quarto = {
 
 
 
-<p>A key component of training deep learning models is the choice of optimisation algorithm. There are several approaches, ranging from <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">:link simple stochastic gradient descent</a> (SGD) to more advanced methods like Adam. In this experiment, we’ll try to give an intuitive understanding of what optimisation means in the context of machine learning, briefly discuss the Adam algorithm.</p>
+<p>A key component of training deep learning models is the choice of optimisation algorithm. There are several approaches, ranging from <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">:link simple stochastic gradient descent</a> (SGD) to more advanced methods like Adam. In this experiment, we’ll try to give an intuitive understanding of what optimisation means in the context of machine learning, briefly discussing the Adam algorithm.</p>
 <section id="what-is-optimisation" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-optimisation">What is optimisation?</h2>
-<p>Optimization, in its broadest sense, is the process of finding the best solution among many possibilities. It involves adjusting variables to maximize or minimize an objective function. Think of it like tuning a car: you adjust various settings to achieve the best performance, whether that means faster acceleration or better fuel efficiency. This concept applies across fields, from engineering to economics, where you often balance trade-offs to reach an optimal outcome.</p>
-<p>In the context of machine learning, optimization takes on a more specific role. Here, the objective function is typically the <a href="https://en.wikipedia.org/wiki/Loss_function">:link loss (or cost) function</a>, which quantifies how far off a model’s predictions are from the actual data. The goal is to adjust the model’s parameters (like weights and biases) to minimize this loss. Because the loss landscapes in machine learning can be highly complex and non-linear, algorithms like gradient descent, and advanced variants such as Adam, are employed. These algorithms iteratively tweak the parameters, gradually moving the model toward better performance.</p>
-<p>Because in machine learning we are typically minimising a loss function, we are looking for the global minimum of the function. This is where the loss is at its lowest, and the model is performing optimally. However, finding this global minimum is not always straightforward, especially in high-dimensional spaces with many local minima and <a href="https://en.wikipedia.org/wiki/Saddle_point">:link saddle points</a>. This is where the choice of optimization algorithm becomes crucial, as it needs to be capable of navigating these complex landscapes efficiently.</p>
+<p>Optimisation, in its broadest sense, is the process of finding the best solution among many possibilities, adjusting variables to maximize or minimize an objective function. Think of it like tuning a car: you adjust various settings to achieve the best performance, whether the objective is faster acceleration or higher fuel efficiency. This concept applies across fields, from engineering to economics, where you often balance trade-offs to reach an optimal outcome.</p>
+<p>In machine learning, optimisation takes on a more specific role. The objective function is typically the <a href="https://en.wikipedia.org/wiki/Loss_function">:link loss (or cost)</a>, which quantifies how far off a model’s predictions are from the actual data. The goal is to adjust the model’s parameters (like weights and biases) to minimize this loss. Because the loss landscapes in machine learning can be highly complex and non-linear, algorithms like gradient descent, and variants such as Adam, are employed. These algorithms iteratively tweak model parameters, gradually moving it toward better performance.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Machine learning involves data with many parameters and high-dimensional spaces, therefore the optimisation algorithm has to navigate many local minima and <a href="https://en.wikipedia.org/wiki/Saddle_point">:link saddle points</a>. The choice of algorithm is crucial, as it determines how efficiently the model converges to the optimal solution.</p>
+</div>
+</div>
 </section>
 <section id="visualising-adam-in-action" class="level2">
 <h2 class="anchored" data-anchor-id="visualising-adam-in-action">Visualising Adam in action</h2>
-<p>To illustrate the optimization process, let us take a classical function used to test optimization algorithms: the <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">:link Rosenbrock function</a>. This function is known for its narrow, curved valley, making it challenging for optimisation algorithms to converge to the global minimum. The function is typically depicted in 2D, with the x and y axes representing the parameters to be optimized. In our case, we will instead visualise the optimization process in 3D, with the x and y axes representing the spatial coordinates and the z-axis representing the function value.</p>
-<p>In the code below we define the <code>rosenbrock_2d</code> function, set up the optimization process using PyTorch and the Adam optimizer (<code>torch.optim.Adam</code>), and track the path taken by the optimizer. We then create a 3D surface plot of the Rosenbrock function and animate the optimization process to see how the optimizer navigates the landscape.</p>
+<p>To illustrate the optimisation process, let us take a classical function used to test optimisation algorithms: the <a href="https://en.wikipedia.org/wiki/Rosenbrock_function">:link Rosenbrock function</a>. This function is known for its narrow, curved valley, making it challenging for optimisation algorithms to converge to the global minimum. The function is typically depicted in 2D, with the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes representing the parameters to be optimized. We will instead visualise the optimisation process in 3D, with the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes representing the spatial coordinates and the <span class="math inline">\(z\)</span>-axis representing the function value.</p>
+<p>In the code below we define the <code>rosenbrock_2d</code> function, set up the optimisation process using PyTorch and the Adam optimizer (<code>torch.optim.Adam</code>), and track the path taken by the optimizer. We then create a 3D surface plot of the function and animate the optimisation process to see how the optimiser navigates the landscape.</p>
 <div id="4b407126" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -401,7 +413,7 @@ window.Quarto = {
 <span id="4b407126-103"><a href="#4b407126-103" aria-hidden="true" tabindex="-1"></a>plt.close(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Adam uses adaptive learning rates for each parameter, which can help it converge faster than traditional gradient descent methods. This is why in the animation you see the optimizer move more or less quickly in different directions. The slower the convergence, the more the optimizer is “exploring” the landscape to find the optimal path to the global minimum. This adaptability is one of the key strengths of Adam, as it can handle different learning rates for each parameter, making it more robust to various optimization problems.</p>
+<p>Adam uses adaptive learning rates for each parameter, which can help it converge faster than traditional gradient descent methods. This is why in the animation you see the optimizer move at different speeds in different directions. The slower the convergence, the more the optimizer is “exploring” the landscape to find the optimal path to the global minimum. This adaptability is one of the key strengths of Adam, as it can handle different learning rates for each parameter, making it more robust to various optimisation problems.</p>
 <video width="100%" controls="">
 <source src="adam_rosenbrock.mp4" type="video/mp4">
 Your browser does not support the video tag.
@@ -417,7 +429,7 @@ The mathematics of Adam
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Adam (Adaptive Moment Estimation) is an optimization algorithm that combines ideas from momentum and RMSProp to adaptively adjust the learning rates of model parameters. At its core, Adam computes two moving averages: one for the gradients (the first moment) and one for the squared gradients (the second moment). Given the gradient <span class="math inline">\(g_t\)</span> at iteration <span class="math inline">\(t\)</span>, these are updated as:</p>
+<p>Adam (Adaptive Moment Estimation) combines ideas from momentum and <a href="https://optimization.cbe.cornell.edu/index.php?title=RMSProp">:link RMSProp</a> to adaptively adjust the learning rates of model parameters. At its core, Adam computes two moving averages: one for the gradients (the first moment) and one for the squared gradients (the second moment). Given the gradient <span class="math inline">\(g_t\)</span> at iteration <span class="math inline">\(t\)</span>, these are updated as:</p>
 <p><span class="math display">\[
 m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t
 \]</span></p>
@@ -442,8 +454,8 @@ v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2
 </section>
 <section id="teaching-a-neural-network-to-paint-with-adam" class="level2">
 <h2 class="anchored" data-anchor-id="teaching-a-neural-network-to-paint-with-adam">Teaching a neural network to paint with Adam</h2>
-<p>Another great way to show Adam in action is by training a neural network to paint an image. We’ll use a simple Multi-Layer Perceptron (MLP) and a more advanced architecture called <a href="https://arxiv.org/abs/2006.09661">:link Sinusoidal Representation Networks (SIREN)</a>. The goal is to predict the RGB values of each pixel in an image based on its spatial coordinates. We’ll my favourite painting, “The Arnolfini Portrait” by Jan van Eyck as our target image.</p>
-<p>First we need to setup a few hyperparameters and load the image. We are setting up a network with 3 hidden layers, each with 512 hidden units. We’ll train the model, saving display frames every 100 epochs and animation frames every 10 epochs. We’ll use the Adam optimizer with a learning rate of <span class="math inline">\(10^{-3}\)</span> and early stopping patience of 500 epochs.</p>
+<p>Another great way to show Adam in action is by training a neural network to paint an image. We’ll use a simple Multi-Layer Perceptron (MLP) and a more advanced architecture called <a href="https://arxiv.org/abs/2006.09661">:link Sinusoidal Representation Networks (SIREN)</a> to illustrate this. The goal is to predict the RGB values of each pixel in an image based on its spatial coordinates. We’ll my favourite painting, “The Arnolfini Portrait” by Jan van Eyck as our target image.</p>
+<p>First we need to setup a few hyperparameters and load the image. We are setting up a network with 4 hidden layers, each with 512 hidden units. We’ll train the model, saving display frames every 100 epochs and animation frames every 10 epochs. We’ll use the Adam optimizer with a learning rate of <span class="math inline">\(10^{-4}\)</span> and early stopping patience of 500 epochs.</p>
 <div id="0ef36428" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -458,21 +470,7 @@ v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2
 <span id="0ef36428-9"><a href="#0ef36428-9" aria-hidden="true" tabindex="-1"></a>hidden_layers <span class="op">=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Let us load the image and display it to see what we are working with.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The <a href="https://en.wikipedia.org/wiki/Arnolfini_Portrait">:link Arnolfini Portrait</a> is a painting by Jan van Eyck from 1434 that shows a wealthy couple, likely Giovanni di Nicolao Arnolfini and his wife, in a detailed domestic scene. Van Eyck’s innovative use of oil paints delivers striking realism, capturing textures and reflective surfaces with great precision.</p>
-<p>The work is packed with symbolism, from the mirror to the extinguished candle, which hint at themes like marriage and fidelity. Its mix of technical mastery and hidden meaning makes it a cornerstone of art history that still sparks debate and interest today.</p>
-</div>
-</div>
+<p>Let us load the image and display it to see what the model is working with.</p>
 <div id="fb128431" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -508,7 +506,7 @@ Note
 </div>
 </div>
 </div>
-<p>I am using Apple Silicon to run this code, so we check for the presence of MPS to use the GPU. If you are running this on a different platform, you may need to adjust the device accordingly.</p>
+<p>In my case, I am using Apple Silicon to run this code, so we check for the presence of MPS so PyTorch uses the GPU. If you are running this on a different platform, you may need to adjust the device accordingly.</p>
 <div id="8fd8588a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -522,7 +520,7 @@ Note
 </div>
 </div>
 <p>We also need to create a coordinate grid that represents the spatial coordinates of each pixel in the image. This grid will be the input to our neural network, and the target will be the RGB values of the corresponding pixels in the image. We’ll use the coordinate grid to train the model to predict the RGB values based on spatial location.</p>
-<p>This grid looks as the following, notice that the image is inverted in the y-axis compared to the usual image representation. This is because the origin (0,0) is at the top-left corner in the image, while in the Cartesian coordinate system it is at the bottom-left corner.</p>
+<p>This grid looks as the following, notice that the image is inverted in the <em>y</em>-axis compared to the usual image representation. This is because the origin <span class="math inline">\((0,0)\)</span> is at the top-left corner in the image, while in the Cartesian coordinate system it is at the bottom-left corner.</p>
 <div id="01563d2b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -557,7 +555,7 @@ Note
 </div>
 </div>
 </div>
-<p>Let us also create directories to store the display and animation frames, this way we don’t have to store all the frames in memory. We’ll use these to save the model’s predictions at different epochs during training, which we will later use to create an animation of the training process.</p>
+<p>We also need to create directories to store the display and animation frames, this way we don’t have to store all the frames in memory. We’ll use these to save the model’s predictions at different epochs during training, which we will later use to create an animation of the training process.</p>
 <div id="cf2c15b1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -571,7 +569,7 @@ Note
 </div>
 <section id="the-model" class="level3">
 <h3 class="anchored" data-anchor-id="the-model">The model</h3>
-<p>Let us define a simple Multi-Layer Perceptron (MLP) model. The model features an input layer that accepts <span class="math inline">\((x,y)\)</span> coordinates, three hidden layers with <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">:link ReLU</a> activation functions, and an output layer that produces the predicted RGB values. While an MLP is a basic neural network that may not capture complex spatial patterns as well as more advanced architectures, this very limitation helps visually highlight the optimizer’s struggle to learn the image, and how Adam adapts as it traverses the loss landscape.</p>
+<p>As mentioned before, we will use a Multi-Layer Perceptron (MLP) model. It features an input layer that accepts <span class="math inline">\((x,y)\)</span> coordinates, three hidden layers with <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">:link ReLU</a> activation functions, and an output layer that produces the predicted RGB values. While an MLP is a basic neural network that may not capture complex spatial patterns as well as more advanced architectures, this very limitation helps visually highlight the optimizer’s struggle to learn the image, and how Adam adapts as it traverses the loss landscape.</p>
 <div id="083ee46a" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -594,7 +592,7 @@ Note
 <span id="083ee46a-17"><a href="#083ee46a-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.net(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Note the model doesn’t have enough parameters to fully memorize the image and will struggle to capture the details of the painting pixel by pixel. This limitation will be evident in the animation, where the model’s predictions will be a blurry approximation of the original image. You can think of it as the model having to compress the image into a lower-dimensional space and then reconstruct it, losing some information in the process. To produce an image that closely resembles the original, we would need a more complex architecture, a different approach, or lots of epochs to try and capture the details.</p>
+<p>Note the model doesn’t have enough parameters to fully memorize the image and will struggle to capture the details of the painting pixel by pixel. This limitation will be evident in the animation, where the model’s predictions will be a blurry approximation of the original image. You can think of it as the model having to compress information into a lower-dimensional space and then reconstruct it, losing detail in the process. To produce an image that closely resembles the original, we would need a more complex architecture, a different approach, or lots of epochs to capture enough detail.</p>
 <div id="daa94b49" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -630,7 +628,7 @@ Note
 Number of parameters: 1053699</code></pre>
 </div>
 </div>
-<p>Finally we define the Adam optimizer and the Mean Squared Error (MSE) loss function. Remember that the optimizer is responsible for updating the model’s parameters towards minimizing the loss function. The MSE loss measures the difference between the model’s predictions and the target values (the original pixels), which we aim to minimize during training.</p>
+<p>Finally we define the Adam optimiser and the Mean Squared Error (MSE) loss function. Remember the optimiser is responsible for updating the model’s parameters towards minimizing the loss function, while the MSE loss measures the difference between the model’s predictions and the target values (the original pixels), which we aim to minimize during training.</p>
 <div id="1b5d786d" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -640,7 +638,7 @@ Number of parameters: 1053699</code></pre>
 <span id="1b5d786d-4"><a href="#1b5d786d-4" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> nn.MSELoss()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>With this out of the way, let us train the model and save the display and animation frames. We’ll also implement early stopping based on the <code>patience</code> hyper-parameter, which stops training if the loss does not improve for a certain number of epochs. If you decide to try this yourself, keep in mind that depending on your hardware, training may take a while (hours) due to the large number of epochs and the complexity of the model.</p>
+<p>With this out of the way, let us train the model and save the display and animation frames. We’ll also implement early stopping based on the <code>patience</code> hyper-parameter, which stops training if the loss does not improve for a certain number of epochs. If you decide to try this yourself, keep in mind that depending on your hardware, training may take a while (hours) due to the necessary large number of epochs and the complexity of the model.</p>
 <div id="8c14f943" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -736,7 +734,7 @@ Number of parameters: 1053699</code></pre>
 </script>
 </div>
 </div>
-<p>We can display the saved frames to see how the model’s predictions evolve over time. The frames show the model’s output at different epochs, with the epoch number and loss value displayed below each image. This visualisation helps us understand how the model learns to approximate the original image pixel by pixel.</p>
+<p>With the training complete, we can display the saved frames to get a sense of how the model’s predictions evolved over time. They show the model’s output at different epochs, with the epoch number and loss value displayed with each image. This visualisation helps us understand how the model learns to approximate the original image pixel by pixel.</p>
 <div id="af05aabe" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -801,7 +799,7 @@ Number of parameters: 1053699</code></pre>
 <span id="43c6a662-8"><a href="#43c6a662-8" aria-hidden="true" tabindex="-1"></a>cleanup_frames(display_dir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>To get an even better sense of how the model learns to paint the image, let us create an animation that shows predictions at different epochs. This animation will give us a dynamic view of the training process, illustrating how the model’s output evolves over time. We’ll use the <code>imageio</code> library to create an MP4 video from the saved frames.</p>
+<p>To get an even better intuition, let us create an animation which shows predictions at different epochs. This animation will give us a dynamic view of the training process, illustrating how the model’s output evolves over time. We’ll use the <code>imageio</code> library to create an MP4 video from the saved frames.</p>
 <div id="a5994c1b" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -866,12 +864,12 @@ Number of parameters: 1053699</code></pre>
 <span id="1077f770-3"><a href="#1077f770-3" aria-hidden="true" tabindex="-1"></a>    cleanup_frames(anim_dir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<video width="70%" controls="">
+<video width="80%" controls="">
 <source src="The_Arnolfini_portrait_RGB_MLP.mp4" type="video/mp4">
 Your browser does not support the video tag.
 
 </video>
-<p>We can see the model learn the details of the painting over time, starting from a blurry approximation and gradually refining its predictions. The role of the optimiser, is to guide the model towards “guessing” the various details of the painting, such as the textures, colours, and shapes. The “wiggles” in the animation represent the model’s attempts to find the optimal parameters that minimize the loss function, which in turn helps it produce more accurate predictions, just like when a person tries to find the optimal path around a complex maze by trial and error.</p>
+<p>We can clearly see the model slowly learn the details of the painting over time, starting from a verry blurry approximation and gradually refining its predictions. The role of the optimiser, is to guide the model towards “guessing” the details of the painting, such as textures, colours, and shapes. The “wiggles” in the animation represent the model’s attempt to find the optimal parameters that minimize the loss function, which in turn helps it produce more accurate predictions, just like when a person tries to find the optimal path around a complex maze by trial and error.</p>
 </section>
 <section id="the-siren-model" class="level3">
 <h3 class="anchored" data-anchor-id="the-siren-model">The SIREN model</h3>
@@ -948,7 +946,7 @@ Your browser does not support the video tag.
 <span id="2c23562d-9"><a href="#2c23562d-9" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> nn.MSELoss()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Finally, we run training and save the display and animation frames as before. This time we should see convergence faster, and more detailed predictions compared to the MLP, thanks to SIREN’s ability to capture high-frequency spatial patterns more effectively.</p>
+<p>Finally, we run training and save the display and animation frames. This time we should see convergence being achieved faster, and more detailed predictions compared to the MLP, thanks to SIREN’s ability to capture high-frequency spatial patterns more effectively.</p>
 <div id="82b2669c" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -1006,12 +1004,12 @@ Your browser does not support the video tag.
 <span id="51ec98b8-3"><a href="#51ec98b8-3" aria-hidden="true" tabindex="-1"></a>    cleanup_frames(anim_dir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<video width="70%" controls="">
+<video width="80%" controls="">
 <source src="The_Arnolfini_portrait_RGB_SIREN.mp4" type="video/mp4">
 Your browser does not support the video tag.
 
 </video>
-<p>Notice how this time the model captures fine details much faster and accurately than the MLP. It has almost memorized the training data, showcasing the effectiveness of SIREN in high-frequency function representation. The Adam optimizer, in this case, has an easier time navigating the loss landscape, converging to the target image much faster and with more precision.</p>
+<p>Notice how this time SIREN captures fine details much faster and accurately than the MLP. It has almost memorized the training data, showing the effectiveness of SIREN in high-frequency function representation. The Adam optimizer, in this case, has an easier time navigating the loss landscape, converging to the target image much faster and with more precision.</p>
 
 
 </section>
