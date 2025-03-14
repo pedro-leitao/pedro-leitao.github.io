@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 10 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 14 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Adam’s Apple</title>
+  <link>https://pedroleitao.nl/posts/experiments/adam-optimisation/</link>
+  <description><![CDATA[ A key component of training deep learning models is the choice of optimisation algorithm. There are several approaches, ranging from <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">:link simple stochastic gradient descent</a> (SGD) to more advanced methods like Adam. In this experiment, we’ll try to give an intuitive understanding of what optimisation means in the context of machine learning, briefly discuss the Adam algorithm. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Deep Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/adam-optimisation/</guid>
+  <pubDate>Fri, 14 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Maps and More Maps</title>
   <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
@@ -102,16 +112,6 @@
   <category>Language Models</category>
   <guid>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</guid>
   <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Fine-tuning an LLM with Apple’s MLX Framework</title>
-  <link>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</link>
-  <description><![CDATA[ Modern GPU’s come with inbuilt memory, which is separate from the CPU’s memory. This means that when training large models, the data has to be copied from the CPU’s memory to the GPU’s memory, which can be slow and inefficient. This is particularly problematic when training large language models (LLM’s), as the data can be too large to fit into the GPU’s memory. ]]></description>
-  <category>HowTo</category>
-  <category>AI</category>
-  <category>Language Models</category>
-  <guid>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/</guid>
-  <pubDate>Wed, 11 Dec 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

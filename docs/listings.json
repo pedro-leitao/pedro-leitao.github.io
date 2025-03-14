@@ -12,18 +12,9 @@
     ]
   },
   {
-    "listing": "/howtos.html",
-    "items": [
-      "/posts/howtos/deepseek-r1-reasoning/index.html",
-      "/posts/howtos/transformers-fine-tuning/index.html",
-      "/posts/howtos/mlx-fine-tuning/index.html",
-      "/posts/howtos/mlflow-ui/index.html",
-      "/posts/howtos/caching-ml/index.html"
-    ]
-  },
-  {
     "listing": "/experiments.html",
     "items": [
+      "/posts/experiments/adam-optimisation/index.html",
       "/posts/experiments/maps-and-maps/index.html",
       "/posts/experiments/connect-four-rl/index.html",
       "/posts/experiments/parallel-mandelbrot/index.html",
@@ -42,8 +33,19 @@
     ]
   },
   {
+    "listing": "/howtos.html",
+    "items": [
+      "/posts/howtos/deepseek-r1-reasoning/index.html",
+      "/posts/howtos/transformers-fine-tuning/index.html",
+      "/posts/howtos/mlx-fine-tuning/index.html",
+      "/posts/howtos/mlflow-ui/index.html",
+      "/posts/howtos/caching-ml/index.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
+      "/posts/experiments/adam-optimisation/index.html",
       "/posts/experiments/maps-and-maps/index.html",
       "/posts/thoughts/engineering-teams-scale/index.html",
       "/posts/thoughts/moving-to-quarto/index.html",

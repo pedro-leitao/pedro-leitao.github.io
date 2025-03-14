@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/experiments.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 10 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 14 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Adam’s Apple</title>
+  <link>https://pedroleitao.nl/posts/experiments/adam-optimisation/</link>
+  <description><![CDATA[ A key component of training deep learning models is the choice of optimisation algorithm. There are several approaches, ranging from <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">:link simple stochastic gradient descent</a> (SGD) to more advanced methods like Adam. In this experiment, we’ll try to give an intuitive understanding of what optimisation means in the context of machine learning, briefly discuss the Adam algorithm. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Deep Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/adam-optimisation/</guid>
+  <pubDate>Fri, 14 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Maps and More Maps</title>
   <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
@@ -100,15 +110,6 @@
   <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/time-series-forecasting/</guid>
   <pubDate>Fri, 19 Apr 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Understanding Random Forest Classification and Its Effectiveness</title>
-  <link>https://pedroleitao.nl/posts/experiments/random-forests/</link>
-  <description><![CDATA[ A Random Forest is a versatile and robust machine learning algorithm used for both classification and regression tasks. It builds upon the concept of decision trees, but improves on their accuracy and overcomes their tendency to overfit by combining the predictions of numerous decision trees constructed on different subsets of the data. We have already <a href="../../../posts/experiments/ml-pipeline/index.html">experimented with a Random Tree regressor</a>, and in this experiment, we will focus on Random Forest classification. ]]></description>
-  <category>Experiments</category>
-  <category>Machine Learning</category>
-  <guid>https://pedroleitao.nl/posts/experiments/random-forests/</guid>
-  <pubDate>Thu, 07 Mar 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
