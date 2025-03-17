@@ -264,22 +264,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mondrian" id="toc-mondrian" class="nav-link active" data-scroll-target="#mondrian">Mondrian</a></li>
+  <li><a href="#the-architecture-of-a-variational-autoencoder" id="toc-the-architecture-of-a-variational-autoencoder" class="nav-link active" data-scroll-target="#the-architecture-of-a-variational-autoencoder">The architecture of a Variational Autoencoder</a></li>
+  <li><a href="#mondrian" id="toc-mondrian" class="nav-link" data-scroll-target="#mondrian">Mondrian</a></li>
   <li><a href="#the-dataset-generator" id="toc-the-dataset-generator" class="nav-link" data-scroll-target="#the-dataset-generator">The dataset generator</a></li>
   <li><a href="#the-vae-model" id="toc-the-vae-model" class="nav-link" data-scroll-target="#the-vae-model">The VAE model</a>
   <ul class="collapse">
   <li><a href="#encoding" id="toc-encoding" class="nav-link" data-scroll-target="#encoding">Encoding</a></li>
   <li><a href="#decoding" id="toc-decoding" class="nav-link" data-scroll-target="#decoding">Decoding</a></li>
   <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">The model</a></li>
-  </ul></li>
   <li><a href="#annealing-the-kl-divergence" id="toc-annealing-the-kl-divergence" class="nav-link" data-scroll-target="#annealing-the-kl-divergence">Annealing the KL divergence</a></li>
   <li><a href="#the-loss-function" id="toc-the-loss-function" class="nav-link" data-scroll-target="#the-loss-function">The loss function</a></li>
   <li><a href="#the-training-loop" id="toc-the-training-loop" class="nav-link" data-scroll-target="#the-training-loop">The training loop</a></li>
   <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference">Inference</a></li>
-  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a>
-  <ul class="collapse">
-  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks">Final remarks</a></li>
   </ul></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
+  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks">Final remarks</a></li>
   </ul>
 </nav>
     </div>
@@ -292,7 +291,8 @@ window.Quarto = {
 
 <p>Besides classification and regression tasks, deep learning models can also be used for generative tasks, where the goal is to generate new data samples that can mimic the distribution of the training data. Generative models have a wide range of applications, including image generation, style transfer, image inpainting, and more.</p>
 <p>In this experiment, we’ll explore the use of a <a href="https://en.wikipedia.org/wiki/Variational_autoencoder">:link Variational Autoencoder</a> (VAE) to inpaint missing regions in images. The task of inpainting involves filling in unknown regions, which can be useful for image restoration, editing, and other applications. For example, your phone camera likely has a feature that can remove unwanted objects from a photo by inpainting the missing regions - the way it achieves this is by using generative models like VAEs.</p>
-<p>#&nbsp;The architecture of a Variational Autoencoder</p>
+<section id="the-architecture-of-a-variational-autoencoder" class="level1">
+<h1>The architecture of a Variational Autoencoder</h1>
 <p>The VAE is a type of generative model which learns a <em>latent</em> representation of the input data. What latent in this context means is that the model transforms the original data into a compressed, hidden form that captures its most important features. This latent space is not directly observable but serves as an internal representation from which the model can reconstruct or generate new data.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -678,6 +678,7 @@ Note
 </div>
 </div>
 </div>
+</section>
 <section id="mondrian" class="level1">
 <h1>Mondrian</h1>
 <p>Training a VAE for an inpainting task requires a dataset of images for the model to learn from. In our case, we will use a simple Mondrian image generator to create a dataset of images with missing regions. The Mondrian images are inspired by the works of <a href="https://en.wikipedia.org/wiki/Piet_Mondrian">:link Piet Mondrian</a>, a Dutch painter known for his abstract compositions of lines and colors.</p>
@@ -1367,9 +1368,8 @@ Note
 </div>
 <p>Try not to get too lost in the mathematics of the model too much. It is not an easy topic to grapple with, for now what matters is that you understand the high-level architecture of the model and how the encoder and decoder work together to learn a compressed representation of the input data. If you are curious, you can read the <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://arxiv.org/abs/1312.6114&amp;ved=2ahUKEwj1lf6NoZGMAxX4WEEAHcmqGegQFnoECAkQAQ&amp;usg=AOvVaw0lcWUpG5O19Y_RMGqNMkr2">original paper</a> by Kingma and Welling that introduced the VAE concept, or a slightly <a href="https://arxiv.org/abs/1906.02691">gentler introduction</a>.</p>
 </section>
-</section>
-<section id="annealing-the-kl-divergence" class="level1">
-<h1>Annealing the KL divergence</h1>
+<section id="annealing-the-kl-divergence" class="level2">
+<h2 class="anchored" data-anchor-id="annealing-the-kl-divergence">Annealing the KL divergence</h2>
 <p>During training, the VAE model minimizes a loss function that consists of two components: a reconstruction loss and a Kullback-Leibler (KL) divergence loss. The reconstruction loss measures the difference between the input and the reconstructed output, while the KL divergence loss ensures that the latent distribution remains close to a standard normal distribution.</p>
 <p>The KL divergence loss is weighted by a parameter <code>kl_weight</code>, which controls the importance of the KL divergence term during training. An annealing schedule is often used to gradually increase the KL weight over the course of training. This helps the model first focus on learning a good reconstruction, before enforcing a more structured latent space.</p>
 <p>Here we define a simple linear annealing function that scales the KL weight from 0.0 to 1.0 between a start and end epoch. This function will be used during training to adjust the KL weight over time.</p>
@@ -1414,8 +1414,8 @@ Note
 </div>
 </div>
 </section>
-<section id="the-loss-function" class="level1">
-<h1>The loss function</h1>
+<section id="the-loss-function" class="level2">
+<h2 class="anchored" data-anchor-id="the-loss-function">The loss function</h2>
 <p>The loss function of the VAE is composed of two main components: the reconstruction loss (<code>recon_loss</code>) and the KL divergence term (<code>KL_loss</code>). The reconstruction loss measures how close the reconstructed output is to the original input, but here it’s computed <em>only over the masked region</em> using Mean Squared Error (MSE). This ensures that the model focuses on accurately recreating the parts of the image that matter most. On the other hand, the KL divergence term acts as a regularizer, encouraging the latent space to follow a standard normal distribution. This regularization is key for enabling smooth interpolation and meaningful sample generation from the latent space.</p>
 <p>By balancing these two components, the overall loss ensures that the model not only produces high-quality reconstructions but also learns a well-structured latent space. The kl_weight parameter lets you adjust the emphasis on the KL divergence term relative to the reconstruction loss. A higher <code>kl_weight</code> will force the latent space to be more closely aligned with a normal distribution, potentially at the expense of reconstruction accuracy, whereas a lower weight will prioritize accurate reconstructions. This delicate balance is central to training effective VAEs that are both generative and faithful to the input data.</p>
 <p>In this function, <code>recon_x</code> is the reconstructed output, <code>x</code> is the original input, <code>mu</code> is the mean of the latent distribution, <code>logvar</code> is the log variance (all of which are computed in the forward pass), and <code>mask</code> is the binary mask indicating the missing region.</p>
@@ -1431,8 +1431,8 @@ Note
 </details>
 </div>
 </section>
-<section id="the-training-loop" class="level1">
-<h1>The training loop</h1>
+<section id="the-training-loop" class="level2">
+<h2 class="anchored" data-anchor-id="the-training-loop">The training loop</h2>
 <p>We now have all the components needed to train our VAE model for the inpainting task. The training loop consists of the following steps:</p>
 <ol type="1">
 <li>Iterate over the dataset in batches.</li>
@@ -1483,8 +1483,8 @@ Note
 </details>
 </div>
 </section>
-<section id="inference" class="level1">
-<h1>Inference</h1>
+<section id="inference" class="level2">
+<h2 class="anchored" data-anchor-id="inference">Inference</h2>
 <p>The training loop above calls an <code>inference</code> function at regular intervals to visualize the inpainting results so we can regularly look at how well the model is performing. The <code>inference</code> function generates a new Mondrian image, applies a random square mask to it, and inpaints the missing region using the model. It then plots the original image, the masked image, the inpainted image, and the reconstructed patch. Note that it is given a <em>whole new image</em> to inpaint, not one from the training set.</p>
 <div id="208b7b88" class="cell" data-execution_count="12">
 <details class="code-fold">
@@ -1551,6 +1551,7 @@ Note
 <span id="208b7b88-60"><a href="#208b7b88-60" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
 </section>
 <section id="putting-it-all-together" class="level1">
 <h1>Putting it all together</h1>
@@ -1661,13 +1662,13 @@ Note
 </div>
 </div>
 </div>
-<section id="final-remarks" class="level2">
-<h2 class="anchored" data-anchor-id="final-remarks">Final remarks</h2>
+</section>
+<section id="final-remarks" class="level1">
+<h1>Final remarks</h1>
 <p>We have explored the concept of Variational Autoencoders (VAEs) and how they can be used for image inpainting. We have implemented a VAE model with a U-NET architecture and trained it on a dataset of Mondrian images with masked regions. The model learned to inpaint the missing regions by reconstructing the original image from the compressed latent space representation.</p>
 <p>As an exercise, we can further train the model on a more complex dataset, for example the <a href="https://celeba.org/">CelebA</a>. We will leave it to another time.</p>
 
 
-</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
