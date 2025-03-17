@@ -1656,8 +1656,9 @@ z = \mu + \sigma \odot \epsilon
 </div>
 </div>
 </div>
-<p>Notice how the model is learning and generalizing across epochs. By then end of epoch 0, it can very roughly interpret colours and colour boundaries, but not very accurately. At epoch 59 it has improved significantly, and it can now draw boundary lines, and it is very confident with boundaries and colours. At epoch 89 it is nearly getting perfect boundary lines. At epoch 149 it pretty much mastered it.</p>
-<p>Notice how epoch 119 threw a curveball with and edge case. The mask fell on a corner, and the model clearly wasn’t very confident with the inpainting. This is a good example of how the it is learning to generalize, but it is not perfect at this stage. Finally let us run one last inference with the last training epoch.</p>
+<p>Notice how the model is learning and generalizing across epochs. By the end of epoch 0, it can very roughly interpret colours and colour boundaries, but not very accurately. At epoch 59 it has improved significantly, and it can now draw boundary lines, and is very confident with boundaries and colours. At epoch 89 it is nearly getting perfect boundary lines. At epoch 149 it pretty much mastered it.</p>
+<p>Notice how epoch 119 threw a curveball with an edge case. The mask fell on a corner, and the model clearly wasn’t very confident with the inpainting. This is a good example of how it is learning to generalize, but is not perfect at this stage.</p>
+<p>Finally let us run one last inference at the last training epoch.</p>
 <div id="3f5a6159" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -1671,7 +1672,7 @@ z = \mu + \sigma \odot \epsilon
 </div>
 </div>
 </div>
-<p>By now we can see that the VRE model has learned to inpaint the missing regions quite well. The reconstructed patch is very close to the original, including edge cases such as where border lines meet. The model has learned to capture the structure and colors of the Mondrian images.</p>
+<p>By now we can see that the VAE model has learned to inpaint the missing regions quite well. The reconstructed patch is very close to the original, including edge cases such as where border lines meet. The model has learned to capture the structure and colors of the Mondrian images.</p>
 <p>Finally let us plot the training loss over time to see how the model’s performance improved during training.</p>
 <div id="143e09da" class="cell" data-execution_count="15">
 <details class="code-fold">
