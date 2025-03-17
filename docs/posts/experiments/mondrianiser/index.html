@@ -790,8 +790,8 @@ Note
 </section>
 <section id="the-dataset-generator" class="level1">
 <h1>The dataset generator</h1>
-<p>To train our VAE model, we need a dataset of Mondrian images with masked regions. We will create a <code>PyTorch</code> dataset class that generates Mondrian images and applies a random square mask to each image. The dataset will return the original image, the masked image, and the mask itself as the training samples. Note that we normalize the pixel values to the range <span class="math inline">\([0, 1]\)</span> to facilitate training, as neural networks typically perform better with inputs in this range.</p>
-<p>The model will use this <code>Dataset</code> class to load the training data in batches during training, with images being passed to the model as needed. Notice that the masked image is created by setting the pixel values in the masked region to zero, effectively removing that part of the image (this is why the image generator sets a <code>(75, 75, 75)</code> grey border and lines, so the model doesn’t confuse the mask with black areas of the image).</p>
+<p>To train our VAE model, we need a dataset of Mondrian images with masked regions. We will create a <code>PyTorch</code> dataset class that generates images and applies a random square mask to each one. The dataset will return the original image, the masked image, and the mask itself as the training samples. Note that we normalize the pixel values to the range <span class="math inline">\([0, 1]\)</span> to facilitate training, as neural networks typically perform better with inputs in this range.</p>
+<p>The model will use this <code>Dataset</code> class to load the training data in batches during training, with inputs being passed to the model as needed. Notice that the masked image is created by setting the pixel values in the masked region to zero, effectively removing that part (this is why the image generator sets a <code>(75, 75, 75)</code> grey border and lines, so the model doesn’t confuse the mask with black areas of the original).</p>
 <div id="eaf6997d" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -835,11 +835,42 @@ Note
 </section>
 <section id="the-vae-model" class="level1">
 <h1>The VAE model</h1>
-<p>With the dataset and generator in place, let us move to looking into the architecture of the Variational Autoencoder model. Previously we mentioned the <em>encoder</em> and <em>decoder</em> - we will organise our model by separating the encoder and decoder functions clearly, and then bringing it together into a single model class.</p>
-<p>We will not go into too deep an explanation of how a VAE works, but will provide a high-level overview of the model’s components so that readers can understand the overall architecture without getting bogged down in the details or the math.</p>
+<p>With the dataset and generator in place, let us move to looking into the architecture of the Variational Autoencoder model. Previously we mentioned the <em>encoder</em> and <em>decoder</em> - we will organise our model by separating both functions clearly, and then bringing it together into a single model class.</p>
+<p>We will not go too deep into an explanation of how a VAE works, but will provide a high-level overview of the model’s components so that readers can understand the overall architecture without getting bogged down in the details or the math.</p>
 <section id="encoding" class="level2">
 <h2 class="anchored" data-anchor-id="encoding">Encoding</h2>
 <p>The encoder is responsible for transforming the input image into a latent representation. In our VAE model, the encoder consists of several <a href="https://en.wikipedia.org/wiki/Convolutional_layer">:link convolutional layers</a> that downsample the input image, capturing its features at different levels of abstraction. The encoder outputs the mean (<code>mu</code>) and log variance (<code>logvar</code>) of the latent distribution, which are used to sample the latent vector during training.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the mathematically inclined, <code>mu</code> (<span class="math inline">\(\mu\)</span>) and <code>logvar</code> are the parameters of a Gaussian distribution that approximates the true posterior distribution of the latent space. The encoder learns to map the input image to the parameters of this distribution, which allows the model to sample latent vectors during training. The Gaussian distribution is chosen for its simplicity and differentiability, which makes it easier to train the model using backpropagation.</p>
+<p>The encoder outputs two vectors—one for the mean <span class="math inline">\(\mu\)</span> and one for the log-variance <span class="math inline">\(\log \sigma^2\)</span>, typically computed as:</p>
+<p><span class="math display">\[
+\mu = W_{\mu} \cdot x + b_{\mu}
+\]</span></p>
+<p><span class="math display">\[
+\log \sigma^2 = W_{\log \sigma^2} \cdot x + b_{\log \sigma^2}
+\]</span></p>
+<p>Here, <span class="math inline">\(x\)</span> represents the features extracted from the input by earlier layers, and <span class="math inline">\(W\)</span> and <span class="math inline">\(b\)</span> are learned parameters.</p>
+<p>Once you have <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\log \sigma^2\)</span>, you can obtain the standard deviation by taking:</p>
+<p><span class="math display">\[
+\sigma = \exp\left(\frac{1}{2} \log \sigma^2\right)
+\]</span></p>
+<p>This formulation is critical for the reparameterization trick, which allows for backpropagation through the sampling process. Specifically, a latent vector <span class="math inline">\(z\)</span> is sampled as:</p>
+<p><span class="math display">\[
+z = \mu + \sigma \odot \epsilon
+\]</span></p>
+<p>with $ (0, I)$.</p>
+<p>This approach ensures that the sampling is differentiable, making the VAE training stable.</p>
+</div>
+</div>
 <p>Encoding in practice captures parts of the image that are important for reconstruction, such as edges, textures and shapes. The encoder’s output is a compressed representation of the input image that can be used to reconstruct the original image or generate new samples.</p>
 <div id="7e5fe0d9" class="cell" data-execution_count="5">
 <details class="code-fold">
@@ -884,12 +915,12 @@ Note
 <span id="7e5fe0d9-38"><a href="#7e5fe0d9-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> f1, f2, f3, f4, mu, logvar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>You might be tempted to think of the VAE encoder as similar to a hash function (like SHA256 for example), but there are key differences. A hash function is a one-way transformation that maps any input to a fixed-size output. It’s designed for tasks like data integrity checks, where even a tiny change in the input leads to a completely different hash. In contrast, the encoder in a VAE is a learnable function that compresses input data into a latent space. This latent representation retains the core features of the original data so that it can later be used to reconstruct or even generate new, similar data.</p>
-<p>The VAE encoder doesn’t produce a single deterministic output like a hash function does. Instead, it outputs parameters, typically the mean and variance of a probability distribution in the latent space. This allows for controlled randomness, enabling smooth transitions and meaningful variations when sampling from the latent space. While both methods reduce the dimensionality of data, the VAE encoder is built to preserve the underlying structure and semantics necessary for generating or reconstructing data, rather than just providing a unique fingerprint of the input.</p>
+<p>You might be tempted to think of the VAE encoder as similar to a hash function (like SHA256 for example), but there are key differences. A hash function is a one-way transformation that maps any input to a fixed-size output. It’s designed for tasks like data integrity checks, where even a tiny change in the input leads to a completely different hash. In contrast, the encoder in a VAE is a learnable function that compresses input data into a latent space. This latent representation retains the core features of the original data so that it can later be used to reconstruct or, even generate new, similar data.</p>
+<p>The VAE encoder doesn’t produce a single deterministic output like a hash function does. Instead, it outputs parameters, the mean and variance of a probability distribution in the latent space. This allows for controlled randomness, enabling smooth transitions and meaningful variations when sampling from the latent space. While both methods reduce the dimensionality of data, the VAE encoder is built to preserve the underlying structure and semantics necessary for generating or reconstructing data, rather than just providing a unique fingerprint of the input, like a hash function does.</p>
 </section>
 <section id="decoding" class="level2">
 <h2 class="anchored" data-anchor-id="decoding">Decoding</h2>
-<p>The VAE decoder essentially reverses the work of the encoder. It takes the latent vector, sampled from a distribution defined by the encoder’s mean and variance, and maps it back to the original data space. In the case of images, the decoder is usually composed of a series of transposed convolutional (or deconvolutional) layers that gradually upsample the latent representation. This process reconstructs the image by piecing together the key features, such as edges, textures, and colors, that the encoder originally captured in its compressed form.</p>
+<p>The VAE decoder essentially reverses the output of the encoder. It takes the latent vector, sampled from a distribution defined by the encoder’s mean and variance, and maps it back to the original data space. In the case of images, the decoder is usually composed of a series of transposed convolutional (or deconvolutional) layers that gradually upsample the latent representation. This process reconstructs the image by piecing together the key features, such as edges, textures, and colors, that the encoder originally captured in its compressed form.</p>
 <div id="5c5bf88c" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -951,8 +982,8 @@ Note
 </details>
 </div>
 <p>During training, the decoder learns to generate images that are as close as possible to the original inputs, guided by a reconstruction loss. This means that the decoder doesn’t simply replicate the input image but instead creates a version that preserves the most important details. The smooth, continuous nature of the latent space ensures that small changes in the latent vector result in gradual, meaningful variations in the output. As a result, once trained, the decoder is not only capable of accurately reconstructing inputs but also of generating entirely new samples that share similar characteristics with the training data.</p>
-<p>In our case, we have used a special technique called a <a href="https://en.wikipedia.org/wiki/U-Net">:link U-NET architecture</a>, which enhances the basic encoder-decoder design with skip connections. These connections allow the model to carry over fine-grained spatial details from the encoder directly to the corresponding layers in the decoder. This means that while the encoder compresses the image into a latent space, the U-NET structure helps preserve important features, ensuring that the reconstructed image retains higher fidelity to the original.</p>
-<p>By incorporating U-NET, we improve the quality of our reconstructions significantly. The architecture not only captures the global structure through the bottleneck but also reintroduces local details via the skip connections.</p>
+<p>In our case, we have used a technique called a <a href="https://en.wikipedia.org/wiki/U-Net">:link U-NET architecture</a>, which enhances the basic encoder-decoder design with skip connections. These connections allow the model to carry over fine-grained spatial details from the encoder directly to the corresponding layers in the decoder. This means that while the encoder compresses the image into a latent space, U-NET helps preserve important features, ensuring that the reconstructed image retains higher fidelity to the original.</p>
+<p>By incorporating it, we improve the quality of our reconstructions significantly. The architecture not only captures the global structure through the bottleneck (the latent space) but also reintroduces local details via the skip connections.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1366,13 +1397,13 @@ Note
 <span id="a5a7a2c9-19"><a href="#a5a7a2c9-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> recon, mu, logvar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Try not to get too lost in the mathematics of the model too much. It is not an easy topic to grapple with, for now what matters is that you understand the high-level architecture of the model and how the encoder and decoder work together to learn a compressed representation of the input data. If you are curious, you can read the <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://arxiv.org/abs/1312.6114&amp;ved=2ahUKEwj1lf6NoZGMAxX4WEEAHcmqGegQFnoECAkQAQ&amp;usg=AOvVaw0lcWUpG5O19Y_RMGqNMkr2">original paper</a> by Kingma and Welling that introduced the VAE concept, or a slightly <a href="https://arxiv.org/abs/1906.02691">gentler introduction</a>.</p>
+<p>Try not to get too lost in the mathematics of the model. It is not an easy topic to grapple with, for now what matters is that you understand the high-level architecture of the model, the main parameters involved, and how the encoder and decoder work together to learn a compressed representation of the input data. If you are curious, you can read the <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://arxiv.org/abs/1312.6114&amp;ved=2ahUKEwj1lf6NoZGMAxX4WEEAHcmqGegQFnoECAkQAQ&amp;usg=AOvVaw0lcWUpG5O19Y_RMGqNMkr2">original paper</a> by Kingma and Welling that introduced the VAE concept, or a slightly <a href="https://arxiv.org/abs/1906.02691">gentler introduction</a>.</p>
 </section>
 <section id="annealing-the-kl-divergence" class="level2">
 <h2 class="anchored" data-anchor-id="annealing-the-kl-divergence">Annealing the KL divergence</h2>
 <p>During training, the VAE model minimizes a loss function that consists of two components: a reconstruction loss and a Kullback-Leibler (KL) divergence loss. The reconstruction loss measures the difference between the input and the reconstructed output, while the KL divergence loss ensures that the latent distribution remains close to a standard normal distribution.</p>
 <p>The KL divergence loss is weighted by a parameter <code>kl_weight</code>, which controls the importance of the KL divergence term during training. An annealing schedule is often used to gradually increase the KL weight over the course of training. This helps the model first focus on learning a good reconstruction, before enforcing a more structured latent space.</p>
-<p>Here we define a simple linear annealing function that scales the KL weight from 0.0 to 1.0 between a start and end epoch. This function will be used during training to adjust the KL weight over time.</p>
+<p>Here we define a simple linear annealing function that scales the KL weight from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> between a start and end epoch. This function will be used during training to adjust the KL weight over time.</p>
 <div id="e7a6d6e9" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -1389,7 +1420,7 @@ Note
 <span id="e7a6d6e9-11"><a href="#e7a6d6e9-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (epoch <span class="op">-</span> start_epoch) <span class="op">/</span> (end_epoch <span class="op">-</span> start_epoch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Here’s what the KL annealing schedule looks like over the course of training for 100 epochs. The KL weight starts at 0.0 and gradually increases to 1.0 between epochs 0 and 50.</p>
+<p>Here’s what the KL annealing schedule looks like over the course of training for 100 epochs. The KL weight starts at <span class="math inline">\(0.0\)</span> and gradually increases to <span class="math inline">\(1.0\)</span> between epochs 0 and 50.</p>
 <div id="c844a4ad" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -1416,8 +1447,8 @@ Note
 </section>
 <section id="the-loss-function" class="level2">
 <h2 class="anchored" data-anchor-id="the-loss-function">The loss function</h2>
-<p>The loss function of the VAE is composed of two main components: the reconstruction loss (<code>recon_loss</code>) and the KL divergence term (<code>KL_loss</code>). The reconstruction loss measures how close the reconstructed output is to the original input, but here it’s computed <em>only over the masked region</em> using Mean Squared Error (MSE). This ensures that the model focuses on accurately recreating the parts of the image that matter most. On the other hand, the KL divergence term acts as a regularizer, encouraging the latent space to follow a standard normal distribution. This regularization is key for enabling smooth interpolation and meaningful sample generation from the latent space.</p>
-<p>By balancing these two components, the overall loss ensures that the model not only produces high-quality reconstructions but also learns a well-structured latent space. The kl_weight parameter lets you adjust the emphasis on the KL divergence term relative to the reconstruction loss. A higher <code>kl_weight</code> will force the latent space to be more closely aligned with a normal distribution, potentially at the expense of reconstruction accuracy, whereas a lower weight will prioritize accurate reconstructions. This delicate balance is central to training effective VAEs that are both generative and faithful to the input data.</p>
+<p>The loss function of the VAE, as we have touched upon before, is composed of two main components: the reconstruction loss (<code>recon_loss</code>) and the KL divergence term (<code>KL_loss</code>). The reconstruction loss measures how close the reconstructed output is to the original input, but in our function is computed <em>only over the masked region</em> using Mean Squared Error (MSE). This ensures that the model focuses on accurately recreating the parts of the image that matter most.</p>
+<p>By balancing these two components, the overall loss ensures that the model not only produces high-quality reconstructions but also learns a well-structured latent space. The <code>kl_weight</code> parameter lets you adjust the emphasis on the KL divergence term relative to the reconstruction loss. A higher <code>kl_weight</code> will force the latent space to be more closely aligned with a normal distribution, potentially at the expense of reconstruction accuracy, whereas a lower weight will prioritize accurate reconstructions. The annealing scheduler we defined earlier helps the model go from focusing on the broader structure of the latent space to the finer details as training progresses.</p>
 <p>In this function, <code>recon_x</code> is the reconstructed output, <code>x</code> is the original input, <code>mu</code> is the mean of the latent distribution, <code>logvar</code> is the log variance (all of which are computed in the forward pass), and <code>mask</code> is the binary mask indicating the missing region.</p>
 <div id="46dd2be1" class="cell" data-execution_count="10">
 <details class="code-fold">
