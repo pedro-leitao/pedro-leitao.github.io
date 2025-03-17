@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/experiments.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Fri, 14 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 17 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Mondrianiser: Image Inpainting with VAEs</title>
+  <link>https://pedroleitao.nl/posts/experiments/mondrianiser/</link>
+  <description><![CDATA[ an example of generative models using a variable autoencoder ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Deep Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/mondrianiser/</guid>
+  <pubDate>Mon, 17 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Adam’s Apple</title>
   <link>https://pedroleitao.nl/posts/experiments/adam-optimisation/</link>
@@ -100,16 +110,6 @@
   <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/predictive-maintenance/</guid>
   <pubDate>Fri, 10 May 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Time Series Forecasting with Prophet</title>
-  <link>https://pedroleitao.nl/posts/experiments/time-series-forecasting/</link>
-  <description><![CDATA[ Forecasting future trends is a common application in time series analysis. In this experiment, we will use <a href="https://facebook.github.io/prophet/">Meta’s Prophet</a> library to predict trends for births in Malaysia, based on available public data. Prophet is a forecasting tool developed by Meta that is available in Python and R. It is designed for analyzing time series data with daily observations that display patterns on different time scales. ]]></description>
-  <category>Experiments</category>
-  <category>Time Series Analysis</category>
-  <category>Machine Learning</category>
-  <guid>https://pedroleitao.nl/posts/experiments/time-series-forecasting/</guid>
-  <pubDate>Fri, 19 Apr 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

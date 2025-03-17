@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Fri, 14 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 17 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Mondrianiser: Image Inpainting with VAEs</title>
+  <link>https://pedroleitao.nl/posts/experiments/mondrianiser/</link>
+  <description><![CDATA[ an example of generative models using a variable autoencoder ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Deep Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/mondrianiser/</guid>
+  <pubDate>Mon, 17 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Adam’s Apple</title>
   <link>https://pedroleitao.nl/posts/experiments/adam-optimisation/</link>
@@ -102,16 +112,6 @@
   <category>Language Models</category>
   <guid>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</guid>
   <pubDate>Sat, 11 Jan 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Model Fine-tuning with the Hugging Face transformers Library</title>
-  <link>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</link>
-  <description><![CDATA[ Previously, we learned <a href="../../../howtos/fine-tuning/mlx/">how to use Apple’s MLX framework to fine-tune a language model</a>. This is an Apple specific framework and is not available to everyone. Here we will learn how to fine-tune a language model using the Hugging Face <a href="https://huggingface.co/docs/transformers/en/index"><code>transformers</code></a> library. This library is widely used and supports a variety of models on different platforms and hardware. ]]></description>
-  <category>HowTo</category>
-  <category>AI</category>
-  <category>Language Models</category>
-  <guid>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/</guid>
-  <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
