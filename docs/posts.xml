@@ -19,7 +19,7 @@
 <item>
   <title>Mondrianiser: Image Inpainting with VAEs</title>
   <link>https://pedroleitao.nl/posts/experiments/mondrianiser/</link>
-  <description><![CDATA[ an example of generative models using a variable autoencoder ]]></description>
+  <description><![CDATA[ an example of generative models using a variational autoencoder ]]></description>
   <category>Experiments</category>
   <category>Machine Learning</category>
   <category>Deep Learning</category>
