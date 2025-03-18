@@ -1658,7 +1658,7 @@ z = \mu + \sigma \odot \epsilon
 </div>
 </div>
 <p>Notice how the model is learning and generalizing across epochs. By the end of epoch 0, it can very roughly interpret colours and colour boundaries, but not very accurately. At epoch 59 it has improved significantly, and it can now draw boundary lines, and is very confident with boundaries and colours. At epoch 89 it is nearly getting perfect boundary lines. At epoch 149 it pretty much mastered it.</p>
-<p>Notice how epoch 119 threw a curveball with an edge case. The mask fell on a corner, and the model clearly wasn’t very confident with the inpainting. This is a good example of how it is learning to generalize, but is not perfect at this stage.</p>
+<p>At epoch 119, it threw a curveball with an edge case. The mask fell on a corner, and the model clearly wasn’t very confident with the inpainting. This is a good example of how it is learning to generalize, but is not perfect at this stage.</p>
 <p>Finally let us run one last inference at the last training epoch.</p>
 <div id="cfaa4472" class="cell" data-execution_count="14">
 <details class="code-fold">
