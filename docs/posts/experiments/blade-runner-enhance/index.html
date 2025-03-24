@@ -378,7 +378,7 @@ window.Quarto = {
 </section>
 <section id="vae-model-architecture" class="level1">
 <h1>VAE model architecture</h1>
-<p>As explained in the <a href="../../../posts/experiments/mondrianiser/">Mondrian VAE experiment</a>, the VAE architecture consists of an encoder and a decoder. The encoder downsamples the input image into a latent representation, and the decoder upsamples this latent representation to reconstruct the original image. Just like in the Mondrian VAE, we will use skip connections between the encoder and decoder to improve the reconstruction quality. This still makes sense in the case of deblurring since the input and output images are structurally identical - we’re not changing content, just removing degradation. The skip connections allow the network to bypass low-level features (like edges, contours, textures) from the encoder directly to the decoder, which helps reconstruct sharp details that might otherwise be lost in the bottleneck.</p>
+<p>As explained in the <a href="../../../posts/experiments/mondrianiser/">Mondrian VAE experiment</a>, the VAE architecture consists of an encoder and a decoder. The encoder downsamples the input image into a latent representation, and the decoder upsamples this latent representation to reconstruct the original image. Just as before, we will use skip connections between the encoder and decoder to improve the reconstruction quality (a U-NET style architecture). It still makes sense to use this approach in the case of deblurring since the input and output images are structurally identical - we’re not changing content, just removing degradation. The skip connections allow the network to bypass low-level features (like edges, contours, textures) from the encoder directly to the decoder, which helps reconstruct sharp details that might otherwise be lost in the bottleneck.</p>
 <p>The decoder doesn’t need to learn how to recreate fine structure from scratch, it can just re-use it, correcting for the blur. This leads to faster convergence, better visual quality, and fewer artifacts.</p>
 <p>The only necessary adaptation is to adapt the model for a different resolution (218x178 rather than 256x256) and to add a blur transformation to the training loop. We will apply a random Gaussian blur to each image in the batch before feeding it to the model. This simulates the effect of a blurry image that we want to deblur.</p>
 <div id="02c2afc1" class="cell" data-execution_count="6">
@@ -522,6 +522,19 @@ window.Quarto = {
 <span id="b4586bea-11"><a href="#b4586bea-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (epoch <span class="op">-</span> start_epoch) <span class="op">/</span> (end_epoch <span class="op">-</span> start_epoch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>One difference for this use case is that previously we used the Mean Squared Error (MSE) loss for the reconstruction. However, for the deblurring task, we will use the L1 loss function instead. L1 is less sensitive to outliers and can produce sharper images, which is desirable for deblurring tasks. As before, the loss function includes a KL divergence term, which regularizes the latent space to follow a standard normal distribution.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As an exercise, you might want to try a perceptual loss function, such as <a href="https://pytorch.org/vision/main/models/generated/torchvision.models.vgg16.html">VGG16</a> or <a href="https://github.com/richzhang/PerceptualSimilarity">LPIPS</a>, to see if it improves the quality of the reconstructions. These loss functions are designed to capture perceptual similarity between images, which can be more effective than pixel-wise losses for tasks like deblurring.</p>
+</div>
+</div>
 <div id="5b7734ea" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="5b7734ea"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5b7734ea-1"><a href="#5b7734ea-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
 <span id="5b7734ea-2"><a href="#5b7734ea-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -536,7 +549,7 @@ window.Quarto = {
 </section>
 <section id="the-training-loop" class="level1">
 <h1>The training loop</h1>
-<p>The training loop is similar to the Mondrian VAE experiment, with the addition of a random blur applied to each image in the batch. We use a different level of blur for each sample in the batch to simulate varying degrees of blur by using a different kernel size and sigma randomly chosen from a range of values. Another difference from before is that in this case we will measure both training and validation losses in the loop, as we want to ensure that the model generalizes well to unseen data.</p>
+<p>The training loop is similar to our previous experiment, with the addition of a random blur applied to each image in the batch. We use a different level of blur for each sample in the batch to simulate varying degrees of blur by using a different kernel size and sigma randomly chosen from a range of values. Another difference from before is that in this case we will measure both training and validation losses in the loop, as we want to ensure that the model generalizes well to unseen data.</p>
 <div id="e11ca375" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="e11ca375"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e11ca375-1"><a href="#e11ca375-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.tensorboard <span class="im">import</span> SummaryWriter</span>
 <span id="e11ca375-2"><a href="#e11ca375-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision.utils <span class="im">import</span> make_grid</span>
@@ -703,7 +716,7 @@ window.Quarto = {
 <span id="38bb4282-48"><a href="#38bb4282-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="38bb4282-49"><a href="#38bb4282-49" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally let us put it all together, instantiate the model, optimizer, and dataloaders, and train the model. You might have noticed that we are using the same learning rate and batch size as in the Mondrian VAE experiment. As an exercise, you might want to experiment with different values to see how they affect the training dynamics and final results. For example, you could try a smaller learning rate to see if the model is capable of learning more subtle details, accompanied by a smaller batch size to prevent the model from getting stuck in local minima.</p>
+<p>Finally let us put it all together, instantiate the model, optimizer, and dataloaders, and train the model. You might have noticed that we are using the same learning rate and batch size as in the Mondrian VAE experiment. To understand the interplay between these two hyperparameters, you could experiment with different values to see how they affect the training dynamics and final results. For example, try a smaller learning rate to see if the model is capable of learning more subtle details, accompanied by a smaller batch size to prevent the model from getting stuck in local minima.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -827,12 +840,12 @@ Note
 </div>
 </div>
 </div>
-<p>Notice how by epoch 40 the model is starting to reconstruct detail which is barely visible in the blurred image. By epoch 80, it even reconstructs the wire fence behind the person, which is pretty much lost in the blurred image. At epoch 120 you can see that hair details are starting to be reconstructed, and by epoch 160 hair and facial features are much clearer. The model continues to improve until the end of training, with the final images showing a significant improvement over the original blurred images, with the example at epoch 200 showing a very clear reconstruction of the original image.</p>
-<p>Keep in mind that the <code>inference_deblur</code> function is showing the results of the model on images from the validation set, while the model is trained <em>only</em> on the training set. That is, the results you see are on unseen data, with the model inferring details by “guessing” what the original image should look like based on the training images alone!</p>
+<p>Notice how by epoch 40 the model is starting to reconstruct detail which is barely visible in the blurred image. By epoch 80, it reconstructs the wire fence behind the person, which is pretty much lost in the blurred image. At 120 you see that hair details starting to be reconstructed, and by epoch 160 hair and facial features are much clearer. The model continues to improve until the end of training, with the final images showing a significant improvement over the original blurred images, with the example at 200 showing a very clear reconstruction of the original image.</p>
+<p>Keep in mind that the <code>inference_deblur</code> function is showing the results of the model on images from the validation set, while the model is trained <em>only</em> on the training set. That is, the results above are on unseen data, with the model inferring details by “guessing” what the original should look like based on the training images alone!</p>
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
-<p>With training finished (note that this will likely take between a couple of hours, to a whole day, depending on your hardware), we can plot the training and validation losses to see how the model performed over time.</p>
+<p>With training finished (note that it will likely take between a couple of hours, to a whole day, depending on your hardware), we can plot the training and validation losses to see how the model performed over time.</p>
 <div id="6e9e7bf0" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="6e9e7bf0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6e9e7bf0-1"><a href="#6e9e7bf0-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the training and validation losses, on a log scale</span></span>
 <span id="6e9e7bf0-2"><a href="#6e9e7bf0-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
@@ -853,7 +866,7 @@ Note
 </div>
 </div>
 </div>
-<p>You can see the training and validation losses follow closely, indicating that the model is learning effectively over time, and still has room for improvement. The validation loss is slightly higher than the training loss, which is expected as the model is optimized for the training set. The log scale helps to visualize the losses more clearly, as they can vary significantly over epochs.</p>
+<p>The training and validation losses follow closely, indicating that the model is learning effectively over time, with room for improvement. The validation loss is slightly higher than the training loss, which is expected as the model is optimized for the training set. The log scale helps to visualize the losses more clearly, as they can vary significantly over epochs.</p>
 <p>Finally, we can perform inference on a few random images from the validation set to see how well the model performs generally.</p>
 <div id="bead971b" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="bead971b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="bead971b-1"><a href="#bead971b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform inference on 4 random images from the validation set, showing the original, blurred, and reconstructed images</span></span>
@@ -893,7 +906,7 @@ Note
 </div>
 </div>
 </div>
-<p>The second example above is particularly interesting. Notice how the model reconstructed the mouth, and the eyes. The original image is very blurry, and the model managed to infer the facial features quite well. However both the eye and lip shape isn’t <em>quite right</em>, as the model didn’t have enough information to infer the exact shape or position of these features. This is common in generative models, where it the model will “average out” the features it sees in the training set, and can’t always infer the exact details of the original image.</p>
+<p>The second example above is particularly interesting. Notice how the model reconstructed the mouth, and the eyes. The original image is very blurry, and the model managed to infer the facial features quite well. However both the eye and lip shape isn’t <em>quite right</em>, as it didn’t have enough information to infer the exact shape or position of these features. This is common in generative models, where the model will “average out” the features it sees in the training set, and can’t always infer the exact details of the original image.</p>
 <p>#&nbsp;Final remarks</p>
 <p>In this experiment, we trained a Variational Autoencoder to deblur images from the CelebA dataset. We used a similar architecture to the Mondrian VAE experiment, but with a target task which is completely different. It shows the flexibility of the variational autoencoder architecture, which can be adapted to many different problems requiring generative capabilities without needing extensive modifications.</p>
 
