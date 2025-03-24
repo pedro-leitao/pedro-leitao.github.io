@@ -14,6 +14,7 @@
   {
     "listing": "/experiments.html",
     "items": [
+      "/posts/experiments/blade-runner-enhance/index.html",
       "/posts/experiments/mondrianiser/index.html",
       "/posts/experiments/adam-optimisation/index.html",
       "/posts/experiments/maps-and-maps/index.html",
@@ -30,8 +31,7 @@
       "/posts/experiments/mot/index.html",
       "/posts/experiments/ml-pipeline/index.html",
       "/posts/experiments/pca-vs-tsne/index.html",
-      "/posts/experiments/gensim/index.html",
-      "/posts/experiments/blade-runner-enhance/index.html"
+      "/posts/experiments/gensim/index.html"
     ]
   },
   {
@@ -47,6 +47,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/experiments/blade-runner-enhance/index.html",
       "/posts/experiments/mondrianiser/index.html",
       "/posts/experiments/adam-optimisation/index.html",
       "/posts/experiments/maps-and-maps/index.html",
@@ -75,8 +76,7 @@
       "/posts/experiments/mot/index.html",
       "/posts/experiments/ml-pipeline/index.html",
       "/posts/experiments/pca-vs-tsne/index.html",
-      "/posts/experiments/gensim/index.html",
-      "/posts/experiments/blade-runner-enhance/index.html"
+      "/posts/experiments/gensim/index.html"
     ]
   }
 ]

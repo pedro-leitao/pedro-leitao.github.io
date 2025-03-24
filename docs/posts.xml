@@ -15,7 +15,16 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Mon, 17 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 20 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Deblurring, a Classic Machine Learning Problem</title>
+  <link>https://pedroleitao.nl/posts/experiments/blade-runner-enhance/</link>
+  <description><![CDATA[ train a variational autoencoder to deblur images ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/blade-runner-enhance/</guid>
+  <pubDate>Thu, 20 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Mondrianiser: Image Inpainting with VAEs</title>
   <link>https://pedroleitao.nl/posts/experiments/mondrianiser/</link>
@@ -102,16 +111,6 @@
   <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
   <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Reasoning Models for Fun and Profit</title>
-  <link>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</link>
-  <description><![CDATA[ Since the advent of GPT-3, foundation models have rapidly progressed from single pass transformer models, to multi-step models that can reason over multiple passes. Multi-step reasoning can be applied to more complex problems, where the model benefits from iterative reasoning to arrive at the correct answer. ]]></description>
-  <category>HowTo</category>
-  <category>AI</category>
-  <category>Language Models</category>
-  <guid>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</guid>
-  <pubDate>Sat, 11 Jan 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
