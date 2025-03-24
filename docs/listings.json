@@ -12,16 +12,6 @@
     ]
   },
   {
-    "listing": "/howtos.html",
-    "items": [
-      "/posts/howtos/deepseek-r1-reasoning/index.html",
-      "/posts/howtos/transformers-fine-tuning/index.html",
-      "/posts/howtos/mlx-fine-tuning/index.html",
-      "/posts/howtos/mlflow-ui/index.html",
-      "/posts/howtos/caching-ml/index.html"
-    ]
-  },
-  {
     "listing": "/experiments.html",
     "items": [
       "/posts/experiments/mondrianiser/index.html",
@@ -40,7 +30,18 @@
       "/posts/experiments/mot/index.html",
       "/posts/experiments/ml-pipeline/index.html",
       "/posts/experiments/pca-vs-tsne/index.html",
-      "/posts/experiments/gensim/index.html"
+      "/posts/experiments/gensim/index.html",
+      "/posts/experiments/blade-runner-enhance/index.html"
+    ]
+  },
+  {
+    "listing": "/howtos.html",
+    "items": [
+      "/posts/howtos/deepseek-r1-reasoning/index.html",
+      "/posts/howtos/transformers-fine-tuning/index.html",
+      "/posts/howtos/mlx-fine-tuning/index.html",
+      "/posts/howtos/mlflow-ui/index.html",
+      "/posts/howtos/caching-ml/index.html"
     ]
   },
   {
@@ -74,7 +75,8 @@
       "/posts/experiments/mot/index.html",
       "/posts/experiments/ml-pipeline/index.html",
       "/posts/experiments/pca-vs-tsne/index.html",
-      "/posts/experiments/gensim/index.html"
+      "/posts/experiments/gensim/index.html",
+      "/posts/experiments/blade-runner-enhance/index.html"
     ]
   }
 ]
