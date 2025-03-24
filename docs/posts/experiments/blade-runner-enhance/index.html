@@ -267,6 +267,7 @@ window.Quarto = {
   <li><a href="#vae-model-architecture" id="toc-vae-model-architecture" class="nav-link" data-scroll-target="#vae-model-architecture">VAE model architecture</a></li>
   <li><a href="#the-training-loop" id="toc-the-training-loop" class="nav-link" data-scroll-target="#the-training-loop">The training loop</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks">Final remarks</a></li>
   </ul>
 </nav>
     </div>
@@ -907,7 +908,9 @@ Note
 </div>
 </div>
 <p>The second example above is particularly interesting. Notice how the model reconstructed the mouth, and the eyes. The original image is very blurry, and the model managed to infer the facial features quite well. However both the eye and lip shape isn’t <em>quite right</em>, as it didn’t have enough information to infer the exact shape or position of these features. This is common in generative models, where the model will “average out” the features it sees in the training set, and can’t always infer the exact details of the original image.</p>
-<p>#&nbsp;Final remarks</p>
+</section>
+<section id="final-remarks" class="level1">
+<h1>Final remarks</h1>
 <p>In this experiment, we trained a Variational Autoencoder to deblur images from the CelebA dataset. We used a similar architecture to the Mondrian VAE experiment, but with a target task which is completely different. It shows the flexibility of the variational autoencoder architecture, which can be adapted to many different problems requiring generative capabilities without needing extensive modifications.</p>
 
 
