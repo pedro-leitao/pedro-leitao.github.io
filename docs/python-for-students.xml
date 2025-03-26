@@ -15,69 +15,69 @@
 <link>https://pedroleitao.nl/python-for-students.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Wed, 26 Mar 2025 01:09:47 GMT</lastBuildDate>
+<lastBuildDate>Wed, 26 Mar 2025 09:53:34 GMT</lastBuildDate>
 <item>
   <title>About This Book</title>
   <link>https://pedroleitao.nl/python-for-students/about-this/</link>
   <description><![CDATA[ This is an introduction to Python aimed at students in non-computer science disciplines. It is meant to be a gentle and <em>concise</em> introduction to programming and Python, with a focus on practical data and machine learning applications and examples. It is not meant to be comprehensive or authoritative, but rather a starting point for students who are new to programming. This is inspired by trying to teach the basics of data, data science, machine learning and programming to my own son, who is studying an engineering degree. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/about-this/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Computational Thinking</title>
   <link>https://pedroleitao.nl/python-for-students/computational-thinking/</link>
   <description><![CDATA[ Computational thinking is a problem-solving methodology that uses principles from computer science to analyze and tackle challenges across various domains. It enables you to approach problems logically and systematically, much like a computer would process information. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/computational-thinking/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Getting Started with Python</title>
   <link>https://pedroleitao.nl/python-for-students/introduction/</link>
   <description><![CDATA[ As a first step, we will be installing a Python distribution and getting things set up. As this is aimed at non-computer science students and a broader audience, we will assume that you have no prior experience with Python or programming, and that you are using a Windows machine of some kind. Steps will differ if you are using a Mac or Linux machine, but the general idea is the same. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/introduction/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Python Basics</title>
   <link>https://pedroleitao.nl/python-for-students/basics/</link>
   <description><![CDATA[ There are many tools and skills which can help you to become a better critical thinker, but one of the most important ones is learning how to program. Programming is the process of writing instructions for a computer to execute, and because computers are fundamentally logic machines, programming is a great way to develop your logical thinking skills. Learning a programming language like Python can help you to think more clearly, solve problems more effectively, and communicate more precisely. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/basics/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Types of Data</title>
   <link>https://pedroleitao.nl/python-for-students/types-of-data/</link>
   <description><![CDATA[ Python has a number of basic types of data. These include integers, floating point numbers, strings, lists and booleans. With different types of data, you can do different things. For example, you can add two integers or floating point numbers, you can concatenate strings, check booleans (True or False) and so on. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/types-of-data/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Flow Control</title>
   <link>https://pedroleitao.nl/python-for-students/flow-control/</link>
   <description><![CDATA[ Any language has a way to control the flow of the program. This is primarily done by using conditional statements, loops, and functions. Flow control is the order in which the program executes statements - think of it like being directed by a traffic policeman on a busy road. The traffic policeman directs the traffic to move in a certain direction, stop, or go back. Similarly, flow control in programming directs the program to execute certain statements based on conditions, loop through a set of statements, or call a function. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/flow-control/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Comprehensions</title>
   <link>https://pedroleitao.nl/python-for-students/comprehensions/</link>
   <description><![CDATA[ We have already seen what lists, tuples, sets and dictionaries are. We have also seen how to create them. We also saw a few examples of comprehensions when looking at functions. Comprehensions however are such an important part of Python that they deserve a separate discussion. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/comprehensions/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Working with Files</title>
   <link>https://pedroleitao.nl/python-for-students/working-with-files/</link>
   <description><![CDATA[ The most common way for anyone to share data is through <em>files</em>. Because you are using a computer, one can safelly assume that you have already worked with files, but there’s a lot more to learn about them if you want to become proficient in software and if you want to be able to programmatically use and create files. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/working-with-files/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 <item>
   <title>Diving Deeper Into Data</title>
   <link>https://pedroleitao.nl/python-for-students/diving-into-data/</link>
   <description><![CDATA[ By now we have covered a few basics - we learnt about different data types including lists, sequences and dictionaries, and we learnt how to use loops and conditions to manipulate data. We also learnt how to define simple functions, and how to load external modules to extend the functionality of Python. ]]></description>
   <guid>https://pedroleitao.nl/python-for-students/diving-into-data/</guid>
-  <pubDate>Wed, 26 Mar 2025 01:09:47 GMT</pubDate>
+  <pubDate>Wed, 26 Mar 2025 09:53:34 GMT</pubDate>
 </item>
 </channel>
 </rss>
