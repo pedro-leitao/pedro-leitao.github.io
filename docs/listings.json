@@ -12,39 +12,6 @@
     ]
   },
   {
-    "listing": "/experiments.html",
-    "items": [
-      "/posts/experiments/blade-runner-enhance/index.html",
-      "/posts/experiments/mondrianiser/index.html",
-      "/posts/experiments/adam-optimisation/index.html",
-      "/posts/experiments/maps-and-maps/index.html",
-      "/posts/experiments/connect-four-rl/index.html",
-      "/posts/experiments/parallel-mandelbrot/index.html",
-      "/posts/experiments/regularisation/index.html",
-      "/posts/experiments/customer-churn/index.html",
-      "/posts/experiments/random-forests-embeddings/index.html",
-      "/posts/experiments/unsupervised-image-segmentation/index.html",
-      "/posts/experiments/predictive-maintenance/index.html",
-      "/posts/experiments/time-series-forecasting/index.html",
-      "/posts/experiments/random-forests/index.html",
-      "/posts/experiments/instance-vs-model/index.html",
-      "/posts/experiments/mot/index.html",
-      "/posts/experiments/ml-pipeline/index.html",
-      "/posts/experiments/pca-vs-tsne/index.html",
-      "/posts/experiments/gensim/index.html"
-    ]
-  },
-  {
-    "listing": "/howtos.html",
-    "items": [
-      "/posts/howtos/deepseek-r1-reasoning/index.html",
-      "/posts/howtos/transformers-fine-tuning/index.html",
-      "/posts/howtos/mlx-fine-tuning/index.html",
-      "/posts/howtos/mlflow-ui/index.html",
-      "/posts/howtos/caching-ml/index.html"
-    ]
-  },
-  {
     "listing": "/posts.html",
     "items": [
       "/posts/experiments/blade-runner-enhance/index.html",
@@ -77,6 +44,53 @@
       "/posts/experiments/ml-pipeline/index.html",
       "/posts/experiments/pca-vs-tsne/index.html",
       "/posts/experiments/gensim/index.html"
+    ]
+  },
+  {
+    "listing": "/howtos.html",
+    "items": [
+      "/posts/howtos/deepseek-r1-reasoning/index.html",
+      "/posts/howtos/transformers-fine-tuning/index.html",
+      "/posts/howtos/mlx-fine-tuning/index.html",
+      "/posts/howtos/mlflow-ui/index.html",
+      "/posts/howtos/caching-ml/index.html"
+    ]
+  },
+  {
+    "listing": "/experiments.html",
+    "items": [
+      "/posts/experiments/blade-runner-enhance/index.html",
+      "/posts/experiments/mondrianiser/index.html",
+      "/posts/experiments/adam-optimisation/index.html",
+      "/posts/experiments/maps-and-maps/index.html",
+      "/posts/experiments/connect-four-rl/index.html",
+      "/posts/experiments/parallel-mandelbrot/index.html",
+      "/posts/experiments/regularisation/index.html",
+      "/posts/experiments/customer-churn/index.html",
+      "/posts/experiments/random-forests-embeddings/index.html",
+      "/posts/experiments/unsupervised-image-segmentation/index.html",
+      "/posts/experiments/predictive-maintenance/index.html",
+      "/posts/experiments/time-series-forecasting/index.html",
+      "/posts/experiments/random-forests/index.html",
+      "/posts/experiments/instance-vs-model/index.html",
+      "/posts/experiments/mot/index.html",
+      "/posts/experiments/ml-pipeline/index.html",
+      "/posts/experiments/pca-vs-tsne/index.html",
+      "/posts/experiments/gensim/index.html"
+    ]
+  },
+  {
+    "listing": "/python-for-students.html",
+    "items": [
+      "/python-for-students/about-this/index.html",
+      "/python-for-students/computational-thinking/index.html",
+      "/python-for-students/introduction/index.html",
+      "/python-for-students/basics/index.html",
+      "/python-for-students/types-of-data/index.html",
+      "/python-for-students/flow-control/index.html",
+      "/python-for-students/comprehensions/index.html",
+      "/python-for-students/working-with-files/index.html",
+      "/python-for-students/diving-into-data/index.html"
     ]
   }
 ]
