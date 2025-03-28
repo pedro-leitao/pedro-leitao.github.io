@@ -14,3 +14,7 @@ posts/**/Qwen/
 posts/**/__pycache__/
 posts/**/model/
 
+python-for-students_files/
+python-for-students/**/.jupyter_cache
+posts/**/*.html
+posts/**/__pycache__/
