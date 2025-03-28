@@ -15,7 +15,14 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.6.42</generator>
-<lastBuildDate>Thu, 20 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 28 Mar 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Dear Apple, Why Does Universal Control suck?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/universal-control/</link>
+  <description><![CDATA[ i love the idea of Universal Control, but it doesn’t work as well as it should. ]]></description>
+  <guid>https://pedroleitao.nl/posts/thoughts/universal-control/</guid>
+  <pubDate>Fri, 28 Mar 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Deblurring, a Classic Machine Learning Problem</title>
   <link>https://pedroleitao.nl/posts/experiments/blade-runner-enhance/</link>
@@ -102,15 +109,6 @@
   <category>GPU</category>
   <guid>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</guid>
   <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Regularisation in Machine Learning</title>
-  <link>https://pedroleitao.nl/posts/experiments/regularisation/</link>
-  <description><![CDATA[ Regularisation is a technique designed to prevent models from overfitting. In other words, it helps your model generalise better to unseen data by discouraging it from fitting too closely to the quirks and noise present in your training set. This is typically achieved by adding a penalty term to the model’s cost function, nudging the learning process toward simpler, more robust solutions. ]]></description>
-  <category>Experiments</category>
-  <category>Machine Learning</category>
-  <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
-  <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

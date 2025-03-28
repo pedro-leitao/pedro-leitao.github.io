@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-03-28">
+<meta name="description" content="i love the idea of Universal Control, but it doesn’t work as well as it should.">
 
-<title>Thoughts – Pedro Leitão</title>
+<title>Dear Apple, Why Does Universal Control suck? – Pedro Leitão</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,27 +25,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
-<script src="site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
+<script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,82 +71,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-subtitle','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 6,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>
 
       .quarto-title-block .quarto-title-banner {
-        background-image: url(_static/banner-waves-partial.jpg);
+        background-image: url(../../../_static/banner-waves-partial.jpg);
 background-size: cover;
       }
 </style>
 <script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Pedro Leitão" href="thoughts.xml" data-external="1"><meta property="og:title" content="Thoughts – Pedro Leitão">
-<meta property="og:description" content="thoughts and reflections">
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Dear Apple, Why Does Universal Control suck? – Pedro Leitão">
+<meta property="og:description" content="i love the idea of Universal Control, but it doesn’t work as well as it should.">
 <meta property="og:image" content="https://pedroleitao.nl/_static/logo.jpg">
 <meta property="og:site_name" content="Pedro Leitão">
-<meta name="twitter:title" content="Thoughts – Pedro Leitão">
-<meta name="twitter:description" content="thoughts and reflections">
+<meta name="twitter:title" content="Dear Apple, Why Does Universal Control suck? – Pedro Leitão">
+<meta name="twitter:description" content="i love the idea of Universal Control, but it doesn’t work as well as it should.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -157,8 +98,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./_static/logo.jpg" alt="" class="navbar-logo">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.jpg" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -168,31 +109,31 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Bio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./posts.html"> 
+    <a class="nav-link" href="../../../posts.html"> 
 <span class="menu-text">All posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./experiments.html"> 
+    <a class="nav-link" href="../../../experiments.html"> 
 <span class="menu-text">Experiments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./thoughts.html" aria-current="page"> 
+    <a class="nav-link" href="../../../thoughts.html"> 
 <span class="menu-text">Thoughts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./howtos.html"> 
+    <a class="nav-link" href="../../../howtos.html"> 
 <span class="menu-text">Howto’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./python-for-students.html"> 
+    <a class="nav-link" href="../../../python-for-students.html"> 
 <span class="menu-text">Python for Students</span></a>
   </li>  
   <li class="nav-item compact">
@@ -206,7 +147,7 @@ window.Quarto = {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./posts.xml"> <i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -220,325 +161,51 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Thoughts</h1>
-            <p class="subtitle lead">thoughts and reflections</p>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Dear Apple, Why Does Universal Control suck?</h1>
+                  <div>
+        <div class="description">
+          i love the idea of Universal Control, but it doesn’t work as well as it should.
+        </div>
+      </div>
+                </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 28, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(5)</span></div><div class="category" data-category="RGVlcCUyMExlYXJuaW5n">Deep Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXVyb3Bl">Europe <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UG9saXRpY3M=">Politics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UHVibGlzaGluZw==">Publishing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2NhbGluZw==">Scaling <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U29mdHdhcmUlMjBFbmdpbmVlcmluZw==">Software Engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGhvdWdodHM=">Thoughts <span class="quarto-category-count">(7)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>I have multiple Apple devices, but I want to use a single keyboard and mouse. Apple supposedly has a solution for this: <a href="https://support.apple.com/en-gb/102459">Universal Control</a>. Except… well, it is mostly unusable. The experience is frustrating, with so many disconnects that you mostly just spend your time trying to reconnect rather than being productive.</p>
+<p>Here’s an alternative - just use <a href="https://github.com/deskflow/deskflow">Deskflow</a>. It is a simple, open-source solution that works well, and it is the basis for <a href="https://symless.com/synergy">Synergy</a>. It is not as seamless as Universal Control, but it is reliable and does the job once you get it going. I have been using it for a while now, and I have not had any issues so far, unlike Universal Control, which is a hair-pulling experience.</p>
+<p>Apple, <a href="https://www.reddit.com/r/MacOS/comments/191kyov/universal_control_stops_working_from_time_to_time/">get it together</a>!</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1743120000000" data-listing-file-modified-sort="1743172450000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="124">
-<a href="./posts/thoughts/universal-control/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Dear Apple, Why Does Universal Control suck?
-</h5>
-<div class="listing-reading-time card-text text-muted">
-1 min
-</div>
-<div class="card-text listing-description">
-i love the idea of Universal Control, but it doesn’t work as well as it should.
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Mar 28, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="VGhvdWdodHMlMkNTb2Z0d2FyZSUyMEVuZ2luZWVyaW5nJTJDU2NhbGluZw==" data-listing-date-sort="1741046400000" data-listing-file-modified-sort="1742573002000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4014">
-<a href="./posts/thoughts/engineering-teams-scale/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Getting Things Right: How Engineering Teams Scale and Achieve Great Things
-</h5>
-<div class="listing-reading-time card-text text-muted">
-21 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('U29mdHdhcmUlMjBFbmdpbmVlcmluZw=='); return false;">
-Software Engineering
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('U2NhbGluZw=='); return false;">
-Scaling
-</div>
-</div>
-<div class="card-text listing-description">
-larger doesn’t always mean faster or better
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Mar 4, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="VGhvdWdodHMlMkNQdWJsaXNoaW5n" data-listing-date-sort="1740960000000" data-listing-file-modified-sort="1741399968000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
-<a href="./posts/thoughts/moving-to-quarto/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Moving to Quarto
-</h5>
-<div class="card-subtitle listing-subtitle">
-why i think quarto is better
-</div>
-<div class="listing-reading-time card-text text-muted">
-1 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UHVibGlzaGluZw=='); return false;">
-Publishing
-</div>
-</div>
-<div class="card-text listing-description">
-I’ve been using JupyterBook to create this site for a while, and I’ve been pretty happy with it. But I’ve recently started using Quarto, and I think…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Mar 3, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="VGhvdWdodHMlMkNBSSUyQ1BvbGl0aWNzJTJDRXVyb3Bl" data-listing-date-sort="1739145600000" data-listing-file-modified-sort="1741399961000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="379">
-<a href="./posts/thoughts/france-ai-investment/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-France, AI and Back to Nuclear for Germany ?
-</h5>
-<div class="card-subtitle listing-subtitle">
-were the french right all along ?
-</div>
-<div class="listing-reading-time card-text text-muted">
-2 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">
-AI
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UG9saXRpY3M='); return false;">
-Politics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RXVyb3Bl'); return false;">
-Europe
-</div>
-</div>
-<div class="card-text listing-description">
-President Macron has just signalled that France is about to announce €109 billion private sector investments in AI. This is a significant amount of…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Feb 10, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-categories="VGhvdWdodHMlMkNBSSUyQ01hY2hpbmUlMjBMZWFybmluZw==" data-listing-date-sort="1728601200000" data-listing-file-modified-sort="1741003524000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1230">
-<a href="./posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Will Artificial Intelligence Ever be More than Fancy Curve Fitting ?
-</h5>
-<div class="card-subtitle listing-subtitle">
-ai is just hyperdimensional regression
-</div>
-<div class="listing-reading-time card-text text-muted">
-7 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">
-AI
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('TWFjaGluZSUyMExlYXJuaW5n'); return false;">
-Machine Learning
-</div>
-</div>
-<div class="card-text listing-description">
-One of my favourite books from my late 20’s was Roger Penrose’s The Emperor’s New Mind, where he argues that human consciousness is non-algorithmic…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-Oct 11, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-categories="VGhvdWdodHMlMkNNYWNoaW5lJTIwTGVhcm5pbmclMkNEZWVwJTIwTGVhcm5pbmclMkNBSQ==" data-listing-date-sort="1716591600000" data-listing-file-modified-sort="1741003440000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2507">
-<a href="./posts/thoughts/kolmogorov/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Exploring the Impact of Kolmogorov-Arnold Networks in Machine Learning
-</h5>
-<div class="card-subtitle listing-subtitle">
-a new dawn for machine learning, or just another fad?
-</div>
-<div class="listing-reading-time card-text text-muted">
-13 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('TWFjaGluZSUyMExlYXJuaW5n'); return false;">
-Machine Learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RGVlcCUyMExlYXJuaW5n'); return false;">
-Deep Learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">
-AI
-</div>
-</div>
-<div class="card-text listing-description">
-Machine learning never sleeps, and its latest wake-up call is the cutting-edge Kolmogorov-Arnold Networks (KANs), as detailed in this NSF paper.…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-May 25, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="6" data-categories="VGhvdWdodHMlMkNBSSUyQ0V1cm9wZSUyQ1BvbGl0aWNz" data-listing-date-sort="1716159600000" data-listing-file-modified-sort="1741436860000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1582">
-<a href="./posts/thoughts/connundrum-european-tech/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-The Connundrum of European Tech and Artificial Intelligence
-</h5>
-<div class="card-subtitle listing-subtitle">
-why Europe is lagging behind in ai investment and innovation
-</div>
-<div class="listing-reading-time card-text text-muted">
-8 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">
-AI
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RXVyb3Bl'); return false;">
-Europe
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UG9saXRpY3M='); return false;">
-Politics
-</div>
-</div>
-<div class="card-text listing-description">
-The European tech scene is a curious one. It is a region that is home to some of the oldest and most representative companies in the world, yet it…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-May 20, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="7" data-categories="VGhvdWdodHMlMkNBSSUyQ1NjYWxpbmc=" data-listing-date-sort="1716159600000" data-listing-file-modified-sort="1741399974000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="810">
-<a href="./posts/thoughts/scalling-ai/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-On Scaling AI: Are we Hitting the Limits of our Current Approaches?
-</h5>
-<div class="card-subtitle listing-subtitle">
-the data problem and the chinchilla scaling law
-</div>
-<div class="listing-reading-time card-text text-muted">
-5 min
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGhvdWdodHM='); return false;">
-Thoughts
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">
-AI
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('U2NhbGluZw=='); return false;">
-Scaling
-</div>
-</div>
-<div class="card-text listing-description">
-There’s been a lot of speculation on whether we’re hitting the limits of our current approaches to scaling AI. Will OpenAI and others be able to…
-</div>
-<div class="card-attribution card-text-small end">
-<div class="listing-date">
-May 20, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
-  <ul class="pagination"></ul>
-</nav>
-</div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

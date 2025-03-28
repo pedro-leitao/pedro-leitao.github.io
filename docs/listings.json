@@ -2,6 +2,7 @@
   {
     "listing": "/thoughts.html",
     "items": [
+      "/posts/thoughts/universal-control/index.html",
       "/posts/thoughts/engineering-teams-scale/index.html",
       "/posts/thoughts/moving-to-quarto/index.html",
       "/posts/thoughts/france-ai-investment/index.html",
@@ -14,6 +15,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/thoughts/universal-control/index.html",
       "/posts/experiments/blade-runner-enhance/index.html",
       "/posts/experiments/mondrianiser/index.html",
       "/posts/experiments/adam-optimisation/index.html",
@@ -47,16 +49,6 @@
     ]
   },
   {
-    "listing": "/howtos.html",
-    "items": [
-      "/posts/howtos/deepseek-r1-reasoning/index.html",
-      "/posts/howtos/transformers-fine-tuning/index.html",
-      "/posts/howtos/mlx-fine-tuning/index.html",
-      "/posts/howtos/mlflow-ui/index.html",
-      "/posts/howtos/caching-ml/index.html"
-    ]
-  },
-  {
     "listing": "/experiments.html",
     "items": [
       "/posts/experiments/blade-runner-enhance/index.html",
@@ -77,6 +69,16 @@
       "/posts/experiments/ml-pipeline/index.html",
       "/posts/experiments/pca-vs-tsne/index.html",
       "/posts/experiments/gensim/index.html"
+    ]
+  },
+  {
+    "listing": "/howtos.html",
+    "items": [
+      "/posts/howtos/deepseek-r1-reasoning/index.html",
+      "/posts/howtos/transformers-fine-tuning/index.html",
+      "/posts/howtos/mlx-fine-tuning/index.html",
+      "/posts/howtos/mlflow-ui/index.html",
+      "/posts/howtos/caching-ml/index.html"
     ]
   },
   {
