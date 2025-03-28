@@ -1,0 +1,359 @@
+---
+title: Functions and Modules
+subtitle: how to use functions and modules in Python
+jupyter: python3
+order: 6
+format:
+  html:
+    code-fold: false
+---
+
+
+In math you will have likely seen functions like $f(x) = x^2$ or $g(x) = \sin(x)$. In programming, functions are similar. They are a "black box" that takes in some input and returns some output.
+
+In Python, functions come in multiple flavors - built-in functions, functions from modules, and user-defined functions. Built-in functions are available in Python without needing to import anything. Functions from modules are functions that are part of a module, and you need to import the module to use them. User-defined functions are functions that you define yourself.
+
+An example of a built-in function which you have already seen is `print()`. An example of a function from a module is `math.sqrt()`. In previous sections you have also seen how you can define your own funtion, for example a function to calculate the acummulated value of an investment with a starting principal, an interest rate and a number of years.
+
+
+```{python}
+def compound(rate, years, principal):
+    return principal * (1 + rate) ** years
+
+# Compound interest at 5% for 5 years on $1000
+print(
+    compound(0.05, 5, 1000)
+)
+```
+
+## Packages and modules
+
+Python has thousands of third-party packages that you can use to extend the functionality of the language. These cover a wide range of topics, from data analysis to web development. Pretty much if you can think of it, there is probably a package that covers it!
+
+You have already installed Anaconda, and you can use the `conda` package manager to see what packages are installed on your system.
+
+```bash
+conda list
+```
+
+Which will show you a list of all the packages installed in your current environment. This will likely be a long list, so don't feel like you need to read through it all! Running the above command will show you something like this:
+
+```
+# packages in environment at /Volumes/Home/pedroleitao/miniconda3:
+#
+# Name                    Version                   Build  Channel
+anaconda-anon-usage       0.4.4           py312hd6b623d_100  
+anaconda-client           1.12.3          py312hca03da5_0  
+anaconda-cloud-auth       0.5.1           py312hca03da5_0  
+anaconda-navigator        2.6.0           py312hca03da5_0  
+annotated-types           0.6.0           py312hca03da5_0  
+archspec                  0.2.3              pyhd3eb1b0_0  
+attrs                     23.1.0          py312hca03da5_0  
+boltons                   23.0.0          py312hca03da5_0  
+brotli-python             1.0.9           py312h313beb8_8  
+bzip2                     1.0.8                h80987f9_6  
+c-ares                    1.19.1               h80987f9_0  
+ca-certificates           2024.3.11            hca03da5_0  
+certifi                   2024.2.2        py312hca03da5_0  
+cffi                      1.16.0          py312h80987f9_1  
+chardet                   4.0.0           py312hca03da5_1003
+...
+```
+
+Some of the most important packages that you will use include `numpy` (for numerical computing), `pandas` (for data manipulation), `matplotlib` (for plotting), and `scipy` (for scientific computing). You can install these packages using `conda install` (but you very likely don't need to as Anaconda should have included them).
+
+```bash
+conda install numpy pandas matplotlib scipy
+```
+
+You can search and find packages on the [Anaconda website](https://anaconda.org/anaconda/repo) or on the [Python Package Index (PyPI)](https://pypi.org/).
+
+### A practical example
+
+Let us install a package from scratch, and use it in a program. To make things a bit visual, we will use the [ASE](https://ase-workshop-2023.github.io/tutorial/) package to generate visualise a molecular structure. First, we need to install the package. It is available in Conda Forge, so we can use the `conda install` command to add the package to our environment.
+
+```bash
+conda install ase
+```
+
+Once it installs successfully, we can use it in a program. Here is an example program that visualises a molecule - you can rotate and zoom in with your mouse.
+
+```{python}
+from ase.build import molecule
+from ase.visualize import view
+
+structure = "CH3CH2OCH3"
+
+atoms = molecule(structure)
+
+view(atoms, viewer='x3d')
+```
+
+Over time you might end up installing a lot of packages, which you might or might not use or need anymore. You can remove packages using the `conda remove` command.
+
+```bash
+conda remove ase
+```
+
+That will help you keep your environment clean and tidy.
+
+## Creating your own modules and functions
+
+You have already seen how to create your own functions. You can also create your own modules. A module is a file that contains Python code. You can import the module into your program and use the functions and classes defined in the module. This is a great way to organise your code and make it more readable and manageable, so you don't end up having one huge file with all your code in it.
+
+To create a module, you simply create a Python file with the `.py` extension. For example, say you are writing a program which needs some financial functions. Instead of including them in your main program, you can create a module called `finance.py` and put all your financial functions in there. You can then import the module into your main program and use the functions. For example:
+
+```{python}
+%%writefile finance.py
+# A module for financial calculations
+
+# finance.py
+
+def simple(rate, years, principal):
+    return principal * (1 + rate * years)
+
+def compound(rate, years, principal):
+    return principal * (1 + rate) ** years
+
+def amortize(rate, years, principal):
+    return principal * rate / (1 - (1 + rate) ** -years)
+
+def present(value, rate, years):
+    return value / (1 + rate) ** years
+```
+
+The above would be saved in a file called `finance.py` (the `%%writefile` notation is for Jupyter Notebook, you would not include that in your `finance.py` file). You can then import the module into your main program and use the functions. For example:
+
+```{python}
+# program.py
+
+from finance import compound
+
+print("Interest on $1000 at 5% for 5 years:")
+print(
+    compound(0.05, 5, 1000)
+)
+```
+
+You can create as many modules as you like, and you can also create packages, which are collections of modules. A package is simply a directory that contains a special file called `__init__.py` (which can be empty). You can then put your modules in the package directory and import them into your program. For example:
+
+```
+my_package/
+    __init__.py
+    finance.py
+    physics.py
+```
+
+You can then import the modules into your program like this:
+
+```
+import my_package.finance
+import my_package.physics
+```
+
+Your `__init__.py` file can also contain code that is run when the package is imported. This can be useful for setting up the package, for example by importing modules or setting up variables.
+
+Packages are however a bit more advanced, and you don't need to worry about them for now. Just remember that you can create your own modules and functions to help organise your code and make it more readable and manageable.
+
+As a general rule, you should try to keep your functions short and simple. A good rule of thumb is that a function should do one thing and do it well. If a function is getting too long or complicated, you should consider breaking it up into smaller functions. This will make your code easier to read and maintain.
+
+You should also organise modules so they contain related functions. For example, you might have a module called `math.py` which contains mathematical functions, and a module called `string.py` which contains string functions. This will make it easier to find the function you need when you are working on your program.
+
+Finally, you should give your functions and modules descriptive names. This will make it easier to understand what the function does, and will make your code more readable. For example, instead of calling a function `f()` you should call it something like `calculate_area_of_circle()`. This will make it clear what the function does, and will make your code easier to understand.
+
+## About functions
+
+Python is an extensive language, and there are a few things you should know about functions. This is not a deep dive into the Python language, and therefore we will not cover everything. However there are a few things that are important to know.
+
+### Arguments
+
+Functions can take arguments, which are values that are passed to the function when it is called. For example, the `print()` function takes an argument, which is the value that is printed to the screen. Arguments can be of different types, such as integers, floats, strings, lists, dictionaries, and so on, and when defining the function you can specify the type of the arguments. Let us take the `compound` function from before, you can specify the type of the arguments like this:
+
+```{python}
+def compound(rate: float, years: int, principal: float):
+    return principal * (1 + rate) ** years
+```
+
+Here `rate: float` specifies that the `rate` argument should be a float. This makes the function definition explicit and easier to read as well. You can also specify default values for arguments, which means that if the argument is not provided when the function is called, the default value is used. For example:
+
+```{python}
+def compound(years: int, principal: float, rate: float = 0.05):
+    return principal * (1 + rate) ** years
+```
+
+In the above we moved the order of the arguments because in Python you must specify the default arguments after the non-default arguments. You can also specify the arguments by name when calling the function, which can make the code more readable. For example:
+
+```{python}
+print(
+    compound(years=5, principal=1000)
+)
+```
+
+### Return values
+
+Functions can and typically do return a value. You can explicitly specify the type of the return value, which can make the function definition more readable.
+
+```{python}
+def compound(principal: float, years: int, rate: float = 0.05) -> float:
+    return principal * (1 + rate) ** years
+```
+
+`-> float` explicitly specifies that the function should return a float. Note however that this notation does not *enforce* the return type, it is just a hint to the programmer.
+
+A function can also return multiple values, which are returned as a tuple. For example, let us change the `compound` function to return a tuple of floats with the accumulated value per year.
+
+```{python}
+def compound(principal: float, years: int, rate: float = 0.05) -> tuple[float]:
+    yearly_values = []
+
+    # For each year n, calculate the accumulated amount
+    for n in range(years + 1):
+        accumulated = principal * (1 + rate) ** n
+        yearly_values.append(accumulated)
+
+    # Convert the list to a tuple and return it
+    return tuple(yearly_values)
+
+print(
+    compound(1000, 5)
+)
+```
+
+In the above we changed the return value to a tuple, and we added a loop to calculate the accumulated value per year. We then return the accumulated value as a tuple.
+
+The function can be made shorter by using a list comprehension, which is a concise way to create lists (but not as readable as the loop).
+
+```{python}
+def compound(principal: float, years: int, rate: float = 0.05) -> tuple[float]:
+    return tuple(
+        principal * (1 + rate) ** n
+        for n in range(years + 1)
+    )
+
+print(
+    compound(1000, 5)
+)
+```
+
+:::{.callout-note}
+## About Generator Expressions
+
+The comprehension above has two main parts: the expression `principal * (1 + rate) ** year` which calculates the accumulated value for each year, and the `for year in range(years)` which iterates over the years, put together as `(...) for n in range(...)` it is called a *generator expression*. The generator expression is then enclosed in the `tuple()` function which converts the result to a tuple. The comprehension could also be written as a single line: `tuple(principal * (1 + rate) ** year for year in range(years))`. But this would be less readable.
+:::
+
+Comprehensions are a powerful feature of Python, and you can use them to create lists, dictionaries, and sets. They are a concise way to create collections, and can make your code more readable and maintainable. We could change the function to use a list or dictionary comprehension as well!
+
+```{python}
+def compound(principal: float, years: int, rate: float = 0.05) -> list[float]:
+    return list(
+        principal * (1 + rate) ** n
+        for n in range(years + 1)
+    )
+
+print(
+    compound(1000, 5)
+)
+
+def compound(principal: float, years: int, rate: float = 0.05) -> dict[int, float]:
+    return {
+        n: principal * (1 + rate) ** n
+        for n in range(years + 1)
+    }
+
+print(
+    compound(1000, 5)
+)
+```
+
+Note how for the dictionary comprehension we define the return value as a dictionary with the year as the key and the accumulated value as the value. This makes the return value more explicit and easier to understand.
+
+:::{.callout-note}
+## About Comprehensions
+
+Comprehensions are a pretty advanced feature of Python. If you are just starting out with the language you might find them a bit confusing. Don't worry if you don't understand them right away - you can always come back to them later when you have practiced the basics some more. If on the other hand you understand the above code without much difficulty, you are doing great!
+:::
+
+### Passing complex data types as arguments
+
+You can pass complex data types as arguments to functions, such as lists, dictionaries, and objects. Let us change the `compound` function so it takes a an initial principal, and a list of rates for each year. This time let us not use a comprehension, as using a loop is easier to understand.
+
+```{python}
+def compound(principal: float, rates: list[float]) -> list[float]:
+    """
+    Calculate the accumulated capital after each year using
+    the corresponding rate for that year in 'rates'.
+    """
+    accumulated_values = [principal]
+    accumulated = principal
+    
+    for rate in rates:
+        accumulated = accumulated * (1 + rate)
+        accumulated_values.append(accumulated)
+    
+    return accumulated_values
+    
+print(
+    compound(
+        1000,
+        [0.05, 0.06, 0.07, 0.08, 0.09]
+    )
+)
+```
+
+As you can see the `rates` argument is a list of floats, and we loop over the list to calculate the accumulated value for each year. In turn the function then returns back a list of floats as before.
+
+## Recursion
+
+Recursion is one of those topics which result in a "aha!" moment when you understand it. It is a powerful concept, and can be used to solve problems that are difficult or impossible to solve with other techniques. Recursion is when a function calls itself. This might sound a bit strange at first, but it is a very powerful technique very much worth exploring and learning.
+
+A classic example of recursion is the factorial function. The factorial of a number is the product of all the positive integers up to that number. For example, the factorial of 5 is 5 * 4 * 3 * 2 * 1 = 120. The factorial function can be defined recursively as $n! = n \times (n-1)!$ for n > 0. Or in Python:
+
+```{python}
+def factorial(n: int) -> int:
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+    
+print(
+    factorial(5)
+)
+```
+
+The above function *calls itself* with the argument `n-1`. This is the essence of recursion - a function that calls itself. The function will keep calling itself until it reaches the base case, which is when `n` is 0. At that point the function will return 1, and the recursion will stop. For example, if you call `factorial(5)` the function will call itself with `n=4`, then `n=3`, then `n=2`, then `n=1`, and finally `n=0`. At that point the function will return 1, and the recursion will stop.
+
+Recursion is used to solve problems of all kinds, from simple mathematical problems like the factorial function to complex problems like searching a tree or graph. It is a powerful technique, and once you understand it you will find many uses for it.
+
+:::{.callout-note}
+## About Tower of Hanoi
+
+A really interesting recursion problem is the [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi). It is a classic example that is often used to teach recursion. The problem is to move a stack of disks from one peg to another, using a third peg as a temporary storage. The rules are that you can only move one disk at a time, and you can never place a larger disk on top of a smaller disk. The problem can be solved recursively, and is a great way to learn about recursion.
+:::
+
+![Tower of Hanoi](https://www.researchgate.net/publication/359575059/figure/fig2/AS:1139167622897665@1648610134121/The-initial-and-goal-states-of-Hanoi-Tower-game.png)
+
+## Chaining methods together
+
+In Python you can chain methods together, which means that you can call one method on the result of another method. This can make your code more concise and readable, and can be a powerful way to work with objects. For example, say you have the text "Hello, World!" and you want to convert it to uppercase and then split it into words. You can do this with the `upper()` and `split()` methods in a chain like this:
+
+```{python}
+text = "Today is a beautiful day"
+text.upper().split()
+```
+
+The code works because a `string` object is returned by the `upper()` method, and a `list` object is returned by the `split()` method. You can chain as many methods together as you like, and you can also use indexing and slicing in the chain. For example, you can get the first word of the uppercase text like this:
+
+```{python}
+text = "Today is a beautiful day"
+text.upper().split()[0]
+```
+
+Chaining methods together is very common and you will see it a lot in Python code. It is a powerful technique that can make your code more concise and readable, and can help you work with objects in a more natural way.
+
+## Exercises
+
+1. Write a simple program, which uses a module with your own functions to add, subtract and multiply numbers. The module should contain three functions, `add`, `subtract`, and `multiply`, which take two numbers as arguments and return the result of adding, subtracting, and multiplying the numbers, respectively. The program should import the module and use the functions to add, subtract, and multiply two numbers.
+2. Take the `compound` function, and change it so it uses a default principal of 10000 if none is provided.
+3. Write a function which calculates the Fibbonaci sequence using recursion.
+4. Write a function which solves the Towers of Hanoi problem using recursion (**this is a complex exercise**).
+

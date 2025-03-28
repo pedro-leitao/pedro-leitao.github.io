@@ -1,0 +1,170 @@
+---
+title: Error Handling and Debugging
+subtitle: how to handle errors and debug your code
+jupyter: python3
+order: 9
+format:
+  html:
+    code-fold: false
+---
+
+
+Programs can behave in unexpected ways. This can be due to a variety of reasons, such as incorrect input, unexpected conditions, or bugs in your code. There are a number of techniques you can use to help you identify and fix these issues, and to help you understand what your code is doing. This sections briefly covers some of these techniques and tools which you can use in the future to help you debug and understand your code.
+
+
+## Error handling
+
+Error handling is the process of responding to and recovering from error conditions in your program. Error handling can help you identify and fix issues, and help you write more robust and reliable programs.
+
+When we say "error", we are referring to any unexpected condition that prevents your program from running correctly, we are *not* referring to syntax or logical errors. Syntax errors are caught by the Python interpreter when you attempt to run a program, and logical errors are errors in the logic of your code that cause it to behave incorrectly but not necessarily produce an error.
+
+### Exceptions
+
+In Python, errors are represented as "exceptions". An exception is an object that represents an error condition which you can use to handle things when they go wrong. Exceptions are raised when an error occurs, and can be caught and handled by your program.
+
+When an error occurs, an exception is raised, which interrupts the normal flow of the program and transfers control to an exception handler.
+
+Here is an example of an exception being raised:
+
+```{python}
+#| error: true
+def bmi(weight: float, height: float) -> int:
+    return int(weight / (height**2))
+
+bmi(80, 0)
+```
+
+We have defined a function `bmi` which calculates the Body Mass Index (BMI) of a person given their weight and height. If we call this function with a height of 0, it will raise a `ZeroDivisionError` exception, because we cannot divide by zero.
+
+When we call any block of code that might raise an exception, we can catch and handle that exception using a `try` block. A `try` block is a block of code that might raise an exception, and is followed by one or more `except` blocks that handle that exception.
+
+```{python}
+#| error: true
+try:
+    bmi(80, 0)
+except ZeroDivisionError:
+    print("Invalid height")
+```
+
+We could change the `bmi` function so it returns a BMI of -1 if the height is 0, and then check for this value in the calling code. However, this is not a good solution, because it is not clear that -1 is an invalid value, and it is easy to forget to check for it.
+
+For arguments sake though, let's see how we could do this.
+
+```{python}
+def bmi(weight: float, height: float) -> int:
+    try:
+        return int(weight / (height**2))
+    except ZeroDivisionError:
+        return -1
+    
+bmi(80, 0)
+```
+
+We can also raise exceptions ourselves using the `raise` statement. This can be useful if you want to raise an exception in response to a specific condition in your code, in this case we could raise a `ValueError` if the height is 0.
+
+```{python}
+#| error: true
+def bmi(weight: float, height: float) -> int:
+    if height == 0:
+        raise ValueError("Invalid height")
+    return int(weight / (height**2))
+
+bmi(80, 0)
+```
+
+`ValueError`, `ZeroDivisionError`, and other exceptions are built-in exceptions in Python. You can also define your own exceptions by creating a new class that inherits from the `Exception` class.
+
+:::{.callout-note}
+## About Classes and Objects
+
+The concept of a "class" comes from object-oriented programming, which is a way of organizing and structuring code. We will not cover object-oriented programming here, but you can learn more about it in the [Python documentation](https://docs.python.org/3/tutorial/classes.html). In many cases, you can use classes without understanding how they work, but it can be useful to understand the basics of classes and objects.
+:::
+
+Let us see how we can define our own exception class, and raise an instance of it.
+
+### Creating a custom exception
+
+Let us take the BMI example from previously, and create a custom exception class called `ZeroHeightError` which we can raise when the height is 0.
+
+```{python}
+# Define a new ZeroHeightError exception
+class ZeroHeightError(ValueError):
+    pass
+
+def bmi(weight: float, height: float) -> int:
+    if height == 0:
+        raise ZeroHeightError('Invalid height')
+    return int(weight / (height**2))
+
+try:
+    bmi(80, 0)
+except ZeroHeightError as exception:
+    print(exception)
+```
+
+Above we have defined a new class called `ZeroHeightError` which inherits from the `ValueError` class (don't worry about what "inherits" means for now). This means that `ZeroHeightError` is a subclass of `ValueError`, and inherits all of its properties and methods.
+
+:::{.callout-note}
+## About Exceptions
+
+In the vast majority of cases, you can use existing exceptions in Python, and you do not need to define your own exceptions. We are only illustrating how to define your own exceptions here for educational purposes.
+:::
+
+### The `else` and `finally` blocks
+
+In addition to the `try` and `except` blocks, you can also use `else` and `finally` blocks in a `try` statement. The `else` block is executed if no exceptions are raised in the `try` block, and the `finally` block is always executed, regardless of whether an exception is raised or not.
+
+Here is an example of using the `else` and `finally` blocks:
+
+```{python}
+try:
+    v = bmi(80, 1.75)
+except ZeroHeightError as exception:
+    print(exception)
+else:
+    print("Your BMI is", v)
+finally:
+    print("This is the end of the program")
+```
+
+You can try changing the weight and height parameters to see how the program behaves when an exception is raised, and when it is not.
+
+## Debugging techniques
+
+Debugging is the process of identifying and fixing issues in your code, and code **always** has issues! There are various techniques you can use to help you debug your code, and to help you understand what your code is doing, these include:
+
+- You can use `print` statements to print out the values of variables and the flow of your program. This can help you understand what your code is doing, and identify issues.
+- You can use a debugger to step through your code line-by-line, and inspect the values of variables. Using a debugger is a more advanced technique, but can be very useful for understanding complex code. In this section, we will not cover how to use a debugger, but keep in mind that Jupyter Notebooks has a [built-in debugger that you can use](https://jupyterlab.readthedocs.io/en/stable/user/debugger.html).
+- You can use assertions to check that certain conditions are true at specific points in your code. If an assertion fails, an `AssertionError` exception is raised, which can help you identify problems.
+
+### Using `print` statements
+
+One of the simplest ways to debug your code is to use `print` statements to print out the values of variables and the flow of your program. This can help you understand what your code is doing, but can become difficult to manage if you have a lot of `print` statements. In most simple cases however, `print` statements are a quick and easy way to debug your code. Here is an example of using `print` statements to debug the BMI example from earlier:
+
+```{python}
+def bmi(weight: float, height: float) -> int:
+    print(f'Calculating BMI for weight={weight} and height={height}')
+    if height == 0:
+        raise ZeroHeightError('Invalid height')
+    return int(weight / (height**2))
+
+bmi(80, 1.75)
+```
+
+### Assertions
+
+Assertions are a way of checking that certain conditions are true at specific points in your code. If an assertion fails, an `AssertionError` exception is raised, which can help you identify problems. Assertions are a simple way to check that your code is working correctly, and can help you identify issues early on. For example, you could use an assertion to check that the height is not 0 in the BMI example:
+
+```{python}
+#| error: true
+def bmi(weight: float, height: float) -> int:
+    print(f'Calculating BMI for weight={weight} and height={height}')
+    assert height != 0, 'Invalid height'
+    return int(weight / (height**2))
+
+bmi(80, 0)
+    
+```
+
+Assertions are typically used to check for conditions that should never occur, and if they do occur, it indicates that potentially there is a bug in your code. You can use assertions to check for things like invalid input, unexpected conditions, or other issues that should never happen. In the example above, we are using an assertion to check that the height is not 0, because it should never be 0.
+

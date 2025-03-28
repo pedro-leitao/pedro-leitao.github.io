@@ -1,0 +1,30 @@
+---
+title: "About"
+subtitle: "what this site is about"
+about:
+  template: marquee
+---
+
+> *Not having heard something is not as good as having heard it; having heard it is not as good as having seen it; having seen it is not as good as knowing it; knowing it is not as good as putting it into practice.* -- Xun Kuang
+
+This is a curated collection of personal experiments, tutorials, and general commentary.
+
+I’ve long held the belief that the most effective way to learn is through creation. Knowledge isn’t truly grasped until you roll up your sleeves and build something with it. Much of what you’ll encounter in this collection reflects my own process of exploring, experimenting, and occasionally stumbling along the way.
+
+These pieces aren’t intended to be flawless or definitive; rather, they’re snapshots of experimentation - sometimes messy, sometimes not. With that in mind, I invite you to approach these articles with a critical lens and a healthy dose of skepticism. Challenge my assumptions, test my conclusions, and adapt any ideas you find here to your own context.
+
+I write on a range of topics, mostly for my own future reference. Themes include software development, machine learning, and software architecture, with the occasional dip into personal reflections. Any insights offered may vary from thoughtful to mundane. Hopefully you might find them valuable as well, or at least informative.
+
+::: {.callout-note}
+## Code vs Narrative
+
+A lot of the content here includes code, mostly Python, which I chose to be collapsed *in most cases* - you need to click on "Show the code" to see the details, for example:
+
+``` {python}
+print("Hello there!")
+```
+
+This is by design, as a lot of what I am trying to convey are broad ideas, rather than implementation details.
+:::
+
+*Any opinions shared here are mine alone and do not represent those of my employer or any organization I’ve been affiliated with before.*

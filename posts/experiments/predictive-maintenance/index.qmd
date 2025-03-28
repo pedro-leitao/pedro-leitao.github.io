@@ -1,0 +1,335 @@
+---
+title: Machine Learning and Predictive Maintenance
+subtitle: using machine learning for a common industrial and engineering application
+date: 2024-05-11
+tags: 
+  - Experiments
+  - Predictive Maintenance
+  - Machine Learning
+categories:
+  - Experiments
+  - Machine Learning
+jupyter: python3
+---
+
+
+Predictive maintenance leverages machine learning to analyze operational data, anticipate potential failures, and schedule timely maintenance. This approach helps avoid unexpected downtime and extends the lifespan of equipment. 
+
+In the automotive industry, companies like Tesla are integrating machine learning to predict vehicle component failures before they occur. This is achieved by analyzing data from various sensors in the vehicle, enabling proactive replacement of parts and software updates that enhance performance and safety.
+
+In aviation, predictive maintenance can be particularly critical. Airlines utilize machine learning models to monitor aircraft health in real-time, analyzing data from engines and other critical systems to predict failures. For example, GE uses its [Predix](https://www.ge.com/digital/iiot-platform) platform to process data from aircraft engines, predict when maintenance is needed, and reduce unplanned downtime.
+
+The manufacturing sector also benefits from predictive maintenance. Siemens uses machine learning in its [Insights Hub](https://plm.sw.siemens.com/en-US/insights-hub/) platform to analyze operational data from industrial machinery. This enables them to predict failures and optimize maintenance schedules, thereby improving efficiency and reducing costs.
+
+Energy companies are also applying these techniques to predict the maintenance needs of infrastructure like wind turbines and pipelines. This proactive approach not only ensures operational efficiency but also helps in preventing environmental hazards.
+
+In this exercise, we will explore a simple predictive maintenance scenario using machine learning. We will use a dataset that simulates the sensor data from a car engine, and build a model to predict when an engine is likely running abnormally and might require maintenance.
+
+We will use a [simple dataset](https://www.kaggle.com/datasets/parvmodi/automotive-vehicles-engine-health-dataset) covering data from various sensors, and a target variable indicating whether the engine is running normally or abnormally.
+
+
+```{python}
+# Load dataset from Kaggle
+
+!kaggle datasets download -d parvmodi/automotive-vehicles-engine-health-dataset -p .data/ --unzip
+```
+
+```{python}
+# Load engine data from dataset into a pandas dataframe
+
+import pandas as pd
+
+engine = pd.read_csv('.data/engine_data.csv')
+```
+
+## Dataset
+
+As in any ML task, let's start by understanding the content of the dataset.
+
+```{python}
+engine
+```
+
+As we can see it is composed of various sensor data and a target variable indicating whether the engine is running normally or abnormally. Let's make sure there's no missing data.
+
+```{python}
+engine.info()
+```
+
+```{python}
+# Show a data summary, excluding the 'Engine Condition' column
+
+engine.drop('Engine Condition', axis=1, inplace=False).describe().drop('count').style.background_gradient(cmap='Greens')
+```
+
+The dataset consists of various parameters related to engine performance and maintenance. Engine rpm shows a mean of approximately 791 with a standard deviation of about 268, indicating moderate variability in engine speeds across different observations. Lubrication oil pressure averages around 3.30 with a standard deviation of just over 1, suggesting some fluctuations in oil pressure which might affect engine lubrication and performance.
+
+Fuel pressure has an average value near 6.66 and a standard deviation of approximately 2.76, pointing to considerable variation that could influence fuel delivery and engine efficiency. Similarly, coolant pressure, averaging at about 2.34 with a standard deviation of around 1.04, displays notable variability which is critical for maintaining optimal engine temperature.
+
+Lubrication oil temperature and coolant temperature have averages of roughly 77.64°C and 78.43°C, respectively, with lubrication oil showing less temperature variability (standard deviation of about 3.11) compared to coolant temperature (standard deviation of approximately 6.21). This temperature stability is crucial for maintaining engine health, yet the wider range in coolant temperature could indicate different cooling needs or system efficiencies among the units observed.
+
+Overall, while there is a general consistency in the central values of these parameters, the variability highlighted by the standard deviations and the range between minimum and maximum values underline the complexities and differing conditions under which the engines operate.
+
+To avoid any errors further down in the pipeline, let's also rename all columns so they do not have any whitespaces - this is not strictly necessary, but it can help avoid issues later on.
+
+```{python}
+# To avoid issues further down, let us rename the columns to remove spaces
+
+engine.columns = engine.columns.str.replace(' ', '_')
+```
+
+```{python}
+# Split the data into features and target
+
+X = engine.drop('Engine_Condition', axis=1)
+y = engine['Engine_Condition']
+
+y.value_counts()
+```
+
+## Balancing the data
+
+Notice the imbalance in the target variable `Engine_Condition`, with a split between categories of 58%/42%. This imbalance could affect the model's ability to learn the patterns in the data, especially if the minority class (abnormal engine operation) is underrepresented. We will address this issue with a resampling technique called SMOTE.
+
+```{python}
+# There is a class imbalance in the target variable. We will use the SMOTE technique to balance the classes.
+
+from imblearn.over_sampling import SMOTE
+
+sm = SMOTE(random_state=42)
+
+X_resampled, y_resampled = sm.fit_resample(X, y)
+```
+
+::: {.callout-note}
+## About SMOTE
+
+SMOTE stands for Synthetic Minority Over-sampling Technique. It's a statistical technique for increasing the number of cases in a dataset in a balanced way. SMOTE works by creating synthetic samples rather than by oversampling with replacement. It's particularly useful when dealing with imbalanced datasets, where one class is significantly outnumbered by the other(s). 
+
+The way SMOTE works is by first selecting a minority class instance and then finding its k-nearest minority class neighbors. The synthetic instances are then created by choosing one of the k-nearest neighbors and drawing a line between the two in feature space. The synthetic instances are points along the line, randomly placed between the two original instances. This approach not only augments the dataset size but also helps to generalize the decision boundaries, as the synthetic samples are not copies of existing instances but are instead new, plausible examples constructed in the feature space neighborhood of existing examples. 
+
+By using SMOTE, the variance of the minority class increases, which can potentially improve the classifier's performance by making it more robust and less likely to overfit the minority class based on a small number of samples. This makes it particularly useful in scenarios where acquiring more examples of the minority class is impractical.
+:::
+
+## Visualising the distributions
+
+Now that we have balanced the target classes, let's visualize the distributions of the features to understand their spread and identify any patterns or outliers. This will help us determine which features are most relevant for predicting engine condition, if any.
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_violin(data, ax):
+    # Create a violin plot using the specified color palette
+    sns.violinplot(data=data, palette='summer_r', ax=ax)
+
+    # Rotate x-tick labels for better readability - apply to the specific axes
+    ax.tick_params(axis='x', rotation=45)
+
+    # Apply a log scale to the y-axis of the specific axes
+    ax.set_yscale('log')
+
+    return ax
+
+def plot_bar(data, ax):
+    # Get the unique values and their frequency
+    value_counts = data.value_counts()
+
+    # Generate a list of colors, one for each unique value
+    colors = plt.cm.summer_r(np.linspace(0, 1, num=len(value_counts)))
+
+    # Plot with a different color for each bar
+    value_counts.plot(kind='bar', color=colors, ax=ax)
+
+    return plt
+
+# Plot the distribution of the resampled features, together with the original features as a facet grid
+fig, axs = plt.subplots(2, 2, figsize=(8, 6))  # Create a 2x2 grid of subplots
+
+plot_violin(X, ax=axs[0, 0])
+plot_bar(y, ax=axs[0, 1])
+
+plot_violin(X_resampled, ax=axs[1, 0])
+plot_bar(y_resampled, ax=axs[1, 1])
+
+axs[0, 0].set_title('Feature distribution - Original')
+axs[0, 1].set_title('Category distribution - Original')
+axs[1, 0].set_title('Feature distribution - Resampled')
+axs[1, 1].set_title('Category distribution - Resampled')
+
+plt.tight_layout()
+plt.show()
+```
+
+We see the expected spread as indicated before. Another important step is to understand if there is a clear correlation between the features and the target variable. This can be done by plotting a correlation matrix.
+
+```{python}
+# Plot a correlation matrix of the features
+
+corr = X_resampled.corr()
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr, annot=True, cmap='summer_r', fmt='.2f')
+plt.show()
+```
+
+Notice how there are no strong correlations between the features and the target variable. This suggests that the features might not be linearly related to the target, and more complex relationships might be at play, or that the features are not informative enough to predict the target variable.
+
+It points at needing to use more advanced models to capture the underlying patterns in the data, rather than simple linear models.
+
+## Reducing dimensionality for analysis
+
+To further understand the data, we can reduce the dimensionality of the dataset using t-SNE (t-distributed Stochastic Neighbor Embedding). This technique is useful for visualizing high-dimensional data in 2D or 3D, allowing us to explore the data's structure and identify any clusters or patterns.
+
+```{python}
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.tri import Triangulation
+from sklearn.manifold import TSNE
+
+# t-SNE transformation
+tsne = TSNE(n_components=3, random_state=42)
+X_tsne = tsne.fit_transform(X_resampled)
+df_tsne = pd.DataFrame(X_tsne, columns=['Component 1', 'Component 2', 'Component 3'])
+df_tsne['y'] = y_resampled
+
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Define unique categories and assign a color from tab10 for each
+categories = df_tsne['y'].unique()
+colors = plt.cm.tab10(range(len(categories)))
+
+for cat, color in zip(categories, colors):
+    df_cat = df_tsne[df_tsne['y'] == cat]
+    if len(df_cat) < 3:
+        # Fallback: not enough points for a surface, so scatter them.
+        ax.scatter(df_cat['Component 1'],
+                   df_cat['Component 2'],
+                   df_cat['Component 3'],
+                   color=color,
+                   label=str(cat))
+    else:
+        # Create triangulation based on the first two components
+        triang = Triangulation(df_cat['Component 1'], df_cat['Component 2'])
+        ax.plot_trisurf(df_cat['Component 1'],
+                        df_cat['Component 2'],
+                        df_cat['Component 3'],
+                        triangles=triang.triangles,
+                        color=color,
+                        alpha=0.25,
+                        label=str(cat))
+
+ax.set_title('3D t-SNE Surface Plot by Category')
+ax.set_xlabel('Component 1')
+ax.set_ylabel('Component 2')
+ax.set_zlabel('Component 3')
+ax.legend()
+plt.show()
+```
+
+That makes for an interesting structure, but unfortunately it doesn't seem to show any clear separation between the two classes. This could indicate that the data is not easily separable in the feature space, which might make it challenging to build a model that accurately predicts engine condition based on these features. However, it's still worth exploring different models to see if they can capture the underlying patterns in the data.
+
+## Testing a prediction model
+
+We have mentioned that the features might not be linearly related to the target variable, and more complex relationships might be at play. To address this, we can use a Random Forest classifier, which is an ensemble learning method that combines multiple decision trees to improve predictive performance. Random Forest models are known for their robustness and ability to capture complex relationships in the data, making them suitable for this task.
+
+First we will split the data into training and testing sets, and then train the Random Forest model on the training data. We will evaluate the model's performance on the test data using metrics such as accuracy, precision, recall, and F1 score. Notice how we are stratifying the split to ensure that the distribution of the target variable is preserved in both the training and testing sets.
+
+```{python}
+# Create a train-test split of the data
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X_resampled,
+                                                    y_resampled,
+                                                    test_size=0.2,
+                                                    stratify=y_resampled,
+                                                    random_state=42)
+```
+
+Let's now train the Random Forest Model and evaluate its performance. We will do this by searching for the best hyperparameters using a grid search.
+
+```{python}
+# Do a grid search to find the best hyperparameters for a Random Forest Classifier
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import classification_report
+
+param_grid = {
+    'n_estimators': [25, 50, 100],
+    'max_depth': [5, 10, 20],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+
+rf = RandomForestClassifier(random_state=42)
+grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, n_jobs=-1, verbose=1)
+grid_search.fit(X_train, y_train)
+grid_search.best_params_
+
+# Train the model with the best hyperparameters
+rf_best = grid_search.best_estimator_
+rf_best.fit(X_train, y_train)
+
+# Evaluate the model
+y_pred = rf_best.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+
+That's an ok(ish) performance, but this was somewhat expected given the lack of strong correlations between the features and the target variable. However, the Random Forest model is able to capture some of the underlying patterns in the data, achieving an accuracy of around 70% on the test set.
+
+::: {.callout-note}
+## About Model Accuracy
+
+In a balanced binary classification scenario where each class has a 50% probability, random guessing would typically result in an accuracy of 50%. If a model achieves an accuracy of 70%, it is performing better than random guessing by a margin of 20 percentage points.
+
+To further quantify this improvement:
+
+- **Random Guessing Accuracy**: 50%
+- **Model Accuracy**: 70%
+- **Improvement**: $(70\% - 50\% = 20\%)$
+
+This means the model's accuracy is 40% better than what would be expected by random chance, calculated by the formula:
+
+$$
+\begin{aligned}
+\text{Improvement Percentage} &= \left( \frac{\text{Model Accuracy} - \text{Random Guessing Accuracy}}{\text{Random Guessing Accuracy}} \right) \times 100\% \\
+&= \left( \frac{70\% - 50\%}{50\%} \right) \times 100\% \\
+&= 40\%
+\end{aligned}
+$$
+
+Thus, the model is performing significantly better than random guessing in this balanced classification problem. This is a good indication that it is learning and able to effectively discriminate between the two classes beyond mere chance.
+:::
+
+Let us now look at the feature importances, as determined by the model. This will help us understand which features are most relevant for predicting engine condition.
+
+```{python}
+# Plot the feature importances
+
+importances = rf_best.feature_importances_
+
+importances_df = pd.DataFrame(importances, index=X.columns, columns=['Importance'])
+importances_df = importances_df.sort_values(by='Importance', ascending=False)
+
+plt.figure(figsize=(8, 6))
+sns.barplot(data=importances_df, x='Importance', hue=importances_df.index, y=importances_df.index, palette='summer_r', legend=False)
+plt.title('Feature importances')
+plt.show()
+```
+
+## Final remarks
+
+In this exercise, we explored a simple predictive maintenance scenario using machine learning. We used a dataset simulating sensor data from a car engine and built a Random Forest model to predict when an engine is likely running abnormally and might require maintenance.
+
+::: {.callout-note}
+# Limitations
+
+The dataset in this example was small, which could limit the model's ability to generalize to new data. In practice, having more data would be beneficial for training a more robust model that can capture the underlying patterns in the data more effectively.
+:::
+
+We reached an accuracy of around 70% on the test set, indicating that the model is able to capture some of the underlying patterns in the data. However, the lack of strong correlations between the features and the target variable suggests that more complex relationships might be at play, which could be challenging to capture with the current features. Therefore it would be worth considering additional features in such a scenario.
+
+As an exercise, maybe you can think of what features you would consider to increase the chance of a more reliable predictor in this scenario ?

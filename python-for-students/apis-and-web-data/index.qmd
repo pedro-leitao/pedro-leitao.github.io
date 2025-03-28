@@ -1,0 +1,11 @@
+---
+title: API's and Web Data
+subtitle: using APIs to retrieve your own data
+jupyter: python3
+format:
+  html:
+    code-fold: false
+---
+
+
+

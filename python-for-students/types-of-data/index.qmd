@@ -1,0 +1,569 @@
+---
+title: Types of Data
+subtitle: basic and advanced data types in Python
+jupyter: python3
+order: 5
+format:
+  html:
+    code-fold: false
+---
+
+
+Python has a number of basic types of data. These include integers, floating point numbers, strings, lists and booleans. With different types of data, you can do different things. For example, you can add two integers or floating point numbers, you can concatenate strings, check booleans (True or False) and so on.
+
+Data is the life and blood of any program. It is the data that we manipulate and process to get the desired output. In Python, data is stored in variables. A variable is a name that refers to a value. You can think of a variable as a box that holds data. You can put data into a variable and then refer to the data by the variable's name.
+
+
+## Basic data types
+
+Python supports a number of basic data types. These are:
+
+1. Integers
+2. Floating point numbers
+3. Strings
+4. Booleans
+
+Here are some examples of each of these data types:
+
+```{python}
+a = 1 # This is an integer
+b = 2.0 # This is a float
+c = "Hello" # This is a string
+d = True # This is a boolean
+```
+
+Strings are sequences of characters or text. You can create a string by enclosing text in single or double quotes. For example:
+
+```{python}
+c = "Hello" # String with double quotes
+c = 'Hello' # String with single quotes
+```
+
+The difference between single and double quotes is that you can use double quotes inside single quotes and vice versa. For example:
+
+```{python}
+c = '"Hello"' # String with double quotes
+print(c)
+
+c = "'Hello'" # String with single quotes
+print(c)
+```
+
+## Operators and basic data types
+
+Python supports a number of operators (`+`, `-`, `*`, `/`) that you can use with basic data types. For example, you can use the `+` operator to add two integers or floating point numbers, the `*` operator to multiply two integers or floating point numbers, the `+` operator to concatenate two strings, and so on. Here are some examples:
+
+```{python}
+a = 2 + 3 # Addition
+print(a)
+
+a = 2 - 3 # Subtraction
+print(a)
+
+a = 2 * 3 # Multiplication
+print(a)
+
+a = 2 / 3 # Division
+print(a)
+```
+
+These operators generally work as you would expect. But in some cases they might not make sense for some data types, for example, you can add two integers or two floating point numbers, but you can't add an integer and a string. You can add (concatenate) two strings, but you can't multiply two strings. You also can't, for example, add a numeric value to a string, or add two booleans.
+
+```{python}
+#| error: true
+a = 2 + 3 # This works fine
+print(a)
+
+a = 2 + "3" # This will give an error
+```
+
+There are also some operators that work exclusively with booleans. For example, the `and` operator returns `True` if both operands are `True`, otherwise it returns `False`. The `or` operator returns `True` if at least one of the operands is `True`, otherwise it returns `False`. The `not` operator returns `True` if the operand is `False`, otherwise it returns `False`.
+
+```{python}
+a = True
+b = False
+c = a and b # Logical AND
+print(c)
+
+c = a or b # Logical OR
+print(c)
+
+c = not a # Logical NOT
+print(c)
+
+c = a == b # Logical equals
+print(c)
+```
+
+There are also some operators that work exclusively with integers. For example, the `//` operator returns the integer division of two integers, the `%` operator returns the remainder of the division of two integers, and the `**` operator returns the power of an integer.
+
+```{python}
+c = 5 // 2 # Integer division
+print(c)
+
+c = 5 % 2 # Modulus, returns the remainder
+print(c)
+
+c = 5 ** 2 # Exponentiation
+print(c)
+```
+
+### Converting between data types
+
+You can convert between data types using the `int()`, `float()`, `str()`, and `bool()` functions, and some times this is necessary to make the data types compatible. For example, you can convert an integer to a floating point number, a floating point number to an integer, a string to an integer or floating point number, and so on.
+
+This conversion is called type casting, and it is done by calling the appropriate function with the value you want to convert as an argument.
+
+Here are some examples:
+
+```{python}
+c = int(5 / 2) # Type casting a float to an integer
+print(c)
+
+c = float(5 * 2) # Type casting an integer to a float
+print(c)
+
+c = str(5 / 2) # Type casting a float to a string
+print(c)
+
+c = bool(1) # Type casting an integer to a boolean, 0 is False, everything else is True
+print(c)
+
+c = int("5") # Type casting a string to an integer
+print(c)
+```
+
+## More advanced data types
+
+Besides the basic data types, Python also supports more advanced data types. These include lists, tuples, dictionaries, and sets.
+
+* Lists are sequences of values.
+* Tuples are sequences of values that can't be changed.
+* Dictionaries are collections of key-value pairs.
+* Sets are collections of unique values.
+
+:::{.callout-note}
+## About the `type()` function
+
+You can use the `type()` function to find out the type of a variable. For example, `type(1)` will return `<class 'int'>`, `type(1.0)` will return `<class 'float'>`, `type('hello')` will return `<class 'str'>`, and so on.
+:::
+
+Lists, tuples, dictionaries and sets can hold any type of data, including other lists, tuples, dictionaries and sets. For example, you can have a list of lists, a dictionary of dictionaries, a list of integers, a list of integers and floats, etc.
+
+Dictionaries are collections of key-value pairs. Key-value pairs are basically lists of "this" and "that". For example, you can have a dictionary with the keys "name" and "age" and the values "John" and 30. You can access the values of a dictionary by using the keys. For example, if you have a dictionary `person` with the keys "name" and "age", you can access the value of the key "name" by using `person['name']`.
+
+### Some examples of lists and tuples
+
+Advanced types are more complex and abstract than basic types. They are used to store and manipulate more complex data structures, so let us look at a few examples of each of these types. Let us start with lists and tuples, as these are quite straightforward.
+
+```{python}
+a = [1, 2, 3, 4, 5] # List
+print(a)
+
+a = (1, 2, 3, 4, 5) # Tuple
+print(a)
+```
+
+Here we are creating a list and a tuple of integers. Note that we can mix different types of data, for example we can have integers, floats and strings in the same list or tuple.
+
+```{python}
+a = [1, 1.0, "1"] # List with mixed data types
+print(a)
+
+a = (1, 1.0, "1") # Tuple with mixed data types
+print(a)
+```
+
+We can even embed complex types within types. For example, we can have a list of lists.
+
+```{python}
+a = [
+    [1, 2],
+    [3, 4]
+] # List of lists
+print(a)
+```
+
+We can access individual elements of complex types using indexing. We can also access **slices** of complex types using slicing. Slicing is a way to access a subset of a list, tuple, dictionary or set. Let us exemplify how this works.
+
+:::{.callout-note}
+## About Indexing
+
+In Python, indexing starts at 0. So the first element of a list, tuple, dictionary or set is at index 0, the second element is at index 1, and so on. You can also use negative indices to access elements from the end of the list, tuple, dictionary or set. For example, the last element of a list is at index -1, the second to last element is at index -2, and so on.
+:::
+
+```{python}
+a = [1, 2, 3, 4, 5]
+print(a[0]) # Access the first element
+print(a[1]) # Access the second element
+print(a[-1]) # Access the last element
+print(a[1:3]) # Access the second and third elements
+print(a[1:]) # Access all elements starting from the second element
+print(a[:3]) # Access the first three elements
+
+# For tuples this works the same way
+a = (1, 2, 3, 4, 5)
+print(a[0]) # Access the first element
+print(a[1]) # Access the second element
+print(a[-1]) # Access the last element
+print(a[1:3]) # Access the second and third elements
+print(a[1:]) # Access all elements starting from the second element
+print(a[:3]) # Access the first three elements
+```
+
+We can also use this technique to modify elements of complex types. For example, we can change the value of an element in a list.
+
+```{python}
+a = [1, 2, 3, 4, 5]
+print(a)
+
+a[0] = 10 # Change the first element
+print(a)
+
+# Change the third and fourth elements
+a[2:4] = [30, 40]
+print(a)
+```
+
+For readibility, we can represent a list in multiple lines. This is useful when we have a long list in our code, for example:
+
+```{python}
+a = [1,
+     2,
+     3,
+     4,
+     5]
+print(a)
+```
+
+Tuples are similar to lists, but they are immutable, which means that once you create a tuple, you can't change it. This makes tuples faster and more memory efficient than lists. As you've seen in previous examples, tuples are created by enclosing values in parentheses.
+
+```{python}
+#| error: true
+a = (1, 2, 3, 4, 5)
+print(a)
+
+# This will give an error because tuples are immutable
+a[0] = 10
+```
+
+### Dictionaries and sets
+
+Dictionaries are collections of key-value pairs. Keys are used to access values. Sets on the other hand are collections of unique values. Dictionaries specifically are very useful for storing data in a structured way and are used extensively in Python programming, as you learn, you will see how dictionaries are used in many different contexts.
+
+Let us first look at a simple example of a dictionary.
+
+```{python}
+a = {}
+a["John"] = 25
+a["Jane"] = 30
+a["Jack"] = 35
+print(a)
+```
+
+Here we first create an empty dictionary and assign it to variable `a` with the expression `a = {}`. We then add key-value pairs to the dictionary using the syntax `a[key] = value`. We can access the value of a key using the syntax `a[key]`.
+
+We can also create the dictionary with key-value pairs already in it. The above is equivalent to:
+
+```{python}
+a = {
+    "John": 25,
+    "Jane": 30,
+    "Jack": 35
+}
+print(a)
+```
+
+We can then access the values of the keys in the dictionary using the syntax `a[key]`.
+
+```{python}
+print(a["John"]) # Access the value for the key "John"
+```
+
+Dictionaries aren't immutable like tuples, so you can change the values of keys in a dictionary.
+
+```{python}
+a["John"] = 26 # Change the value for the key "John"
+print(a)
+```
+
+Dictionaries can also hold multiple types of data, including other dictionaries, lists, tuples, and sets. For example, you can have a dictionary of dictionaries, a dictionary of lists, a dictionary of tuples, and so on.
+
+```{python}
+a = {
+    "John": 25,
+    "Jane": 30,
+    "Children": {
+        "Mary": 3,
+        "Paul": 2
+    }
+}
+print(a)
+```
+
+Dictionaries can have many types of nesting. For example, you can have a dictionary of dictionaries of lists of tuples of sets, and so on. Here is an example:
+
+```{python}
+a = {
+    "Family": {
+        "Father": {
+            "John": 25
+        },
+        "Mother": {
+            "Jane": 30
+        },
+        "Children": {
+            "Mary": 3,
+            "Paul": 2
+        }
+    }
+}
+print(a)
+```
+
+In the above example notice how we created the dictionary `a` in a multi-line format, just as we did before with the list example. This is a common way to create dictionaries with many levels of nesting. It makes the code more readable and easier to understand.
+
+Let us now look at what a set is. A set is a collection of unique values. This means that a set can't have duplicate values. For example, if you try to add the same value to a set twice, the second value will be ignored. Here is an example of a set:
+
+```{python}
+a = {1, 2, 3, 4, 5}
+print(a)
+```
+
+If we try to create or add duplicate values to a set, the duplicates will be ignored.
+
+```{python}
+a = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5}
+print(a)
+```
+
+Note however that sets are **unordered** and **unindexed**, which means that you can't access the values of a set using an index. You can only access the values of a set by iterating over the set. For example, trying the following will give an error:
+
+```{python}
+#| error: true
+a = {1, 2, 3, 4, 5}
+print(a)
+
+ # This will give an error because sets are unindexed
+a[0] = 10
+```
+
+To add elements to a set instead you use the `add()` method. For example:
+
+```{python}
+a = {1, 2, 3, 4, 5}
+print(a)
+
+a.add(6) # Add an element to the set
+print(a)
+
+a.add(0)
+print(a)
+```
+
+Like other complex data types, we can mix different types of data in a set. For example:
+
+```{python}
+a = {1, 2, 3, 4, 5}
+print(a)
+
+a.add("zero")
+print(a)
+
+a.add('six')
+print(a)
+```
+
+Sets, unlike lists and dictionaries, do not support lists, tuples or dictionaries as elements. This is because these types are unhashable, which means that they can't be used as keys in a dictionary or as elements in a set. For example, if you try to add a list to a set, you will get an error.
+
+```{python}
+#| error: true
+a = {1, 2, 3, 4, 5}
+print(a)
+
+# This will give an error because lists are unhashable
+a.add(['zero', 'six'])
+```
+
+:::{.callout-note}
+## About Hashable Data Types
+
+A data type being `hashable` means that it can be converted to a unique integer value. For example, a string can be converted to a unique integer value, but a list can't. This is why lists, tuples and dictionaries can't be used as keys in a dictionary or as elements in a set. This is probably a bit too advanced for now, but it's good to know.
+:::
+
+### Special methods for complex types
+
+Complex types have special methods that you can use to manipulate them. For example, you can use the `append()` method to add an element to a list, the `remove()` method to remove an element from a list, the `pop()` method to remove and return an element from a list, the `clear()` method to remove all elements from a list, the `copy()` method to create a copy of a list, the `count()` method to count the number of occurrences of an element in a list, the `extend()` method to add the elements of a list to another list, the `index()` method to get the index of an element in a list, the `insert()` method to insert an element at a specific index in a list, the `reverse()` method to reverse the elements of a list, the `sort()` method to sort the elements of a list, and so on.
+
+Let us look at some examples of these methods.
+
+```{python}
+a = [1, 2, 3, 4, 5] # A list
+print(a)
+
+print(6 in a) # Check if an element is in the list
+
+a.append(6) # Add an element to the list
+print(a)
+
+a.remove(6) # Remove an element from the list
+print(a)
+
+a = (1, 2, 3, 4, 5) # A tuple
+print(a)
+
+i = a.index(3) # Find the index of an element in the tuple
+print(i)
+
+a = {
+    "John": 25,
+    "Jane": 30,
+    "Jack": 35
+}
+print(a)
+
+a.pop("John") # Remove an element from the dictionary
+print(a)
+
+a.popitem() # Remove the last element from the dictionary
+print(a)
+```
+
+### Iterating over complex types
+
+Any complex type can be iterated over using a `for` loop. Loops are a way to repeat a block of code multiple times. For example, to go through a list of integers and add them up. Besides using a `for` loop, you can use other types of loops, such as `while` loops, which repeat a block of code as long as a condition is `True`.
+
+Let us exemplify this, by taking a list of integers, and summing them up.
+
+```{python}
+a = [1, 2, 3, 4, 5]
+sum = 0
+for element in a:
+    sum = sum + element
+
+print(sum)
+```
+
+The above pattern would work equally well with a tuple, dictionary or set. For example, to sum up the values of a dictionary, you can do the following:
+
+```{python}
+a = {
+    "John": 25,
+    "Jane": 30,
+    "Jack": 35
+}
+sum = 0
+for key in a:
+    sum = sum + a[key]
+
+print(sum)
+```
+
+In the above example, we are iterating over the keys of the dictionary `a` (where each is assigned to `key`, one per loop iteration) and summing up the values of the keys (where the value in each loop iteration is `a[key]`).
+
+:::{.callout-note}
+## About the `values()` Method
+
+An alternative for the above dictionary example would be to use the `values()` method of the dictionary. This method returns a view of the values of the dictionary. For example, `a.values()` would return `[1, 2, 3]`. You can then iterate over the values of the dictionary as a list instead.
+:::
+
+### Converting between complex types
+
+Just as we can convert between basic data types, we can also convert between complex data types. For example, we can convert a list to a tuple, a tuple to a list, a list to a dictionary, a dictionary to a list, a list to a set, a set to a list, a dictionary to a set, a set to a dictionary, and so on.
+
+Here are some examples:
+
+```{python}
+a = tuple([1, 2, 3, 4, 5]) # Convert a list to a tuple
+print(a)
+
+a = list((1, 2, 3, 4, 5)) # Convert a tuple to a list
+print(a)
+
+a = set([1, 2, 3, 4, 5]) # Convert a list to a set
+print(a)
+
+a = list({1, 2, 3, 4, 5}) # Convert a set to a list
+print(a)
+
+a = tuple({1, 2, 3, 4, 5}) # Convert a set to a tuple
+print(a)
+
+a = set((1, 2, 3, 4, 5)) # Convert a tuple to a set
+print(a)
+
+a = {
+    "John": 25,
+    "Jane": 30,
+    "Jack": 35
+}
+
+b = list(a.keys()) # Convert the keys of a dictionary to a list
+print(b)
+
+b = list(a.values()) # Convert the values of a dictionary to a list
+print(b)
+```
+
+### Mutable object references
+
+Unlike basic data types, when you assign a variable to a complex type, you are actually assigning a reference to the object in memory. This means that if you assign a variable to another variable, you are actually assigning a reference to the same object in memory. This is important to understand, because if you modify the object through one variable, the changes will be reflected in the other variable as well.
+
+Here's an example to illustrate this:
+
+```{python}
+a = 1
+b = a
+a = 2
+print(a,b)
+
+a = [1, 2, 3, 4, 5]
+b = a
+a[0] = 10
+
+print(a,b)
+```
+
+In the first part, we assigned 1 to `a`, `b` to `a`, and then changed the value of `a` to 2. This changed the value of `a` but not `b`, because `b` was assigned to `a` before the change.
+
+In the second part we assigned `[1, 2, 3, 4, 5]` to `a`, then assigned `b` to `a`, and then changed the value of `a` by changing the first element of `a` to 10. This changed the value of `a` and `b`, because of object references. When you assign `b` to `a`, you are actually assigning a reference to the object in memory, so when you change the object through `a`, the changes are reflected in `b` as well!
+
+If you want to avoid this behavior, you can create a copy of the object using the `copy()` method. For example:
+
+```{python}
+a = [1, 2, 3, 4, 5]
+b = a.copy()
+a[0] = 10
+
+print(a,b)
+```
+
+For nested objects like a list of lists, you can use the `deepcopy()` method to create a deep copy of the object. For example:
+
+```{python}
+import copy
+
+a = [
+    [1, 2],
+    [3, 4]
+]
+b = copy.deepcopy(a)
+b[0][0] = 10
+print(a,b)
+```
+
+The `deepcopy()` method creates a copy of the object and all of its nested objects. Had we used the `copy()` method instead, the nested objects would still be references to the original objects, and changes to the nested objects would be reflected in the copied object as well.
+
+:::{.callout-note}
+This can be a bit non-intuitive at first, it is a good idea to create a few examples of your own to make sure you understand how this works.
+:::
+
+## Exercises
+
+1. How would you calculate and print half of pi ?
+2. Create a list of floats and print the list.
+3. Create a tuple of strings and print the tuple.
+4. Create a dictionary with the keys "name" and "age" and the values "John" and 30, and print the dictionary.
+5. Create a dictionary with a list of keys called "name" and "age", and a list of example values, and print the dictionary.
+6. You have a dictionary like `{"marble": 2, "wood": 3, "stone": 1}`. Write a program that uses the `values()` method of the dictionary to sum up the values of all the keys.
+

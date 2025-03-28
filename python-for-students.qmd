@@ -1,0 +1,34 @@
+---
+title: "Python for Students"
+subtitle: "a gentle introduction to programming for students"
+listing:
+  contents:
+    - python-for-students/about-this
+    - python-for-students/computational-thinking
+    - python-for-students/introduction
+    - python-for-students/basics
+    - python-for-students/types-of-data
+    - python-for-students/flow-control
+    - python-for-students/functions-and-modules
+    - python-for-students/comprehensions
+    - python-for-students/working-with-files
+    - python-for-students/error-handling-and-debugging
+    - python-for-students/diving-into-data
+  feed:
+    items: 10
+    image: _static/logo.png
+    type: partial
+  fields: [title, subtitle, description, reading-time, word-count]
+  type: table
+  table-striped: true
+  table-hover: true
+  sort:
+    - "order asc"
+  grid-item-border: false
+  max-description-length: 150
+  date-format: medium
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---

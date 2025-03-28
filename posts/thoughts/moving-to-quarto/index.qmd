@@ -1,0 +1,20 @@
+---
+title: Moving to Quarto
+subtitle: why i think quarto is better
+tags:
+  - Thoughts
+  - Publishing
+  - Quarto
+categories:
+  - Thoughts
+  - Publishing
+date: 2025-03-03
+---
+
+I’ve been using [JupyterBook](https://jupyterbook.org) to create this site for a while, and I’ve been pretty happy with it. But I’ve recently started using [Quarto](https://quarto.org), and I think it’s better. Here’s why.
+
+The great thing about JupyterBook is its integration with Jupyter notebooks. It just works, and it’s super easy to get something going. But… it is [Sphinx](https://www.sphinx-doc.org/) based, and to be honest I just can’t get my head around the whole Sphinx ecosystem. Doing anything beyond the out of the box functionality is a bit too contrived for me.
+
+In that sense, Quarto, with a hierarchical configuration system, and what to me seems like a much saner approach to configuration and extensibility, is a breath of fresh air. It supports R, as well as Jupyter and Python, will also be a plus in the long run.
+
+Caching, building, and deployment makes a lot more sense in Quarto, and configuring various outputs is intuitive. In addition, it gives me the option to set this site as a blog (including an [RSS feed](https://pedroleitao.nl/posts.xml)), which JupyterBook doesn’t. Quarto's documentation is well organized, easy to follow, and has a lot of examples that make it comprehensible - getting it going and migrating from JupyterBook is a breeze.

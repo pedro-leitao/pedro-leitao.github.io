@@ -1,0 +1,390 @@
+---
+title: Time Series Forecasting with Prophet
+subtitle: predicting the future with machine learning
+date: 2024-04-20
+tags: 
+  - Experiments
+  - Time Series Analysis
+  - Forecasting
+  - Prophet
+  - Machine Learning
+categories:
+    - Experiments
+    - Time Series Analysis
+    - Machine Learning
+jupyter: python3
+---
+
+Forecasting future trends is a common application in time series analysis. In this experiment, we will use [Meta's Prophet](https://facebook.github.io/prophet/) library to predict trends for births in Malaysia, based on available public data. Prophet is a forecasting tool developed by Meta that is available in Python and R. It is designed for analyzing time series data with daily observations that display patterns on different time scales.
+
+Prophet handles missing data, shifts in the trend, and large outliers in a robust manner. It provides a straightforward way to include the effects of holidays and seasonality in the forecast. It decomposes time series data into trend, seasonality, and holiday effects, making it easy to understand the impact of these components on the forecast.
+
+In this experiment, we will incorporate additional regressors, such as temperature and pollutant levels, to see how these factors influence birth rates. The approach allows us to account for external variables that might affect the trend and seasonality of births.
+
+## Load the datasets
+
+We will be using public Kaggle datasets, one containing weather data for Malaysia, and the other containing the number of births.
+
+```{python}
+# Download https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia?select=full-weather.csv using the Kaggle API
+
+!kaggle datasets download -p .data/ shahmirvarqha/weather-data-malaysia --unzip
+```
+
+```{python}
+# Download https://www.kaggle.com/datasets/jylim21/malaysia-public-data
+
+!kaggle datasets download -p .data/ jylim21/malaysia-public-data --unzip
+```
+
+```{python}
+# Disable all warnings
+
+import warnings
+
+warnings.filterwarnings('ignore')
+```
+
+Let's load these as dataframes and inspect the first few rows of each dataset.
+
+```{python}
+# Load full_weather.csv and births.csv
+
+import pandas as pd
+
+weather = pd.read_csv('.data/full_weather.csv')
+births = pd.read_csv('.data/births.csv')
+```
+
+## Preprocessing the data
+
+We will need to adjust the available data to fit our purposes, including filling in gaps and merging the data we are interested in.
+
+```{python}
+# Display the first 5 rows of each dataframe
+
+weather.head().style.background_gradient(cmap='Greens')
+```
+
+```{python}
+births.head().style.background_gradient(cmap='Greens')
+```
+
+The `datetime` column is a string, which we want to convert to a Pandas datetime object.
+
+```{python}
+# Convert the 'date' column in both dataframes to datetime
+
+weather['datetime'] = pd.to_datetime(weather['datetime'])
+births['date'] = pd.to_datetime(births['date'])
+```
+
+The weather dataset contains multiple measurements in a single day, which we will need to aggregate to daily values. Also, different measurements are available for different locations - we will average these to get a single value for the whole country, as births are recorded at the national level.
+
+```{python}
+# Average all features in the weather dataframe by day
+
+weather['date'] = weather['datetime'].dt.date
+births['date'] = births['date'].dt.date
+
+# Drop the columns 'place', 'city', 'state', and 'datetime'
+weather.drop(columns=['place', 'city', 'state', 'datetime'], inplace=True)
+
+# Group by date and calculate the mean
+daily_average = weather.groupby('date').mean().reset_index()
+
+# Replace the original DataFrame with the new one
+weather = daily_average
+```
+
+Let's check what each column of the weather dataset now looks like, and statistics for each column.
+
+```{python}
+weather.describe().drop('count').style.background_gradient(cmap='Greens')
+```
+
+We have two separate datasets, one for weather and one for births. Let us merge these on the date column.
+
+```{python}
+# Merge the two dataframes on the 'date' column, where the date is a datetime64 type
+
+data = pd.merge(births, weather, on='date')
+data.drop(columns=['state'], inplace=True)
+```
+
+```{python}
+data.head().style.background_gradient(cmap='Greens')
+```
+
+Let us also fill in any missing values using the mean for each column to fill in the gaps. This is a simple approach, and in practice more sophisticated methods to fill in missing data would need to be considered. For the purposes of this experiment, it will suffice.
+
+```{python}
+# Fill in missing values for each numerical column with the mean of that column
+
+mean_values = data.select_dtypes(include='number').mean()
+data.fillna(mean_values, inplace=True)
+```
+
+```{python}
+data.head().style.background_gradient(cmap='Greens')
+```
+
+```{python}
+data.describe().drop('count').style.background_gradient(cmap='Greens')
+```
+
+## Visualising a few features
+
+Let's visualise the data to get a better understanding of the trends and seasonality, and to develop an intuition of what we are trying to forecast. We will focus on births, temperature, and pollutant levels.
+
+```{python}
+import matplotlib.pyplot as plt
+
+fig, axs = plt.subplots(3, 1, figsize=(8, 9))
+
+axs[0].plot(data['date'], data['births'])
+axs[0].set_title('Daily Births')
+axs[0].set_xlabel('Date')
+axs[0].set_ylabel('Births')
+
+axs[1].plot(data['date'], data['temperature'])
+axs[1].set_title('Temperature')
+axs[1].set_xlabel('Date')
+axs[1].set_ylabel('Temperature')
+
+axs[2].plot(data['date'], data['pollutant_value'])
+axs[2].set_title('Pollution')
+axs[2].set_xlabel('Date')
+axs[2].set_ylabel('Pollution')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Building the model
+
+We can now build a Prophet model forecasting five years into the future, we will adjust Prophet's change point prior scale to make the model more flexible. First, we will forecast temperature and pollutant levels, and then we will forecast the number of births using these two features as regressors.
+
+::: {.callout-note}
+## About the Change Point Prior Scale
+
+The change point prior scale parameter controls the flexibility of the model. A higher value makes the model more flexible, allowing it to capture more fluctuations in the data. However, this can lead to overfitting, so it is important to tune carefully.
+:::
+
+Prophet requires the input data to have two columns: `ds` and `y`. The `ds` column contains dates, and the `y` column the values we want to forecast - in our case temperature, pollutant levels, and births.
+
+```{python}
+from prophet import Prophet
+
+future_period = 365*5
+prior_scale = 0.05
+
+# Prepare the data for Prophet
+df_temperature = data[['date', 'temperature']].rename(columns={'date': 'ds', 'temperature': 'y'})
+df_pollutant = data[['date', 'pollutant_value']].rename(columns={'date': 'ds', 'pollutant_value': 'y'})
+
+# Initialize the Prophet model
+model_temperature = Prophet(changepoint_prior_scale=prior_scale)
+model_pollutant = Prophet(changepoint_prior_scale=prior_scale)
+
+# Fit the model
+model_temperature.fit(df_temperature)
+
+# Make a dataframe to hold future predictions
+future_temperature = model_temperature.make_future_dataframe(periods=future_period)
+forecast_temperature = model_temperature.predict(future_temperature)
+
+model_pollutant.fit(df_pollutant)
+future_pollutant = model_pollutant.make_future_dataframe(periods=future_period)
+forecast_pollutant = model_pollutant.predict(future_pollutant)
+```
+
+Prophet includes inbuilt methods to easily visuallise the forecasted values, as well as uncertainty intervals. We will also include change points in the forecast plot, which are the points where the trend changes direction.
+
+::: {.callout-note}
+## About Change Points
+
+Prophet uses a piecewise linear model to capture the trend in the data. Change points are where the trend changes direction, and are automatically selected by the model. You can also manually specify individual change points if you have domain knowledge about the data.
+:::
+
+```{python}
+from prophet.plot import add_changepoints_to_plot
+import matplotlib.pyplot as plt
+
+# Create a figure with a 2-row, 1-column grid
+fig, axs = plt.subplots(2, 1, figsize=(8, 9))
+
+# Plot the temperature forecast on the first subplot
+fig1 = model_temperature.plot(forecast_temperature, ax=axs[0], include_legend=True)
+axs[0].set_title('Temperature Forecast with Changepoints')
+add_changepoints_to_plot(axs[0], model_temperature, forecast_temperature)
+
+# Plot the pollutant forecast on the second subplot
+fig2 = model_pollutant.plot(forecast_pollutant, ax=axs[1], include_legend=True)
+axs[1].set_title('Pollutant Forecast with Changepoints')
+add_changepoints_to_plot(axs[1], model_pollutant, forecast_pollutant)
+
+plt.tight_layout()
+plt.show()
+```
+
+In addition we can plot the components of the forecast, including the trend, seasonality, and holidays. It helps to understand how these components contribute to the forecast. Notice how in the yearly seasonality plot, the model captures the peaks in temperature and pollutant levels during certain months.
+
+```{python}
+# Visualise the components of each forecast
+
+fig3 = model_temperature.plot_components(forecast_temperature, figsize=(8, 6))
+_ = fig3.suptitle('Temperature Forecast Components', fontsize=14)
+fig4 = model_pollutant.plot_components(forecast_pollutant, figsize=(8, 6))
+_ = fig4.suptitle('Pollutant Forecast Components', fontsize=14)
+```
+
+# Predicting births
+
+We now want to forecast the number of future births. In addition we want to use temperature and pollutant levels as regressors in the model. Let us build a new Prophet model that includes these regressors.
+
+::: {.callout-note}
+## About Regressors
+
+Including additional regressors gives the ability to account for external factors that might influence the trend and seasonality of the data. This can improve the accuracy of the forecast, especially if these factors have a significant impact on the target variable. In this case, we are including temperature and pollutant levels as regressors as an illustration of how to use this feature in Prophet, in practice these might not be the most relevant factors for predicting births.
+:::
+
+```{python}
+df_births = data[['date', 'births']].rename(columns={'date': 'ds', 'births': 'y'})
+
+# Add temperature and pollutant values to the dataframe
+df_births['temperature'] = data['temperature']
+df_births['pollutant_value'] = data['pollutant_value']
+```
+
+Prophet also allows us to include factors such as holidays in the model. We can include public holidays in Malaysia, which will help the model to account for the impact of holidays on the number of births. We could also include other seasonalities or events that might affect the number of births, such as cultural or religious events. We are also including the temperature and pollutant levels as regressors in the model, as these might impact birth rates.
+
+::: {.callout-tip}
+## Other Regressors and Seasonalities
+
+As an exercise, can you think of other regressors or seasonalities that might influence the number of births? For example, you could include certain economic indicators, social factors, or other external variables that might affect birth rates.
+:::
+
+```{python}
+model_births = Prophet(changepoint_prior_scale=prior_scale)
+
+# Add Malaysian holidays to the model
+model_births.add_country_holidays(country_name='MY')
+
+# Add a monthly seasonality to the model
+model_births.add_seasonality(name='monthly', period=30.5, fourier_order=5)
+
+# Add the temperature and pollutant value to the model as regressors
+model_births.add_regressor('temperature')
+model_births.add_regressor('pollutant_value')
+
+# Fit the model
+model_births.fit(df_births)
+
+# Make a dataframe to hold future predictions
+future_births = model_births.make_future_dataframe(periods=future_period)
+
+# Add forecasted temperature and pollutant values to future_births
+future_births['temperature'] = forecast_temperature['yhat'][-len(future_births):].reset_index(drop=True)
+future_births['pollutant_value'] = forecast_pollutant['yhat'][-len(future_births):].reset_index(drop=True)
+
+# Predict the future
+forecast_births = model_births.predict(future_births)
+```
+
+Now that we have completed a forecast, we can plot the predicted values, as well as uncertainty intervals, just as we did before for temperature and pollutant levels.
+
+```{python}
+# Visualize the forecast
+
+fig5 = model_births.plot(forecast_births, include_legend=True, figsize=(8, 6))
+fig5.gca().set_title('Births Forecast with Changepoints')
+
+# Add changepoints to the plot
+a = add_changepoints_to_plot(fig5.gca(), model_births, forecast_births)
+```
+
+Let us also plot the components of the forecast, including the trend, seasonality, holidays, and the impact of the regressors. This allows us to understand how these components contribute to the forecast and if and how the regressors influence the number of births.
+
+```{python}
+# Visualise the components of the forecast
+
+fig6 = model_births.plot_components(forecast_births, figsize=(8, 12))
+_ = fig6.suptitle('Births Forecast Components', fontsize=14)
+```
+
+Interestingly, there is a negative effect of many holidays on the number of births - this might be due to the fact that many births are planned, and people might avoid giving birth on holidays, or there might be other non-represented factors at play. Additionally we see that the number of births is highest between September and November.
+
+## Cross validating the model
+
+Prophet provides a convenient way to cross-validate the model using historical data. This allows us to evaluate the performance of the model on past data and tune the hyperparameters accordingly. We will use cross-validation to assess the forecast accuracy of the model and identify any potential issues. Cross validation in Prophet works on a rolling forecast origin, where the model is trained on historical data up to a certain point and then used to forecast known future data. We can then compare the forecasted values with the actual values to evaluate the model's performance. The `initial` parameter specifies the size of the initial training period, and the `period` parameter specifies the size of the forecast `horizon`.
+
+::: {.callout-note}
+## About Cross Validation
+
+Cross validation produces a dataframe with `yhat`, `yhat_lower`, `yhat_upper` and `y` columns. The `yhat` column contains the forecasted values, the `yhat_lower` and `yhat_upper` columns contain the uncertainty intervals, and the `y` column contains the actual values. We can use this dataframe to calculate evaluation metrics such as mean absolute error (MAE), mean squared error (MSE), and root mean squared error (RMSE).
+:::
+
+```{python}
+# Cross validate the model
+
+from prophet.diagnostics import cross_validation
+
+df_births_cv = cross_validation(model_births, initial='730 days', period='180 days', horizon = '365 days')
+df_births_cv.head().style.background_gradient(cmap='Greens')
+```
+
+These metrics provide a quantitative measure of the model's accuracy and can help us evaluate the performance of the model.
+
+We are particularly interested in MAPE (Mean Absolute Percentage Error), which is a relative measure of the forecast accuracy. It is calculated as the average of the absolute percentage errors between the forecasted and actual values. A lower MAPE indicates a more accurate forecast.
+
+$MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100$
+
+As an example, a MAPE of 0.046 would indicate that the forecast is 4.6% off from the actual value.
+
+```{python}
+from prophet.diagnostics import performance_metrics
+
+df_births_cv_p = performance_metrics(df_births_cv)
+df_births_cv_p.head().style.background_gradient(cmap='Greens')
+```
+
+We can plot the MAPE values for each forecast horizon to see how the forecast accuracy changes over time.
+
+```{python}
+# Plot the MAPE performance metric
+
+from prophet.plot import plot_cross_validation_metric
+
+fig7 = plot_cross_validation_metric(df_births_cv, metric='mape', figsize=(8, 6))
+```
+
+Notice how this metric stays relatively stable over time, around or just below 5%. This indicates that the model is performing well and providing accurate forecasts.
+
+Let us now plot the output of the cross-validation, showing the actual values and forecasted values superimposed on each other. This allows us to visually inspect the accuracy of the forecast over the period and horizon of the cross-validation.
+
+```{python}
+# Create a figure and axis
+
+plt.figure(figsize=(8, 6))
+
+# Plot actual values (y) as a scatter plot
+plt.scatter(df_births_cv['ds'], df_births_cv['y'], color='blue', label='Actual Births (y)', alpha=1.0)
+
+# Plot predicted values (yhat) as a scatter plot
+plt.scatter(df_births_cv['ds'], df_births_cv['yhat'], color='red', label='Predicted Births (yhat)', alpha=0.5)
+
+# Add labels and title
+plt.xlabel('Date (ds)')
+plt.ylabel('Births')
+plt.title('Actual vs Predicted Births Over Time')
+plt.legend()
+
+# Show plot
+plt.show()
+```
+
+# Final remarks
+
+This experiment demonstrates how Prophet can be effectively used to forecast births in Malaysia by combining historical data with external factors such as temperature and pollutant levels. Integrating these regressors enabled the model to better capture seasonal patterns and underlying trends, as evidenced by the consistent performance across cross-validation metrics—including a stable MAPE of around 5%. Overall, the approach not only validates the robustness of Prophet for time series forecasting but also lays the groundwork for further enhancements. Future work might explore additional variables, like economic or social indicators, to refine predictions even further.
+

@@ -1,0 +1,26 @@
+---
+title: Dear Apple, Why Does Universal Control Suck?
+description: i love the idea of Universal Control, but it doesn't work as well as it should.
+tags:
+  - Apple
+  - Universal Control
+  - Deskflow
+categories:
+  - Thoughts
+  - Apple
+  - Universal Control
+date: 2025-03-28
+---
+
+I have multiple Apple devices, but I want to use a single keyboard and mouse. Apple supposedly has a solution for this: [Universal Control](https://support.apple.com/en-gb/102459). Except... well, it is mostly unusable. The experience is frustrating, with so many disconnects that you mostly just spend your time trying to reconnect rather than being productive.
+
+Here's an alternative - just use [Deskflow](https://github.com/deskflow/deskflow). It is a simple, open-source solution that works well, and is the basis for [Synergy](https://symless.com/synergy). It is not as seamless as Universal Control, but works reliably and does the job once you get it going. I have been using it for a while now, and have not had any issues so far, unlike Universal Control, which is a hair-pulling experience. Better still, you can install it with just `homebrew`:
+
+```bash
+brew tap deskflow/homebrew-tap
+brew install deskflow
+```
+
+Then just run `Deskflow.app` and you are good to go.
+
+Apple, [get it together](https://www.reddit.com/r/MacOS/comments/191kyov/universal_control_stops_working_from_time_to_time/)!

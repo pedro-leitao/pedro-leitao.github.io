@@ -1,0 +1,216 @@
+---
+title: Maps and More Maps
+subtitle: "sometimes a map and a few lines of code are all you need"
+date: 2025-03-10
+categories:
+  - Experiments
+  - Software Engineering
+tags:
+  - Experiments
+  - Software Engineering
+  - Programming
+jupyter: python3
+---
+
+Recently I was trying to figure out sun exposure for a specific location, except I was a couple of thousand kilometers away, and needed to get a sense of the sun's path relative to a rooftop. There are quite a few tools available online (like [SunCalc](https://suncalc.org)), and some mobile apps which pretty much can do the job. But, I really wanted to find out if I could do it myself from first principles.
+
+The problem here is that although I vaguely remember the area, I don't have a clear picture of the surroundings. So, an overlay on a map of the sun's path at different times of the day and year would be really helpful and give an intuition of the kind of sun exposure the area gets.
+
+To solve this we would need a few steps - we need to map the area, and for that we have Python's [`folium`](https://github.com/python-visualization/folium) library which is a wrapper around `leaflet.js`. We also need to calculate the sun's position at different times of the day and year, for which we can use [`pysolar`](https://pysolar.readthedocs.io/en/latest/) library. Finally we need to figure out how to overlay the sun's course on the map, and for that we need to do some basic geometry.
+
+Let us start by visualising the area. I know the coordinates of a polygon which covers the geometry I want to check, which we can then overlay on a map.
+
+```{python}
+import folium
+
+lon = -8.649779901717114
+lat = 41.14898866596278
+base = (lat, lon)
+
+shape = [
+    [41.14897506901333, -8.649853359565837],
+    [41.14893442240481, -8.6497568000413],
+    [41.14898264291275, -8.64971958439122],
+    [41.1489942562235, -8.649717237458331],
+    [41.14908867741279, -8.64980273287068],
+    [41.149035155258005, -8.649911027059657],
+    [41.14897506901333, -8.649853359565837]
+]
+
+
+# Set the zoom level
+zoom_start = 19
+
+# Create the map
+map_osm = folium.Map(location=base, zoom_start=zoom_start)
+
+# Add a polygon to the map
+folium.Polygon(
+    shape,
+    color='blue',
+    fill=True,
+    weight=1,
+    fill_color='blue',
+    fill_opacity=0.2).add_to(map_osm)
+
+# Save the map to an HTML file
+map_osm.save('osm_map.html')
+```
+
+<iframe src="osm_map.html" width="100%" height="450"></iframe>
+
+Now that we have the area mapped, we can start adding the sun's path at different times of the day. Let us create a function that will add lines indicating the position and altitude of the sun at different times of the day. We need to calculate the [:link azimuth](https://en.wikipedia.org/wiki/Azimuth) and [:link altitude](https://en.wikipedia.org/wiki/Solar_zenith_angle) of the sun at a given location and time, and then draw a line from the base to the calculated position. `pysolar` does this job tremendously well for us - we can give the function a specific date, and it will then calculate the sun's position at different times of the day and draw the relevant lines. We will compute distinct lengths for each depending on the sun's altitude (the shorter, the higher the sun), which should give us a sense of how strongly the sun shines on different parts of the area at different times of the day.
+
+```{python}
+from pysolar.solar import get_azimuth, get_altitude
+from geopy.distance import distance
+from folium.features import DivIcon
+import folium
+import datetime
+
+def add_sun_lines(map_obj, month, day, line_color, line_weight, label_pos_end=False, line_style="solid"):
+    # Define the hours (7am to 7pm, every 2 hours)
+    hours = [7, 9, 11, 13, 15, 17, 19]
+    year = 2025
+    base_distance = 50  # maximum distance when sun is at horizon
+
+    for hour in hours:
+        # Create a UTC datetime for the given hour
+        dt = datetime.datetime(year, month, day, hour, 0, 0, tzinfo=datetime.timezone.utc)
+
+        # Compute the sun's azimuth and altitude at your location
+        azimuth = get_azimuth(lat, lon, dt)
+        altitude = get_altitude(lat, lon, dt)
+
+        # Ensure altitude is non-negative for the calculation
+        altitude_for_calc = max(0, altitude)
+
+        # The higher the sun, the shorter the line
+        effective_distance = base_distance * (1 - altitude_for_calc / 90)
+
+        # Calculate a destination point using the effective distance
+        dest = distance(meters=effective_distance).destination(point=base, bearing=azimuth)
+        
+        # Setup polyline options based on line_style
+        polyline_options = {}
+        if line_style.lower() == "dashed":
+            polyline_options["dash_array"] = "5, 5"
+        
+        # Draw the line (polyline) from the base to the destination
+        folium.PolyLine(
+            locations=[[lat, lon], [dest.latitude, dest.longitude]],
+            color=line_color,
+            weight=line_weight,
+            popup=f"{dt.strftime('%b %d, %H:%M')} - Azimuth: {azimuth:.1f}°, Altitude: {altitude:.1f}°",
+            **polyline_options
+        ).add_to(map_obj)
+        
+        pos_lat = dest.latitude if label_pos_end else (lat + dest.latitude) / 2
+        pos_lon = dest.longitude if label_pos_end else (lon + dest.longitude) / 2
+        
+        # Add a label and star icon only for specific hours (7, 13, 19)
+        if hour in (7, 13, 19):
+            # Add time label marker
+            folium.Marker(
+                [pos_lat, pos_lon],
+                icon=DivIcon(
+                    html=f'<div style="font-size: 11pt; color: black;">{hour}:00</div>'
+                )
+            ).add_to(map_obj)
+            # Add a star icon (UTF star character) at the destination, shifted with CSS
+            folium.Marker(
+                [dest.latitude, dest.longitude],
+                icon=DivIcon(
+                    html='<div style="font-size: 14pt; color: orange; transform: translate(10px, -10px);">★</div>'
+                )
+            ).add_to(map_obj)
+```
+
+With that, let us add the directional sun lines to the map for August 1 (summer) and January 1 (winter). We will use *red lines* for August 1 and *blue lines* for January 1.
+
+```{python}
+# Add sun lines for August 1 (bold red lines) and January 1 (thin blue lines)
+add_sun_lines(map_osm, month=8, day=1, line_color='red', line_weight=3, label_pos_end=True)
+add_sun_lines(map_osm, month=1, day=1, line_color='blue', line_weight=2, label_pos_end=True, line_style="dashed")
+```
+
+`folium` relies on `leaflet.js` which produces Javascript for rendering maps, so we need to save the map to an HTML file to view it.
+
+```{python}
+# Save the map to an HTML file
+map_osm.save('osm_map_with_sun_markers.html')
+```
+
+<iframe src="osm_map_with_sun_markers.html" width="100%" height="450"></iframe>
+
+That worked very well! We want a map which gives the best visual sense of the area and the sun's path, so let us add a tile layer to the map. We can use the `CartoDB Positron` tile layer, which is a light, minimalistic map style.
+
+```{python}
+# Add a tile layer to the map
+folium.TileLayer('CartoDB Positron', opacity=1.0).add_to(map_osm)
+
+map_osm.save('osm_map_with_sun_markers_and_tiles.html')
+```
+
+<iframe src="osm_map_with_sun_markers_and_tiles.html" width="100%" height="450"></iframe>
+
+It would also be interesting to see the sun's path throughout the day as an arc. We can add a continuous line to the map that represents the sun's path from sunrise to sunset. Let us create another function which will compute the sun's position more frequently and draw a continuous line on the map.
+
+```{python}
+
+def add_sun_path(map_obj, month, day, line_color='orange', line_weight=2, interval=15):
+    year = 2025
+    base_distance = 50
+    sun_path_coords = []
+    
+    # Compute sun positions every `interval` minutes between 7:00 and 19:00 UTC
+    for t in range(7 * 60, 19 * 60, interval):
+        hour = t // 60
+        minute = t % 60
+        dt = datetime.datetime(year, month, day, hour, minute, 0, tzinfo=datetime.timezone.utc)
+        azimuth = get_azimuth(lat, lon, dt)
+        altitude = get_altitude(lat, lon, dt)
+        # Ensure a non-negative altitude for the calculation
+        altitude_for_calc = max(0, altitude)
+        # Scale the distance: the higher the sun, the shorter the line
+        effective_distance = base_distance * (1 - altitude_for_calc / 90)
+        dest = distance(meters=effective_distance).destination(point=base, bearing=azimuth)
+        sun_path_coords.append([dest.latitude, dest.longitude])
+    
+    # Draw the continuous sun path
+    folium.PolyLine(
+         locations=sun_path_coords,
+         color=line_color,
+         weight=line_weight,
+         opacity=0.7,
+         popup="Sun Path"
+    ).add_to(map_obj)
+```
+
+This allows us to add the sun path for August 1 and January 1 as before, with different line colors and weights.
+
+```{python}
+# Add sun path for August 1
+add_sun_path(map_osm, month=8, day=1, line_color='darkorange', line_weight=2)
+add_sun_path(map_osm, month=1, day=1, line_color='orange', line_weight=1)
+
+map_osm.save('osm_map_with_sun_markers_tiles_and_path.html')
+```
+
+<iframe src="osm_map_with_sun_markers_tiles_and_path.html" width="100%" height="450"></iframe>
+
+That works very well, but we are lacking a sense of depth - we can add a satellite layer to the map to give a better sense of the area, the geometry, and potential obstacles which could occlude the sun's path.
+
+```{python}
+# Add an ESRI Satellite layer to the map
+folium.TileLayer(
+        tiles = "StadiaAlidadeSatellite",
+        opacity = 1.0
+).add_to(map_osm)
+
+map_osm.save('osm_map_with_sun_markers_tiles_path_and_satellite.html')
+```
+
+<iframe src="osm_map_with_sun_markers_tiles_path_and_satellite.html" width="100%" height="450"></iframe>
+
+Although not perfect, it gives a really good sense of the area and the sun's path, any potential shaded zones, and the kind of sun exposure it will get. It's a good example as to what a few lines of code, basic geometry, and creativity can do!

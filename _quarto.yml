@@ -1,0 +1,85 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Pedro Leitão"
+  site-url: "https://pedroleitao.nl"
+  repo-url: "https://github.com/pedro-leitao/pedro-leitao.github.io"
+  favicon: "_static/logo.jpg"
+  open-graph:
+    image: "/_static/logo.jpg"
+  twitter-card: true
+  navbar:
+    title: false
+    logo: "_static/logo.jpg"
+    right:
+      - index.qmd
+      - about.qmd
+      - posts.qmd
+      - experiments.qmd
+      - thoughts.qmd
+      - howtos.qmd
+      - python-for-students.qmd
+      - icon: github
+        href: https://github.com/pedro-leitao
+      - icon: linkedin
+        href: https://linkedin.com/in/nunoleitao
+      - icon: rss
+        href: posts.xml
+  page-footer:
+    background: light
+    left: "Written with love, take time to think and ponder."
+    right:
+      - icon: arrow-through-heart
+        href: https://quarto.org
+      - icon: cup-hot
+        href: http://www.frankscanteen.com
+      - icon: egg-fried
+        href: https://www.instagram.com/bilhanovarestaurante
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    mermaid:
+      theme: default
+    css: styles.css
+    toc: true
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-block-border-left: false
+    code-line-numbers: false
+    code-link: true
+    highlight-style: pygments
+    lightbox: true
+    title-block-categories: true
+    title-block-banner: _static/banner-waves-partial.jpg
+    mainfont: "Roboto Flex"
+    monofont: "Roboto Mono"
+    include-in-header:
+      - text: |
+          <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+filters: 
+  - black-formatter
+  - nutshell
+  - unsplash-api
+
+unsplash:
+  client_id: "d53HeQO3HqiazQlm5nM8o443dCxD5iM8d-zvjbVA5N4"
+
+execute:
+  warning: false
+  # freeze computational output
+  # (see https://quarto.org/docs/projects/code-execution.html#freeze)
+  freeze: auto
+  cache: true
+
+jupyter:
+  kernelspec:
+    name: "python3"
+    language: "python"
+    display_name: "ML Environment (latest)"

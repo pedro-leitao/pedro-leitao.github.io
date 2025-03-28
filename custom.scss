@@ -1,0 +1,48 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+$light-green: #D1D9CE;
+$white: #FFFFFF;
+$medium-green: #98A08D;
+$dark-green: #757B6D;
+$cream: #FDFBF7;
+$dark-gray: #5A5856;
+$medium-gray: #64605f;
+$near-black: #111111;
+$black: #000000;
+$violet: #846075;
+$terracotta: #BD6E53; 
+$dark-orange: #D17A22;
+
+// Base document colors
+$navbar-bg: $cream;
+$navbar-fg: $medium-gray;
+$navbar-hl: $black;
+$body-bg: $white;
+$body-color: $medium-gray;
+$footer-bg: $near-black;
+$footer-fg: $cream; 
+$link-color: $terracotta;
+
+// Inline code
+$code-bg: $cream;
+$code-color: $violet;//$burnt-orange; 
+
+// Code blocks
+$code-block-bg: $cream;
+
+// see https://github.com/robertmitchellv/robertmitchellv.github.io/blob/main/custom-dark.scss
+.navbar-brand img { 
+    max-height: 85px;
+    width: auto;
+}
+
+// headshot shape
+.rounded { 
+    border-radius: 50px 20px 50px 20px !important;
+}
+
+// italicize the subtitle in listings
+.card-subtitle {
+    font-style: italic;
+}

@@ -1,0 +1,21 @@
+---
+title: "Thoughts"
+subtitle: "thoughts and reflections"
+listing:
+  contents: posts/thoughts
+  feed:
+    items: 10
+    image: _static/logo.jpg
+    type: partial
+  fields: [date, title, subtitle, description, categories, reading-time]
+  sort: "date desc"
+  type: grid
+  page-size: 6
+  grid-item-border: false
+  max-description-length: 150
+  date-format: medium
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---

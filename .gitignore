@@ -1,0 +1,16 @@
+.quarto/
+.jupiter_cache/
+.freeze/
+.luarc.json
+
+posts/**/.jupyter_cache
+posts/**/*.pth
+posts/**/*.html
+posts/**/.data/
+posts/**/checkpoints/
+posts/**/mlruns/
+posts/**/adapter/
+posts/**/Qwen/
+posts/**/__pycache__/
+posts/**/model/
+

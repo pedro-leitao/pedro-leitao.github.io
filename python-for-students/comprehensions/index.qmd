@@ -1,0 +1,159 @@
+---
+title: Comprehensions
+subtitle: using comprehensions to create lists, tuples, sets, and dictionaries
+jupyter: python3
+order: 7
+format:
+  html:
+    code-fold: false
+---
+
+
+We have already seen what lists, tuples, sets and dictionaries are. We have also seen how to create them. We also saw a few examples of comprehensions when looking at functions. Comprehensions however are such an important part of Python that they deserve a separate discussion.
+
+## Why are comprehensions important?
+
+Creating lists, tuples, sets and dictionaries is a common task in Python, especially in data science and other data intensive applications. Comprehensions provide a concise way to create these data structures. They are also faster than using loops to create them.
+
+Finally, comprehensions promote a *functional* programming style. This is a style of programming that is based on mathematical thinking. It is a style that is becoming more popular in Python and other languages since it tends to clearer, more concise, and less error-prone code. By focusing on expressions that transform data rather than on sequences of commands, functional programming encourages immutability, stateless functions, and declarative code. This approach makes programs easier to reason about, test, and maintain—qualities that are highly valued in modern software development. Comprehensions embody these principles by allowing developers to succinctly express complex transformations in a readable, mathematical-like way.
+
+## The basics of comprehensions
+
+The basic syntax for a comprehension is `expression for item in iterable`. The `expression` is the value that will be stored in the data structure, the `item` is the variable that will be assigned the value of the current element in the `iterable`. The `iterable` is the object that will be iterated over. Optionally, you can add a condition to the comprehension. The condition is a boolean expression that will be evaluated for each element in the `iterable`. If the condition is `True`, the element will be included in the data structure, if it is `False`, the element will be excluded.
+
+![Comprehension syntax](figures/comprehension.svg)
+
+:::{.callout-note}
+## About Iterables
+
+The iterable can be a list, tuple, set, dictionary, or any other object that can be iterated over. Think of it as a sequence of values that can be accessed one at a time. Iterables are objects that implement the `__iter__` method. This method returns an iterator object that can be used to iterate over the elements of the iterable. The iterator object implements the `__next__` method which returns the next element in the sequence. When there are no more elements to return, the `__next__` method raises a `StopIteration` exception. You can create iterable method yourself, but most of the time you will use built-in iterables like lists, tuples, sets, dictionaries, and strings.
+:::
+
+Let us look at the simplest possible example. In this case we will use the `range` function to create an *iterable* from 0 to 9 (i.e., an object which can be iterated). We will then use a comprehension to create a list from the items returned by the *iterable*. This is the simplest way to create a list, tuple, set or dictionary using a comprehension.
+
+
+```{python}
+[x for x in range(10)]
+```
+
+We could equally create a tuple, as follows:
+
+```{python}
+tuple(x for x in range(10))
+```
+
+Or a set:
+
+```{python}
+set(x for x in range(10))
+```
+
+Or a dictionary:
+
+```{python}
+{x for x in range(10)}
+```
+
+Comprehensions rely on an object that can be iterated over. This is why we used the `range` function in the examples above. However, we can use any object that can be iterated over. For example, we could use a list:
+
+```{python}
+numbers = [1, 2, 3, 4, 5]
+# The following is equivalent to just the numbers list itself
+[x for x in numbers]
+```
+
+## Generators
+
+Comprehensions return a new object of the `generator` type. This is a special type of object that can be iterated over. It is similar to a list, but it is more memory efficient. You can convert a generator to a list, set, tuple or dictionary by using the `list`, `set`, `tuple` and `dictionary` functions. For example:
+
+```{python}
+generator = (x for x in range(10))
+print(generator)
+
+numbers = list(generator)
+print(numbers)
+```
+
+You can also iterate through a generator yourself using a `for` loop.
+
+```{admonition} About Generators
+:class: warning, dropdown
+You can only iterate through a generator once. If you want to iterate through it again, you will need to create a new generator.
+```
+
+```{python}
+generator = (x for x in range(10))
+
+for number in generator:
+    print(number)
+```
+
+Additionaly, any function that takes an iterable as an argument can take a generator as an argument. For example, we can use the `sum` function to sum the elements of a generator.
+
+```{python}
+generator = (x for x in range(10))
+
+print(sum(generator))
+```
+
+Generators compute values on the fly, and only when they are necessary. This is useful for when you have large or even infinite sequences. For example, you could create a generator that generates the Fibonacci sequence.
+
+```{python}
+# Use a generator to calculate the fibonacci sequence
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        # Compute the next Fibonacci number using a temporary variable
+        next_value = a + b
+        a = b        # Shift 'a' to the next number
+        b = next_value  # Assign the sum as the new 'b'
+        
+fib = fibonacci()
+print(fib) # Notice that fib is a generator object
+
+# Print the first 10 numbers in the fibonacci sequence
+for i in range(10):
+    print(next(fib))
+
+# The generator will "remember" where it left off and you can continue calling next on it
+print("...")
+print(next(fib))
+print(next(fib))
+```
+
+Now you might be thinking, how does Python know the `fibonacci` function is a generator? The answer is that Python uses the `yield` keyword to create a generator. The `yield` keyword is similar to the `return` keyword, but it does not stop the function. Instead, it pauses the function and returns the value. When the function is called again, it resumes from where it left off. This is why we can use the `fibonacci` function as a generator.
+
+## Filtering
+
+You can also filter the elements of an iterable using a comprehension. To do this, you add an `if` statement to the comprehension. The `if` statement is used to filter the elements of the iterable. For example, we could create a list of even numbers from 0 to 9.
+
+```{python}
+[x for x in range(10) if x % 2 == 0]
+```
+
+## Nested comprehensions
+
+You can nest comprehensions inside each other. This is useful when you have a list of lists, a list of tuples, a list of sets, a list of dictionaries, or any other nested data structure. For example, we could create a multiplication table using a nested comprehension.
+
+:::{.callout-note}
+## About Nested Comprehensions
+
+Nested comprehensions are read from left to right. This means that the outer comprehension is read first, then the inner comprehension. This is important to remember when you are creating nested comprehensions. This can be confusing at first, but with practice you will get used to it. If you are having trouble understanding a nested comprehension, just take your time and relax! It will come to you eventually.
+:::
+
+```{python}
+multiplication_table = [
+    [x * y for y in range(1, 10)] for x in range(1, 10)
+]
+# Print the multiplication table in a more readable format
+for row in multiplication_table:
+    print(row)
+```
+
+## Exercises
+
+1. Create a list of the squares of the numbers from 0 to 9 using a comprehension.
+2. Change the comprehension above to create a list of the squares of only even numbers.
+3. Create a generator which produces an infinite sequence of factorials.
+

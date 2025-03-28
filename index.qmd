@@ -1,0 +1,32 @@
+---
+title: "Bio"
+subtitle: "about me"
+image: _static/pedro.jpg
+about:
+  template: solana
+  image-shape: round
+  links:
+    #- icon: twitter
+    #  text: Twitter
+    #  href: https://twitter.com
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/nunoleitao/
+    - icon: github
+      text: Github
+      href: https://github.com/pedro-leitao
+    - icon: envelope
+      text: Email
+      href: mailto:pedro.leitao+blog@yahoo.com
+format:
+  html:
+    email-obfuscation: javascript
+
+---
+
+Hello! I am Pedro Leitão (vaguely pronounced as "Pe-drow Lay-tow"). Professionally, I am
+a chief architect in the software industry, mostly engaging in Cloud Native systems design, Systems Thinking, Analytics & Data Science, Machine Learning and AI. More importantly, I am a father and adventurer in all things family-related.
+
+I love embracing new challenges, continuous learning, and mentoring others - I build and manage high-performance tech teams while keeping a hands-on approach. Based in London, but you will often find me somewhere further south.
+
+In this site you will find a collection [of thoughts](thoughts.qmd), [how to's](howtos.qmd) and [experiments](experiments.qmd) that I have fiddled with over time. Find out more about [why I write](/about.qmd).

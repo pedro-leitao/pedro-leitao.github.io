@@ -1,0 +1,38 @@
+# The path to the local model directory or Hugging Face repo.
+model: "/Users/NLeitao/.lmstudio/models/lmstudio-community/Qwen2.5-0.5B-Instruct-MLX-8bit"
+
+# Whether or not to train (boolean)
+train: true
+
+# The fine-tuning method: "lora", "dora", or "full".
+fine_tune_type: lora
+
+# Directory with {train, valid, test}.jsonl files
+data: "./no_robots"
+
+# Number of layers to fine-tune
+num_layers: 16
+
+# Minibatch size.
+batch_size: 6
+
+# Iterations to train for.
+iters: 1000
+
+# Adam learning rate.
+learning_rate: 1e-4
+
+# Save/load path for the trained adapter weights.
+adapter_path: "adapter"
+
+# Save the model every N iterations.
+save_every: 100
+
+# Evaluate on the test set after training
+test: true
+
+# Maximum sequence length.
+max_seq_length: 2048
+
+# Use gradient checkpointing to reduce memory use.
+grad_checkpoint: true

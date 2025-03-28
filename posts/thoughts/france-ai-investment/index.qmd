@@ -1,0 +1,25 @@
+---
+title: "France, AI and Back to Nuclear for Germany ?"
+subtitle: were the french right all along ?
+date: 2025-02-10
+tags: [ "AI", "Artificial Intelligence", "Europe" ]
+categories: [ "Thoughts", "AI", "Politics", "Europe" ]
+---
+
+President Macron has [just signalled that France is about to announce €109 billion private sector investments in AI](https://www.reuters.com/technology/artificial-intelligence/france-invest-109-billion-euros-ai-macron-announces-2025-02-09/). This is a significant amount of money, even for a country like France. It is also a clear statement that at least some European countries might be serious about investing in digital.
+
+France is at this time the only european union country with a significant AI company ([Mistral](https://mistral.ai/en)), and perhaps this announcement is a reflection of this position. In the meantime, [Aleph Alpha](https://aleph-alpha.com), the German AI startup, pretty much ditched large scale model development and claims to be building [B2B tooling for AI](https://sifted.eu/articles/aleph-alpha-what-comes-next-news), read that in whatever way you see fit.
+
+## The German Nuclear Question
+
+France produces most of its electricity from nuclear power, and Germany has been phasing out nuclear power since 2011. Obviously France will be better positioned to have in place the necessary electricity for any large scale AI infrastructure, and this is bound to be a significant advantage in the future if it really does lead to a sustained level of investment.
+
+Germany is in the midst of a debate about a [return to nuclear power](https://www.politico.eu/article/germany-election-jens-spahn-nuclear-energy-comeback/), the country has been struggling with its energy transition, and the need to power a significant AI infrastructure could be a significant factor to be considered.
+
+A lot of this will depend on the coming [German election](https://www.dw.com/en/german-election-2025/t-70794502) and whether [Merz is likely to hold his nerve](https://www.politico.eu/article/germany-next-chancellor-friedrich-merz-vows-put-economy-before-climate-elections/) when it comes to energy policy. If the CDU ends up in a coalition with the Greens, it is likely that the nuclear question will be off the table.
+
+## The European Union
+
+In the meantime, the European Union now seems to be talking more and more about deregulation, but the spin seems to be going towards ["simplification"](https://www.euronews.com/my-europe/2025/02/10/simplification-or-deregulation-newsletter) rather than actually significantly removing barriers to entry - it remains to be seen if EU institutions and political organisations are actually capable of removing the web of regulation which has been built up over the last few decades. There are significant political interests in maintaining the status quo, and it very well could be that the EU will continue to be a difficult place to do business for the foreseeable future.
+
+In the meantime the pace of regulatory change in Europe continues unabated, with the European Comission alone having [passed 421 new legal acts](https://eur-lex.europa.eu/statistics/2024/legislative-acts-statistics.html) in 2024 alone.
