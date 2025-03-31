@@ -4,7 +4,8 @@ subtitle: "about me"
 image: _static/pedro_hokusai.jpg
 about:
   template: solana
-  image-shape: round
+  image-shape: rounded
+  image-width: 10em
   links:
     #- icon: twitter
     #  text: Twitter
