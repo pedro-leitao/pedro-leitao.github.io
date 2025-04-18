@@ -1,203 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pedroleitao.nl/thoughts.html</loc>
-    <lastmod>2025-03-08T10:08:17.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/working-with-files/index.html</loc>
-    <lastmod>2025-03-26T01:03:08.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/introduction/index.html</loc>
-    <lastmod>2025-03-26T01:00:38.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/flow-control/index.html</loc>
-    <lastmod>2025-03-26T01:01:42.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/diving-into-data/index.html</loc>
-    <lastmod>2025-03-26T01:03:43.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/comprehensions/index.html</loc>
-    <lastmod>2025-03-26T01:02:45.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/apis-and-web-data/index.html</loc>
-    <lastmod>2025-03-25T23:38:37.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts.html</loc>
-    <lastmod>2025-03-08T10:07:53.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/universal-control/index.html</loc>
-    <lastmod>2025-03-30T13:55:29.107Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/index.html</loc>
-    <lastmod>2025-03-08T02:12:48.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/france-ai-investment/index.html</loc>
-    <lastmod>2025-03-08T02:12:41.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/connundrum-european-tech/index.html</loc>
-    <lastmod>2025-03-08T12:27:40.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/index.html</loc>
-    <lastmod>2025-03-08T02:12:19.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/index.html</loc>
-    <lastmod>2025-03-08T02:12:29.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/unsupervised-image-segmentation/index.html</loc>
-    <lastmod>2025-03-03T11:58:48.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/regularisation/index.html</loc>
-    <lastmod>2025-03-08T01:54:39.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/random-forests/index.html</loc>
-    <lastmod>2025-03-03T11:56:33.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/pca-vs-tsne/index.html</loc>
-    <lastmod>2025-03-03T11:55:05.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/mot/index.html</loc>
-    <lastmod>2025-03-03T11:54:02.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/ml-pipeline/index.html</loc>
-    <lastmod>2025-03-03T11:53:18.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/instance-vs-model/index.html</loc>
-    <lastmod>2025-03-03T11:52:36.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/customer-churn/index.html</loc>
-    <lastmod>2025-03-03T11:50:42.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/blade-runner-enhance/index.html</loc>
-    <lastmod>2025-03-24T18:13:04.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/index.html</loc>
-    <lastmod>2025-03-31T08:36:56.428Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/experiments.html</loc>
-    <lastmod>2025-03-08T10:09:07.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/about.html</loc>
-    <lastmod>2025-03-23T23:47:17.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/howtos.html</loc>
-    <lastmod>2025-03-08T10:09:15.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/experiments/adam-optimisation/index.html</loc>
-    <lastmod>2025-03-14T09:55:48.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://pedroleitao.nl/posts/experiments/connect-four-rl/index.html</loc>
-    <lastmod>2025-03-10T17:31:58.000Z</lastmod>
+    <lastmod>2025-04-17T11:32:47.256Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/experiments/gensim/index.html</loc>
-    <lastmod>2025-03-03T11:52:06.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/experiments/maps-and-maps/index.html</loc>
-    <lastmod>2025-03-10T19:41:28.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/ml-pipeline/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/experiments/mondrianiser/index.html</loc>
-    <lastmod>2025-03-18T23:01:27.000Z</lastmod>
+    <lastmod>2025-04-17T07:31:39.333Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/index.html</loc>
-    <lastmod>2025-03-03T11:54:41.000Z</lastmod>
+    <lastmod>2025-04-15T09:21:08.653Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/experiments/predictive-maintenance/index.html</loc>
-    <lastmod>2025-03-03T11:55:39.000Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/experiments/pca-vs-tsne/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/experiments/random-forests-embeddings/index.html</loc>
-    <lastmod>2025-03-03T11:57:11.000Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/experiments/random-forests/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/experiments/time-series-forecasting/index.html</loc>
-    <lastmod>2025-03-03T11:58:12.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/unsupervised-image-segmentation/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/howtos/caching-ml/index.html</loc>
-    <lastmod>2025-03-03T18:43:56.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/howtos/mlflow-ui/index.html</loc>
-    <lastmod>2025-03-03T12:00:25.000Z</lastmod>
+    <lastmod>2025-04-15T09:34:19.685Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/index.html</loc>
-    <lastmod>2025-03-03T14:36:31.000Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/thoughts/connundrum-european-tech/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.177Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/index.html</loc>
-    <lastmod>2025-03-21T16:03:22.000Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/thoughts/france-ai-investment/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.177Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/kolmogorov/index.html</loc>
-    <lastmod>2025-03-03T12:04:00.000Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.178Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/thoughts/scalling-ai/index.html</loc>
-    <lastmod>2025-03-08T02:12:54.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.178Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/thoughts/universal-control/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.178Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.html</loc>
-    <lastmod>2025-03-03T12:05:24.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/python-for-students/about-this/index.html</loc>
-    <lastmod>2025-03-26T00:58:44.000Z</lastmod>
+    <loc>https://pedroleitao.nl/about.html</loc>
+    <lastmod>2025-04-14T16:01:56.019Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/python-for-students/basics/index.html</loc>
-    <lastmod>2025-03-26T01:01:06.000Z</lastmod>
+    <loc>https://pedroleitao.nl/experiments.html</loc>
+    <lastmod>2025-04-14T16:01:56.116Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/python-for-students/computational-thinking/index.html</loc>
-    <lastmod>2025-03-26T01:00:20.000Z</lastmod>
+    <loc>https://pedroleitao.nl/howtos.html</loc>
+    <lastmod>2025-04-14T16:01:56.116Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/python-for-students/error-handling/index.html</loc>
-    <lastmod>2025-03-26T01:03:23.000Z</lastmod>
+    <loc>https://pedroleitao.nl/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.116Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/python-for-students/functions-modules/index.html</loc>
-    <lastmod>2025-03-26T01:02:23.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students/types-of-data/index.html</loc>
-    <lastmod>2025-03-26T01:01:20.000Z</lastmod>
+    <loc>https://pedroleitao.nl/posts.html</loc>
+    <lastmod>2025-04-14T16:01:56.116Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/python-for-students.html</loc>
-    <lastmod>2025-03-26T00:59:39.000Z</lastmod>
+    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/about-this/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/apis-and-web-data/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/basics/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/comprehensions/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.180Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/computational-thinking/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.180Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/diving-into-data/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/error-handling/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/flow-control/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/functions-modules/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/introduction/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/types-of-data/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students/working-with-files/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/thoughts.html</loc>
+    <lastmod>2025-04-14T16:01:56.182Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/instance-vs-model/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/customer-churn/index.html</loc>
+    <lastmod>2025-04-16T17:21:05.176Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/predictive-maintenance/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/random-forests-embeddings/index.html</loc>
+    <lastmod>2025-04-16T17:08:36.209Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/regularisation/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/thoughts/kolmogorov/index.html</loc>
+    <lastmod>2025-04-16T23:11:23.067Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/mot/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/blade-runner-enhance/index.html</loc>
+    <lastmod>2025-04-17T10:59:43.350Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/experiments/adam-optimisation/index.html</loc>
+    <lastmod>2025-04-17T17:05:03.455Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.126Z</lastmod>
   </url>
 </urlset>

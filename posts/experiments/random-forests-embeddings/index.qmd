@@ -112,6 +112,7 @@ elif torch.backends.mps.is_available():
     device = torch.device('mps')
 else:
     device = torch.device('cpu')
+print(f'Using device: {device}')
 
 # Initialize the model, move it to the correct device, and set it to evaluation mode
 bert_model = BERTEmbeddingModule()
@@ -135,7 +136,7 @@ with torch.no_grad():
             print(f'Processed {i} sentences', end='\r')
 
 # Add the embeddings to the sentiment DataFrame
-sentiment.loc[:, 'embedding'] = sentiment_embeddings
+sentiment = sentiment.assign(embedding=sentiment_embeddings)
 
 # Compute embeddings in batches for the sentiment_validation DataFrame
 sentiment_validation_embeddings = []
@@ -148,7 +149,7 @@ with torch.no_grad():
             print(f'Processed {i} validation sentences', end='\r')
 
 # Add the embeddings to the sentiment_validation DataFrame
-sentiment_validation.loc[:, 'embedding'] = sentiment_validation_embeddings
+sentiment_validation = sentiment_validation.assign(embedding=sentiment_validation_embeddings)
 ```
 
 Let's check what the embeddings look like for a sample tweet.

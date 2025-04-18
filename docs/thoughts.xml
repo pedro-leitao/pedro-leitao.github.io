@@ -14,7 +14,7 @@
 <title>Pedro Leitão</title>
 <link>https://pedroleitao.nl/thoughts.html</link>
 </image>
-<generator>quarto-1.6.42</generator>
+<generator>quarto-1.7.23</generator>
 <lastBuildDate>Fri, 28 Mar 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Dear Apple, Why Does Universal Control Suck?</title>
@@ -78,6 +78,16 @@
   <pubDate>Fri, 24 May 2024 23:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>On Scaling AI: Are we Hitting the Limits of our Current Approaches?</title>
+  <link>https://pedroleitao.nl/posts/thoughts/scalling-ai/</link>
+  <description><![CDATA[ There’s been a lot of speculation on whether we’re hitting the limits of our current approaches to scaling AI. Will OpenAI and others be able to continue to scale up models at the same pace? Will these new models be able to solve new problems, or will GPT-7 be just an iteration over GPT-4 ? ]]></description>
+  <category>Thoughts</category>
+  <category>AI</category>
+  <category>Scaling</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/scalling-ai/</guid>
+  <pubDate>Sun, 19 May 2024 23:00:00 GMT</pubDate>
+</item>
+<item>
   <title>The Connundrum of European Tech and Artificial Intelligence</title>
   <link>https://pedroleitao.nl/posts/thoughts/connundrum-european-tech/</link>
   <description><![CDATA[ The European tech scene is a curious one. It is a region that is home to some of the oldest and most representative companies in the world, yet it is also a region that is often overlooked when it comes to tech investment. This is a paradox that has puzzled many observers, and one that has led to a number of questions about the future of European tech. ]]></description>
@@ -86,16 +96,6 @@
   <category>Europe</category>
   <category>Politics</category>
   <guid>https://pedroleitao.nl/posts/thoughts/connundrum-european-tech/</guid>
-  <pubDate>Sun, 19 May 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>On Scaling AI: Are we Hitting the Limits of our Current Approaches?</title>
-  <link>https://pedroleitao.nl/posts/thoughts/scalling-ai/</link>
-  <description><![CDATA[ There’s been a lot of speculation on whether we’re hitting the limits of our current approaches to scaling AI. Will OpenAI and others be able to continue to scale up models at the same pace? Will these new models be able to solve new problems, or will GPT-7 be just an iteration over GPT-4 ? ]]></description>
-  <category>Thoughts</category>
-  <category>AI</category>
-  <category>Scaling</category>
-  <guid>https://pedroleitao.nl/posts/thoughts/scalling-ai/</guid>
   <pubDate>Sun, 19 May 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>

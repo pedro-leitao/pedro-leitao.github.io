@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -153,13 +155,13 @@ window.Quarto = {
 <meta property="og:site_name" content="Pedro Leitão">
 <meta name="twitter:title" content="Exploring the Impact of Kolmogorov-Arnold Networks in Machine Learning – Pedro Leitão">
 <meta name="twitter:description" content="a new dawn for machine learning, or just another fad?">
-<meta name="twitter:image" content="https://pedroleitao.nl/posts/thoughts/kolmogorov/index_files/figure-html/cell-3-output-1.png">
+<meta name="twitter:image" content="https://pedroleitao.nl/posts/thoughts/kolmogorov/index_files/figure-html/cell-4-output-1.png">
 <meta name="twitter:image-height" content="486">
 <meta name="twitter:image-width" content="804">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -326,64 +328,75 @@ N(d) = 10^d
 <h2 class="anchored" data-anchor-id="a-simple-brief-example-of-a-kan">A simple, brief example of a KAN</h2>
 <p>To illustrate the fundamental difference between KANs and MLPs, let’s consider a simple example. Suppose we have a dataset with two features, <span class="math inline">\(\mathbf{x_1}\)</span> and <span class="math inline">\(\mathbf{x_2}\)</span>, and a binary target variable <span class="math inline">\(\mathbf{y}\)</span>. We want to build a simple classification model to predict <span class="math inline">\(\mathbf{y}\)</span> based on the input features. Furthermore, let us pick a dataset that is not linearly separable and which would present a challenge for any ML model.</p>
 <p>Let’s create a simple, synthetic dataset with <code>SKLearn</code> to demonstrate a KAN in action. In this case we will use the <code>make_circles</code> function to generate a toy dataset that is not linearly separable.</p>
-<div id="c7b992b9" class="cell" data-execution_count="2">
+<div id="aa2427ed" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c7b992b9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c7b992b9-1"><a href="#c7b992b9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> datasets</span>
-<span id="c7b992b9-2"><a href="#c7b992b9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch <span class="im">as</span> torch</span>
-<span id="c7b992b9-3"><a href="#c7b992b9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c7b992b9-4"><a href="#c7b992b9-4" aria-hidden="true" tabindex="-1"></a>Circles_points_train, Circles_label_train <span class="op">=</span> datasets.make_circles(</span>
-<span id="c7b992b9-5"><a href="#c7b992b9-5" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>, shuffle<span class="op">=</span><span class="va">True</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.10</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="c7b992b9-6"><a href="#c7b992b9-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="c7b992b9-7"><a href="#c7b992b9-7" aria-hidden="true" tabindex="-1"></a>Circles_points_test, Circles_label_test <span class="op">=</span> datasets.make_circles(</span>
-<span id="c7b992b9-8"><a href="#c7b992b9-8" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>, shuffle<span class="op">=</span><span class="va">True</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.10</span>, random_state<span class="op">=</span><span class="dv">43</span></span>
-<span id="c7b992b9-9"><a href="#c7b992b9-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="c7b992b9-10"><a href="#c7b992b9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c7b992b9-11"><a href="#c7b992b9-11" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> {}</span>
-<span id="c7b992b9-12"><a href="#c7b992b9-12" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train_input"</span>] <span class="op">=</span> torch.from_numpy(</span>
-<span id="c7b992b9-13"><a href="#c7b992b9-13" aria-hidden="true" tabindex="-1"></a>    Circles_points_train</span>
-<span id="c7b992b9-14"><a href="#c7b992b9-14" aria-hidden="true" tabindex="-1"></a>).<span class="bu">float</span>()  <span class="co"># Ensure that the data is float</span></span>
-<span id="c7b992b9-15"><a href="#c7b992b9-15" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train_label"</span>] <span class="op">=</span> torch.from_numpy(Circles_label_train)</span>
-<span id="c7b992b9-16"><a href="#c7b992b9-16" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"test_input"</span>] <span class="op">=</span> torch.from_numpy(Circles_points_test).<span class="bu">float</span>()</span>
-<span id="c7b992b9-17"><a href="#c7b992b9-17" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"test_label"</span>] <span class="op">=</span> torch.from_numpy(Circles_label_test)</span>
-<span id="c7b992b9-18"><a href="#c7b992b9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c7b992b9-19"><a href="#c7b992b9-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset[<span class="st">"train_input"</span>]</span>
-<span id="c7b992b9-20"><a href="#c7b992b9-20" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset[<span class="st">"train_label"</span>]</span>
-<span id="c7b992b9-21"><a href="#c7b992b9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c7b992b9-22"><a href="#c7b992b9-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="aa2427ed"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="aa2427ed-1"><a href="#aa2427ed-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="aa2427ed-2"><a href="#aa2427ed-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="aa2427ed-3"><a href="#aa2427ed-3" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span>
+<span id="aa2427ed-4"><a href="#aa2427ed-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Using device: </span><span class="sc">{</span>device<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Using device: cuda</code></pre>
+</div>
+</div>
+<div id="5c6328d6" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="5c6328d6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5c6328d6-1"><a href="#5c6328d6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> datasets</span>
+<span id="5c6328d6-2"><a href="#5c6328d6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5c6328d6-3"><a href="#5c6328d6-3" aria-hidden="true" tabindex="-1"></a>Circles_points_train, Circles_label_train <span class="op">=</span> datasets.make_circles(</span>
+<span id="5c6328d6-4"><a href="#5c6328d6-4" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>, shuffle<span class="op">=</span><span class="va">True</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.10</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="5c6328d6-5"><a href="#5c6328d6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5c6328d6-6"><a href="#5c6328d6-6" aria-hidden="true" tabindex="-1"></a>Circles_points_test, Circles_label_test <span class="op">=</span> datasets.make_circles(</span>
+<span id="5c6328d6-7"><a href="#5c6328d6-7" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>, shuffle<span class="op">=</span><span class="va">True</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.10</span>, random_state<span class="op">=</span><span class="dv">43</span></span>
+<span id="5c6328d6-8"><a href="#5c6328d6-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5c6328d6-9"><a href="#5c6328d6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5c6328d6-10"><a href="#5c6328d6-10" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> {}</span>
+<span id="5c6328d6-11"><a href="#5c6328d6-11" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train_input"</span>] <span class="op">=</span> (</span>
+<span id="5c6328d6-12"><a href="#5c6328d6-12" aria-hidden="true" tabindex="-1"></a>    torch.from_numpy(Circles_points_train).<span class="bu">float</span>().to(device)</span>
+<span id="5c6328d6-13"><a href="#5c6328d6-13" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># Ensure that the data is float and on the correct device</span></span>
+<span id="5c6328d6-14"><a href="#5c6328d6-14" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"train_label"</span>] <span class="op">=</span> torch.from_numpy(Circles_label_train).to(device)</span>
+<span id="5c6328d6-15"><a href="#5c6328d6-15" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"test_input"</span>] <span class="op">=</span> torch.from_numpy(Circles_points_test).<span class="bu">float</span>().to(device)</span>
+<span id="5c6328d6-16"><a href="#5c6328d6-16" aria-hidden="true" tabindex="-1"></a>dataset[<span class="st">"test_label"</span>] <span class="op">=</span> torch.from_numpy(Circles_label_test).to(device)</span>
+<span id="5c6328d6-17"><a href="#5c6328d6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5c6328d6-18"><a href="#5c6328d6-18" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> dataset[<span class="st">"train_input"</span>]</span>
+<span id="5c6328d6-19"><a href="#5c6328d6-19" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> dataset[<span class="st">"train_label"</span>]</span>
+<span id="5c6328d6-20"><a href="#5c6328d6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5c6328d6-21"><a href="#5c6328d6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>torch.Size([1000, 2]) torch.Size([1000])</code></pre>
 </div>
 </div>
 <p>The dataset has 1000 samples, 2 features, and 2 classes. We will split the dataset into training and testing sets, and then train a KAN model on the training data and evaluate its performance on the test data. Let’s have a look at what it looks like.</p>
-<div id="34df014c" class="cell" data-execution_count="3">
+<div id="d4a927c2" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="34df014c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="34df014c-1"><a href="#34df014c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot X and y as 2D scatter plot</span></span>
-<span id="34df014c-2"><a href="#34df014c-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="34df014c-3"><a href="#34df014c-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="34df014c-4"><a href="#34df014c-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="34df014c-5"><a href="#34df014c-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"blue"</span>)</span>
-<span id="34df014c-6"><a href="#34df014c-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"red"</span>)</span>
-<span id="34df014c-7"><a href="#34df014c-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d4a927c2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d4a927c2-1"><a href="#d4a927c2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot X and y as 2D scatter plot</span></span>
+<span id="d4a927c2-2"><a href="#d4a927c2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="d4a927c2-3"><a href="#d4a927c2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d4a927c2-4"><a href="#d4a927c2-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="d4a927c2-5"><a href="#d4a927c2-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>].cpu(), X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>].cpu(), color<span class="op">=</span><span class="st">"blue"</span>)</span>
+<span id="d4a927c2-6"><a href="#d4a927c2-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>].cpu(), X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>].cpu(), color<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="d4a927c2-7"><a href="#d4a927c2-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can clearly see this is not a linearly separable dataset, as the two classes are intertwined in a circular pattern. This should be a good test for the KAN approach.</p>
 <p>Let’s now create the model. It will have two input nodes, and two output nodes, one for each class. The key difference from an MLP is that the weights are replaced by learnable activation functions on the edges connecting the nodes.</p>
-<div id="4ae8fe22" class="cell" data-execution_count="4">
+<div id="b8b9b01a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="4ae8fe22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4ae8fe22-1"><a href="#4ae8fe22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kan <span class="im">as</span> kan</span>
-<span id="4ae8fe22-2"><a href="#4ae8fe22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4ae8fe22-3"><a href="#4ae8fe22-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> kan.KAN(width<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], grid<span class="op">=</span><span class="dv">3</span>, k<span class="op">=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b8b9b01a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b8b9b01a-1"><a href="#b8b9b01a-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kan <span class="im">as</span> kan</span>
+<span id="b8b9b01a-2"><a href="#b8b9b01a-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8b9b01a-3"><a href="#b8b9b01a-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> kan.KAN(width<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], grid<span class="op">=</span><span class="dv">3</span>, k<span class="op">=</span><span class="dv">3</span>, device<span class="op">=</span>device)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>checkpoint directory created: ./model
@@ -391,237 +404,237 @@ saving model version 0.0</code></pre>
 </div>
 </div>
 <p>One great thing about the KAN <code>pytorch</code> implementation is that it alows us to easily visualize the model structure. Let’s have a look at it.</p>
-<div id="ec58093c" class="cell" data-execution_count="5">
+<div id="13fc54f6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="ec58093c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ec58093c-1"><a href="#ec58093c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the uninitialized model</span></span>
-<span id="ec58093c-2"><a href="#ec58093c-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="ec58093c-3"><a href="#ec58093c-3" aria-hidden="true" tabindex="-1"></a>model(X)</span>
-<span id="ec58093c-4"><a href="#ec58093c-4" aria-hidden="true" tabindex="-1"></a>model.plot(</span>
-<span id="ec58093c-5"><a href="#ec58093c-5" aria-hidden="true" tabindex="-1"></a>    beta<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="ec58093c-6"><a href="#ec58093c-6" aria-hidden="true" tabindex="-1"></a>    in_vars<span class="op">=</span>[<span class="vs">r"$x_1$"</span>, <span class="vs">r"$x_2$"</span>],</span>
-<span id="ec58093c-7"><a href="#ec58093c-7" aria-hidden="true" tabindex="-1"></a>    out_vars<span class="op">=</span>[<span class="vs">r"$y_1$"</span>, <span class="vs">r"$y_2$"</span>],</span>
-<span id="ec58093c-8"><a href="#ec58093c-8" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Uninitialized model"</span>,</span>
-<span id="ec58093c-9"><a href="#ec58093c-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="13fc54f6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="13fc54f6-1"><a href="#13fc54f6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the uninitialized model</span></span>
+<span id="13fc54f6-2"><a href="#13fc54f6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="13fc54f6-3"><a href="#13fc54f6-3" aria-hidden="true" tabindex="-1"></a>model(X)</span>
+<span id="13fc54f6-4"><a href="#13fc54f6-4" aria-hidden="true" tabindex="-1"></a>model.plot(</span>
+<span id="13fc54f6-5"><a href="#13fc54f6-5" aria-hidden="true" tabindex="-1"></a>    beta<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="13fc54f6-6"><a href="#13fc54f6-6" aria-hidden="true" tabindex="-1"></a>    in_vars<span class="op">=</span>[<span class="vs">r"</span><span class="dv">$</span><span class="vs">x_1</span><span class="dv">$</span><span class="vs">"</span>, <span class="vs">r"</span><span class="dv">$</span><span class="vs">x_2</span><span class="dv">$</span><span class="vs">"</span>],</span>
+<span id="13fc54f6-7"><a href="#13fc54f6-7" aria-hidden="true" tabindex="-1"></a>    out_vars<span class="op">=</span>[<span class="vs">r"</span><span class="dv">$</span><span class="vs">y_1</span><span class="dv">$</span><span class="vs">"</span>, <span class="vs">r"</span><span class="dv">$</span><span class="vs">y_2</span><span class="dv">$</span><span class="vs">"</span>],</span>
+<span id="13fc54f6-8"><a href="#13fc54f6-8" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Uninitialized model"</span>,</span>
+<span id="13fc54f6-9"><a href="#13fc54f6-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Now let us define two metric functions to evaluate the model performance - one for training accuracy, and one for test accuracy. We will then train it on the data and evaluate its performance.</p>
-<div id="6670f0c3" class="cell" data-execution_count="6">
+<div id="612b23f7" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="6670f0c3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6670f0c3-1"><a href="#6670f0c3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_acc():</span>
-<span id="6670f0c3-2"><a href="#6670f0c3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
-<span id="6670f0c3-3"><a href="#6670f0c3-3" aria-hidden="true" tabindex="-1"></a>        (</span>
-<span id="6670f0c3-4"><a href="#6670f0c3-4" aria-hidden="true" tabindex="-1"></a>            torch.argmax(model(dataset[<span class="st">"train_input"</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">"train_label"</span>]</span>
-<span id="6670f0c3-5"><a href="#6670f0c3-5" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">float</span>()</span>
-<span id="6670f0c3-6"><a href="#6670f0c3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="6670f0c3-7"><a href="#6670f0c3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6670f0c3-8"><a href="#6670f0c3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6670f0c3-9"><a href="#6670f0c3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_acc():</span>
-<span id="6670f0c3-10"><a href="#6670f0c3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
-<span id="6670f0c3-11"><a href="#6670f0c3-11" aria-hidden="true" tabindex="-1"></a>        (</span>
-<span id="6670f0c3-12"><a href="#6670f0c3-12" aria-hidden="true" tabindex="-1"></a>            torch.argmax(model(dataset[<span class="st">"test_input"</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">"test_label"</span>]</span>
-<span id="6670f0c3-13"><a href="#6670f0c3-13" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">float</span>()</span>
-<span id="6670f0c3-14"><a href="#6670f0c3-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="6670f0c3-15"><a href="#6670f0c3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6670f0c3-16"><a href="#6670f0c3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6670f0c3-17"><a href="#6670f0c3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Make use of MPS device if available (for Apple Silicon)</span></span>
-<span id="6670f0c3-18"><a href="#6670f0c3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
-<span id="6670f0c3-19"><a href="#6670f0c3-19" aria-hidden="true" tabindex="-1"></a>    mps_device <span class="op">=</span> torch.device(<span class="st">"mps"</span>)</span>
-<span id="6670f0c3-20"><a href="#6670f0c3-20" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> torch.ones(<span class="dv">1</span>, device<span class="op">=</span>mps_device)</span>
-<span id="6670f0c3-21"><a href="#6670f0c3-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span>
-<span id="6670f0c3-22"><a href="#6670f0c3-22" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="6670f0c3-23"><a href="#6670f0c3-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"MPS device not found."</span>)</span>
-<span id="6670f0c3-24"><a href="#6670f0c3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6670f0c3-25"><a href="#6670f0c3-25" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit(</span>
-<span id="6670f0c3-26"><a href="#6670f0c3-26" aria-hidden="true" tabindex="-1"></a>    dataset,</span>
-<span id="6670f0c3-27"><a href="#6670f0c3-27" aria-hidden="true" tabindex="-1"></a>    opt<span class="op">=</span><span class="st">"LBFGS"</span>,</span>
-<span id="6670f0c3-28"><a href="#6670f0c3-28" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="6670f0c3-29"><a href="#6670f0c3-29" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>(train_acc, test_acc),</span>
-<span id="6670f0c3-30"><a href="#6670f0c3-30" aria-hidden="true" tabindex="-1"></a>    loss_fn<span class="op">=</span>torch.nn.CrossEntropyLoss(),</span>
-<span id="6670f0c3-31"><a href="#6670f0c3-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="6670f0c3-32"><a href="#6670f0c3-32" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"train_acc"</span>][<span class="op">-</span><span class="dv">1</span>], results[<span class="st">"test_acc"</span>][<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="612b23f7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="612b23f7-1"><a href="#612b23f7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_acc():</span>
+<span id="612b23f7-2"><a href="#612b23f7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
+<span id="612b23f7-3"><a href="#612b23f7-3" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="612b23f7-4"><a href="#612b23f7-4" aria-hidden="true" tabindex="-1"></a>            torch.argmax(model(dataset[<span class="st">"train_input"</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">"train_label"</span>]</span>
+<span id="612b23f7-5"><a href="#612b23f7-5" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">float</span>()</span>
+<span id="612b23f7-6"><a href="#612b23f7-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="612b23f7-7"><a href="#612b23f7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="612b23f7-8"><a href="#612b23f7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="612b23f7-9"><a href="#612b23f7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_acc():</span>
+<span id="612b23f7-10"><a href="#612b23f7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.mean(</span>
+<span id="612b23f7-11"><a href="#612b23f7-11" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="612b23f7-12"><a href="#612b23f7-12" aria-hidden="true" tabindex="-1"></a>            torch.argmax(model(dataset[<span class="st">"test_input"</span>]), dim<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> dataset[<span class="st">"test_label"</span>]</span>
+<span id="612b23f7-13"><a href="#612b23f7-13" aria-hidden="true" tabindex="-1"></a>        ).<span class="bu">float</span>()</span>
+<span id="612b23f7-14"><a href="#612b23f7-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="612b23f7-15"><a href="#612b23f7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="612b23f7-16"><a href="#612b23f7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="612b23f7-17"><a href="#612b23f7-17" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">"mps"</span> <span class="cf">if</span> torch.mps.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span>
+<span id="612b23f7-18"><a href="#612b23f7-18" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> device)</span>
+<span id="612b23f7-19"><a href="#612b23f7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Using device: </span><span class="sc">{</span>device<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="612b23f7-20"><a href="#612b23f7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="612b23f7-21"><a href="#612b23f7-21" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> torch.ones(<span class="dv">1</span>, device<span class="op">=</span>device)</span>
+<span id="612b23f7-22"><a href="#612b23f7-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="612b23f7-23"><a href="#612b23f7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="612b23f7-24"><a href="#612b23f7-24" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit(</span>
+<span id="612b23f7-25"><a href="#612b23f7-25" aria-hidden="true" tabindex="-1"></a>    dataset,</span>
+<span id="612b23f7-26"><a href="#612b23f7-26" aria-hidden="true" tabindex="-1"></a>    opt<span class="op">=</span><span class="st">"LBFGS"</span>,</span>
+<span id="612b23f7-27"><a href="#612b23f7-27" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="612b23f7-28"><a href="#612b23f7-28" aria-hidden="true" tabindex="-1"></a>    metrics<span class="op">=</span>(train_acc, test_acc),</span>
+<span id="612b23f7-29"><a href="#612b23f7-29" aria-hidden="true" tabindex="-1"></a>    loss_fn<span class="op">=</span>torch.nn.CrossEntropyLoss(),</span>
+<span id="612b23f7-30"><a href="#612b23f7-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="612b23f7-31"><a href="#612b23f7-31" aria-hidden="true" tabindex="-1"></a>results[<span class="st">"train_acc"</span>][<span class="op">-</span><span class="dv">1</span>], results[<span class="st">"test_acc"</span>][<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>tensor([1.], device='mps:0')</code></pre>
+<pre><code>Using device: cuda
+tensor([1.], device='cuda:0')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>saving model version 0.1</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(0.9980000257492065, 0.9890000224113464)</code></pre>
 </div>
 </div>
 <p>That training run took just a few seconds to complete, and the model achieved a test accuracy of 0.98, which is quite impressive given the complexity of the dataset! This demonstrates the power of KANs in handling non-linearly separable data and achieving high accuracy with a simple model.</p>
 <p>Let’s look at the training performance.</p>
-<div id="131515a1" class="cell" data-execution_count="7">
+<div id="00a46bb8" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="131515a1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="131515a1-1"><a href="#131515a1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the training and test accuracy</span></span>
-<span id="131515a1-2"><a href="#131515a1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="131515a1-3"><a href="#131515a1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="131515a1-4"><a href="#131515a1-4" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">"train_acc"</span>], label<span class="op">=</span><span class="st">"train"</span>)</span>
-<span id="131515a1-5"><a href="#131515a1-5" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">"test_acc"</span>], label<span class="op">=</span><span class="st">"test"</span>)</span>
-<span id="131515a1-6"><a href="#131515a1-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="131515a1-7"><a href="#131515a1-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="00a46bb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="00a46bb8-1"><a href="#00a46bb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the training and test accuracy</span></span>
+<span id="00a46bb8-2"><a href="#00a46bb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="00a46bb8-3"><a href="#00a46bb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="00a46bb8-4"><a href="#00a46bb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">"train_acc"</span>], label<span class="op">=</span><span class="st">"train"</span>)</span>
+<span id="00a46bb8-5"><a href="#00a46bb8-5" aria-hidden="true" tabindex="-1"></a>plt.plot(results[<span class="st">"test_acc"</span>], label<span class="op">=</span><span class="st">"test"</span>)</span>
+<span id="00a46bb8-6"><a href="#00a46bb8-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="00a46bb8-7"><a href="#00a46bb8-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can see that the training accuracy increases rapidly and converges to a high value, indicating that the model is learning effectively from the data just after a few training steps.</p>
 <p>Let’s look at it after training.</p>
-<div id="c75311b0" class="cell" data-execution_count="8">
+<div id="fba6a60c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c75311b0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c75311b0-1"><a href="#c75311b0-1" aria-hidden="true" tabindex="-1"></a>model.plot(</span>
-<span id="c75311b0-2"><a href="#c75311b0-2" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Circles, 5 neurons"</span>,</span>
-<span id="c75311b0-3"><a href="#c75311b0-3" aria-hidden="true" tabindex="-1"></a>    in_vars<span class="op">=</span>[<span class="vs">r"$x_1$"</span>, <span class="vs">r"$x_2$"</span>],</span>
-<span id="c75311b0-4"><a href="#c75311b0-4" aria-hidden="true" tabindex="-1"></a>    out_vars<span class="op">=</span>[<span class="vs">r"$y_1$"</span>, <span class="vs">r"$y_2$"</span>],</span>
-<span id="c75311b0-5"><a href="#c75311b0-5" aria-hidden="true" tabindex="-1"></a>    beta<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="c75311b0-6"><a href="#c75311b0-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="fba6a60c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fba6a60c-1"><a href="#fba6a60c-1" aria-hidden="true" tabindex="-1"></a>model.plot(</span>
+<span id="fba6a60c-2"><a href="#fba6a60c-2" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Circles, 5 neurons"</span>,</span>
+<span id="fba6a60c-3"><a href="#fba6a60c-3" aria-hidden="true" tabindex="-1"></a>    in_vars<span class="op">=</span>[<span class="vs">r"</span><span class="dv">$</span><span class="vs">x_1</span><span class="dv">$</span><span class="vs">"</span>, <span class="vs">r"</span><span class="dv">$</span><span class="vs">x_2</span><span class="dv">$</span><span class="vs">"</span>],</span>
+<span id="fba6a60c-4"><a href="#fba6a60c-4" aria-hidden="true" tabindex="-1"></a>    out_vars<span class="op">=</span>[<span class="vs">r"</span><span class="dv">$</span><span class="vs">y_1</span><span class="dv">$</span><span class="vs">"</span>, <span class="vs">r"</span><span class="dv">$</span><span class="vs">y_2</span><span class="dv">$</span><span class="vs">"</span>],</span>
+<span id="fba6a60c-5"><a href="#fba6a60c-5" aria-hidden="true" tabindex="-1"></a>    beta<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="fba6a60c-6"><a href="#fba6a60c-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>You will have noticed that the shape of the activation functions has changed after training. This is because the model has learned the optimal activation functions to map the input data to the output classes effectively.</p>
 <p>Remember that we mentioned that KANs are more interpretable than MLPs? Let’s look at the symbolic representation of the activation functions learned by the model. This is a unique feature of KANs that allows us to understand how the model is making decisions, and which you can’t get from a traditional MLP network.</p>
-<div id="fb1ef69d" class="cell" data-execution_count="9">
+<div id="f8b668c0" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="fb1ef69d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fb1ef69d-1"><a href="#fb1ef69d-1" aria-hidden="true" tabindex="-1"></a>function_library <span class="op">=</span> [</span>
-<span id="fb1ef69d-2"><a href="#fb1ef69d-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>,</span>
-<span id="fb1ef69d-3"><a href="#fb1ef69d-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^2"</span>,</span>
-<span id="fb1ef69d-4"><a href="#fb1ef69d-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^3"</span>,</span>
-<span id="fb1ef69d-5"><a href="#fb1ef69d-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^4"</span>,</span>
-<span id="fb1ef69d-6"><a href="#fb1ef69d-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"exp"</span>,</span>
-<span id="fb1ef69d-7"><a href="#fb1ef69d-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log"</span>,</span>
-<span id="fb1ef69d-8"><a href="#fb1ef69d-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sqrt"</span>,</span>
-<span id="fb1ef69d-9"><a href="#fb1ef69d-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tanh"</span>,</span>
-<span id="fb1ef69d-10"><a href="#fb1ef69d-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sin"</span>,</span>
-<span id="fb1ef69d-11"><a href="#fb1ef69d-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tan"</span>,</span>
-<span id="fb1ef69d-12"><a href="#fb1ef69d-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"abs"</span>,</span>
-<span id="fb1ef69d-13"><a href="#fb1ef69d-13" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="fb1ef69d-14"><a href="#fb1ef69d-14" aria-hidden="true" tabindex="-1"></a>model.auto_symbolic(lib<span class="op">=</span>function_library)</span>
-<span id="fb1ef69d-15"><a href="#fb1ef69d-15" aria-hidden="true" tabindex="-1"></a>formula1, formula2 <span class="op">=</span> model.symbolic_formula()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f8b668c0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f8b668c0-1"><a href="#f8b668c0-1" aria-hidden="true" tabindex="-1"></a>function_library <span class="op">=</span> [</span>
+<span id="f8b668c0-2"><a href="#f8b668c0-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>,</span>
+<span id="f8b668c0-3"><a href="#f8b668c0-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^2"</span>,</span>
+<span id="f8b668c0-4"><a href="#f8b668c0-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^3"</span>,</span>
+<span id="f8b668c0-5"><a href="#f8b668c0-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x^4"</span>,</span>
+<span id="f8b668c0-6"><a href="#f8b668c0-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"exp"</span>,</span>
+<span id="f8b668c0-7"><a href="#f8b668c0-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log"</span>,</span>
+<span id="f8b668c0-8"><a href="#f8b668c0-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sqrt"</span>,</span>
+<span id="f8b668c0-9"><a href="#f8b668c0-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tanh"</span>,</span>
+<span id="f8b668c0-10"><a href="#f8b668c0-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sin"</span>,</span>
+<span id="f8b668c0-11"><a href="#f8b668c0-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tan"</span>,</span>
+<span id="f8b668c0-12"><a href="#f8b668c0-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"abs"</span>,</span>
+<span id="f8b668c0-13"><a href="#f8b668c0-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="f8b668c0-14"><a href="#f8b668c0-14" aria-hidden="true" tabindex="-1"></a>model.auto_symbolic(lib<span class="op">=</span>function_library)</span>
+<span id="f8b668c0-15"><a href="#f8b668c0-15" aria-hidden="true" tabindex="-1"></a>formula1, formula2 <span class="op">=</span> model.symbolic_formula()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>fixing (0,0,0) with sin, r2=0.9502711892127991, c=2
-fixing (0,0,1) with x^2, r2=0.9458399415016174, c=2
-fixing (0,1,0) with sin, r2=0.9953222274780273, c=2
-fixing (0,1,1) with sin, r2=0.995384156703949, c=2
+<pre><code>fixing (0,0,0) with x^2, r2=0.944023072719574, c=2
+fixing (0,0,1) with x^2, r2=0.9523342251777649, c=2
+fixing (0,1,0) with sin, r2=0.9956939220428467, c=2
+fixing (0,1,1) with sin, r2=0.9956303238868713, c=2
 saving model version 0.2</code></pre>
 </div>
 </div>
-<div id="377af703" class="cell" data-execution_count="10">
+<div id="eb9a7ba5" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="377af703"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="377af703-1"><a href="#377af703-1" aria-hidden="true" tabindex="-1"></a>formula1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
-<p><span class="math inline">\(\displaystyle - 395.614929199219 \sin{\left(0.600559830665588 x_{1} + 7.81623983383179 \right)} - 41.3908004760742 \sin{\left(2.02695989608765 x_{2} + 1.60479974746704 \right)} + 392.057125091553\)</span></p>
-</div>
-</div>
-<div id="f5180dda" class="cell" data-execution_count="11">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="f5180dda"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f5180dda-1"><a href="#f5180dda-1" aria-hidden="true" tabindex="-1"></a>formula2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="eb9a7ba5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eb9a7ba5-1"><a href="#eb9a7ba5-1" aria-hidden="true" tabindex="-1"></a>formula1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="10">
-<p><span class="math inline">\(\displaystyle - 59.2461098803678 \left(0.0664703610853865 - x_{1}\right)^{2} + 42.0637092590332 \sin{\left(2.03351974487305 x_{2} + 1.61191976070404 \right)} - 7.05126571655273\)</span></p>
+<p><span class="math inline">\(\displaystyle 65.6034606510272 \left(0.0600098280338495 - x_{1}\right)^{2} - 41.0008277893066 \sin{\left(2.02343988418579 x_{2} + 1.59663987159729 \right)} + 0.722492218017578\)</span></p>
+</div>
+</div>
+<div id="e8c3dbbd" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="e8c3dbbd"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e8c3dbbd-1"><a href="#e8c3dbbd-1" aria-hidden="true" tabindex="-1"></a>formula2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="11">
+<p><span class="math inline">\(\displaystyle - 62.1148479768263 \left(0.0699051752569734 - x_{1}\right)^{2} - 42.7506561279297 \sin{\left(2.01999974250793 x_{2} - 7.80703973770142 \right)} - 3.6636848449707\)</span></p>
 </div>
 </div>
 <p>We get two formulas, one for each class, that represent the activation functions learned by the model. With this, we can now calculate the accuracy of the determined symbolic functions on the test data.</p>
-<div id="82053fc6" class="cell" data-execution_count="12">
+<div id="dced6ca3" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="82053fc6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="82053fc6-1"><a href="#82053fc6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the accuracy of the formula</span></span>
-<span id="82053fc6-2"><a href="#82053fc6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="82053fc6-3"><a href="#82053fc6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="82053fc6-4"><a href="#82053fc6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="82053fc6-5"><a href="#82053fc6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> symbolic_acc(formula1, formula2, X, y):</span>
-<span id="82053fc6-6"><a href="#82053fc6-6" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
-<span id="82053fc6-7"><a href="#82053fc6-7" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
-<span id="82053fc6-8"><a href="#82053fc6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(batch):</span>
-<span id="82053fc6-9"><a href="#82053fc6-9" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">"x_1"</span>, X[i, <span class="dv">0</span>]).subs(<span class="st">"x_2"</span>, X[i, <span class="dv">1</span>])).astype(</span>
-<span id="82053fc6-10"><a href="#82053fc6-10" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
-<span id="82053fc6-11"><a href="#82053fc6-11" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="82053fc6-12"><a href="#82053fc6-12" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">"x_1"</span>, X[i, <span class="dv">0</span>]).subs(<span class="st">"x_2"</span>, X[i, <span class="dv">1</span>])).astype(</span>
-<span id="82053fc6-13"><a href="#82053fc6-13" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
-<span id="82053fc6-14"><a href="#82053fc6-14" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="82053fc6-15"><a href="#82053fc6-15" aria-hidden="true" tabindex="-1"></a>        correct <span class="op">+=</span> (logit2 <span class="op">&gt;</span> logit1) <span class="op">==</span> y[i]</span>
-<span id="82053fc6-16"><a href="#82053fc6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> correct <span class="op">/</span> batch</span>
-<span id="82053fc6-17"><a href="#82053fc6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="82053fc6-18"><a href="#82053fc6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="82053fc6-19"><a href="#82053fc6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="82053fc6-20"><a href="#82053fc6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formula train accuracy:"</span>,</span>
-<span id="82053fc6-21"><a href="#82053fc6-21" aria-hidden="true" tabindex="-1"></a>    symbolic_acc(formula1, formula2, dataset[<span class="st">"train_input"</span>], dataset[<span class="st">"train_label"</span>]),</span>
-<span id="82053fc6-22"><a href="#82053fc6-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="82053fc6-23"><a href="#82053fc6-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="82053fc6-24"><a href="#82053fc6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formula test accuracy:"</span>,</span>
-<span id="82053fc6-25"><a href="#82053fc6-25" aria-hidden="true" tabindex="-1"></a>    symbolic_acc(formula1, formula2, dataset[<span class="st">"test_input"</span>], dataset[<span class="st">"test_label"</span>]),</span>
-<span id="82053fc6-26"><a href="#82053fc6-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="dced6ca3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dced6ca3-1"><a href="#dced6ca3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the accuracy of the formula</span></span>
+<span id="dced6ca3-2"><a href="#dced6ca3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="dced6ca3-3"><a href="#dced6ca3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dced6ca3-4"><a href="#dced6ca3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dced6ca3-5"><a href="#dced6ca3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> symbolic_acc(formula1, formula2, X, y):</span>
+<span id="dced6ca3-6"><a href="#dced6ca3-6" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="dced6ca3-7"><a href="#dced6ca3-7" aria-hidden="true" tabindex="-1"></a>    correct <span class="op">=</span> <span class="dv">0</span></span>
+<span id="dced6ca3-8"><a href="#dced6ca3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(batch):</span>
+<span id="dced6ca3-9"><a href="#dced6ca3-9" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">"x_1"</span>, X[i, <span class="dv">0</span>]).subs(<span class="st">"x_2"</span>, X[i, <span class="dv">1</span>])).astype(</span>
+<span id="dced6ca3-10"><a href="#dced6ca3-10" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="dced6ca3-11"><a href="#dced6ca3-11" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="dced6ca3-12"><a href="#dced6ca3-12" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">"x_1"</span>, X[i, <span class="dv">0</span>]).subs(<span class="st">"x_2"</span>, X[i, <span class="dv">1</span>])).astype(</span>
+<span id="dced6ca3-13"><a href="#dced6ca3-13" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="dced6ca3-14"><a href="#dced6ca3-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="dced6ca3-15"><a href="#dced6ca3-15" aria-hidden="true" tabindex="-1"></a>        correct <span class="op">+=</span> (logit2 <span class="op">&gt;</span> logit1) <span class="op">==</span> y[i]</span>
+<span id="dced6ca3-16"><a href="#dced6ca3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> correct <span class="op">/</span> batch</span>
+<span id="dced6ca3-17"><a href="#dced6ca3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dced6ca3-18"><a href="#dced6ca3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="dced6ca3-19"><a href="#dced6ca3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="dced6ca3-20"><a href="#dced6ca3-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formula train accuracy:"</span>,</span>
+<span id="dced6ca3-21"><a href="#dced6ca3-21" aria-hidden="true" tabindex="-1"></a>    symbolic_acc(formula1, formula2, dataset[<span class="st">"train_input"</span>], dataset[<span class="st">"train_label"</span>]),</span>
+<span id="dced6ca3-22"><a href="#dced6ca3-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="dced6ca3-23"><a href="#dced6ca3-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="dced6ca3-24"><a href="#dced6ca3-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formula test accuracy:"</span>,</span>
+<span id="dced6ca3-25"><a href="#dced6ca3-25" aria-hidden="true" tabindex="-1"></a>    symbolic_acc(formula1, formula2, dataset[<span class="st">"test_input"</span>], dataset[<span class="st">"test_label"</span>]),</span>
+<span id="dced6ca3-26"><a href="#dced6ca3-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>formula train accuracy: tensor(0.9870)
-formula test accuracy: tensor(0.9860)</code></pre>
+<pre><code>formula train accuracy: tensor(0.9870, device='cuda:0')
+formula test accuracy: tensor(0.9870, device='cuda:0')</code></pre>
 </div>
 </div>
 <p>The symbolic functions learned by the model achieve a test accuracy of 0.98, which is very close to the model itself. This demonstrates the power of KANs in learning interpretable activation functions that can effectively map input data to output classes.</p>
 <p>As a last step, let’s visualize the decision boundary learned by the model. This will help us understand how the model is separating the two classes in the input space.</p>
-<div id="a4222c66" class="cell" data-execution_count="13">
+<div id="ff726d22" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="a4222c66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a4222c66-1"><a href="#a4222c66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the symbolic formula as a Plotly contour plot</span></span>
-<span id="a4222c66-2"><a href="#a4222c66-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="a4222c66-3"><a href="#a4222c66-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="a4222c66-4"><a href="#a4222c66-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a4222c66-5"><a href="#a4222c66-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
-<span id="a4222c66-6"><a href="#a4222c66-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
-<span id="a4222c66-7"><a href="#a4222c66-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="a4222c66-8"><a href="#a4222c66-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.zeros_like(X)</span>
-<span id="a4222c66-9"><a href="#a4222c66-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="a4222c66-10"><a href="#a4222c66-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="a4222c66-11"><a href="#a4222c66-11" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">"x_1"</span>, X[i, j]).subs(<span class="st">"x_2"</span>, Y[i, j])).astype(</span>
-<span id="a4222c66-12"><a href="#a4222c66-12" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
-<span id="a4222c66-13"><a href="#a4222c66-13" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="a4222c66-14"><a href="#a4222c66-14" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">"x_1"</span>, X[i, j]).subs(<span class="st">"x_2"</span>, Y[i, j])).astype(</span>
-<span id="a4222c66-15"><a href="#a4222c66-15" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
-<span id="a4222c66-16"><a href="#a4222c66-16" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="a4222c66-17"><a href="#a4222c66-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Determine the class by comparing the logits</span></span>
-<span id="a4222c66-18"><a href="#a4222c66-18" aria-hidden="true" tabindex="-1"></a>        Z[i, j] <span class="op">=</span> logit2 <span class="op">&gt;</span> logit1</span>
-<span id="a4222c66-19"><a href="#a4222c66-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a4222c66-20"><a href="#a4222c66-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="a4222c66-21"><a href="#a4222c66-21" aria-hidden="true" tabindex="-1"></a>plt.contourf(X, Y, Z)</span>
-<span id="a4222c66-22"><a href="#a4222c66-22" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
-<span id="a4222c66-23"><a href="#a4222c66-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
-<span id="a4222c66-24"><a href="#a4222c66-24" aria-hidden="true" tabindex="-1"></a>    Circles_points_train[:, <span class="dv">0</span>],</span>
-<span id="a4222c66-25"><a href="#a4222c66-25" aria-hidden="true" tabindex="-1"></a>    Circles_points_train[:, <span class="dv">1</span>],</span>
-<span id="a4222c66-26"><a href="#a4222c66-26" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>Circles_label_train,</span>
-<span id="a4222c66-27"><a href="#a4222c66-27" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
-<span id="a4222c66-28"><a href="#a4222c66-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="a4222c66-29"><a href="#a4222c66-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ff726d22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ff726d22-1"><a href="#ff726d22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the symbolic formula as a Plotly contour plot</span></span>
+<span id="ff726d22-2"><a href="#ff726d22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="ff726d22-3"><a href="#ff726d22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="ff726d22-4"><a href="#ff726d22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ff726d22-5"><a href="#ff726d22-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
+<span id="ff726d22-6"><a href="#ff726d22-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
+<span id="ff726d22-7"><a href="#ff726d22-7" aria-hidden="true" tabindex="-1"></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="ff726d22-8"><a href="#ff726d22-8" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.zeros_like(X)</span>
+<span id="ff726d22-9"><a href="#ff726d22-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="ff726d22-10"><a href="#ff726d22-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="ff726d22-11"><a href="#ff726d22-11" aria-hidden="true" tabindex="-1"></a>        logit1 <span class="op">=</span> np.array(formula1.subs(<span class="st">"x_1"</span>, X[i, j]).subs(<span class="st">"x_2"</span>, Y[i, j])).astype(</span>
+<span id="ff726d22-12"><a href="#ff726d22-12" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="ff726d22-13"><a href="#ff726d22-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="ff726d22-14"><a href="#ff726d22-14" aria-hidden="true" tabindex="-1"></a>        logit2 <span class="op">=</span> np.array(formula2.subs(<span class="st">"x_1"</span>, X[i, j]).subs(<span class="st">"x_2"</span>, Y[i, j])).astype(</span>
+<span id="ff726d22-15"><a href="#ff726d22-15" aria-hidden="true" tabindex="-1"></a>            np.float64</span>
+<span id="ff726d22-16"><a href="#ff726d22-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="ff726d22-17"><a href="#ff726d22-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Determine the class by comparing the logits</span></span>
+<span id="ff726d22-18"><a href="#ff726d22-18" aria-hidden="true" tabindex="-1"></a>        Z[i, j] <span class="op">=</span> logit2 <span class="op">&gt;</span> logit1</span>
+<span id="ff726d22-19"><a href="#ff726d22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ff726d22-20"><a href="#ff726d22-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="ff726d22-21"><a href="#ff726d22-21" aria-hidden="true" tabindex="-1"></a>plt.contourf(X, Y, Z)</span>
+<span id="ff726d22-22"><a href="#ff726d22-22" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="ff726d22-23"><a href="#ff726d22-23" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="ff726d22-24"><a href="#ff726d22-24" aria-hidden="true" tabindex="-1"></a>    Circles_points_train[:, <span class="dv">0</span>],</span>
+<span id="ff726d22-25"><a href="#ff726d22-25" aria-hidden="true" tabindex="-1"></a>    Circles_points_train[:, <span class="dv">1</span>],</span>
+<span id="ff726d22-26"><a href="#ff726d22-26" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>Circles_label_train,</span>
+<span id="ff726d22-27"><a href="#ff726d22-27" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"coolwarm"</span>,</span>
+<span id="ff726d22-28"><a href="#ff726d22-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="ff726d22-29"><a href="#ff726d22-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -640,236 +653,242 @@ formula test accuracy: tensor(0.9860)</code></pre>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -877,185 +896,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

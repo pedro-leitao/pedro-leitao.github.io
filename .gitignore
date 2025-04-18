@@ -2,6 +2,8 @@
 .jupiter_cache/
 .freeze/
 .luarc.json
+*.log
+.DS_Store
 
 posts/**/.jupyter_cache
 posts/**/*.pth
@@ -13,12 +15,9 @@ posts/**/adapter/
 posts/**/Qwen/
 posts/**/__pycache__/
 posts/**/model/
+posts/**/.nobuild
 
 python-for-students_files/
 python-for-students/**/.jupyter_cache
 posts/**/*.html
 posts/**/__pycache__/
-
-/.luarc.json
-
-/.quarto/

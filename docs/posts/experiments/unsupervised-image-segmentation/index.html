@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -159,7 +161,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -291,58 +293,58 @@ window.Quarto = {
 <section id="generating-a-synthetic-landscape" class="level2">
 <h2 class="anchored" data-anchor-id="generating-a-synthetic-landscape">Generating a synthetic landscape</h2>
 <p>Let’s start by generating a synthetic landscape image that we will use for segmentation. To do so, we will create a simple 512x512 “virtual” landscape of different “heights” between 0 and 1.</p>
-<div id="86bf3f92" class="cell" data-execution_count="2">
+<div id="cda78cb3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="86bf3f92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="86bf3f92-1"><a href="#86bf3f92-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="86bf3f92-2"><a href="#86bf3f92-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="86bf3f92-3"><a href="#86bf3f92-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> noise <span class="im">import</span> pnoise2</span>
-<span id="86bf3f92-4"><a href="#86bf3f92-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="86bf3f92-5"><a href="#86bf3f92-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.measure <span class="im">import</span> find_contours</span>
-<span id="86bf3f92-6"><a href="#86bf3f92-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="86bf3f92-7"><a href="#86bf3f92-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="86bf3f92-8"><a href="#86bf3f92-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_procedural_landscape(</span>
-<span id="86bf3f92-9"><a href="#86bf3f92-9" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">256</span>, scale<span class="op">=</span><span class="fl">100.0</span>, octaves<span class="op">=</span><span class="dv">6</span>, persistence<span class="op">=</span><span class="fl">0.5</span>, lacunarity<span class="op">=</span><span class="fl">2.0</span>, seed<span class="op">=</span><span class="dv">0</span></span>
-<span id="86bf3f92-10"><a href="#86bf3f92-10" aria-hidden="true" tabindex="-1"></a>):</span>
-<span id="86bf3f92-11"><a href="#86bf3f92-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="86bf3f92-12"><a href="#86bf3f92-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate a procedural landscape with hills and valleys using Perlin noise.</span></span>
-<span id="86bf3f92-13"><a href="#86bf3f92-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="86bf3f92-14"><a href="#86bf3f92-14" aria-hidden="true" tabindex="-1"></a><span class="co">    :param size: The size of the landscape (size x size).</span></span>
-<span id="86bf3f92-15"><a href="#86bf3f92-15" aria-hidden="true" tabindex="-1"></a><span class="co">    :param scale: The scale of the noise.</span></span>
-<span id="86bf3f92-16"><a href="#86bf3f92-16" aria-hidden="true" tabindex="-1"></a><span class="co">    :param octaves: Number of layers of noise.</span></span>
-<span id="86bf3f92-17"><a href="#86bf3f92-17" aria-hidden="true" tabindex="-1"></a><span class="co">    :param persistence: Amplitude of each octave.</span></span>
-<span id="86bf3f92-18"><a href="#86bf3f92-18" aria-hidden="true" tabindex="-1"></a><span class="co">    :param lacunarity: Frequency of each octave.</span></span>
-<span id="86bf3f92-19"><a href="#86bf3f92-19" aria-hidden="true" tabindex="-1"></a><span class="co">    :param seed: The seed for generating different landscapes.</span></span>
-<span id="86bf3f92-20"><a href="#86bf3f92-20" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 2D numpy array representing the landscape heights.</span></span>
-<span id="86bf3f92-21"><a href="#86bf3f92-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="86bf3f92-22"><a href="#86bf3f92-22" aria-hidden="true" tabindex="-1"></a>    landscape <span class="op">=</span> np.zeros((size, size))</span>
-<span id="86bf3f92-23"><a href="#86bf3f92-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="86bf3f92-24"><a href="#86bf3f92-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
-<span id="86bf3f92-25"><a href="#86bf3f92-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(size):</span>
-<span id="86bf3f92-26"><a href="#86bf3f92-26" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> (i <span class="op">+</span> seed) <span class="op">/</span> scale</span>
-<span id="86bf3f92-27"><a href="#86bf3f92-27" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> (j <span class="op">+</span> seed) <span class="op">/</span> scale</span>
-<span id="86bf3f92-28"><a href="#86bf3f92-28" aria-hidden="true" tabindex="-1"></a>            landscape[i][j] <span class="op">=</span> pnoise2(</span>
-<span id="86bf3f92-29"><a href="#86bf3f92-29" aria-hidden="true" tabindex="-1"></a>                x, y, octaves<span class="op">=</span>octaves, persistence<span class="op">=</span>persistence, lacunarity<span class="op">=</span>lacunarity</span>
-<span id="86bf3f92-30"><a href="#86bf3f92-30" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="86bf3f92-31"><a href="#86bf3f92-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="86bf3f92-32"><a href="#86bf3f92-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize the values to be between 0 and 1</span></span>
-<span id="86bf3f92-33"><a href="#86bf3f92-33" aria-hidden="true" tabindex="-1"></a>    min_val <span class="op">=</span> np.<span class="bu">min</span>(landscape)</span>
-<span id="86bf3f92-34"><a href="#86bf3f92-34" aria-hidden="true" tabindex="-1"></a>    max_val <span class="op">=</span> np.<span class="bu">max</span>(landscape)</span>
-<span id="86bf3f92-35"><a href="#86bf3f92-35" aria-hidden="true" tabindex="-1"></a>    landscape <span class="op">=</span> (landscape <span class="op">-</span> min_val) <span class="op">/</span> (max_val <span class="op">-</span> min_val)</span>
-<span id="86bf3f92-36"><a href="#86bf3f92-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="86bf3f92-37"><a href="#86bf3f92-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> landscape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cda78cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cda78cb3-1"><a href="#cda78cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cda78cb3-2"><a href="#cda78cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cda78cb3-3"><a href="#cda78cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> noise <span class="im">import</span> pnoise2</span>
+<span id="cda78cb3-4"><a href="#cda78cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cda78cb3-5"><a href="#cda78cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.measure <span class="im">import</span> find_contours</span>
+<span id="cda78cb3-6"><a href="#cda78cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cda78cb3-7"><a href="#cda78cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cda78cb3-8"><a href="#cda78cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_procedural_landscape(</span>
+<span id="cda78cb3-9"><a href="#cda78cb3-9" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">256</span>, scale<span class="op">=</span><span class="fl">100.0</span>, octaves<span class="op">=</span><span class="dv">6</span>, persistence<span class="op">=</span><span class="fl">0.5</span>, lacunarity<span class="op">=</span><span class="fl">2.0</span>, seed<span class="op">=</span><span class="dv">0</span></span>
+<span id="cda78cb3-10"><a href="#cda78cb3-10" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cda78cb3-11"><a href="#cda78cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cda78cb3-12"><a href="#cda78cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate a procedural landscape with hills and valleys using Perlin noise.</span></span>
+<span id="cda78cb3-13"><a href="#cda78cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cda78cb3-14"><a href="#cda78cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">    :param size: The size of the landscape (size x size).</span></span>
+<span id="cda78cb3-15"><a href="#cda78cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">    :param scale: The scale of the noise.</span></span>
+<span id="cda78cb3-16"><a href="#cda78cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">    :param octaves: Number of layers of noise.</span></span>
+<span id="cda78cb3-17"><a href="#cda78cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">    :param persistence: Amplitude of each octave.</span></span>
+<span id="cda78cb3-18"><a href="#cda78cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">    :param lacunarity: Frequency of each octave.</span></span>
+<span id="cda78cb3-19"><a href="#cda78cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">    :param seed: The seed for generating different landscapes.</span></span>
+<span id="cda78cb3-20"><a href="#cda78cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 2D numpy array representing the landscape heights.</span></span>
+<span id="cda78cb3-21"><a href="#cda78cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cda78cb3-22"><a href="#cda78cb3-22" aria-hidden="true" tabindex="-1"></a>    landscape <span class="op">=</span> np.zeros((size, size))</span>
+<span id="cda78cb3-23"><a href="#cda78cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cda78cb3-24"><a href="#cda78cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cda78cb3-25"><a href="#cda78cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cda78cb3-26"><a href="#cda78cb3-26" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> (i <span class="op">+</span> seed) <span class="op">/</span> scale</span>
+<span id="cda78cb3-27"><a href="#cda78cb3-27" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> (j <span class="op">+</span> seed) <span class="op">/</span> scale</span>
+<span id="cda78cb3-28"><a href="#cda78cb3-28" aria-hidden="true" tabindex="-1"></a>            landscape[i][j] <span class="op">=</span> pnoise2(</span>
+<span id="cda78cb3-29"><a href="#cda78cb3-29" aria-hidden="true" tabindex="-1"></a>                x, y, octaves<span class="op">=</span>octaves, persistence<span class="op">=</span>persistence, lacunarity<span class="op">=</span>lacunarity</span>
+<span id="cda78cb3-30"><a href="#cda78cb3-30" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cda78cb3-31"><a href="#cda78cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cda78cb3-32"><a href="#cda78cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize the values to be between 0 and 1</span></span>
+<span id="cda78cb3-33"><a href="#cda78cb3-33" aria-hidden="true" tabindex="-1"></a>    min_val <span class="op">=</span> np.<span class="bu">min</span>(landscape)</span>
+<span id="cda78cb3-34"><a href="#cda78cb3-34" aria-hidden="true" tabindex="-1"></a>    max_val <span class="op">=</span> np.<span class="bu">max</span>(landscape)</span>
+<span id="cda78cb3-35"><a href="#cda78cb3-35" aria-hidden="true" tabindex="-1"></a>    landscape <span class="op">=</span> (landscape <span class="op">-</span> min_val) <span class="op">/</span> (max_val <span class="op">-</span> min_val)</span>
+<span id="cda78cb3-36"><a href="#cda78cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cda78cb3-37"><a href="#cda78cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> landscape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="66aed1b9" class="cell" data-execution_count="3">
+<div id="3fbc23ad" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="66aed1b9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="66aed1b9-1"><a href="#66aed1b9-1" aria-hidden="true" tabindex="-1"></a>landscape <span class="op">=</span> generate_procedural_landscape(size<span class="op">=</span><span class="dv">512</span>, scale<span class="op">=</span><span class="dv">128</span>)</span>
-<span id="66aed1b9-2"><a href="#66aed1b9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="66aed1b9-3"><a href="#66aed1b9-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="66aed1b9-4"><a href="#66aed1b9-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape, cmap<span class="op">=</span><span class="st">"terrain"</span>)</span>
-<span id="66aed1b9-5"><a href="#66aed1b9-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Procedural Landscape"</span>)</span>
-<span id="66aed1b9-6"><a href="#66aed1b9-6" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
-<span id="66aed1b9-7"><a href="#66aed1b9-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="3fbc23ad"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3fbc23ad-1"><a href="#3fbc23ad-1" aria-hidden="true" tabindex="-1"></a>landscape <span class="op">=</span> generate_procedural_landscape(size<span class="op">=</span><span class="dv">512</span>, scale<span class="op">=</span><span class="dv">128</span>)</span>
+<span id="3fbc23ad-2"><a href="#3fbc23ad-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3fbc23ad-3"><a href="#3fbc23ad-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="3fbc23ad-4"><a href="#3fbc23ad-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape, cmap<span class="op">=</span><span class="st">"terrain"</span>)</span>
+<span id="3fbc23ad-5"><a href="#3fbc23ad-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Procedural Landscape"</span>)</span>
+<span id="3fbc23ad-6"><a href="#3fbc23ad-6" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="3fbc23ad-7"><a href="#3fbc23ad-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -353,39 +355,39 @@ window.Quarto = {
 </div>
 </div>
 <p>We have a simple image, where the pixel intensity represents the height of the landscape. To make it visually intuitive to understand what we are doing, let us identify and visualise isolines of different heights. Isolines are lines that connect points of equal value, such as points of equal height in a landscape.</p>
-<div id="1a0e3bc1" class="cell" data-execution_count="4">
+<div id="f84910df" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="1a0e3bc1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1a0e3bc1-1"><a href="#1a0e3bc1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> landscape_isocontour(landscape, thresholds<span class="op">=</span>[<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>]):</span>
-<span id="1a0e3bc1-2"><a href="#1a0e3bc1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="1a0e3bc1-3"><a href="#1a0e3bc1-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate iso-contour lines for the landscape.</span></span>
-<span id="1a0e3bc1-4"><a href="#1a0e3bc1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="1a0e3bc1-5"><a href="#1a0e3bc1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param landscape: A 2D numpy array representing the landscape heights.</span></span>
-<span id="1a0e3bc1-6"><a href="#1a0e3bc1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param thresholds: List of threshold values for the isocontours.</span></span>
-<span id="1a0e3bc1-7"><a href="#1a0e3bc1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A list of contour arrays.</span></span>
-<span id="1a0e3bc1-8"><a href="#1a0e3bc1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="1a0e3bc1-9"><a href="#1a0e3bc1-9" aria-hidden="true" tabindex="-1"></a>    contours <span class="op">=</span> []</span>
-<span id="1a0e3bc1-10"><a href="#1a0e3bc1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> threshold <span class="kw">in</span> thresholds:</span>
-<span id="1a0e3bc1-11"><a href="#1a0e3bc1-11" aria-hidden="true" tabindex="-1"></a>        contour <span class="op">=</span> find_contours(landscape, level<span class="op">=</span>threshold)</span>
-<span id="1a0e3bc1-12"><a href="#1a0e3bc1-12" aria-hidden="true" tabindex="-1"></a>        contours.append(contour)</span>
-<span id="1a0e3bc1-13"><a href="#1a0e3bc1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> contours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f84910df"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f84910df-1"><a href="#f84910df-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> landscape_isocontour(landscape, thresholds<span class="op">=</span>[<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>]):</span>
+<span id="f84910df-2"><a href="#f84910df-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="f84910df-3"><a href="#f84910df-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate iso-contour lines for the landscape.</span></span>
+<span id="f84910df-4"><a href="#f84910df-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f84910df-5"><a href="#f84910df-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param landscape: A 2D numpy array representing the landscape heights.</span></span>
+<span id="f84910df-6"><a href="#f84910df-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param thresholds: List of threshold values for the isocontours.</span></span>
+<span id="f84910df-7"><a href="#f84910df-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A list of contour arrays.</span></span>
+<span id="f84910df-8"><a href="#f84910df-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="f84910df-9"><a href="#f84910df-9" aria-hidden="true" tabindex="-1"></a>    contours <span class="op">=</span> []</span>
+<span id="f84910df-10"><a href="#f84910df-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> threshold <span class="kw">in</span> thresholds:</span>
+<span id="f84910df-11"><a href="#f84910df-11" aria-hidden="true" tabindex="-1"></a>        contour <span class="op">=</span> find_contours(landscape, level<span class="op">=</span>threshold)</span>
+<span id="f84910df-12"><a href="#f84910df-12" aria-hidden="true" tabindex="-1"></a>        contours.append(contour)</span>
+<span id="f84910df-13"><a href="#f84910df-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> contours</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="9920f718" class="cell" data-execution_count="5">
+<div id="3f01153d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="9920f718"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9920f718-1"><a href="#9920f718-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate isocontours for the landscape</span></span>
-<span id="9920f718-2"><a href="#9920f718-2" aria-hidden="true" tabindex="-1"></a>contours <span class="op">=</span> landscape_isocontour(landscape, thresholds<span class="op">=</span>[<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>])</span>
-<span id="9920f718-3"><a href="#9920f718-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9920f718-4"><a href="#9920f718-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the landscape with isocontours</span></span>
-<span id="9920f718-5"><a href="#9920f718-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="9920f718-6"><a href="#9920f718-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape, cmap<span class="op">=</span><span class="st">"terrain"</span>)</span>
-<span id="9920f718-7"><a href="#9920f718-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Procedural Landscape with Isocontours"</span>)</span>
-<span id="9920f718-8"><a href="#9920f718-8" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
-<span id="9920f718-9"><a href="#9920f718-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> contour <span class="kw">in</span> contours:</span>
-<span id="9920f718-10"><a href="#9920f718-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> contour:</span>
-<span id="9920f718-11"><a href="#9920f718-11" aria-hidden="true" tabindex="-1"></a>        plt.plot(line[:, <span class="dv">1</span>], line[:, <span class="dv">0</span>], linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="9920f718-12"><a href="#9920f718-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="3f01153d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3f01153d-1"><a href="#3f01153d-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate isocontours for the landscape</span></span>
+<span id="3f01153d-2"><a href="#3f01153d-2" aria-hidden="true" tabindex="-1"></a>contours <span class="op">=</span> landscape_isocontour(landscape, thresholds<span class="op">=</span>[<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>])</span>
+<span id="3f01153d-3"><a href="#3f01153d-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3f01153d-4"><a href="#3f01153d-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the landscape with isocontours</span></span>
+<span id="3f01153d-5"><a href="#3f01153d-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="3f01153d-6"><a href="#3f01153d-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape, cmap<span class="op">=</span><span class="st">"terrain"</span>)</span>
+<span id="3f01153d-7"><a href="#3f01153d-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Procedural Landscape with Isocontours"</span>)</span>
+<span id="3f01153d-8"><a href="#3f01153d-8" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="3f01153d-9"><a href="#3f01153d-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> contour <span class="kw">in</span> contours:</span>
+<span id="3f01153d-10"><a href="#3f01153d-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> contour:</span>
+<span id="3f01153d-11"><a href="#3f01153d-11" aria-hidden="true" tabindex="-1"></a>        plt.plot(line[:, <span class="dv">1</span>], line[:, <span class="dv">0</span>], linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="3f01153d-12"><a href="#3f01153d-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -396,101 +398,101 @@ window.Quarto = {
 </div>
 </div>
 <p>That looks interesting. What we ultimately are trying to synthethise is something which looks like a satellite view of a natural landscape. To do this, let us take this height representation, and convert it into a color representation where low lying areas are blue (water), high lying areas are white (snow), and everything in between is green (grass) or brown (mountains). To do so, we will apply a color map to the height representation, and interpolate between colors to create gradients representing intermediate areas.</p>
-<div id="e5c0b22f" class="cell" data-execution_count="6">
+<div id="292da074" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="e5c0b22f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e5c0b22f-1"><a href="#e5c0b22f-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lerp(color1, color2, t):</span>
-<span id="e5c0b22f-2"><a href="#e5c0b22f-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="e5c0b22f-3"><a href="#e5c0b22f-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Linearly interpolate between two colors.</span></span>
-<span id="e5c0b22f-4"><a href="#e5c0b22f-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-5"><a href="#e5c0b22f-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param color1: The first color (as an array of [R, G, B]).</span></span>
-<span id="e5c0b22f-6"><a href="#e5c0b22f-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param color2: The second color (as an array of [R, G, B]).</span></span>
-<span id="e5c0b22f-7"><a href="#e5c0b22f-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :param t: The interpolation parameter (0 &lt;= t &lt;= 1).</span></span>
-<span id="e5c0b22f-8"><a href="#e5c0b22f-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: The interpolated color.</span></span>
-<span id="e5c0b22f-9"><a href="#e5c0b22f-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="e5c0b22f-10"><a href="#e5c0b22f-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> np.array(color1) <span class="op">+</span> t <span class="op">*</span> np.array(color2)</span>
-<span id="e5c0b22f-11"><a href="#e5c0b22f-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-12"><a href="#e5c0b22f-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-13"><a href="#e5c0b22f-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_colormap(</span>
-<span id="e5c0b22f-14"><a href="#e5c0b22f-14" aria-hidden="true" tabindex="-1"></a>    landscape,</span>
-<span id="e5c0b22f-15"><a href="#e5c0b22f-15" aria-hidden="true" tabindex="-1"></a>    water_color<span class="op">=</span>[<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">220</span>],</span>
-<span id="e5c0b22f-16"><a href="#e5c0b22f-16" aria-hidden="true" tabindex="-1"></a>    grass_color<span class="op">=</span>[<span class="dv">20</span>, <span class="dv">220</span>, <span class="dv">20</span>],</span>
-<span id="e5c0b22f-17"><a href="#e5c0b22f-17" aria-hidden="true" tabindex="-1"></a>    mountain_color<span class="op">=</span>[<span class="dv">139</span>, <span class="dv">69</span>, <span class="dv">19</span>],</span>
-<span id="e5c0b22f-18"><a href="#e5c0b22f-18" aria-hidden="true" tabindex="-1"></a>    snow_color<span class="op">=</span>[<span class="dv">220</span>, <span class="dv">220</span>, <span class="dv">220</span>],</span>
-<span id="e5c0b22f-19"><a href="#e5c0b22f-19" aria-hidden="true" tabindex="-1"></a>    transition_width<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="e5c0b22f-20"><a href="#e5c0b22f-20" aria-hidden="true" tabindex="-1"></a>    water_threshold<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="e5c0b22f-21"><a href="#e5c0b22f-21" aria-hidden="true" tabindex="-1"></a>    grass_threshold<span class="op">=</span><span class="fl">0.6</span>,</span>
-<span id="e5c0b22f-22"><a href="#e5c0b22f-22" aria-hidden="true" tabindex="-1"></a>    mountain_threshold<span class="op">=</span><span class="fl">0.8</span>,</span>
-<span id="e5c0b22f-23"><a href="#e5c0b22f-23" aria-hidden="true" tabindex="-1"></a>):</span>
-<span id="e5c0b22f-24"><a href="#e5c0b22f-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="e5c0b22f-25"><a href="#e5c0b22f-25" aria-hidden="true" tabindex="-1"></a><span class="co">    Apply a colormap to the landscape to simulate various elements (e.g., water, grass, mountains, snow) with soft edges.</span></span>
-<span id="e5c0b22f-26"><a href="#e5c0b22f-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-27"><a href="#e5c0b22f-27" aria-hidden="true" tabindex="-1"></a><span class="co">    :param landscape: A 2D numpy array representing the landscape heights.</span></span>
-<span id="e5c0b22f-28"><a href="#e5c0b22f-28" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 3D numpy array with RGB values.</span></span>
-<span id="e5c0b22f-29"><a href="#e5c0b22f-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="e5c0b22f-30"><a href="#e5c0b22f-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-31"><a href="#e5c0b22f-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an RGB image</span></span>
-<span id="e5c0b22f-32"><a href="#e5c0b22f-32" aria-hidden="true" tabindex="-1"></a>    rgb_image <span class="op">=</span> np.zeros((landscape.shape[<span class="dv">0</span>], landscape.shape[<span class="dv">1</span>], <span class="dv">3</span>), dtype<span class="op">=</span>np.uint8)</span>
-<span id="e5c0b22f-33"><a href="#e5c0b22f-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-34"><a href="#e5c0b22f-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply colors based on thresholds with gradients</span></span>
-<span id="e5c0b22f-35"><a href="#e5c0b22f-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(landscape.shape[<span class="dv">0</span>]):</span>
-<span id="e5c0b22f-36"><a href="#e5c0b22f-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(landscape.shape[<span class="dv">1</span>]):</span>
-<span id="e5c0b22f-37"><a href="#e5c0b22f-37" aria-hidden="true" tabindex="-1"></a>            height <span class="op">=</span> landscape[i, j]</span>
-<span id="e5c0b22f-38"><a href="#e5c0b22f-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-39"><a href="#e5c0b22f-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> height <span class="op">&lt;</span> water_threshold <span class="op">-</span> transition_width:</span>
-<span id="e5c0b22f-40"><a href="#e5c0b22f-40" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> water_color</span>
-<span id="e5c0b22f-41"><a href="#e5c0b22f-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> water_threshold <span class="op">+</span> transition_width:</span>
-<span id="e5c0b22f-42"><a href="#e5c0b22f-42" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> (height <span class="op">-</span> (water_threshold <span class="op">-</span> transition_width)) <span class="op">/</span> (</span>
-<span id="e5c0b22f-43"><a href="#e5c0b22f-43" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">2</span> <span class="op">*</span> transition_width</span>
-<span id="e5c0b22f-44"><a href="#e5c0b22f-44" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="e5c0b22f-45"><a href="#e5c0b22f-45" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> lerp(water_color, grass_color, t)</span>
-<span id="e5c0b22f-46"><a href="#e5c0b22f-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> grass_threshold <span class="op">-</span> transition_width:</span>
-<span id="e5c0b22f-47"><a href="#e5c0b22f-47" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> grass_color</span>
-<span id="e5c0b22f-48"><a href="#e5c0b22f-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> grass_threshold <span class="op">+</span> transition_width:</span>
-<span id="e5c0b22f-49"><a href="#e5c0b22f-49" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> (height <span class="op">-</span> (grass_threshold <span class="op">-</span> transition_width)) <span class="op">/</span> (</span>
-<span id="e5c0b22f-50"><a href="#e5c0b22f-50" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">2</span> <span class="op">*</span> transition_width</span>
-<span id="e5c0b22f-51"><a href="#e5c0b22f-51" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="e5c0b22f-52"><a href="#e5c0b22f-52" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> lerp(grass_color, mountain_color, t)</span>
-<span id="e5c0b22f-53"><a href="#e5c0b22f-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> mountain_threshold <span class="op">-</span> transition_width:</span>
-<span id="e5c0b22f-54"><a href="#e5c0b22f-54" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> mountain_color</span>
-<span id="e5c0b22f-55"><a href="#e5c0b22f-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> mountain_threshold <span class="op">+</span> transition_width:</span>
-<span id="e5c0b22f-56"><a href="#e5c0b22f-56" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> (height <span class="op">-</span> (mountain_threshold <span class="op">-</span> transition_width)) <span class="op">/</span> (</span>
-<span id="e5c0b22f-57"><a href="#e5c0b22f-57" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">2</span> <span class="op">*</span> transition_width</span>
-<span id="e5c0b22f-58"><a href="#e5c0b22f-58" aria-hidden="true" tabindex="-1"></a>                )</span>
-<span id="e5c0b22f-59"><a href="#e5c0b22f-59" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> lerp(mountain_color, snow_color, t)</span>
-<span id="e5c0b22f-60"><a href="#e5c0b22f-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="e5c0b22f-61"><a href="#e5c0b22f-61" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> snow_color</span>
-<span id="e5c0b22f-62"><a href="#e5c0b22f-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-63"><a href="#e5c0b22f-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rgb_image</span>
-<span id="e5c0b22f-64"><a href="#e5c0b22f-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-65"><a href="#e5c0b22f-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-66"><a href="#e5c0b22f-66" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> landscape_as_image(landscape, transition_width<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="e5c0b22f-67"><a href="#e5c0b22f-67" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="e5c0b22f-68"><a href="#e5c0b22f-68" aria-hidden="true" tabindex="-1"></a><span class="co">    Save the procedural landscape as a colorful image file.</span></span>
-<span id="e5c0b22f-69"><a href="#e5c0b22f-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-70"><a href="#e5c0b22f-70" aria-hidden="true" tabindex="-1"></a><span class="co">    :param landscape: A 2D numpy array representing the landscape heights.</span></span>
-<span id="e5c0b22f-71"><a href="#e5c0b22f-71" aria-hidden="true" tabindex="-1"></a><span class="co">    :param filename: The filename to save the image as.</span></span>
-<span id="e5c0b22f-72"><a href="#e5c0b22f-72" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="e5c0b22f-73"><a href="#e5c0b22f-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply the colormap</span></span>
-<span id="e5c0b22f-74"><a href="#e5c0b22f-74" aria-hidden="true" tabindex="-1"></a>    rgb_image <span class="op">=</span> apply_colormap(landscape, transition_width<span class="op">=</span>transition_width)</span>
-<span id="e5c0b22f-75"><a href="#e5c0b22f-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-76"><a href="#e5c0b22f-76" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an image object</span></span>
-<span id="e5c0b22f-77"><a href="#e5c0b22f-77" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> Image.fromarray(rgb_image, mode<span class="op">=</span><span class="st">"RGB"</span>)</span>
-<span id="e5c0b22f-78"><a href="#e5c0b22f-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5c0b22f-79"><a href="#e5c0b22f-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="292da074"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="292da074-1"><a href="#292da074-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lerp(color1, color2, t):</span>
+<span id="292da074-2"><a href="#292da074-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="292da074-3"><a href="#292da074-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Linearly interpolate between two colors.</span></span>
+<span id="292da074-4"><a href="#292da074-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-5"><a href="#292da074-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param color1: The first color (as an array of [R, G, B]).</span></span>
+<span id="292da074-6"><a href="#292da074-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param color2: The second color (as an array of [R, G, B]).</span></span>
+<span id="292da074-7"><a href="#292da074-7" aria-hidden="true" tabindex="-1"></a><span class="co">    :param t: The interpolation parameter (0 &lt;= t &lt;= 1).</span></span>
+<span id="292da074-8"><a href="#292da074-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: The interpolated color.</span></span>
+<span id="292da074-9"><a href="#292da074-9" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="292da074-10"><a href="#292da074-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> np.array(color1) <span class="op">+</span> t <span class="op">*</span> np.array(color2)</span>
+<span id="292da074-11"><a href="#292da074-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-12"><a href="#292da074-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-13"><a href="#292da074-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_colormap(</span>
+<span id="292da074-14"><a href="#292da074-14" aria-hidden="true" tabindex="-1"></a>    landscape,</span>
+<span id="292da074-15"><a href="#292da074-15" aria-hidden="true" tabindex="-1"></a>    water_color<span class="op">=</span>[<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">220</span>],</span>
+<span id="292da074-16"><a href="#292da074-16" aria-hidden="true" tabindex="-1"></a>    grass_color<span class="op">=</span>[<span class="dv">20</span>, <span class="dv">220</span>, <span class="dv">20</span>],</span>
+<span id="292da074-17"><a href="#292da074-17" aria-hidden="true" tabindex="-1"></a>    mountain_color<span class="op">=</span>[<span class="dv">139</span>, <span class="dv">69</span>, <span class="dv">19</span>],</span>
+<span id="292da074-18"><a href="#292da074-18" aria-hidden="true" tabindex="-1"></a>    snow_color<span class="op">=</span>[<span class="dv">220</span>, <span class="dv">220</span>, <span class="dv">220</span>],</span>
+<span id="292da074-19"><a href="#292da074-19" aria-hidden="true" tabindex="-1"></a>    transition_width<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="292da074-20"><a href="#292da074-20" aria-hidden="true" tabindex="-1"></a>    water_threshold<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="292da074-21"><a href="#292da074-21" aria-hidden="true" tabindex="-1"></a>    grass_threshold<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="292da074-22"><a href="#292da074-22" aria-hidden="true" tabindex="-1"></a>    mountain_threshold<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="292da074-23"><a href="#292da074-23" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="292da074-24"><a href="#292da074-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="292da074-25"><a href="#292da074-25" aria-hidden="true" tabindex="-1"></a><span class="co">    Apply a colormap to the landscape to simulate various elements (e.g., water, grass, mountains, snow) with soft edges.</span></span>
+<span id="292da074-26"><a href="#292da074-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-27"><a href="#292da074-27" aria-hidden="true" tabindex="-1"></a><span class="co">    :param landscape: A 2D numpy array representing the landscape heights.</span></span>
+<span id="292da074-28"><a href="#292da074-28" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 3D numpy array with RGB values.</span></span>
+<span id="292da074-29"><a href="#292da074-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="292da074-30"><a href="#292da074-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-31"><a href="#292da074-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an RGB image</span></span>
+<span id="292da074-32"><a href="#292da074-32" aria-hidden="true" tabindex="-1"></a>    rgb_image <span class="op">=</span> np.zeros((landscape.shape[<span class="dv">0</span>], landscape.shape[<span class="dv">1</span>], <span class="dv">3</span>), dtype<span class="op">=</span>np.uint8)</span>
+<span id="292da074-33"><a href="#292da074-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-34"><a href="#292da074-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply colors based on thresholds with gradients</span></span>
+<span id="292da074-35"><a href="#292da074-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(landscape.shape[<span class="dv">0</span>]):</span>
+<span id="292da074-36"><a href="#292da074-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(landscape.shape[<span class="dv">1</span>]):</span>
+<span id="292da074-37"><a href="#292da074-37" aria-hidden="true" tabindex="-1"></a>            height <span class="op">=</span> landscape[i, j]</span>
+<span id="292da074-38"><a href="#292da074-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-39"><a href="#292da074-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> height <span class="op">&lt;</span> water_threshold <span class="op">-</span> transition_width:</span>
+<span id="292da074-40"><a href="#292da074-40" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> water_color</span>
+<span id="292da074-41"><a href="#292da074-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> water_threshold <span class="op">+</span> transition_width:</span>
+<span id="292da074-42"><a href="#292da074-42" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> (height <span class="op">-</span> (water_threshold <span class="op">-</span> transition_width)) <span class="op">/</span> (</span>
+<span id="292da074-43"><a href="#292da074-43" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">2</span> <span class="op">*</span> transition_width</span>
+<span id="292da074-44"><a href="#292da074-44" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="292da074-45"><a href="#292da074-45" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> lerp(water_color, grass_color, t)</span>
+<span id="292da074-46"><a href="#292da074-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> grass_threshold <span class="op">-</span> transition_width:</span>
+<span id="292da074-47"><a href="#292da074-47" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> grass_color</span>
+<span id="292da074-48"><a href="#292da074-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> grass_threshold <span class="op">+</span> transition_width:</span>
+<span id="292da074-49"><a href="#292da074-49" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> (height <span class="op">-</span> (grass_threshold <span class="op">-</span> transition_width)) <span class="op">/</span> (</span>
+<span id="292da074-50"><a href="#292da074-50" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">2</span> <span class="op">*</span> transition_width</span>
+<span id="292da074-51"><a href="#292da074-51" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="292da074-52"><a href="#292da074-52" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> lerp(grass_color, mountain_color, t)</span>
+<span id="292da074-53"><a href="#292da074-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> mountain_threshold <span class="op">-</span> transition_width:</span>
+<span id="292da074-54"><a href="#292da074-54" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> mountain_color</span>
+<span id="292da074-55"><a href="#292da074-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> height <span class="op">&lt;</span> mountain_threshold <span class="op">+</span> transition_width:</span>
+<span id="292da074-56"><a href="#292da074-56" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> (height <span class="op">-</span> (mountain_threshold <span class="op">-</span> transition_width)) <span class="op">/</span> (</span>
+<span id="292da074-57"><a href="#292da074-57" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">2</span> <span class="op">*</span> transition_width</span>
+<span id="292da074-58"><a href="#292da074-58" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="292da074-59"><a href="#292da074-59" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> lerp(mountain_color, snow_color, t)</span>
+<span id="292da074-60"><a href="#292da074-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="292da074-61"><a href="#292da074-61" aria-hidden="true" tabindex="-1"></a>                rgb_image[i, j] <span class="op">=</span> snow_color</span>
+<span id="292da074-62"><a href="#292da074-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-63"><a href="#292da074-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rgb_image</span>
+<span id="292da074-64"><a href="#292da074-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-65"><a href="#292da074-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-66"><a href="#292da074-66" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> landscape_as_image(landscape, transition_width<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="292da074-67"><a href="#292da074-67" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="292da074-68"><a href="#292da074-68" aria-hidden="true" tabindex="-1"></a><span class="co">    Save the procedural landscape as a colorful image file.</span></span>
+<span id="292da074-69"><a href="#292da074-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-70"><a href="#292da074-70" aria-hidden="true" tabindex="-1"></a><span class="co">    :param landscape: A 2D numpy array representing the landscape heights.</span></span>
+<span id="292da074-71"><a href="#292da074-71" aria-hidden="true" tabindex="-1"></a><span class="co">    :param filename: The filename to save the image as.</span></span>
+<span id="292da074-72"><a href="#292da074-72" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="292da074-73"><a href="#292da074-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply the colormap</span></span>
+<span id="292da074-74"><a href="#292da074-74" aria-hidden="true" tabindex="-1"></a>    rgb_image <span class="op">=</span> apply_colormap(landscape, transition_width<span class="op">=</span>transition_width)</span>
+<span id="292da074-75"><a href="#292da074-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-76"><a href="#292da074-76" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an image object</span></span>
+<span id="292da074-77"><a href="#292da074-77" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> Image.fromarray(rgb_image, mode<span class="op">=</span><span class="st">"RGB"</span>)</span>
+<span id="292da074-78"><a href="#292da074-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="292da074-79"><a href="#292da074-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="997a5397" class="cell" data-execution_count="7">
+<div id="08f48cd4" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="997a5397"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="997a5397-1"><a href="#997a5397-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the landscape to an image which represents different elements, such as water, grass, mountains, and snow</span></span>
-<span id="997a5397-2"><a href="#997a5397-2" aria-hidden="true" tabindex="-1"></a>landscape_image <span class="op">=</span> landscape_as_image(landscape, transition_width<span class="op">=</span><span class="fl">0.06</span>)</span>
-<span id="997a5397-3"><a href="#997a5397-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="997a5397-4"><a href="#997a5397-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="997a5397-5"><a href="#997a5397-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape_image)</span>
-<span id="997a5397-6"><a href="#997a5397-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Procedural Landscape with Colormap"</span>)</span>
-<span id="997a5397-7"><a href="#997a5397-7" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
-<span id="997a5397-8"><a href="#997a5397-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="08f48cd4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="08f48cd4-1"><a href="#08f48cd4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the landscape to an image which represents different elements, such as water, grass, mountains, and snow</span></span>
+<span id="08f48cd4-2"><a href="#08f48cd4-2" aria-hidden="true" tabindex="-1"></a>landscape_image <span class="op">=</span> landscape_as_image(landscape, transition_width<span class="op">=</span><span class="fl">0.06</span>)</span>
+<span id="08f48cd4-3"><a href="#08f48cd4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="08f48cd4-4"><a href="#08f48cd4-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="08f48cd4-5"><a href="#08f48cd4-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape_image)</span>
+<span id="08f48cd4-6"><a href="#08f48cd4-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Procedural Landscape with Colormap"</span>)</span>
+<span id="08f48cd4-7"><a href="#08f48cd4-7" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="08f48cd4-8"><a href="#08f48cd4-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -518,73 +520,73 @@ Note
 <section id="segmentation-using-k-means-clustering" class="level2">
 <h2 class="anchored" data-anchor-id="segmentation-using-k-means-clustering">Segmentation using k-means clustering</h2>
 <p>Now that we have our synthetic landscape, we will segment it using k-means clustering. The goal is to group pixels with similar colors together, forming distinct regions in the image. k-means clustering is an iterative algorithm that partitions the data into <span class="math inline">\(\mathbf{k}\)</span> clusters based on the similarity of their features. In our case, the features are the RGB values of each pixel.</p>
-<div id="bc30aac8" class="cell" data-execution_count="8">
+<div id="5e11f10d" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="bc30aac8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="bc30aac8-1"><a href="#bc30aac8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="bc30aac8-2"><a href="#bc30aac8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-3"><a href="#bc30aac8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-4"><a href="#bc30aac8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_image(image, n_clusters<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="bc30aac8-5"><a href="#bc30aac8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="bc30aac8-6"><a href="#bc30aac8-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Classify the image into regions using K-means clustering.</span></span>
-<span id="bc30aac8-7"><a href="#bc30aac8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-8"><a href="#bc30aac8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param image_np: A numpy array representing the image.</span></span>
-<span id="bc30aac8-9"><a href="#bc30aac8-9" aria-hidden="true" tabindex="-1"></a><span class="co">    :param n_clusters: The number of clusters to classify into.</span></span>
-<span id="bc30aac8-10"><a href="#bc30aac8-10" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 2D numpy array with cluster labels and the cluster centers as RGB values.</span></span>
-<span id="bc30aac8-11"><a href="#bc30aac8-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="bc30aac8-12"><a href="#bc30aac8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the image to a numpy array</span></span>
-<span id="bc30aac8-13"><a href="#bc30aac8-13" aria-hidden="true" tabindex="-1"></a>    image_np <span class="op">=</span> np.array(image)</span>
-<span id="bc30aac8-14"><a href="#bc30aac8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-15"><a href="#bc30aac8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reshape the image to a list of pixels</span></span>
-<span id="bc30aac8-16"><a href="#bc30aac8-16" aria-hidden="true" tabindex="-1"></a>    pixels <span class="op">=</span> image_np.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="bc30aac8-17"><a href="#bc30aac8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-18"><a href="#bc30aac8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform K-means clustering</span></span>
-<span id="bc30aac8-19"><a href="#bc30aac8-19" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>n_clusters, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="bc30aac8-20"><a href="#bc30aac8-20" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(pixels)</span>
-<span id="bc30aac8-21"><a href="#bc30aac8-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-22"><a href="#bc30aac8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the cluster labels and centers</span></span>
-<span id="bc30aac8-23"><a href="#bc30aac8-23" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> kmeans.labels_</span>
-<span id="bc30aac8-24"><a href="#bc30aac8-24" aria-hidden="true" tabindex="-1"></a>    centers <span class="op">=</span> kmeans.cluster_centers_</span>
-<span id="bc30aac8-25"><a href="#bc30aac8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-26"><a href="#bc30aac8-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reshape the labels back to the original image shape</span></span>
-<span id="bc30aac8-27"><a href="#bc30aac8-27" aria-hidden="true" tabindex="-1"></a>    classified_image <span class="op">=</span> labels.reshape(image_np.shape[:<span class="dv">2</span>])</span>
-<span id="bc30aac8-28"><a href="#bc30aac8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="bc30aac8-29"><a href="#bc30aac8-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> classified_image, centers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="5e11f10d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5e11f10d-1"><a href="#5e11f10d-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="5e11f10d-2"><a href="#5e11f10d-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-3"><a href="#5e11f10d-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-4"><a href="#5e11f10d-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_image(image, n_clusters<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="5e11f10d-5"><a href="#5e11f10d-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="5e11f10d-6"><a href="#5e11f10d-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Classify the image into regions using K-means clustering.</span></span>
+<span id="5e11f10d-7"><a href="#5e11f10d-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-8"><a href="#5e11f10d-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param image_np: A numpy array representing the image.</span></span>
+<span id="5e11f10d-9"><a href="#5e11f10d-9" aria-hidden="true" tabindex="-1"></a><span class="co">    :param n_clusters: The number of clusters to classify into.</span></span>
+<span id="5e11f10d-10"><a href="#5e11f10d-10" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 2D numpy array with cluster labels and the cluster centers as RGB values.</span></span>
+<span id="5e11f10d-11"><a href="#5e11f10d-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="5e11f10d-12"><a href="#5e11f10d-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the image to a numpy array</span></span>
+<span id="5e11f10d-13"><a href="#5e11f10d-13" aria-hidden="true" tabindex="-1"></a>    image_np <span class="op">=</span> np.array(image)</span>
+<span id="5e11f10d-14"><a href="#5e11f10d-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-15"><a href="#5e11f10d-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reshape the image to a list of pixels</span></span>
+<span id="5e11f10d-16"><a href="#5e11f10d-16" aria-hidden="true" tabindex="-1"></a>    pixels <span class="op">=</span> image_np.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="5e11f10d-17"><a href="#5e11f10d-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-18"><a href="#5e11f10d-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform K-means clustering</span></span>
+<span id="5e11f10d-19"><a href="#5e11f10d-19" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>n_clusters, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="5e11f10d-20"><a href="#5e11f10d-20" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(pixels)</span>
+<span id="5e11f10d-21"><a href="#5e11f10d-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-22"><a href="#5e11f10d-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the cluster labels and centers</span></span>
+<span id="5e11f10d-23"><a href="#5e11f10d-23" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> kmeans.labels_</span>
+<span id="5e11f10d-24"><a href="#5e11f10d-24" aria-hidden="true" tabindex="-1"></a>    centers <span class="op">=</span> kmeans.cluster_centers_</span>
+<span id="5e11f10d-25"><a href="#5e11f10d-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-26"><a href="#5e11f10d-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reshape the labels back to the original image shape</span></span>
+<span id="5e11f10d-27"><a href="#5e11f10d-27" aria-hidden="true" tabindex="-1"></a>    classified_image <span class="op">=</span> labels.reshape(image_np.shape[:<span class="dv">2</span>])</span>
+<span id="5e11f10d-28"><a href="#5e11f10d-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5e11f10d-29"><a href="#5e11f10d-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> classified_image, centers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a8d0aa27" class="cell" data-execution_count="9">
+<div id="e553758e" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="a8d0aa27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a8d0aa27-1"><a href="#a8d0aa27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify the image using K-means clustering</span></span>
-<span id="a8d0aa27-2"><a href="#a8d0aa27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a8d0aa27-3"><a href="#a8d0aa27-3" aria-hidden="true" tabindex="-1"></a>classified_image, centers <span class="op">=</span> classify_image(landscape_image, n_clusters<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="a8d0aa27-4"><a href="#a8d0aa27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a8d0aa27-5"><a href="#a8d0aa27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the classified image, with a symbolic colormap, include a legend with the cluster centers</span></span>
-<span id="a8d0aa27-6"><a href="#a8d0aa27-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="a8d0aa27-7"><a href="#a8d0aa27-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(classified_image, cmap<span class="op">=</span><span class="st">"tab10"</span>)</span>
-<span id="a8d0aa27-8"><a href="#a8d0aa27-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Classified Landscape"</span>)</span>
-<span id="a8d0aa27-9"><a href="#a8d0aa27-9" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
-<span id="a8d0aa27-10"><a href="#a8d0aa27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a8d0aa27-11"><a href="#a8d0aa27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the colormap colors for the legend</span></span>
-<span id="a8d0aa27-12"><a href="#a8d0aa27-12" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> plt.get_cmap(<span class="st">"tab10"</span>)</span>
-<span id="a8d0aa27-13"><a href="#a8d0aa27-13" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [colormap(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centers))]</span>
-<span id="a8d0aa27-14"><a href="#a8d0aa27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a8d0aa27-15"><a href="#a8d0aa27-15" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
-<span id="a8d0aa27-16"><a href="#a8d0aa27-16" aria-hidden="true" tabindex="-1"></a>    handles<span class="op">=</span>[</span>
-<span id="a8d0aa27-17"><a href="#a8d0aa27-17" aria-hidden="true" tabindex="-1"></a>        plt.Line2D(</span>
-<span id="a8d0aa27-18"><a href="#a8d0aa27-18" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">0</span>],</span>
-<span id="a8d0aa27-19"><a href="#a8d0aa27-19" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">0</span>],</span>
-<span id="a8d0aa27-20"><a href="#a8d0aa27-20" aria-hidden="true" tabindex="-1"></a>            marker<span class="op">=</span><span class="st">"o"</span>,</span>
-<span id="a8d0aa27-21"><a href="#a8d0aa27-21" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"w"</span>,</span>
-<span id="a8d0aa27-22"><a href="#a8d0aa27-22" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="ss">f"Cluster </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="a8d0aa27-23"><a href="#a8d0aa27-23" aria-hidden="true" tabindex="-1"></a>            markerfacecolor<span class="op">=</span>colors[i],</span>
-<span id="a8d0aa27-24"><a href="#a8d0aa27-24" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="a8d0aa27-25"><a href="#a8d0aa27-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centers))</span>
-<span id="a8d0aa27-26"><a href="#a8d0aa27-26" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="a8d0aa27-27"><a href="#a8d0aa27-27" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">"upper right"</span>,</span>
-<span id="a8d0aa27-28"><a href="#a8d0aa27-28" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="a8d0aa27-29"><a href="#a8d0aa27-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="a8d0aa27-30"><a href="#a8d0aa27-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e553758e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e553758e-1"><a href="#e553758e-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify the image using K-means clustering</span></span>
+<span id="e553758e-2"><a href="#e553758e-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e553758e-3"><a href="#e553758e-3" aria-hidden="true" tabindex="-1"></a>classified_image, centers <span class="op">=</span> classify_image(landscape_image, n_clusters<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="e553758e-4"><a href="#e553758e-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e553758e-5"><a href="#e553758e-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the classified image, with a symbolic colormap, include a legend with the cluster centers</span></span>
+<span id="e553758e-6"><a href="#e553758e-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="e553758e-7"><a href="#e553758e-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(classified_image, cmap<span class="op">=</span><span class="st">"tab10"</span>)</span>
+<span id="e553758e-8"><a href="#e553758e-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Classified Landscape"</span>)</span>
+<span id="e553758e-9"><a href="#e553758e-9" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="e553758e-10"><a href="#e553758e-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e553758e-11"><a href="#e553758e-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the colormap colors for the legend</span></span>
+<span id="e553758e-12"><a href="#e553758e-12" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> plt.get_cmap(<span class="st">"tab10"</span>)</span>
+<span id="e553758e-13"><a href="#e553758e-13" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [colormap(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centers))]</span>
+<span id="e553758e-14"><a href="#e553758e-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e553758e-15"><a href="#e553758e-15" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
+<span id="e553758e-16"><a href="#e553758e-16" aria-hidden="true" tabindex="-1"></a>    handles<span class="op">=</span>[</span>
+<span id="e553758e-17"><a href="#e553758e-17" aria-hidden="true" tabindex="-1"></a>        plt.Line2D(</span>
+<span id="e553758e-18"><a href="#e553758e-18" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">0</span>],</span>
+<span id="e553758e-19"><a href="#e553758e-19" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">0</span>],</span>
+<span id="e553758e-20"><a href="#e553758e-20" aria-hidden="true" tabindex="-1"></a>            marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="e553758e-21"><a href="#e553758e-21" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"w"</span>,</span>
+<span id="e553758e-22"><a href="#e553758e-22" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="ss">f"Cluster </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="e553758e-23"><a href="#e553758e-23" aria-hidden="true" tabindex="-1"></a>            markerfacecolor<span class="op">=</span>colors[i],</span>
+<span id="e553758e-24"><a href="#e553758e-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="e553758e-25"><a href="#e553758e-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centers))</span>
+<span id="e553758e-26"><a href="#e553758e-26" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="e553758e-27"><a href="#e553758e-27" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">"upper right"</span>,</span>
+<span id="e553758e-28"><a href="#e553758e-28" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="e553758e-29"><a href="#e553758e-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="e553758e-30"><a href="#e553758e-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -596,85 +598,85 @@ Note
 </div>
 <p>What you see is a segmented image where each color represents a different cluster. The algorithm has grouped pixels with similar colors together, creating distinct regions in the image. The image has been painted with a color palette that represents the different clusters identified by the algorithm, and which do not necessarily correspond to the original colors of the landscape.</p>
 <p>Let us now turn the classification into a segmented image, where each pixel is colored back according to the type of landscape the cluster represents. This will give us a visual representation of the segmentation results which is close to the original image (think of it as a “paint by numbers” exercise which will eliminate the gradient colors). We do this by replacing the RGB values of each pixel with the centroid of the cluster it belongs to.</p>
-<div id="433d0ba9" class="cell" data-execution_count="10">
+<div id="90a366df" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="433d0ba9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="433d0ba9-1"><a href="#433d0ba9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> cdist</span>
-<span id="433d0ba9-2"><a href="#433d0ba9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-3"><a href="#433d0ba9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-4"><a href="#433d0ba9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define color dictionary for the colormap</span></span>
-<span id="433d0ba9-5"><a href="#433d0ba9-5" aria-hidden="true" tabindex="-1"></a>color_dict <span class="op">=</span> {</span>
-<span id="433d0ba9-6"><a href="#433d0ba9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"water"</span>: [<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">220</span>],  <span class="co"># Blue for water</span></span>
-<span id="433d0ba9-7"><a href="#433d0ba9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grass"</span>: [<span class="dv">20</span>, <span class="dv">255</span>, <span class="dv">20</span>],  <span class="co"># Green for grass</span></span>
-<span id="433d0ba9-8"><a href="#433d0ba9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mountains"</span>: [<span class="dv">139</span>, <span class="dv">69</span>, <span class="dv">19</span>],  <span class="co"># Brown for mountains</span></span>
-<span id="433d0ba9-9"><a href="#433d0ba9-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"snow"</span>: [<span class="dv">220</span>, <span class="dv">220</span>, <span class="dv">220</span>],  <span class="co"># White for snow</span></span>
-<span id="433d0ba9-10"><a href="#433d0ba9-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="433d0ba9-11"><a href="#433d0ba9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define target colors for each landscape element</span></span>
-<span id="433d0ba9-12"><a href="#433d0ba9-12" aria-hidden="true" tabindex="-1"></a>target_colors <span class="op">=</span> np.array(</span>
-<span id="433d0ba9-13"><a href="#433d0ba9-13" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="433d0ba9-14"><a href="#433d0ba9-14" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"water"</span>],</span>
-<span id="433d0ba9-15"><a href="#433d0ba9-15" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"grass"</span>],</span>
-<span id="433d0ba9-16"><a href="#433d0ba9-16" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"mountains"</span>],</span>
-<span id="433d0ba9-17"><a href="#433d0ba9-17" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"snow"</span>],</span>
-<span id="433d0ba9-18"><a href="#433d0ba9-18" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="433d0ba9-19"><a href="#433d0ba9-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="433d0ba9-20"><a href="#433d0ba9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-21"><a href="#433d0ba9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-22"><a href="#433d0ba9-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> segment_with_colormap(classified_image, centers):</span>
-<span id="433d0ba9-23"><a href="#433d0ba9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="433d0ba9-24"><a href="#433d0ba9-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Apply a colormap to the classified image.</span></span>
-<span id="433d0ba9-25"><a href="#433d0ba9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-26"><a href="#433d0ba9-26" aria-hidden="true" tabindex="-1"></a><span class="co">    :param classified_image: A 2D numpy array with cluster labels.</span></span>
-<span id="433d0ba9-27"><a href="#433d0ba9-27" aria-hidden="true" tabindex="-1"></a><span class="co">    :param centers: The cluster centers.</span></span>
-<span id="433d0ba9-28"><a href="#433d0ba9-28" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 3D numpy array with RGB values.</span></span>
-<span id="433d0ba9-29"><a href="#433d0ba9-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="433d0ba9-30"><a href="#433d0ba9-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-31"><a href="#433d0ba9-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Match the cluster centers to the target colors</span></span>
-<span id="433d0ba9-32"><a href="#433d0ba9-32" aria-hidden="true" tabindex="-1"></a>    distances <span class="op">=</span> cdist(centers, target_colors)</span>
-<span id="433d0ba9-33"><a href="#433d0ba9-33" aria-hidden="true" tabindex="-1"></a>    closest_colors <span class="op">=</span> np.argmin(distances, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="433d0ba9-34"><a href="#433d0ba9-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-35"><a href="#433d0ba9-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an RGB image</span></span>
-<span id="433d0ba9-36"><a href="#433d0ba9-36" aria-hidden="true" tabindex="-1"></a>    rgb_image <span class="op">=</span> np.zeros(</span>
-<span id="433d0ba9-37"><a href="#433d0ba9-37" aria-hidden="true" tabindex="-1"></a>        (classified_image.shape[<span class="dv">0</span>], classified_image.shape[<span class="dv">1</span>], <span class="dv">3</span>), dtype<span class="op">=</span>np.uint8</span>
-<span id="433d0ba9-38"><a href="#433d0ba9-38" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="433d0ba9-39"><a href="#433d0ba9-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-40"><a href="#433d0ba9-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cluster_label <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centers)):</span>
-<span id="433d0ba9-41"><a href="#433d0ba9-41" aria-hidden="true" tabindex="-1"></a>        rgb_image[classified_image <span class="op">==</span> cluster_label] <span class="op">=</span> target_colors[</span>
-<span id="433d0ba9-42"><a href="#433d0ba9-42" aria-hidden="true" tabindex="-1"></a>            closest_colors[cluster_label]</span>
-<span id="433d0ba9-43"><a href="#433d0ba9-43" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="433d0ba9-44"><a href="#433d0ba9-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="433d0ba9-45"><a href="#433d0ba9-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rgb_image, closest_colors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="90a366df"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="90a366df-1"><a href="#90a366df-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> cdist</span>
+<span id="90a366df-2"><a href="#90a366df-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-3"><a href="#90a366df-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-4"><a href="#90a366df-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define color dictionary for the colormap</span></span>
+<span id="90a366df-5"><a href="#90a366df-5" aria-hidden="true" tabindex="-1"></a>color_dict <span class="op">=</span> {</span>
+<span id="90a366df-6"><a href="#90a366df-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"water"</span>: [<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">220</span>],  <span class="co"># Blue for water</span></span>
+<span id="90a366df-7"><a href="#90a366df-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grass"</span>: [<span class="dv">20</span>, <span class="dv">255</span>, <span class="dv">20</span>],  <span class="co"># Green for grass</span></span>
+<span id="90a366df-8"><a href="#90a366df-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mountains"</span>: [<span class="dv">139</span>, <span class="dv">69</span>, <span class="dv">19</span>],  <span class="co"># Brown for mountains</span></span>
+<span id="90a366df-9"><a href="#90a366df-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"snow"</span>: [<span class="dv">220</span>, <span class="dv">220</span>, <span class="dv">220</span>],  <span class="co"># White for snow</span></span>
+<span id="90a366df-10"><a href="#90a366df-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="90a366df-11"><a href="#90a366df-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define target colors for each landscape element</span></span>
+<span id="90a366df-12"><a href="#90a366df-12" aria-hidden="true" tabindex="-1"></a>target_colors <span class="op">=</span> np.array(</span>
+<span id="90a366df-13"><a href="#90a366df-13" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="90a366df-14"><a href="#90a366df-14" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"water"</span>],</span>
+<span id="90a366df-15"><a href="#90a366df-15" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"grass"</span>],</span>
+<span id="90a366df-16"><a href="#90a366df-16" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"mountains"</span>],</span>
+<span id="90a366df-17"><a href="#90a366df-17" aria-hidden="true" tabindex="-1"></a>        color_dict[<span class="st">"snow"</span>],</span>
+<span id="90a366df-18"><a href="#90a366df-18" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="90a366df-19"><a href="#90a366df-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="90a366df-20"><a href="#90a366df-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-21"><a href="#90a366df-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-22"><a href="#90a366df-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> segment_with_colormap(classified_image, centers):</span>
+<span id="90a366df-23"><a href="#90a366df-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="90a366df-24"><a href="#90a366df-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Apply a colormap to the classified image.</span></span>
+<span id="90a366df-25"><a href="#90a366df-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-26"><a href="#90a366df-26" aria-hidden="true" tabindex="-1"></a><span class="co">    :param classified_image: A 2D numpy array with cluster labels.</span></span>
+<span id="90a366df-27"><a href="#90a366df-27" aria-hidden="true" tabindex="-1"></a><span class="co">    :param centers: The cluster centers.</span></span>
+<span id="90a366df-28"><a href="#90a366df-28" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 3D numpy array with RGB values.</span></span>
+<span id="90a366df-29"><a href="#90a366df-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="90a366df-30"><a href="#90a366df-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-31"><a href="#90a366df-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Match the cluster centers to the target colors</span></span>
+<span id="90a366df-32"><a href="#90a366df-32" aria-hidden="true" tabindex="-1"></a>    distances <span class="op">=</span> cdist(centers, target_colors)</span>
+<span id="90a366df-33"><a href="#90a366df-33" aria-hidden="true" tabindex="-1"></a>    closest_colors <span class="op">=</span> np.argmin(distances, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="90a366df-34"><a href="#90a366df-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-35"><a href="#90a366df-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create an RGB image</span></span>
+<span id="90a366df-36"><a href="#90a366df-36" aria-hidden="true" tabindex="-1"></a>    rgb_image <span class="op">=</span> np.zeros(</span>
+<span id="90a366df-37"><a href="#90a366df-37" aria-hidden="true" tabindex="-1"></a>        (classified_image.shape[<span class="dv">0</span>], classified_image.shape[<span class="dv">1</span>], <span class="dv">3</span>), dtype<span class="op">=</span>np.uint8</span>
+<span id="90a366df-38"><a href="#90a366df-38" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="90a366df-39"><a href="#90a366df-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-40"><a href="#90a366df-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cluster_label <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centers)):</span>
+<span id="90a366df-41"><a href="#90a366df-41" aria-hidden="true" tabindex="-1"></a>        rgb_image[classified_image <span class="op">==</span> cluster_label] <span class="op">=</span> target_colors[</span>
+<span id="90a366df-42"><a href="#90a366df-42" aria-hidden="true" tabindex="-1"></a>            closest_colors[cluster_label]</span>
+<span id="90a366df-43"><a href="#90a366df-43" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="90a366df-44"><a href="#90a366df-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="90a366df-45"><a href="#90a366df-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rgb_image, closest_colors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="33526d17" class="cell" data-execution_count="11">
+<div id="504808d2" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="33526d17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="33526d17-1"><a href="#33526d17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the cluster colormap to the classified image</span></span>
-<span id="33526d17-2"><a href="#33526d17-2" aria-hidden="true" tabindex="-1"></a>segmented_image, closest_colors <span class="op">=</span> segment_with_colormap(classified_image, centers)</span>
-<span id="33526d17-3"><a href="#33526d17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="33526d17-4"><a href="#33526d17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the original image and the cluster-colored image</span></span>
-<span id="33526d17-5"><a href="#33526d17-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="33526d17-6"><a href="#33526d17-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(landscape_image)</span>
-<span id="33526d17-7"><a href="#33526d17-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Original Image"</span>)</span>
-<span id="33526d17-8"><a href="#33526d17-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].axis(<span class="st">"off"</span>)</span>
-<span id="33526d17-9"><a href="#33526d17-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(segmented_image)</span>
-<span id="33526d17-10"><a href="#33526d17-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"Segmented Image"</span>)</span>
-<span id="33526d17-11"><a href="#33526d17-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axis(<span class="st">"off"</span>)</span>
-<span id="33526d17-12"><a href="#33526d17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a legend</span></span>
-<span id="33526d17-13"><a href="#33526d17-13" aria-hidden="true" tabindex="-1"></a>handles <span class="op">=</span> [</span>
-<span id="33526d17-14"><a href="#33526d17-14" aria-hidden="true" tabindex="-1"></a>    plt.Line2D(</span>
-<span id="33526d17-15"><a href="#33526d17-15" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>],</span>
-<span id="33526d17-16"><a href="#33526d17-16" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>],</span>
-<span id="33526d17-17"><a href="#33526d17-17" aria-hidden="true" tabindex="-1"></a>        marker<span class="op">=</span><span class="st">"o"</span>,</span>
-<span id="33526d17-18"><a href="#33526d17-18" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"w"</span>,</span>
-<span id="33526d17-19"><a href="#33526d17-19" aria-hidden="true" tabindex="-1"></a>        markerfacecolor<span class="op">=</span>target_colors[i] <span class="op">/</span> <span class="dv">255</span>,</span>
-<span id="33526d17-20"><a href="#33526d17-20" aria-hidden="true" tabindex="-1"></a>        markersize<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="33526d17-21"><a href="#33526d17-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="33526d17-22"><a href="#33526d17-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(target_colors))</span>
-<span id="33526d17-23"><a href="#33526d17-23" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="33526d17-24"><a href="#33526d17-24" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> color_dict.keys()</span>
-<span id="33526d17-25"><a href="#33526d17-25" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend(handles, labels, loc<span class="op">=</span><span class="st">"upper right"</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="33526d17-26"><a href="#33526d17-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="504808d2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="504808d2-1"><a href="#504808d2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the cluster colormap to the classified image</span></span>
+<span id="504808d2-2"><a href="#504808d2-2" aria-hidden="true" tabindex="-1"></a>segmented_image, closest_colors <span class="op">=</span> segment_with_colormap(classified_image, centers)</span>
+<span id="504808d2-3"><a href="#504808d2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="504808d2-4"><a href="#504808d2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the original image and the cluster-colored image</span></span>
+<span id="504808d2-5"><a href="#504808d2-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="504808d2-6"><a href="#504808d2-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].imshow(landscape_image)</span>
+<span id="504808d2-7"><a href="#504808d2-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"Original Image"</span>)</span>
+<span id="504808d2-8"><a href="#504808d2-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].axis(<span class="st">"off"</span>)</span>
+<span id="504808d2-9"><a href="#504808d2-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].imshow(segmented_image)</span>
+<span id="504808d2-10"><a href="#504808d2-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"Segmented Image"</span>)</span>
+<span id="504808d2-11"><a href="#504808d2-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].axis(<span class="st">"off"</span>)</span>
+<span id="504808d2-12"><a href="#504808d2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a legend</span></span>
+<span id="504808d2-13"><a href="#504808d2-13" aria-hidden="true" tabindex="-1"></a>handles <span class="op">=</span> [</span>
+<span id="504808d2-14"><a href="#504808d2-14" aria-hidden="true" tabindex="-1"></a>    plt.Line2D(</span>
+<span id="504808d2-15"><a href="#504808d2-15" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>],</span>
+<span id="504808d2-16"><a href="#504808d2-16" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>],</span>
+<span id="504808d2-17"><a href="#504808d2-17" aria-hidden="true" tabindex="-1"></a>        marker<span class="op">=</span><span class="st">"o"</span>,</span>
+<span id="504808d2-18"><a href="#504808d2-18" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"w"</span>,</span>
+<span id="504808d2-19"><a href="#504808d2-19" aria-hidden="true" tabindex="-1"></a>        markerfacecolor<span class="op">=</span>target_colors[i] <span class="op">/</span> <span class="dv">255</span>,</span>
+<span id="504808d2-20"><a href="#504808d2-20" aria-hidden="true" tabindex="-1"></a>        markersize<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="504808d2-21"><a href="#504808d2-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="504808d2-22"><a href="#504808d2-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(target_colors))</span>
+<span id="504808d2-23"><a href="#504808d2-23" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="504808d2-24"><a href="#504808d2-24" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> color_dict.keys()</span>
+<span id="504808d2-25"><a href="#504808d2-25" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].legend(handles, labels, loc<span class="op">=</span><span class="st">"upper right"</span>, bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="504808d2-26"><a href="#504808d2-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -706,24 +708,24 @@ About the Elbow Method
 <section id="determining-the-optimal-number-of-clusters" class="level3">
 <h3 class="anchored" data-anchor-id="determining-the-optimal-number-of-clusters">Determining the optimal number of clusters</h3>
 <p>Let’s visually compare the results of k-means clustering for different values of <span class="math inline">\(\mathbf{k}\)</span> to determine the optimal number of clusters for our synthetic landscape image. We will run k-means clustering for <span class="math inline">\(\mathbf{k=2, 3, 4, 5, 6, 7, 8, 9, 10}\)</span> and visualize the segmented images for each value of <span class="math inline">\(\mathbf{k}\)</span>, and visually compare.</p>
-<div id="47d6111f" class="cell" data-execution_count="12">
+<div id="efec1838" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="47d6111f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="47d6111f-1"><a href="#47d6111f-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of classified images with different number of clusters</span></span>
-<span id="47d6111f-2"><a href="#47d6111f-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="47d6111f-3"><a href="#47d6111f-3" aria-hidden="true" tabindex="-1"></a>n_clusters <span class="op">=</span> <span class="dv">10</span></span>
-<span id="47d6111f-4"><a href="#47d6111f-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="47d6111f-5"><a href="#47d6111f-5" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Classified Images with Different Number of Clusters"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="47d6111f-6"><a href="#47d6111f-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n_clusters <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="47d6111f-7"><a href="#47d6111f-7" aria-hidden="true" tabindex="-1"></a>    _classified_image, _centers <span class="op">=</span> classify_image(landscape_image, n_clusters<span class="op">=</span>i)</span>
-<span id="47d6111f-8"><a href="#47d6111f-8" aria-hidden="true" tabindex="-1"></a>    _color_mapped_image, _ <span class="op">=</span> segment_with_colormap(_classified_image, _centers)</span>
-<span id="47d6111f-9"><a href="#47d6111f-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="47d6111f-10"><a href="#47d6111f-10" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">3</span>, <span class="dv">3</span>, i <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="47d6111f-11"><a href="#47d6111f-11" aria-hidden="true" tabindex="-1"></a>    plt.imshow(_color_mapped_image)</span>
-<span id="47d6111f-12"><a href="#47d6111f-12" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">"off"</span>)</span>
-<span id="47d6111f-13"><a href="#47d6111f-13" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> Clusters"</span>)</span>
-<span id="47d6111f-14"><a href="#47d6111f-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="47d6111f-15"><a href="#47d6111f-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="efec1838"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="efec1838-1"><a href="#efec1838-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of classified images with different number of clusters</span></span>
+<span id="efec1838-2"><a href="#efec1838-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="efec1838-3"><a href="#efec1838-3" aria-hidden="true" tabindex="-1"></a>n_clusters <span class="op">=</span> <span class="dv">10</span></span>
+<span id="efec1838-4"><a href="#efec1838-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="efec1838-5"><a href="#efec1838-5" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Classified Images with Different Number of Clusters"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="efec1838-6"><a href="#efec1838-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, n_clusters <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="efec1838-7"><a href="#efec1838-7" aria-hidden="true" tabindex="-1"></a>    _classified_image, _centers <span class="op">=</span> classify_image(landscape_image, n_clusters<span class="op">=</span>i)</span>
+<span id="efec1838-8"><a href="#efec1838-8" aria-hidden="true" tabindex="-1"></a>    _color_mapped_image, _ <span class="op">=</span> segment_with_colormap(_classified_image, _centers)</span>
+<span id="efec1838-9"><a href="#efec1838-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="efec1838-10"><a href="#efec1838-10" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">3</span>, <span class="dv">3</span>, i <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="efec1838-11"><a href="#efec1838-11" aria-hidden="true" tabindex="-1"></a>    plt.imshow(_color_mapped_image)</span>
+<span id="efec1838-12"><a href="#efec1838-12" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">"off"</span>)</span>
+<span id="efec1838-13"><a href="#efec1838-13" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> Clusters"</span>)</span>
+<span id="efec1838-14"><a href="#efec1838-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="efec1838-15"><a href="#efec1838-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -734,27 +736,27 @@ About the Elbow Method
 </div>
 </div>
 <p>We can see that as the number of clusters increases, the image becomes more finely segmented, capturing more detailed regions in the landscape. However, beyond a certain point, adding more clusters does not significantly improve the segmentation quality and may lead to overfitting. The optimal number of clusters depends on the desired level of granularity and the complexity of the image. Let us try the elbow method to determine the optimal number of clusters for our synthetic landscape image.</p>
-<div id="95332c1f" class="cell" data-execution_count="13">
+<div id="19bf501b" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="95332c1f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="95332c1f-1"><a href="#95332c1f-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate WCSS for different values of k</span></span>
-<span id="95332c1f-2"><a href="#95332c1f-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="95332c1f-3"><a href="#95332c1f-3" aria-hidden="true" tabindex="-1"></a>wcss <span class="op">=</span> []</span>
-<span id="95332c1f-4"><a href="#95332c1f-4" aria-hidden="true" tabindex="-1"></a>n_clusters_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
-<span id="95332c1f-5"><a href="#95332c1f-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> n_clusters_range:</span>
-<span id="95332c1f-6"><a href="#95332c1f-6" aria-hidden="true" tabindex="-1"></a>    _, centers <span class="op">=</span> classify_image(landscape_image, n_clusters<span class="op">=</span>i)</span>
-<span id="95332c1f-7"><a href="#95332c1f-7" aria-hidden="true" tabindex="-1"></a>    pixels <span class="op">=</span> np.array(landscape_image).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="95332c1f-8"><a href="#95332c1f-8" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>i, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="95332c1f-9"><a href="#95332c1f-9" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(pixels)</span>
-<span id="95332c1f-10"><a href="#95332c1f-10" aria-hidden="true" tabindex="-1"></a>    wcss.append(kmeans.inertia_)</span>
-<span id="95332c1f-11"><a href="#95332c1f-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="95332c1f-12"><a href="#95332c1f-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the WCSS values</span></span>
-<span id="95332c1f-13"><a href="#95332c1f-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="95332c1f-14"><a href="#95332c1f-14" aria-hidden="true" tabindex="-1"></a>plt.plot(n_clusters_range, wcss, marker<span class="op">=</span><span class="st">"o"</span>)</span>
-<span id="95332c1f-15"><a href="#95332c1f-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Elbow Method"</span>)</span>
-<span id="95332c1f-16"><a href="#95332c1f-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Clusters"</span>)</span>
-<span id="95332c1f-17"><a href="#95332c1f-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"WCSS"</span>)</span>
-<span id="95332c1f-18"><a href="#95332c1f-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="19bf501b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="19bf501b-1"><a href="#19bf501b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate WCSS for different values of k</span></span>
+<span id="19bf501b-2"><a href="#19bf501b-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19bf501b-3"><a href="#19bf501b-3" aria-hidden="true" tabindex="-1"></a>wcss <span class="op">=</span> []</span>
+<span id="19bf501b-4"><a href="#19bf501b-4" aria-hidden="true" tabindex="-1"></a>n_clusters_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
+<span id="19bf501b-5"><a href="#19bf501b-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> n_clusters_range:</span>
+<span id="19bf501b-6"><a href="#19bf501b-6" aria-hidden="true" tabindex="-1"></a>    _, centers <span class="op">=</span> classify_image(landscape_image, n_clusters<span class="op">=</span>i)</span>
+<span id="19bf501b-7"><a href="#19bf501b-7" aria-hidden="true" tabindex="-1"></a>    pixels <span class="op">=</span> np.array(landscape_image).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="19bf501b-8"><a href="#19bf501b-8" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>i, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="19bf501b-9"><a href="#19bf501b-9" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(pixels)</span>
+<span id="19bf501b-10"><a href="#19bf501b-10" aria-hidden="true" tabindex="-1"></a>    wcss.append(kmeans.inertia_)</span>
+<span id="19bf501b-11"><a href="#19bf501b-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19bf501b-12"><a href="#19bf501b-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the WCSS values</span></span>
+<span id="19bf501b-13"><a href="#19bf501b-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="19bf501b-14"><a href="#19bf501b-14" aria-hidden="true" tabindex="-1"></a>plt.plot(n_clusters_range, wcss, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="19bf501b-15"><a href="#19bf501b-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Elbow Method"</span>)</span>
+<span id="19bf501b-16"><a href="#19bf501b-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Clusters"</span>)</span>
+<span id="19bf501b-17"><a href="#19bf501b-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"WCSS"</span>)</span>
+<span id="19bf501b-18"><a href="#19bf501b-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -765,52 +767,52 @@ About the Elbow Method
 </div>
 </div>
 <p>It looks like the optimal number of clusters for our synthetic landscape image is around <span class="math inline">\(\mathbf{k=4}\)</span>, as the rate of decrease in <span class="math inline">\(\mathbf{WCSS}\)</span> slows down significantly after this point. We can use the “knee” method to mathematically determine the optimal number of clusters, but in practice, it is often a subjective decision based on the data and the desired level of granularity.</p>
-<div id="c17ec770" class="cell" data-execution_count="14">
+<div id="cbe14b82" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c17ec770"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c17ec770-1"><a href="#c17ec770-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> kneed <span class="im">import</span> KneeLocator</span>
-<span id="c17ec770-2"><a href="#c17ec770-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c17ec770-3"><a href="#c17ec770-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the "elbow" point</span></span>
-<span id="c17ec770-4"><a href="#c17ec770-4" aria-hidden="true" tabindex="-1"></a>kneedle <span class="op">=</span> KneeLocator(n_clusters_range, wcss, curve<span class="op">=</span><span class="st">"convex"</span>, direction<span class="op">=</span><span class="st">"decreasing"</span>)</span>
-<span id="c17ec770-5"><a href="#c17ec770-5" aria-hidden="true" tabindex="-1"></a>optimal_n_clusters <span class="op">=</span> kneedle.elbow</span>
-<span id="c17ec770-6"><a href="#c17ec770-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c17ec770-7"><a href="#c17ec770-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Optimal number of clusters: </span><span class="sc">{</span>optimal_n_clusters<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cbe14b82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cbe14b82-1"><a href="#cbe14b82-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> kneed <span class="im">import</span> KneeLocator</span>
+<span id="cbe14b82-2"><a href="#cbe14b82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cbe14b82-3"><a href="#cbe14b82-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the "elbow" point</span></span>
+<span id="cbe14b82-4"><a href="#cbe14b82-4" aria-hidden="true" tabindex="-1"></a>kneedle <span class="op">=</span> KneeLocator(n_clusters_range, wcss, curve<span class="op">=</span><span class="st">"convex"</span>, direction<span class="op">=</span><span class="st">"decreasing"</span>)</span>
+<span id="cbe14b82-5"><a href="#cbe14b82-5" aria-hidden="true" tabindex="-1"></a>optimal_n_clusters <span class="op">=</span> kneedle.elbow</span>
+<span id="cbe14b82-6"><a href="#cbe14b82-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cbe14b82-7"><a href="#cbe14b82-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Optimal number of clusters: </span><span class="sc">{</span>optimal_n_clusters<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Optimal number of clusters: 4</code></pre>
 </div>
 </div>
 <p>We were right in our initial assumption! The optimal number of clusters for our synthetic landscape image is indeed <span class="math inline">\(\mathbf{k=4}\)</span> according to the knee method. Let us now look for the boundaries between the clusters to better understand the segmentation results. We will overlay the cluster boundaries on the segmented image to visualize the regions where the clusters meet.</p>
-<div id="e5280510" class="cell" data-execution_count="15">
+<div id="153ab694" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="e5280510"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e5280510-1"><a href="#e5280510-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.segmentation <span class="im">import</span> find_boundaries</span>
-<span id="e5280510-2"><a href="#e5280510-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5280510-3"><a href="#e5280510-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5280510-4"><a href="#e5280510-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_image_boundaries(classified_image):</span>
-<span id="e5280510-5"><a href="#e5280510-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="e5280510-6"><a href="#e5280510-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Find the boundaries of classified regions in the image and label them.</span></span>
-<span id="e5280510-7"><a href="#e5280510-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e5280510-8"><a href="#e5280510-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param classified_image: A 2D numpy array with cluster labels.</span></span>
-<span id="e5280510-9"><a href="#e5280510-9" aria-hidden="true" tabindex="-1"></a><span class="co">    :param closest_colors: The mapped color labels for each cluster.</span></span>
-<span id="e5280510-10"><a href="#e5280510-10" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 2D numpy array with boundaries.</span></span>
-<span id="e5280510-11"><a href="#e5280510-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="e5280510-12"><a href="#e5280510-12" aria-hidden="true" tabindex="-1"></a>    boundaries <span class="op">=</span> find_boundaries(classified_image, mode<span class="op">=</span><span class="st">"thick"</span>)</span>
-<span id="e5280510-13"><a href="#e5280510-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> boundaries</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="153ab694"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="153ab694-1"><a href="#153ab694-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.segmentation <span class="im">import</span> find_boundaries</span>
+<span id="153ab694-2"><a href="#153ab694-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="153ab694-3"><a href="#153ab694-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="153ab694-4"><a href="#153ab694-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_image_boundaries(classified_image):</span>
+<span id="153ab694-5"><a href="#153ab694-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="153ab694-6"><a href="#153ab694-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Find the boundaries of classified regions in the image and label them.</span></span>
+<span id="153ab694-7"><a href="#153ab694-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="153ab694-8"><a href="#153ab694-8" aria-hidden="true" tabindex="-1"></a><span class="co">    :param classified_image: A 2D numpy array with cluster labels.</span></span>
+<span id="153ab694-9"><a href="#153ab694-9" aria-hidden="true" tabindex="-1"></a><span class="co">    :param closest_colors: The mapped color labels for each cluster.</span></span>
+<span id="153ab694-10"><a href="#153ab694-10" aria-hidden="true" tabindex="-1"></a><span class="co">    :return: A 2D numpy array with boundaries.</span></span>
+<span id="153ab694-11"><a href="#153ab694-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="153ab694-12"><a href="#153ab694-12" aria-hidden="true" tabindex="-1"></a>    boundaries <span class="op">=</span> find_boundaries(classified_image, mode<span class="op">=</span><span class="st">"thick"</span>)</span>
+<span id="153ab694-13"><a href="#153ab694-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> boundaries</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="13219c3b" class="cell" data-execution_count="16">
+<div id="6222515b" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="13219c3b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="13219c3b-1"><a href="#13219c3b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the boundaries in the classified image</span></span>
-<span id="13219c3b-2"><a href="#13219c3b-2" aria-hidden="true" tabindex="-1"></a>boundaries_image <span class="op">=</span> find_image_boundaries(classified_image)</span>
-<span id="13219c3b-3"><a href="#13219c3b-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="13219c3b-4"><a href="#13219c3b-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the classified image overlayed with boundaries</span></span>
-<span id="13219c3b-5"><a href="#13219c3b-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="13219c3b-6"><a href="#13219c3b-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape_image)</span>
-<span id="13219c3b-7"><a href="#13219c3b-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(boundaries_image, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="13219c3b-8"><a href="#13219c3b-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Classified Image with Boundaries"</span>)</span>
-<span id="13219c3b-9"><a href="#13219c3b-9" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6222515b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6222515b-1"><a href="#6222515b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the boundaries in the classified image</span></span>
+<span id="6222515b-2"><a href="#6222515b-2" aria-hidden="true" tabindex="-1"></a>boundaries_image <span class="op">=</span> find_image_boundaries(classified_image)</span>
+<span id="6222515b-3"><a href="#6222515b-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6222515b-4"><a href="#6222515b-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the classified image overlayed with boundaries</span></span>
+<span id="6222515b-5"><a href="#6222515b-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="6222515b-6"><a href="#6222515b-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape_image)</span>
+<span id="6222515b-7"><a href="#6222515b-7" aria-hidden="true" tabindex="-1"></a>plt.imshow(boundaries_image, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="6222515b-8"><a href="#6222515b-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Classified Image with Boundaries"</span>)</span>
+<span id="6222515b-9"><a href="#6222515b-9" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -826,52 +828,52 @@ About the Elbow Method
 <h2 class="anchored" data-anchor-id="wraping-it-up">Wraping it up</h2>
 <p>We have successfully segmented the synthetic landscape image using k-means clustering and visualized the results. The segmentation has created distinct regions in the image, making it easier to identify different parts of the landscape. By assigning each pixel to a cluster based on its color similarity, we have grouped pixels with similar colors together, forming meaningful segments in the image.</p>
 <p>To wrap things up, let us overlay everything with different landscape markers to map the different regions of the synthetic landscape image.</p>
-<div id="04b8024f" class="cell" data-execution_count="17">
+<div id="eea5c786" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="04b8024f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="04b8024f-1"><a href="#04b8024f-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.measure <span class="im">import</span> regionprops, label</span>
-<span id="04b8024f-2"><a href="#04b8024f-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-3"><a href="#04b8024f-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define labels for each landscape element</span></span>
-<span id="04b8024f-4"><a href="#04b8024f-4" aria-hidden="true" tabindex="-1"></a>labels_dict <span class="op">=</span> {<span class="dv">0</span>: <span class="st">"Water"</span>, <span class="dv">1</span>: <span class="st">"Grass"</span>, <span class="dv">2</span>: <span class="st">"Mountain"</span>, <span class="dv">3</span>: <span class="st">"Snow"</span>}</span>
-<span id="04b8024f-5"><a href="#04b8024f-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-6"><a href="#04b8024f-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display boundaries image</span></span>
-<span id="04b8024f-7"><a href="#04b8024f-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
-<span id="04b8024f-8"><a href="#04b8024f-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape_image)</span>
-<span id="04b8024f-9"><a href="#04b8024f-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(boundaries_image, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="04b8024f-10"><a href="#04b8024f-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Classified Image with Boundaries and Markers"</span>)</span>
-<span id="04b8024f-11"><a href="#04b8024f-11" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
-<span id="04b8024f-12"><a href="#04b8024f-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-13"><a href="#04b8024f-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use regionprops to find centroids of each region and add one label per class</span></span>
-<span id="04b8024f-14"><a href="#04b8024f-14" aria-hidden="true" tabindex="-1"></a>labeled_array, num_features <span class="op">=</span> label(classified_image, return_num<span class="op">=</span><span class="va">True</span>)</span>
-<span id="04b8024f-15"><a href="#04b8024f-15" aria-hidden="true" tabindex="-1"></a>props <span class="op">=</span> regionprops(labeled_array)</span>
-<span id="04b8024f-16"><a href="#04b8024f-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-17"><a href="#04b8024f-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define symbols for each landscape element</span></span>
-<span id="04b8024f-18"><a href="#04b8024f-18" aria-hidden="true" tabindex="-1"></a>symbols_dict <span class="op">=</span> {</span>
-<span id="04b8024f-19"><a href="#04b8024f-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: (<span class="st">"o"</span>, <span class="st">"water"</span>),</span>
-<span id="04b8024f-20"><a href="#04b8024f-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: (<span class="st">"s"</span>, <span class="st">"grass"</span>),</span>
-<span id="04b8024f-21"><a href="#04b8024f-21" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: (<span class="st">"^"</span>, <span class="st">"mountain"</span>),</span>
-<span id="04b8024f-22"><a href="#04b8024f-22" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: (<span class="st">"p"</span>, <span class="st">"snow"</span>),</span>
-<span id="04b8024f-23"><a href="#04b8024f-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="04b8024f-24"><a href="#04b8024f-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-25"><a href="#04b8024f-25" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate labels in the legend</span></span>
-<span id="04b8024f-26"><a href="#04b8024f-26" aria-hidden="true" tabindex="-1"></a>handles <span class="op">=</span> {}</span>
-<span id="04b8024f-27"><a href="#04b8024f-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-28"><a href="#04b8024f-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> prop <span class="kw">in</span> props:</span>
-<span id="04b8024f-29"><a href="#04b8024f-29" aria-hidden="true" tabindex="-1"></a>    y, x <span class="op">=</span> prop.centroid</span>
-<span id="04b8024f-30"><a href="#04b8024f-30" aria-hidden="true" tabindex="-1"></a>    label_index <span class="op">=</span> classified_image[<span class="bu">int</span>(y), <span class="bu">int</span>(x)]</span>
-<span id="04b8024f-31"><a href="#04b8024f-31" aria-hidden="true" tabindex="-1"></a>    symbol, label_text <span class="op">=</span> symbols_dict.get(closest_colors[label_index], (<span class="st">"x"</span>, <span class="st">"Unknown"</span>))</span>
-<span id="04b8024f-32"><a href="#04b8024f-32" aria-hidden="true" tabindex="-1"></a>    scatter <span class="op">=</span> plt.scatter(</span>
-<span id="04b8024f-33"><a href="#04b8024f-33" aria-hidden="true" tabindex="-1"></a>        x, y, marker<span class="op">=</span>symbol, color<span class="op">=</span><span class="st">"salmon"</span>, s<span class="op">=</span><span class="dv">100</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span>label_text</span>
-<span id="04b8024f-34"><a href="#04b8024f-34" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="04b8024f-35"><a href="#04b8024f-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-36"><a href="#04b8024f-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to handles only if label_text not already added</span></span>
-<span id="04b8024f-37"><a href="#04b8024f-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> label_text <span class="kw">not</span> <span class="kw">in</span> handles:</span>
-<span id="04b8024f-38"><a href="#04b8024f-38" aria-hidden="true" tabindex="-1"></a>        handles[label_text] <span class="op">=</span> scatter</span>
-<span id="04b8024f-39"><a href="#04b8024f-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-40"><a href="#04b8024f-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a legend</span></span>
-<span id="04b8024f-41"><a href="#04b8024f-41" aria-hidden="true" tabindex="-1"></a>plt.legend(handles<span class="op">=</span>handles.values(), labels<span class="op">=</span>handles.keys(), loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="04b8024f-42"><a href="#04b8024f-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="04b8024f-43"><a href="#04b8024f-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="eea5c786"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eea5c786-1"><a href="#eea5c786-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage.measure <span class="im">import</span> regionprops, label</span>
+<span id="eea5c786-2"><a href="#eea5c786-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-3"><a href="#eea5c786-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define labels for each landscape element</span></span>
+<span id="eea5c786-4"><a href="#eea5c786-4" aria-hidden="true" tabindex="-1"></a>labels_dict <span class="op">=</span> {<span class="dv">0</span>: <span class="st">"Water"</span>, <span class="dv">1</span>: <span class="st">"Grass"</span>, <span class="dv">2</span>: <span class="st">"Mountain"</span>, <span class="dv">3</span>: <span class="st">"Snow"</span>}</span>
+<span id="eea5c786-5"><a href="#eea5c786-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-6"><a href="#eea5c786-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display boundaries image</span></span>
+<span id="eea5c786-7"><a href="#eea5c786-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="eea5c786-8"><a href="#eea5c786-8" aria-hidden="true" tabindex="-1"></a>plt.imshow(landscape_image)</span>
+<span id="eea5c786-9"><a href="#eea5c786-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(boundaries_image, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="eea5c786-10"><a href="#eea5c786-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Classified Image with Boundaries and Markers"</span>)</span>
+<span id="eea5c786-11"><a href="#eea5c786-11" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="eea5c786-12"><a href="#eea5c786-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-13"><a href="#eea5c786-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Use regionprops to find centroids of each region and add one label per class</span></span>
+<span id="eea5c786-14"><a href="#eea5c786-14" aria-hidden="true" tabindex="-1"></a>labeled_array, num_features <span class="op">=</span> label(classified_image, return_num<span class="op">=</span><span class="va">True</span>)</span>
+<span id="eea5c786-15"><a href="#eea5c786-15" aria-hidden="true" tabindex="-1"></a>props <span class="op">=</span> regionprops(labeled_array)</span>
+<span id="eea5c786-16"><a href="#eea5c786-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-17"><a href="#eea5c786-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define symbols for each landscape element</span></span>
+<span id="eea5c786-18"><a href="#eea5c786-18" aria-hidden="true" tabindex="-1"></a>symbols_dict <span class="op">=</span> {</span>
+<span id="eea5c786-19"><a href="#eea5c786-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: (<span class="st">"o"</span>, <span class="st">"water"</span>),</span>
+<span id="eea5c786-20"><a href="#eea5c786-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: (<span class="st">"s"</span>, <span class="st">"grass"</span>),</span>
+<span id="eea5c786-21"><a href="#eea5c786-21" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: (<span class="st">"^"</span>, <span class="st">"mountain"</span>),</span>
+<span id="eea5c786-22"><a href="#eea5c786-22" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: (<span class="st">"p"</span>, <span class="st">"snow"</span>),</span>
+<span id="eea5c786-23"><a href="#eea5c786-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="eea5c786-24"><a href="#eea5c786-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-25"><a href="#eea5c786-25" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate labels in the legend</span></span>
+<span id="eea5c786-26"><a href="#eea5c786-26" aria-hidden="true" tabindex="-1"></a>handles <span class="op">=</span> {}</span>
+<span id="eea5c786-27"><a href="#eea5c786-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-28"><a href="#eea5c786-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> prop <span class="kw">in</span> props:</span>
+<span id="eea5c786-29"><a href="#eea5c786-29" aria-hidden="true" tabindex="-1"></a>    y, x <span class="op">=</span> prop.centroid</span>
+<span id="eea5c786-30"><a href="#eea5c786-30" aria-hidden="true" tabindex="-1"></a>    label_index <span class="op">=</span> classified_image[<span class="bu">int</span>(y), <span class="bu">int</span>(x)]</span>
+<span id="eea5c786-31"><a href="#eea5c786-31" aria-hidden="true" tabindex="-1"></a>    symbol, label_text <span class="op">=</span> symbols_dict.get(closest_colors[label_index], (<span class="st">"x"</span>, <span class="st">"Unknown"</span>))</span>
+<span id="eea5c786-32"><a href="#eea5c786-32" aria-hidden="true" tabindex="-1"></a>    scatter <span class="op">=</span> plt.scatter(</span>
+<span id="eea5c786-33"><a href="#eea5c786-33" aria-hidden="true" tabindex="-1"></a>        x, y, marker<span class="op">=</span>symbol, color<span class="op">=</span><span class="st">"salmon"</span>, s<span class="op">=</span><span class="dv">100</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span>label_text</span>
+<span id="eea5c786-34"><a href="#eea5c786-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="eea5c786-35"><a href="#eea5c786-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-36"><a href="#eea5c786-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add to handles only if label_text not already added</span></span>
+<span id="eea5c786-37"><a href="#eea5c786-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> label_text <span class="kw">not</span> <span class="kw">in</span> handles:</span>
+<span id="eea5c786-38"><a href="#eea5c786-38" aria-hidden="true" tabindex="-1"></a>        handles[label_text] <span class="op">=</span> scatter</span>
+<span id="eea5c786-39"><a href="#eea5c786-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-40"><a href="#eea5c786-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a legend</span></span>
+<span id="eea5c786-41"><a href="#eea5c786-41" aria-hidden="true" tabindex="-1"></a>plt.legend(handles<span class="op">=</span>handles.values(), labels<span class="op">=</span>handles.keys(), loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="eea5c786-42"><a href="#eea5c786-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="eea5c786-43"><a href="#eea5c786-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -892,236 +894,242 @@ About the Elbow Method
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1129,185 +1137,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,15 +66,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script id="quarto-search-options" type="application/json">{
@@ -123,7 +125,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -289,11 +291,11 @@ Try it out
 <p>As you have installed Anaconda, you can use Jupyter Notebook to run Python code. To try out the code below, run the Anaconda Navigator and open Jupyter Notebook. Create a new notebook and paste the code below into a cell. Then run the cell by pressing <code>Shift + Enter</code>.</p>
 </div>
 </div>
-<div id="a941a9ff" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="a941a9ff"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a941a9ff-1"><a href="#a941a9ff-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
-<span id="a941a9ff-2"><a href="#a941a9ff-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
-<span id="a941a9ff-3"><a href="#a941a9ff-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="a941a9ff-4"><a href="#a941a9ff-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3193d5cb" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="3193d5cb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3193d5cb-1"><a href="#3193d5cb-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="3193d5cb-2"><a href="#3193d5cb-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
+<span id="3193d5cb-3"><a href="#3193d5cb-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="3193d5cb-4"><a href="#3193d5cb-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
@@ -305,17 +307,17 @@ Try it out
 <li><strong>Functions</strong>: Functions are used to group code that performs a specific task. In this case, the inbuilt <code>print</code> function is used to print the result of adding the numbers stored in the variables <code>a</code> and <code>b</code>.</li>
 </ul>
 <p>The above can be expressed in many different ways, for example:</p>
-<div id="03336107" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="03336107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="03336107-1"><a href="#03336107-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
-<span id="03336107-2"><a href="#03336107-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
-<span id="03336107-3"><a href="#03336107-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">+</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0c76b372" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="0c76b372"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0c76b372-1"><a href="#0c76b372-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="0c76b372-2"><a href="#0c76b372-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
+<span id="0c76b372-3"><a href="#0c76b372-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">+</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
 </div>
 <p>Or even just:</p>
-<div id="553b5df2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="553b5df2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="553b5df2-1"><a href="#553b5df2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="af064a8b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="af064a8b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="af064a8b-1"><a href="#af064a8b-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
@@ -323,25 +325,25 @@ Try it out
 <section id="creating-your-own-functions" class="level3">
 <h3 class="anchored" data-anchor-id="creating-your-own-functions">Creating your own functions</h3>
 <p>We can also create our own functions. Following from the previous example, we can create a function that sums two numbers and returns the result.</p>
-<div id="c21fdf3d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="c21fdf3d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c21fdf3d-1"><a href="#c21fdf3d-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="c21fdf3d-2"><a href="#c21fdf3d-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="c21fdf3d-3"><a href="#c21fdf3d-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c21fdf3d-4"><a href="#c21fdf3d-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c21fdf3d-5"><a href="#c21fdf3d-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fcd96594" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="fcd96594"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fcd96594-1"><a href="#fcd96594-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="fcd96594-2"><a href="#fcd96594-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="fcd96594-3"><a href="#fcd96594-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fcd96594-4"><a href="#fcd96594-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fcd96594-5"><a href="#fcd96594-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
 </div>
 <p>In the above code, <code>def</code> is a keyword that is used to define a function. The function is given a name, <code>add</code>, and a list of parameters, <code>a</code> and <code>b</code>. The function body is indented, and contains the code that performs the addition of the two numbers. The <code>return</code> keyword is used to return the result of the addition.</p>
 <p>The function can be called by passing two numbers as arguments, and the result can be then processed further. We could also assign the result to a variable and print it.</p>
-<div id="b14b7185" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="b14b7185"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b14b7185-1"><a href="#b14b7185-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="b14b7185-2"><a href="#b14b7185-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="b14b7185-3"><a href="#b14b7185-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="b14b7185-4"><a href="#b14b7185-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="b14b7185-5"><a href="#b14b7185-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(<span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="b14b7185-6"><a href="#b14b7185-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77d0b2cf" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="77d0b2cf"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="77d0b2cf-1"><a href="#77d0b2cf-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="77d0b2cf-2"><a href="#77d0b2cf-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="77d0b2cf-3"><a href="#77d0b2cf-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77d0b2cf-4"><a href="#77d0b2cf-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="77d0b2cf-5"><a href="#77d0b2cf-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="77d0b2cf-6"><a href="#77d0b2cf-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
@@ -351,27 +353,27 @@ Try it out
 <h3 class="anchored" data-anchor-id="overloading">Overloading</h3>
 <p>Python has several built-in data types that are used to store different types of data. And often operators and functions can handle different data types in different ways. For example, the <code>+</code> operator can be used to add numbers, concatenate strings, and merge lists, which means the <code>add</code> function we defined earlier can be used with different things. This kind of behavior is called <strong>operator overloading</strong>.</p>
 <p>Here’s an example of this:</p>
-<div id="aad46358" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="aad46358"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="aad46358-1"><a href="#aad46358-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="aad46358-2"><a href="#aad46358-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="aad46358-3"><a href="#aad46358-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="aad46358-4"><a href="#aad46358-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="aad46358-5"><a href="#aad46358-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(<span class="st">"a"</span>, <span class="st">"b"</span>)</span>
-<span id="aad46358-6"><a href="#aad46358-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d10bd072" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="d10bd072"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d10bd072-1"><a href="#d10bd072-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="d10bd072-2"><a href="#d10bd072-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="d10bd072-3"><a href="#d10bd072-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d10bd072-4"><a href="#d10bd072-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d10bd072-5"><a href="#d10bd072-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(<span class="st">"a"</span>, <span class="st">"b"</span>)</span>
+<span id="d10bd072-6"><a href="#d10bd072-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ab</code></pre>
 </div>
 </div>
 <p>In the above example the same <code>add</code> function is used to concatenate strings, rather than adding numbers. This is possible because the <code>+</code> operator can take different data inputs and act accordingly. Let us do the same with Python lists:</p>
-<div id="b70aa97b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="b70aa97b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b70aa97b-1"><a href="#b70aa97b-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="b70aa97b-2"><a href="#b70aa97b-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="b70aa97b-3"><a href="#b70aa97b-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="b70aa97b-4"><a href="#b70aa97b-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="b70aa97b-5"><a href="#b70aa97b-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="b70aa97b-6"><a href="#b70aa97b-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>]</span>
-<span id="b70aa97b-7"><a href="#b70aa97b-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(a, b)</span>
-<span id="b70aa97b-8"><a href="#b70aa97b-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3cff12b3" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="3cff12b3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3cff12b3-1"><a href="#3cff12b3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="3cff12b3-2"><a href="#3cff12b3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="3cff12b3-3"><a href="#3cff12b3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3cff12b3-4"><a href="#3cff12b3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3cff12b3-5"><a href="#3cff12b3-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="3cff12b3-6"><a href="#3cff12b3-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>]</span>
+<span id="3cff12b3-7"><a href="#3cff12b3-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(a, b)</span>
+<span id="3cff12b3-8"><a href="#3cff12b3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 2, 3, 4]</code></pre>
 </div>
@@ -380,15 +382,15 @@ Try it out
 <section id="errors" class="level3">
 <h3 class="anchored" data-anchor-id="errors">Errors</h3>
 <p>In this example we introduced a different data type, the list, and the <code>+</code> operator is used to merge the two lists. This is another example of operator overloading. We will talk about different data types in the next section, but for now, it is important to understand that Python is a very flexible language that allows you to write code that can handle different data types in different ways. There are however some limitations, for example, the <code>+</code> operator cannot be used to add a number and a string, or a list and a number, or a list and a string. Here’s how this would fail:</p>
-<div id="c6a4c02e" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="c6a4c02e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c6a4c02e-1"><a href="#c6a4c02e-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="c6a4c02e-2"><a href="#c6a4c02e-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="c6a4c02e-3"><a href="#c6a4c02e-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c6a4c02e-4"><a href="#c6a4c02e-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c6a4c02e-5"><a href="#c6a4c02e-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
-<span id="c6a4c02e-6"><a href="#c6a4c02e-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="st">"2"</span></span>
-<span id="c6a4c02e-7"><a href="#c6a4c02e-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(a, b)</span>
-<span id="c6a4c02e-8"><a href="#c6a4c02e-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a452fe3c" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="a452fe3c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a452fe3c-1"><a href="#a452fe3c-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="a452fe3c-2"><a href="#a452fe3c-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="a452fe3c-3"><a href="#a452fe3c-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a452fe3c-4"><a href="#a452fe3c-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a452fe3c-5"><a href="#a452fe3c-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="a452fe3c-6"><a href="#a452fe3c-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="st">"2"</span></span>
+<span id="a452fe3c-7"><a href="#a452fe3c-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> add(a, b)</span>
+<span id="a452fe3c-8"><a href="#a452fe3c-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
@@ -413,39 +415,39 @@ Try it out
 <h3 class="anchored" data-anchor-id="code-comments">Code comments</h3>
 <p>Comments are used to explain and document the code and make it easier to understand. In Python, comments start with the <code>#</code> character and continue until the end of the line. Comments are ignored by the Python interpreter, so they do not affect the execution of the program. Think of it as a note to yourself or others who might read your code. You can also write multi-line comments using triple quotes <code>'''</code> or <code>"""</code>.</p>
 <p>Here’s an example of a comment:</p>
-<div id="bd17fbef" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="bd17fbef"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="bd17fbef-1"><a href="#bd17fbef-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This method adds two numbers, strings or lists</span></span>
-<span id="bd17fbef-2"><a href="#bd17fbef-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="bd17fbef-3"><a href="#bd17fbef-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="bd17fbef-4"><a href="#bd17fbef-4" aria-hidden="true" tabindex="-1"></a><span class="co">    This method adds two numbers, strings or lists</span></span>
-<span id="bd17fbef-5"><a href="#bd17fbef-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param a: number, string or list</span></span>
-<span id="bd17fbef-6"><a href="#bd17fbef-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param b: number, string or list</span></span>
-<span id="bd17fbef-7"><a href="#bd17fbef-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="bd17fbef-8"><a href="#bd17fbef-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0a8f6f14" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="0a8f6f14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0a8f6f14-1"><a href="#0a8f6f14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This method adds two numbers, strings or lists</span></span>
+<span id="0a8f6f14-2"><a href="#0a8f6f14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="0a8f6f14-3"><a href="#0a8f6f14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="0a8f6f14-4"><a href="#0a8f6f14-4" aria-hidden="true" tabindex="-1"></a><span class="co">    This method adds two numbers, strings or lists</span></span>
+<span id="0a8f6f14-5"><a href="#0a8f6f14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    :param a: number, string or list</span></span>
+<span id="0a8f6f14-6"><a href="#0a8f6f14-6" aria-hidden="true" tabindex="-1"></a><span class="co">    :param b: number, string or list</span></span>
+<span id="0a8f6f14-7"><a href="#0a8f6f14-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="0a8f6f14-8"><a href="#0a8f6f14-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="indentation" class="level3">
 <h3 class="anchored" data-anchor-id="indentation">Indentation</h3>
 <p>Python uses indentation to define the structure of the code. Blocks of code that are at the same level of indentation are considered to be part of the same block. Blocks of code that are indented more are considered to be part of a nested block. Indentation is used to define the structure of the code, and it is important to use consistent indentation to make the code easier to read and understand.</p>
 <p>Here’s an example of indentation:</p>
-<div id="32d25245" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="32d25245"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="32d25245-1"><a href="#32d25245-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="32d25245-2"><a href="#32d25245-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="32d25245-3"><a href="#32d25245-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Everything at this level of indentation is considered part of the function</span></span>
-<span id="32d25245-4"><a href="#32d25245-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="32d25245-5"><a href="#32d25245-5" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> a <span class="op">+</span> b</span>
-<span id="32d25245-6"><a href="#32d25245-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c</span>
-<span id="32d25245-7"><a href="#32d25245-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="32d25245-8"><a href="#32d25245-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="32d25245-9"><a href="#32d25245-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This is at the same level of indentation as the function, and therefore not part of the function</span></span>
-<span id="32d25245-10"><a href="#32d25245-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="89b46a51" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="89b46a51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="89b46a51-1"><a href="#89b46a51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="89b46a51-2"><a href="#89b46a51-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="89b46a51-3"><a href="#89b46a51-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Everything at this level of indentation is considered part of the function</span></span>
+<span id="89b46a51-4"><a href="#89b46a51-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="89b46a51-5"><a href="#89b46a51-5" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="89b46a51-6"><a href="#89b46a51-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c</span>
+<span id="89b46a51-7"><a href="#89b46a51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89b46a51-8"><a href="#89b46a51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="89b46a51-9"><a href="#89b46a51-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This is at the same level of indentation as the function, and therefore not part of the function</span></span>
+<span id="89b46a51-10"><a href="#89b46a51-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
 </div>
 <p>Indentation can also be used when calling functions, which makes the code easier to read and understand in cases where the function takes multiple arguments, for example:</p>
-<div id="1f7e6687" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="1f7e6687"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1f7e6687-1"><a href="#1f7e6687-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a71e91de" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="a71e91de"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a71e91de-1"><a href="#a71e91de-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(add(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>3</code></pre>
 </div>
@@ -464,236 +466,242 @@ Try it out
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -701,185 +709,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,15 +66,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -158,7 +160,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -278,13 +280,13 @@ window.Quarto = {
 <p>In math you will have likely seen functions like <span class="math inline">\(f(x) = x^2\)</span> or <span class="math inline">\(g(x) = \sin(x)\)</span>. In programming, functions are similar. They are a “black box” that takes in some input and returns some output.</p>
 <p>In Python, functions come in multiple flavors - built-in functions, functions from modules, and user-defined functions. Built-in functions are available in Python without needing to import anything. Functions from modules are functions that are part of a module, and you need to import the module to use them. User-defined functions are functions that you define yourself.</p>
 <p>An example of a built-in function which you have already seen is <code>print()</code>. An example of a function from a module is <code>math.sqrt()</code>. In previous sections you have also seen how you can define your own funtion, for example a function to calculate the acummulated value of an investment with a starting principal, an interest rate and a number of years.</p>
-<div id="665f00ff" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="665f00ff"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="665f00ff-1"><a href="#665f00ff-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(rate, years, principal):</span>
-<span id="665f00ff-2"><a href="#665f00ff-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span>
-<span id="665f00ff-3"><a href="#665f00ff-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="665f00ff-4"><a href="#665f00ff-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="665f00ff-5"><a href="#665f00ff-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compound interest at 5% for 5 years on $1000</span></span>
-<span id="665f00ff-6"><a href="#665f00ff-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="fl">0.05</span>, <span class="dv">5</span>, <span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="26f744d3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="26f744d3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="26f744d3-1"><a href="#26f744d3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(rate, years, principal):</span>
+<span id="26f744d3-2"><a href="#26f744d3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span>
+<span id="26f744d3-3"><a href="#26f744d3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="26f744d3-4"><a href="#26f744d3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="26f744d3-5"><a href="#26f744d3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compound interest at 5% for 5 years on $1000</span></span>
+<span id="26f744d3-6"><a href="#26f744d3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="fl">0.05</span>, <span class="dv">5</span>, <span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1276.2815625000003</code></pre>
 </div>
@@ -322,15 +324,15 @@ chardet                   4.0.0           py312hca03da5_1003
 <p>Let us install a package from scratch, and use it in a program. To make things a bit visual, we will use the <a href="https://ase-workshop-2023.github.io/tutorial/">ASE</a> package to generate visualise a molecular structure. First, we need to install the package. It is available in Conda Forge, so we can use the <code>conda install</code> command to add the package to our environment.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install ase</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Once it installs successfully, we can use it in a program. Here is an example program that visualises a molecule - you can rotate and zoom in with your mouse.</p>
-<div id="84d19c1f" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="84d19c1f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="84d19c1f-1"><a href="#84d19c1f-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ase.build <span class="im">import</span> molecule</span>
-<span id="84d19c1f-2"><a href="#84d19c1f-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ase.visualize <span class="im">import</span> view</span>
-<span id="84d19c1f-3"><a href="#84d19c1f-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="84d19c1f-4"><a href="#84d19c1f-4" aria-hidden="true" tabindex="-1"></a>structure <span class="op">=</span> <span class="st">"CH3CH2OCH3"</span></span>
-<span id="84d19c1f-5"><a href="#84d19c1f-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="84d19c1f-6"><a href="#84d19c1f-6" aria-hidden="true" tabindex="-1"></a>atoms <span class="op">=</span> molecule(structure)</span>
-<span id="84d19c1f-7"><a href="#84d19c1f-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="84d19c1f-8"><a href="#84d19c1f-8" aria-hidden="true" tabindex="-1"></a>view(atoms, viewer<span class="op">=</span><span class="st">"x3d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="13006abf" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="13006abf"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="13006abf-1"><a href="#13006abf-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ase.build <span class="im">import</span> molecule</span>
+<span id="13006abf-2"><a href="#13006abf-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ase.visualize <span class="im">import</span> view</span>
+<span id="13006abf-3"><a href="#13006abf-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="13006abf-4"><a href="#13006abf-4" aria-hidden="true" tabindex="-1"></a>structure <span class="op">=</span> <span class="st">"CH3CH2OCH3"</span></span>
+<span id="13006abf-5"><a href="#13006abf-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="13006abf-6"><a href="#13006abf-6" aria-hidden="true" tabindex="-1"></a>atoms <span class="op">=</span> molecule(structure)</span>
+<span id="13006abf-7"><a href="#13006abf-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="13006abf-8"><a href="#13006abf-8" aria-hidden="true" tabindex="-1"></a>view(atoms, viewer<span class="op">=</span><span class="st">"x3d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 
     
@@ -508,35 +510,35 @@ chardet                   4.0.0           py312hca03da5_1003
 <h2 class="anchored" data-anchor-id="creating-your-own-modules-and-functions">Creating your own modules and functions</h2>
 <p>You have already seen how to create your own functions. You can also create your own modules. A module is a file that contains Python code. You can import the module into your program and use the functions and classes defined in the module. This is a great way to organise your code and make it more readable and manageable, so you don’t end up having one huge file with all your code in it.</p>
 <p>To create a module, you simply create a Python file with the <code>.py</code> extension. For example, say you are writing a program which needs some financial functions. Instead of including them in your main program, you can create a module called <code>finance.py</code> and put all your financial functions in there. You can then import the module into your main program and use the functions. For example:</p>
-<div id="512f4f9b" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="512f4f9b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="512f4f9b-1"><a href="#512f4f9b-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile finance.py</span>
-<span id="512f4f9b-2"><a href="#512f4f9b-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A module for financial calculations</span></span>
-<span id="512f4f9b-3"><a href="#512f4f9b-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="512f4f9b-4"><a href="#512f4f9b-4" aria-hidden="true" tabindex="-1"></a><span class="co"># finance.py</span></span>
-<span id="512f4f9b-5"><a href="#512f4f9b-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="512f4f9b-6"><a href="#512f4f9b-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simple(rate, years, principal):</span>
-<span id="512f4f9b-7"><a href="#512f4f9b-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate <span class="op">*</span> years)</span>
-<span id="512f4f9b-8"><a href="#512f4f9b-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="512f4f9b-9"><a href="#512f4f9b-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(rate, years, principal):</span>
-<span id="512f4f9b-10"><a href="#512f4f9b-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span>
-<span id="512f4f9b-11"><a href="#512f4f9b-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="512f4f9b-12"><a href="#512f4f9b-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> amortize(rate, years, principal):</span>
-<span id="512f4f9b-13"><a href="#512f4f9b-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> rate <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> <span class="op">-</span>years)</span>
-<span id="512f4f9b-14"><a href="#512f4f9b-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="512f4f9b-15"><a href="#512f4f9b-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> present(value, rate, years):</span>
-<span id="512f4f9b-16"><a href="#512f4f9b-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a0702c82" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="a0702c82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a0702c82-1"><a href="#a0702c82-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile finance.py</span>
+<span id="a0702c82-2"><a href="#a0702c82-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A module for financial calculations</span></span>
+<span id="a0702c82-3"><a href="#a0702c82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a0702c82-4"><a href="#a0702c82-4" aria-hidden="true" tabindex="-1"></a><span class="co"># finance.py</span></span>
+<span id="a0702c82-5"><a href="#a0702c82-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a0702c82-6"><a href="#a0702c82-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simple(rate, years, principal):</span>
+<span id="a0702c82-7"><a href="#a0702c82-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate <span class="op">*</span> years)</span>
+<span id="a0702c82-8"><a href="#a0702c82-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a0702c82-9"><a href="#a0702c82-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(rate, years, principal):</span>
+<span id="a0702c82-10"><a href="#a0702c82-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span>
+<span id="a0702c82-11"><a href="#a0702c82-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a0702c82-12"><a href="#a0702c82-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> amortize(rate, years, principal):</span>
+<span id="a0702c82-13"><a href="#a0702c82-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> rate <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> <span class="op">-</span>years)</span>
+<span id="a0702c82-14"><a href="#a0702c82-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a0702c82-15"><a href="#a0702c82-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> present(value, rate, years):</span>
+<span id="a0702c82-16"><a href="#a0702c82-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Writing finance.py</code></pre>
+<pre><code>Overwriting finance.py</code></pre>
 </div>
 </div>
 <p>The above would be saved in a file called <code>finance.py</code> (the <code>%%writefile</code> notation is for Jupyter Notebook, you would not include that in your <code>finance.py</code> file). You can then import the module into your main program and use the functions. For example:</p>
-<div id="6c1b69e5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="6c1b69e5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6c1b69e5-1"><a href="#6c1b69e5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># program.py</span></span>
-<span id="6c1b69e5-2"><a href="#6c1b69e5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6c1b69e5-3"><a href="#6c1b69e5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> finance <span class="im">import</span> compound</span>
-<span id="6c1b69e5-4"><a href="#6c1b69e5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6c1b69e5-5"><a href="#6c1b69e5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Interest on $1000 at 5</span><span class="sc">% f</span><span class="st">or 5 years:"</span>)</span>
-<span id="6c1b69e5-6"><a href="#6c1b69e5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="fl">0.05</span>, <span class="dv">5</span>, <span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a7541b31" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="a7541b31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a7541b31-1"><a href="#a7541b31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># program.py</span></span>
+<span id="a7541b31-2"><a href="#a7541b31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a7541b31-3"><a href="#a7541b31-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> finance <span class="im">import</span> compound</span>
+<span id="a7541b31-4"><a href="#a7541b31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a7541b31-5"><a href="#a7541b31-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Interest on $1000 at 5</span><span class="sc">% f</span><span class="st">or 5 years:"</span>)</span>
+<span id="a7541b31-6"><a href="#a7541b31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="fl">0.05</span>, <span class="dv">5</span>, <span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Interest on $1000 at 5% for 5 years:
 1276.2815625000003</code></pre>
@@ -562,18 +564,18 @@ import my_package.physics</code></pre>
 <section id="arguments" class="level3">
 <h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
 <p>Functions can take arguments, which are values that are passed to the function when it is called. For example, the <code>print()</code> function takes an argument, which is the value that is printed to the screen. Arguments can be of different types, such as integers, floats, strings, lists, dictionaries, and so on, and when defining the function you can specify the type of the arguments. Let us take the <code>compound</code> function from before, you can specify the type of the arguments like this:</p>
-<div id="aec8d0de" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="aec8d0de"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="aec8d0de-1"><a href="#aec8d0de-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(rate: <span class="bu">float</span>, years: <span class="bu">int</span>, principal: <span class="bu">float</span>):</span>
-<span id="aec8d0de-2"><a href="#aec8d0de-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0e24cb77" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="0e24cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0e24cb77-1"><a href="#0e24cb77-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(rate: <span class="bu">float</span>, years: <span class="bu">int</span>, principal: <span class="bu">float</span>):</span>
+<span id="0e24cb77-2"><a href="#0e24cb77-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here <code>rate: float</code> specifies that the <code>rate</code> argument should be a float. This makes the function definition explicit and easier to read as well. You can also specify default values for arguments, which means that if the argument is not provided when the function is called, the default value is used. For example:</p>
-<div id="346feedf" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="346feedf"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="346feedf-1"><a href="#346feedf-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(years: <span class="bu">int</span>, principal: <span class="bu">float</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>):</span>
-<span id="346feedf-2"><a href="#346feedf-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d754b954" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="d754b954"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d754b954-1"><a href="#d754b954-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(years: <span class="bu">int</span>, principal: <span class="bu">float</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>):</span>
+<span id="d754b954-2"><a href="#d754b954-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the above we moved the order of the arguments because in Python you must specify the default arguments after the non-default arguments. You can also specify the arguments by name when calling the function, which can make the code more readable. For example:</p>
-<div id="29919c07" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="29919c07"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="29919c07-1"><a href="#29919c07-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(years<span class="op">=</span><span class="dv">5</span>, principal<span class="op">=</span><span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="dc178830" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="dc178830"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dc178830-1"><a href="#dc178830-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(years<span class="op">=</span><span class="dv">5</span>, principal<span class="op">=</span><span class="dv">1000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1276.2815625000003</code></pre>
 </div>
@@ -582,38 +584,38 @@ import my_package.physics</code></pre>
 <section id="return-values" class="level3">
 <h3 class="anchored" data-anchor-id="return-values">Return values</h3>
 <p>Functions can and typically do return a value. You can explicitly specify the type of the return value, which can make the function definition more readable.</p>
-<div id="73d11297" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="73d11297"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="73d11297-1"><a href="#73d11297-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="73d11297-2"><a href="#73d11297-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="73a9dd11" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="73a9dd11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="73a9dd11-1"><a href="#73a9dd11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="73a9dd11-2"><a href="#73a9dd11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>-&gt; float</code> explicitly specifies that the function should return a float. Note however that this notation does not <em>enforce</em> the return type, it is just a hint to the programmer.</p>
 <p>A function can also return multiple values, which are returned as a tuple. For example, let us change the <code>compound</code> function to return a tuple of floats with the accumulated value per year.</p>
-<div id="4e283dfb" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="4e283dfb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4e283dfb-1"><a href="#4e283dfb-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[<span class="bu">float</span>]:</span>
-<span id="4e283dfb-2"><a href="#4e283dfb-2" aria-hidden="true" tabindex="-1"></a>    yearly_values <span class="op">=</span> []</span>
-<span id="4e283dfb-3"><a href="#4e283dfb-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4e283dfb-4"><a href="#4e283dfb-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each year n, calculate the accumulated amount</span></span>
-<span id="4e283dfb-5"><a href="#4e283dfb-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="4e283dfb-6"><a href="#4e283dfb-6" aria-hidden="true" tabindex="-1"></a>        accumulated <span class="op">=</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n</span>
-<span id="4e283dfb-7"><a href="#4e283dfb-7" aria-hidden="true" tabindex="-1"></a>        yearly_values.append(accumulated)</span>
-<span id="4e283dfb-8"><a href="#4e283dfb-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4e283dfb-9"><a href="#4e283dfb-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the list to a tuple and return it</span></span>
-<span id="4e283dfb-10"><a href="#4e283dfb-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(yearly_values)</span>
-<span id="4e283dfb-11"><a href="#4e283dfb-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4e283dfb-12"><a href="#4e283dfb-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4e283dfb-13"><a href="#4e283dfb-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e776b784" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="e776b784"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e776b784-1"><a href="#e776b784-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[<span class="bu">float</span>]:</span>
+<span id="e776b784-2"><a href="#e776b784-2" aria-hidden="true" tabindex="-1"></a>    yearly_values <span class="op">=</span> []</span>
+<span id="e776b784-3"><a href="#e776b784-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e776b784-4"><a href="#e776b784-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each year n, calculate the accumulated amount</span></span>
+<span id="e776b784-5"><a href="#e776b784-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="e776b784-6"><a href="#e776b784-6" aria-hidden="true" tabindex="-1"></a>        accumulated <span class="op">=</span> principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n</span>
+<span id="e776b784-7"><a href="#e776b784-7" aria-hidden="true" tabindex="-1"></a>        yearly_values.append(accumulated)</span>
+<span id="e776b784-8"><a href="#e776b784-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e776b784-9"><a href="#e776b784-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert the list to a tuple and return it</span></span>
+<span id="e776b784-10"><a href="#e776b784-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(yearly_values)</span>
+<span id="e776b784-11"><a href="#e776b784-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e776b784-12"><a href="#e776b784-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e776b784-13"><a href="#e776b784-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1000.0, 1050.0, 1102.5, 1157.6250000000002, 1215.5062500000001, 1276.2815625000003)</code></pre>
 </div>
 </div>
 <p>In the above we changed the return value to a tuple, and we added a loop to calculate the accumulated value per year. We then return the accumulated value as a tuple.</p>
 <p>The function can be made shorter by using a list comprehension, which is a concise way to create lists (but not as readable as the loop).</p>
-<div id="06a40295" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="06a40295"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="06a40295-1"><a href="#06a40295-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[<span class="bu">float</span>]:</span>
-<span id="06a40295-2"><a href="#06a40295-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="06a40295-3"><a href="#06a40295-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="06a40295-4"><a href="#06a40295-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="06a40295-5"><a href="#06a40295-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="98e0ac25" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="98e0ac25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="98e0ac25-1"><a href="#98e0ac25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[<span class="bu">float</span>]:</span>
+<span id="98e0ac25-2"><a href="#98e0ac25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="98e0ac25-3"><a href="#98e0ac25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="98e0ac25-4"><a href="#98e0ac25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="98e0ac25-5"><a href="#98e0ac25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1000.0, 1050.0, 1102.5, 1157.6250000000002, 1215.5062500000001, 1276.2815625000003)</code></pre>
 </div>
@@ -632,19 +634,19 @@ About Generator Expressions
 </div>
 </div>
 <p>Comprehensions are a powerful feature of Python, and you can use them to create lists, dictionaries, and sets. They are a concise way to create collections, and can make your code more readable and maintainable. We could change the function to use a list or dictionary comprehension as well!</p>
-<div id="f70e7ba9" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="f70e7ba9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f70e7ba9-1"><a href="#f70e7ba9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">float</span>]:</span>
-<span id="f70e7ba9-2"><a href="#f70e7ba9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">list</span>(principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>))</span>
-<span id="f70e7ba9-3"><a href="#f70e7ba9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="f70e7ba9-4"><a href="#f70e7ba9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="f70e7ba9-5"><a href="#f70e7ba9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span>
-<span id="f70e7ba9-6"><a href="#f70e7ba9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="f70e7ba9-7"><a href="#f70e7ba9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="f70e7ba9-8"><a href="#f70e7ba9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">int</span>, <span class="bu">float</span>]:</span>
-<span id="f70e7ba9-9"><a href="#f70e7ba9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {n: principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>)}</span>
-<span id="f70e7ba9-10"><a href="#f70e7ba9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="f70e7ba9-11"><a href="#f70e7ba9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="f70e7ba9-12"><a href="#f70e7ba9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="df2e3fa9" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="df2e3fa9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="df2e3fa9-1"><a href="#df2e3fa9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">float</span>]:</span>
+<span id="df2e3fa9-2"><a href="#df2e3fa9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">list</span>(principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="df2e3fa9-3"><a href="#df2e3fa9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df2e3fa9-4"><a href="#df2e3fa9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df2e3fa9-5"><a href="#df2e3fa9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span>
+<span id="df2e3fa9-6"><a href="#df2e3fa9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df2e3fa9-7"><a href="#df2e3fa9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df2e3fa9-8"><a href="#df2e3fa9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, years: <span class="bu">int</span>, rate: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.05</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">int</span>, <span class="bu">float</span>]:</span>
+<span id="df2e3fa9-9"><a href="#df2e3fa9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {n: principal <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate) <span class="op">**</span> n <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(years <span class="op">+</span> <span class="dv">1</span>)}</span>
+<span id="df2e3fa9-10"><a href="#df2e3fa9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df2e3fa9-11"><a href="#df2e3fa9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="df2e3fa9-12"><a href="#df2e3fa9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1000.0, 1050.0, 1102.5, 1157.6250000000002, 1215.5062500000001, 1276.2815625000003]
 {0: 1000.0, 1: 1050.0, 2: 1102.5, 3: 1157.6250000000002, 4: 1215.5062500000001, 5: 1276.2815625000003}</code></pre>
@@ -668,23 +670,23 @@ About Comprehensions
 <section id="passing-complex-data-types-as-arguments" class="level3">
 <h3 class="anchored" data-anchor-id="passing-complex-data-types-as-arguments">Passing complex data types as arguments</h3>
 <p>You can pass complex data types as arguments to functions, such as lists, dictionaries, and objects. Let us change the <code>compound</code> function so it takes a an initial principal, and a list of rates for each year. This time let us not use a comprehension, as using a loop is easier to understand.</p>
-<div id="6bfbe7b5" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="6bfbe7b5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6bfbe7b5-1"><a href="#6bfbe7b5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, rates: <span class="bu">list</span>[<span class="bu">float</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">float</span>]:</span>
-<span id="6bfbe7b5-2"><a href="#6bfbe7b5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="6bfbe7b5-3"><a href="#6bfbe7b5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate the accumulated capital after each year using</span></span>
-<span id="6bfbe7b5-4"><a href="#6bfbe7b5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    the corresponding rate for that year in 'rates'.</span></span>
-<span id="6bfbe7b5-5"><a href="#6bfbe7b5-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="6bfbe7b5-6"><a href="#6bfbe7b5-6" aria-hidden="true" tabindex="-1"></a>    accumulated_values <span class="op">=</span> [principal]</span>
-<span id="6bfbe7b5-7"><a href="#6bfbe7b5-7" aria-hidden="true" tabindex="-1"></a>    accumulated <span class="op">=</span> principal</span>
-<span id="6bfbe7b5-8"><a href="#6bfbe7b5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6bfbe7b5-9"><a href="#6bfbe7b5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> rate <span class="kw">in</span> rates:</span>
-<span id="6bfbe7b5-10"><a href="#6bfbe7b5-10" aria-hidden="true" tabindex="-1"></a>        accumulated <span class="op">=</span> accumulated <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate)</span>
-<span id="6bfbe7b5-11"><a href="#6bfbe7b5-11" aria-hidden="true" tabindex="-1"></a>        accumulated_values.append(accumulated)</span>
-<span id="6bfbe7b5-12"><a href="#6bfbe7b5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6bfbe7b5-13"><a href="#6bfbe7b5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> accumulated_values</span>
-<span id="6bfbe7b5-14"><a href="#6bfbe7b5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6bfbe7b5-15"><a href="#6bfbe7b5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6bfbe7b5-16"><a href="#6bfbe7b5-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, [<span class="fl">0.05</span>, <span class="fl">0.06</span>, <span class="fl">0.07</span>, <span class="fl">0.08</span>, <span class="fl">0.09</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="87baf904" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="87baf904"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="87baf904-1"><a href="#87baf904-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compound(principal: <span class="bu">float</span>, rates: <span class="bu">list</span>[<span class="bu">float</span>]) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">float</span>]:</span>
+<span id="87baf904-2"><a href="#87baf904-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="87baf904-3"><a href="#87baf904-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate the accumulated capital after each year using</span></span>
+<span id="87baf904-4"><a href="#87baf904-4" aria-hidden="true" tabindex="-1"></a><span class="co">    the corresponding rate for that year in 'rates'.</span></span>
+<span id="87baf904-5"><a href="#87baf904-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="87baf904-6"><a href="#87baf904-6" aria-hidden="true" tabindex="-1"></a>    accumulated_values <span class="op">=</span> [principal]</span>
+<span id="87baf904-7"><a href="#87baf904-7" aria-hidden="true" tabindex="-1"></a>    accumulated <span class="op">=</span> principal</span>
+<span id="87baf904-8"><a href="#87baf904-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87baf904-9"><a href="#87baf904-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> rate <span class="kw">in</span> rates:</span>
+<span id="87baf904-10"><a href="#87baf904-10" aria-hidden="true" tabindex="-1"></a>        accumulated <span class="op">=</span> accumulated <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> rate)</span>
+<span id="87baf904-11"><a href="#87baf904-11" aria-hidden="true" tabindex="-1"></a>        accumulated_values.append(accumulated)</span>
+<span id="87baf904-12"><a href="#87baf904-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87baf904-13"><a href="#87baf904-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> accumulated_values</span>
+<span id="87baf904-14"><a href="#87baf904-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87baf904-15"><a href="#87baf904-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="87baf904-16"><a href="#87baf904-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compound(<span class="dv">1000</span>, [<span class="fl">0.05</span>, <span class="fl">0.06</span>, <span class="fl">0.07</span>, <span class="fl">0.08</span>, <span class="fl">0.09</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1000, 1050.0, 1113.0, 1190.91, 1286.1828000000003, 1401.9392520000004]</code></pre>
 </div>
@@ -696,15 +698,15 @@ About Comprehensions
 <h2 class="anchored" data-anchor-id="recursion">Recursion</h2>
 <p>Recursion is one of those topics which result in a “aha!” moment when you understand it. It is a powerful concept, and can be used to solve problems that are difficult or impossible to solve with other techniques. Recursion is when a function calls itself. This might sound a bit strange at first, but it is a very powerful technique very much worth exploring and learning.</p>
 <p>A classic example of recursion is the factorial function. The factorial of a number is the product of all the positive integers up to that number. For example, the factorial of 5 is 5 * 4 * 3 * 2 * 1 = 120. The factorial function can be defined recursively as <span class="math inline">\(n! = n \times (n-1)!\)</span> for n &gt; 0. Or in Python:</p>
-<div id="ee7d716a" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="ee7d716a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ee7d716a-1"><a href="#ee7d716a-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="ee7d716a-2"><a href="#ee7d716a-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="ee7d716a-3"><a href="#ee7d716a-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
-<span id="ee7d716a-4"><a href="#ee7d716a-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="ee7d716a-5"><a href="#ee7d716a-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="ee7d716a-6"><a href="#ee7d716a-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="ee7d716a-7"><a href="#ee7d716a-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="ee7d716a-8"><a href="#ee7d716a-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factorial(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b8a0be7b" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="b8a0be7b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b8a0be7b-1"><a href="#b8a0be7b-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="b8a0be7b-2"><a href="#b8a0be7b-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="b8a0be7b-3"><a href="#b8a0be7b-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="b8a0be7b-4"><a href="#b8a0be7b-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="b8a0be7b-5"><a href="#b8a0be7b-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="b8a0be7b-6"><a href="#b8a0be7b-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8a0be7b-7"><a href="#b8a0be7b-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b8a0be7b-8"><a href="#b8a0be7b-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(factorial(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>120</code></pre>
 </div>
@@ -734,17 +736,17 @@ About Tower of Hanoi
 <section id="chaining-methods-together" class="level2">
 <h2 class="anchored" data-anchor-id="chaining-methods-together">Chaining methods together</h2>
 <p>In Python you can chain methods together, which means that you can call one method on the result of another method. This can make your code more concise and readable, and can be a powerful way to work with objects. For example, say you have the text “Hello, World!” and you want to convert it to uppercase and then split it into words. You can do this with the <code>upper()</code> and <code>split()</code> methods in a chain like this:</p>
-<div id="bb8578d6" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="bb8578d6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="bb8578d6-1"><a href="#bb8578d6-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Today is a beautiful day"</span></span>
-<span id="bb8578d6-2"><a href="#bb8578d6-2" aria-hidden="true" tabindex="-1"></a>text.upper().split()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8b0cf321" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="8b0cf321"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8b0cf321-1"><a href="#8b0cf321-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Today is a beautiful day"</span></span>
+<span id="8b0cf321-2"><a href="#8b0cf321-2" aria-hidden="true" tabindex="-1"></a>text.upper().split()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>['TODAY', 'IS', 'A', 'BEAUTIFUL', 'DAY']</code></pre>
 </div>
 </div>
 <p>The code works because a <code>string</code> object is returned by the <code>upper()</code> method, and a <code>list</code> object is returned by the <code>split()</code> method. You can chain as many methods together as you like, and you can also use indexing and slicing in the chain. For example, you can get the first word of the uppercase text like this:</p>
-<div id="04175e8a" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="04175e8a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="04175e8a-1"><a href="#04175e8a-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Today is a beautiful day"</span></span>
-<span id="04175e8a-2"><a href="#04175e8a-2" aria-hidden="true" tabindex="-1"></a>text.upper().split()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2838a775" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="2838a775"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2838a775-1"><a href="#2838a775-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Today is a beautiful day"</span></span>
+<span id="2838a775-2"><a href="#2838a775-2" aria-hidden="true" tabindex="-1"></a>text.upper().split()[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>'TODAY'</code></pre>
 </div>
@@ -765,236 +767,242 @@ About Tower of Hanoi
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1002,185 +1010,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

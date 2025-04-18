@@ -208,9 +208,11 @@ We start by setting up the network and model.
 ```{python}
 # Predict with a PyTorch neural network
 from torch import nn, device, backends, from_numpy, optim
+import torch
 import torch.nn.functional as F
 
-device = device("mps" if backends.mps.is_available() else "cpu")
+device = torch.device("mps" if torch.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else device)
 print(f"Using device: {device}")
     
 class NeuralNetwork(nn.Module):

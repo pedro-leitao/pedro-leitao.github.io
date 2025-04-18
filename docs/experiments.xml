@@ -14,7 +14,7 @@
 <title>Pedro Leitão</title>
 <link>https://pedroleitao.nl/experiments.html</link>
 </image>
-<generator>quarto-1.6.42</generator>
+<generator>quarto-1.7.23</generator>
 <lastBuildDate>Thu, 20 Mar 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Deblurring, a Classic Machine Learning Problem</title>
@@ -55,6 +55,15 @@
   <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>How GPU’s work, an explainer using the Mandelbrot set</title>
+  <link>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</link>
+  <description><![CDATA[ Every day pretty much all of us either uses or hears about the mythical GPU, the Graphics Processing Unit. It’s the thing that makes your games, video renders, and your machine learning models train faster. But how does it achieve that? What makes it different from a CPU? ]]></description>
+  <category>Experiments</category>
+  <category>GPU</category>
+  <guid>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</guid>
+  <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Reinforcement Learning - a Primer using Connect Four</title>
   <link>https://pedroleitao.nl/posts/experiments/connect-four-rl/</link>
   <description><![CDATA[ One of the mainstay algorithms in machine learning is reinforcement learning (or <em>RL</em> for short). RL is an approach to machine learning that is used to teach an agent how to make decisions. The agent learns to achieve a goal in an uncertain, potentially complex environment. It learns by interacting with the environment and receiving feedback in the form of rewards or penalties. It then uses this feedback to learn the best strategy for achieving its goal. ]]></description>
@@ -62,15 +71,6 @@
   <category>Machine Learning</category>
   <category>Reinforcement Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/connect-four-rl/</guid>
-  <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>How GPU’s work, an explainer using the Mandelbrot set</title>
-  <link>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</link>
-  <description><![CDATA[ Every day pretty much all of us either uses or hears about the mythical GPU, the Graphics Processing Unit. It’s the thing that makes your games, video renders, and your machine learning models train faster. But how does it achieve that? What makes it different from a CPU? ]]></description>
-  <category>Experiments</category>
-  <category>GPU</category>
-  <guid>https://pedroleitao.nl/posts/experiments/parallel-mandelbrot/</guid>
   <pubDate>Sun, 09 Feb 2025 00:00:00 GMT</pubDate>
 </item>
 <item>

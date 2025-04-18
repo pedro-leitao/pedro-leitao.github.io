@@ -686,11 +686,13 @@ from torch import optim
 # Initialize random seed for reproducibility
 random.seed(123)
 
-device = torch.device('mps' if torch.mps.is_available() else 'cpu')
+device = torch.device("mps" if torch.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else device)
+print(f"Using device: {device}")
 
 # Create dataset & dataloader
 dataset = MondrianDataset(num_samples=10000)
-dataloader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=0)
+dataloader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=12, pin_memory=True)
 
 # Create U-Net style VAE model
 model = VAE_UNet(latent_dim=128).to(device)
