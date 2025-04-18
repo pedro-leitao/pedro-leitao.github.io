@@ -70,8 +70,14 @@ To illustrate the fundamental difference between KANs and MLPs, let's consider a
 Let's create a simple, synthetic dataset with `SKLearn` to demonstrate a KAN in action. In this case we will use the `make_circles` function to generate a toy dataset that is not linearly separable.
 
 ```{python}
+import torch
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
+```
+
+```{python}
 import sklearn.datasets as datasets
-import torch as torch
 
 Circles_points_train, Circles_label_train = datasets.make_circles(n_samples=1000,
                                                                   shuffle=True,
@@ -85,10 +91,10 @@ Circles_points_test, Circles_label_test = datasets.make_circles(n_samples=1000,
                                                                 random_state=43)
 
 dataset = {}
-dataset['train_input'] = torch.from_numpy(Circles_points_train).float() # Ensure that the data is float
-dataset['train_label'] = torch.from_numpy(Circles_label_train)
-dataset['test_input'] = torch.from_numpy(Circles_points_test).float()
-dataset['test_label'] = torch.from_numpy(Circles_label_test)
+dataset['train_input'] = torch.from_numpy(Circles_points_train).float().to(device) # Ensure that the data is float and on the correct device
+dataset['train_label'] = torch.from_numpy(Circles_label_train).to(device)
+dataset['test_input'] = torch.from_numpy(Circles_points_test).float().to(device)
+dataset['test_label'] = torch.from_numpy(Circles_label_test).to(device)
 
 X = dataset['train_input']
 y = dataset['train_label']
@@ -103,8 +109,8 @@ The dataset has 1000 samples, 2 features, and 2 classes. We will split the datas
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(10, 6))
-plt.scatter(X[y == 0, 0], X[y == 0, 1], color='blue')
-plt.scatter(X[y == 1, 0], X[y == 1, 1], color='red')
+plt.scatter(X[y == 0, 0].cpu(), X[y == 0, 1].cpu(), color='blue')
+plt.scatter(X[y == 1, 0].cpu(), X[y == 1, 1].cpu(), color='red')
 plt.show()
 ```
 
@@ -115,7 +121,7 @@ Let's now create the model. It will have two input nodes, and two output nodes, 
 ```{python}
 import kan as kan
 
-model = kan.KAN(width=[2,2], grid=3, k=3)
+model = kan.KAN(width=[2,2], grid=3, k=3, device=device)
 ```
 
 One great thing about the KAN `pytorch` implementation is that it alows us to easily visualize the model structure. Let's have a look at it.
@@ -141,13 +147,12 @@ def test_acc():
     return torch.mean(
         (torch.argmax(model(dataset['test_input']), dim=1) == dataset['test_label']).float())
 
-# Make use of MPS device if available (for Apple Silicon)
-if torch.backends.mps.is_available():
-    mps_device = torch.device("mps")
-    x = torch.ones(1, device=mps_device)
-    print (x)
-else:
-    print ("MPS device not found.")
+device = torch.device("mps" if torch.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else device)
+print(f"Using device: {device}")
+
+x = torch.ones(1, device=device)
+print(x)
 
 results = model.fit(dataset,
                       opt="LBFGS",

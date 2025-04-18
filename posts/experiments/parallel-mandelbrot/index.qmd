@@ -163,26 +163,40 @@ The difference being that when using the GPU, the operations will run concurrent
 Apple's MLX offers an API which is virtually the same as PyTorch and NumPy, and it can be used interchangeably with them. The only difference is that it is optimized for Apple hardware, and it can be used on Apple Silicon.
 
 ```{python}
-import mlx.core as mx
+try:
+    import mlx.core as mx
+except ImportError:
+    mx = None
 
-def compute_mandelbrot_mlx(width:int = 500, height:int = 500, max_iter:int = 30) -> mx.array:
-    real = mx.linspace(-2, 1, width)
-    imag = mx.linspace(-1.5, 1.5, height)
-    X, Y = mx.meshgrid(real, imag, indexing='xy')
-    c = X + 1j * Y
-
-    z = mx.zeros_like(c)
-    iter_counts = mx.zeros(c.shape, dtype=mx.int32)
-
-    for _ in range(max_iter):
-        mask = mx.abs(z) < 4
-        if not mask.any():
-            break
-
-        z = mx.where(mask, z * z + c, z)
-        iter_counts = mx.where(mask, iter_counts + 1, iter_counts)
-
-    return iter_counts
+if mx is not None:
+    def compute_mandelbrot_mlx(width: int = 500, height: int = 500, max_iter: int = 30) -> mx.array:
+        real = mx.linspace(-2, 1, width).astype(mx.float32)
+        imag = mx.linspace(-1.5, 1.5, height).astype(mx.float32)
+        X, Y = mx.meshgrid(real, imag, indexing='xy')
+        c_real = mx.transpose(X)
+        c_imag = mx.transpose(Y)
+        
+        z_real = mx.zeros_like(c_real)
+        z_imag = mx.zeros_like(c_imag)
+        iter_counts = mx.zeros(c_real.shape, dtype=mx.int32)
+        
+        for _ in range(max_iter):
+            mag_sq = mx.multiply(z_real, z_real) + mx.multiply(z_imag, z_imag)
+            mask = mag_sq < 4.0
+            if not mx.any(mask):
+                break
+            
+            new_z_real = mx.where(mask, z_real * z_real - z_imag * z_imag + c_real, z_real)
+            new_z_imag = mx.where(mask, 2 * z_real * z_imag + c_imag, z_imag)
+            z_real = new_z_real
+            z_imag = new_z_imag
+            
+            iter_counts = mx.where(mask, iter_counts + 1, iter_counts)
+        
+        return iter_counts
+else:
+    def compute_mandelbrot_mlx(*args, **kwargs):
+        raise ImportError("MLX is not available on this system.")
 ```
 
 ## Putting it all together
@@ -191,23 +205,24 @@ Let's put all the above together and render the Mandelbrot set with each differe
 
 ```{python}
 mps_available = torch.backends.mps.is_available()
+cuda_available = torch.cuda.is_available()
+mlx_available = (mx is not None)
 
 width, height = 500, 500
 max_iter = 30
 
-iter_counts = []
+iter_counts = {}
 
-iter_counts_iterations = compute_mandelbrot_iterations(width, height, max_iter)
-iter_counts.append(iter_counts_iterations)
-iter_counts_numpy = compute_mandelbrot_numpy(width, height, max_iter)
-iter_counts.append(iter_counts_numpy)
-iter_counts_torch_cpu = compute_mandelbrot_torch(width, height, max_iter, "cpu")
-iter_counts.append(iter_counts_torch_cpu.T.cpu())
+iter_counts["iterations"] = compute_mandelbrot_iterations(width, height, max_iter)
+iter_counts["numpy"] = compute_mandelbrot_numpy(width, height, max_iter)
+iter_counts["torch_cpu"] = compute_mandelbrot_torch(width, height, max_iter, "cpu").T.cpu()
+
 if mps_available:
-    iter_counts_torch_mps = compute_mandelbrot_torch(width, height, max_iter, "mps")
-    iter_counts.append(iter_counts_torch_mps.T.cpu())
-iter_counts_mlx = compute_mandelbrot_mlx(width, height, max_iter)
-iter_counts.append(iter_counts_mlx)
+    iter_counts["mps"] = compute_mandelbrot_torch(width, height, max_iter, "mps").T.cpu()
+if cuda_available:
+    iter_counts["cuda"] = compute_mandelbrot_torch(width, height, max_iter, "cuda").T.cpu()
+if mlx_available:
+    iter_counts["mlx"] = compute_mandelbrot_mlx(width, height, max_iter).T
 ```
 
 ## Plotting the set
@@ -218,52 +233,41 @@ Now let's create a function to plot the above `iter_counts` list of Mandelbrot i
 import math
 import matplotlib.pyplot as plt
 
-def plot_mandelbrot_grid(iter_counts_list:list, titles:list = None):
-    n = len(iter_counts_list)
+def plot_mandelbrot_grid(iter_counts_dict, titles: list = None):
+    n = len(iter_counts_dict)
+    iter_counts_list = list(iter_counts_dict.values())
+    if titles is not None and len(titles) != n:
+        raise ValueError("Number of titles must match the number of images.")
     if n == 0:
         print("No Mandelbrot sets to plot.")
         return
-
-    # Determine grid dimensions (roughly square)
     n_cols = math.ceil(math.sqrt(n))
     n_rows = math.ceil(n / n_cols)
-    
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(2.5 * n_cols, 2.5 * n_rows))
-    
-    # Flatten axes array for easier iteration
-    if n == 1:
-        axes = [axes]
-    else:
-        axes = axes.flatten()
-    
-    for i, (ax, counts) in enumerate(zip(axes, iter_counts_list)):
-        ax.imshow(counts, cmap='plasma', interpolation='nearest', origin='lower')
-        # Use provided title if available, else default to "Mandelbrot"
-        title = titles[i] if titles is not None and i < len(titles) else "Mandelbrot"
-        # Add title text inside the plot at the top-left corner
-        ax.text(0.05, 0.95, title, transform=ax.transAxes, 
-                color='white', fontsize=14, verticalalignment='top',
-                bbox=dict(facecolor='black', alpha=0.5, edgecolor='none'))
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 10))
+    axes = axes.flatten() if n_rows > 1 else [axes]
+    for i, (key, iter_counts) in enumerate(iter_counts_dict.items()):
+        ax = axes[i]
+        ax.imshow(iter_counts, cmap='hot', extent=(-2, 1, -1.5, 1.5))
+        ax.set_title(titles[i] if titles else key)
         ax.axis('off')
-    
-    # Hide any unused subplots
-    for ax in axes[n:]:
-        ax.axis('off')
-    
+    for j in range(i + 1, len(axes)):
+        axes[j].axis('off')
     plt.tight_layout()
     plt.show()
+
 ```
 
 ```{python}
-plot_mandelbrot_grid(
-    iter_counts,
-    titles=[
-        "Python (iterations)",
-        "NumPy",
-        "PyTorch (CPU)",
-        "PyTorch (MPS)" if mps_available else None, "Apple MLX"
-    ]
-)
+titles = ["Python (iterations)", "NumPy", "PyTorch (CPU)"]
+if mps_available:
+    titles.append("PyTorch (MPS)")
+if cuda_available:
+    titles.append("PyTorch (CUDA)")
+if mlx_available:
+    titles.append("Apple MLX")
+
+plot_mandelbrot_grid(iter_counts, titles=titles)
+
 ```
 
 That confirms that each of the methods above is correct, and that they all yield the same result. The only difference is the speed at which they compute the Mandelbrot set!
@@ -283,8 +287,9 @@ header = [
     "Iterations",
     "NumPy",
     "PyTorch/cpu",
-    "PyTorch/mps", 
-    "MLX"
+    "PyTorch/mps" if mps_available else "MPS - N/A",
+    "PyTorch/cuda" if cuda_available else "CUDA - N/A", 
+    "MLX" if mlx_available else "MLX - N/A"
 ]
 
 table_data = []
@@ -312,9 +317,19 @@ for n in resolutions:
     else:
         timings["PyTorch/mps"] = None
 
-    start_time = time.time()
-    compute_mandelbrot_mlx(width, height, max_iter)
-    timings["MLX"] = time.time() - start_time
+    if cuda_available:
+        start_time = time.time()
+        compute_mandelbrot_torch(width, height, max_iter, "cuda")
+        timings["PyTorch/cuda"] = time.time() - start_time
+    else:
+        timings["PyTorch/cuda"] = None
+
+    if mlx_available:
+        start_time = time.time()
+        compute_mandelbrot_mlx(width, height, max_iter)
+        timings["MLX"] = time.time() - start_time
+    else:
+        timings["MLX"] = None
 
     row = [
         f"{n}x{n}",
@@ -322,48 +337,45 @@ for n in resolutions:
         f"{timings['NumPy']:.3f}",
         f"{timings['PyTorch/cpu']:.3f}",
         f"{timings['PyTorch/mps']:.3f}" if timings['PyTorch/mps'] is not None else "N/A",
-        f"{timings['MLX']:.3f}"
+        f"{timings['PyTorch/cuda']:.3f}" if timings['PyTorch/cuda'] is not None else "N/A",
+        f"{timings['MLX']:.3f}" if timings['MLX'] is not None else "N/A"
     ]
     table_data.append(row)
 
-print("{:<12} {:<12} {:<12} {:<15} {:<15} {:<12}".format(*header))
+print("{:<12} {:<12} {:<12} {:<15} {:<15} {:<12} {:<12}".format(*header))
 for row in table_data:
-    print("{:<12} {:<12} {:<12} {:<15} {:<15} {:<12}".format(*row))
+    print("{:<12} {:<12} {:<12} {:<15} {:<15} {:<12} {:<12}".format(*row))
 ```
 
 And finally let us put the above results in an intuitive visual representation, so we can see the difference in speed between the different methods.
 
 ```{python}
 import matplotlib.ticker as ticker
+import numpy as np  # Make sure NumPy is imported
 
 resolutions_numeric = [int(row[0].split('x')[0]) for row in table_data]
 methods = header[1:]
 
 num_res = len(resolutions_numeric)
 num_methods = len(methods)
-x = np.arange(num_res)  # x locations for the groups
-width = 0.15            # width of each bar
+x = np.arange(num_res)
+bar_width = 0.15
 
 fig, ax = plt.subplots(figsize=(8, 6))
 
-# Plot bars for each method
 for i, method in enumerate(methods):
     times = []
     for row in table_data:
-        value = row[i+1]  # skip the resolution column
-        # Use 0 for "N/A", or you could choose to skip/handle it differently
+        value = row[i+1]  # skip resolution column
         times.append(float(value) if value != "N/A" else 0)
-    # Calculate offset for each method within the group
-    offset = (i - num_methods/2) * width + width/2
-    ax.bar(x + offset, times, width, label=method)
+    offset = (i - num_methods/2) * bar_width + bar_width/2
+    ax.bar(x + offset, times, bar_width, label=method)
 
-# Set labels and ticks
 ax.set_xlabel("Resolution (pixels)")
 ax.set_ylabel("Time (s)")
 ax.set_xticks(x)
 ax.set_xticklabels([f"{res}x{res}" for res in resolutions_numeric])
 
-# Disable scientific notation on the y-axis
 formatter = ticker.ScalarFormatter()
 formatter.set_scientific(False)
 ax.yaxis.set_major_formatter(formatter)

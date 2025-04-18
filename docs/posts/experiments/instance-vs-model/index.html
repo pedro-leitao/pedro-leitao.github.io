@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -58,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -114,6 +116,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 background-size: cover;
       }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -159,7 +164,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -300,33 +305,33 @@ About Linearly Separable
 <h2 class="anchored" data-anchor-id="an-example-instance-approach-predictor">An example instance approach predictor</h2>
 <p>To illustrate the above, let us build a simple instance based predictor - in this case, based on the California Housing dataset which can be found both on Keras and SKLearn. This predictor will attempt to “guess” the median house price for a given California district census block group.</p>
 <p>Let us start by getting a sense of what the dataset is about.</p>
-<div id="ec873cf1" class="cell" data-execution_count="2">
+<div id="e4d27dbd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="ec873cf1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ec873cf1-1"><a href="#ec873cf1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="ec873cf1-2"><a href="#ec873cf1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_california_housing</span>
-<span id="ec873cf1-3"><a href="#ec873cf1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="ec873cf1-4"><a href="#ec873cf1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="ec873cf1-5"><a href="#ec873cf1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="ec873cf1-6"><a href="#ec873cf1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="ec873cf1-7"><a href="#ec873cf1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the California housing dataset</span></span>
-<span id="ec873cf1-8"><a href="#ec873cf1-8" aria-hidden="true" tabindex="-1"></a>housing <span class="op">=</span> fetch_california_housing()</span>
-<span id="ec873cf1-9"><a href="#ec873cf1-9" aria-hidden="true" tabindex="-1"></a>housing_df <span class="op">=</span> pd.DataFrame(housing.data, columns<span class="op">=</span>housing.feature_names)</span>
-<span id="ec873cf1-10"><a href="#ec873cf1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(housing.DESCR)</span>
-<span id="ec873cf1-11"><a href="#ec873cf1-11" aria-hidden="true" tabindex="-1"></a>housing_df[<span class="st">"MedianHouseValue"</span>] <span class="op">=</span> housing.target</span>
-<span id="ec873cf1-12"><a href="#ec873cf1-12" aria-hidden="true" tabindex="-1"></a>housing_df.plot(</span>
-<span id="ec873cf1-13"><a href="#ec873cf1-13" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
-<span id="ec873cf1-14"><a href="#ec873cf1-14" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Longitude"</span>,</span>
-<span id="ec873cf1-15"><a href="#ec873cf1-15" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Latitude"</span>,</span>
-<span id="ec873cf1-16"><a href="#ec873cf1-16" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.4</span>,</span>
-<span id="ec873cf1-17"><a href="#ec873cf1-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>housing_df[<span class="st">"Population"</span>] <span class="op">/</span> <span class="dv">100</span>,</span>
-<span id="ec873cf1-18"><a href="#ec873cf1-18" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Population"</span>,</span>
-<span id="ec873cf1-19"><a href="#ec873cf1-19" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>),</span>
-<span id="ec873cf1-20"><a href="#ec873cf1-20" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"MedianHouseValue"</span>,</span>
-<span id="ec873cf1-21"><a href="#ec873cf1-21" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.get_cmap(<span class="st">"jet"</span>),</span>
-<span id="ec873cf1-22"><a href="#ec873cf1-22" aria-hidden="true" tabindex="-1"></a>    colorbar<span class="op">=</span><span class="va">True</span>,</span>
-<span id="ec873cf1-23"><a href="#ec873cf1-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="ec873cf1-24"><a href="#ec873cf1-24" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e4d27dbd"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e4d27dbd-1"><a href="#e4d27dbd-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="e4d27dbd-2"><a href="#e4d27dbd-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_california_housing</span>
+<span id="e4d27dbd-3"><a href="#e4d27dbd-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="e4d27dbd-4"><a href="#e4d27dbd-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="e4d27dbd-5"><a href="#e4d27dbd-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e4d27dbd-6"><a href="#e4d27dbd-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e4d27dbd-7"><a href="#e4d27dbd-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the California housing dataset</span></span>
+<span id="e4d27dbd-8"><a href="#e4d27dbd-8" aria-hidden="true" tabindex="-1"></a>housing <span class="op">=</span> fetch_california_housing()</span>
+<span id="e4d27dbd-9"><a href="#e4d27dbd-9" aria-hidden="true" tabindex="-1"></a>housing_df <span class="op">=</span> pd.DataFrame(housing.data, columns<span class="op">=</span>housing.feature_names)</span>
+<span id="e4d27dbd-10"><a href="#e4d27dbd-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(housing.DESCR)</span>
+<span id="e4d27dbd-11"><a href="#e4d27dbd-11" aria-hidden="true" tabindex="-1"></a>housing_df[<span class="st">"MedianHouseValue"</span>] <span class="op">=</span> housing.target</span>
+<span id="e4d27dbd-12"><a href="#e4d27dbd-12" aria-hidden="true" tabindex="-1"></a>housing_df.plot(</span>
+<span id="e4d27dbd-13"><a href="#e4d27dbd-13" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
+<span id="e4d27dbd-14"><a href="#e4d27dbd-14" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Longitude"</span>,</span>
+<span id="e4d27dbd-15"><a href="#e4d27dbd-15" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Latitude"</span>,</span>
+<span id="e4d27dbd-16"><a href="#e4d27dbd-16" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span id="e4d27dbd-17"><a href="#e4d27dbd-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>housing_df[<span class="st">"Population"</span>] <span class="op">/</span> <span class="dv">100</span>,</span>
+<span id="e4d27dbd-18"><a href="#e4d27dbd-18" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Population"</span>,</span>
+<span id="e4d27dbd-19"><a href="#e4d27dbd-19" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>),</span>
+<span id="e4d27dbd-20"><a href="#e4d27dbd-20" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"MedianHouseValue"</span>,</span>
+<span id="e4d27dbd-21"><a href="#e4d27dbd-21" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.get_cmap(<span class="st">"jet"</span>),</span>
+<span id="e4d27dbd-22"><a href="#e4d27dbd-22" aria-hidden="true" tabindex="-1"></a>    colorbar<span class="op">=</span><span class="va">True</span>,</span>
+<span id="e4d27dbd-23"><a href="#e4d27dbd-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="e4d27dbd-24"><a href="#e4d27dbd-24" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>.. _california_housing_dataset:
@@ -399,62 +404,62 @@ About k-Nearest Neighbors
 <p>The k-nearest neighbors (k-NN) regressor is a straightforward method used in machine learning for predicting the value of an unknown point based on the values of its nearest neighbors. Imagine you’re at a park trying to guess the age of a tree you’re standing next to but have no idea how to do it. What you can do, however, is look at the nearby trees whose ages you do know. You decide to consider the ages of the 3 trees closest to the one you’re interested in. If those trees are 50, 55, and 60 years old, you might guess that the tree you’re looking at is around 55 years old—the average age of its “nearest neighbors.”</p>
 </div>
 </div>
-<div id="89559447" class="cell" data-execution_count="3">
+<div id="b87bb481" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="89559447"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="89559447-1"><a href="#89559447-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="89559447-2"><a href="#89559447-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="89559447-3"><a href="#89559447-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="89559447-4"><a href="#89559447-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="89559447-5"><a href="#89559447-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="89559447-6"><a href="#89559447-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-7"><a href="#89559447-7" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> housing.data, housing.target</span>
-<span id="89559447-8"><a href="#89559447-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-9"><a href="#89559447-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and seed random number generators</span></span>
-<span id="89559447-10"><a href="#89559447-10" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">42</span></span>
-<span id="89559447-11"><a href="#89559447-11" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
-<span id="89559447-12"><a href="#89559447-12" aria-hidden="true" tabindex="-1"></a>random.seed(seed)</span>
-<span id="89559447-13"><a href="#89559447-13" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(seed)</span>
-<span id="89559447-14"><a href="#89559447-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.cuda.is_available():</span>
-<span id="89559447-15"><a href="#89559447-15" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed(seed)</span>
-<span id="89559447-16"><a href="#89559447-16" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed_all(seed)</span>
-<span id="89559447-17"><a href="#89559447-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
-<span id="89559447-18"><a href="#89559447-18" aria-hidden="true" tabindex="-1"></a>    torch.manual_seed(seed)</span>
-<span id="89559447-19"><a href="#89559447-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-20"><a href="#89559447-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-21"><a href="#89559447-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and split the California housing dataset</span></span>
-<span id="89559447-22"><a href="#89559447-22" aria-hidden="true" tabindex="-1"></a>X_train_full, X_test, y_train_full, y_test <span class="op">=</span> train_test_split(</span>
-<span id="89559447-23"><a href="#89559447-23" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed</span>
-<span id="89559447-24"><a href="#89559447-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="89559447-25"><a href="#89559447-25" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(X_train_full, y_train_full)</span>
-<span id="89559447-26"><a href="#89559447-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-27"><a href="#89559447-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the features</span></span>
-<span id="89559447-28"><a href="#89559447-28" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="89559447-29"><a href="#89559447-29" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train)</span>
-<span id="89559447-30"><a href="#89559447-30" aria-hidden="true" tabindex="-1"></a>X_valid_scaled <span class="op">=</span> scaler.transform(X_valid)</span>
-<span id="89559447-31"><a href="#89559447-31" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test)</span>
-<span id="89559447-32"><a href="#89559447-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-33"><a href="#89559447-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the k-NN regressor</span></span>
-<span id="89559447-34"><a href="#89559447-34" aria-hidden="true" tabindex="-1"></a>knn_reg <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="89559447-35"><a href="#89559447-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-36"><a href="#89559447-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the k-NN model</span></span>
-<span id="89559447-37"><a href="#89559447-37" aria-hidden="true" tabindex="-1"></a>knn_reg.fit(X_train_scaled, y_train)</span>
-<span id="89559447-38"><a href="#89559447-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-39"><a href="#89559447-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
-<span id="89559447-40"><a href="#89559447-40" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> knn_reg.score(</span>
-<span id="89559447-41"><a href="#89559447-41" aria-hidden="true" tabindex="-1"></a>    X_test_scaled, y_test</span>
-<span id="89559447-42"><a href="#89559447-42" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># This returns the R^2 score of the prediction</span></span>
-<span id="89559447-43"><a href="#89559447-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-44"><a href="#89559447-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Making predictions</span></span>
-<span id="89559447-45"><a href="#89559447-45" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> knn_reg.predict(X_test_scaled[:<span class="dv">5</span>])</span>
-<span id="89559447-46"><a href="#89559447-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-47"><a href="#89559447-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
-<span id="89559447-48"><a href="#89559447-48" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="89559447-49"><a href="#89559447-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="89559447-50"><a href="#89559447-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model R^2 score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="89559447-51"><a href="#89559447-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="89559447-52"><a href="#89559447-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="89559447-53"><a href="#89559447-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b87bb481"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b87bb481-1"><a href="#b87bb481-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="b87bb481-2"><a href="#b87bb481-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="b87bb481-3"><a href="#b87bb481-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="b87bb481-4"><a href="#b87bb481-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="b87bb481-5"><a href="#b87bb481-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="b87bb481-6"><a href="#b87bb481-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-7"><a href="#b87bb481-7" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> housing.data, housing.target</span>
+<span id="b87bb481-8"><a href="#b87bb481-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-9"><a href="#b87bb481-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize and seed random number generators</span></span>
+<span id="b87bb481-10"><a href="#b87bb481-10" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">42</span></span>
+<span id="b87bb481-11"><a href="#b87bb481-11" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
+<span id="b87bb481-12"><a href="#b87bb481-12" aria-hidden="true" tabindex="-1"></a>random.seed(seed)</span>
+<span id="b87bb481-13"><a href="#b87bb481-13" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(seed)</span>
+<span id="b87bb481-14"><a href="#b87bb481-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.cuda.is_available():</span>
+<span id="b87bb481-15"><a href="#b87bb481-15" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed(seed)</span>
+<span id="b87bb481-16"><a href="#b87bb481-16" aria-hidden="true" tabindex="-1"></a>    torch.cuda.manual_seed_all(seed)</span>
+<span id="b87bb481-17"><a href="#b87bb481-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.backends.mps.is_available():</span>
+<span id="b87bb481-18"><a href="#b87bb481-18" aria-hidden="true" tabindex="-1"></a>    torch.manual_seed(seed)</span>
+<span id="b87bb481-19"><a href="#b87bb481-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-20"><a href="#b87bb481-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-21"><a href="#b87bb481-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and split the California housing dataset</span></span>
+<span id="b87bb481-22"><a href="#b87bb481-22" aria-hidden="true" tabindex="-1"></a>X_train_full, X_test, y_train_full, y_test <span class="op">=</span> train_test_split(</span>
+<span id="b87bb481-23"><a href="#b87bb481-23" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed</span>
+<span id="b87bb481-24"><a href="#b87bb481-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="b87bb481-25"><a href="#b87bb481-25" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(X_train_full, y_train_full)</span>
+<span id="b87bb481-26"><a href="#b87bb481-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-27"><a href="#b87bb481-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the features</span></span>
+<span id="b87bb481-28"><a href="#b87bb481-28" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="b87bb481-29"><a href="#b87bb481-29" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="b87bb481-30"><a href="#b87bb481-30" aria-hidden="true" tabindex="-1"></a>X_valid_scaled <span class="op">=</span> scaler.transform(X_valid)</span>
+<span id="b87bb481-31"><a href="#b87bb481-31" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="b87bb481-32"><a href="#b87bb481-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-33"><a href="#b87bb481-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the k-NN regressor</span></span>
+<span id="b87bb481-34"><a href="#b87bb481-34" aria-hidden="true" tabindex="-1"></a>knn_reg <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="b87bb481-35"><a href="#b87bb481-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-36"><a href="#b87bb481-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the k-NN model</span></span>
+<span id="b87bb481-37"><a href="#b87bb481-37" aria-hidden="true" tabindex="-1"></a>knn_reg.fit(X_train_scaled, y_train)</span>
+<span id="b87bb481-38"><a href="#b87bb481-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-39"><a href="#b87bb481-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
+<span id="b87bb481-40"><a href="#b87bb481-40" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> knn_reg.score(</span>
+<span id="b87bb481-41"><a href="#b87bb481-41" aria-hidden="true" tabindex="-1"></a>    X_test_scaled, y_test</span>
+<span id="b87bb481-42"><a href="#b87bb481-42" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># This returns the R^2 score of the prediction</span></span>
+<span id="b87bb481-43"><a href="#b87bb481-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-44"><a href="#b87bb481-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Making predictions</span></span>
+<span id="b87bb481-45"><a href="#b87bb481-45" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> knn_reg.predict(X_test_scaled[:<span class="dv">5</span>])</span>
+<span id="b87bb481-46"><a href="#b87bb481-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-47"><a href="#b87bb481-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
+<span id="b87bb481-48"><a href="#b87bb481-48" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="b87bb481-49"><a href="#b87bb481-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b87bb481-50"><a href="#b87bb481-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model R^2 score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="b87bb481-51"><a href="#b87bb481-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="b87bb481-52"><a href="#b87bb481-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="b87bb481-53"><a href="#b87bb481-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model R^2 score: 0.6863935783148378
@@ -469,131 +474,134 @@ Relative differences (%): [ 19.79035639  44.84716157 -12.1000758   20.37968893  
 <h2 class="anchored" data-anchor-id="solving-the-same-problem-with-a-model-approach">Solving the same problem with a model approach</h2>
 <p>Let’s explore a model-based method for making predictions by utilizing a straightforward neural network structure. it is a simple feedforward model built for regression tasks. It starts with an input layer that directly connects to a hidden layer of 50 neurons. This hidden layer uses the ReLU activation function, which helps the model capture non-linear relationships in the data. After processing through this hidden layer, the data is passed to a single neuron in the output layer that produces the final prediction.</p>
 <p>Additionally, the model is trained using the mean squared error (MSE) loss function, which is well-suited for regression because it penalizes larger errors more heavily. The use of stochastic gradient descent (SGD) helps in efficiently updating the model’s weights. We also add an early stopping mechanism to halt training when the validation loss stops improving, thereby preventing overfitting.</p>
-<div id="2f0b6b2f" class="cell" data-execution_count="4">
+<div id="91e442c8" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="2f0b6b2f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2f0b6b2f-1"><a href="#2f0b6b2f-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="2f0b6b2f-2"><a href="#2f0b6b2f-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytorch_lightning <span class="im">as</span> pl</span>
-<span id="2f0b6b2f-3"><a href="#2f0b6b2f-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> DataLoader, TensorDataset</span>
-<span id="2f0b6b2f-4"><a href="#2f0b6b2f-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_lightning.callbacks.early_stopping <span class="im">import</span> EarlyStopping</span>
-<span id="2f0b6b2f-5"><a href="#2f0b6b2f-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-6"><a href="#2f0b6b2f-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-7"><a href="#2f0b6b2f-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the LightningModule</span></span>
-<span id="2f0b6b2f-8"><a href="#2f0b6b2f-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RegressionModel(pl.LightningModule):</span>
-<span id="2f0b6b2f-9"><a href="#2f0b6b2f-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim):</span>
-<span id="2f0b6b2f-10"><a href="#2f0b6b2f-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="2f0b6b2f-11"><a href="#2f0b6b2f-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> nn.Sequential(</span>
-<span id="2f0b6b2f-12"><a href="#2f0b6b2f-12" aria-hidden="true" tabindex="-1"></a>            nn.Linear(input_dim, <span class="dv">50</span>), nn.ReLU(), nn.Linear(<span class="dv">50</span>, <span class="dv">1</span>)</span>
-<span id="2f0b6b2f-13"><a href="#2f0b6b2f-13" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="2f0b6b2f-14"><a href="#2f0b6b2f-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.loss_fn <span class="op">=</span> nn.MSELoss()</span>
-<span id="2f0b6b2f-15"><a href="#2f0b6b2f-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-16"><a href="#2f0b6b2f-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
-<span id="2f0b6b2f-17"><a href="#2f0b6b2f-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.model(x)</span>
-<span id="2f0b6b2f-18"><a href="#2f0b6b2f-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-19"><a href="#2f0b6b2f-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> training_step(<span class="va">self</span>, batch, batch_idx):</span>
-<span id="2f0b6b2f-20"><a href="#2f0b6b2f-20" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
-<span id="2f0b6b2f-21"><a href="#2f0b6b2f-21" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)  <span class="co"># Ensure proper shape</span></span>
-<span id="2f0b6b2f-22"><a href="#2f0b6b2f-22" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
-<span id="2f0b6b2f-23"><a href="#2f0b6b2f-23" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
-<span id="2f0b6b2f-24"><a href="#2f0b6b2f-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"train_loss"</span>, loss)</span>
-<span id="2f0b6b2f-25"><a href="#2f0b6b2f-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
-<span id="2f0b6b2f-26"><a href="#2f0b6b2f-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-27"><a href="#2f0b6b2f-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validation_step(<span class="va">self</span>, batch, batch_idx):</span>
-<span id="2f0b6b2f-28"><a href="#2f0b6b2f-28" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
-<span id="2f0b6b2f-29"><a href="#2f0b6b2f-29" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="2f0b6b2f-30"><a href="#2f0b6b2f-30" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
-<span id="2f0b6b2f-31"><a href="#2f0b6b2f-31" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
-<span id="2f0b6b2f-32"><a href="#2f0b6b2f-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"val_loss"</span>, loss, prog_bar<span class="op">=</span><span class="va">True</span>)</span>
-<span id="2f0b6b2f-33"><a href="#2f0b6b2f-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
-<span id="2f0b6b2f-34"><a href="#2f0b6b2f-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-35"><a href="#2f0b6b2f-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_step(<span class="va">self</span>, batch, batch_idx):</span>
-<span id="2f0b6b2f-36"><a href="#2f0b6b2f-36" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
-<span id="2f0b6b2f-37"><a href="#2f0b6b2f-37" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="2f0b6b2f-38"><a href="#2f0b6b2f-38" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
-<span id="2f0b6b2f-39"><a href="#2f0b6b2f-39" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
-<span id="2f0b6b2f-40"><a href="#2f0b6b2f-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"test_loss"</span>, loss)</span>
-<span id="2f0b6b2f-41"><a href="#2f0b6b2f-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
-<span id="2f0b6b2f-42"><a href="#2f0b6b2f-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-43"><a href="#2f0b6b2f-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> configure_optimizers(<span class="va">self</span>):</span>
-<span id="2f0b6b2f-44"><a href="#2f0b6b2f-44" aria-hidden="true" tabindex="-1"></a>        optimizer <span class="op">=</span> torch.optim.SGD(<span class="va">self</span>.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</span>
-<span id="2f0b6b2f-45"><a href="#2f0b6b2f-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> optimizer</span>
-<span id="2f0b6b2f-46"><a href="#2f0b6b2f-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-47"><a href="#2f0b6b2f-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-48"><a href="#2f0b6b2f-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Create TensorDatasets and DataLoaders</span></span>
-<span id="2f0b6b2f-49"><a href="#2f0b6b2f-49" aria-hidden="true" tabindex="-1"></a>train_dataset <span class="op">=</span> TensorDataset(</span>
-<span id="2f0b6b2f-50"><a href="#2f0b6b2f-50" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_train_scaled, dtype<span class="op">=</span>torch.float32),</span>
-<span id="2f0b6b2f-51"><a href="#2f0b6b2f-51" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_train, dtype<span class="op">=</span>torch.float32),</span>
-<span id="2f0b6b2f-52"><a href="#2f0b6b2f-52" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="2f0b6b2f-53"><a href="#2f0b6b2f-53" aria-hidden="true" tabindex="-1"></a>valid_dataset <span class="op">=</span> TensorDataset(</span>
-<span id="2f0b6b2f-54"><a href="#2f0b6b2f-54" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_valid_scaled, dtype<span class="op">=</span>torch.float32),</span>
-<span id="2f0b6b2f-55"><a href="#2f0b6b2f-55" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_valid, dtype<span class="op">=</span>torch.float32),</span>
-<span id="2f0b6b2f-56"><a href="#2f0b6b2f-56" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="2f0b6b2f-57"><a href="#2f0b6b2f-57" aria-hidden="true" tabindex="-1"></a>test_dataset <span class="op">=</span> TensorDataset(</span>
-<span id="2f0b6b2f-58"><a href="#2f0b6b2f-58" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_test_scaled, dtype<span class="op">=</span>torch.float32),</span>
-<span id="2f0b6b2f-59"><a href="#2f0b6b2f-59" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_test, dtype<span class="op">=</span>torch.float32),</span>
-<span id="2f0b6b2f-60"><a href="#2f0b6b2f-60" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="2f0b6b2f-61"><a href="#2f0b6b2f-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-62"><a href="#2f0b6b2f-62" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_dataset, batch_size<span class="op">=</span><span class="dv">32</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
-<span id="2f0b6b2f-63"><a href="#2f0b6b2f-63" aria-hidden="true" tabindex="-1"></a>valid_loader <span class="op">=</span> DataLoader(valid_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
-<span id="2f0b6b2f-64"><a href="#2f0b6b2f-64" aria-hidden="true" tabindex="-1"></a>test_loader <span class="op">=</span> DataLoader(test_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
-<span id="2f0b6b2f-65"><a href="#2f0b6b2f-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-66"><a href="#2f0b6b2f-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the model with the correct input dimension</span></span>
-<span id="2f0b6b2f-67"><a href="#2f0b6b2f-67" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> X_train_scaled.shape[<span class="dv">1</span>]</span>
-<span id="2f0b6b2f-68"><a href="#2f0b6b2f-68" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RegressionModel(input_dim<span class="op">=</span>input_dim)</span>
-<span id="2f0b6b2f-69"><a href="#2f0b6b2f-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-70"><a href="#2f0b6b2f-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up EarlyStopping callback</span></span>
-<span id="2f0b6b2f-71"><a href="#2f0b6b2f-71" aria-hidden="true" tabindex="-1"></a>early_stop_callback <span class="op">=</span> EarlyStopping(</span>
-<span id="2f0b6b2f-72"><a href="#2f0b6b2f-72" aria-hidden="true" tabindex="-1"></a>    monitor<span class="op">=</span><span class="st">"val_loss"</span>, patience<span class="op">=</span><span class="dv">3</span>, mode<span class="op">=</span><span class="st">"min"</span>, verbose<span class="op">=</span><span class="va">False</span></span>
-<span id="2f0b6b2f-73"><a href="#2f0b6b2f-73" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="2f0b6b2f-74"><a href="#2f0b6b2f-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2f0b6b2f-75"><a href="#2f0b6b2f-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model using PyTorch-Lightning's Trainer</span></span>
-<span id="2f0b6b2f-76"><a href="#2f0b6b2f-76" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> pl.Trainer(</span>
-<span id="2f0b6b2f-77"><a href="#2f0b6b2f-77" aria-hidden="true" tabindex="-1"></a>    max_epochs<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="2f0b6b2f-78"><a href="#2f0b6b2f-78" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[early_stop_callback],</span>
-<span id="2f0b6b2f-79"><a href="#2f0b6b2f-79" aria-hidden="true" tabindex="-1"></a>    logger<span class="op">=</span><span class="va">False</span>,</span>
-<span id="2f0b6b2f-80"><a href="#2f0b6b2f-80" aria-hidden="true" tabindex="-1"></a>    enable_progress_bar<span class="op">=</span><span class="va">False</span>,</span>
-<span id="2f0b6b2f-81"><a href="#2f0b6b2f-81" aria-hidden="true" tabindex="-1"></a>    enable_checkpointing<span class="op">=</span><span class="va">False</span>,</span>
-<span id="2f0b6b2f-82"><a href="#2f0b6b2f-82" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="2f0b6b2f-83"><a href="#2f0b6b2f-83" aria-hidden="true" tabindex="-1"></a>trainer.fit(model, train_loader, valid_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="91e442c8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="91e442c8-1"><a href="#91e442c8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="91e442c8-2"><a href="#91e442c8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytorch_lightning <span class="im">as</span> pl</span>
+<span id="91e442c8-3"><a href="#91e442c8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> DataLoader, TensorDataset</span>
+<span id="91e442c8-4"><a href="#91e442c8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_lightning.callbacks.early_stopping <span class="im">import</span> EarlyStopping</span>
+<span id="91e442c8-5"><a href="#91e442c8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-6"><a href="#91e442c8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-7"><a href="#91e442c8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the LightningModule</span></span>
+<span id="91e442c8-8"><a href="#91e442c8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RegressionModel(pl.LightningModule):</span>
+<span id="91e442c8-9"><a href="#91e442c8-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim):</span>
+<span id="91e442c8-10"><a href="#91e442c8-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="91e442c8-11"><a href="#91e442c8-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> nn.Sequential(</span>
+<span id="91e442c8-12"><a href="#91e442c8-12" aria-hidden="true" tabindex="-1"></a>            nn.Linear(input_dim, <span class="dv">50</span>), nn.ReLU(), nn.Linear(<span class="dv">50</span>, <span class="dv">1</span>)</span>
+<span id="91e442c8-13"><a href="#91e442c8-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="91e442c8-14"><a href="#91e442c8-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.loss_fn <span class="op">=</span> nn.MSELoss()</span>
+<span id="91e442c8-15"><a href="#91e442c8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-16"><a href="#91e442c8-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="91e442c8-17"><a href="#91e442c8-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.model(x)</span>
+<span id="91e442c8-18"><a href="#91e442c8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-19"><a href="#91e442c8-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> training_step(<span class="va">self</span>, batch, batch_idx):</span>
+<span id="91e442c8-20"><a href="#91e442c8-20" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
+<span id="91e442c8-21"><a href="#91e442c8-21" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)  <span class="co"># Ensure proper shape</span></span>
+<span id="91e442c8-22"><a href="#91e442c8-22" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
+<span id="91e442c8-23"><a href="#91e442c8-23" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
+<span id="91e442c8-24"><a href="#91e442c8-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"train_loss"</span>, loss)</span>
+<span id="91e442c8-25"><a href="#91e442c8-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
+<span id="91e442c8-26"><a href="#91e442c8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-27"><a href="#91e442c8-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> validation_step(<span class="va">self</span>, batch, batch_idx):</span>
+<span id="91e442c8-28"><a href="#91e442c8-28" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
+<span id="91e442c8-29"><a href="#91e442c8-29" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="91e442c8-30"><a href="#91e442c8-30" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
+<span id="91e442c8-31"><a href="#91e442c8-31" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
+<span id="91e442c8-32"><a href="#91e442c8-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"val_loss"</span>, loss, prog_bar<span class="op">=</span><span class="va">True</span>)</span>
+<span id="91e442c8-33"><a href="#91e442c8-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
+<span id="91e442c8-34"><a href="#91e442c8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-35"><a href="#91e442c8-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_step(<span class="va">self</span>, batch, batch_idx):</span>
+<span id="91e442c8-36"><a href="#91e442c8-36" aria-hidden="true" tabindex="-1"></a>        x, y <span class="op">=</span> batch</span>
+<span id="91e442c8-37"><a href="#91e442c8-37" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> y.view(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="91e442c8-38"><a href="#91e442c8-38" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> <span class="va">self</span>(x)</span>
+<span id="91e442c8-39"><a href="#91e442c8-39" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> <span class="va">self</span>.loss_fn(y_hat, y)</span>
+<span id="91e442c8-40"><a href="#91e442c8-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.log(<span class="st">"test_loss"</span>, loss)</span>
+<span id="91e442c8-41"><a href="#91e442c8-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span>
+<span id="91e442c8-42"><a href="#91e442c8-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-43"><a href="#91e442c8-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> configure_optimizers(<span class="va">self</span>):</span>
+<span id="91e442c8-44"><a href="#91e442c8-44" aria-hidden="true" tabindex="-1"></a>        optimizer <span class="op">=</span> torch.optim.SGD(<span class="va">self</span>.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="91e442c8-45"><a href="#91e442c8-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> optimizer</span>
+<span id="91e442c8-46"><a href="#91e442c8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-47"><a href="#91e442c8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-48"><a href="#91e442c8-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Create TensorDatasets and DataLoaders</span></span>
+<span id="91e442c8-49"><a href="#91e442c8-49" aria-hidden="true" tabindex="-1"></a>train_dataset <span class="op">=</span> TensorDataset(</span>
+<span id="91e442c8-50"><a href="#91e442c8-50" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_train_scaled, dtype<span class="op">=</span>torch.float32),</span>
+<span id="91e442c8-51"><a href="#91e442c8-51" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_train, dtype<span class="op">=</span>torch.float32),</span>
+<span id="91e442c8-52"><a href="#91e442c8-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="91e442c8-53"><a href="#91e442c8-53" aria-hidden="true" tabindex="-1"></a>valid_dataset <span class="op">=</span> TensorDataset(</span>
+<span id="91e442c8-54"><a href="#91e442c8-54" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_valid_scaled, dtype<span class="op">=</span>torch.float32),</span>
+<span id="91e442c8-55"><a href="#91e442c8-55" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_valid, dtype<span class="op">=</span>torch.float32),</span>
+<span id="91e442c8-56"><a href="#91e442c8-56" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="91e442c8-57"><a href="#91e442c8-57" aria-hidden="true" tabindex="-1"></a>test_dataset <span class="op">=</span> TensorDataset(</span>
+<span id="91e442c8-58"><a href="#91e442c8-58" aria-hidden="true" tabindex="-1"></a>    torch.tensor(X_test_scaled, dtype<span class="op">=</span>torch.float32),</span>
+<span id="91e442c8-59"><a href="#91e442c8-59" aria-hidden="true" tabindex="-1"></a>    torch.tensor(y_test, dtype<span class="op">=</span>torch.float32),</span>
+<span id="91e442c8-60"><a href="#91e442c8-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="91e442c8-61"><a href="#91e442c8-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-62"><a href="#91e442c8-62" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_dataset, batch_size<span class="op">=</span><span class="dv">32</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
+<span id="91e442c8-63"><a href="#91e442c8-63" aria-hidden="true" tabindex="-1"></a>valid_loader <span class="op">=</span> DataLoader(valid_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="91e442c8-64"><a href="#91e442c8-64" aria-hidden="true" tabindex="-1"></a>test_loader <span class="op">=</span> DataLoader(test_dataset, batch_size<span class="op">=</span><span class="dv">32</span>)</span>
+<span id="91e442c8-65"><a href="#91e442c8-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-66"><a href="#91e442c8-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the model with the correct input dimension</span></span>
+<span id="91e442c8-67"><a href="#91e442c8-67" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> X_train_scaled.shape[<span class="dv">1</span>]</span>
+<span id="91e442c8-68"><a href="#91e442c8-68" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RegressionModel(input_dim<span class="op">=</span>input_dim)</span>
+<span id="91e442c8-69"><a href="#91e442c8-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-70"><a href="#91e442c8-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up EarlyStopping callback</span></span>
+<span id="91e442c8-71"><a href="#91e442c8-71" aria-hidden="true" tabindex="-1"></a>early_stop_callback <span class="op">=</span> EarlyStopping(</span>
+<span id="91e442c8-72"><a href="#91e442c8-72" aria-hidden="true" tabindex="-1"></a>    monitor<span class="op">=</span><span class="st">"val_loss"</span>, patience<span class="op">=</span><span class="dv">3</span>, mode<span class="op">=</span><span class="st">"min"</span>, verbose<span class="op">=</span><span class="va">False</span></span>
+<span id="91e442c8-73"><a href="#91e442c8-73" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="91e442c8-74"><a href="#91e442c8-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="91e442c8-75"><a href="#91e442c8-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model using PyTorch-Lightning's Trainer</span></span>
+<span id="91e442c8-76"><a href="#91e442c8-76" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> pl.Trainer(</span>
+<span id="91e442c8-77"><a href="#91e442c8-77" aria-hidden="true" tabindex="-1"></a>    max_epochs<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="91e442c8-78"><a href="#91e442c8-78" aria-hidden="true" tabindex="-1"></a>    callbacks<span class="op">=</span>[early_stop_callback],</span>
+<span id="91e442c8-79"><a href="#91e442c8-79" aria-hidden="true" tabindex="-1"></a>    logger<span class="op">=</span><span class="va">False</span>,</span>
+<span id="91e442c8-80"><a href="#91e442c8-80" aria-hidden="true" tabindex="-1"></a>    enable_progress_bar<span class="op">=</span><span class="va">False</span>,</span>
+<span id="91e442c8-81"><a href="#91e442c8-81" aria-hidden="true" tabindex="-1"></a>    enable_checkpointing<span class="op">=</span><span class="va">False</span>,</span>
+<span id="91e442c8-82"><a href="#91e442c8-82" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="91e442c8-83"><a href="#91e442c8-83" aria-hidden="true" tabindex="-1"></a>trainer.fit(model, train_loader, valid_loader)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>With the model trained, let us evaluate performance and run a few predictions.</p>
-<div id="1ee31f36" class="cell" data-execution_count="5">
+<div id="ce98a09b" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="1ee31f36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1ee31f36-1"><a href="#1ee31f36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on the test set</span></span>
-<span id="1ee31f36-2"><a href="#1ee31f36-2" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> trainer.test(model, test_loader)</span>
-<span id="1ee31f36-3"><a href="#1ee31f36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE: </span><span class="sc">{</span>test_results<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ce98a09b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ce98a09b-1"><a href="#ce98a09b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on the test set</span></span>
+<span id="ce98a09b-2"><a href="#ce98a09b-2" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> trainer.test(model, test_loader)</span>
+<span id="ce98a09b-3"><a href="#ce98a09b-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE: </span><span class="sc">{</span>test_results<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold">        Test metric        </span>┃<span style="font-weight: bold">       DataLoader 0        </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│<span style="color: #008080; text-decoration-color: #008080">         test_loss         </span>│<span style="color: #800080; text-decoration-color: #800080">    0.37767359614372253    </span>│
+└───────────────────────────┴───────────────────────────┘
+</pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-       Test metric             DataLoader 0
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-        test_loss           0.3777255415916443
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Test MSE: [{'test_loss': 0.3777255415916443}]</code></pre>
+<pre><code>Test MSE: [{'test_loss': 0.37767359614372253}]</code></pre>
 </div>
 </div>
-<div id="4c0f6a21" class="cell" data-execution_count="6">
+<div id="4b486a4b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="4c0f6a21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4c0f6a21-1"><a href="#4c0f6a21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions for the first 5 test instances</span></span>
-<span id="4c0f6a21-2"><a href="#4c0f6a21-2" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
-<span id="4c0f6a21-3"><a href="#4c0f6a21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> torch.no_grad():</span>
-<span id="4c0f6a21-4"><a href="#4c0f6a21-4" aria-hidden="true" tabindex="-1"></a>    test_samples <span class="op">=</span> torch.tensor(X_test_scaled[:<span class="dv">5</span>], dtype<span class="op">=</span>torch.float32)</span>
-<span id="4c0f6a21-5"><a href="#4c0f6a21-5" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> model(test_samples).view(<span class="op">-</span><span class="dv">1</span>).numpy()</span>
-<span id="4c0f6a21-6"><a href="#4c0f6a21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4c0f6a21-7"><a href="#4c0f6a21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
-<span id="4c0f6a21-8"><a href="#4c0f6a21-8" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="4c0f6a21-9"><a href="#4c0f6a21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4c0f6a21-10"><a href="#4c0f6a21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="4c0f6a21-11"><a href="#4c0f6a21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="4c0f6a21-12"><a href="#4c0f6a21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4b486a4b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4b486a4b-1"><a href="#4b486a4b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions for the first 5 test instances</span></span>
+<span id="4b486a4b-2"><a href="#4b486a4b-2" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="4b486a4b-3"><a href="#4b486a4b-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> torch.no_grad():</span>
+<span id="4b486a4b-4"><a href="#4b486a4b-4" aria-hidden="true" tabindex="-1"></a>    test_samples <span class="op">=</span> torch.tensor(X_test_scaled[:<span class="dv">5</span>], dtype<span class="op">=</span>torch.float32)</span>
+<span id="4b486a4b-5"><a href="#4b486a4b-5" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> model(test_samples).view(<span class="op">-</span><span class="dv">1</span>).numpy()</span>
+<span id="4b486a4b-6"><a href="#4b486a4b-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4b486a4b-7"><a href="#4b486a4b-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate relative differences as percentages</span></span>
+<span id="4b486a4b-8"><a href="#4b486a4b-8" aria-hidden="true" tabindex="-1"></a>relative_differences <span class="op">=</span> ((predictions <span class="op">-</span> y_test[:<span class="dv">5</span>]) <span class="op">/</span> y_test[:<span class="dv">5</span>]) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="4b486a4b-9"><a href="#4b486a4b-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4b486a4b-10"><a href="#4b486a4b-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predictions for first 5 instances: </span><span class="sc">{</span>predictions<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="4b486a4b-11"><a href="#4b486a4b-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual values for first 5 instances: </span><span class="sc">{</span>y_test[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="4b486a4b-12"><a href="#4b486a4b-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Relative differences (%): </span><span class="sc">{</span>relative_differences<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Predictions for first 5 instances: [0.5031792 1.6951654 3.744416  2.57257   2.807933 ]
+<pre><code>Predictions for first 5 instances: [0.5028435 1.6948755 3.745551  2.5731127 2.8087265]
 Actual values for first 5 instances: [0.477   0.458   5.00001 2.186   2.78   ]
-Relative differences (%): [  5.48830032 270.12344885 -25.11182981  17.68390144   1.00478749]</code></pre>
+Relative differences (%): [  5.41792436 270.0601482  -25.08912764  17.7087249    1.03332911]</code></pre>
 </div>
 </div>
 </section>
@@ -621,236 +629,242 @@ Relative differences (%): [  5.48830032 270.12344885 -25.11182981  17.68390144  
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -858,185 +872,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

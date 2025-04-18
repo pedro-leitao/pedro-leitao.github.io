@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -133,7 +135,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -252,35 +254,36 @@ background-size: cover;
 <p>In this experiment, let us use the <a href="https://www.kaggle.com/datasets/yasserh/wine-quality-dataset/data">Wine Quality Dataset from Kaggle</a> to predict the quality of wine based on its features. We will investigate the dataset, use <a href="https://scikit-learn.org/stable/">SKLearn</a> pipelines to preprocess the data, and to evaluate the performance of different models towards finding a suitable regressor. This is a normal activity in any machine learning project.</p>
 <section id="loading-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-data">Loading the data</h2>
-<div id="9b3bb229" class="cell" data-execution_count="2">
+<div id="74a27967" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="9b3bb229"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9b3bb229-1"><a href="#9b3bb229-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>d yasserh<span class="op">/</span>wine<span class="op">-</span>quality<span class="op">-</span>dataset <span class="op">--</span>unzip <span class="op">-</span>p .data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="74a27967"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="74a27967-1"><a href="#74a27967-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle datasets download <span class="op">-</span>d yasserh<span class="op">/</span>wine<span class="op">-</span>quality<span class="op">-</span>dataset <span class="op">--</span>unzip <span class="op">-</span>p .data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Dataset URL: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
+<pre><code>Warning: Looks like you're using an outdated API Version, please consider updating (server 1.7.4.2 / client 1.6.17)
+Dataset URL: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
 License(s): CC0-1.0
 Downloading wine-quality-dataset.zip to .data
   0%|                                               | 0.00/21.5k [00:00&lt;?, ?B/s]
-100%|██████████████████████████████████████| 21.5k/21.5k [00:00&lt;00:00, 2.57MB/s]</code></pre>
+100%|██████████████████████████████████████| 21.5k/21.5k [00:00&lt;00:00, 2.44MB/s]</code></pre>
 </div>
 </div>
 <p>Let us start by loading the data into a Pandas dataframe. Remember that a Dataframe is a 2-dimensional labeled data structure with columns of potentially different types. You can think of it like a spreadsheet or SQL table, or a dictionary of Series objects.</p>
-<div id="d94ff68b" class="cell" data-execution_count="3">
+<div id="f180dd8a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="d94ff68b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d94ff68b-1"><a href="#d94ff68b-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in '.data/WineQT.csv' as a pandas dataframe</span></span>
-<span id="d94ff68b-2"><a href="#d94ff68b-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d94ff68b-3"><a href="#d94ff68b-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="d94ff68b-4"><a href="#d94ff68b-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d94ff68b-5"><a href="#d94ff68b-5" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> pd.read_csv(<span class="st">".data/WineQT.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="f180dd8a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f180dd8a-1"><a href="#f180dd8a-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in '.data/WineQT.csv' as a pandas dataframe</span></span>
+<span id="f180dd8a-2"><a href="#f180dd8a-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f180dd8a-3"><a href="#f180dd8a-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="f180dd8a-4"><a href="#f180dd8a-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="f180dd8a-5"><a href="#f180dd8a-5" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> pd.read_csv(<span class="st">".data/WineQT.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let us look at a few data examples.</p>
-<div id="9ead71c3" class="cell" data-execution_count="4">
+<div id="9556dfa7" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="9ead71c3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9ead71c3-1"><a href="#9ead71c3-1" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="9556dfa7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9556dfa7-1"><a href="#9556dfa7-1" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -490,10 +493,10 @@ Downloading wine-quality-dataset.zip to .data
 </div>
 </div>
 <p>We can see the dataset is composed of 1143 samples, with 13 columns in total. Let us check the various datatypes in the dataset, and ensure there are no missing values.</p>
-<div id="f82cde4f" class="cell" data-execution_count="5">
+<div id="4f72225c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="f82cde4f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f82cde4f-1"><a href="#f82cde4f-1" aria-hidden="true" tabindex="-1"></a>wine.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4f72225c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4f72225c-1"><a href="#4f72225c-1" aria-hidden="true" tabindex="-1"></a>wine.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -519,367 +522,367 @@ memory usage: 116.2 KB</code></pre>
 </div>
 </div>
 <p>We don’t particularly care about the <code>Id</code> column, so let us drop it from the dataset.</p>
-<div id="577fd9e5" class="cell" data-execution_count="6">
+<div id="6052996c" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="577fd9e5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="577fd9e5-1"><a href="#577fd9e5-1" aria-hidden="true" tabindex="-1"></a>wine.drop(<span class="st">"Id"</span>, inplace<span class="op">=</span><span class="va">True</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6052996c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6052996c-1"><a href="#6052996c-1" aria-hidden="true" tabindex="-1"></a>wine.drop(<span class="st">"Id"</span>, inplace<span class="op">=</span><span class="va">True</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let us further describe the dataset to understand the distribution of the data.</p>
-<div id="6a3311af" class="cell" data-execution_count="7">
+<div id="011321ee" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="6a3311af"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6a3311af-1"><a href="#6a3311af-1" aria-hidden="true" tabindex="-1"></a>wine.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="011321ee"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="011321ee-1"><a href="#011321ee-1" aria-hidden="true" tabindex="-1"></a>wine.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <style type="text/css">
-#T_7035f_row0_col0 {
+#T_b3505_row0_col0 {
   background-color: #81ca81;
   color: #000000;
 }
-#T_7035f_row0_col1 {
+#T_b3505_row0_col1 {
   background-color: #bde5b6;
   color: #000000;
 }
-#T_7035f_row0_col2, #T_7035f_row0_col9 {
+#T_b3505_row0_col2, #T_b3505_row0_col9 {
   background-color: #c2e7bb;
   color: #000000;
 }
-#T_7035f_row0_col3, #T_7035f_row4_col4, #T_7035f_row4_col6 {
+#T_b3505_row0_col3, #T_b3505_row4_col4, #T_b3505_row4_col6 {
   background-color: #e7f6e3;
   color: #000000;
 }
-#T_7035f_row0_col4 {
+#T_b3505_row0_col4 {
   background-color: #e5f5e0;
   color: #000000;
 }
-#T_7035f_row0_col5 {
+#T_b3505_row0_col5 {
   background-color: #cfecc9;
   color: #000000;
 }
-#T_7035f_row0_col6 {
+#T_b3505_row0_col6 {
   background-color: #e1f3dc;
   color: #000000;
 }
-#T_7035f_row0_col7, #T_7035f_row4_col7, #T_7035f_row5_col7 {
+#T_b3505_row0_col7, #T_b3505_row4_col7, #T_b3505_row5_col7 {
   background-color: #00451c;
   color: #f1f1f1;
 }
-#T_7035f_row0_col8, #T_7035f_row4_col8 {
+#T_b3505_row0_col8, #T_b3505_row4_col8 {
   background-color: #107a37;
   color: #f1f1f1;
 }
-#T_7035f_row0_col10 {
+#T_b3505_row0_col10 {
   background-color: #349d53;
   color: #f1f1f1;
 }
-#T_7035f_row0_col11 {
+#T_b3505_row0_col11 {
   background-color: #359e53;
   color: #f1f1f1;
 }
-#T_7035f_row1_col0, #T_7035f_row1_col7, #T_7035f_row1_col8, #T_7035f_row1_col9, #T_7035f_row1_col10, #T_7035f_row1_col11, #T_7035f_row2_col1, #T_7035f_row2_col2, #T_7035f_row2_col3, #T_7035f_row2_col4, #T_7035f_row2_col5, #T_7035f_row2_col6 {
+#T_b3505_row1_col0, #T_b3505_row1_col7, #T_b3505_row1_col8, #T_b3505_row1_col9, #T_b3505_row1_col10, #T_b3505_row1_col11, #T_b3505_row2_col1, #T_b3505_row2_col2, #T_b3505_row2_col3, #T_b3505_row2_col4, #T_b3505_row2_col5, #T_b3505_row2_col6 {
   background-color: #f7fcf5;
   color: #000000;
 }
-#T_7035f_row1_col1 {
+#T_b3505_row1_col1 {
   background-color: #f1faee;
   color: #000000;
 }
-#T_7035f_row1_col2 {
+#T_b3505_row1_col2 {
   background-color: #d4eece;
   color: #000000;
 }
-#T_7035f_row1_col3 {
+#T_b3505_row1_col3 {
   background-color: #f3faf0;
   color: #000000;
 }
-#T_7035f_row1_col4 {
+#T_b3505_row1_col4 {
   background-color: #eff9eb;
   color: #000000;
 }
-#T_7035f_row1_col5 {
+#T_b3505_row1_col5 {
   background-color: #e2f4dd;
   color: #000000;
 }
-#T_7035f_row1_col6, #T_7035f_row3_col4 {
+#T_b3505_row1_col6, #T_b3505_row3_col4 {
   background-color: #e9f7e5;
   color: #000000;
 }
-#T_7035f_row2_col0 {
+#T_b3505_row2_col0 {
   background-color: #d3eecd;
   color: #000000;
 }
-#T_7035f_row2_col7 {
+#T_b3505_row2_col7 {
   background-color: #00481d;
   color: #f1f1f1;
 }
-#T_7035f_row2_col8 {
+#T_b3505_row2_col8 {
   background-color: #369f54;
   color: #f1f1f1;
 }
-#T_7035f_row2_col9, #T_7035f_row3_col5, #T_7035f_row4_col3 {
+#T_b3505_row2_col9, #T_b3505_row3_col5, #T_b3505_row4_col3 {
   background-color: #ebf7e7;
   color: #000000;
 }
-#T_7035f_row2_col10 {
+#T_b3505_row2_col10 {
   background-color: #68be70;
   color: #000000;
 }
-#T_7035f_row2_col11, #T_7035f_row5_col9 {
+#T_b3505_row2_col11, #T_b3505_row5_col9 {
   background-color: #b6e2af;
   color: #000000;
 }
-#T_7035f_row3_col0 {
+#T_b3505_row3_col0 {
   background-color: #a0d99b;
   color: #000000;
 }
-#T_7035f_row3_col1 {
+#T_b3505_row3_col1 {
   background-color: #d7efd1;
   color: #000000;
 }
-#T_7035f_row3_col2 {
+#T_b3505_row3_col2 {
   background-color: #eaf7e6;
   color: #000000;
 }
-#T_7035f_row3_col3 {
+#T_b3505_row3_col3 {
   background-color: #edf8ea;
   color: #000000;
 }
-#T_7035f_row3_col6 {
+#T_b3505_row3_col6 {
   background-color: #f0f9ec;
   color: #000000;
 }
-#T_7035f_row3_col7 {
+#T_b3505_row3_col7 {
   background-color: #00471c;
   color: #f1f1f1;
 }
-#T_7035f_row3_col8 {
+#T_b3505_row3_col8 {
   background-color: #17813d;
   color: #f1f1f1;
 }
-#T_7035f_row3_col9 {
+#T_b3505_row3_col9 {
   background-color: #d1edcb;
   color: #000000;
 }
-#T_7035f_row3_col10 {
+#T_b3505_row3_col10 {
   background-color: #48ae60;
   color: #f1f1f1;
 }
-#T_7035f_row3_col11 {
+#T_b3505_row3_col11 {
   background-color: #52b365;
   color: #f1f1f1;
 }
-#T_7035f_row4_col0 {
+#T_b3505_row4_col0 {
   background-color: #8bcf89;
   color: #000000;
 }
-#T_7035f_row4_col1 {
+#T_b3505_row4_col1 {
   background-color: #c0e6b9;
   color: #000000;
 }
-#T_7035f_row4_col2 {
+#T_b3505_row4_col2 {
   background-color: #c7e9c0;
   color: #000000;
 }
-#T_7035f_row4_col5 {
+#T_b3505_row4_col5 {
   background-color: #d9f0d3;
   color: #000000;
 }
-#T_7035f_row4_col9 {
+#T_b3505_row4_col9 {
   background-color: #c9eac2;
   color: #000000;
 }
-#T_7035f_row4_col10 {
+#T_b3505_row4_col10 {
   background-color: #39a257;
   color: #f1f1f1;
 }
-#T_7035f_row4_col11, #T_7035f_row5_col11 {
+#T_b3505_row4_col11, #T_b3505_row5_col11 {
   background-color: #2a924a;
   color: #f1f1f1;
 }
-#T_7035f_row5_col0 {
+#T_b3505_row5_col0 {
   background-color: #6dc072;
   color: #000000;
 }
-#T_7035f_row5_col1 {
+#T_b3505_row5_col1 {
   background-color: #a7dba0;
   color: #000000;
 }
-#T_7035f_row5_col2 {
+#T_b3505_row5_col2 {
   background-color: #91d28e;
   color: #000000;
 }
-#T_7035f_row5_col3 {
+#T_b3505_row5_col3 {
   background-color: #e7f6e2;
   color: #000000;
 }
-#T_7035f_row5_col4 {
+#T_b3505_row5_col4 {
   background-color: #e4f5df;
   color: #000000;
 }
-#T_7035f_row5_col5 {
+#T_b3505_row5_col5 {
   background-color: #b8e3b2;
   color: #000000;
 }
-#T_7035f_row5_col6 {
+#T_b3505_row5_col6 {
   background-color: #d5efcf;
   color: #000000;
 }
-#T_7035f_row5_col8 {
+#T_b3505_row5_col8 {
   background-color: #097532;
   color: #f1f1f1;
 }
-#T_7035f_row5_col10 {
+#T_b3505_row5_col10 {
   background-color: #29914a;
   color: #f1f1f1;
 }
-#T_7035f_row6_col0, #T_7035f_row6_col1, #T_7035f_row6_col2, #T_7035f_row6_col3, #T_7035f_row6_col4, #T_7035f_row6_col5, #T_7035f_row6_col6, #T_7035f_row6_col7, #T_7035f_row6_col8, #T_7035f_row6_col9, #T_7035f_row6_col10, #T_7035f_row6_col11 {
+#T_b3505_row6_col0, #T_b3505_row6_col1, #T_b3505_row6_col2, #T_b3505_row6_col3, #T_b3505_row6_col4, #T_b3505_row6_col5, #T_b3505_row6_col6, #T_b3505_row6_col7, #T_b3505_row6_col8, #T_b3505_row6_col9, #T_b3505_row6_col10, #T_b3505_row6_col11 {
   background-color: #00441b;
   color: #f1f1f1;
 }
 </style>
 
-<table id="T_7035f" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_b3505" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_7035f_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">fixed acidity</th>
-<th id="T_7035f_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">volatile acidity</th>
-<th id="T_7035f_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">citric acid</th>
-<th id="T_7035f_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">residual sugar</th>
-<th id="T_7035f_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">chlorides</th>
-<th id="T_7035f_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">free sulfur dioxide</th>
-<th id="T_7035f_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">total sulfur dioxide</th>
-<th id="T_7035f_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">density</th>
-<th id="T_7035f_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">pH</th>
-<th id="T_7035f_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">sulphates</th>
-<th id="T_7035f_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">alcohol</th>
-<th id="T_7035f_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">quality</th>
+<th id="T_b3505_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">fixed acidity</th>
+<th id="T_b3505_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">volatile acidity</th>
+<th id="T_b3505_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">citric acid</th>
+<th id="T_b3505_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">residual sugar</th>
+<th id="T_b3505_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">chlorides</th>
+<th id="T_b3505_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">free sulfur dioxide</th>
+<th id="T_b3505_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">total sulfur dioxide</th>
+<th id="T_b3505_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">density</th>
+<th id="T_b3505_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">pH</th>
+<th id="T_b3505_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">sulphates</th>
+<th id="T_b3505_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">alcohol</th>
+<th id="T_b3505_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">quality</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_7035f_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
-<td id="T_7035f_row0_col0" class="data row0 col0">8.311111</td>
-<td id="T_7035f_row0_col1" class="data row0 col1">0.531339</td>
-<td id="T_7035f_row0_col2" class="data row0 col2">0.268364</td>
-<td id="T_7035f_row0_col3" class="data row0 col3">2.532152</td>
-<td id="T_7035f_row0_col4" class="data row0 col4">0.086933</td>
-<td id="T_7035f_row0_col5" class="data row0 col5">15.615486</td>
-<td id="T_7035f_row0_col6" class="data row0 col6">45.914698</td>
-<td id="T_7035f_row0_col7" class="data row0 col7">0.996730</td>
-<td id="T_7035f_row0_col8" class="data row0 col8">3.311015</td>
-<td id="T_7035f_row0_col9" class="data row0 col9">0.657708</td>
-<td id="T_7035f_row0_col10" class="data row0 col10">10.442111</td>
-<td id="T_7035f_row0_col11" class="data row0 col11">5.657043</td>
+<td id="T_b3505_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
+<td id="T_b3505_row0_col0" class="data row0 col0">8.311111</td>
+<td id="T_b3505_row0_col1" class="data row0 col1">0.531339</td>
+<td id="T_b3505_row0_col2" class="data row0 col2">0.268364</td>
+<td id="T_b3505_row0_col3" class="data row0 col3">2.532152</td>
+<td id="T_b3505_row0_col4" class="data row0 col4">0.086933</td>
+<td id="T_b3505_row0_col5" class="data row0 col5">15.615486</td>
+<td id="T_b3505_row0_col6" class="data row0 col6">45.914698</td>
+<td id="T_b3505_row0_col7" class="data row0 col7">0.996730</td>
+<td id="T_b3505_row0_col8" class="data row0 col8">3.311015</td>
+<td id="T_b3505_row0_col9" class="data row0 col9">0.657708</td>
+<td id="T_b3505_row0_col10" class="data row0 col10">10.442111</td>
+<td id="T_b3505_row0_col11" class="data row0 col11">5.657043</td>
 </tr>
 <tr class="even">
-<td id="T_7035f_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
-<td id="T_7035f_row1_col0" class="data row1 col0">1.747595</td>
-<td id="T_7035f_row1_col1" class="data row1 col1">0.179633</td>
-<td id="T_7035f_row1_col2" class="data row1 col2">0.196686</td>
-<td id="T_7035f_row1_col3" class="data row1 col3">1.355917</td>
-<td id="T_7035f_row1_col4" class="data row1 col4">0.047267</td>
-<td id="T_7035f_row1_col5" class="data row1 col5">10.250486</td>
-<td id="T_7035f_row1_col6" class="data row1 col6">32.782130</td>
-<td id="T_7035f_row1_col7" class="data row1 col7">0.001925</td>
-<td id="T_7035f_row1_col8" class="data row1 col8">0.156664</td>
-<td id="T_7035f_row1_col9" class="data row1 col9">0.170399</td>
-<td id="T_7035f_row1_col10" class="data row1 col10">1.082196</td>
-<td id="T_7035f_row1_col11" class="data row1 col11">0.805824</td>
+<td id="T_b3505_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
+<td id="T_b3505_row1_col0" class="data row1 col0">1.747595</td>
+<td id="T_b3505_row1_col1" class="data row1 col1">0.179633</td>
+<td id="T_b3505_row1_col2" class="data row1 col2">0.196686</td>
+<td id="T_b3505_row1_col3" class="data row1 col3">1.355917</td>
+<td id="T_b3505_row1_col4" class="data row1 col4">0.047267</td>
+<td id="T_b3505_row1_col5" class="data row1 col5">10.250486</td>
+<td id="T_b3505_row1_col6" class="data row1 col6">32.782130</td>
+<td id="T_b3505_row1_col7" class="data row1 col7">0.001925</td>
+<td id="T_b3505_row1_col8" class="data row1 col8">0.156664</td>
+<td id="T_b3505_row1_col9" class="data row1 col9">0.170399</td>
+<td id="T_b3505_row1_col10" class="data row1 col10">1.082196</td>
+<td id="T_b3505_row1_col11" class="data row1 col11">0.805824</td>
 </tr>
 <tr class="odd">
-<td id="T_7035f_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
-<td id="T_7035f_row2_col0" class="data row2 col0">4.600000</td>
-<td id="T_7035f_row2_col1" class="data row2 col1">0.120000</td>
-<td id="T_7035f_row2_col2" class="data row2 col2">0.000000</td>
-<td id="T_7035f_row2_col3" class="data row2 col3">0.900000</td>
-<td id="T_7035f_row2_col4" class="data row2 col4">0.012000</td>
-<td id="T_7035f_row2_col5" class="data row2 col5">1.000000</td>
-<td id="T_7035f_row2_col6" class="data row2 col6">6.000000</td>
-<td id="T_7035f_row2_col7" class="data row2 col7">0.990070</td>
-<td id="T_7035f_row2_col8" class="data row2 col8">2.740000</td>
-<td id="T_7035f_row2_col9" class="data row2 col9">0.330000</td>
-<td id="T_7035f_row2_col10" class="data row2 col10">8.400000</td>
-<td id="T_7035f_row2_col11" class="data row2 col11">3.000000</td>
+<td id="T_b3505_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
+<td id="T_b3505_row2_col0" class="data row2 col0">4.600000</td>
+<td id="T_b3505_row2_col1" class="data row2 col1">0.120000</td>
+<td id="T_b3505_row2_col2" class="data row2 col2">0.000000</td>
+<td id="T_b3505_row2_col3" class="data row2 col3">0.900000</td>
+<td id="T_b3505_row2_col4" class="data row2 col4">0.012000</td>
+<td id="T_b3505_row2_col5" class="data row2 col5">1.000000</td>
+<td id="T_b3505_row2_col6" class="data row2 col6">6.000000</td>
+<td id="T_b3505_row2_col7" class="data row2 col7">0.990070</td>
+<td id="T_b3505_row2_col8" class="data row2 col8">2.740000</td>
+<td id="T_b3505_row2_col9" class="data row2 col9">0.330000</td>
+<td id="T_b3505_row2_col10" class="data row2 col10">8.400000</td>
+<td id="T_b3505_row2_col11" class="data row2 col11">3.000000</td>
 </tr>
 <tr class="even">
-<td id="T_7035f_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
-<td id="T_7035f_row3_col0" class="data row3 col0">7.100000</td>
-<td id="T_7035f_row3_col1" class="data row3 col1">0.392500</td>
-<td id="T_7035f_row3_col2" class="data row3 col2">0.090000</td>
-<td id="T_7035f_row3_col3" class="data row3 col3">1.900000</td>
-<td id="T_7035f_row3_col4" class="data row3 col4">0.070000</td>
-<td id="T_7035f_row3_col5" class="data row3 col5">7.000000</td>
-<td id="T_7035f_row3_col6" class="data row3 col6">21.000000</td>
-<td id="T_7035f_row3_col7" class="data row3 col7">0.995570</td>
-<td id="T_7035f_row3_col8" class="data row3 col8">3.205000</td>
-<td id="T_7035f_row3_col9" class="data row3 col9">0.550000</td>
-<td id="T_7035f_row3_col10" class="data row3 col10">9.500000</td>
-<td id="T_7035f_row3_col11" class="data row3 col11">5.000000</td>
+<td id="T_b3505_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
+<td id="T_b3505_row3_col0" class="data row3 col0">7.100000</td>
+<td id="T_b3505_row3_col1" class="data row3 col1">0.392500</td>
+<td id="T_b3505_row3_col2" class="data row3 col2">0.090000</td>
+<td id="T_b3505_row3_col3" class="data row3 col3">1.900000</td>
+<td id="T_b3505_row3_col4" class="data row3 col4">0.070000</td>
+<td id="T_b3505_row3_col5" class="data row3 col5">7.000000</td>
+<td id="T_b3505_row3_col6" class="data row3 col6">21.000000</td>
+<td id="T_b3505_row3_col7" class="data row3 col7">0.995570</td>
+<td id="T_b3505_row3_col8" class="data row3 col8">3.205000</td>
+<td id="T_b3505_row3_col9" class="data row3 col9">0.550000</td>
+<td id="T_b3505_row3_col10" class="data row3 col10">9.500000</td>
+<td id="T_b3505_row3_col11" class="data row3 col11">5.000000</td>
 </tr>
 <tr class="odd">
-<td id="T_7035f_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
-<td id="T_7035f_row4_col0" class="data row4 col0">7.900000</td>
-<td id="T_7035f_row4_col1" class="data row4 col1">0.520000</td>
-<td id="T_7035f_row4_col2" class="data row4 col2">0.250000</td>
-<td id="T_7035f_row4_col3" class="data row4 col3">2.200000</td>
-<td id="T_7035f_row4_col4" class="data row4 col4">0.079000</td>
-<td id="T_7035f_row4_col5" class="data row4 col5">13.000000</td>
-<td id="T_7035f_row4_col6" class="data row4 col6">37.000000</td>
-<td id="T_7035f_row4_col7" class="data row4 col7">0.996680</td>
-<td id="T_7035f_row4_col8" class="data row4 col8">3.310000</td>
-<td id="T_7035f_row4_col9" class="data row4 col9">0.620000</td>
-<td id="T_7035f_row4_col10" class="data row4 col10">10.200000</td>
-<td id="T_7035f_row4_col11" class="data row4 col11">6.000000</td>
+<td id="T_b3505_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
+<td id="T_b3505_row4_col0" class="data row4 col0">7.900000</td>
+<td id="T_b3505_row4_col1" class="data row4 col1">0.520000</td>
+<td id="T_b3505_row4_col2" class="data row4 col2">0.250000</td>
+<td id="T_b3505_row4_col3" class="data row4 col3">2.200000</td>
+<td id="T_b3505_row4_col4" class="data row4 col4">0.079000</td>
+<td id="T_b3505_row4_col5" class="data row4 col5">13.000000</td>
+<td id="T_b3505_row4_col6" class="data row4 col6">37.000000</td>
+<td id="T_b3505_row4_col7" class="data row4 col7">0.996680</td>
+<td id="T_b3505_row4_col8" class="data row4 col8">3.310000</td>
+<td id="T_b3505_row4_col9" class="data row4 col9">0.620000</td>
+<td id="T_b3505_row4_col10" class="data row4 col10">10.200000</td>
+<td id="T_b3505_row4_col11" class="data row4 col11">6.000000</td>
 </tr>
 <tr class="even">
-<td id="T_7035f_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
-<td id="T_7035f_row5_col0" class="data row5 col0">9.100000</td>
-<td id="T_7035f_row5_col1" class="data row5 col1">0.640000</td>
-<td id="T_7035f_row5_col2" class="data row5 col2">0.420000</td>
-<td id="T_7035f_row5_col3" class="data row5 col3">2.600000</td>
-<td id="T_7035f_row5_col4" class="data row5 col4">0.090000</td>
-<td id="T_7035f_row5_col5" class="data row5 col5">21.000000</td>
-<td id="T_7035f_row5_col6" class="data row5 col6">61.000000</td>
-<td id="T_7035f_row5_col7" class="data row5 col7">0.997845</td>
-<td id="T_7035f_row5_col8" class="data row5 col8">3.400000</td>
-<td id="T_7035f_row5_col9" class="data row5 col9">0.730000</td>
-<td id="T_7035f_row5_col10" class="data row5 col10">11.100000</td>
-<td id="T_7035f_row5_col11" class="data row5 col11">6.000000</td>
+<td id="T_b3505_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
+<td id="T_b3505_row5_col0" class="data row5 col0">9.100000</td>
+<td id="T_b3505_row5_col1" class="data row5 col1">0.640000</td>
+<td id="T_b3505_row5_col2" class="data row5 col2">0.420000</td>
+<td id="T_b3505_row5_col3" class="data row5 col3">2.600000</td>
+<td id="T_b3505_row5_col4" class="data row5 col4">0.090000</td>
+<td id="T_b3505_row5_col5" class="data row5 col5">21.000000</td>
+<td id="T_b3505_row5_col6" class="data row5 col6">61.000000</td>
+<td id="T_b3505_row5_col7" class="data row5 col7">0.997845</td>
+<td id="T_b3505_row5_col8" class="data row5 col8">3.400000</td>
+<td id="T_b3505_row5_col9" class="data row5 col9">0.730000</td>
+<td id="T_b3505_row5_col10" class="data row5 col10">11.100000</td>
+<td id="T_b3505_row5_col11" class="data row5 col11">6.000000</td>
 </tr>
 <tr class="odd">
-<td id="T_7035f_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
-<td id="T_7035f_row6_col0" class="data row6 col0">15.900000</td>
-<td id="T_7035f_row6_col1" class="data row6 col1">1.580000</td>
-<td id="T_7035f_row6_col2" class="data row6 col2">1.000000</td>
-<td id="T_7035f_row6_col3" class="data row6 col3">15.500000</td>
-<td id="T_7035f_row6_col4" class="data row6 col4">0.611000</td>
-<td id="T_7035f_row6_col5" class="data row6 col5">68.000000</td>
-<td id="T_7035f_row6_col6" class="data row6 col6">289.000000</td>
-<td id="T_7035f_row6_col7" class="data row6 col7">1.003690</td>
-<td id="T_7035f_row6_col8" class="data row6 col8">4.010000</td>
-<td id="T_7035f_row6_col9" class="data row6 col9">2.000000</td>
-<td id="T_7035f_row6_col10" class="data row6 col10">14.900000</td>
-<td id="T_7035f_row6_col11" class="data row6 col11">8.000000</td>
+<td id="T_b3505_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
+<td id="T_b3505_row6_col0" class="data row6 col0">15.900000</td>
+<td id="T_b3505_row6_col1" class="data row6 col1">1.580000</td>
+<td id="T_b3505_row6_col2" class="data row6 col2">1.000000</td>
+<td id="T_b3505_row6_col3" class="data row6 col3">15.500000</td>
+<td id="T_b3505_row6_col4" class="data row6 col4">0.611000</td>
+<td id="T_b3505_row6_col5" class="data row6 col5">68.000000</td>
+<td id="T_b3505_row6_col6" class="data row6 col6">289.000000</td>
+<td id="T_b3505_row6_col7" class="data row6 col7">1.003690</td>
+<td id="T_b3505_row6_col8" class="data row6 col8">4.010000</td>
+<td id="T_b3505_row6_col9" class="data row6 col9">2.000000</td>
+<td id="T_b3505_row6_col10" class="data row6 col10">14.900000</td>
+<td id="T_b3505_row6_col11" class="data row6 col11">8.000000</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <p>And let’s visually inspect the distribution of the data.</p>
-<div id="c2efbb7f" class="cell" data-execution_count="8">
+<div id="ffa771f1" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c2efbb7f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c2efbb7f-1"><a href="#c2efbb7f-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="c2efbb7f-2"><a href="#c2efbb7f-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="c2efbb7f-3"><a href="#c2efbb7f-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c2efbb7f-4"><a href="#c2efbb7f-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="c2efbb7f-5"><a href="#c2efbb7f-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>wine, palette<span class="op">=</span><span class="st">"Greens"</span>)  <span class="co"># This applies the green palette directly</span></span>
-<span id="c2efbb7f-6"><a href="#c2efbb7f-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c2efbb7f-7"><a href="#c2efbb7f-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)  <span class="co"># Rotate x-tick labels for better readability</span></span>
-<span id="c2efbb7f-8"><a href="#c2efbb7f-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Value"</span>)</span>
-<span id="c2efbb7f-9"><a href="#c2efbb7f-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ffa771f1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ffa771f1-1"><a href="#ffa771f1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="ffa771f1-2"><a href="#ffa771f1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="ffa771f1-3"><a href="#ffa771f1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ffa771f1-4"><a href="#ffa771f1-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="ffa771f1-5"><a href="#ffa771f1-5" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>wine, palette<span class="op">=</span><span class="st">"Greens"</span>)  <span class="co"># This applies the green palette directly</span></span>
+<span id="ffa771f1-6"><a href="#ffa771f1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ffa771f1-7"><a href="#ffa771f1-7" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)  <span class="co"># Rotate x-tick labels for better readability</span></span>
+<span id="ffa771f1-8"><a href="#ffa771f1-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Value"</span>)</span>
+<span id="ffa771f1-9"><a href="#ffa771f1-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -904,12 +907,12 @@ About Scaling Features
 </div>
 </div>
 <p>Our target variable is the ‘quality’ column, let us look at its distribution more carefully.</p>
-<div id="b5d85ce7" class="cell" data-execution_count="9">
+<div id="28db1144" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="b5d85ce7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b5d85ce7-1"><a href="#b5d85ce7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality'</span></span>
-<span id="b5d85ce7-2"><a href="#b5d85ce7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="b5d85ce7-3"><a href="#b5d85ce7-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(wine[<span class="st">"quality"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="28db1144"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="28db1144-1"><a href="#28db1144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality'</span></span>
+<span id="28db1144-2"><a href="#28db1144-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="28db1144-3"><a href="#28db1144-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(wine[<span class="st">"quality"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -958,17 +961,17 @@ About Scaling Features
 </div>
 </div>
 <p>We can see the majority of wines have a quality of 5 or 6, with only very few wines having a quality of 3 or 4. Let us see this as a histogram of the quality column.</p>
-<div id="c51f055a" class="cell" data-execution_count="10">
+<div id="55eeb442" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c51f055a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c51f055a-1"><a href="#c51f055a-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality' as a histogram</span></span>
-<span id="c51f055a-2"><a href="#c51f055a-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="c51f055a-3"><a href="#c51f055a-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>wine, x<span class="op">=</span><span class="st">"quality"</span>, bins<span class="op">=</span><span class="dv">10</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
-<span id="c51f055a-4"><a href="#c51f055a-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c51f055a-5"><a href="#c51f055a-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Quality"</span>)</span>
-<span id="c51f055a-6"><a href="#c51f055a-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
-<span id="c51f055a-7"><a href="#c51f055a-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Quality"</span>)</span>
-<span id="c51f055a-8"><a href="#c51f055a-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="55eeb442"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="55eeb442-1"><a href="#55eeb442-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the distribution of 'quality' as a histogram</span></span>
+<span id="55eeb442-2"><a href="#55eeb442-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="55eeb442-3"><a href="#55eeb442-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>wine, x<span class="op">=</span><span class="st">"quality"</span>, bins<span class="op">=</span><span class="dv">10</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">"green"</span>)</span>
+<span id="55eeb442-4"><a href="#55eeb442-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="55eeb442-5"><a href="#55eeb442-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Quality"</span>)</span>
+<span id="55eeb442-6"><a href="#55eeb442-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="55eeb442-7"><a href="#55eeb442-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Quality"</span>)</span>
+<span id="55eeb442-8"><a href="#55eeb442-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -992,26 +995,26 @@ About Dropping Features
 <p>In many cases, it is important to reduce the number of features in the model. This is because having too many features can lead to overfitting, and the model may not generalize well to new data. In this case, we are dropping features with a correlation of less than 0.2 with the target variable, as they are less likely to be important in predicting the quality of wine.</p>
 </div>
 </div>
-<div id="8788f615" class="cell" data-execution_count="11">
+<div id="e61aaff3" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="8788f615"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8788f615-1"><a href="#8788f615-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation chart of the features against the 'quality' target variable.</span></span>
-<span id="8788f615-2"><a href="#8788f615-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="8788f615-3"><a href="#8788f615-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
-<span id="8788f615-4"><a href="#8788f615-4" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> wine.corr()</span>
-<span id="8788f615-5"><a href="#8788f615-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="8788f615-6"><a href="#8788f615-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify features with correlation to 'quality' less than 0.2</span></span>
-<span id="8788f615-7"><a href="#8788f615-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use absolute value to consider both positive and negative correlations</span></span>
-<span id="8788f615-8"><a href="#8788f615-8" aria-hidden="true" tabindex="-1"></a>features_to_keep <span class="op">=</span> correlation_matrix.index[<span class="bu">abs</span>(correlation_matrix[<span class="st">"quality"</span>]) <span class="op">&gt;=</span> <span class="fl">0.2</span>]</span>
-<span id="8788f615-9"><a href="#8788f615-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="8788f615-10"><a href="#8788f615-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="8788f615-11"><a href="#8788f615-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
-<span id="8788f615-12"><a href="#8788f615-12" aria-hidden="true" tabindex="-1"></a>    correlation_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"summer_r"</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, linewidths<span class="op">=</span><span class="dv">2</span></span>
-<span id="8788f615-13"><a href="#8788f615-13" aria-hidden="true" tabindex="-1"></a>).set_title(<span class="st">"Wine Chemistry/Quality Correlation Heatmap"</span>)</span>
-<span id="8788f615-14"><a href="#8788f615-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="8788f615-15"><a href="#8788f615-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="8788f615-16"><a href="#8788f615-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep these features in the DataFrame, including the target variable 'quality'</span></span>
-<span id="8788f615-17"><a href="#8788f615-17" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> wine[features_to_keep]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e61aaff3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e61aaff3-1"><a href="#e61aaff3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a correlation chart of the features against the 'quality' target variable.</span></span>
+<span id="e61aaff3-2"><a href="#e61aaff3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e61aaff3-3"><a href="#e61aaff3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
+<span id="e61aaff3-4"><a href="#e61aaff3-4" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> wine.corr()</span>
+<span id="e61aaff3-5"><a href="#e61aaff3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e61aaff3-6"><a href="#e61aaff3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify features with correlation to 'quality' less than 0.2</span></span>
+<span id="e61aaff3-7"><a href="#e61aaff3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use absolute value to consider both positive and negative correlations</span></span>
+<span id="e61aaff3-8"><a href="#e61aaff3-8" aria-hidden="true" tabindex="-1"></a>features_to_keep <span class="op">=</span> correlation_matrix.index[<span class="bu">abs</span>(correlation_matrix[<span class="st">"quality"</span>]) <span class="op">&gt;=</span> <span class="fl">0.2</span>]</span>
+<span id="e61aaff3-9"><a href="#e61aaff3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e61aaff3-10"><a href="#e61aaff3-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="e61aaff3-11"><a href="#e61aaff3-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
+<span id="e61aaff3-12"><a href="#e61aaff3-12" aria-hidden="true" tabindex="-1"></a>    correlation_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"summer_r"</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, linewidths<span class="op">=</span><span class="dv">2</span></span>
+<span id="e61aaff3-13"><a href="#e61aaff3-13" aria-hidden="true" tabindex="-1"></a>).set_title(<span class="st">"Wine Chemistry/Quality Correlation Heatmap"</span>)</span>
+<span id="e61aaff3-14"><a href="#e61aaff3-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="e61aaff3-15"><a href="#e61aaff3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e61aaff3-16"><a href="#e61aaff3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep these features in the DataFrame, including the target variable 'quality'</span></span>
+<span id="e61aaff3-17"><a href="#e61aaff3-17" aria-hidden="true" tabindex="-1"></a>wine <span class="op">=</span> wine[features_to_keep]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1023,21 +1026,21 @@ About Dropping Features
 </div>
 <p>From this correlation matrix it becomes apparent that <code>alcohol</code>, <code>sulphates</code>, <code>volatile acidity</code> and <code>citric acid</code> are the features with the highest correlation with the target variable.</p>
 <p>Now let us plot a matrix for the features to see how they are related to each other. This will help us understand the multicollinearity between the features, as effectively a chemical feature comparison. Notice how we now have a smaller number of features, as we dropped the ones with a correlation of less than 0.2 with the target variable.</p>
-<div id="c6692253" class="cell" data-execution_count="12">
+<div id="ad1adac9" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c6692253"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c6692253-1"><a href="#c6692253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us chart a matrix of plots, with X vs Y between all features.</span></span>
-<span id="c6692253-2"><a href="#c6692253-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This will effectively give us a chemical composition matrix, where the color of the plot will indicate the quality.</span></span>
-<span id="c6692253-3"><a href="#c6692253-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c6692253-4"><a href="#c6692253-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair plot using seaborn</span></span>
-<span id="c6692253-5"><a href="#c6692253-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(context<span class="op">=</span><span class="st">"paper"</span>, style<span class="op">=</span><span class="st">"ticks"</span>)  <span class="co"># Set the style of the visualization</span></span>
-<span id="c6692253-6"><a href="#c6692253-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="c6692253-7"><a href="#c6692253-7" aria-hidden="true" tabindex="-1"></a>pairplot <span class="op">=</span> sns.pairplot(wine, hue<span class="op">=</span><span class="st">"quality"</span>, palette<span class="op">=</span><span class="st">"Greens"</span>, corner<span class="op">=</span><span class="va">True</span>)</span>
-<span id="c6692253-8"><a href="#c6692253-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c6692253-9"><a href="#c6692253-9" aria-hidden="true" tabindex="-1"></a>pairplot.figure.suptitle(<span class="st">"Wine chemical features by Quality"</span>, size<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="c6692253-10"><a href="#c6692253-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="c6692253-11"><a href="#c6692253-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c6692253-12"><a href="#c6692253-12" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ad1adac9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ad1adac9-1"><a href="#ad1adac9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let us chart a matrix of plots, with X vs Y between all features.</span></span>
+<span id="ad1adac9-2"><a href="#ad1adac9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This will effectively give us a chemical composition matrix, where the color of the plot will indicate the quality.</span></span>
+<span id="ad1adac9-3"><a href="#ad1adac9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ad1adac9-4"><a href="#ad1adac9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair plot using seaborn</span></span>
+<span id="ad1adac9-5"><a href="#ad1adac9-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(context<span class="op">=</span><span class="st">"paper"</span>, style<span class="op">=</span><span class="st">"ticks"</span>)  <span class="co"># Set the style of the visualization</span></span>
+<span id="ad1adac9-6"><a href="#ad1adac9-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="ad1adac9-7"><a href="#ad1adac9-7" aria-hidden="true" tabindex="-1"></a>pairplot <span class="op">=</span> sns.pairplot(wine, hue<span class="op">=</span><span class="st">"quality"</span>, palette<span class="op">=</span><span class="st">"Greens"</span>, corner<span class="op">=</span><span class="va">True</span>)</span>
+<span id="ad1adac9-8"><a href="#ad1adac9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ad1adac9-9"><a href="#ad1adac9-9" aria-hidden="true" tabindex="-1"></a>pairplot.figure.suptitle(<span class="st">"Wine chemical features by Quality"</span>, size<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="ad1adac9-10"><a href="#ad1adac9-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="ad1adac9-11"><a href="#ad1adac9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ad1adac9-12"><a href="#ad1adac9-12" aria-hidden="true" tabindex="-1"></a>wine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 768x576 with 0 Axes&gt;</code></pre>
@@ -1161,54 +1164,54 @@ About Dropping Features
 </div>
 </div>
 <p>Now let us derive a second dataset, grouped by quality, where each featured is averaged. We will then use this to plot an aggregate positioning of the best correlated features.</p>
-<div id="dcf64a92" class="cell" data-execution_count="13">
+<div id="7c261d6f" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="dcf64a92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dcf64a92-1"><a href="#dcf64a92-1" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality <span class="op">=</span> wine.groupby(<span class="st">"quality"</span>).mean()</span>
-<span id="dcf64a92-2"><a href="#dcf64a92-2" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="7c261d6f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7c261d6f-1"><a href="#7c261d6f-1" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality <span class="op">=</span> wine.groupby(<span class="st">"quality"</span>).mean()</span>
+<span id="7c261d6f-2"><a href="#7c261d6f-2" aria-hidden="true" tabindex="-1"></a>wine_grouped_by_quality.reset_index(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>And now let us plot the positioning for the three best correlators.</p>
-<div id="c37409e5" class="cell" data-execution_count="14">
+<div id="7d500fd3" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="c37409e5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c37409e5-1"><a href="#c37409e5-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="c37409e5-2"><a href="#c37409e5-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
-<span id="c37409e5-3"><a href="#c37409e5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c37409e5-4"><a href="#c37409e5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize 'quality' values for color mapping</span></span>
-<span id="c37409e5-5"><a href="#c37409e5-5" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> plt.Normalize(</span>
-<span id="c37409e5-6"><a href="#c37409e5-6" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"quality"</span>].<span class="bu">min</span>(), wine_grouped_by_quality[<span class="st">"quality"</span>].<span class="bu">max</span>()</span>
-<span id="c37409e5-7"><a href="#c37409e5-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="c37409e5-8"><a href="#c37409e5-8" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.get_cmap(<span class="st">"Greens"</span>)(norm(wine_grouped_by_quality[<span class="st">"quality"</span>]))</span>
-<span id="c37409e5-9"><a href="#c37409e5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c37409e5-10"><a href="#c37409e5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D scatter plot</span></span>
-<span id="c37409e5-11"><a href="#c37409e5-11" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(</span>
-<span id="c37409e5-12"><a href="#c37409e5-12" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"alcohol"</span>],</span>
-<span id="c37409e5-13"><a href="#c37409e5-13" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"sulphates"</span>],</span>
-<span id="c37409e5-14"><a href="#c37409e5-14" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"citric acid"</span>],</span>
-<span id="c37409e5-15"><a href="#c37409e5-15" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>colors,</span>
-<span id="c37409e5-16"><a href="#c37409e5-16" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
-<span id="c37409e5-17"><a href="#c37409e5-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">40</span>,</span>
-<span id="c37409e5-18"><a href="#c37409e5-18" aria-hidden="true" tabindex="-1"></a>    depthshade<span class="op">=</span><span class="va">True</span>,</span>
-<span id="c37409e5-19"><a href="#c37409e5-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="c37409e5-20"><a href="#c37409e5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c37409e5-21"><a href="#c37409e5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a color bar with the correct mapping</span></span>
-<span id="c37409e5-22"><a href="#c37409e5-22" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(plt.cm.ScalarMappable(norm<span class="op">=</span>norm, cmap<span class="op">=</span><span class="st">"Greens"</span>), ax<span class="op">=</span>ax, pad<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="c37409e5-23"><a href="#c37409e5-23" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Quality"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="c37409e5-24"><a href="#c37409e5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the color bar tick labels</span></span>
-<span id="c37409e5-25"><a href="#c37409e5-25" aria-hidden="true" tabindex="-1"></a>cbar.ax.tick_params(labelsize<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Adjust labelsize as needed</span></span>
-<span id="c37409e5-26"><a href="#c37409e5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c37409e5-27"><a href="#c37409e5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
-<span id="c37409e5-28"><a href="#c37409e5-28" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Alcohol"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="c37409e5-29"><a href="#c37409e5-29" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Sulphates"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="c37409e5-30"><a href="#c37409e5-30" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">"Citric Acid"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="c37409e5-31"><a href="#c37409e5-31" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Highest Positive Correlator Positions"</span>)</span>
-<span id="c37409e5-32"><a href="#c37409e5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c37409e5-33"><a href="#c37409e5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the tick labels on all axes</span></span>
-<span id="c37409e5-34"><a href="#c37409e5-34" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, which<span class="op">=</span><span class="st">"major"</span>, labelsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="c37409e5-35"><a href="#c37409e5-35" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, which<span class="op">=</span><span class="st">"minor"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="c37409e5-36"><a href="#c37409e5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c37409e5-37"><a href="#c37409e5-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="7d500fd3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7d500fd3-1"><a href="#7d500fd3-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="7d500fd3-2"><a href="#7d500fd3-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
+<span id="7d500fd3-3"><a href="#7d500fd3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7d500fd3-4"><a href="#7d500fd3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize 'quality' values for color mapping</span></span>
+<span id="7d500fd3-5"><a href="#7d500fd3-5" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> plt.Normalize(</span>
+<span id="7d500fd3-6"><a href="#7d500fd3-6" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"quality"</span>].<span class="bu">min</span>(), wine_grouped_by_quality[<span class="st">"quality"</span>].<span class="bu">max</span>()</span>
+<span id="7d500fd3-7"><a href="#7d500fd3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="7d500fd3-8"><a href="#7d500fd3-8" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.get_cmap(<span class="st">"Greens"</span>)(norm(wine_grouped_by_quality[<span class="st">"quality"</span>]))</span>
+<span id="7d500fd3-9"><a href="#7d500fd3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7d500fd3-10"><a href="#7d500fd3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D scatter plot</span></span>
+<span id="7d500fd3-11"><a href="#7d500fd3-11" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(</span>
+<span id="7d500fd3-12"><a href="#7d500fd3-12" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"alcohol"</span>],</span>
+<span id="7d500fd3-13"><a href="#7d500fd3-13" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"sulphates"</span>],</span>
+<span id="7d500fd3-14"><a href="#7d500fd3-14" aria-hidden="true" tabindex="-1"></a>    wine_grouped_by_quality[<span class="st">"citric acid"</span>],</span>
+<span id="7d500fd3-15"><a href="#7d500fd3-15" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>colors,</span>
+<span id="7d500fd3-16"><a href="#7d500fd3-16" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="7d500fd3-17"><a href="#7d500fd3-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">40</span>,</span>
+<span id="7d500fd3-18"><a href="#7d500fd3-18" aria-hidden="true" tabindex="-1"></a>    depthshade<span class="op">=</span><span class="va">True</span>,</span>
+<span id="7d500fd3-19"><a href="#7d500fd3-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="7d500fd3-20"><a href="#7d500fd3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7d500fd3-21"><a href="#7d500fd3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a color bar with the correct mapping</span></span>
+<span id="7d500fd3-22"><a href="#7d500fd3-22" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(plt.cm.ScalarMappable(norm<span class="op">=</span>norm, cmap<span class="op">=</span><span class="st">"Greens"</span>), ax<span class="op">=</span>ax, pad<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="7d500fd3-23"><a href="#7d500fd3-23" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Quality"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="7d500fd3-24"><a href="#7d500fd3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the color bar tick labels</span></span>
+<span id="7d500fd3-25"><a href="#7d500fd3-25" aria-hidden="true" tabindex="-1"></a>cbar.ax.tick_params(labelsize<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Adjust labelsize as needed</span></span>
+<span id="7d500fd3-26"><a href="#7d500fd3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7d500fd3-27"><a href="#7d500fd3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
+<span id="7d500fd3-28"><a href="#7d500fd3-28" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Alcohol"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="7d500fd3-29"><a href="#7d500fd3-29" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Sulphates"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="7d500fd3-30"><a href="#7d500fd3-30" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">"Citric Acid"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="7d500fd3-31"><a href="#7d500fd3-31" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Highest Positive Correlator Positions"</span>)</span>
+<span id="7d500fd3-32"><a href="#7d500fd3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7d500fd3-33"><a href="#7d500fd3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Set font size for the tick labels on all axes</span></span>
+<span id="7d500fd3-34"><a href="#7d500fd3-34" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, which<span class="op">=</span><span class="st">"major"</span>, labelsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="7d500fd3-35"><a href="#7d500fd3-35" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, which<span class="op">=</span><span class="st">"minor"</span>, labelsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="7d500fd3-36"><a href="#7d500fd3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="7d500fd3-37"><a href="#7d500fd3-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1230,127 +1233,127 @@ About Dropping Features
 <li><strong>KNeighbors Regressor</strong>: A type of instance-based learning or non-generalizing learning that does not attempt to construct a general internal model, but stores instances of the training data. Classification is computed from a simple majority vote of the nearest neighbors of each point.</li>
 </ul>
 <p>For each model, we will scale the features using <code>MinMaxScaler</code> to ensure that all features contribute equally to the result. This is particularly important for models like SVR and KNeighbors Regressor, which are sensitive to the scale of the input features. We will then perform hyperparameter tuning to find the best parameters for each model, using <code>GridSearchCV</code> to systematically explore a range of parameters for each model. Finally, we will evaluate the performance of each model based on the negative mean squared error (<code>neg_mean_squared_error</code>), allowing us to identify the model that best predicts the quality of the wine.</p>
-<div id="e92e41d9" class="cell" data-execution_count="15">
+<div id="11ef3ed6" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="e92e41d9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e92e41d9-1"><a href="#e92e41d9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
-<span id="e92e41d9-2"><a href="#e92e41d9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV, cross_val_score</span>
-<span id="e92e41d9-3"><a href="#e92e41d9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="e92e41d9-4"><a href="#e92e41d9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
-<span id="e92e41d9-5"><a href="#e92e41d9-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="e92e41d9-6"><a href="#e92e41d9-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
-<span id="e92e41d9-7"><a href="#e92e41d9-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVR</span>
-<span id="e92e41d9-8"><a href="#e92e41d9-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="e92e41d9-9"><a href="#e92e41d9-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor</span>
-<span id="e92e41d9-10"><a href="#e92e41d9-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="e92e41d9-11"><a href="#e92e41d9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-12"><a href="#e92e41d9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Split 'wine' into features (X, all columns except quality) and target (y, only quality)</span></span>
-<span id="e92e41d9-13"><a href="#e92e41d9-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> wine.drop(<span class="st">"quality"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="e92e41d9-14"><a href="#e92e41d9-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> wine[<span class="st">"quality"</span>]</span>
-<span id="e92e41d9-15"><a href="#e92e41d9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-16"><a href="#e92e41d9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset into training and testing sets</span></span>
-<span id="e92e41d9-17"><a href="#e92e41d9-17" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="e92e41d9-18"><a href="#e92e41d9-18" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="e92e41d9-19"><a href="#e92e41d9-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="e92e41d9-20"><a href="#e92e41d9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-21"><a href="#e92e41d9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define models and their respective parameter grids. Note that the parameter grid keys must be prefixed by the model name in the pipeline.</span></span>
-<span id="e92e41d9-22"><a href="#e92e41d9-22" aria-hidden="true" tabindex="-1"></a>models_params <span class="op">=</span> [</span>
-<span id="e92e41d9-23"><a href="#e92e41d9-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Linear Regression"</span>, LinearRegression(), {}),</span>
-<span id="e92e41d9-24"><a href="#e92e41d9-24" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="e92e41d9-25"><a href="#e92e41d9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Random Forest"</span>,</span>
-<span id="e92e41d9-26"><a href="#e92e41d9-26" aria-hidden="true" tabindex="-1"></a>        RandomForestRegressor(),</span>
-<span id="e92e41d9-27"><a href="#e92e41d9-27" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="e92e41d9-28"><a href="#e92e41d9-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Random Forest__n_estimators"</span>: [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">200</span>],</span>
-<span id="e92e41d9-29"><a href="#e92e41d9-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Random Forest__max_depth"</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
-<span id="e92e41d9-30"><a href="#e92e41d9-30" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="e92e41d9-31"><a href="#e92e41d9-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="e92e41d9-32"><a href="#e92e41d9-32" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="e92e41d9-33"><a href="#e92e41d9-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SVR"</span>,</span>
-<span id="e92e41d9-34"><a href="#e92e41d9-34" aria-hidden="true" tabindex="-1"></a>        SVR(),</span>
-<span id="e92e41d9-35"><a href="#e92e41d9-35" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="e92e41d9-36"><a href="#e92e41d9-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SVR__C"</span>: [<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>],</span>
-<span id="e92e41d9-37"><a href="#e92e41d9-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SVR__kernel"</span>: [<span class="st">"linear"</span>, <span class="st">"rbf"</span>],</span>
-<span id="e92e41d9-38"><a href="#e92e41d9-38" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="e92e41d9-39"><a href="#e92e41d9-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="e92e41d9-40"><a href="#e92e41d9-40" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="e92e41d9-41"><a href="#e92e41d9-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"XGBoost"</span>,</span>
-<span id="e92e41d9-42"><a href="#e92e41d9-42" aria-hidden="true" tabindex="-1"></a>        XGBRegressor(),</span>
-<span id="e92e41d9-43"><a href="#e92e41d9-43" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="e92e41d9-44"><a href="#e92e41d9-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__n_estimators"</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">800</span>],</span>
-<span id="e92e41d9-45"><a href="#e92e41d9-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__learning_rate"</span>: [<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>],</span>
-<span id="e92e41d9-46"><a href="#e92e41d9-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__max_depth"</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
-<span id="e92e41d9-47"><a href="#e92e41d9-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__seed"</span>: [<span class="dv">42</span>],</span>
-<span id="e92e41d9-48"><a href="#e92e41d9-48" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="e92e41d9-49"><a href="#e92e41d9-49" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="e92e41d9-50"><a href="#e92e41d9-50" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="e92e41d9-51"><a href="#e92e41d9-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"KNeighbors"</span>,</span>
-<span id="e92e41d9-52"><a href="#e92e41d9-52" aria-hidden="true" tabindex="-1"></a>        KNeighborsRegressor(),</span>
-<span id="e92e41d9-53"><a href="#e92e41d9-53" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="e92e41d9-54"><a href="#e92e41d9-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KNeighbors__n_neighbors"</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
-<span id="e92e41d9-55"><a href="#e92e41d9-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KNeighbors__weights"</span>: [<span class="st">"uniform"</span>, <span class="st">"distance"</span>],</span>
-<span id="e92e41d9-56"><a href="#e92e41d9-56" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="e92e41d9-57"><a href="#e92e41d9-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="e92e41d9-58"><a href="#e92e41d9-58" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="e92e41d9-59"><a href="#e92e41d9-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-60"><a href="#e92e41d9-60" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> <span class="bu">float</span>(<span class="st">"-inf"</span>)</span>
-<span id="e92e41d9-61"><a href="#e92e41d9-61" aria-hidden="true" tabindex="-1"></a>best_regressor <span class="op">=</span> <span class="va">None</span></span>
-<span id="e92e41d9-62"><a href="#e92e41d9-62" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> <span class="va">None</span></span>
-<span id="e92e41d9-63"><a href="#e92e41d9-63" aria-hidden="true" tabindex="-1"></a>model_names <span class="op">=</span> []</span>
-<span id="e92e41d9-64"><a href="#e92e41d9-64" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> []</span>
-<span id="e92e41d9-65"><a href="#e92e41d9-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-66"><a href="#e92e41d9-66" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, regressor, params <span class="kw">in</span> models_params:</span>
-<span id="e92e41d9-67"><a href="#e92e41d9-67" aria-hidden="true" tabindex="-1"></a>    pipeline <span class="op">=</span> Pipeline(</span>
-<span id="e92e41d9-68"><a href="#e92e41d9-68" aria-hidden="true" tabindex="-1"></a>        [</span>
-<span id="e92e41d9-69"><a href="#e92e41d9-69" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"scaler"</span>, MinMaxScaler()),  <span class="co"># Scale features</span></span>
-<span id="e92e41d9-70"><a href="#e92e41d9-70" aria-hidden="true" tabindex="-1"></a>            (name, regressor),  <span class="co"># Use the model name as the step name in the pipeline</span></span>
-<span id="e92e41d9-71"><a href="#e92e41d9-71" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="e92e41d9-72"><a href="#e92e41d9-72" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="e92e41d9-73"><a href="#e92e41d9-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-74"><a href="#e92e41d9-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> params:</span>
-<span id="e92e41d9-75"><a href="#e92e41d9-75" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Perform hyperparameter tuning for models with a defined parameter grid</span></span>
-<span id="e92e41d9-76"><a href="#e92e41d9-76" aria-hidden="true" tabindex="-1"></a>        grid_search <span class="op">=</span> GridSearchCV(</span>
-<span id="e92e41d9-77"><a href="#e92e41d9-77" aria-hidden="true" tabindex="-1"></a>            pipeline, param_grid<span class="op">=</span>params, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span></span>
-<span id="e92e41d9-78"><a href="#e92e41d9-78" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="e92e41d9-79"><a href="#e92e41d9-79" aria-hidden="true" tabindex="-1"></a>        grid_search.fit(X_train, y_train)</span>
-<span id="e92e41d9-80"><a href="#e92e41d9-80" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> grid_search.best_score_</span>
-<span id="e92e41d9-81"><a href="#e92e41d9-81" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> grid_search.best_params_</span>
-<span id="e92e41d9-82"><a href="#e92e41d9-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="e92e41d9-83"><a href="#e92e41d9-83" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For simplicity, directly evaluate models without a parameter grid</span></span>
-<span id="e92e41d9-84"><a href="#e92e41d9-84" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> np.mean(</span>
-<span id="e92e41d9-85"><a href="#e92e41d9-85" aria-hidden="true" tabindex="-1"></a>            cross_val_score(</span>
-<span id="e92e41d9-86"><a href="#e92e41d9-86" aria-hidden="true" tabindex="-1"></a>                pipeline, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span></span>
-<span id="e92e41d9-87"><a href="#e92e41d9-87" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="e92e41d9-88"><a href="#e92e41d9-88" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="e92e41d9-89"><a href="#e92e41d9-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-90"><a href="#e92e41d9-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store the model name and score</span></span>
-<span id="e92e41d9-91"><a href="#e92e41d9-91" aria-hidden="true" tabindex="-1"></a>    model_names.append(name)</span>
-<span id="e92e41d9-92"><a href="#e92e41d9-92" aria-hidden="true" tabindex="-1"></a>    scores.append(score)</span>
-<span id="e92e41d9-93"><a href="#e92e41d9-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-94"><a href="#e92e41d9-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score <span class="op">&gt;</span> best_score:</span>
-<span id="e92e41d9-95"><a href="#e92e41d9-95" aria-hidden="true" tabindex="-1"></a>        best_score <span class="op">=</span> score</span>
-<span id="e92e41d9-96"><a href="#e92e41d9-96" aria-hidden="true" tabindex="-1"></a>        best_regressor <span class="op">=</span> name</span>
-<span id="e92e41d9-97"><a href="#e92e41d9-97" aria-hidden="true" tabindex="-1"></a>        best_params <span class="op">=</span> params</span>
-<span id="e92e41d9-98"><a href="#e92e41d9-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-99"><a href="#e92e41d9-99" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MSE by negating the best_score</span></span>
-<span id="e92e41d9-100"><a href="#e92e41d9-100" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> best_score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="e92e41d9-101"><a href="#e92e41d9-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-102"><a href="#e92e41d9-102" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="e92e41d9-103"><a href="#e92e41d9-103" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Best regressor: </span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss"> with neg_mean_squared_error score: </span><span class="sc">{</span>best_score<span class="sc">}</span><span class="ss">, MSE: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">, and parameters: </span><span class="sc">{</span>best_params<span class="sc">}</span><span class="ss">"</span></span>
-<span id="e92e41d9-104"><a href="#e92e41d9-104" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="e92e41d9-105"><a href="#e92e41d9-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-106"><a href="#e92e41d9-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair each model name with its score, sort by score, and then unzip back into separate lists</span></span>
-<span id="e92e41d9-107"><a href="#e92e41d9-107" aria-hidden="true" tabindex="-1"></a>sorted_pairs <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(scores, model_names), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>])</span>
-<span id="e92e41d9-108"><a href="#e92e41d9-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-109"><a href="#e92e41d9-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzipping the sorted pairs</span></span>
-<span id="e92e41d9-110"><a href="#e92e41d9-110" aria-hidden="true" tabindex="-1"></a>sorted_scores, sorted_model_names <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>sorted_pairs)</span>
-<span id="e92e41d9-111"><a href="#e92e41d9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-112"><a href="#e92e41d9-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the performance of each model with sorted values</span></span>
-<span id="e92e41d9-113"><a href="#e92e41d9-113" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="e92e41d9-114"><a href="#e92e41d9-114" aria-hidden="true" tabindex="-1"></a>ax.barh(sorted_model_names, [score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> score <span class="kw">in</span> sorted_scores], color<span class="op">=</span><span class="st">"#2CA02C"</span>)</span>
-<span id="e92e41d9-115"><a href="#e92e41d9-115" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Mean Squared Error (MSE)"</span>)</span>
-<span id="e92e41d9-116"><a href="#e92e41d9-116" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Model Performance (smaller is better)"</span>)</span>
-<span id="e92e41d9-117"><a href="#e92e41d9-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e92e41d9-118"><a href="#e92e41d9-118" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="11ef3ed6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="11ef3ed6-1"><a href="#11ef3ed6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="11ef3ed6-2"><a href="#11ef3ed6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV, cross_val_score</span>
+<span id="11ef3ed6-3"><a href="#11ef3ed6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="11ef3ed6-4"><a href="#11ef3ed6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="11ef3ed6-5"><a href="#11ef3ed6-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="11ef3ed6-6"><a href="#11ef3ed6-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="11ef3ed6-7"><a href="#11ef3ed6-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVR</span>
+<span id="11ef3ed6-8"><a href="#11ef3ed6-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="11ef3ed6-9"><a href="#11ef3ed6-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor</span>
+<span id="11ef3ed6-10"><a href="#11ef3ed6-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="11ef3ed6-11"><a href="#11ef3ed6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-12"><a href="#11ef3ed6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Split 'wine' into features (X, all columns except quality) and target (y, only quality)</span></span>
+<span id="11ef3ed6-13"><a href="#11ef3ed6-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> wine.drop(<span class="st">"quality"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="11ef3ed6-14"><a href="#11ef3ed6-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> wine[<span class="st">"quality"</span>]</span>
+<span id="11ef3ed6-15"><a href="#11ef3ed6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-16"><a href="#11ef3ed6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset into training and testing sets</span></span>
+<span id="11ef3ed6-17"><a href="#11ef3ed6-17" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="11ef3ed6-18"><a href="#11ef3ed6-18" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="11ef3ed6-19"><a href="#11ef3ed6-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="11ef3ed6-20"><a href="#11ef3ed6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-21"><a href="#11ef3ed6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define models and their respective parameter grids. Note that the parameter grid keys must be prefixed by the model name in the pipeline.</span></span>
+<span id="11ef3ed6-22"><a href="#11ef3ed6-22" aria-hidden="true" tabindex="-1"></a>models_params <span class="op">=</span> [</span>
+<span id="11ef3ed6-23"><a href="#11ef3ed6-23" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Linear Regression"</span>, LinearRegression(), {}),</span>
+<span id="11ef3ed6-24"><a href="#11ef3ed6-24" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="11ef3ed6-25"><a href="#11ef3ed6-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Random Forest"</span>,</span>
+<span id="11ef3ed6-26"><a href="#11ef3ed6-26" aria-hidden="true" tabindex="-1"></a>        RandomForestRegressor(),</span>
+<span id="11ef3ed6-27"><a href="#11ef3ed6-27" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="11ef3ed6-28"><a href="#11ef3ed6-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Random Forest__n_estimators"</span>: [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">200</span>],</span>
+<span id="11ef3ed6-29"><a href="#11ef3ed6-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Random Forest__max_depth"</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
+<span id="11ef3ed6-30"><a href="#11ef3ed6-30" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="11ef3ed6-31"><a href="#11ef3ed6-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="11ef3ed6-32"><a href="#11ef3ed6-32" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="11ef3ed6-33"><a href="#11ef3ed6-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SVR"</span>,</span>
+<span id="11ef3ed6-34"><a href="#11ef3ed6-34" aria-hidden="true" tabindex="-1"></a>        SVR(),</span>
+<span id="11ef3ed6-35"><a href="#11ef3ed6-35" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="11ef3ed6-36"><a href="#11ef3ed6-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SVR__C"</span>: [<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>],</span>
+<span id="11ef3ed6-37"><a href="#11ef3ed6-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SVR__kernel"</span>: [<span class="st">"linear"</span>, <span class="st">"rbf"</span>],</span>
+<span id="11ef3ed6-38"><a href="#11ef3ed6-38" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="11ef3ed6-39"><a href="#11ef3ed6-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="11ef3ed6-40"><a href="#11ef3ed6-40" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="11ef3ed6-41"><a href="#11ef3ed6-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"XGBoost"</span>,</span>
+<span id="11ef3ed6-42"><a href="#11ef3ed6-42" aria-hidden="true" tabindex="-1"></a>        XGBRegressor(),</span>
+<span id="11ef3ed6-43"><a href="#11ef3ed6-43" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="11ef3ed6-44"><a href="#11ef3ed6-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__n_estimators"</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">800</span>],</span>
+<span id="11ef3ed6-45"><a href="#11ef3ed6-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__learning_rate"</span>: [<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>],</span>
+<span id="11ef3ed6-46"><a href="#11ef3ed6-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__max_depth"</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
+<span id="11ef3ed6-47"><a href="#11ef3ed6-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">"XGBoost__seed"</span>: [<span class="dv">42</span>],</span>
+<span id="11ef3ed6-48"><a href="#11ef3ed6-48" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="11ef3ed6-49"><a href="#11ef3ed6-49" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="11ef3ed6-50"><a href="#11ef3ed6-50" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="11ef3ed6-51"><a href="#11ef3ed6-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"KNeighbors"</span>,</span>
+<span id="11ef3ed6-52"><a href="#11ef3ed6-52" aria-hidden="true" tabindex="-1"></a>        KNeighborsRegressor(),</span>
+<span id="11ef3ed6-53"><a href="#11ef3ed6-53" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="11ef3ed6-54"><a href="#11ef3ed6-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KNeighbors__n_neighbors"</span>: [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>],</span>
+<span id="11ef3ed6-55"><a href="#11ef3ed6-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"KNeighbors__weights"</span>: [<span class="st">"uniform"</span>, <span class="st">"distance"</span>],</span>
+<span id="11ef3ed6-56"><a href="#11ef3ed6-56" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="11ef3ed6-57"><a href="#11ef3ed6-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="11ef3ed6-58"><a href="#11ef3ed6-58" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="11ef3ed6-59"><a href="#11ef3ed6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-60"><a href="#11ef3ed6-60" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> <span class="bu">float</span>(<span class="st">"-inf"</span>)</span>
+<span id="11ef3ed6-61"><a href="#11ef3ed6-61" aria-hidden="true" tabindex="-1"></a>best_regressor <span class="op">=</span> <span class="va">None</span></span>
+<span id="11ef3ed6-62"><a href="#11ef3ed6-62" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> <span class="va">None</span></span>
+<span id="11ef3ed6-63"><a href="#11ef3ed6-63" aria-hidden="true" tabindex="-1"></a>model_names <span class="op">=</span> []</span>
+<span id="11ef3ed6-64"><a href="#11ef3ed6-64" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> []</span>
+<span id="11ef3ed6-65"><a href="#11ef3ed6-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-66"><a href="#11ef3ed6-66" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, regressor, params <span class="kw">in</span> models_params:</span>
+<span id="11ef3ed6-67"><a href="#11ef3ed6-67" aria-hidden="true" tabindex="-1"></a>    pipeline <span class="op">=</span> Pipeline(</span>
+<span id="11ef3ed6-68"><a href="#11ef3ed6-68" aria-hidden="true" tabindex="-1"></a>        [</span>
+<span id="11ef3ed6-69"><a href="#11ef3ed6-69" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"scaler"</span>, MinMaxScaler()),  <span class="co"># Scale features</span></span>
+<span id="11ef3ed6-70"><a href="#11ef3ed6-70" aria-hidden="true" tabindex="-1"></a>            (name, regressor),  <span class="co"># Use the model name as the step name in the pipeline</span></span>
+<span id="11ef3ed6-71"><a href="#11ef3ed6-71" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="11ef3ed6-72"><a href="#11ef3ed6-72" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="11ef3ed6-73"><a href="#11ef3ed6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-74"><a href="#11ef3ed6-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> params:</span>
+<span id="11ef3ed6-75"><a href="#11ef3ed6-75" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Perform hyperparameter tuning for models with a defined parameter grid</span></span>
+<span id="11ef3ed6-76"><a href="#11ef3ed6-76" aria-hidden="true" tabindex="-1"></a>        grid_search <span class="op">=</span> GridSearchCV(</span>
+<span id="11ef3ed6-77"><a href="#11ef3ed6-77" aria-hidden="true" tabindex="-1"></a>            pipeline, param_grid<span class="op">=</span>params, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span></span>
+<span id="11ef3ed6-78"><a href="#11ef3ed6-78" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="11ef3ed6-79"><a href="#11ef3ed6-79" aria-hidden="true" tabindex="-1"></a>        grid_search.fit(X_train, y_train)</span>
+<span id="11ef3ed6-80"><a href="#11ef3ed6-80" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> grid_search.best_score_</span>
+<span id="11ef3ed6-81"><a href="#11ef3ed6-81" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> grid_search.best_params_</span>
+<span id="11ef3ed6-82"><a href="#11ef3ed6-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="11ef3ed6-83"><a href="#11ef3ed6-83" aria-hidden="true" tabindex="-1"></a>        <span class="co"># For simplicity, directly evaluate models without a parameter grid</span></span>
+<span id="11ef3ed6-84"><a href="#11ef3ed6-84" aria-hidden="true" tabindex="-1"></a>        score <span class="op">=</span> np.mean(</span>
+<span id="11ef3ed6-85"><a href="#11ef3ed6-85" aria-hidden="true" tabindex="-1"></a>            cross_val_score(</span>
+<span id="11ef3ed6-86"><a href="#11ef3ed6-86" aria-hidden="true" tabindex="-1"></a>                pipeline, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span></span>
+<span id="11ef3ed6-87"><a href="#11ef3ed6-87" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="11ef3ed6-88"><a href="#11ef3ed6-88" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="11ef3ed6-89"><a href="#11ef3ed6-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-90"><a href="#11ef3ed6-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store the model name and score</span></span>
+<span id="11ef3ed6-91"><a href="#11ef3ed6-91" aria-hidden="true" tabindex="-1"></a>    model_names.append(name)</span>
+<span id="11ef3ed6-92"><a href="#11ef3ed6-92" aria-hidden="true" tabindex="-1"></a>    scores.append(score)</span>
+<span id="11ef3ed6-93"><a href="#11ef3ed6-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-94"><a href="#11ef3ed6-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score <span class="op">&gt;</span> best_score:</span>
+<span id="11ef3ed6-95"><a href="#11ef3ed6-95" aria-hidden="true" tabindex="-1"></a>        best_score <span class="op">=</span> score</span>
+<span id="11ef3ed6-96"><a href="#11ef3ed6-96" aria-hidden="true" tabindex="-1"></a>        best_regressor <span class="op">=</span> name</span>
+<span id="11ef3ed6-97"><a href="#11ef3ed6-97" aria-hidden="true" tabindex="-1"></a>        best_params <span class="op">=</span> params</span>
+<span id="11ef3ed6-98"><a href="#11ef3ed6-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-99"><a href="#11ef3ed6-99" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MSE by negating the best_score</span></span>
+<span id="11ef3ed6-100"><a href="#11ef3ed6-100" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> best_score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="11ef3ed6-101"><a href="#11ef3ed6-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-102"><a href="#11ef3ed6-102" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="11ef3ed6-103"><a href="#11ef3ed6-103" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Best regressor: </span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss"> with neg_mean_squared_error score: </span><span class="sc">{</span>best_score<span class="sc">}</span><span class="ss">, MSE: </span><span class="sc">{</span>mse<span class="sc">}</span><span class="ss">, and parameters: </span><span class="sc">{</span>best_params<span class="sc">}</span><span class="ss">"</span></span>
+<span id="11ef3ed6-104"><a href="#11ef3ed6-104" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="11ef3ed6-105"><a href="#11ef3ed6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-106"><a href="#11ef3ed6-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Pair each model name with its score, sort by score, and then unzip back into separate lists</span></span>
+<span id="11ef3ed6-107"><a href="#11ef3ed6-107" aria-hidden="true" tabindex="-1"></a>sorted_pairs <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(scores, model_names), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>])</span>
+<span id="11ef3ed6-108"><a href="#11ef3ed6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-109"><a href="#11ef3ed6-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzipping the sorted pairs</span></span>
+<span id="11ef3ed6-110"><a href="#11ef3ed6-110" aria-hidden="true" tabindex="-1"></a>sorted_scores, sorted_model_names <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>sorted_pairs)</span>
+<span id="11ef3ed6-111"><a href="#11ef3ed6-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-112"><a href="#11ef3ed6-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the performance of each model with sorted values</span></span>
+<span id="11ef3ed6-113"><a href="#11ef3ed6-113" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="11ef3ed6-114"><a href="#11ef3ed6-114" aria-hidden="true" tabindex="-1"></a>ax.barh(sorted_model_names, [score <span class="op">*</span> <span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> score <span class="kw">in</span> sorted_scores], color<span class="op">=</span><span class="st">"#2CA02C"</span>)</span>
+<span id="11ef3ed6-115"><a href="#11ef3ed6-115" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Mean Squared Error (MSE)"</span>)</span>
+<span id="11ef3ed6-116"><a href="#11ef3ed6-116" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Model Performance (smaller is better)"</span>)</span>
+<span id="11ef3ed6-117"><a href="#11ef3ed6-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11ef3ed6-118"><a href="#11ef3ed6-118" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best regressor: KNeighbors with neg_mean_squared_error score: -0.38768439914783254, MSE: 0.38768439914783254, and parameters: {'KNeighbors__n_neighbors': 9, 'KNeighbors__weights': 'distance'}</code></pre>
@@ -1378,66 +1381,66 @@ About Residuals
 <p>Residuals are the difference between the observed values and the predicted values. By plotting the residuals, we can visually inspect the performance of the model. Ideally, the residuals should be randomly distributed around zero, indicating that the model is making predictions without any systematic errors. If we observe a pattern in the residuals, it may indicate that the model is not capturing some underlying patterns in the data.</p>
 </div>
 </div>
-<div id="cf148c97" class="cell" data-execution_count="16">
+<div id="0d9fbe7d" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cf148c97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cf148c97-1"><a href="#cf148c97-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cf148c97-2"><a href="#cf148c97-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-3"><a href="#cf148c97-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Since we're using named steps in the pipeline, update `best_params` to work with `set_params`</span></span>
-<span id="cf148c97-4"><a href="#cf148c97-4" aria-hidden="true" tabindex="-1"></a>best_params_updated <span class="op">=</span> {</span>
-<span id="cf148c97-5"><a href="#cf148c97-5" aria-hidden="true" tabindex="-1"></a>    key.replace(<span class="ss">f"</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">__"</span>, <span class="st">""</span>, <span class="dv">1</span>): value</span>
-<span id="cf148c97-6"><a href="#cf148c97-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> best_params.items()</span>
-<span id="cf148c97-7"><a href="#cf148c97-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cf148c97-8"><a href="#cf148c97-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-9"><a href="#cf148c97-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Recreate the best pipeline with the best parameters</span></span>
-<span id="cf148c97-10"><a href="#cf148c97-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> best_regressor <span class="op">==</span> <span class="st">"Linear Regression"</span>:</span>
-<span id="cf148c97-11"><a href="#cf148c97-11" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> LinearRegression(<span class="op">**</span>best_params_updated)</span>
-<span id="cf148c97-12"><a href="#cf148c97-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"Random Forest"</span>:</span>
-<span id="cf148c97-13"><a href="#cf148c97-13" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> RandomForestRegressor(<span class="op">**</span>best_params_updated)</span>
-<span id="cf148c97-14"><a href="#cf148c97-14" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"SVR"</span>:</span>
-<span id="cf148c97-15"><a href="#cf148c97-15" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> SVR(<span class="op">**</span>best_params_updated)</span>
-<span id="cf148c97-16"><a href="#cf148c97-16" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"XGBoost"</span>:</span>
-<span id="cf148c97-17"><a href="#cf148c97-17" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> XGBRegressor(<span class="op">**</span>best_params_updated)</span>
-<span id="cf148c97-18"><a href="#cf148c97-18" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"KNeighbors"</span>:</span>
-<span id="cf148c97-19"><a href="#cf148c97-19" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> KNeighborsRegressor(<span class="op">**</span>best_params_updated)</span>
-<span id="cf148c97-20"><a href="#cf148c97-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-21"><a href="#cf148c97-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the pipeline with the best model</span></span>
-<span id="cf148c97-22"><a href="#cf148c97-22" aria-hidden="true" tabindex="-1"></a>best_pipeline <span class="op">=</span> Pipeline([(<span class="st">"scaler"</span>, MinMaxScaler()), (best_regressor, best_model)])</span>
-<span id="cf148c97-23"><a href="#cf148c97-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-24"><a href="#cf148c97-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrain on the full training set</span></span>
-<span id="cf148c97-25"><a href="#cf148c97-25" aria-hidden="true" tabindex="-1"></a>best_pipeline.fit(X_train, y_train)</span>
-<span id="cf148c97-26"><a href="#cf148c97-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-27"><a href="#cf148c97-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
-<span id="cf148c97-28"><a href="#cf148c97-28" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_pipeline.predict(X_test)</span>
-<span id="cf148c97-29"><a href="#cf148c97-29" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
-<span id="cf148c97-30"><a href="#cf148c97-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-31"><a href="#cf148c97-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and print the MSE on the test set for evaluation</span></span>
-<span id="cf148c97-32"><a href="#cf148c97-32" aria-hidden="true" tabindex="-1"></a>test_mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
-<span id="cf148c97-33"><a href="#cf148c97-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE for the best regressor (</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>test_mse<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cf148c97-34"><a href="#cf148c97-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-35"><a href="#cf148c97-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary statistics of the residuals</span></span>
-<span id="cf148c97-36"><a href="#cf148c97-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Residuals Summary Statistics:"</span>)</span>
-<span id="cf148c97-37"><a href="#cf148c97-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(residuals.describe())</span>
-<span id="cf148c97-38"><a href="#cf148c97-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-39"><a href="#cf148c97-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual plot using seaborn and matplotlib</span></span>
-<span id="cf148c97-40"><a href="#cf148c97-40" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cf148c97-41"><a href="#cf148c97-41" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>y_test, y<span class="op">=</span>residuals, color<span class="op">=</span><span class="st">"#2CA02C"</span>)</span>
-<span id="cf148c97-42"><a href="#cf148c97-42" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"red"</span>)  <span class="co"># Adding a horizontal line at 0</span></span>
-<span id="cf148c97-43"><a href="#cf148c97-43" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Residual Plot"</span>)</span>
-<span id="cf148c97-44"><a href="#cf148c97-44" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Actual Values"</span>)</span>
-<span id="cf148c97-45"><a href="#cf148c97-45" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residuals"</span>)</span>
-<span id="cf148c97-46"><a href="#cf148c97-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cf148c97-47"><a href="#cf148c97-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cf148c97-48"><a href="#cf148c97-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of residuals</span></span>
-<span id="cf148c97-49"><a href="#cf148c97-49" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cf148c97-50"><a href="#cf148c97-50" aria-hidden="true" tabindex="-1"></a>sns.histplot(residuals, kde<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span><span class="st">"#2CA02C"</span>, bins<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cf148c97-51"><a href="#cf148c97-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Residuals"</span>)</span>
-<span id="cf148c97-52"><a href="#cf148c97-52" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Residuals"</span>)</span>
-<span id="cf148c97-53"><a href="#cf148c97-53" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
-<span id="cf148c97-54"><a href="#cf148c97-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="0d9fbe7d"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0d9fbe7d-1"><a href="#0d9fbe7d-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="0d9fbe7d-2"><a href="#0d9fbe7d-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-3"><a href="#0d9fbe7d-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Since we're using named steps in the pipeline, update `best_params` to work with `set_params`</span></span>
+<span id="0d9fbe7d-4"><a href="#0d9fbe7d-4" aria-hidden="true" tabindex="-1"></a>best_params_updated <span class="op">=</span> {</span>
+<span id="0d9fbe7d-5"><a href="#0d9fbe7d-5" aria-hidden="true" tabindex="-1"></a>    key.replace(<span class="ss">f"</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">__"</span>, <span class="st">""</span>, <span class="dv">1</span>): value</span>
+<span id="0d9fbe7d-6"><a href="#0d9fbe7d-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> best_params.items()</span>
+<span id="0d9fbe7d-7"><a href="#0d9fbe7d-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="0d9fbe7d-8"><a href="#0d9fbe7d-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-9"><a href="#0d9fbe7d-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Recreate the best pipeline with the best parameters</span></span>
+<span id="0d9fbe7d-10"><a href="#0d9fbe7d-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> best_regressor <span class="op">==</span> <span class="st">"Linear Regression"</span>:</span>
+<span id="0d9fbe7d-11"><a href="#0d9fbe7d-11" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> LinearRegression(<span class="op">**</span>best_params_updated)</span>
+<span id="0d9fbe7d-12"><a href="#0d9fbe7d-12" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"Random Forest"</span>:</span>
+<span id="0d9fbe7d-13"><a href="#0d9fbe7d-13" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> RandomForestRegressor(<span class="op">**</span>best_params_updated)</span>
+<span id="0d9fbe7d-14"><a href="#0d9fbe7d-14" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"SVR"</span>:</span>
+<span id="0d9fbe7d-15"><a href="#0d9fbe7d-15" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> SVR(<span class="op">**</span>best_params_updated)</span>
+<span id="0d9fbe7d-16"><a href="#0d9fbe7d-16" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"XGBoost"</span>:</span>
+<span id="0d9fbe7d-17"><a href="#0d9fbe7d-17" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> XGBRegressor(<span class="op">**</span>best_params_updated)</span>
+<span id="0d9fbe7d-18"><a href="#0d9fbe7d-18" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> best_regressor <span class="op">==</span> <span class="st">"KNeighbors"</span>:</span>
+<span id="0d9fbe7d-19"><a href="#0d9fbe7d-19" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> KNeighborsRegressor(<span class="op">**</span>best_params_updated)</span>
+<span id="0d9fbe7d-20"><a href="#0d9fbe7d-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-21"><a href="#0d9fbe7d-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the pipeline with the best model</span></span>
+<span id="0d9fbe7d-22"><a href="#0d9fbe7d-22" aria-hidden="true" tabindex="-1"></a>best_pipeline <span class="op">=</span> Pipeline([(<span class="st">"scaler"</span>, MinMaxScaler()), (best_regressor, best_model)])</span>
+<span id="0d9fbe7d-23"><a href="#0d9fbe7d-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-24"><a href="#0d9fbe7d-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrain on the full training set</span></span>
+<span id="0d9fbe7d-25"><a href="#0d9fbe7d-25" aria-hidden="true" tabindex="-1"></a>best_pipeline.fit(X_train, y_train)</span>
+<span id="0d9fbe7d-26"><a href="#0d9fbe7d-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-27"><a href="#0d9fbe7d-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
+<span id="0d9fbe7d-28"><a href="#0d9fbe7d-28" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_pipeline.predict(X_test)</span>
+<span id="0d9fbe7d-29"><a href="#0d9fbe7d-29" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
+<span id="0d9fbe7d-30"><a href="#0d9fbe7d-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-31"><a href="#0d9fbe7d-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate and print the MSE on the test set for evaluation</span></span>
+<span id="0d9fbe7d-32"><a href="#0d9fbe7d-32" aria-hidden="true" tabindex="-1"></a>test_mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
+<span id="0d9fbe7d-33"><a href="#0d9fbe7d-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test MSE for the best regressor (</span><span class="sc">{</span>best_regressor<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>test_mse<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="0d9fbe7d-34"><a href="#0d9fbe7d-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-35"><a href="#0d9fbe7d-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Print summary statistics of the residuals</span></span>
+<span id="0d9fbe7d-36"><a href="#0d9fbe7d-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Residuals Summary Statistics:"</span>)</span>
+<span id="0d9fbe7d-37"><a href="#0d9fbe7d-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(residuals.describe())</span>
+<span id="0d9fbe7d-38"><a href="#0d9fbe7d-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-39"><a href="#0d9fbe7d-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual plot using seaborn and matplotlib</span></span>
+<span id="0d9fbe7d-40"><a href="#0d9fbe7d-40" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="0d9fbe7d-41"><a href="#0d9fbe7d-41" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>y_test, y<span class="op">=</span>residuals, color<span class="op">=</span><span class="st">"#2CA02C"</span>)</span>
+<span id="0d9fbe7d-42"><a href="#0d9fbe7d-42" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"red"</span>)  <span class="co"># Adding a horizontal line at 0</span></span>
+<span id="0d9fbe7d-43"><a href="#0d9fbe7d-43" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Residual Plot"</span>)</span>
+<span id="0d9fbe7d-44"><a href="#0d9fbe7d-44" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Actual Values"</span>)</span>
+<span id="0d9fbe7d-45"><a href="#0d9fbe7d-45" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residuals"</span>)</span>
+<span id="0d9fbe7d-46"><a href="#0d9fbe7d-46" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="0d9fbe7d-47"><a href="#0d9fbe7d-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0d9fbe7d-48"><a href="#0d9fbe7d-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of residuals</span></span>
+<span id="0d9fbe7d-49"><a href="#0d9fbe7d-49" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="0d9fbe7d-50"><a href="#0d9fbe7d-50" aria-hidden="true" tabindex="-1"></a>sns.histplot(residuals, kde<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span><span class="st">"#2CA02C"</span>, bins<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="0d9fbe7d-51"><a href="#0d9fbe7d-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Residuals"</span>)</span>
+<span id="0d9fbe7d-52"><a href="#0d9fbe7d-52" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Residuals"</span>)</span>
+<span id="0d9fbe7d-53"><a href="#0d9fbe7d-53" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="0d9fbe7d-54"><a href="#0d9fbe7d-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test MSE for the best regressor (KNeighbors): 0.3381499055639954
+<pre><code>Test MSE for the best regressor (KNeighbors): 0.33814990556399543
 Residuals Summary Statistics:
 count    229.000000
 mean      -0.048154
@@ -1475,236 +1478,242 @@ Name: quality, dtype: float64</code></pre>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1712,185 +1721,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

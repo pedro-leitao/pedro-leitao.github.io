@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,15 +66,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -132,7 +134,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -302,13 +304,13 @@ About Downloading Datasets
 <section id="loading-and-working-with-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-and-working-with-data">Loading and working with data</h2>
 <p>Pandas can unpack zip files directly, let us see how to do it.</p>
-<div id="c47bca2e" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="c47bca2e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c47bca2e-1"><a href="#c47bca2e-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="c47bca2e-2"><a href="#c47bca2e-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c47bca2e-3"><a href="#c47bca2e-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the CSV directly from the zip</span></span>
-<span id="c47bca2e-4"><a href="#c47bca2e-4" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> pd.read_csv(<span class="st">"earthquake-database.zip"</span>, compression<span class="op">=</span><span class="st">"zip"</span>)</span>
-<span id="c47bca2e-5"><a href="#c47bca2e-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c47bca2e-6"><a href="#c47bca2e-6" aria-hidden="true" tabindex="-1"></a>earthquakes.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="59510241" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="59510241"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="59510241-1"><a href="#59510241-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="59510241-2"><a href="#59510241-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="59510241-3"><a href="#59510241-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the CSV directly from the zip</span></span>
+<span id="59510241-4"><a href="#59510241-4" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> pd.read_csv(<span class="st">"earthquake-database.zip"</span>, compression<span class="op">=</span><span class="st">"zip"</span>)</span>
+<span id="59510241-5"><a href="#59510241-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="59510241-6"><a href="#59510241-6" aria-hidden="true" tabindex="-1"></a>earthquakes.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
@@ -590,8 +592,8 @@ About Downloading Datasets
 </div>
 <p>There’s a few new things there. We loaded the file with <code>read_csv</code> as we encountered before, but this time we passed the <code>compression</code> argument to specify that the file is compressed. We also used the <code>head</code> method to show the first 10 rows of the dataframe. This is a very useful method to quickly check the contents of a dataset.</p>
 <p>Pandas offers a few other methods to quickly check the contents of a dataframe, such as <code>info</code> and <code>describe</code>. Let us see how they work.</p>
-<div id="4b6253cf" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="4b6253cf"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4b6253cf-1"><a href="#4b6253cf-1" aria-hidden="true" tabindex="-1"></a>earthquakes.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c64fda02" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="c64fda02"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c64fda02-1"><a href="#c64fda02-1" aria-hidden="true" tabindex="-1"></a>earthquakes.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -742,8 +744,8 @@ About Downloading Datasets
 </div>
 </div>
 <p>The <code>describe</code> method gives us a summary of the numerical columns in the dataframe. It shows the count of non-null values, the mean, standard deviation, minimum, maximum, and the quartiles of the data. This is a very useful method to quickly get an idea of the distribution of the data.</p>
-<div id="158b1da9" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="158b1da9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="158b1da9-1"><a href="#158b1da9-1" aria-hidden="true" tabindex="-1"></a>earthquakes.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="caae53c4" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="caae53c4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="caae53c4-1"><a href="#caae53c4-1" aria-hidden="true" tabindex="-1"></a>earthquakes.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 23412 entries, 0 to 23411
@@ -790,8 +792,8 @@ memory usage: 3.8+ MB</code></pre>
 <section id="checking-for-missing-values" class="level3">
 <h3 class="anchored" data-anchor-id="checking-for-missing-values">Checking for missing values</h3>
 <p>Frequently columns in a dataset will have missing or incomplete data. Pandas can handle missing data in a few ways, such as dropping the rows with missing data, filling the missing data with a value, or interpolating the missing data. Let us see what this looks like by showing the series for the <code>Depth Error</code> column.</p>
-<div id="9001fbc9" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="9001fbc9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9001fbc9-1"><a href="#9001fbc9-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Depth Error"</span>].info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="239dadb1" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="239dadb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="239dadb1-1"><a href="#239dadb1-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Depth Error"</span>].info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.series.Series'&gt;
 RangeIndex: 23412 entries, 0 to 23411
@@ -804,8 +806,8 @@ memory usage: 183.0 KB</code></pre>
 </div>
 </div>
 <p>Notice how the range is 0 to 23411, but how the Non-Null Count is only 4461. This means that there are 18951 missing values in this column. We can use the <code>isnull</code> method to check for missing values across all columns in the dataframe.</p>
-<div id="623059a6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="623059a6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="623059a6-1"><a href="#623059a6-1" aria-hidden="true" tabindex="-1"></a>earthquakes.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="268a51ec" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="268a51ec"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="268a51ec-1"><a href="#268a51ec-1" aria-hidden="true" tabindex="-1"></a>earthquakes.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>Date                              0
 Time                              0
@@ -833,8 +835,8 @@ dtype: int64</code></pre>
 </div>
 <p>Quite a few columns have missing values, such as <code>Depth Error</code>, <code>Depth Seismic Stations</code>, <code>Magnitude Error</code>, and <code>Magnitude Seismic Stations</code>.</p>
 <p>Let us see what missing values look like in the dataframe.</p>
-<div id="7af8910b" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="7af8910b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7af8910b-1"><a href="#7af8910b-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Depth Error"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="475d87b9" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="475d87b9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="475d87b9-1"><a href="#475d87b9-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Depth Error"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>0        NaN
 1        NaN
@@ -853,8 +855,8 @@ Name: Depth Error, Length: 23412, dtype: float64</code></pre>
 <p>The entries with missing values are shown as <code>NaN</code>, which stands for “Not a Number”.</p>
 <p>Pandas offers a few methods to handle missing values, such as <code>dropna</code> (will drop any rows with missing values), <code>fillna</code> (substitutes a missing value with a prescribed value), and <code>interpolate</code> (will fill in missing values with interpolated values).</p>
 <p>As an example, let us drop any rows with a missing <code>Magnitude Type</code>.</p>
-<div id="f80de44b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="f80de44b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f80de44b-1"><a href="#f80de44b-1" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> earthquakes.dropna(subset<span class="op">=</span>[<span class="st">"Magnitude Type"</span>], ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1341055a" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="1341055a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1341055a-1"><a href="#1341055a-1" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> earthquakes.dropna(subset<span class="op">=</span>[<span class="st">"Magnitude Type"</span>], ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>dropna</code> method has a few arguments that can be used to customize the behavior. In the example above, we used the <code>subset</code> argument to specify that we only want to drop rows where the <code>Magnitude Type</code> column is missing. We also used the <code>ignore_index</code> argument to reset the index of the dataframe after dropping the rows.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -871,8 +873,8 @@ About the <code>ignore_index</code> argument
 </div>
 </div>
 <p>Let us now look at the dataframe again to see if the rows with missing <code>Magnitude Type</code> have been dropped.</p>
-<div id="b7b4a8fb" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="b7b4a8fb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b7b4a8fb-1"><a href="#b7b4a8fb-1" aria-hidden="true" tabindex="-1"></a>earthquakes.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7ec80b4f" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="7ec80b4f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7ec80b4f-1"><a href="#7ec80b4f-1" aria-hidden="true" tabindex="-1"></a>earthquakes.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 23409 entries, 0 to 23408
@@ -911,46 +913,46 @@ memory usage: 3.8+ MB</code></pre>
 <h3 class="anchored" data-anchor-id="checking-for-duplicate-values">Checking for duplicate values</h3>
 <p>Another common problem in datasets is duplicate values. These can occur for a variety of reasons, such as data entry errors, or errors in the data collection process. Pandas offers a few methods to check for duplicate values, such as <code>duplicated</code> and <code>drop_duplicates</code>.</p>
 <p>As an example, let us check for duplicate values in the <code>ID</code> column. We do this by using the <code>duplicated</code> method, which returns a boolean series indicating whether a value is duplicated or not, and then using the <code>sum</code> method to count the number of duplicates.</p>
-<div id="01753a17" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="01753a17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="01753a17-1"><a href="#01753a17-1" aria-hidden="true" tabindex="-1"></a>earthquakes.duplicated(subset<span class="op">=</span>[<span class="st">"ID"</span>]).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2c43d019" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="2c43d019"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2c43d019-1"><a href="#2c43d019-1" aria-hidden="true" tabindex="-1"></a>earthquakes.duplicated(subset<span class="op">=</span>[<span class="st">"ID"</span>]).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>0</code></pre>
 </div>
 </div>
 <p>The result was 0, which means that there are no duplicate values in the <code>ID</code> column, good!</p>
 <p>Let us now check to try and find duplicate <code>Latitude</code> and <code>Longitude</code> values, as these could indicate that the same earthquake was recorded more than once by the same, or different stations.</p>
-<div id="21488fc8" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="21488fc8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="21488fc8-1"><a href="#21488fc8-1" aria-hidden="true" tabindex="-1"></a>earthquakes.duplicated(subset<span class="op">=</span>[<span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>]).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="acb3160a" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="acb3160a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="acb3160a-1"><a href="#acb3160a-1" aria-hidden="true" tabindex="-1"></a>earthquakes.duplicated(subset<span class="op">=</span>[<span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>]).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>6</code></pre>
 </div>
 </div>
 <p>There! We found 6 duplicates present. Let us now drop these duplicates with the <code>drop_duplicates</code> method.</p>
-<div id="5846ce56" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="5846ce56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5846ce56-1"><a href="#5846ce56-1" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> earthquakes.drop_duplicates(</span>
-<span id="5846ce56-2"><a href="#5846ce56-2" aria-hidden="true" tabindex="-1"></a>    subset<span class="op">=</span>[<span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>], ignore_index<span class="op">=</span><span class="va">True</span></span>
-<span id="5846ce56-3"><a href="#5846ce56-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2a14e8b7" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="2a14e8b7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2a14e8b7-1"><a href="#2a14e8b7-1" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> earthquakes.drop_duplicates(</span>
+<span id="2a14e8b7-2"><a href="#2a14e8b7-2" aria-hidden="true" tabindex="-1"></a>    subset<span class="op">=</span>[<span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>], ignore_index<span class="op">=</span><span class="va">True</span></span>
+<span id="2a14e8b7-3"><a href="#2a14e8b7-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="checking-for-incorrect-values" class="level3">
 <h3 class="anchored" data-anchor-id="checking-for-incorrect-values">Checking for incorrect values</h3>
 <p>Checking for incorrect values in a dataset can be a bit more challenging, as it requires some domain knowledge. For argument’s sake, let us check for large <code>Horizontal Error</code> values (in the dataset, <code>Horizontal Error</code> is the horizontal error of the location of the earthquake in kilometers, and let us assume that it should not be larger than 90 km).</p>
-<div id="3903d8da" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="3903d8da"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3903d8da-1"><a href="#3903d8da-1" aria-hidden="true" tabindex="-1"></a>(earthquakes[<span class="st">"Horizontal Error"</span>] <span class="op">&gt;</span> <span class="dv">90</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="186bd5f5" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="186bd5f5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="186bd5f5-1"><a href="#186bd5f5-1" aria-hidden="true" tabindex="-1"></a>(earthquakes[<span class="st">"Horizontal Error"</span>] <span class="op">&gt;</span> <span class="dv">90</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>14</code></pre>
 </div>
 </div>
 <p>The above expression <code>earthquakes['Horizontal Error'] &gt; 90</code> returns a boolean series indicating whether the condition is met or not, and then we use the <code>sum</code> method to count the number of values that meet the condition. In this case, there are 14 earthquakes with a <code>Horizontal Error</code> larger than 90 km, which could be incorrect values. Let us now drop these rows.</p>
-<div id="da72e364" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="da72e364"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="da72e364-1"><a href="#da72e364-1" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> earthquakes.drop(</span>
-<span id="da72e364-2"><a href="#da72e364-2" aria-hidden="true" tabindex="-1"></a>    earthquakes[earthquakes[<span class="st">"Horizontal Error"</span>] <span class="op">&gt;</span> <span class="dv">90</span>].index</span>
-<span id="da72e364-3"><a href="#da72e364-3" aria-hidden="true" tabindex="-1"></a>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8fb6545e" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="8fb6545e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8fb6545e-1"><a href="#8fb6545e-1" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="op">=</span> earthquakes.drop(</span>
+<span id="8fb6545e-2"><a href="#8fb6545e-2" aria-hidden="true" tabindex="-1"></a>    earthquakes[earthquakes[<span class="st">"Horizontal Error"</span>] <span class="op">&gt;</span> <span class="dv">90</span>].index</span>
+<span id="8fb6545e-3"><a href="#8fb6545e-3" aria-hidden="true" tabindex="-1"></a>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code has a few more details than what we have seen until now. It works by first selecting the rows that meet the condition <code>earthquakes['Horizontal Error'] &gt; 90</code>, and then using the <code>index</code> attribute to get the index (0, 1, 2, etc.) of the rows that meet the condition. We then use the <code>drop</code> method to drop these rows, and finally use the <code>reset_index</code> method to reset the index of the dataframe as we have seen before when using the <code>ignore_index</code> argument of the <code>dropna</code> method.</p>
 <p>Let’s now check the dataframe to see if the rows with large <code>Horizontal Error</code> values have been dropped.</p>
-<div id="44dd411a" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="44dd411a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="44dd411a-1"><a href="#44dd411a-1" aria-hidden="true" tabindex="-1"></a>(earthquakes[<span class="st">"Horizontal Error"</span>] <span class="op">&gt;</span> <span class="dv">90</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5aef2520" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="5aef2520"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5aef2520-1"><a href="#5aef2520-1" aria-hidden="true" tabindex="-1"></a>(earthquakes[<span class="st">"Horizontal Error"</span>] <span class="op">&gt;</span> <span class="dv">90</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>0</code></pre>
 </div>
@@ -969,8 +971,8 @@ memory usage: 3.8+ MB</code></pre>
 </ul>
 <section id="calculating-mean-values" class="level3">
 <h3 class="anchored" data-anchor-id="calculating-mean-values">Calculating mean values</h3>
-<div id="063ac495" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="063ac495"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="063ac495-1"><a href="#063ac495-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ab35b161" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="ab35b161"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ab35b161-1"><a href="#ab35b161-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>count    23389.000000
 mean         5.882655
@@ -984,8 +986,8 @@ Name: Magnitude, dtype: float64</code></pre>
 </div>
 </div>
 <p>This code simply uses the <code>describe</code> method to show the summary statistics of the <code>Magnitude</code> column, which includes the mean value, as well as the standard deviation, minimum, maximum, and quartiles. Alternatively, we could calculate the mean value directly.</p>
-<div id="f6dbe524" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="f6dbe524"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f6dbe524-1"><a href="#f6dbe524-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="656f3d85" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="656f3d85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="656f3d85-1"><a href="#656f3d85-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>5.882655094275087</code></pre>
 </div>
@@ -1008,36 +1010,36 @@ About Data Distribution
 <p>A great introduction to statistics if you haven’t looked very deeply into the topic is Shafer and Zhang’s <a href="https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Shafer_and_Zhang)">Introductory Statistics</a>.</p>
 </div>
 </div>
-<div id="6f946813" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="18">
-<div class="sourceCode cell-code" id="6f946813"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6f946813-1"><a href="#6f946813-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="6f946813-2"><a href="#6f946813-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="6f946813-3"><a href="#6f946813-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
-<span id="6f946813-4"><a href="#6f946813-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6f946813-5"><a href="#6f946813-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate normally distributed integers</span></span>
-<span id="6f946813-6"><a href="#6f946813-6" aria-hidden="true" tabindex="-1"></a>normal_integers <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">10</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="6f946813-7"><a href="#6f946813-7" aria-hidden="true" tabindex="-1"></a>normal_integers <span class="op">=</span> np.<span class="bu">round</span>(normal_integers).astype(<span class="bu">int</span>)</span>
-<span id="6f946813-8"><a href="#6f946813-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6f946813-9"><a href="#6f946813-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data for the line (fitted normal distribution)</span></span>
-<span id="6f946813-10"><a href="#6f946813-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">min</span>(normal_integers), <span class="bu">max</span>(normal_integers) <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="6f946813-11"><a href="#6f946813-11" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> norm.pdf(x, loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Normal PDF based on the original distribution</span></span>
-<span id="6f946813-12"><a href="#6f946813-12" aria-hidden="true" tabindex="-1"></a>pdf_scaled <span class="op">=</span> pdf <span class="op">*</span> <span class="bu">len</span>(normal_integers) <span class="op">*</span> (x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>])  <span class="co"># Scale to match histogram</span></span>
-<span id="6f946813-13"><a href="#6f946813-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6f946813-14"><a href="#6f946813-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the histogram</span></span>
-<span id="6f946813-15"><a href="#6f946813-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="6f946813-16"><a href="#6f946813-16" aria-hidden="true" tabindex="-1"></a>plt.hist(normal_integers, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Histogram"</span>)</span>
-<span id="6f946813-17"><a href="#6f946813-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6f946813-18"><a href="#6f946813-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay the line</span></span>
-<span id="6f946813-19"><a href="#6f946813-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, pdf_scaled, color<span class="op">=</span><span class="st">"red"</span>, label<span class="op">=</span><span class="st">"Normal Distribution Curve"</span>)</span>
-<span id="6f946813-20"><a href="#6f946813-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6f946813-21"><a href="#6f946813-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
-<span id="6f946813-22"><a href="#6f946813-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Histogram with Normal Distribution Curve"</span>)</span>
-<span id="6f946813-23"><a href="#6f946813-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Value"</span>)</span>
-<span id="6f946813-24"><a href="#6f946813-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
-<span id="6f946813-25"><a href="#6f946813-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="6f946813-26"><a href="#6f946813-26" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="6f946813-27"><a href="#6f946813-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="6f946813-28"><a href="#6f946813-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="6f946813-29"><a href="#6f946813-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e409d3ec" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="18">
+<div class="sourceCode cell-code" id="e409d3ec"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e409d3ec-1"><a href="#e409d3ec-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="e409d3ec-2"><a href="#e409d3ec-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="e409d3ec-3"><a href="#e409d3ec-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="e409d3ec-4"><a href="#e409d3ec-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e409d3ec-5"><a href="#e409d3ec-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate normally distributed integers</span></span>
+<span id="e409d3ec-6"><a href="#e409d3ec-6" aria-hidden="true" tabindex="-1"></a>normal_integers <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">10</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="e409d3ec-7"><a href="#e409d3ec-7" aria-hidden="true" tabindex="-1"></a>normal_integers <span class="op">=</span> np.<span class="bu">round</span>(normal_integers).astype(<span class="bu">int</span>)</span>
+<span id="e409d3ec-8"><a href="#e409d3ec-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e409d3ec-9"><a href="#e409d3ec-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data for the line (fitted normal distribution)</span></span>
+<span id="e409d3ec-10"><a href="#e409d3ec-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">min</span>(normal_integers), <span class="bu">max</span>(normal_integers) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="e409d3ec-11"><a href="#e409d3ec-11" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> norm.pdf(x, loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Normal PDF based on the original distribution</span></span>
+<span id="e409d3ec-12"><a href="#e409d3ec-12" aria-hidden="true" tabindex="-1"></a>pdf_scaled <span class="op">=</span> pdf <span class="op">*</span> <span class="bu">len</span>(normal_integers) <span class="op">*</span> (x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>])  <span class="co"># Scale to match histogram</span></span>
+<span id="e409d3ec-13"><a href="#e409d3ec-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e409d3ec-14"><a href="#e409d3ec-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the histogram</span></span>
+<span id="e409d3ec-15"><a href="#e409d3ec-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="e409d3ec-16"><a href="#e409d3ec-16" aria-hidden="true" tabindex="-1"></a>plt.hist(normal_integers, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Histogram"</span>)</span>
+<span id="e409d3ec-17"><a href="#e409d3ec-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e409d3ec-18"><a href="#e409d3ec-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay the line</span></span>
+<span id="e409d3ec-19"><a href="#e409d3ec-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, pdf_scaled, color<span class="op">=</span><span class="st">"red"</span>, label<span class="op">=</span><span class="st">"Normal Distribution Curve"</span>)</span>
+<span id="e409d3ec-20"><a href="#e409d3ec-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e409d3ec-21"><a href="#e409d3ec-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels and title</span></span>
+<span id="e409d3ec-22"><a href="#e409d3ec-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Histogram with Normal Distribution Curve"</span>)</span>
+<span id="e409d3ec-23"><a href="#e409d3ec-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Value"</span>)</span>
+<span id="e409d3ec-24"><a href="#e409d3ec-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="e409d3ec-25"><a href="#e409d3ec-25" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="e409d3ec-26"><a href="#e409d3ec-26" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="e409d3ec-27"><a href="#e409d3ec-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e409d3ec-28"><a href="#e409d3ec-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="e409d3ec-29"><a href="#e409d3ec-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1047,8 +1049,8 @@ About Data Distribution
 </div>
 </div>
 <p>The usual process to understand a distribution is by dividing the data into ranges (also called “bins”), and then counting the number of values in each range. This is what the histogram shows. Let us see how this works.</p>
-<div id="c610e455" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="c610e455"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c610e455-1"><a href="#c610e455-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].value_counts(bins<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6f9103fa" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="6f9103fa"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6f9103fa-1"><a href="#6f9103fa-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].value_counts(bins<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>(5.495, 6.4]    21084
 (6.4, 7.3]       2023
@@ -1059,10 +1061,10 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>This code uses the <code>value_counts</code> method to count the number of earthquake magnitudes into four bins (<code>bins=4</code>), and returns a series with the counts. Any numerical columns in a dataframe can be divided into bins using this method.</p>
 <p>We can also plot the histogram for the <code>Magnitude</code> column using the <code>plot</code> method and the <code>hist</code> plot kind.</p>
-<div id="82863cc5" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="82863cc5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="82863cc5-1"><a href="#82863cc5-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].plot(</span>
-<span id="82863cc5-2"><a href="#82863cc5-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"hist"</span>, bins<span class="op">=</span><span class="dv">4</span>, title<span class="op">=</span><span class="st">"Earthquakes Magnitude Distribution"</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>)</span>
-<span id="82863cc5-3"><a href="#82863cc5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d1b6ba66" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="d1b6ba66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d1b6ba66-1"><a href="#d1b6ba66-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Magnitude"</span>].plot(</span>
+<span id="d1b6ba66-2"><a href="#d1b6ba66-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"hist"</span>, bins<span class="op">=</span><span class="dv">4</span>, title<span class="op">=</span><span class="st">"Earthquakes Magnitude Distribution"</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>)</span>
+<span id="d1b6ba66-3"><a href="#d1b6ba66-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1077,8 +1079,8 @@ Name: count, dtype: int64</code></pre>
 <h3 class="anchored" data-anchor-id="understanding-the-relationship-between-variables">Understanding the relationship between variables</h3>
 <p>Another important aspect of data analysis is understanding the relationship between variables. This can be done by computing the correlation between variables, which measures how closely related two variables are. The correlation coefficient ranges from -1 to 1, where -1 indicates a perfect negative correlation, 1 indicates a perfect positive correlation, and 0 indicates no correlation.</p>
 <p>Pandas offers a <code>corr</code> method to compute the correlation between variables. Let us see how this works.</p>
-<div id="4abe9836" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="4abe9836"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4abe9836-1"><a href="#4abe9836-1" aria-hidden="true" tabindex="-1"></a>earthquakes[[<span class="st">"Magnitude"</span>, <span class="st">"Depth"</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="eb9f326c" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="eb9f326c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eb9f326c-1"><a href="#eb9f326c-1" aria-hidden="true" tabindex="-1"></a>earthquakes[[<span class="st">"Magnitude"</span>, <span class="st">"Depth"</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
@@ -1110,8 +1112,8 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>What the resulting matrix shows is the correlation between <code>Magnitude</code> and <code>Depth</code>, which is 0.023, indicating a very weak positive correlation. This means that as the magnitude of an earthquake increases, the depth of the earthquake also increases, but only very slightly.</p>
 <p>We can run a similar analysis for any number of other columns, for example, let us add <code>Horizontal Error</code> to the mix.</p>
-<div id="9693d692" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="9693d692"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9693d692-1"><a href="#9693d692-1" aria-hidden="true" tabindex="-1"></a>earthquakes[[<span class="st">"Magnitude"</span>, <span class="st">"Depth"</span>, <span class="st">"Horizontal Error"</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="dc39fd9e" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="dc39fd9e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dc39fd9e-1"><a href="#dc39fd9e-1" aria-hidden="true" tabindex="-1"></a>earthquakes[[<span class="st">"Magnitude"</span>, <span class="st">"Depth"</span>, <span class="st">"Horizontal Error"</span>]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 
@@ -1165,16 +1167,16 @@ About Scatter Plots
 <p>Scatter plots are a very useful tool to visualize the relationship between two variables. They can help identify patterns and trends in the data, and can be used to identify outliers or anomalies. There are many other types of plots that can be used to visualize data, such as line plots, bar plots, and box plots, which we will use as we progress.</p>
 </div>
 </div>
-<div id="3d6e5db3" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="3d6e5db3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3d6e5db3-1"><a href="#3d6e5db3-1" aria-hidden="true" tabindex="-1"></a>earthquakes.plot(</span>
-<span id="3d6e5db3-2"><a href="#3d6e5db3-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
-<span id="3d6e5db3-3"><a href="#3d6e5db3-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Depth"</span>,</span>
-<span id="3d6e5db3-4"><a href="#3d6e5db3-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Horizontal Error"</span>,</span>
-<span id="3d6e5db3-5"><a href="#3d6e5db3-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Earthquake Depth vs. Horizontal Error"</span>,</span>
-<span id="3d6e5db3-6"><a href="#3d6e5db3-6" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
-<span id="3d6e5db3-7"><a href="#3d6e5db3-7" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"Magnitude"</span>,</span>
-<span id="3d6e5db3-8"><a href="#3d6e5db3-8" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
-<span id="3d6e5db3-9"><a href="#3d6e5db3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5a3b4a71" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="5a3b4a71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5a3b4a71-1"><a href="#5a3b4a71-1" aria-hidden="true" tabindex="-1"></a>earthquakes.plot(</span>
+<span id="5a3b4a71-2"><a href="#5a3b4a71-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
+<span id="5a3b4a71-3"><a href="#5a3b4a71-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Depth"</span>,</span>
+<span id="5a3b4a71-4"><a href="#5a3b4a71-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Horizontal Error"</span>,</span>
+<span id="5a3b4a71-5"><a href="#5a3b4a71-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Earthquake Depth vs. Horizontal Error"</span>,</span>
+<span id="5a3b4a71-6"><a href="#5a3b4a71-6" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
+<span id="5a3b4a71-7"><a href="#5a3b4a71-7" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"Magnitude"</span>,</span>
+<span id="5a3b4a71-8"><a href="#5a3b4a71-8" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
+<span id="5a3b4a71-9"><a href="#5a3b4a71-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1189,8 +1191,8 @@ About Scatter Plots
 <h3 class="anchored" data-anchor-id="categorical-data-and-grouping">Categorical data and grouping</h3>
 <p>You will have noticed that some of the columns in the dataset are strings of text, such as <code>Type</code> and <code>Source</code>. These are called <em>categorical</em> data and can be used to group the data and perform analysis. Pandas offers a few methods to work with categorical data, such as <code>groupby</code> and <code>pivot_table</code>.</p>
 <p>As an example, let us group the data by the <code>Type</code> column and calculate the average magnitude of each type of earthquake.</p>
-<div id="cf215cae" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cf215cae"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cf215cae-1"><a href="#cf215cae-1" aria-hidden="true" tabindex="-1"></a>earthquakes.groupby(<span class="st">"Type"</span>)[<span class="st">"Magnitude"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="187bec2a" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="187bec2a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="187bec2a-1"><a href="#187bec2a-1" aria-hidden="true" tabindex="-1"></a>earthquakes.groupby(<span class="st">"Type"</span>)[<span class="st">"Magnitude"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>Type
 Earthquake           5.882775
@@ -1202,9 +1204,9 @@ Name: Magnitude, dtype: float64</code></pre>
 </div>
 <p>What this series shows us is the average magnitude of each type of earthquake. For example, the average magnitude of <code>Earthquake</code> is aproximately 5.88, and the average magnitude of <code>Nuclear Explosion</code> is 5.86.</p>
 <p>We can also use the <code>pivot_table</code> method to group the data by multiple columns. A pivot table is a way to summarize data in a table format, and can be used to perform more complex analysis. Let us see how this works, this time by grouping the data by <code>Type</code> and <code>Source</code>.</p>
-<div id="c7b4b183" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="c7b4b183"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c7b4b183-1"><a href="#c7b4b183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot Type and Magnitude</span></span>
-<span id="c7b4b183-2"><a href="#c7b4b183-2" aria-hidden="true" tabindex="-1"></a>earthquakes.pivot_table(values<span class="op">=</span><span class="st">"Magnitude"</span>, index<span class="op">=</span>[<span class="st">"Type"</span>, <span class="st">"Source"</span>], aggfunc<span class="op">=</span><span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fedb024f" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="fedb024f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fedb024f-1"><a href="#fedb024f-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot Type and Magnitude</span></span>
+<span id="fedb024f-2"><a href="#fedb024f-2" aria-hidden="true" tabindex="-1"></a>earthquakes.pivot_table(values<span class="op">=</span><span class="st">"Magnitude"</span>, index<span class="op">=</span>[<span class="st">"Type"</span>, <span class="st">"Source"</span>], aggfunc<span class="op">=</span><span class="st">"mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
@@ -1312,15 +1314,15 @@ About <code>datetime</code> Objects
 <p><code>datetime</code> objects are a very useful data type in Python, and Pandas offers a lot of functionality to work with them. You will come across them frequently when working with time series data, and it is good to be familiar with them.</p>
 </div>
 </div>
-<div id="49317508" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="49317508"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="49317508-1"><a href="#49317508-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Date"</span>] <span class="op">=</span> pd.to_datetime(</span>
-<span id="49317508-2"><a href="#49317508-2" aria-hidden="true" tabindex="-1"></a>    earthquakes[<span class="st">"Date"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y"</span>, errors<span class="op">=</span><span class="st">"coerce"</span></span>
-<span id="49317508-3"><a href="#49317508-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7bb270d5" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="7bb270d5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7bb270d5-1"><a href="#7bb270d5-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Date"</span>] <span class="op">=</span> pd.to_datetime(</span>
+<span id="7bb270d5-2"><a href="#7bb270d5-2" aria-hidden="true" tabindex="-1"></a>    earthquakes[<span class="st">"Date"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y"</span>, errors<span class="op">=</span><span class="st">"coerce"</span></span>
+<span id="7bb270d5-3"><a href="#7bb270d5-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above looks a bit special, but it is actually quite simple. We are using the <code>to_datetime</code> method of the Pandas library to convert dates formated as ‘month/day/year’ (commonly used in the United States, unlike ‘day/month/year’ used in Europe) to a <code>datetime</code> object, with <code>errors='coerce'</code> instructing the method to return <code>NaT</code> (Not a Time) for any dates that cannot be converted.</p>
 <p>Now let us extract the year from the <code>Date</code> column, and add it as a new column to the dataframe.</p>
-<div id="a123c124" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="a123c124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a123c124-1"><a href="#a123c124-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>] <span class="op">=</span> earthquakes[<span class="st">"Date"</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="32cb82d9" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="32cb82d9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="32cb82d9-1"><a href="#32cb82d9-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>] <span class="op">=</span> earthquakes[<span class="st">"Date"</span>].dt.year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code uses the <code>dt</code> accessor to access the <code>year</code> attribute of the <code>Date</code> column, and then assigns it to a new column named <code>Year</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1337,8 +1339,8 @@ About Accessors
 </div>
 </div>
 <p>We can now check the dataframe to see if the <code>Year</code> column was added.</p>
-<div id="47f10d6c" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="47f10d6c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="47f10d6c-1"><a href="#47f10d6c-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="94d1ec38" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="94d1ec38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="94d1ec38-1"><a href="#94d1ec38-1" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>0        1965.0
 1        1965.0
@@ -1355,11 +1357,11 @@ Name: Year, Length: 23389, dtype: float64</code></pre>
 </div>
 </div>
 <p>Worked! Did you notice however that the <code>Year</code> column is a <code>float</code> ? This is because the <code>dt.year</code> accessor returns a <code>float</code> type. We can convert it to an <code>int</code> type just to make it look nicer, but also because it makes more sense to have years as integers. We do this with the <code>astype</code> method.</p>
-<div id="e629a486" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="e629a486"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e629a486-1"><a href="#e629a486-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill NaN values before converting</span></span>
-<span id="e629a486-2"><a href="#e629a486-2" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>] <span class="op">=</span> earthquakes[<span class="st">"Year"</span>].fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="e629a486-3"><a href="#e629a486-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e629a486-4"><a href="#e629a486-4" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0224752c" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="0224752c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0224752c-1"><a href="#0224752c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill NaN values before converting</span></span>
+<span id="0224752c-2"><a href="#0224752c-2" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>] <span class="op">=</span> earthquakes[<span class="st">"Year"</span>].fillna(<span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="0224752c-3"><a href="#0224752c-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0224752c-4"><a href="#0224752c-4" aria-hidden="true" tabindex="-1"></a>earthquakes[<span class="st">"Year"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>0        1965
 1        1965
@@ -1376,23 +1378,23 @@ Name: Year, Length: 23389, dtype: int64</code></pre>
 </div>
 </div>
 <p>Now that we have a <code>Year</code> column, we can calculate the average magnitude of the earthquakes that occurred in a given year.</p>
-<div id="a2260482" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="a2260482"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a2260482-1"><a href="#a2260482-1" aria-hidden="true" tabindex="-1"></a>earthquakes[earthquakes[<span class="st">"Year"</span>] <span class="op">==</span> <span class="dv">1972</span>][<span class="st">"Magnitude"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4419809c" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="4419809c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4419809c-1"><a href="#4419809c-1" aria-hidden="true" tabindex="-1"></a>earthquakes[earthquakes[<span class="st">"Year"</span>] <span class="op">==</span> <span class="dv">1972</span>][<span class="st">"Magnitude"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>5.943814432989692</code></pre>
 </div>
 </div>
 <p>Great! We can even plot some of this data in interesting ways using the <code>matplotlib</code> library. Let us see how to do this.</p>
-<div id="98e9cab1" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="98e9cab1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="98e9cab1-1"><a href="#98e9cab1-1" aria-hidden="true" tabindex="-1"></a>earthquakes[earthquakes[<span class="st">"Year"</span>] <span class="op">==</span> <span class="dv">1972</span>].plot(</span>
-<span id="98e9cab1-2"><a href="#98e9cab1-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
-<span id="98e9cab1-3"><a href="#98e9cab1-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Date"</span>,</span>
-<span id="98e9cab1-4"><a href="#98e9cab1-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Magnitude"</span>,</span>
-<span id="98e9cab1-5"><a href="#98e9cab1-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Earthquakes in 1972"</span>,</span>
-<span id="98e9cab1-6"><a href="#98e9cab1-6" aria-hidden="true" tabindex="-1"></a>    colormap<span class="op">=</span><span class="st">"rainbow"</span>,</span>
-<span id="98e9cab1-7"><a href="#98e9cab1-7" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"Depth"</span>,</span>
-<span id="98e9cab1-8"><a href="#98e9cab1-8" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
-<span id="98e9cab1-9"><a href="#98e9cab1-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="319c6ea9" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="319c6ea9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="319c6ea9-1"><a href="#319c6ea9-1" aria-hidden="true" tabindex="-1"></a>earthquakes[earthquakes[<span class="st">"Year"</span>] <span class="op">==</span> <span class="dv">1972</span>].plot(</span>
+<span id="319c6ea9-2"><a href="#319c6ea9-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
+<span id="319c6ea9-3"><a href="#319c6ea9-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Date"</span>,</span>
+<span id="319c6ea9-4"><a href="#319c6ea9-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"Magnitude"</span>,</span>
+<span id="319c6ea9-5"><a href="#319c6ea9-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Earthquakes in 1972"</span>,</span>
+<span id="319c6ea9-6"><a href="#319c6ea9-6" aria-hidden="true" tabindex="-1"></a>    colormap<span class="op">=</span><span class="st">"rainbow"</span>,</span>
+<span id="319c6ea9-7"><a href="#319c6ea9-7" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"Depth"</span>,</span>
+<span id="319c6ea9-8"><a href="#319c6ea9-8" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
+<span id="319c6ea9-9"><a href="#319c6ea9-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1403,15 +1405,15 @@ Name: Year, Length: 23389, dtype: int64</code></pre>
 </div>
 <p>Here we are plotting the Date vs the Magnitude of the earthquakes. The <code>plot</code> method is used to create the plot, and the <code>scatter</code> plot kind is used to create a scatter plot. The <code>c</code> argument is used to color the points by the <code>Depth</code> column, and the <code>cmap</code> argument is used to specify the color map to use. The <code>x</code> and <code>y</code> attributes are used to set the columns for the x and y axes, and the <code>title</code> method is used to set the title of the plot.</p>
 <p>We can also use the <code>plot</code> method to create a line plot, which shows the relationship between two variables over time. We could for example plot the average magnitude of earthquakes over time by aggregating the data by a given time period.</p>
-<div id="fe0bc9e4" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="fe0bc9e4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fe0bc9e4-1"><a href="#fe0bc9e4-1" aria-hidden="true" tabindex="-1"></a>avg_magnitude_per_year <span class="op">=</span> earthquakes.resample(rule<span class="op">=</span><span class="st">"YE"</span>, on<span class="op">=</span><span class="st">"Date"</span>)[<span class="st">"Magnitude"</span>].mean()</span>
-<span id="fe0bc9e4-2"><a href="#fe0bc9e4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe0bc9e4-3"><a href="#fe0bc9e4-3" aria-hidden="true" tabindex="-1"></a>avg_magnitude_per_year.plot(</span>
-<span id="fe0bc9e4-4"><a href="#fe0bc9e4-4" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>,</span>
-<span id="fe0bc9e4-5"><a href="#fe0bc9e4-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Average Earthquake Magnitude per Year"</span>,</span>
-<span id="fe0bc9e4-6"><a href="#fe0bc9e4-6" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Average Magnitude"</span>,</span>
-<span id="fe0bc9e4-7"><a href="#fe0bc9e4-7" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
-<span id="fe0bc9e4-8"><a href="#fe0bc9e4-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8e72ae74" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="8e72ae74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8e72ae74-1"><a href="#8e72ae74-1" aria-hidden="true" tabindex="-1"></a>avg_magnitude_per_year <span class="op">=</span> earthquakes.resample(rule<span class="op">=</span><span class="st">"YE"</span>, on<span class="op">=</span><span class="st">"Date"</span>)[<span class="st">"Magnitude"</span>].mean()</span>
+<span id="8e72ae74-2"><a href="#8e72ae74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8e72ae74-3"><a href="#8e72ae74-3" aria-hidden="true" tabindex="-1"></a>avg_magnitude_per_year.plot(</span>
+<span id="8e72ae74-4"><a href="#8e72ae74-4" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>,</span>
+<span id="8e72ae74-5"><a href="#8e72ae74-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Average Earthquake Magnitude per Year"</span>,</span>
+<span id="8e72ae74-6"><a href="#8e72ae74-6" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Average Magnitude"</span>,</span>
+<span id="8e72ae74-7"><a href="#8e72ae74-7" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
+<span id="8e72ae74-8"><a href="#8e72ae74-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1427,8 +1429,8 @@ Name: Year, Length: 23389, dtype: int64</code></pre>
 <li>We then use the <code>plot</code> method to create a line plot of the data.</li>
 </ul>
 <p>To make this clearer, let us show the calculated <code>avg_magnitude_per_year</code> series for the first five years.</p>
-<div id="2b3df140" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="2b3df140"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2b3df140-1"><a href="#2b3df140-1" aria-hidden="true" tabindex="-1"></a>avg_magnitude_per_year.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="53cd596a" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="53cd596a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="53cd596a-1"><a href="#53cd596a-1" aria-hidden="true" tabindex="-1"></a>avg_magnitude_per_year.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>Date
 1965-12-31    6.014159
@@ -1444,12 +1446,12 @@ Name: Magnitude, dtype: float64</code></pre>
 <h3 class="anchored" data-anchor-id="using-geographical-data-effectively">Using geographical data effectively</h3>
 <p>You will have noticed (hopefully) that the dataset contains geographical data in the form of <code>Latitude</code> and <code>Longitude</code>. This data can be used to create maps and to perform spatial analysis. For example, we could create a map of the earthquakes in the dataset, or we could filter out the earthquakes that occurred in a given region of the planet.</p>
 <p>Let us take a simple example, and filter out the earthquakes that occurred around the region of the Azores islands. We will consider the region to be between 36 and 42 degrees latitude, and between -31 and -24 degrees longitude.</p>
-<div id="c3191d42" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="c3191d42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c3191d42-1"><a href="#c3191d42-1" aria-hidden="true" tabindex="-1"></a>azores_earthquakes <span class="op">=</span> earthquakes[</span>
-<span id="c3191d42-2"><a href="#c3191d42-2" aria-hidden="true" tabindex="-1"></a>    earthquakes[<span class="st">"Latitude"</span>].between(<span class="dv">36</span>, <span class="dv">42</span>) <span class="op">&amp;</span> earthquakes[<span class="st">"Longitude"</span>].between(<span class="op">-</span><span class="dv">31</span>, <span class="op">-</span><span class="dv">24</span>)</span>
-<span id="c3191d42-3"><a href="#c3191d42-3" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="c3191d42-4"><a href="#c3191d42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="c3191d42-5"><a href="#c3191d42-5" aria-hidden="true" tabindex="-1"></a>azores_earthquakes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="92852822" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="92852822"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="92852822-1"><a href="#92852822-1" aria-hidden="true" tabindex="-1"></a>azores_earthquakes <span class="op">=</span> earthquakes[</span>
+<span id="92852822-2"><a href="#92852822-2" aria-hidden="true" tabindex="-1"></a>    earthquakes[<span class="st">"Latitude"</span>].between(<span class="dv">36</span>, <span class="dv">42</span>) <span class="op">&amp;</span> earthquakes[<span class="st">"Longitude"</span>].between(<span class="op">-</span><span class="dv">31</span>, <span class="op">-</span><span class="dv">24</span>)</span>
+<span id="92852822-3"><a href="#92852822-3" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="92852822-4"><a href="#92852822-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="92852822-5"><a href="#92852822-5" aria-hidden="true" tabindex="-1"></a>azores_earthquakes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 
@@ -1778,12 +1780,12 @@ Name: Magnitude, dtype: float64</code></pre>
 </div>
 </div>
 <p>The above code should be self explanatory - we are filtering the dataframe by selecting the rows where the <code>Latitude</code> is between 36 and 42 degrees, and (the symbol <code>&amp;</code> means “and”) the <code>Longitude</code> is between -31 and -24 degrees. Now that we have the list, let us calculate the minimum, maximum, and average magnitude of the earthquakes that occurred in this region.</p>
-<div id="2db83515" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="2db83515"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2db83515-1"><a href="#2db83515-1" aria-hidden="true" tabindex="-1"></a>azores_min_magnitude <span class="op">=</span> azores_earthquakes[<span class="st">"Magnitude"</span>].<span class="bu">min</span>()</span>
-<span id="2db83515-2"><a href="#2db83515-2" aria-hidden="true" tabindex="-1"></a>azores_max_magnitude <span class="op">=</span> azores_earthquakes[<span class="st">"Magnitude"</span>].<span class="bu">max</span>()</span>
-<span id="2db83515-3"><a href="#2db83515-3" aria-hidden="true" tabindex="-1"></a>azores_mean_magnitude <span class="op">=</span> azores_earthquakes[<span class="st">"Magnitude"</span>].mean()</span>
-<span id="2db83515-4"><a href="#2db83515-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2db83515-5"><a href="#2db83515-5" aria-hidden="true" tabindex="-1"></a>azores_min_magnitude, azores_max_magnitude, azores_mean_magnitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="308205b8" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="308205b8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="308205b8-1"><a href="#308205b8-1" aria-hidden="true" tabindex="-1"></a>azores_min_magnitude <span class="op">=</span> azores_earthquakes[<span class="st">"Magnitude"</span>].<span class="bu">min</span>()</span>
+<span id="308205b8-2"><a href="#308205b8-2" aria-hidden="true" tabindex="-1"></a>azores_max_magnitude <span class="op">=</span> azores_earthquakes[<span class="st">"Magnitude"</span>].<span class="bu">max</span>()</span>
+<span id="308205b8-3"><a href="#308205b8-3" aria-hidden="true" tabindex="-1"></a>azores_mean_magnitude <span class="op">=</span> azores_earthquakes[<span class="st">"Magnitude"</span>].mean()</span>
+<span id="308205b8-4"><a href="#308205b8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="308205b8-5"><a href="#308205b8-5" aria-hidden="true" tabindex="-1"></a>azores_min_magnitude, azores_max_magnitude, azores_mean_magnitude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>(5.5, 6.7, 5.95)</code></pre>
 </div>
@@ -1801,39 +1803,39 @@ About Box Plots
 <p>There’s a neat type of plot called a <code>boxplot</code> that can be used to visualize the distribution of data. It shows the median, quartiles, and outliers of the data. We don’t need to go into the details of how it works for now, but it is useful to know that it exists and that it can be used to visualize the distribution of a given column.</p>
 </div>
 </div>
-<div id="eccef2da" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="36">
-<div class="sourceCode cell-code" id="eccef2da"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eccef2da-1"><a href="#eccef2da-1" aria-hidden="true" tabindex="-1"></a>azores_earthquakes[<span class="st">"Magnitude"</span>].plot(</span>
-<span id="eccef2da-2"><a href="#eccef2da-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span>,</span>
-<span id="eccef2da-3"><a href="#eccef2da-3" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Azores Earthquakes Magnitude Distribution"</span>,</span>
-<span id="eccef2da-4"><a href="#eccef2da-4" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
-<span id="eccef2da-5"><a href="#eccef2da-5" aria-hidden="true" tabindex="-1"></a>    vert<span class="op">=</span><span class="va">False</span>,</span>
-<span id="eccef2da-6"><a href="#eccef2da-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="eccef2da-7"><a href="#eccef2da-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eccef2da-8"><a href="#eccef2da-8" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
-<span id="eccef2da-9"><a href="#eccef2da-9" aria-hidden="true" tabindex="-1"></a>    azores_min_magnitude,</span>
-<span id="eccef2da-10"><a href="#eccef2da-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,</span>
-<span id="eccef2da-11"><a href="#eccef2da-11" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Min: </span><span class="sc">{</span>azores_min_magnitude<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
-<span id="eccef2da-12"><a href="#eccef2da-12" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="eccef2da-13"><a href="#eccef2da-13" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"left"</span>,</span>
-<span id="eccef2da-14"><a href="#eccef2da-14" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"blue"</span>,</span>
-<span id="eccef2da-15"><a href="#eccef2da-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="eccef2da-16"><a href="#eccef2da-16" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
-<span id="eccef2da-17"><a href="#eccef2da-17" aria-hidden="true" tabindex="-1"></a>    azores_max_magnitude,</span>
-<span id="eccef2da-18"><a href="#eccef2da-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,</span>
-<span id="eccef2da-19"><a href="#eccef2da-19" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Max: </span><span class="sc">{</span>azores_max_magnitude<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
-<span id="eccef2da-20"><a href="#eccef2da-20" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="eccef2da-21"><a href="#eccef2da-21" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"right"</span>,</span>
-<span id="eccef2da-22"><a href="#eccef2da-22" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
-<span id="eccef2da-23"><a href="#eccef2da-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="eccef2da-24"><a href="#eccef2da-24" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
-<span id="eccef2da-25"><a href="#eccef2da-25" aria-hidden="true" tabindex="-1"></a>    azores_mean_magnitude,</span>
-<span id="eccef2da-26"><a href="#eccef2da-26" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1</span>,</span>
-<span id="eccef2da-27"><a href="#eccef2da-27" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Mean: </span><span class="sc">{</span>azores_mean_magnitude<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
-<span id="eccef2da-28"><a href="#eccef2da-28" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="eccef2da-29"><a href="#eccef2da-29" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="eccef2da-30"><a href="#eccef2da-30" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"green"</span>,</span>
-<span id="eccef2da-31"><a href="#eccef2da-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="eccef2da-32"><a href="#eccef2da-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5d6a1f49" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="36">
+<div class="sourceCode cell-code" id="5d6a1f49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5d6a1f49-1"><a href="#5d6a1f49-1" aria-hidden="true" tabindex="-1"></a>azores_earthquakes[<span class="st">"Magnitude"</span>].plot(</span>
+<span id="5d6a1f49-2"><a href="#5d6a1f49-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span>,</span>
+<span id="5d6a1f49-3"><a href="#5d6a1f49-3" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Azores Earthquakes Magnitude Distribution"</span>,</span>
+<span id="5d6a1f49-4"><a href="#5d6a1f49-4" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>),</span>
+<span id="5d6a1f49-5"><a href="#5d6a1f49-5" aria-hidden="true" tabindex="-1"></a>    vert<span class="op">=</span><span class="va">False</span>,</span>
+<span id="5d6a1f49-6"><a href="#5d6a1f49-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5d6a1f49-7"><a href="#5d6a1f49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5d6a1f49-8"><a href="#5d6a1f49-8" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
+<span id="5d6a1f49-9"><a href="#5d6a1f49-9" aria-hidden="true" tabindex="-1"></a>    azores_min_magnitude,</span>
+<span id="5d6a1f49-10"><a href="#5d6a1f49-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,</span>
+<span id="5d6a1f49-11"><a href="#5d6a1f49-11" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Min: </span><span class="sc">{</span>azores_min_magnitude<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
+<span id="5d6a1f49-12"><a href="#5d6a1f49-12" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="5d6a1f49-13"><a href="#5d6a1f49-13" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"left"</span>,</span>
+<span id="5d6a1f49-14"><a href="#5d6a1f49-14" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"blue"</span>,</span>
+<span id="5d6a1f49-15"><a href="#5d6a1f49-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5d6a1f49-16"><a href="#5d6a1f49-16" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
+<span id="5d6a1f49-17"><a href="#5d6a1f49-17" aria-hidden="true" tabindex="-1"></a>    azores_max_magnitude,</span>
+<span id="5d6a1f49-18"><a href="#5d6a1f49-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,</span>
+<span id="5d6a1f49-19"><a href="#5d6a1f49-19" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Max: </span><span class="sc">{</span>azores_max_magnitude<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
+<span id="5d6a1f49-20"><a href="#5d6a1f49-20" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="5d6a1f49-21"><a href="#5d6a1f49-21" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"right"</span>,</span>
+<span id="5d6a1f49-22"><a href="#5d6a1f49-22" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="5d6a1f49-23"><a href="#5d6a1f49-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5d6a1f49-24"><a href="#5d6a1f49-24" aria-hidden="true" tabindex="-1"></a>plt.text(</span>
+<span id="5d6a1f49-25"><a href="#5d6a1f49-25" aria-hidden="true" tabindex="-1"></a>    azores_mean_magnitude,</span>
+<span id="5d6a1f49-26"><a href="#5d6a1f49-26" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1</span>,</span>
+<span id="5d6a1f49-27"><a href="#5d6a1f49-27" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Mean: </span><span class="sc">{</span>azores_mean_magnitude<span class="sc">:.2f}</span><span class="ss">"</span>,</span>
+<span id="5d6a1f49-28"><a href="#5d6a1f49-28" aria-hidden="true" tabindex="-1"></a>    va<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="5d6a1f49-29"><a href="#5d6a1f49-29" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="5d6a1f49-30"><a href="#5d6a1f49-30" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"green"</span>,</span>
+<span id="5d6a1f49-31"><a href="#5d6a1f49-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5d6a1f49-32"><a href="#5d6a1f49-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1843,25 +1845,25 @@ About Box Plots
 </div>
 </div>
 <p>Because we have a small dataset, we can also plot the earthquakes on a map. For this we will use the <code>folium</code> library which we can install with the <code>conda</code> command (by now you should be able to do this without further instruction).</p>
-<div id="18cf559c" class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="18cf559c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="18cf559c-1"><a href="#18cf559c-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
-<span id="18cf559c-2"><a href="#18cf559c-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="18cf559c-3"><a href="#18cf559c-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a map centered around the Azores</span></span>
-<span id="18cf559c-4"><a href="#18cf559c-4" aria-hidden="true" tabindex="-1"></a>azores_map <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="dv">38</span>, <span class="op">-</span><span class="dv">28</span>], zoom_start<span class="op">=</span><span class="fl">6.5</span>)</span>
-<span id="18cf559c-5"><a href="#18cf559c-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="18cf559c-6"><a href="#18cf559c-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add markers for each earthquake</span></span>
-<span id="18cf559c-7"><a href="#18cf559c-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> azores_earthquakes.iterrows():</span>
-<span id="18cf559c-8"><a href="#18cf559c-8" aria-hidden="true" tabindex="-1"></a>    folium.CircleMarker(</span>
-<span id="18cf559c-9"><a href="#18cf559c-9" aria-hidden="true" tabindex="-1"></a>        location<span class="op">=</span>[row[<span class="st">"Latitude"</span>], row[<span class="st">"Longitude"</span>]],</span>
-<span id="18cf559c-10"><a href="#18cf559c-10" aria-hidden="true" tabindex="-1"></a>        radius<span class="op">=</span>row[<span class="st">"Magnitude"</span>],  <span class="co"># Scale the circle size by magnitude</span></span>
-<span id="18cf559c-11"><a href="#18cf559c-11" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"blue"</span>,</span>
-<span id="18cf559c-12"><a href="#18cf559c-12" aria-hidden="true" tabindex="-1"></a>        fill<span class="op">=</span><span class="va">True</span>,</span>
-<span id="18cf559c-13"><a href="#18cf559c-13" aria-hidden="true" tabindex="-1"></a>        fill_opacity<span class="op">=</span><span class="fl">0.3</span>,</span>
-<span id="18cf559c-14"><a href="#18cf559c-14" aria-hidden="true" tabindex="-1"></a>        popup<span class="op">=</span><span class="ss">f"Year: </span><span class="sc">{</span><span class="bu">int</span>(row[<span class="st">'Year'</span>])<span class="sc">}</span><span class="ss"> Magnitude: </span><span class="sc">{</span>row[<span class="st">'Magnitude'</span>]<span class="sc">}</span><span class="ss">, Depth: </span><span class="sc">{</span>row[<span class="st">'Depth'</span>]<span class="sc">}</span><span class="ss"> km"</span>,</span>
-<span id="18cf559c-15"><a href="#18cf559c-15" aria-hidden="true" tabindex="-1"></a>    ).add_to(azores_map)</span>
-<span id="18cf559c-16"><a href="#18cf559c-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="18cf559c-17"><a href="#18cf559c-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
-<span id="18cf559c-18"><a href="#18cf559c-18" aria-hidden="true" tabindex="-1"></a>azores_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="67409768" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="67409768"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="67409768-1"><a href="#67409768-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="67409768-2"><a href="#67409768-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="67409768-3"><a href="#67409768-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a map centered around the Azores</span></span>
+<span id="67409768-4"><a href="#67409768-4" aria-hidden="true" tabindex="-1"></a>azores_map <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="dv">38</span>, <span class="op">-</span><span class="dv">28</span>], zoom_start<span class="op">=</span><span class="fl">6.5</span>)</span>
+<span id="67409768-5"><a href="#67409768-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="67409768-6"><a href="#67409768-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add markers for each earthquake</span></span>
+<span id="67409768-7"><a href="#67409768-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> azores_earthquakes.iterrows():</span>
+<span id="67409768-8"><a href="#67409768-8" aria-hidden="true" tabindex="-1"></a>    folium.CircleMarker(</span>
+<span id="67409768-9"><a href="#67409768-9" aria-hidden="true" tabindex="-1"></a>        location<span class="op">=</span>[row[<span class="st">"Latitude"</span>], row[<span class="st">"Longitude"</span>]],</span>
+<span id="67409768-10"><a href="#67409768-10" aria-hidden="true" tabindex="-1"></a>        radius<span class="op">=</span>row[<span class="st">"Magnitude"</span>],  <span class="co"># Scale the circle size by magnitude</span></span>
+<span id="67409768-11"><a href="#67409768-11" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"blue"</span>,</span>
+<span id="67409768-12"><a href="#67409768-12" aria-hidden="true" tabindex="-1"></a>        fill<span class="op">=</span><span class="va">True</span>,</span>
+<span id="67409768-13"><a href="#67409768-13" aria-hidden="true" tabindex="-1"></a>        fill_opacity<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="67409768-14"><a href="#67409768-14" aria-hidden="true" tabindex="-1"></a>        popup<span class="op">=</span><span class="ss">f"Year: </span><span class="sc">{</span><span class="bu">int</span>(row[<span class="st">'Year'</span>])<span class="sc">}</span><span class="ss"> Magnitude: </span><span class="sc">{</span>row[<span class="st">'Magnitude'</span>]<span class="sc">}</span><span class="ss">, Depth: </span><span class="sc">{</span>row[<span class="st">'Depth'</span>]<span class="sc">}</span><span class="ss"> km"</span>,</span>
+<span id="67409768-15"><a href="#67409768-15" aria-hidden="true" tabindex="-1"></a>    ).add_to(azores_map)</span>
+<span id="67409768-16"><a href="#67409768-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="67409768-17"><a href="#67409768-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
+<span id="67409768-18"><a href="#67409768-18" aria-hidden="true" tabindex="-1"></a>azores_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
 <html>
@@ -1890,7 +1892,7 @@ About Box Plots
             <meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
             <style>
-                #map_98707f855dbe2467d30cb6f3b4af02aa {
+                #map_d0465e53d4a5e8e5172c1ef0019ec0d0 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -1904,14 +1906,14 @@ About Box Plots
 <body>
     
     
-            <div class=&quot;folium-map&quot; id=&quot;map_98707f855dbe2467d30cb6f3b4af02aa&quot; ></div>
+            <div class=&quot;folium-map&quot; id=&quot;map_d0465e53d4a5e8e5172c1ef0019ec0d0&quot; ></div>
         
 </body>
 <script>
     
     
-            var map_98707f855dbe2467d30cb6f3b4af02aa = L.map(
-                &quot;map_98707f855dbe2467d30cb6f3b4af02aa&quot;,
+            var map_d0465e53d4a5e8e5172c1ef0019ec0d0 = L.map(
+                &quot;map_d0465e53d4a5e8e5172c1ef0019ec0d0&quot;,
                 {
                     center: [38.0, -28.0],
                     crs: L.CRS.EPSG3857,
@@ -1928,7 +1930,7 @@ About Box Plots
 
         
     
-            var tile_layer_fb10417f5122c5e98c73c129c76eb2d9 = L.tileLayer(
+            var tile_layer_4c8fcf93f95ba32f1130e52df2aa4600 = L.tileLayer(
                 &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {
   &quot;minZoom&quot;: 0,
@@ -1945,280 +1947,280 @@ About Box Plots
             );
         
     
-            tile_layer_fb10417f5122c5e98c73c129c76eb2d9.addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            tile_layer_4c8fcf93f95ba32f1130e52df2aa4600.addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-            var circle_marker_4ec0ad77553465ccb9dc04f44517ba36 = L.circleMarker(
+            var circle_marker_552bedb8e53bb087c06a3c6f497117ef = L.circleMarker(
                 [38.815, -27.78],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 6.7, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_ff47e661c308d4c37b0d801f248b187d = L.popup({
+        var popup_583927a385d65902fcfb9b9798d478b1 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_a2c6fed17ea2aee9cce053d8dc59c1dc = $(`<div id=&quot;html_a2c6fed17ea2aee9cce053d8dc59c1dc&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1980 Magnitude: 6.7, Depth: 10.0 km</div>`)[0];
-                popup_ff47e661c308d4c37b0d801f248b187d.setContent(html_a2c6fed17ea2aee9cce053d8dc59c1dc);
+                var html_cd5a7d8e15430e24b5da1a5641f0de8d = $(`<div id=&quot;html_cd5a7d8e15430e24b5da1a5641f0de8d&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1980 Magnitude: 6.7, Depth: 10.0 km</div>`)[0];
+                popup_583927a385d65902fcfb9b9798d478b1.setContent(html_cd5a7d8e15430e24b5da1a5641f0de8d);
             
         
 
-        circle_marker_4ec0ad77553465ccb9dc04f44517ba36.bindPopup(popup_ff47e661c308d4c37b0d801f248b187d)
+        circle_marker_552bedb8e53bb087c06a3c6f497117ef.bindPopup(popup_583927a385d65902fcfb9b9798d478b1)
         ;
 
         
     
     
-            var circle_marker_ba993ed786ca348b586c8164f605f448 = L.circleMarker(
+            var circle_marker_b04151f34b6b87754bdf9423fba9805e = L.circleMarker(
                 [39.862, -29.589],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.5, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_d0fd1be614ad994ec5c306e92d47cf60 = L.popup({
+        var popup_51894e4d1d9c7e88ece4c8a1f505b919 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_5b4113395c8f9fce63d57a54af49096f = $(`<div id=&quot;html_5b4113395c8f9fce63d57a54af49096f&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1988 Magnitude: 5.5, Depth: 10.0 km</div>`)[0];
-                popup_d0fd1be614ad994ec5c306e92d47cf60.setContent(html_5b4113395c8f9fce63d57a54af49096f);
+                var html_0e18ecdfce53435de754c3133f130a3f = $(`<div id=&quot;html_0e18ecdfce53435de754c3133f130a3f&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1988 Magnitude: 5.5, Depth: 10.0 km</div>`)[0];
+                popup_51894e4d1d9c7e88ece4c8a1f505b919.setContent(html_0e18ecdfce53435de754c3133f130a3f);
             
         
 
-        circle_marker_ba993ed786ca348b586c8164f605f448.bindPopup(popup_d0fd1be614ad994ec5c306e92d47cf60)
+        circle_marker_b04151f34b6b87754bdf9423fba9805e.bindPopup(popup_51894e4d1d9c7e88ece4c8a1f505b919)
         ;
 
         
     
     
-            var circle_marker_955f68c973669c6dc1f330c394252ebf = L.circleMarker(
+            var circle_marker_bcf8873395882fa7c4b4940663ad932a = L.circleMarker(
                 [37.938, -26.142],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.9, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_89aeca972225d8d9b859290ab6cf1411 = L.popup({
+        var popup_712595b7370f1e66107a1d74de606f65 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_e473b44d288e5025451d90f97a486ae6 = $(`<div id=&quot;html_e473b44d288e5025451d90f97a486ae6&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1988 Magnitude: 5.9, Depth: 10.8 km</div>`)[0];
-                popup_89aeca972225d8d9b859290ab6cf1411.setContent(html_e473b44d288e5025451d90f97a486ae6);
+                var html_d15903d1dd625ecd054054fc382f9c9e = $(`<div id=&quot;html_d15903d1dd625ecd054054fc382f9c9e&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1988 Magnitude: 5.9, Depth: 10.8 km</div>`)[0];
+                popup_712595b7370f1e66107a1d74de606f65.setContent(html_d15903d1dd625ecd054054fc382f9c9e);
             
         
 
-        circle_marker_955f68c973669c6dc1f330c394252ebf.bindPopup(popup_89aeca972225d8d9b859290ab6cf1411)
+        circle_marker_bcf8873395882fa7c4b4940663ad932a.bindPopup(popup_712595b7370f1e66107a1d74de606f65)
         ;
 
         
     
     
-            var circle_marker_36e807f6e86a9f316ddb84c4f01d2657 = L.circleMarker(
+            var circle_marker_4469ba1a7f6794d8b75c342e4093e469 = L.circleMarker(
                 [38.147, -26.243],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.7, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_3ec38b8fe935ffd3ac87f5c3124edcc5 = L.popup({
+        var popup_7df37d604238f754b1ee9199855e5046 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_9dc7beb1cfc9a4b835ede2150bc167ad = $(`<div id=&quot;html_9dc7beb1cfc9a4b835ede2150bc167ad&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1989 Magnitude: 5.7, Depth: 10.0 km</div>`)[0];
-                popup_3ec38b8fe935ffd3ac87f5c3124edcc5.setContent(html_9dc7beb1cfc9a4b835ede2150bc167ad);
+                var html_8ff3f1e2f3f8f4917eec4c6a51b3ae91 = $(`<div id=&quot;html_8ff3f1e2f3f8f4917eec4c6a51b3ae91&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1989 Magnitude: 5.7, Depth: 10.0 km</div>`)[0];
+                popup_7df37d604238f754b1ee9199855e5046.setContent(html_8ff3f1e2f3f8f4917eec4c6a51b3ae91);
             
         
 
-        circle_marker_36e807f6e86a9f316ddb84c4f01d2657.bindPopup(popup_3ec38b8fe935ffd3ac87f5c3124edcc5)
+        circle_marker_4469ba1a7f6794d8b75c342e4093e469.bindPopup(popup_7df37d604238f754b1ee9199855e5046)
         ;
 
         
     
     
-            var circle_marker_8902c61d05ba90790b166fb0b89a7bfb = L.circleMarker(
+            var circle_marker_87d1886c36162921604da16d4441b690 = L.circleMarker(
                 [39.112, -28.242],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.9, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_51f464bfc4d663d50cc8a66ff99b5472 = L.popup({
+        var popup_354c66f93c07fdfa1490996debb4d275 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_205d2e4f42b9ea050f61ba8c55930f05 = $(`<div id=&quot;html_205d2e4f42b9ea050f61ba8c55930f05&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1989 Magnitude: 5.9, Depth: 11.3 km</div>`)[0];
-                popup_51f464bfc4d663d50cc8a66ff99b5472.setContent(html_205d2e4f42b9ea050f61ba8c55930f05);
+                var html_476dc22d865545c2cc231d75c2da042b = $(`<div id=&quot;html_476dc22d865545c2cc231d75c2da042b&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1989 Magnitude: 5.9, Depth: 11.3 km</div>`)[0];
+                popup_354c66f93c07fdfa1490996debb4d275.setContent(html_476dc22d865545c2cc231d75c2da042b);
             
         
 
-        circle_marker_8902c61d05ba90790b166fb0b89a7bfb.bindPopup(popup_51f464bfc4d663d50cc8a66ff99b5472)
+        circle_marker_87d1886c36162921604da16d4441b690.bindPopup(popup_354c66f93c07fdfa1490996debb4d275)
         ;
 
         
     
     
-            var circle_marker_e331c9da049840ea3f228ef116672e06 = L.circleMarker(
+            var circle_marker_36513e0c9d90f6061b4e5f20e9b632d0 = L.circleMarker(
                 [37.034, -24.374],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.7, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_5bed760098b617c9d6733bc4024ec080 = L.popup({
+        var popup_d6afa535594fd748fd4e8d45886fc35c = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_c6c9697a9fff25de07af1174a438eae1 = $(`<div id=&quot;html_c6c9697a9fff25de07af1174a438eae1&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1996 Magnitude: 5.7, Depth: 10.0 km</div>`)[0];
-                popup_5bed760098b617c9d6733bc4024ec080.setContent(html_c6c9697a9fff25de07af1174a438eae1);
+                var html_e03b15e58ca8d2011963066b803e4a99 = $(`<div id=&quot;html_e03b15e58ca8d2011963066b803e4a99&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1996 Magnitude: 5.7, Depth: 10.0 km</div>`)[0];
+                popup_d6afa535594fd748fd4e8d45886fc35c.setContent(html_e03b15e58ca8d2011963066b803e4a99);
             
         
 
-        circle_marker_e331c9da049840ea3f228ef116672e06.bindPopup(popup_5bed760098b617c9d6733bc4024ec080)
+        circle_marker_36513e0c9d90f6061b4e5f20e9b632d0.bindPopup(popup_d6afa535594fd748fd4e8d45886fc35c)
         ;
 
         
     
     
-            var circle_marker_5c608882106a2034e5053a4a7a606ed1 = L.circleMarker(
+            var circle_marker_c60974712cd860c2319179dcbafdde93 = L.circleMarker(
                 [38.334, -26.684],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.9, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_aabfaaf72ab9172d919109405c67a431 = L.popup({
+        var popup_8eacd60f0ae0f3fc336e03b5de6b0ada = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_fda30bd690baa0f345464f4f7aaa5301 = $(`<div id=&quot;html_fda30bd690baa0f345464f4f7aaa5301&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1997 Magnitude: 5.9, Depth: 10.0 km</div>`)[0];
-                popup_aabfaaf72ab9172d919109405c67a431.setContent(html_fda30bd690baa0f345464f4f7aaa5301);
+                var html_d42b08fbb3ce9a91804dcc5c2a11998c = $(`<div id=&quot;html_d42b08fbb3ce9a91804dcc5c2a11998c&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1997 Magnitude: 5.9, Depth: 10.0 km</div>`)[0];
+                popup_8eacd60f0ae0f3fc336e03b5de6b0ada.setContent(html_d42b08fbb3ce9a91804dcc5c2a11998c);
             
         
 
-        circle_marker_5c608882106a2034e5053a4a7a606ed1.bindPopup(popup_aabfaaf72ab9172d919109405c67a431)
+        circle_marker_c60974712cd860c2319179dcbafdde93.bindPopup(popup_8eacd60f0ae0f3fc336e03b5de6b0ada)
         ;
 
         
     
     
-            var circle_marker_08bb9b19ade640351932e4582856b6e0 = L.circleMarker(
+            var circle_marker_4285ebeaf65a63765c510a6af1844a5a = L.circleMarker(
                 [38.65, -28.626],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 6.2, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_d4882c8e2d8053eeb5cc747185d70e88 = L.popup({
+        var popup_4cbc34187f34a147ec11c09768272904 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_dac4923f3c90c03d89b4fb44b43cc3bd = $(`<div id=&quot;html_dac4923f3c90c03d89b4fb44b43cc3bd&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1998 Magnitude: 6.2, Depth: 10.0 km</div>`)[0];
-                popup_d4882c8e2d8053eeb5cc747185d70e88.setContent(html_dac4923f3c90c03d89b4fb44b43cc3bd);
+                var html_8b644c448f43d4f7b38f67c07741d68d = $(`<div id=&quot;html_8b644c448f43d4f7b38f67c07741d68d&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 1998 Magnitude: 6.2, Depth: 10.0 km</div>`)[0];
+                popup_4cbc34187f34a147ec11c09768272904.setContent(html_8b644c448f43d4f7b38f67c07741d68d);
             
         
 
-        circle_marker_08bb9b19ade640351932e4582856b6e0.bindPopup(popup_d4882c8e2d8053eeb5cc747185d70e88)
+        circle_marker_4285ebeaf65a63765c510a6af1844a5a.bindPopup(popup_4cbc34187f34a147ec11c09768272904)
         ;
 
         
     
     
-            var circle_marker_66c2d622f747f30ca253d2f58ecf4321 = L.circleMarker(
+            var circle_marker_3f3fd60b6754984a3f5a81596ee42bee = L.circleMarker(
                 [40.135, -29.692],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.6, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_b200fee2865f9c5b27ee9f384bda101d = L.popup({
+        var popup_90ff89daed854e5f1531dfeb5b22df9f = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_ce2f92b3d2b1ffe58b0d9ee5adc96196 = $(`<div id=&quot;html_ce2f92b3d2b1ffe58b0d9ee5adc96196&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2003 Magnitude: 5.6, Depth: 10.0 km</div>`)[0];
-                popup_b200fee2865f9c5b27ee9f384bda101d.setContent(html_ce2f92b3d2b1ffe58b0d9ee5adc96196);
+                var html_27764bede0820ca1583804fa71b27638 = $(`<div id=&quot;html_27764bede0820ca1583804fa71b27638&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2003 Magnitude: 5.6, Depth: 10.0 km</div>`)[0];
+                popup_90ff89daed854e5f1531dfeb5b22df9f.setContent(html_27764bede0820ca1583804fa71b27638);
             
         
 
-        circle_marker_66c2d622f747f30ca253d2f58ecf4321.bindPopup(popup_b200fee2865f9c5b27ee9f384bda101d)
+        circle_marker_3f3fd60b6754984a3f5a81596ee42bee.bindPopup(popup_90ff89daed854e5f1531dfeb5b22df9f)
         ;
 
         
     
     
-            var circle_marker_8cbc0bc44c62837259776297bf698858 = L.circleMarker(
+            var circle_marker_9b5d5531372b32be225bf71e5b44d2b7 = L.circleMarker(
                 [37.306, -24.621],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 6.3, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_151e5cbe5d6aef6e47b7bcf50f15e0d9 = L.popup({
+        var popup_145cbc094cbdaad790a3ba329b3e0ed3 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_da4ef63004c028852e1157a5c1db246d = $(`<div id=&quot;html_da4ef63004c028852e1157a5c1db246d&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2007 Magnitude: 6.3, Depth: 14.0 km</div>`)[0];
-                popup_151e5cbe5d6aef6e47b7bcf50f15e0d9.setContent(html_da4ef63004c028852e1157a5c1db246d);
+                var html_e706f9add15ba98c71aaabbb8d84b617 = $(`<div id=&quot;html_e706f9add15ba98c71aaabbb8d84b617&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2007 Magnitude: 6.3, Depth: 14.0 km</div>`)[0];
+                popup_145cbc094cbdaad790a3ba329b3e0ed3.setContent(html_e706f9add15ba98c71aaabbb8d84b617);
             
         
 
-        circle_marker_8cbc0bc44c62837259776297bf698858.bindPopup(popup_151e5cbe5d6aef6e47b7bcf50f15e0d9)
+        circle_marker_9b5d5531372b32be225bf71e5b44d2b7.bindPopup(popup_145cbc094cbdaad790a3ba329b3e0ed3)
         ;
 
         
     
     
-            var circle_marker_6898bbf01ae7f1c07eadcec662189516 = L.circleMarker(
+            var circle_marker_486d3ec6356a1890af57bb2774a22345 = L.circleMarker(
                 [37.306, -24.494],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 6.1, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_0efcbbeab0ea93c4d35b97dcd6d0cc5f = L.popup({
+        var popup_200c55409333ad1673a8254649445fd4 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_810e22e47568de7fbea091ef09e646fd = $(`<div id=&quot;html_810e22e47568de7fbea091ef09e646fd&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2007 Magnitude: 6.1, Depth: 8.0 km</div>`)[0];
-                popup_0efcbbeab0ea93c4d35b97dcd6d0cc5f.setContent(html_810e22e47568de7fbea091ef09e646fd);
+                var html_132b2245a4a894b114294b2ab0c77c13 = $(`<div id=&quot;html_132b2245a4a894b114294b2ab0c77c13&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2007 Magnitude: 6.1, Depth: 8.0 km</div>`)[0];
+                popup_200c55409333ad1673a8254649445fd4.setContent(html_132b2245a4a894b114294b2ab0c77c13);
             
         
 
-        circle_marker_6898bbf01ae7f1c07eadcec662189516.bindPopup(popup_0efcbbeab0ea93c4d35b97dcd6d0cc5f)
+        circle_marker_486d3ec6356a1890af57bb2774a22345.bindPopup(popup_200c55409333ad1673a8254649445fd4)
         ;
 
         
     
     
-            var circle_marker_76e970bef0b8e7a8838bce09404c6177 = L.circleMarker(
+            var circle_marker_a2243d5d89f5e21264fa18a3e83435cc = L.circleMarker(
                 [37.592, -24.913],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;blue&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;blue&quot;, &quot;fillOpacity&quot;: 0.3, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;opacity&quot;: 1.0, &quot;radius&quot;: 5.9, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_98707f855dbe2467d30cb6f3b4af02aa);
+            ).addTo(map_d0465e53d4a5e8e5172c1ef0019ec0d0);
         
     
-        var popup_61b17fc728abdd56daaf161108d6ca07 = L.popup({
+        var popup_236e1821500e82972ff906945c100144 = L.popup({
   &quot;maxWidth&quot;: &quot;100%&quot;,
 });
 
         
             
-                var html_aff55c2371ca746db6aa7e37b72f7627 = $(`<div id=&quot;html_aff55c2371ca746db6aa7e37b72f7627&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2013 Magnitude: 5.9, Depth: 10.0 km</div>`)[0];
-                popup_61b17fc728abdd56daaf161108d6ca07.setContent(html_aff55c2371ca746db6aa7e37b72f7627);
+                var html_e3ca819c86562c409b61da9094d32806 = $(`<div id=&quot;html_e3ca819c86562c409b61da9094d32806&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;>Year: 2013 Magnitude: 5.9, Depth: 10.0 km</div>`)[0];
+                popup_236e1821500e82972ff906945c100144.setContent(html_e3ca819c86562c409b61da9094d32806);
             
         
 
-        circle_marker_76e970bef0b8e7a8838bce09404c6177.bindPopup(popup_61b17fc728abdd56daaf161108d6ca07)
+        circle_marker_a2243d5d89f5e21264fa18a3e83435cc.bindPopup(popup_236e1821500e82972ff906945c100144)
         ;
 
         
@@ -2249,236 +2251,242 @@ About Box Plots
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2486,185 +2494,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

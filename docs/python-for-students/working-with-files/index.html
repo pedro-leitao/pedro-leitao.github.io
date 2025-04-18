@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,15 +66,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -131,7 +133,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -276,25 +278,25 @@ Jane Smith,27,female,New Zealand
 Markus Müller,35,male,Germany</code></pre>
 <p>You will notice that the first line of the file contains the names of the columns, and the subsequent lines contain the values of the columns. This is a common convention in CSV files, but it is not required. Some CSV files may not have column names, and some may have different delimiters (e.g., semicolons instead of commas).</p>
 <p>To work with CSV files in Python, you can use the <code>csv</code> module (this is a builtin Python module), which provides functions for reading and writing CSV files. Here is an example of how you can read a CSV file in Python.</p>
-<div id="07010581" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="07010581"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="07010581-1"><a href="#07010581-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
-<span id="07010581-2"><a href="#07010581-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="07010581-3"><a href="#07010581-3" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">"people.csv"</span>, <span class="st">"r"</span>)</span>
-<span id="07010581-4"><a href="#07010581-4" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> csv.DictReader(<span class="bu">input</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="78b7f9f7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="78b7f9f7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="78b7f9f7-1"><a href="#78b7f9f7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="78b7f9f7-2"><a href="#78b7f9f7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="78b7f9f7-3"><a href="#78b7f9f7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">"people.csv"</span>, <span class="st">"r"</span>)</span>
+<span id="78b7f9f7-4"><a href="#78b7f9f7-4" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> csv.DictReader(<span class="bu">input</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That is it! You loaded a CSV file into Python! You can now work with the data in the file as you would with any other data in Python, for example you can check which columns are in the file, you can filter the data, you can calculate statistics, etc.</p>
 <p>In the above code, we used the <code>DictReader</code> method of the <code>csv</code> module to read the CSV file which we opened with <code>open('people.csv', 'r')</code> (the <code>r</code> just indicates we are opening the file for reading only). This method reads the CSV file and returns an iterator that yields a dictionary for each row of the file. The keys of the dictionary are the column names, and the values are the values of the columns.</p>
 <p>You can check the column names of the CSV file by calling the <code>fieldnames</code> attribute of the <code>DictReader</code> object:</p>
-<div id="c40b2451" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="c40b2451"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="c40b2451-1"><a href="#c40b2451-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(people.fieldnames)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="218594c8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="218594c8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="218594c8-1"><a href="#218594c8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(people.fieldnames)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['name', 'age', 'gender', 'nationality']</code></pre>
 </div>
 </div>
 <p>We can then iterate over the rows of the CSV file and print each row.</p>
-<div id="7ed48629" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="7ed48629"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7ed48629-1"><a href="#7ed48629-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="7ed48629-2"><a href="#7ed48629-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="806c366f" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="806c366f"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="806c366f-1"><a href="#806c366f-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="806c366f-2"><a href="#806c366f-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'name': 'John Doe', 'age': '30', 'gender': 'male', 'nationality': 'Great Britain'}
 {'name': 'Jane Smith', 'age': '27', 'gender': 'female', 'nationality': 'New Zealand'}
@@ -302,27 +304,27 @@ Markus Müller,35,male,Germany</code></pre>
 </div>
 </div>
 <p>Keep in mind that the rows are represented as dictionaries, so you can access the values of the columns by using the column names as keys.</p>
-<div id="ef1a534c" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="ef1a534c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ef1a534c-1"><a href="#ef1a534c-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="ef1a534c-2"><a href="#ef1a534c-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person[<span class="st">"name"</span>], person[<span class="st">"age"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f15a669b" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="f15a669b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="f15a669b-1"><a href="#f15a669b-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="f15a669b-2"><a href="#f15a669b-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person[<span class="st">"name"</span>], person[<span class="st">"age"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Wait… why did the code above print nothing ?!?</p>
 <p>The reason is that the <code>DictReader</code> object is an iterator, and iterators in Python are consumed when you iterate over them. This means that once you have iterated over the <code>DictReader</code> object, you cannot iterate over it again.</p>
 <p>To iterate over the <code>DictReader</code> object multiple times, you need to read the file again into a <code>DictReader</code> object. When reading a CSV file using the <code>csv</code> module, it is common to read the file into a list of dictionaries, so that you can iterate over the list multiple times.</p>
-<div id="eb592b22" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="eb592b22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="eb592b22-1"><a href="#eb592b22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset back to the beginning of the file</span></span>
-<span id="eb592b22-2"><a href="#eb592b22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span>.seek(<span class="dv">0</span>)</span>
-<span id="eb592b22-3"><a href="#eb592b22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb592b22-4"><a href="#eb592b22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file again, this time as a list of dictionaries</span></span>
-<span id="eb592b22-5"><a href="#eb592b22-5" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="bu">list</span>(csv.DictReader(<span class="bu">input</span>))</span>
-<span id="eb592b22-6"><a href="#eb592b22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb592b22-7"><a href="#eb592b22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over the list of dictionaries...</span></span>
-<span id="eb592b22-8"><a href="#eb592b22-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="eb592b22-9"><a href="#eb592b22-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person)</span>
-<span id="eb592b22-10"><a href="#eb592b22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="eb592b22-11"><a href="#eb592b22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over the list of dictionaries again...</span></span>
-<span id="eb592b22-12"><a href="#eb592b22-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="eb592b22-13"><a href="#eb592b22-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person[<span class="st">"name"</span>], person[<span class="st">"age"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="653b7d6c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="653b7d6c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="653b7d6c-1"><a href="#653b7d6c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset back to the beginning of the file</span></span>
+<span id="653b7d6c-2"><a href="#653b7d6c-2" aria-hidden="true" tabindex="-1"></a><span class="bu">input</span>.seek(<span class="dv">0</span>)</span>
+<span id="653b7d6c-3"><a href="#653b7d6c-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="653b7d6c-4"><a href="#653b7d6c-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the file again, this time as a list of dictionaries</span></span>
+<span id="653b7d6c-5"><a href="#653b7d6c-5" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="bu">list</span>(csv.DictReader(<span class="bu">input</span>))</span>
+<span id="653b7d6c-6"><a href="#653b7d6c-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="653b7d6c-7"><a href="#653b7d6c-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over the list of dictionaries...</span></span>
+<span id="653b7d6c-8"><a href="#653b7d6c-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="653b7d6c-9"><a href="#653b7d6c-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person)</span>
+<span id="653b7d6c-10"><a href="#653b7d6c-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="653b7d6c-11"><a href="#653b7d6c-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over the list of dictionaries again...</span></span>
+<span id="653b7d6c-12"><a href="#653b7d6c-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="653b7d6c-13"><a href="#653b7d6c-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person[<span class="st">"name"</span>], person[<span class="st">"age"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'name': 'John Doe', 'age': '30', 'gender': 'male', 'nationality': 'Great Britain'}
 {'name': 'Jane Smith', 'age': '27', 'gender': 'female', 'nationality': 'New Zealand'}
@@ -337,14 +339,14 @@ Markus Müller 35</code></pre>
 <section id="writing-to-a-csv-file" class="level3">
 <h3 class="anchored" data-anchor-id="writing-to-a-csv-file">Writing to a CSV file</h3>
 <p>Just as you can read a CSV file using the <code>csv</code> module, you can also write to it. As an example, let us update our people list and write the updated list to a new CSV file.</p>
-<div id="0317388c" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="0317388c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0317388c-1"><a href="#0317388c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change the age of "Jane Smith" to 26</span></span>
-<span id="0317388c-2"><a href="#0317388c-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="0317388c-3"><a href="#0317388c-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> person[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Jane Smith"</span>:</span>
-<span id="0317388c-4"><a href="#0317388c-4" aria-hidden="true" tabindex="-1"></a>        person[<span class="st">"age"</span>] <span class="op">=</span> <span class="dv">26</span></span>
-<span id="0317388c-5"><a href="#0317388c-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="0317388c-6"><a href="#0317388c-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="0317388c-7"><a href="#0317388c-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6a38fa50" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="6a38fa50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6a38fa50-1"><a href="#6a38fa50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change the age of "Jane Smith" to 26</span></span>
+<span id="6a38fa50-2"><a href="#6a38fa50-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="6a38fa50-3"><a href="#6a38fa50-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> person[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Jane Smith"</span>:</span>
+<span id="6a38fa50-4"><a href="#6a38fa50-4" aria-hidden="true" tabindex="-1"></a>        person[<span class="st">"age"</span>] <span class="op">=</span> <span class="dv">26</span></span>
+<span id="6a38fa50-5"><a href="#6a38fa50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6a38fa50-6"><a href="#6a38fa50-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="6a38fa50-7"><a href="#6a38fa50-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(person)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'name': 'John Doe', 'age': '30', 'gender': 'male', 'nationality': 'Great Britain'}
 {'name': 'Jane Smith', 'age': 26, 'gender': 'female', 'nationality': 'New Zealand'}
@@ -352,17 +354,17 @@ Markus Müller 35</code></pre>
 </div>
 </div>
 <p>That worked well! Let us now take the <code>people</code> list and write it to a new CSV file.</p>
-<div id="7516aa8c" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="7516aa8c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7516aa8c-1"><a href="#7516aa8c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the updated data back to a new file</span></span>
-<span id="7516aa8c-2"><a href="#7516aa8c-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> <span class="bu">open</span>(<span class="st">"people-updated.csv"</span>, <span class="st">"w"</span>)</span>
-<span id="7516aa8c-3"><a href="#7516aa8c-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7516aa8c-4"><a href="#7516aa8c-4" aria-hidden="true" tabindex="-1"></a>writer <span class="op">=</span> csv.DictWriter(output, fieldnames<span class="op">=</span>[<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>, <span class="st">"nationality"</span>])</span>
-<span id="7516aa8c-5"><a href="#7516aa8c-5" aria-hidden="true" tabindex="-1"></a>writer.writeheader()</span>
-<span id="7516aa8c-6"><a href="#7516aa8c-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7516aa8c-7"><a href="#7516aa8c-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
-<span id="7516aa8c-8"><a href="#7516aa8c-8" aria-hidden="true" tabindex="-1"></a>    writer.writerow(person)</span>
-<span id="7516aa8c-9"><a href="#7516aa8c-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7516aa8c-10"><a href="#7516aa8c-10" aria-hidden="true" tabindex="-1"></a>output.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="11cc4405" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="11cc4405"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="11cc4405-1"><a href="#11cc4405-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the updated data back to a new file</span></span>
+<span id="11cc4405-2"><a href="#11cc4405-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> <span class="bu">open</span>(<span class="st">"people-updated.csv"</span>, <span class="st">"w"</span>)</span>
+<span id="11cc4405-3"><a href="#11cc4405-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11cc4405-4"><a href="#11cc4405-4" aria-hidden="true" tabindex="-1"></a>writer <span class="op">=</span> csv.DictWriter(output, fieldnames<span class="op">=</span>[<span class="st">"name"</span>, <span class="st">"age"</span>, <span class="st">"gender"</span>, <span class="st">"nationality"</span>])</span>
+<span id="11cc4405-5"><a href="#11cc4405-5" aria-hidden="true" tabindex="-1"></a>writer.writeheader()</span>
+<span id="11cc4405-6"><a href="#11cc4405-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11cc4405-7"><a href="#11cc4405-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> people:</span>
+<span id="11cc4405-8"><a href="#11cc4405-8" aria-hidden="true" tabindex="-1"></a>    writer.writerow(person)</span>
+<span id="11cc4405-9"><a href="#11cc4405-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="11cc4405-10"><a href="#11cc4405-10" aria-hidden="true" tabindex="-1"></a>output.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the above code, we used the <code>DictWriter</code> method of the <code>csv</code> module to write the <code>people</code> list to a new CSV file named <code>people_updated.csv</code>. We opened the file with <code>open('people_updated.csv', 'w')</code> (the <code>w</code> indicates we are opening the file for writing only), and we passed the column names to the <code>fieldnames</code> argument of the <code>DictWriter</code> object. We then wrote the column names to the file using the <code>writeheader</code> method of the <code>DictWriter</code> object, and we wrote the rows of the <code>people</code> list to the file using the <code>writerow</code> method of the <code>DictWriter</code> object. Finally, we closed the file using the <code>close</code> method of the file object.</p>
 </section>
@@ -396,15 +398,15 @@ About DataFrames and Series
 </div>
 </div>
 <p>Anaconda already includes Pandas, so you shouldn’t need to install it. You can right away start using it in your Jupyter Notebooks. Let us create the series and the dataframe from the sales dataframe above as an example.</p>
-<div id="24ac7fee" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="24ac7fee"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="24ac7fee-1"><a href="#24ac7fee-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="24ac7fee-2"><a href="#24ac7fee-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="24ac7fee-3"><a href="#24ac7fee-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a months series</span></span>
-<span id="24ac7fee-4"><a href="#24ac7fee-4" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> pd.Series([<span class="st">"January"</span>, <span class="st">"February"</span>, <span class="st">"March"</span>, <span class="st">"April"</span>])</span>
-<span id="24ac7fee-5"><a href="#24ac7fee-5" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> pd.Series([<span class="dv">180391</span>, <span class="dv">197156</span>, <span class="dv">193501</span>, <span class="dv">199468</span>])</span>
-<span id="24ac7fee-6"><a href="#24ac7fee-6" aria-hidden="true" tabindex="-1"></a>sales_dataframe <span class="op">=</span> pd.DataFrame({<span class="st">"Month"</span>: months, <span class="st">"Sales"</span>: sales})</span>
-<span id="24ac7fee-7"><a href="#24ac7fee-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="24ac7fee-8"><a href="#24ac7fee-8" aria-hidden="true" tabindex="-1"></a>sales_dataframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fc5bce1c" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="fc5bce1c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fc5bce1c-1"><a href="#fc5bce1c-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="fc5bce1c-2"><a href="#fc5bce1c-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fc5bce1c-3"><a href="#fc5bce1c-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a months series</span></span>
+<span id="fc5bce1c-4"><a href="#fc5bce1c-4" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> pd.Series([<span class="st">"January"</span>, <span class="st">"February"</span>, <span class="st">"March"</span>, <span class="st">"April"</span>])</span>
+<span id="fc5bce1c-5"><a href="#fc5bce1c-5" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> pd.Series([<span class="dv">180391</span>, <span class="dv">197156</span>, <span class="dv">193501</span>, <span class="dv">199468</span>])</span>
+<span id="fc5bce1c-6"><a href="#fc5bce1c-6" aria-hidden="true" tabindex="-1"></a>sales_dataframe <span class="op">=</span> pd.DataFrame({<span class="st">"Month"</span>: months, <span class="st">"Sales"</span>: sales})</span>
+<span id="fc5bce1c-7"><a href="#fc5bce1c-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="fc5bce1c-8"><a href="#fc5bce1c-8" aria-hidden="true" tabindex="-1"></a>sales_dataframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -448,10 +450,10 @@ About DataFrames and Series
 <section id="reading-files-with-pandas" class="level3">
 <h3 class="anchored" data-anchor-id="reading-files-with-pandas">Reading files with Pandas</h3>
 <p>Pandas provides abstractions which make file handling much easier. For example, to read a CSV file into a <code>DataFrame</code>, you can use the <code>read_csv</code> function of Pandas. This function reads a CSV file and returns a <code>DataFrame</code> object that represents the data in the file. Let’s load the <code>people.csv</code> file into a <code>DataFrame</code>.</p>
-<div id="75b486dc" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="75b486dc"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="75b486dc-1"><a href="#75b486dc-1" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> pd.read_csv(<span class="st">"people.csv"</span>)</span>
-<span id="75b486dc-2"><a href="#75b486dc-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="75b486dc-3"><a href="#75b486dc-3" aria-hidden="true" tabindex="-1"></a>people</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3e94811a" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="3e94811a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3e94811a-1"><a href="#3e94811a-1" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> pd.read_csv(<span class="st">"people.csv"</span>)</span>
+<span id="3e94811a-2"><a href="#3e94811a-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="3e94811a-3"><a href="#3e94811a-3" aria-hidden="true" tabindex="-1"></a>people</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -496,35 +498,35 @@ About DataFrames and Series
 </div>
 <p>That was super easy! A dataframe is a much more powerful way to work with data than a list of dictionaries, as it provides many more functions and methods to work with the data. For example, you can filter the data, you can calculate statistics, you can group the data, you can join the data with other data, etc.</p>
 <p>For example, let us calculate the average age of the people in the <code>people</code> dataframe.</p>
-<div id="32d9df33" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="32d9df33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="32d9df33-1"><a href="#32d9df33-1" aria-hidden="true" tabindex="-1"></a>average_age <span class="op">=</span> people[<span class="st">"age"</span>].mean()</span>
-<span id="32d9df33-2"><a href="#32d9df33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="32d9df33-3"><a href="#32d9df33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(average_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8a2a5f85" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="8a2a5f85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="8a2a5f85-1"><a href="#8a2a5f85-1" aria-hidden="true" tabindex="-1"></a>average_age <span class="op">=</span> people[<span class="st">"age"</span>].mean()</span>
+<span id="8a2a5f85-2"><a href="#8a2a5f85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="8a2a5f85-3"><a href="#8a2a5f85-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(average_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>30.666666666666668</code></pre>
 </div>
 </div>
 <p>Updating the <code>people</code> dataframe is also very easy. For example, let us update the age of the people in the <code>people</code> dataframe and write the updated dataframe to a new CSV file like before. First, we will update the dataframe. To do so, we will use the <code>loc</code> method of the <code>DataFrame</code> object - <code>loc</code> is used to access a group of rows and columns by labels.</p>
-<div id="fe982312" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="fe982312"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fe982312-1"><a href="#fe982312-1" aria-hidden="true" tabindex="-1"></a>people.loc[people[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Jane Smith"</span>, <span class="st">"age"</span>] <span class="op">=</span> <span class="dv">26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fb594608" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="fb594608"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fb594608-1"><a href="#fb594608-1" aria-hidden="true" tabindex="-1"></a>people.loc[people[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Jane Smith"</span>, <span class="st">"age"</span>] <span class="op">=</span> <span class="dv">26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code looks through a table of people, finds every entry where the person’s name is “Jane Smith,” and changes their age to 26. Much easier than working with a <code>for</code> loop like we did before.</p>
 <p>We could also add a new row to the <code>people</code> dataframe. To do so, we will use the <code>concat</code> method of the <code>DataFrame</code> object.</p>
-<div id="702d47c7" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="702d47c7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="702d47c7-1"><a href="#702d47c7-1" aria-hidden="true" tabindex="-1"></a>new_people <span class="op">=</span> pd.DataFrame(</span>
-<span id="702d47c7-2"><a href="#702d47c7-2" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="702d47c7-3"><a href="#702d47c7-3" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="702d47c7-4"><a href="#702d47c7-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"name"</span>: <span class="st">"Florentino das Rosas"</span>,</span>
-<span id="702d47c7-5"><a href="#702d47c7-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"age"</span>: <span class="dv">51</span>,</span>
-<span id="702d47c7-6"><a href="#702d47c7-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"gender"</span>: <span class="st">"male"</span>,</span>
-<span id="702d47c7-7"><a href="#702d47c7-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"nationality"</span>: <span class="st">"Portugal"</span>,</span>
-<span id="702d47c7-8"><a href="#702d47c7-8" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="702d47c7-9"><a href="#702d47c7-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="702d47c7-10"><a href="#702d47c7-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="702d47c7-11"><a href="#702d47c7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="702d47c7-12"><a href="#702d47c7-12" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> pd.concat([people, new_people], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="702d47c7-13"><a href="#702d47c7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="702d47c7-14"><a href="#702d47c7-14" aria-hidden="true" tabindex="-1"></a>people</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5c3cd235" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="5c3cd235"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5c3cd235-1"><a href="#5c3cd235-1" aria-hidden="true" tabindex="-1"></a>new_people <span class="op">=</span> pd.DataFrame(</span>
+<span id="5c3cd235-2"><a href="#5c3cd235-2" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="5c3cd235-3"><a href="#5c3cd235-3" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="5c3cd235-4"><a href="#5c3cd235-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"name"</span>: <span class="st">"Florentino das Rosas"</span>,</span>
+<span id="5c3cd235-5"><a href="#5c3cd235-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"age"</span>: <span class="dv">51</span>,</span>
+<span id="5c3cd235-6"><a href="#5c3cd235-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"gender"</span>: <span class="st">"male"</span>,</span>
+<span id="5c3cd235-7"><a href="#5c3cd235-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"nationality"</span>: <span class="st">"Portugal"</span>,</span>
+<span id="5c3cd235-8"><a href="#5c3cd235-8" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="5c3cd235-9"><a href="#5c3cd235-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="5c3cd235-10"><a href="#5c3cd235-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="5c3cd235-11"><a href="#5c3cd235-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5c3cd235-12"><a href="#5c3cd235-12" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> pd.concat([people, new_people], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="5c3cd235-13"><a href="#5c3cd235-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5c3cd235-14"><a href="#5c3cd235-14" aria-hidden="true" tabindex="-1"></a>people</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
@@ -577,8 +579,8 @@ About DataFrames and Series
 <p>The way you add new rows to a dataframe is by concatenating an existing dataframe with a new dataframe that contains the new rows. In the above code, we created a new dataframe called <code>new_people</code> that contains a new row with the name “Florentino das Rosas,” age 51. We then concatenated the <code>people</code> dataframe with the <code>new_people</code> dataframe using the <code>concat</code> method of the <code>DataFrame</code> object, and we assigned the result to <code>people</code> again.</p>
 <p><code>ignore_index=True</code> is used to ignore the index of the new dataframe you are adding (which will be <code>0</code>) and create a new sequential index for the concatenated dataframe. If you don’t use <code>ignore_index=True</code>, the index of the new <code>new_people</code> dataframe will be used as the index of the concatenated dataframe.</p>
 <p>Let us now write the updated <code>people</code> dataframe to a new CSV file.</p>
-<div id="d5841c14" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="d5841c14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d5841c14-1"><a href="#d5841c14-1" aria-hidden="true" tabindex="-1"></a>people.to_csv(<span class="st">"people-updated.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7221f965" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="7221f965"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7221f965-1"><a href="#7221f965-1" aria-hidden="true" tabindex="-1"></a>people.to_csv(<span class="st">"people-updated.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see, much more concise and easier to work with than the <code>csv</code> module. Later on, we will dive deeper into Pandas and learn more about its capabilities, but for now, this should be enough to get you started with working with files in Python.</p>
 </section>
@@ -595,236 +597,242 @@ About DataFrames and Series
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -832,185 +840,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

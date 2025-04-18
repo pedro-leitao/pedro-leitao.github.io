@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -130,7 +132,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -250,34 +252,34 @@ background-size: cover;
 
 <p>Evaluating the effectiveness of dimensionality reduction techniques, such as Principal Component Analysis (PCA) and t-Distributed Stochastic Neighbor Embedding (t-SNE), requires a multifaceted approach tailored to the specific aims and context of the analysis. These methods serve to transform high-dimensional data into a lower-dimensional space while striving to preserve certain properties of the original data. The choice of evaluation criteria and methods significantly depends on the intended application of the dimensionality reduction, whether it be for visualization purposes, to facilitate clustering, or to enhance the performance of classification algorithms. Below, we explore a variety of strategies for assessing the performance of PCA and t-SNE, accompanied by Python code examples. It’s crucial to recognize that the efficacy of these techniques is highly contingent on the characteristics of the dataset in question and the specific objectives sought through the reduction process.</p>
 <p>For this experiment, we will use the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html">SKLearn Digits dataset</a>, which comprises of a number of 16x16 digit representations.</p>
-<div id="fe752080" class="cell" data-execution_count="2">
+<div id="be892cce" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="fe752080"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="fe752080-1"><a href="#fe752080-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show an image of digits 0 to 9 from the digits dataset</span></span>
-<span id="fe752080-2"><a href="#fe752080-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-3"><a href="#fe752080-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="fe752080-4"><a href="#fe752080-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
-<span id="fe752080-5"><a href="#fe752080-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-6"><a href="#fe752080-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the digits dataset</span></span>
-<span id="fe752080-7"><a href="#fe752080-7" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> datasets.load_digits()</span>
-<span id="fe752080-8"><a href="#fe752080-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-9"><a href="#fe752080-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with subplots in a 2x5 grid</span></span>
-<span id="fe752080-10"><a href="#fe752080-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="fe752080-11"><a href="#fe752080-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-12"><a href="#fe752080-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes</span></span>
-<span id="fe752080-13"><a href="#fe752080-13" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
-<span id="fe752080-14"><a href="#fe752080-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-15"><a href="#fe752080-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="fe752080-16"><a href="#fe752080-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the first occurrence of each digit</span></span>
-<span id="fe752080-17"><a href="#fe752080-17" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> digits.target.tolist().index(i)</span>
-<span id="fe752080-18"><a href="#fe752080-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-19"><a href="#fe752080-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot on the ith subplot</span></span>
-<span id="fe752080-20"><a href="#fe752080-20" aria-hidden="true" tabindex="-1"></a>    axes[i].imshow(digits.images[index], cmap<span class="op">=</span>plt.cm.gray_r, interpolation<span class="op">=</span><span class="st">"nearest"</span>)</span>
-<span id="fe752080-21"><a href="#fe752080-21" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f"Digit: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="fe752080-22"><a href="#fe752080-22" aria-hidden="true" tabindex="-1"></a>    axes[i].axis(<span class="st">"off"</span>)  <span class="co"># Hide the axes</span></span>
-<span id="fe752080-23"><a href="#fe752080-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="fe752080-24"><a href="#fe752080-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="fe752080-25"><a href="#fe752080-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="be892cce"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="be892cce-1"><a href="#be892cce-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show an image of digits 0 to 9 from the digits dataset</span></span>
+<span id="be892cce-2"><a href="#be892cce-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-3"><a href="#be892cce-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="be892cce-4"><a href="#be892cce-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="be892cce-5"><a href="#be892cce-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-6"><a href="#be892cce-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the digits dataset</span></span>
+<span id="be892cce-7"><a href="#be892cce-7" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> datasets.load_digits()</span>
+<span id="be892cce-8"><a href="#be892cce-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-9"><a href="#be892cce-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure with subplots in a 2x5 grid</span></span>
+<span id="be892cce-10"><a href="#be892cce-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="be892cce-11"><a href="#be892cce-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-12"><a href="#be892cce-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes</span></span>
+<span id="be892cce-13"><a href="#be892cce-13" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="be892cce-14"><a href="#be892cce-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-15"><a href="#be892cce-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="be892cce-16"><a href="#be892cce-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find the first occurrence of each digit</span></span>
+<span id="be892cce-17"><a href="#be892cce-17" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> digits.target.tolist().index(i)</span>
+<span id="be892cce-18"><a href="#be892cce-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-19"><a href="#be892cce-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot on the ith subplot</span></span>
+<span id="be892cce-20"><a href="#be892cce-20" aria-hidden="true" tabindex="-1"></a>    axes[i].imshow(digits.images[index], cmap<span class="op">=</span>plt.cm.gray_r, interpolation<span class="op">=</span><span class="st">"nearest"</span>)</span>
+<span id="be892cce-21"><a href="#be892cce-21" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f"Digit: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="be892cce-22"><a href="#be892cce-22" aria-hidden="true" tabindex="-1"></a>    axes[i].axis(<span class="st">"off"</span>)  <span class="co"># Hide the axes</span></span>
+<span id="be892cce-23"><a href="#be892cce-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="be892cce-24"><a href="#be892cce-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="be892cce-25"><a href="#be892cce-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -290,60 +292,60 @@ background-size: cover;
 <section id="visual-inspection" class="level2">
 <h2 class="anchored" data-anchor-id="visual-inspection">Visual inspection</h2>
 <p>One of the simplest ways to evaluate PCA and t-SNE is by visually inspecting the reduced dimensions to see how well they separate different classes or clusters.</p>
-<div id="7a276a37" class="cell" data-execution_count="3">
+<div id="95266af8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="7a276a37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="7a276a37-1"><a href="#7a276a37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="7a276a37-2"><a href="#7a276a37-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="7a276a37-3"><a href="#7a276a37-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
-<span id="7a276a37-4"><a href="#7a276a37-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="7a276a37-5"><a href="#7a276a37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-6"><a href="#7a276a37-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> digits.data</span>
-<span id="7a276a37-7"><a href="#7a276a37-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> digits.target</span>
-<span id="7a276a37-8"><a href="#7a276a37-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-9"><a href="#7a276a37-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before Dimensionality Reduction"</span>)</span>
-<span id="7a276a37-10"><a href="#7a276a37-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
-<span id="7a276a37-11"><a href="#7a276a37-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-12"><a href="#7a276a37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
-<span id="7a276a37-13"><a href="#7a276a37-13" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="7a276a37-14"><a href="#7a276a37-14" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X)</span>
-<span id="7a276a37-15"><a href="#7a276a37-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-16"><a href="#7a276a37-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After PCA"</span>)</span>
-<span id="7a276a37-17"><a href="#7a276a37-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_pca.shape)</span>
-<span id="7a276a37-18"><a href="#7a276a37-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-19"><a href="#7a276a37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply t-SNE</span></span>
-<span id="7a276a37-20"><a href="#7a276a37-20" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="7a276a37-21"><a href="#7a276a37-21" aria-hidden="true" tabindex="-1"></a>X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
-<span id="7a276a37-22"><a href="#7a276a37-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-23"><a href="#7a276a37-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After t-SNE"</span>)</span>
-<span id="7a276a37-24"><a href="#7a276a37-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_tsne.shape)</span>
-<span id="7a276a37-25"><a href="#7a276a37-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-26"><a href="#7a276a37-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-27"><a href="#7a276a37-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting function</span></span>
-<span id="7a276a37-28"><a href="#7a276a37-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_reduction(X, y, title):</span>
-<span id="7a276a37-29"><a href="#7a276a37-29" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="7a276a37-30"><a href="#7a276a37-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a colormap</span></span>
-<span id="7a276a37-31"><a href="#7a276a37-31" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> plt.cm.Spectral(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>))</span>
-<span id="7a276a37-32"><a href="#7a276a37-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-33"><a href="#7a276a37-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot each digit with a unique color from the colormap</span></span>
-<span id="7a276a37-34"><a href="#7a276a37-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, color <span class="kw">in</span> <span class="bu">zip</span>(<span class="bu">range</span>(<span class="dv">10</span>), colors):</span>
-<span id="7a276a37-35"><a href="#7a276a37-35" aria-hidden="true" tabindex="-1"></a>        plt.scatter(X[y <span class="op">==</span> i, <span class="dv">0</span>], X[y <span class="op">==</span> i, <span class="dv">1</span>], color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f"Digit </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="7a276a37-36"><a href="#7a276a37-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-37"><a href="#7a276a37-37" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
-<span id="7a276a37-38"><a href="#7a276a37-38" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"First Principal Component"</span>)</span>
-<span id="7a276a37-39"><a href="#7a276a37-39" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Second Principal Component"</span>)</span>
-<span id="7a276a37-40"><a href="#7a276a37-40" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">"best"</span>, shadow<span class="op">=</span><span class="va">False</span>, scatterpoints<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="7a276a37-41"><a href="#7a276a37-41" aria-hidden="true" tabindex="-1"></a>    plt.axis(</span>
-<span id="7a276a37-42"><a href="#7a276a37-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"equal"</span></span>
-<span id="7a276a37-43"><a href="#7a276a37-43" aria-hidden="true" tabindex="-1"></a>    )  <span class="co"># Equal aspect ratio ensures that PCA1 and PCA2 are scaled the same</span></span>
-<span id="7a276a37-44"><a href="#7a276a37-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a legend</span></span>
-<span id="7a276a37-45"><a href="#7a276a37-45" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="7a276a37-46"><a href="#7a276a37-46" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="7a276a37-47"><a href="#7a276a37-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-48"><a href="#7a276a37-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="7a276a37-49"><a href="#7a276a37-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot results</span></span>
-<span id="7a276a37-50"><a href="#7a276a37-50" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_pca, y, <span class="st">"PCA Result"</span>)</span>
-<span id="7a276a37-51"><a href="#7a276a37-51" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_tsne, y, <span class="st">"t-SNE Result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="95266af8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="95266af8-1"><a href="#95266af8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="95266af8-2"><a href="#95266af8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="95266af8-3"><a href="#95266af8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="95266af8-4"><a href="#95266af8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="95266af8-5"><a href="#95266af8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-6"><a href="#95266af8-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> digits.data</span>
+<span id="95266af8-7"><a href="#95266af8-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> digits.target</span>
+<span id="95266af8-8"><a href="#95266af8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-9"><a href="#95266af8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Before Dimensionality Reduction"</span>)</span>
+<span id="95266af8-10"><a href="#95266af8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
+<span id="95266af8-11"><a href="#95266af8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-12"><a href="#95266af8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
+<span id="95266af8-13"><a href="#95266af8-13" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="95266af8-14"><a href="#95266af8-14" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X)</span>
+<span id="95266af8-15"><a href="#95266af8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-16"><a href="#95266af8-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After PCA"</span>)</span>
+<span id="95266af8-17"><a href="#95266af8-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_pca.shape)</span>
+<span id="95266af8-18"><a href="#95266af8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-19"><a href="#95266af8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply t-SNE</span></span>
+<span id="95266af8-20"><a href="#95266af8-20" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="95266af8-21"><a href="#95266af8-21" aria-hidden="true" tabindex="-1"></a>X_tsne <span class="op">=</span> tsne.fit_transform(X)</span>
+<span id="95266af8-22"><a href="#95266af8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-23"><a href="#95266af8-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After t-SNE"</span>)</span>
+<span id="95266af8-24"><a href="#95266af8-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_tsne.shape)</span>
+<span id="95266af8-25"><a href="#95266af8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-26"><a href="#95266af8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-27"><a href="#95266af8-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting function</span></span>
+<span id="95266af8-28"><a href="#95266af8-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_reduction(X, y, title):</span>
+<span id="95266af8-29"><a href="#95266af8-29" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="95266af8-30"><a href="#95266af8-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a colormap</span></span>
+<span id="95266af8-31"><a href="#95266af8-31" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> plt.cm.Spectral(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>))</span>
+<span id="95266af8-32"><a href="#95266af8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-33"><a href="#95266af8-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot each digit with a unique color from the colormap</span></span>
+<span id="95266af8-34"><a href="#95266af8-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, color <span class="kw">in</span> <span class="bu">zip</span>(<span class="bu">range</span>(<span class="dv">10</span>), colors):</span>
+<span id="95266af8-35"><a href="#95266af8-35" aria-hidden="true" tabindex="-1"></a>        plt.scatter(X[y <span class="op">==</span> i, <span class="dv">0</span>], X[y <span class="op">==</span> i, <span class="dv">1</span>], color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f"Digit </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="95266af8-36"><a href="#95266af8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-37"><a href="#95266af8-37" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="95266af8-38"><a href="#95266af8-38" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"First Principal Component"</span>)</span>
+<span id="95266af8-39"><a href="#95266af8-39" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Second Principal Component"</span>)</span>
+<span id="95266af8-40"><a href="#95266af8-40" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">"best"</span>, shadow<span class="op">=</span><span class="va">False</span>, scatterpoints<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="95266af8-41"><a href="#95266af8-41" aria-hidden="true" tabindex="-1"></a>    plt.axis(</span>
+<span id="95266af8-42"><a href="#95266af8-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"equal"</span></span>
+<span id="95266af8-43"><a href="#95266af8-43" aria-hidden="true" tabindex="-1"></a>    )  <span class="co"># Equal aspect ratio ensures that PCA1 and PCA2 are scaled the same</span></span>
+<span id="95266af8-44"><a href="#95266af8-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a legend</span></span>
+<span id="95266af8-45"><a href="#95266af8-45" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="95266af8-46"><a href="#95266af8-46" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="95266af8-47"><a href="#95266af8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-48"><a href="#95266af8-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="95266af8-49"><a href="#95266af8-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot results</span></span>
+<span id="95266af8-50"><a href="#95266af8-50" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_pca, y, <span class="st">"PCA Result"</span>)</span>
+<span id="95266af8-51"><a href="#95266af8-51" aria-hidden="true" tabindex="-1"></a>plot_reduction(X_tsne, y, <span class="st">"t-SNE Result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Before Dimensionality Reduction
@@ -392,56 +394,56 @@ About Silhouette Score
 </ul>
 </div>
 </div>
-<div id="84cceb96" class="cell" data-execution_count="4">
+<div id="a24d6382" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="84cceb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="84cceb96-1"><a href="#84cceb96-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
-<span id="84cceb96-2"><a href="#84cceb96-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="84cceb96-3"><a href="#84cceb96-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for PCA</span></span>
-<span id="84cceb96-4"><a href="#84cceb96-4" aria-hidden="true" tabindex="-1"></a>silhouette_pca <span class="op">=</span> silhouette_score(X_pca, y)</span>
-<span id="84cceb96-5"><a href="#84cceb96-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Silhouette Score: </span><span class="sc">{</span>silhouette_pca<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="84cceb96-6"><a href="#84cceb96-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="84cceb96-7"><a href="#84cceb96-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for t-SNE</span></span>
-<span id="84cceb96-8"><a href="#84cceb96-8" aria-hidden="true" tabindex="-1"></a>silhouette_tsne <span class="op">=</span> silhouette_score(X_tsne, y)</span>
-<span id="84cceb96-9"><a href="#84cceb96-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Silhouette Score: </span><span class="sc">{</span>silhouette_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="a24d6382"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a24d6382-1"><a href="#a24d6382-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="a24d6382-2"><a href="#a24d6382-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a24d6382-3"><a href="#a24d6382-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for PCA</span></span>
+<span id="a24d6382-4"><a href="#a24d6382-4" aria-hidden="true" tabindex="-1"></a>silhouette_pca <span class="op">=</span> silhouette_score(X_pca, y)</span>
+<span id="a24d6382-5"><a href="#a24d6382-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Silhouette Score: </span><span class="sc">{</span>silhouette_pca<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="a24d6382-6"><a href="#a24d6382-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="a24d6382-7"><a href="#a24d6382-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Silhouette Score for t-SNE</span></span>
+<span id="a24d6382-8"><a href="#a24d6382-8" aria-hidden="true" tabindex="-1"></a>silhouette_tsne <span class="op">=</span> silhouette_score(X_tsne, y)</span>
+<span id="a24d6382-9"><a href="#a24d6382-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Silhouette Score: </span><span class="sc">{</span>silhouette_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>PCA Silhouette Score: 0.10505275105361912
-t-SNE Silhouette Score: 0.554421067237854</code></pre>
+<pre><code>PCA Silhouette Score: 0.10505275105361901
+t-SNE Silhouette Score: 0.5546559691429138</code></pre>
 </div>
 </div>
 </section>
 <section id="classification-performance" class="level2">
 <h2 class="anchored" data-anchor-id="classification-performance">Classification performance</h2>
 <p>Another way to evaluate the effectiveness of PCA and t-SNE is to use the reduced dimensions as input for a classifier and compare the classification accuracy. This can help determine if the reduced dimensions capture the essential information needed for classification tasks. In this case, we use a simple Random Forest classifier to compare the classification accuracy of PCA and t-SNE reduced dimensions.</p>
-<div id="a826bfbb" class="cell" data-execution_count="5">
+<div id="442f82b0" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="a826bfbb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="a826bfbb-1"><a href="#a826bfbb-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="a826bfbb-2"><a href="#a826bfbb-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="a826bfbb-3"><a href="#a826bfbb-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
-<span id="a826bfbb-4"><a href="#a826bfbb-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a826bfbb-5"><a href="#a826bfbb-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset for PCA and t-SNE results</span></span>
-<span id="a826bfbb-6"><a href="#a826bfbb-6" aria-hidden="true" tabindex="-1"></a>X_train_pca, X_test_pca, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="a826bfbb-7"><a href="#a826bfbb-7" aria-hidden="true" tabindex="-1"></a>    X_pca, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="a826bfbb-8"><a href="#a826bfbb-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="a826bfbb-9"><a href="#a826bfbb-9" aria-hidden="true" tabindex="-1"></a>X_train_tsne, X_test_tsne, _, _ <span class="op">=</span> train_test_split(</span>
-<span id="a826bfbb-10"><a href="#a826bfbb-10" aria-hidden="true" tabindex="-1"></a>    X_tsne, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="a826bfbb-11"><a href="#a826bfbb-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="a826bfbb-12"><a href="#a826bfbb-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a826bfbb-13"><a href="#a826bfbb-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on PCA results</span></span>
-<span id="a826bfbb-14"><a href="#a826bfbb-14" aria-hidden="true" tabindex="-1"></a>clf_pca <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="a826bfbb-15"><a href="#a826bfbb-15" aria-hidden="true" tabindex="-1"></a>clf_pca.fit(X_train_pca, y_train)</span>
-<span id="a826bfbb-16"><a href="#a826bfbb-16" aria-hidden="true" tabindex="-1"></a>y_pred_pca <span class="op">=</span> clf_pca.predict(X_test_pca)</span>
-<span id="a826bfbb-17"><a href="#a826bfbb-17" aria-hidden="true" tabindex="-1"></a>accuracy_pca <span class="op">=</span> accuracy_score(y_test, y_pred_pca)</span>
-<span id="a826bfbb-18"><a href="#a826bfbb-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Classification Accuracy: </span><span class="sc">{</span>accuracy_pca<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="a826bfbb-19"><a href="#a826bfbb-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="a826bfbb-20"><a href="#a826bfbb-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on t-SNE results</span></span>
-<span id="a826bfbb-21"><a href="#a826bfbb-21" aria-hidden="true" tabindex="-1"></a>clf_tsne <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="a826bfbb-22"><a href="#a826bfbb-22" aria-hidden="true" tabindex="-1"></a>clf_tsne.fit(X_train_tsne, y_train)</span>
-<span id="a826bfbb-23"><a href="#a826bfbb-23" aria-hidden="true" tabindex="-1"></a>y_pred_tsne <span class="op">=</span> clf_tsne.predict(X_test_tsne)</span>
-<span id="a826bfbb-24"><a href="#a826bfbb-24" aria-hidden="true" tabindex="-1"></a>accuracy_tsne <span class="op">=</span> accuracy_score(y_test, y_pred_tsne)</span>
-<span id="a826bfbb-25"><a href="#a826bfbb-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Classification Accuracy: </span><span class="sc">{</span>accuracy_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="442f82b0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="442f82b0-1"><a href="#442f82b0-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="442f82b0-2"><a href="#442f82b0-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="442f82b0-3"><a href="#442f82b0-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="442f82b0-4"><a href="#442f82b0-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="442f82b0-5"><a href="#442f82b0-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset for PCA and t-SNE results</span></span>
+<span id="442f82b0-6"><a href="#442f82b0-6" aria-hidden="true" tabindex="-1"></a>X_train_pca, X_test_pca, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="442f82b0-7"><a href="#442f82b0-7" aria-hidden="true" tabindex="-1"></a>    X_pca, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="442f82b0-8"><a href="#442f82b0-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="442f82b0-9"><a href="#442f82b0-9" aria-hidden="true" tabindex="-1"></a>X_train_tsne, X_test_tsne, _, _ <span class="op">=</span> train_test_split(</span>
+<span id="442f82b0-10"><a href="#442f82b0-10" aria-hidden="true" tabindex="-1"></a>    X_tsne, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="442f82b0-11"><a href="#442f82b0-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="442f82b0-12"><a href="#442f82b0-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="442f82b0-13"><a href="#442f82b0-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on PCA results</span></span>
+<span id="442f82b0-14"><a href="#442f82b0-14" aria-hidden="true" tabindex="-1"></a>clf_pca <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="442f82b0-15"><a href="#442f82b0-15" aria-hidden="true" tabindex="-1"></a>clf_pca.fit(X_train_pca, y_train)</span>
+<span id="442f82b0-16"><a href="#442f82b0-16" aria-hidden="true" tabindex="-1"></a>y_pred_pca <span class="op">=</span> clf_pca.predict(X_test_pca)</span>
+<span id="442f82b0-17"><a href="#442f82b0-17" aria-hidden="true" tabindex="-1"></a>accuracy_pca <span class="op">=</span> accuracy_score(y_test, y_pred_pca)</span>
+<span id="442f82b0-18"><a href="#442f82b0-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Classification Accuracy: </span><span class="sc">{</span>accuracy_pca<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="442f82b0-19"><a href="#442f82b0-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="442f82b0-20"><a href="#442f82b0-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and evaluate a classifier on t-SNE results</span></span>
+<span id="442f82b0-21"><a href="#442f82b0-21" aria-hidden="true" tabindex="-1"></a>clf_tsne <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="442f82b0-22"><a href="#442f82b0-22" aria-hidden="true" tabindex="-1"></a>clf_tsne.fit(X_train_tsne, y_train)</span>
+<span id="442f82b0-23"><a href="#442f82b0-23" aria-hidden="true" tabindex="-1"></a>y_pred_tsne <span class="op">=</span> clf_tsne.predict(X_test_tsne)</span>
+<span id="442f82b0-24"><a href="#442f82b0-24" aria-hidden="true" tabindex="-1"></a>accuracy_tsne <span class="op">=</span> accuracy_score(y_test, y_pred_tsne)</span>
+<span id="442f82b0-25"><a href="#442f82b0-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Classification Accuracy: </span><span class="sc">{</span>accuracy_tsne<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>PCA Classification Accuracy: 0.6203703703703703
@@ -452,26 +454,26 @@ t-SNE Classification Accuracy: 0.987037037037037</code></pre>
 <section id="time-complexity" class="level2">
 <h2 class="anchored" data-anchor-id="time-complexity">Time complexity</h2>
 <p>Finally, comparing the time it takes to perform the reduction can be important, especially for large datasets. t-SNE is known to be computationally expensive compared to PCA, so understanding the time complexity of each method can help in choosing the right technique for the task at hand.</p>
-<div id="2db870c1" class="cell" data-execution_count="6">
+<div id="6cfef5e3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="2db870c1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="2db870c1-1"><a href="#2db870c1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="2db870c1-2"><a href="#2db870c1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2db870c1-3"><a href="#2db870c1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Time PCA</span></span>
-<span id="2db870c1-4"><a href="#2db870c1-4" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
-<span id="2db870c1-5"><a href="#2db870c1-5" aria-hidden="true" tabindex="-1"></a>pca.fit_transform(X)</span>
-<span id="2db870c1-6"><a href="#2db870c1-6" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
-<span id="2db870c1-7"><a href="#2db870c1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
-<span id="2db870c1-8"><a href="#2db870c1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="2db870c1-9"><a href="#2db870c1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Time t-SNE</span></span>
-<span id="2db870c1-10"><a href="#2db870c1-10" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
-<span id="2db870c1-11"><a href="#2db870c1-11" aria-hidden="true" tabindex="-1"></a>tsne.fit_transform(X)</span>
-<span id="2db870c1-12"><a href="#2db870c1-12" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
-<span id="2db870c1-13"><a href="#2db870c1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="6cfef5e3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="6cfef5e3-1"><a href="#6cfef5e3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="6cfef5e3-2"><a href="#6cfef5e3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6cfef5e3-3"><a href="#6cfef5e3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Time PCA</span></span>
+<span id="6cfef5e3-4"><a href="#6cfef5e3-4" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="6cfef5e3-5"><a href="#6cfef5e3-5" aria-hidden="true" tabindex="-1"></a>pca.fit_transform(X)</span>
+<span id="6cfef5e3-6"><a href="#6cfef5e3-6" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
+<span id="6cfef5e3-7"><a href="#6cfef5e3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"PCA Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span>
+<span id="6cfef5e3-8"><a href="#6cfef5e3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="6cfef5e3-9"><a href="#6cfef5e3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Time t-SNE</span></span>
+<span id="6cfef5e3-10"><a href="#6cfef5e3-10" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="6cfef5e3-11"><a href="#6cfef5e3-11" aria-hidden="true" tabindex="-1"></a>tsne.fit_transform(X)</span>
+<span id="6cfef5e3-12"><a href="#6cfef5e3-12" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> time.time()</span>
+<span id="6cfef5e3-13"><a href="#6cfef5e3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"t-SNE Time: </span><span class="sc">{</span>end <span class="op">-</span> start<span class="sc">}</span><span class="ss"> seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>PCA Time: 0.0012040138244628906 seconds
-t-SNE Time: 2.2367727756500244 seconds</code></pre>
+<pre><code>PCA Time: 0.0011410713195800781 seconds
+t-SNE Time: 1.5658550262451172 seconds</code></pre>
 </div>
 </div>
 </section>
@@ -484,236 +486,242 @@ t-SNE Time: 2.2367727756500244 seconds</code></pre>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -721,185 +729,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.23">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-a185852c63625fd9ffbdc57047c9a77e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6b5169cd70b11e3ab71bd7bb77c8208f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
 <script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -133,7 +135,7 @@ background-size: cover;
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -292,20 +294,20 @@ background-size: cover;
 <section id="an-example-random-forest-classifier" class="level2">
 <h2 class="anchored" data-anchor-id="an-example-random-forest-classifier">An example Random Forest classifier</h2>
 <p>Below is an example demonstrating the implementation of a Random Forest classifier using the <code>scikit-learn</code> library. This example uses the <code>Breast Cancer</code> dataset. Let us start by describing the data.</p>
-<div id="3e20198a" class="cell" data-execution_count="2">
+<div id="4fc9f663" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="3e20198a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="3e20198a-1"><a href="#3e20198a-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
-<span id="3e20198a-2"><a href="#3e20198a-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="3e20198a-3"><a href="#3e20198a-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="3e20198a-4"><a href="#3e20198a-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
-<span id="3e20198a-5"><a href="#3e20198a-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="3e20198a-6"><a href="#3e20198a-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="3e20198a-7"><a href="#3e20198a-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="3e20198a-8"><a href="#3e20198a-8" aria-hidden="true" tabindex="-1"></a>breast_cancer <span class="op">=</span> load_breast_cancer()</span>
-<span id="3e20198a-9"><a href="#3e20198a-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="3e20198a-10"><a href="#3e20198a-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(breast_cancer.data, columns<span class="op">=</span>breast_cancer.feature_names)</span>
-<span id="3e20198a-11"><a href="#3e20198a-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="4fc9f663"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4fc9f663-1"><a href="#4fc9f663-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="4fc9f663-2"><a href="#4fc9f663-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="4fc9f663-3"><a href="#4fc9f663-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="4fc9f663-4"><a href="#4fc9f663-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="4fc9f663-5"><a href="#4fc9f663-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="4fc9f663-6"><a href="#4fc9f663-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fc9f663-7"><a href="#4fc9f663-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="4fc9f663-8"><a href="#4fc9f663-8" aria-hidden="true" tabindex="-1"></a>breast_cancer <span class="op">=</span> load_breast_cancer()</span>
+<span id="4fc9f663-9"><a href="#4fc9f663-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4fc9f663-10"><a href="#4fc9f663-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(breast_cancer.data, columns<span class="op">=</span>breast_cancer.feature_names)</span>
+<span id="4fc9f663-11"><a href="#4fc9f663-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
@@ -611,646 +613,646 @@ background-size: cover;
 </div>
 </div>
 <p>And let’s get a view into the distribution of the available data.</p>
-<div id="efe5cc68" class="cell" data-execution_count="3">
+<div id="cfa9cb07" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="efe5cc68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="efe5cc68-1"><a href="#efe5cc68-1" aria-hidden="true" tabindex="-1"></a>df.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cfa9cb07"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cfa9cb07-1"><a href="#cfa9cb07-1" aria-hidden="true" tabindex="-1"></a>df.describe().drop(<span class="st">"count"</span>).style.background_gradient(cmap<span class="op">=</span><span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <style type="text/css">
-#T_1ce36_row0_col0 {
+#T_9eced_row0_col0 {
   background-color: #8dd08a;
   color: #000000;
 }
-#T_1ce36_row0_col1 {
+#T_9eced_row0_col1 {
   background-color: #8ed08b;
   color: #000000;
 }
-#T_1ce36_row0_col2 {
+#T_9eced_row0_col2 {
   background-color: #94d390;
   color: #000000;
 }
-#T_1ce36_row0_col3, #T_1ce36_row0_col26, #T_1ce36_row5_col14 {
+#T_9eced_row0_col3, #T_9eced_row0_col26, #T_9eced_row5_col14 {
   background-color: #cfecc9;
   color: #000000;
 }
-#T_1ce36_row0_col4, #T_1ce36_row5_col27 {
+#T_9eced_row0_col4, #T_9eced_row5_col27 {
   background-color: #5eb96b;
   color: #f1f1f1;
 }
-#T_1ce36_row0_col5, #T_1ce36_row2_col4 {
+#T_9eced_row0_col5, #T_9eced_row2_col4 {
   background-color: #c4e8bd;
   color: #000000;
 }
-#T_1ce36_row0_col6, #T_1ce36_row4_col17 {
+#T_9eced_row0_col6, #T_9eced_row4_col17 {
   background-color: #d1edcb;
   color: #000000;
 }
-#T_1ce36_row0_col7 {
+#T_9eced_row0_col7 {
   background-color: #c9eac2;
   color: #000000;
 }
-#T_1ce36_row0_col8 {
+#T_9eced_row0_col8 {
   background-color: #5db96b;
   color: #f1f1f1;
 }
-#T_1ce36_row0_col9, #T_1ce36_row5_col24 {
+#T_9eced_row0_col9, #T_9eced_row5_col24 {
   background-color: #45ad5f;
   color: #f1f1f1;
 }
-#T_1ce36_row0_col10, #T_1ce36_row5_col16 {
+#T_9eced_row0_col10, #T_9eced_row5_col16 {
   background-color: #e8f6e3;
   color: #000000;
 }
-#T_1ce36_row0_col11 {
+#T_9eced_row0_col11 {
   background-color: #d6efd0;
   color: #000000;
 }
-#T_1ce36_row0_col12, #T_1ce36_row0_col19, #T_1ce36_row1_col23, #T_1ce36_row2_col20, #T_1ce36_row3_col7 {
+#T_9eced_row0_col12, #T_9eced_row0_col19, #T_9eced_row1_col23, #T_9eced_row2_col20, #T_9eced_row3_col7 {
   background-color: #e9f7e5;
   color: #000000;
 }
-#T_1ce36_row0_col13, #T_1ce36_row4_col16 {
+#T_9eced_row0_col13, #T_9eced_row4_col16 {
   background-color: #eef8ea;
   color: #000000;
 }
-#T_1ce36_row0_col14, #T_1ce36_row4_col26 {
+#T_9eced_row0_col14, #T_9eced_row4_col26 {
   background-color: #d8f0d2;
   color: #000000;
 }
-#T_1ce36_row0_col15, #T_1ce36_row4_col3 {
+#T_9eced_row0_col15, #T_9eced_row4_col3 {
   background-color: #daf0d4;
   color: #000000;
 }
-#T_1ce36_row0_col16, #T_1ce36_row1_col16, #T_1ce36_row2_col22, #T_1ce36_row3_col15, #T_1ce36_row3_col23, #T_1ce36_row4_col10, #T_1ce36_row4_col19 {
+#T_9eced_row0_col16, #T_9eced_row1_col16, #T_9eced_row2_col22, #T_9eced_row3_col15, #T_9eced_row3_col23, #T_9eced_row4_col10, #T_9eced_row4_col19 {
   background-color: #ecf8e8;
   color: #000000;
 }
-#T_1ce36_row0_col17, #T_1ce36_row1_col27, #T_1ce36_row3_col27, #T_1ce36_row4_col5 {
+#T_9eced_row0_col17, #T_9eced_row1_col27, #T_9eced_row3_col27, #T_9eced_row4_col5 {
   background-color: #cdecc7;
   color: #000000;
 }
-#T_1ce36_row0_col18, #T_1ce36_row4_col25 {
+#T_9eced_row0_col18, #T_9eced_row4_col25 {
   background-color: #d9f0d3;
   color: #000000;
 }
-#T_1ce36_row0_col20, #T_1ce36_row4_col28 {
+#T_9eced_row0_col20, #T_9eced_row4_col28 {
   background-color: #a4da9e;
   color: #000000;
 }
-#T_1ce36_row0_col21 {
+#T_9eced_row0_col21 {
   background-color: #86cc85;
   color: #000000;
 }
-#T_1ce36_row0_col22, #T_1ce36_row3_col1 {
+#T_9eced_row0_col22, #T_9eced_row3_col1 {
   background-color: #acdea6;
   color: #000000;
 }
-#T_1ce36_row0_col23 {
+#T_9eced_row0_col23 {
   background-color: #dbf1d5;
   color: #000000;
 }
-#T_1ce36_row0_col24, #T_1ce36_row4_col4, #T_1ce36_row4_col8 {
+#T_9eced_row0_col24, #T_9eced_row4_col4, #T_9eced_row4_col8 {
   background-color: #60ba6c;
   color: #f1f1f1;
 }
-#T_1ce36_row0_col25, #T_1ce36_row5_col18, #T_1ce36_row5_col23 {
+#T_9eced_row0_col25, #T_9eced_row5_col18, #T_9eced_row5_col23 {
   background-color: #ceecc8;
   color: #000000;
 }
-#T_1ce36_row0_col27, #T_1ce36_row5_col29 {
+#T_9eced_row0_col27, #T_9eced_row5_col29 {
   background-color: #9bd696;
   color: #000000;
 }
-#T_1ce36_row0_col28 {
+#T_9eced_row0_col28 {
   background-color: #9fd899;
   color: #000000;
 }
-#T_1ce36_row0_col29 {
+#T_9eced_row0_col29 {
   background-color: #a9dca3;
   color: #000000;
 }
-#T_1ce36_row1_col0, #T_1ce36_row1_col1, #T_1ce36_row1_col2, #T_1ce36_row1_col4, #T_1ce36_row1_col8, #T_1ce36_row1_col9, #T_1ce36_row1_col20, #T_1ce36_row1_col21, #T_1ce36_row1_col22, #T_1ce36_row1_col24, #T_1ce36_row1_col28, #T_1ce36_row1_col29, #T_1ce36_row2_col3, #T_1ce36_row2_col5, #T_1ce36_row2_col6, #T_1ce36_row2_col7, #T_1ce36_row2_col10, #T_1ce36_row2_col11, #T_1ce36_row2_col12, #T_1ce36_row2_col13, #T_1ce36_row2_col14, #T_1ce36_row2_col15, #T_1ce36_row2_col16, #T_1ce36_row2_col17, #T_1ce36_row2_col18, #T_1ce36_row2_col19, #T_1ce36_row2_col23, #T_1ce36_row2_col25, #T_1ce36_row2_col26, #T_1ce36_row2_col27 {
+#T_9eced_row1_col0, #T_9eced_row1_col1, #T_9eced_row1_col2, #T_9eced_row1_col4, #T_9eced_row1_col8, #T_9eced_row1_col9, #T_9eced_row1_col20, #T_9eced_row1_col21, #T_9eced_row1_col22, #T_9eced_row1_col24, #T_9eced_row1_col28, #T_9eced_row1_col29, #T_9eced_row2_col3, #T_9eced_row2_col5, #T_9eced_row2_col6, #T_9eced_row2_col7, #T_9eced_row2_col10, #T_9eced_row2_col11, #T_9eced_row2_col12, #T_9eced_row2_col13, #T_9eced_row2_col14, #T_9eced_row2_col15, #T_9eced_row2_col16, #T_9eced_row2_col17, #T_9eced_row2_col18, #T_9eced_row2_col19, #T_9eced_row2_col23, #T_9eced_row2_col25, #T_9eced_row2_col26, #T_9eced_row2_col27 {
   background-color: #f7fcf5;
   color: #000000;
 }
-#T_1ce36_row1_col3 {
+#T_9eced_row1_col3 {
   background-color: #ebf7e7;
   color: #000000;
 }
-#T_1ce36_row1_col5, #T_1ce36_row3_col11, #T_1ce36_row3_col18 {
+#T_9eced_row1_col5, #T_9eced_row3_col11, #T_9eced_row3_col18 {
   background-color: #e8f6e4;
   color: #000000;
 }
-#T_1ce36_row1_col6 {
+#T_9eced_row1_col6 {
   background-color: #d7efd1;
   color: #000000;
 }
-#T_1ce36_row1_col7, #T_1ce36_row2_col29 {
+#T_9eced_row1_col7, #T_9eced_row2_col29 {
   background-color: #d5efcf;
   color: #000000;
 }
-#T_1ce36_row1_col10, #T_1ce36_row1_col12, #T_1ce36_row1_col19 {
+#T_9eced_row1_col10, #T_9eced_row1_col12, #T_9eced_row1_col19 {
   background-color: #eff9eb;
   color: #000000;
 }
-#T_1ce36_row1_col11, #T_1ce36_row1_col14, #T_1ce36_row3_col10, #T_1ce36_row3_col12, #T_1ce36_row3_col19 {
+#T_9eced_row1_col11, #T_9eced_row1_col14, #T_9eced_row3_col10, #T_9eced_row3_col12, #T_9eced_row3_col19 {
   background-color: #f1faee;
   color: #000000;
 }
-#T_1ce36_row1_col13, #T_1ce36_row4_col12, #T_1ce36_row5_col13 {
+#T_9eced_row1_col13, #T_9eced_row4_col12, #T_9eced_row5_col13 {
   background-color: #edf8e9;
   color: #000000;
 }
-#T_1ce36_row1_col15, #T_1ce36_row2_col2, #T_1ce36_row3_col3, #T_1ce36_row3_col14 {
+#T_9eced_row1_col15, #T_9eced_row2_col2, #T_9eced_row3_col3, #T_9eced_row3_col14 {
   background-color: #e6f5e1;
   color: #000000;
 }
-#T_1ce36_row1_col17, #T_1ce36_row3_col25 {
+#T_9eced_row1_col17, #T_9eced_row3_col25 {
   background-color: #e7f6e2;
   color: #000000;
 }
-#T_1ce36_row1_col18 {
+#T_9eced_row1_col18 {
   background-color: #f6fcf4;
   color: #000000;
 }
-#T_1ce36_row1_col25, #T_1ce36_row5_col19 {
+#T_9eced_row1_col25, #T_9eced_row5_col19 {
   background-color: #e5f5e0;
   color: #000000;
 }
-#T_1ce36_row1_col26, #T_1ce36_row4_col7, #T_1ce36_row4_col11 {
+#T_9eced_row1_col26, #T_9eced_row4_col7, #T_9eced_row4_col11 {
   background-color: #dbf1d6;
   color: #000000;
 }
-#T_1ce36_row2_col0, #T_1ce36_row3_col5 {
+#T_9eced_row2_col0, #T_9eced_row3_col5 {
   background-color: #e2f4dd;
   color: #000000;
 }
-#T_1ce36_row2_col1, #T_1ce36_row4_col18 {
+#T_9eced_row2_col1, #T_9eced_row4_col18 {
   background-color: #def2d9;
   color: #000000;
 }
-#T_1ce36_row2_col8, #T_1ce36_row3_col29 {
+#T_9eced_row2_col8, #T_9eced_row3_col29 {
   background-color: #bde5b6;
   color: #000000;
 }
-#T_1ce36_row2_col9 {
+#T_9eced_row2_col9 {
   background-color: #7dc87e;
   color: #000000;
 }
-#T_1ce36_row2_col21, #T_1ce36_row4_col15, #T_1ce36_row5_col10 {
+#T_9eced_row2_col21, #T_9eced_row4_col15, #T_9eced_row5_col10 {
   background-color: #e3f4de;
   color: #000000;
 }
-#T_1ce36_row2_col24 {
+#T_9eced_row2_col24 {
   background-color: #caeac3;
   color: #000000;
 }
-#T_1ce36_row2_col28, #T_1ce36_row4_col14 {
+#T_9eced_row2_col28, #T_9eced_row4_col14 {
   background-color: #ddf2d8;
   color: #000000;
 }
-#T_1ce36_row3_col0 {
+#T_9eced_row3_col0 {
   background-color: #aedea7;
   color: #000000;
 }
-#T_1ce36_row3_col2 {
+#T_9eced_row3_col2 {
   background-color: #b5e1ae;
   color: #000000;
 }
-#T_1ce36_row3_col4 {
+#T_9eced_row3_col4 {
   background-color: #7ac77b;
   color: #000000;
 }
-#T_1ce36_row3_col6 {
+#T_9eced_row3_col6 {
   background-color: #edf8ea;
   color: #000000;
 }
-#T_1ce36_row3_col8, #T_1ce36_row5_col2 {
+#T_9eced_row3_col8, #T_9eced_row5_col2 {
   background-color: #79c67a;
   color: #000000;
 }
-#T_1ce36_row3_col9 {
+#T_9eced_row3_col9 {
   background-color: #5bb86a;
   color: #f1f1f1;
 }
-#T_1ce36_row3_col13 {
+#T_9eced_row3_col13 {
   background-color: #f4fbf2;
   color: #000000;
 }
-#T_1ce36_row3_col16 {
+#T_9eced_row3_col16 {
   background-color: #f2faef;
   color: #000000;
 }
-#T_1ce36_row3_col17 {
+#T_9eced_row3_col17 {
   background-color: #e0f3db;
   color: #000000;
 }
-#T_1ce36_row3_col20 {
+#T_9eced_row3_col20 {
   background-color: #c3e7bc;
   color: #000000;
 }
-#T_1ce36_row3_col21 {
+#T_9eced_row3_col21 {
   background-color: #aadda4;
   color: #000000;
 }
-#T_1ce36_row3_col22 {
+#T_9eced_row3_col22 {
   background-color: #cbebc5;
   color: #000000;
 }
-#T_1ce36_row3_col24 {
+#T_9eced_row3_col24 {
   background-color: #7fc97f;
   color: #000000;
 }
-#T_1ce36_row3_col26 {
+#T_9eced_row3_col26 {
   background-color: #eaf7e6;
   color: #000000;
 }
-#T_1ce36_row3_col28 {
+#T_9eced_row3_col28 {
   background-color: #b4e1ad;
   color: #000000;
 }
-#T_1ce36_row4_col0 {
+#T_9eced_row4_col0 {
   background-color: #98d594;
   color: #000000;
 }
-#T_1ce36_row4_col1 {
+#T_9eced_row4_col1 {
   background-color: #92d28f;
   color: #000000;
 }
-#T_1ce36_row4_col2 {
+#T_9eced_row4_col2 {
   background-color: #a0d99b;
   color: #000000;
 }
-#T_1ce36_row4_col6 {
+#T_9eced_row4_col6 {
   background-color: #e1f3dc;
   color: #000000;
 }
-#T_1ce36_row4_col9 {
+#T_9eced_row4_col9 {
   background-color: #4aaf61;
   color: #f1f1f1;
 }
-#T_1ce36_row4_col13 {
+#T_9eced_row4_col13 {
   background-color: #f2faf0;
   color: #000000;
 }
-#T_1ce36_row4_col20, #T_1ce36_row4_col29 {
+#T_9eced_row4_col20, #T_9eced_row4_col29 {
   background-color: #b0dfaa;
   color: #000000;
 }
-#T_1ce36_row4_col21 {
+#T_9eced_row4_col21 {
   background-color: #88ce87;
   color: #000000;
 }
-#T_1ce36_row4_col22 {
+#T_9eced_row4_col22 {
   background-color: #bae3b3;
   color: #000000;
 }
-#T_1ce36_row4_col23, #T_1ce36_row5_col12 {
+#T_9eced_row4_col23, #T_9eced_row5_col12 {
   background-color: #e5f5e1;
   color: #000000;
 }
-#T_1ce36_row4_col24, #T_1ce36_row5_col21 {
+#T_9eced_row4_col24, #T_9eced_row5_col21 {
   background-color: #62bb6d;
   color: #f1f1f1;
 }
-#T_1ce36_row4_col27, #T_1ce36_row5_col5 {
+#T_9eced_row4_col27, #T_9eced_row5_col5 {
   background-color: #abdda5;
   color: #000000;
 }
-#T_1ce36_row5_col0 {
+#T_9eced_row5_col0 {
   background-color: #75c477;
   color: #000000;
 }
-#T_1ce36_row5_col1 {
+#T_9eced_row5_col1 {
   background-color: #73c476;
   color: #000000;
 }
-#T_1ce36_row5_col3 {
+#T_9eced_row5_col3 {
   background-color: #c1e6ba;
   color: #000000;
 }
-#T_1ce36_row5_col4 {
+#T_9eced_row5_col4 {
   background-color: #46ae60;
   color: #f1f1f1;
 }
-#T_1ce36_row5_col6, #T_1ce36_row5_col26 {
+#T_9eced_row5_col6, #T_9eced_row5_col26 {
   background-color: #b6e2af;
   color: #000000;
 }
-#T_1ce36_row5_col7 {
+#T_9eced_row5_col7 {
   background-color: #a3da9d;
   color: #000000;
 }
-#T_1ce36_row5_col8 {
+#T_9eced_row5_col8 {
   background-color: #48ae60;
   color: #f1f1f1;
 }
-#T_1ce36_row5_col9 {
+#T_9eced_row5_col9 {
   background-color: #3aa357;
   color: #f1f1f1;
 }
-#T_1ce36_row5_col11 {
+#T_9eced_row5_col11 {
   background-color: #c8e9c1;
   color: #000000;
 }
-#T_1ce36_row5_col15 {
+#T_9eced_row5_col15 {
   background-color: #ccebc6;
   color: #000000;
 }
-#T_1ce36_row5_col17 {
+#T_9eced_row5_col17 {
   background-color: #bee5b8;
   color: #000000;
 }
-#T_1ce36_row5_col20 {
+#T_9eced_row5_col20 {
   background-color: #87cd86;
   color: #000000;
 }
-#T_1ce36_row5_col22 {
+#T_9eced_row5_col22 {
   background-color: #91d28e;
   color: #000000;
 }
-#T_1ce36_row5_col25 {
+#T_9eced_row5_col25 {
   background-color: #b7e2b1;
   color: #000000;
 }
-#T_1ce36_row5_col28 {
+#T_9eced_row5_col28 {
   background-color: #90d18d;
   color: #000000;
 }
-#T_1ce36_row6_col0, #T_1ce36_row6_col1, #T_1ce36_row6_col2, #T_1ce36_row6_col3, #T_1ce36_row6_col4, #T_1ce36_row6_col5, #T_1ce36_row6_col6, #T_1ce36_row6_col7, #T_1ce36_row6_col8, #T_1ce36_row6_col9, #T_1ce36_row6_col10, #T_1ce36_row6_col11, #T_1ce36_row6_col12, #T_1ce36_row6_col13, #T_1ce36_row6_col14, #T_1ce36_row6_col15, #T_1ce36_row6_col16, #T_1ce36_row6_col17, #T_1ce36_row6_col18, #T_1ce36_row6_col19, #T_1ce36_row6_col20, #T_1ce36_row6_col21, #T_1ce36_row6_col22, #T_1ce36_row6_col23, #T_1ce36_row6_col24, #T_1ce36_row6_col25, #T_1ce36_row6_col26, #T_1ce36_row6_col27, #T_1ce36_row6_col28, #T_1ce36_row6_col29 {
+#T_9eced_row6_col0, #T_9eced_row6_col1, #T_9eced_row6_col2, #T_9eced_row6_col3, #T_9eced_row6_col4, #T_9eced_row6_col5, #T_9eced_row6_col6, #T_9eced_row6_col7, #T_9eced_row6_col8, #T_9eced_row6_col9, #T_9eced_row6_col10, #T_9eced_row6_col11, #T_9eced_row6_col12, #T_9eced_row6_col13, #T_9eced_row6_col14, #T_9eced_row6_col15, #T_9eced_row6_col16, #T_9eced_row6_col17, #T_9eced_row6_col18, #T_9eced_row6_col19, #T_9eced_row6_col20, #T_9eced_row6_col21, #T_9eced_row6_col22, #T_9eced_row6_col23, #T_9eced_row6_col24, #T_9eced_row6_col25, #T_9eced_row6_col26, #T_9eced_row6_col27, #T_9eced_row6_col28, #T_9eced_row6_col29 {
   background-color: #00441b;
   color: #f1f1f1;
 }
 </style>
 
-<table id="T_1ce36" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_9eced" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_1ce36_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">mean radius</th>
-<th id="T_1ce36_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">mean texture</th>
-<th id="T_1ce36_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">mean perimeter</th>
-<th id="T_1ce36_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">mean area</th>
-<th id="T_1ce36_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">mean smoothness</th>
-<th id="T_1ce36_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">mean compactness</th>
-<th id="T_1ce36_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">mean concavity</th>
-<th id="T_1ce36_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">mean concave points</th>
-<th id="T_1ce36_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">mean symmetry</th>
-<th id="T_1ce36_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">mean fractal dimension</th>
-<th id="T_1ce36_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">radius error</th>
-<th id="T_1ce36_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">texture error</th>
-<th id="T_1ce36_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">perimeter error</th>
-<th id="T_1ce36_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">area error</th>
-<th id="T_1ce36_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">smoothness error</th>
-<th id="T_1ce36_level0_col15" class="col_heading level0 col15" data-quarto-table-cell-role="th">compactness error</th>
-<th id="T_1ce36_level0_col16" class="col_heading level0 col16" data-quarto-table-cell-role="th">concavity error</th>
-<th id="T_1ce36_level0_col17" class="col_heading level0 col17" data-quarto-table-cell-role="th">concave points error</th>
-<th id="T_1ce36_level0_col18" class="col_heading level0 col18" data-quarto-table-cell-role="th">symmetry error</th>
-<th id="T_1ce36_level0_col19" class="col_heading level0 col19" data-quarto-table-cell-role="th">fractal dimension error</th>
-<th id="T_1ce36_level0_col20" class="col_heading level0 col20" data-quarto-table-cell-role="th">worst radius</th>
-<th id="T_1ce36_level0_col21" class="col_heading level0 col21" data-quarto-table-cell-role="th">worst texture</th>
-<th id="T_1ce36_level0_col22" class="col_heading level0 col22" data-quarto-table-cell-role="th">worst perimeter</th>
-<th id="T_1ce36_level0_col23" class="col_heading level0 col23" data-quarto-table-cell-role="th">worst area</th>
-<th id="T_1ce36_level0_col24" class="col_heading level0 col24" data-quarto-table-cell-role="th">worst smoothness</th>
-<th id="T_1ce36_level0_col25" class="col_heading level0 col25" data-quarto-table-cell-role="th">worst compactness</th>
-<th id="T_1ce36_level0_col26" class="col_heading level0 col26" data-quarto-table-cell-role="th">worst concavity</th>
-<th id="T_1ce36_level0_col27" class="col_heading level0 col27" data-quarto-table-cell-role="th">worst concave points</th>
-<th id="T_1ce36_level0_col28" class="col_heading level0 col28" data-quarto-table-cell-role="th">worst symmetry</th>
-<th id="T_1ce36_level0_col29" class="col_heading level0 col29" data-quarto-table-cell-role="th">worst fractal dimension</th>
+<th id="T_9eced_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">mean radius</th>
+<th id="T_9eced_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">mean texture</th>
+<th id="T_9eced_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">mean perimeter</th>
+<th id="T_9eced_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">mean area</th>
+<th id="T_9eced_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">mean smoothness</th>
+<th id="T_9eced_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">mean compactness</th>
+<th id="T_9eced_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">mean concavity</th>
+<th id="T_9eced_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">mean concave points</th>
+<th id="T_9eced_level0_col8" class="col_heading level0 col8" data-quarto-table-cell-role="th">mean symmetry</th>
+<th id="T_9eced_level0_col9" class="col_heading level0 col9" data-quarto-table-cell-role="th">mean fractal dimension</th>
+<th id="T_9eced_level0_col10" class="col_heading level0 col10" data-quarto-table-cell-role="th">radius error</th>
+<th id="T_9eced_level0_col11" class="col_heading level0 col11" data-quarto-table-cell-role="th">texture error</th>
+<th id="T_9eced_level0_col12" class="col_heading level0 col12" data-quarto-table-cell-role="th">perimeter error</th>
+<th id="T_9eced_level0_col13" class="col_heading level0 col13" data-quarto-table-cell-role="th">area error</th>
+<th id="T_9eced_level0_col14" class="col_heading level0 col14" data-quarto-table-cell-role="th">smoothness error</th>
+<th id="T_9eced_level0_col15" class="col_heading level0 col15" data-quarto-table-cell-role="th">compactness error</th>
+<th id="T_9eced_level0_col16" class="col_heading level0 col16" data-quarto-table-cell-role="th">concavity error</th>
+<th id="T_9eced_level0_col17" class="col_heading level0 col17" data-quarto-table-cell-role="th">concave points error</th>
+<th id="T_9eced_level0_col18" class="col_heading level0 col18" data-quarto-table-cell-role="th">symmetry error</th>
+<th id="T_9eced_level0_col19" class="col_heading level0 col19" data-quarto-table-cell-role="th">fractal dimension error</th>
+<th id="T_9eced_level0_col20" class="col_heading level0 col20" data-quarto-table-cell-role="th">worst radius</th>
+<th id="T_9eced_level0_col21" class="col_heading level0 col21" data-quarto-table-cell-role="th">worst texture</th>
+<th id="T_9eced_level0_col22" class="col_heading level0 col22" data-quarto-table-cell-role="th">worst perimeter</th>
+<th id="T_9eced_level0_col23" class="col_heading level0 col23" data-quarto-table-cell-role="th">worst area</th>
+<th id="T_9eced_level0_col24" class="col_heading level0 col24" data-quarto-table-cell-role="th">worst smoothness</th>
+<th id="T_9eced_level0_col25" class="col_heading level0 col25" data-quarto-table-cell-role="th">worst compactness</th>
+<th id="T_9eced_level0_col26" class="col_heading level0 col26" data-quarto-table-cell-role="th">worst concavity</th>
+<th id="T_9eced_level0_col27" class="col_heading level0 col27" data-quarto-table-cell-role="th">worst concave points</th>
+<th id="T_9eced_level0_col28" class="col_heading level0 col28" data-quarto-table-cell-role="th">worst symmetry</th>
+<th id="T_9eced_level0_col29" class="col_heading level0 col29" data-quarto-table-cell-role="th">worst fractal dimension</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_1ce36_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
-<td id="T_1ce36_row0_col0" class="data row0 col0">14.127292</td>
-<td id="T_1ce36_row0_col1" class="data row0 col1">19.289649</td>
-<td id="T_1ce36_row0_col2" class="data row0 col2">91.969033</td>
-<td id="T_1ce36_row0_col3" class="data row0 col3">654.889104</td>
-<td id="T_1ce36_row0_col4" class="data row0 col4">0.096360</td>
-<td id="T_1ce36_row0_col5" class="data row0 col5">0.104341</td>
-<td id="T_1ce36_row0_col6" class="data row0 col6">0.088799</td>
-<td id="T_1ce36_row0_col7" class="data row0 col7">0.048919</td>
-<td id="T_1ce36_row0_col8" class="data row0 col8">0.181162</td>
-<td id="T_1ce36_row0_col9" class="data row0 col9">0.062798</td>
-<td id="T_1ce36_row0_col10" class="data row0 col10">0.405172</td>
-<td id="T_1ce36_row0_col11" class="data row0 col11">1.216853</td>
-<td id="T_1ce36_row0_col12" class="data row0 col12">2.866059</td>
-<td id="T_1ce36_row0_col13" class="data row0 col13">40.337079</td>
-<td id="T_1ce36_row0_col14" class="data row0 col14">0.007041</td>
-<td id="T_1ce36_row0_col15" class="data row0 col15">0.025478</td>
-<td id="T_1ce36_row0_col16" class="data row0 col16">0.031894</td>
-<td id="T_1ce36_row0_col17" class="data row0 col17">0.011796</td>
-<td id="T_1ce36_row0_col18" class="data row0 col18">0.020542</td>
-<td id="T_1ce36_row0_col19" class="data row0 col19">0.003795</td>
-<td id="T_1ce36_row0_col20" class="data row0 col20">16.269190</td>
-<td id="T_1ce36_row0_col21" class="data row0 col21">25.677223</td>
-<td id="T_1ce36_row0_col22" class="data row0 col22">107.261213</td>
-<td id="T_1ce36_row0_col23" class="data row0 col23">880.583128</td>
-<td id="T_1ce36_row0_col24" class="data row0 col24">0.132369</td>
-<td id="T_1ce36_row0_col25" class="data row0 col25">0.254265</td>
-<td id="T_1ce36_row0_col26" class="data row0 col26">0.272188</td>
-<td id="T_1ce36_row0_col27" class="data row0 col27">0.114606</td>
-<td id="T_1ce36_row0_col28" class="data row0 col28">0.290076</td>
-<td id="T_1ce36_row0_col29" class="data row0 col29">0.083946</td>
+<td id="T_9eced_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">mean</td>
+<td id="T_9eced_row0_col0" class="data row0 col0">14.127292</td>
+<td id="T_9eced_row0_col1" class="data row0 col1">19.289649</td>
+<td id="T_9eced_row0_col2" class="data row0 col2">91.969033</td>
+<td id="T_9eced_row0_col3" class="data row0 col3">654.889104</td>
+<td id="T_9eced_row0_col4" class="data row0 col4">0.096360</td>
+<td id="T_9eced_row0_col5" class="data row0 col5">0.104341</td>
+<td id="T_9eced_row0_col6" class="data row0 col6">0.088799</td>
+<td id="T_9eced_row0_col7" class="data row0 col7">0.048919</td>
+<td id="T_9eced_row0_col8" class="data row0 col8">0.181162</td>
+<td id="T_9eced_row0_col9" class="data row0 col9">0.062798</td>
+<td id="T_9eced_row0_col10" class="data row0 col10">0.405172</td>
+<td id="T_9eced_row0_col11" class="data row0 col11">1.216853</td>
+<td id="T_9eced_row0_col12" class="data row0 col12">2.866059</td>
+<td id="T_9eced_row0_col13" class="data row0 col13">40.337079</td>
+<td id="T_9eced_row0_col14" class="data row0 col14">0.007041</td>
+<td id="T_9eced_row0_col15" class="data row0 col15">0.025478</td>
+<td id="T_9eced_row0_col16" class="data row0 col16">0.031894</td>
+<td id="T_9eced_row0_col17" class="data row0 col17">0.011796</td>
+<td id="T_9eced_row0_col18" class="data row0 col18">0.020542</td>
+<td id="T_9eced_row0_col19" class="data row0 col19">0.003795</td>
+<td id="T_9eced_row0_col20" class="data row0 col20">16.269190</td>
+<td id="T_9eced_row0_col21" class="data row0 col21">25.677223</td>
+<td id="T_9eced_row0_col22" class="data row0 col22">107.261213</td>
+<td id="T_9eced_row0_col23" class="data row0 col23">880.583128</td>
+<td id="T_9eced_row0_col24" class="data row0 col24">0.132369</td>
+<td id="T_9eced_row0_col25" class="data row0 col25">0.254265</td>
+<td id="T_9eced_row0_col26" class="data row0 col26">0.272188</td>
+<td id="T_9eced_row0_col27" class="data row0 col27">0.114606</td>
+<td id="T_9eced_row0_col28" class="data row0 col28">0.290076</td>
+<td id="T_9eced_row0_col29" class="data row0 col29">0.083946</td>
 </tr>
 <tr class="even">
-<td id="T_1ce36_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
-<td id="T_1ce36_row1_col0" class="data row1 col0">3.524049</td>
-<td id="T_1ce36_row1_col1" class="data row1 col1">4.301036</td>
-<td id="T_1ce36_row1_col2" class="data row1 col2">24.298981</td>
-<td id="T_1ce36_row1_col3" class="data row1 col3">351.914129</td>
-<td id="T_1ce36_row1_col4" class="data row1 col4">0.014064</td>
-<td id="T_1ce36_row1_col5" class="data row1 col5">0.052813</td>
-<td id="T_1ce36_row1_col6" class="data row1 col6">0.079720</td>
-<td id="T_1ce36_row1_col7" class="data row1 col7">0.038803</td>
-<td id="T_1ce36_row1_col8" class="data row1 col8">0.027414</td>
-<td id="T_1ce36_row1_col9" class="data row1 col9">0.007060</td>
-<td id="T_1ce36_row1_col10" class="data row1 col10">0.277313</td>
-<td id="T_1ce36_row1_col11" class="data row1 col11">0.551648</td>
-<td id="T_1ce36_row1_col12" class="data row1 col12">2.021855</td>
-<td id="T_1ce36_row1_col13" class="data row1 col13">45.491006</td>
-<td id="T_1ce36_row1_col14" class="data row1 col14">0.003003</td>
-<td id="T_1ce36_row1_col15" class="data row1 col15">0.017908</td>
-<td id="T_1ce36_row1_col16" class="data row1 col16">0.030186</td>
-<td id="T_1ce36_row1_col17" class="data row1 col17">0.006170</td>
-<td id="T_1ce36_row1_col18" class="data row1 col18">0.008266</td>
-<td id="T_1ce36_row1_col19" class="data row1 col19">0.002646</td>
-<td id="T_1ce36_row1_col20" class="data row1 col20">4.833242</td>
-<td id="T_1ce36_row1_col21" class="data row1 col21">6.146258</td>
-<td id="T_1ce36_row1_col22" class="data row1 col22">33.602542</td>
-<td id="T_1ce36_row1_col23" class="data row1 col23">569.356993</td>
-<td id="T_1ce36_row1_col24" class="data row1 col24">0.022832</td>
-<td id="T_1ce36_row1_col25" class="data row1 col25">0.157336</td>
-<td id="T_1ce36_row1_col26" class="data row1 col26">0.208624</td>
-<td id="T_1ce36_row1_col27" class="data row1 col27">0.065732</td>
-<td id="T_1ce36_row1_col28" class="data row1 col28">0.061867</td>
-<td id="T_1ce36_row1_col29" class="data row1 col29">0.018061</td>
+<td id="T_9eced_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">std</td>
+<td id="T_9eced_row1_col0" class="data row1 col0">3.524049</td>
+<td id="T_9eced_row1_col1" class="data row1 col1">4.301036</td>
+<td id="T_9eced_row1_col2" class="data row1 col2">24.298981</td>
+<td id="T_9eced_row1_col3" class="data row1 col3">351.914129</td>
+<td id="T_9eced_row1_col4" class="data row1 col4">0.014064</td>
+<td id="T_9eced_row1_col5" class="data row1 col5">0.052813</td>
+<td id="T_9eced_row1_col6" class="data row1 col6">0.079720</td>
+<td id="T_9eced_row1_col7" class="data row1 col7">0.038803</td>
+<td id="T_9eced_row1_col8" class="data row1 col8">0.027414</td>
+<td id="T_9eced_row1_col9" class="data row1 col9">0.007060</td>
+<td id="T_9eced_row1_col10" class="data row1 col10">0.277313</td>
+<td id="T_9eced_row1_col11" class="data row1 col11">0.551648</td>
+<td id="T_9eced_row1_col12" class="data row1 col12">2.021855</td>
+<td id="T_9eced_row1_col13" class="data row1 col13">45.491006</td>
+<td id="T_9eced_row1_col14" class="data row1 col14">0.003003</td>
+<td id="T_9eced_row1_col15" class="data row1 col15">0.017908</td>
+<td id="T_9eced_row1_col16" class="data row1 col16">0.030186</td>
+<td id="T_9eced_row1_col17" class="data row1 col17">0.006170</td>
+<td id="T_9eced_row1_col18" class="data row1 col18">0.008266</td>
+<td id="T_9eced_row1_col19" class="data row1 col19">0.002646</td>
+<td id="T_9eced_row1_col20" class="data row1 col20">4.833242</td>
+<td id="T_9eced_row1_col21" class="data row1 col21">6.146258</td>
+<td id="T_9eced_row1_col22" class="data row1 col22">33.602542</td>
+<td id="T_9eced_row1_col23" class="data row1 col23">569.356993</td>
+<td id="T_9eced_row1_col24" class="data row1 col24">0.022832</td>
+<td id="T_9eced_row1_col25" class="data row1 col25">0.157336</td>
+<td id="T_9eced_row1_col26" class="data row1 col26">0.208624</td>
+<td id="T_9eced_row1_col27" class="data row1 col27">0.065732</td>
+<td id="T_9eced_row1_col28" class="data row1 col28">0.061867</td>
+<td id="T_9eced_row1_col29" class="data row1 col29">0.018061</td>
 </tr>
 <tr class="odd">
-<td id="T_1ce36_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
-<td id="T_1ce36_row2_col0" class="data row2 col0">6.981000</td>
-<td id="T_1ce36_row2_col1" class="data row2 col1">9.710000</td>
-<td id="T_1ce36_row2_col2" class="data row2 col2">43.790000</td>
-<td id="T_1ce36_row2_col3" class="data row2 col3">143.500000</td>
-<td id="T_1ce36_row2_col4" class="data row2 col4">0.052630</td>
-<td id="T_1ce36_row2_col5" class="data row2 col5">0.019380</td>
-<td id="T_1ce36_row2_col6" class="data row2 col6">0.000000</td>
-<td id="T_1ce36_row2_col7" class="data row2 col7">0.000000</td>
-<td id="T_1ce36_row2_col8" class="data row2 col8">0.106000</td>
-<td id="T_1ce36_row2_col9" class="data row2 col9">0.049960</td>
-<td id="T_1ce36_row2_col10" class="data row2 col10">0.111500</td>
-<td id="T_1ce36_row2_col11" class="data row2 col11">0.360200</td>
-<td id="T_1ce36_row2_col12" class="data row2 col12">0.757000</td>
-<td id="T_1ce36_row2_col13" class="data row2 col13">6.802000</td>
-<td id="T_1ce36_row2_col14" class="data row2 col14">0.001713</td>
-<td id="T_1ce36_row2_col15" class="data row2 col15">0.002252</td>
-<td id="T_1ce36_row2_col16" class="data row2 col16">0.000000</td>
-<td id="T_1ce36_row2_col17" class="data row2 col17">0.000000</td>
-<td id="T_1ce36_row2_col18" class="data row2 col18">0.007882</td>
-<td id="T_1ce36_row2_col19" class="data row2 col19">0.000895</td>
-<td id="T_1ce36_row2_col20" class="data row2 col20">7.930000</td>
-<td id="T_1ce36_row2_col21" class="data row2 col21">12.020000</td>
-<td id="T_1ce36_row2_col22" class="data row2 col22">50.410000</td>
-<td id="T_1ce36_row2_col23" class="data row2 col23">185.200000</td>
-<td id="T_1ce36_row2_col24" class="data row2 col24">0.071170</td>
-<td id="T_1ce36_row2_col25" class="data row2 col25">0.027290</td>
-<td id="T_1ce36_row2_col26" class="data row2 col26">0.000000</td>
-<td id="T_1ce36_row2_col27" class="data row2 col27">0.000000</td>
-<td id="T_1ce36_row2_col28" class="data row2 col28">0.156500</td>
-<td id="T_1ce36_row2_col29" class="data row2 col29">0.055040</td>
+<td id="T_9eced_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">min</td>
+<td id="T_9eced_row2_col0" class="data row2 col0">6.981000</td>
+<td id="T_9eced_row2_col1" class="data row2 col1">9.710000</td>
+<td id="T_9eced_row2_col2" class="data row2 col2">43.790000</td>
+<td id="T_9eced_row2_col3" class="data row2 col3">143.500000</td>
+<td id="T_9eced_row2_col4" class="data row2 col4">0.052630</td>
+<td id="T_9eced_row2_col5" class="data row2 col5">0.019380</td>
+<td id="T_9eced_row2_col6" class="data row2 col6">0.000000</td>
+<td id="T_9eced_row2_col7" class="data row2 col7">0.000000</td>
+<td id="T_9eced_row2_col8" class="data row2 col8">0.106000</td>
+<td id="T_9eced_row2_col9" class="data row2 col9">0.049960</td>
+<td id="T_9eced_row2_col10" class="data row2 col10">0.111500</td>
+<td id="T_9eced_row2_col11" class="data row2 col11">0.360200</td>
+<td id="T_9eced_row2_col12" class="data row2 col12">0.757000</td>
+<td id="T_9eced_row2_col13" class="data row2 col13">6.802000</td>
+<td id="T_9eced_row2_col14" class="data row2 col14">0.001713</td>
+<td id="T_9eced_row2_col15" class="data row2 col15">0.002252</td>
+<td id="T_9eced_row2_col16" class="data row2 col16">0.000000</td>
+<td id="T_9eced_row2_col17" class="data row2 col17">0.000000</td>
+<td id="T_9eced_row2_col18" class="data row2 col18">0.007882</td>
+<td id="T_9eced_row2_col19" class="data row2 col19">0.000895</td>
+<td id="T_9eced_row2_col20" class="data row2 col20">7.930000</td>
+<td id="T_9eced_row2_col21" class="data row2 col21">12.020000</td>
+<td id="T_9eced_row2_col22" class="data row2 col22">50.410000</td>
+<td id="T_9eced_row2_col23" class="data row2 col23">185.200000</td>
+<td id="T_9eced_row2_col24" class="data row2 col24">0.071170</td>
+<td id="T_9eced_row2_col25" class="data row2 col25">0.027290</td>
+<td id="T_9eced_row2_col26" class="data row2 col26">0.000000</td>
+<td id="T_9eced_row2_col27" class="data row2 col27">0.000000</td>
+<td id="T_9eced_row2_col28" class="data row2 col28">0.156500</td>
+<td id="T_9eced_row2_col29" class="data row2 col29">0.055040</td>
 </tr>
 <tr class="even">
-<td id="T_1ce36_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
-<td id="T_1ce36_row3_col0" class="data row3 col0">11.700000</td>
-<td id="T_1ce36_row3_col1" class="data row3 col1">16.170000</td>
-<td id="T_1ce36_row3_col2" class="data row3 col2">75.170000</td>
-<td id="T_1ce36_row3_col3" class="data row3 col3">420.300000</td>
-<td id="T_1ce36_row3_col4" class="data row3 col4">0.086370</td>
-<td id="T_1ce36_row3_col5" class="data row3 col5">0.064920</td>
-<td id="T_1ce36_row3_col6" class="data row3 col6">0.029560</td>
-<td id="T_1ce36_row3_col7" class="data row3 col7">0.020310</td>
-<td id="T_1ce36_row3_col8" class="data row3 col8">0.161900</td>
-<td id="T_1ce36_row3_col9" class="data row3 col9">0.057700</td>
-<td id="T_1ce36_row3_col10" class="data row3 col10">0.232400</td>
-<td id="T_1ce36_row3_col11" class="data row3 col11">0.833900</td>
-<td id="T_1ce36_row3_col12" class="data row3 col12">1.606000</td>
-<td id="T_1ce36_row3_col13" class="data row3 col13">17.850000</td>
-<td id="T_1ce36_row3_col14" class="data row3 col14">0.005169</td>
-<td id="T_1ce36_row3_col15" class="data row3 col15">0.013080</td>
-<td id="T_1ce36_row3_col16" class="data row3 col16">0.015090</td>
-<td id="T_1ce36_row3_col17" class="data row3 col17">0.007638</td>
-<td id="T_1ce36_row3_col18" class="data row3 col18">0.015160</td>
-<td id="T_1ce36_row3_col19" class="data row3 col19">0.002248</td>
-<td id="T_1ce36_row3_col20" class="data row3 col20">13.010000</td>
-<td id="T_1ce36_row3_col21" class="data row3 col21">21.080000</td>
-<td id="T_1ce36_row3_col22" class="data row3 col22">84.110000</td>
-<td id="T_1ce36_row3_col23" class="data row3 col23">515.300000</td>
-<td id="T_1ce36_row3_col24" class="data row3 col24">0.116600</td>
-<td id="T_1ce36_row3_col25" class="data row3 col25">0.147200</td>
-<td id="T_1ce36_row3_col26" class="data row3 col26">0.114500</td>
-<td id="T_1ce36_row3_col27" class="data row3 col27">0.064930</td>
-<td id="T_1ce36_row3_col28" class="data row3 col28">0.250400</td>
-<td id="T_1ce36_row3_col29" class="data row3 col29">0.071460</td>
+<td id="T_9eced_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">25%</td>
+<td id="T_9eced_row3_col0" class="data row3 col0">11.700000</td>
+<td id="T_9eced_row3_col1" class="data row3 col1">16.170000</td>
+<td id="T_9eced_row3_col2" class="data row3 col2">75.170000</td>
+<td id="T_9eced_row3_col3" class="data row3 col3">420.300000</td>
+<td id="T_9eced_row3_col4" class="data row3 col4">0.086370</td>
+<td id="T_9eced_row3_col5" class="data row3 col5">0.064920</td>
+<td id="T_9eced_row3_col6" class="data row3 col6">0.029560</td>
+<td id="T_9eced_row3_col7" class="data row3 col7">0.020310</td>
+<td id="T_9eced_row3_col8" class="data row3 col8">0.161900</td>
+<td id="T_9eced_row3_col9" class="data row3 col9">0.057700</td>
+<td id="T_9eced_row3_col10" class="data row3 col10">0.232400</td>
+<td id="T_9eced_row3_col11" class="data row3 col11">0.833900</td>
+<td id="T_9eced_row3_col12" class="data row3 col12">1.606000</td>
+<td id="T_9eced_row3_col13" class="data row3 col13">17.850000</td>
+<td id="T_9eced_row3_col14" class="data row3 col14">0.005169</td>
+<td id="T_9eced_row3_col15" class="data row3 col15">0.013080</td>
+<td id="T_9eced_row3_col16" class="data row3 col16">0.015090</td>
+<td id="T_9eced_row3_col17" class="data row3 col17">0.007638</td>
+<td id="T_9eced_row3_col18" class="data row3 col18">0.015160</td>
+<td id="T_9eced_row3_col19" class="data row3 col19">0.002248</td>
+<td id="T_9eced_row3_col20" class="data row3 col20">13.010000</td>
+<td id="T_9eced_row3_col21" class="data row3 col21">21.080000</td>
+<td id="T_9eced_row3_col22" class="data row3 col22">84.110000</td>
+<td id="T_9eced_row3_col23" class="data row3 col23">515.300000</td>
+<td id="T_9eced_row3_col24" class="data row3 col24">0.116600</td>
+<td id="T_9eced_row3_col25" class="data row3 col25">0.147200</td>
+<td id="T_9eced_row3_col26" class="data row3 col26">0.114500</td>
+<td id="T_9eced_row3_col27" class="data row3 col27">0.064930</td>
+<td id="T_9eced_row3_col28" class="data row3 col28">0.250400</td>
+<td id="T_9eced_row3_col29" class="data row3 col29">0.071460</td>
 </tr>
 <tr class="odd">
-<td id="T_1ce36_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
-<td id="T_1ce36_row4_col0" class="data row4 col0">13.370000</td>
-<td id="T_1ce36_row4_col1" class="data row4 col1">18.840000</td>
-<td id="T_1ce36_row4_col2" class="data row4 col2">86.240000</td>
-<td id="T_1ce36_row4_col3" class="data row4 col3">551.100000</td>
-<td id="T_1ce36_row4_col4" class="data row4 col4">0.095870</td>
-<td id="T_1ce36_row4_col5" class="data row4 col5">0.092630</td>
-<td id="T_1ce36_row4_col6" class="data row4 col6">0.061540</td>
-<td id="T_1ce36_row4_col7" class="data row4 col7">0.033500</td>
-<td id="T_1ce36_row4_col8" class="data row4 col8">0.179200</td>
-<td id="T_1ce36_row4_col9" class="data row4 col9">0.061540</td>
-<td id="T_1ce36_row4_col10" class="data row4 col10">0.324200</td>
-<td id="T_1ce36_row4_col11" class="data row4 col11">1.108000</td>
-<td id="T_1ce36_row4_col12" class="data row4 col12">2.287000</td>
-<td id="T_1ce36_row4_col13" class="data row4 col13">24.530000</td>
-<td id="T_1ce36_row4_col14" class="data row4 col14">0.006380</td>
-<td id="T_1ce36_row4_col15" class="data row4 col15">0.020450</td>
-<td id="T_1ce36_row4_col16" class="data row4 col16">0.025890</td>
-<td id="T_1ce36_row4_col17" class="data row4 col17">0.010930</td>
-<td id="T_1ce36_row4_col18" class="data row4 col18">0.018730</td>
-<td id="T_1ce36_row4_col19" class="data row4 col19">0.003187</td>
-<td id="T_1ce36_row4_col20" class="data row4 col20">14.970000</td>
-<td id="T_1ce36_row4_col21" class="data row4 col21">25.410000</td>
-<td id="T_1ce36_row4_col22" class="data row4 col22">97.660000</td>
-<td id="T_1ce36_row4_col23" class="data row4 col23">686.500000</td>
-<td id="T_1ce36_row4_col24" class="data row4 col24">0.131300</td>
-<td id="T_1ce36_row4_col25" class="data row4 col25">0.211900</td>
-<td id="T_1ce36_row4_col26" class="data row4 col26">0.226700</td>
-<td id="T_1ce36_row4_col27" class="data row4 col27">0.099930</td>
-<td id="T_1ce36_row4_col28" class="data row4 col28">0.282200</td>
-<td id="T_1ce36_row4_col29" class="data row4 col29">0.080040</td>
+<td id="T_9eced_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">50%</td>
+<td id="T_9eced_row4_col0" class="data row4 col0">13.370000</td>
+<td id="T_9eced_row4_col1" class="data row4 col1">18.840000</td>
+<td id="T_9eced_row4_col2" class="data row4 col2">86.240000</td>
+<td id="T_9eced_row4_col3" class="data row4 col3">551.100000</td>
+<td id="T_9eced_row4_col4" class="data row4 col4">0.095870</td>
+<td id="T_9eced_row4_col5" class="data row4 col5">0.092630</td>
+<td id="T_9eced_row4_col6" class="data row4 col6">0.061540</td>
+<td id="T_9eced_row4_col7" class="data row4 col7">0.033500</td>
+<td id="T_9eced_row4_col8" class="data row4 col8">0.179200</td>
+<td id="T_9eced_row4_col9" class="data row4 col9">0.061540</td>
+<td id="T_9eced_row4_col10" class="data row4 col10">0.324200</td>
+<td id="T_9eced_row4_col11" class="data row4 col11">1.108000</td>
+<td id="T_9eced_row4_col12" class="data row4 col12">2.287000</td>
+<td id="T_9eced_row4_col13" class="data row4 col13">24.530000</td>
+<td id="T_9eced_row4_col14" class="data row4 col14">0.006380</td>
+<td id="T_9eced_row4_col15" class="data row4 col15">0.020450</td>
+<td id="T_9eced_row4_col16" class="data row4 col16">0.025890</td>
+<td id="T_9eced_row4_col17" class="data row4 col17">0.010930</td>
+<td id="T_9eced_row4_col18" class="data row4 col18">0.018730</td>
+<td id="T_9eced_row4_col19" class="data row4 col19">0.003187</td>
+<td id="T_9eced_row4_col20" class="data row4 col20">14.970000</td>
+<td id="T_9eced_row4_col21" class="data row4 col21">25.410000</td>
+<td id="T_9eced_row4_col22" class="data row4 col22">97.660000</td>
+<td id="T_9eced_row4_col23" class="data row4 col23">686.500000</td>
+<td id="T_9eced_row4_col24" class="data row4 col24">0.131300</td>
+<td id="T_9eced_row4_col25" class="data row4 col25">0.211900</td>
+<td id="T_9eced_row4_col26" class="data row4 col26">0.226700</td>
+<td id="T_9eced_row4_col27" class="data row4 col27">0.099930</td>
+<td id="T_9eced_row4_col28" class="data row4 col28">0.282200</td>
+<td id="T_9eced_row4_col29" class="data row4 col29">0.080040</td>
 </tr>
 <tr class="even">
-<td id="T_1ce36_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
-<td id="T_1ce36_row5_col0" class="data row5 col0">15.780000</td>
-<td id="T_1ce36_row5_col1" class="data row5 col1">21.800000</td>
-<td id="T_1ce36_row5_col2" class="data row5 col2">104.100000</td>
-<td id="T_1ce36_row5_col3" class="data row5 col3">782.700000</td>
-<td id="T_1ce36_row5_col4" class="data row5 col4">0.105300</td>
-<td id="T_1ce36_row5_col5" class="data row5 col5">0.130400</td>
-<td id="T_1ce36_row5_col6" class="data row5 col6">0.130700</td>
-<td id="T_1ce36_row5_col7" class="data row5 col7">0.074000</td>
-<td id="T_1ce36_row5_col8" class="data row5 col8">0.195700</td>
-<td id="T_1ce36_row5_col9" class="data row5 col9">0.066120</td>
-<td id="T_1ce36_row5_col10" class="data row5 col10">0.478900</td>
-<td id="T_1ce36_row5_col11" class="data row5 col11">1.474000</td>
-<td id="T_1ce36_row5_col12" class="data row5 col12">3.357000</td>
-<td id="T_1ce36_row5_col13" class="data row5 col13">45.190000</td>
-<td id="T_1ce36_row5_col14" class="data row5 col14">0.008146</td>
-<td id="T_1ce36_row5_col15" class="data row5 col15">0.032450</td>
-<td id="T_1ce36_row5_col16" class="data row5 col16">0.042050</td>
-<td id="T_1ce36_row5_col17" class="data row5 col17">0.014710</td>
-<td id="T_1ce36_row5_col18" class="data row5 col18">0.023480</td>
-<td id="T_1ce36_row5_col19" class="data row5 col19">0.004558</td>
-<td id="T_1ce36_row5_col20" class="data row5 col20">18.790000</td>
-<td id="T_1ce36_row5_col21" class="data row5 col21">29.720000</td>
-<td id="T_1ce36_row5_col22" class="data row5 col22">125.400000</td>
-<td id="T_1ce36_row5_col23" class="data row5 col23">1084.000000</td>
-<td id="T_1ce36_row5_col24" class="data row5 col24">0.146000</td>
-<td id="T_1ce36_row5_col25" class="data row5 col25">0.339100</td>
-<td id="T_1ce36_row5_col26" class="data row5 col26">0.382900</td>
-<td id="T_1ce36_row5_col27" class="data row5 col27">0.161400</td>
-<td id="T_1ce36_row5_col28" class="data row5 col28">0.317900</td>
-<td id="T_1ce36_row5_col29" class="data row5 col29">0.092080</td>
+<td id="T_9eced_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">75%</td>
+<td id="T_9eced_row5_col0" class="data row5 col0">15.780000</td>
+<td id="T_9eced_row5_col1" class="data row5 col1">21.800000</td>
+<td id="T_9eced_row5_col2" class="data row5 col2">104.100000</td>
+<td id="T_9eced_row5_col3" class="data row5 col3">782.700000</td>
+<td id="T_9eced_row5_col4" class="data row5 col4">0.105300</td>
+<td id="T_9eced_row5_col5" class="data row5 col5">0.130400</td>
+<td id="T_9eced_row5_col6" class="data row5 col6">0.130700</td>
+<td id="T_9eced_row5_col7" class="data row5 col7">0.074000</td>
+<td id="T_9eced_row5_col8" class="data row5 col8">0.195700</td>
+<td id="T_9eced_row5_col9" class="data row5 col9">0.066120</td>
+<td id="T_9eced_row5_col10" class="data row5 col10">0.478900</td>
+<td id="T_9eced_row5_col11" class="data row5 col11">1.474000</td>
+<td id="T_9eced_row5_col12" class="data row5 col12">3.357000</td>
+<td id="T_9eced_row5_col13" class="data row5 col13">45.190000</td>
+<td id="T_9eced_row5_col14" class="data row5 col14">0.008146</td>
+<td id="T_9eced_row5_col15" class="data row5 col15">0.032450</td>
+<td id="T_9eced_row5_col16" class="data row5 col16">0.042050</td>
+<td id="T_9eced_row5_col17" class="data row5 col17">0.014710</td>
+<td id="T_9eced_row5_col18" class="data row5 col18">0.023480</td>
+<td id="T_9eced_row5_col19" class="data row5 col19">0.004558</td>
+<td id="T_9eced_row5_col20" class="data row5 col20">18.790000</td>
+<td id="T_9eced_row5_col21" class="data row5 col21">29.720000</td>
+<td id="T_9eced_row5_col22" class="data row5 col22">125.400000</td>
+<td id="T_9eced_row5_col23" class="data row5 col23">1084.000000</td>
+<td id="T_9eced_row5_col24" class="data row5 col24">0.146000</td>
+<td id="T_9eced_row5_col25" class="data row5 col25">0.339100</td>
+<td id="T_9eced_row5_col26" class="data row5 col26">0.382900</td>
+<td id="T_9eced_row5_col27" class="data row5 col27">0.161400</td>
+<td id="T_9eced_row5_col28" class="data row5 col28">0.317900</td>
+<td id="T_9eced_row5_col29" class="data row5 col29">0.092080</td>
 </tr>
 <tr class="odd">
-<td id="T_1ce36_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
-<td id="T_1ce36_row6_col0" class="data row6 col0">28.110000</td>
-<td id="T_1ce36_row6_col1" class="data row6 col1">39.280000</td>
-<td id="T_1ce36_row6_col2" class="data row6 col2">188.500000</td>
-<td id="T_1ce36_row6_col3" class="data row6 col3">2501.000000</td>
-<td id="T_1ce36_row6_col4" class="data row6 col4">0.163400</td>
-<td id="T_1ce36_row6_col5" class="data row6 col5">0.345400</td>
-<td id="T_1ce36_row6_col6" class="data row6 col6">0.426800</td>
-<td id="T_1ce36_row6_col7" class="data row6 col7">0.201200</td>
-<td id="T_1ce36_row6_col8" class="data row6 col8">0.304000</td>
-<td id="T_1ce36_row6_col9" class="data row6 col9">0.097440</td>
-<td id="T_1ce36_row6_col10" class="data row6 col10">2.873000</td>
-<td id="T_1ce36_row6_col11" class="data row6 col11">4.885000</td>
-<td id="T_1ce36_row6_col12" class="data row6 col12">21.980000</td>
-<td id="T_1ce36_row6_col13" class="data row6 col13">542.200000</td>
-<td id="T_1ce36_row6_col14" class="data row6 col14">0.031130</td>
-<td id="T_1ce36_row6_col15" class="data row6 col15">0.135400</td>
-<td id="T_1ce36_row6_col16" class="data row6 col16">0.396000</td>
-<td id="T_1ce36_row6_col17" class="data row6 col17">0.052790</td>
-<td id="T_1ce36_row6_col18" class="data row6 col18">0.078950</td>
-<td id="T_1ce36_row6_col19" class="data row6 col19">0.029840</td>
-<td id="T_1ce36_row6_col20" class="data row6 col20">36.040000</td>
-<td id="T_1ce36_row6_col21" class="data row6 col21">49.540000</td>
-<td id="T_1ce36_row6_col22" class="data row6 col22">251.200000</td>
-<td id="T_1ce36_row6_col23" class="data row6 col23">4254.000000</td>
-<td id="T_1ce36_row6_col24" class="data row6 col24">0.222600</td>
-<td id="T_1ce36_row6_col25" class="data row6 col25">1.058000</td>
-<td id="T_1ce36_row6_col26" class="data row6 col26">1.252000</td>
-<td id="T_1ce36_row6_col27" class="data row6 col27">0.291000</td>
-<td id="T_1ce36_row6_col28" class="data row6 col28">0.663800</td>
-<td id="T_1ce36_row6_col29" class="data row6 col29">0.207500</td>
+<td id="T_9eced_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">max</td>
+<td id="T_9eced_row6_col0" class="data row6 col0">28.110000</td>
+<td id="T_9eced_row6_col1" class="data row6 col1">39.280000</td>
+<td id="T_9eced_row6_col2" class="data row6 col2">188.500000</td>
+<td id="T_9eced_row6_col3" class="data row6 col3">2501.000000</td>
+<td id="T_9eced_row6_col4" class="data row6 col4">0.163400</td>
+<td id="T_9eced_row6_col5" class="data row6 col5">0.345400</td>
+<td id="T_9eced_row6_col6" class="data row6 col6">0.426800</td>
+<td id="T_9eced_row6_col7" class="data row6 col7">0.201200</td>
+<td id="T_9eced_row6_col8" class="data row6 col8">0.304000</td>
+<td id="T_9eced_row6_col9" class="data row6 col9">0.097440</td>
+<td id="T_9eced_row6_col10" class="data row6 col10">2.873000</td>
+<td id="T_9eced_row6_col11" class="data row6 col11">4.885000</td>
+<td id="T_9eced_row6_col12" class="data row6 col12">21.980000</td>
+<td id="T_9eced_row6_col13" class="data row6 col13">542.200000</td>
+<td id="T_9eced_row6_col14" class="data row6 col14">0.031130</td>
+<td id="T_9eced_row6_col15" class="data row6 col15">0.135400</td>
+<td id="T_9eced_row6_col16" class="data row6 col16">0.396000</td>
+<td id="T_9eced_row6_col17" class="data row6 col17">0.052790</td>
+<td id="T_9eced_row6_col18" class="data row6 col18">0.078950</td>
+<td id="T_9eced_row6_col19" class="data row6 col19">0.029840</td>
+<td id="T_9eced_row6_col20" class="data row6 col20">36.040000</td>
+<td id="T_9eced_row6_col21" class="data row6 col21">49.540000</td>
+<td id="T_9eced_row6_col22" class="data row6 col22">251.200000</td>
+<td id="T_9eced_row6_col23" class="data row6 col23">4254.000000</td>
+<td id="T_9eced_row6_col24" class="data row6 col24">0.222600</td>
+<td id="T_9eced_row6_col25" class="data row6 col25">1.058000</td>
+<td id="T_9eced_row6_col26" class="data row6 col26">1.252000</td>
+<td id="T_9eced_row6_col27" class="data row6 col27">0.291000</td>
+<td id="T_9eced_row6_col28" class="data row6 col28">0.663800</td>
+<td id="T_9eced_row6_col29" class="data row6 col29">0.207500</td>
 </tr>
 </tbody>
 </table>
@@ -1270,30 +1272,30 @@ About Scale Variance
 </div>
 </div>
 <p>Let us build and train a Random Forest model with the data we just loaded.</p>
-<div id="87a8c465" class="cell" data-execution_count="4">
+<div id="ab17f06c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="87a8c465"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="87a8c465-1"><a href="#87a8c465-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
-<span id="87a8c465-2"><a href="#87a8c465-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> breast_cancer.data</span>
-<span id="87a8c465-3"><a href="#87a8c465-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> breast_cancer.target</span>
-<span id="87a8c465-4"><a href="#87a8c465-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="87a8c465-5"><a href="#87a8c465-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets</span></span>
-<span id="87a8c465-6"><a href="#87a8c465-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="87a8c465-7"><a href="#87a8c465-7" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="87a8c465-8"><a href="#87a8c465-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="87a8c465-9"><a href="#87a8c465-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="87a8c465-10"><a href="#87a8c465-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Random Forest classifier</span></span>
-<span id="87a8c465-11"><a href="#87a8c465-11" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="87a8c465-12"><a href="#87a8c465-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="87a8c465-13"><a href="#87a8c465-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model on the training data</span></span>
-<span id="87a8c465-14"><a href="#87a8c465-14" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
-<span id="87a8c465-15"><a href="#87a8c465-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="87a8c465-16"><a href="#87a8c465-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
-<span id="87a8c465-17"><a href="#87a8c465-17" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
-<span id="87a8c465-18"><a href="#87a8c465-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="87a8c465-19"><a href="#87a8c465-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
-<span id="87a8c465-20"><a href="#87a8c465-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="87a8c465-21"><a href="#87a8c465-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy of Random Forest classifier: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="ab17f06c"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="ab17f06c-1"><a href="#ab17f06c-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into features and target</span></span>
+<span id="ab17f06c-2"><a href="#ab17f06c-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> breast_cancer.data</span>
+<span id="ab17f06c-3"><a href="#ab17f06c-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> breast_cancer.target</span>
+<span id="ab17f06c-4"><a href="#ab17f06c-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ab17f06c-5"><a href="#ab17f06c-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into training and test sets</span></span>
+<span id="ab17f06c-6"><a href="#ab17f06c-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="ab17f06c-7"><a href="#ab17f06c-7" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="ab17f06c-8"><a href="#ab17f06c-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="ab17f06c-9"><a href="#ab17f06c-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ab17f06c-10"><a href="#ab17f06c-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Random Forest classifier</span></span>
+<span id="ab17f06c-11"><a href="#ab17f06c-11" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="ab17f06c-12"><a href="#ab17f06c-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ab17f06c-13"><a href="#ab17f06c-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model on the training data</span></span>
+<span id="ab17f06c-14"><a href="#ab17f06c-14" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
+<span id="ab17f06c-15"><a href="#ab17f06c-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ab17f06c-16"><a href="#ab17f06c-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="ab17f06c-17"><a href="#ab17f06c-17" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
+<span id="ab17f06c-18"><a href="#ab17f06c-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="ab17f06c-19"><a href="#ab17f06c-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model</span></span>
+<span id="ab17f06c-20"><a href="#ab17f06c-20" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="ab17f06c-21"><a href="#ab17f06c-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy of Random Forest classifier: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy of Random Forest classifier: 0.97</code></pre>
@@ -1306,30 +1308,30 @@ About Scale Variance
 <li><p><strong>Leaf Nodes</strong>: Leaf nodes are the terminal nodes of the tree at which no further splitting occurs. Each leaf node represents a decision outcome or prediction. In classification trees, the leaf node assigns the class that is most frequent among the samples in that node. In regression trees, the leaf usually predicts the mean or median of the targets.</p></li>
 <li><p><strong>Branches</strong>: Branches represent the outcome of a test in terms of feature and threshold. Each branch corresponds to one of the possible answers to the question posed at the node: Is the feature value higher or lower than the threshold? This binary splitting makes the structure of a decision tree inherently simple to understand.</p></li>
 </ul>
-<div id="dffeda69" class="cell" data-execution_count="5">
+<div id="0ade8815" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="dffeda69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="dffeda69-1"><a href="#dffeda69-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="dffeda69-2"><a href="#dffeda69-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="dffeda69-3"><a href="#dffeda69-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="dffeda69-4"><a href="#dffeda69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the tree that you want to visualize (e.g., the fifth tree in the forest)</span></span>
-<span id="dffeda69-5"><a href="#dffeda69-5" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> clf.estimators_[<span class="dv">5</span>]</span>
-<span id="dffeda69-6"><a href="#dffeda69-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="dffeda69-7"><a href="#dffeda69-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure for the plot</span></span>
-<span id="dffeda69-8"><a href="#dffeda69-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="dffeda69-9"><a href="#dffeda69-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="dffeda69-10"><a href="#dffeda69-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree using plot_tree function</span></span>
-<span id="dffeda69-11"><a href="#dffeda69-11" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(</span>
-<span id="dffeda69-12"><a href="#dffeda69-12" aria-hidden="true" tabindex="-1"></a>    estimator,</span>
-<span id="dffeda69-13"><a href="#dffeda69-13" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
-<span id="dffeda69-14"><a href="#dffeda69-14" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>breast_cancer.target_names,</span>
-<span id="dffeda69-15"><a href="#dffeda69-15" aria-hidden="true" tabindex="-1"></a>    filled<span class="op">=</span><span class="va">True</span>,</span>
-<span id="dffeda69-16"><a href="#dffeda69-16" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">2</span>,  <span class="co"># Limit the depth of the tree for better readability</span></span>
-<span id="dffeda69-17"><a href="#dffeda69-17" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
-<span id="dffeda69-18"><a href="#dffeda69-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="dffeda69-19"><a href="#dffeda69-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="dffeda69-20"><a href="#dffeda69-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="dffeda69-21"><a href="#dffeda69-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="0ade8815"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="0ade8815-1"><a href="#0ade8815-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="0ade8815-2"><a href="#0ade8815-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
+<span id="0ade8815-3"><a href="#0ade8815-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0ade8815-4"><a href="#0ade8815-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the tree that you want to visualize (e.g., the fifth tree in the forest)</span></span>
+<span id="0ade8815-5"><a href="#0ade8815-5" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> clf.estimators_[<span class="dv">5</span>]</span>
+<span id="0ade8815-6"><a href="#0ade8815-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0ade8815-7"><a href="#0ade8815-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure for the plot</span></span>
+<span id="0ade8815-8"><a href="#0ade8815-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="0ade8815-9"><a href="#0ade8815-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0ade8815-10"><a href="#0ade8815-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree using plot_tree function</span></span>
+<span id="0ade8815-11"><a href="#0ade8815-11" aria-hidden="true" tabindex="-1"></a>tree.plot_tree(</span>
+<span id="0ade8815-12"><a href="#0ade8815-12" aria-hidden="true" tabindex="-1"></a>    estimator,</span>
+<span id="0ade8815-13"><a href="#0ade8815-13" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="0ade8815-14"><a href="#0ade8815-14" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="0ade8815-15"><a href="#0ade8815-15" aria-hidden="true" tabindex="-1"></a>    filled<span class="op">=</span><span class="va">True</span>,</span>
+<span id="0ade8815-16"><a href="#0ade8815-16" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">2</span>,  <span class="co"># Limit the depth of the tree for better readability</span></span>
+<span id="0ade8815-17"><a href="#0ade8815-17" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
+<span id="0ade8815-18"><a href="#0ade8815-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="0ade8815-19"><a href="#0ade8815-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="0ade8815-20"><a href="#0ade8815-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="0ade8815-21"><a href="#0ade8815-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1340,53 +1342,53 @@ About Scale Variance
 </div>
 </div>
 <p>We have seen a single tree, but Random Forest is an ensemble of multiple trees. The final prediction is made by aggregating the predictions of all the trees in the forest. We can also visualise all or a subset of trees in the forest to grasp the complexity and diversity of the model.</p>
-<div id="4fd1a1be" class="cell" data-execution_count="6">
+<div id="1da33ccf" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="4fd1a1be"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4fd1a1be-1"><a href="#4fd1a1be-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="4fd1a1be-2"><a href="#4fd1a1be-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-3"><a href="#4fd1a1be-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of trees in the random forest</span></span>
-<span id="4fd1a1be-4"><a href="#4fd1a1be-4" aria-hidden="true" tabindex="-1"></a>total_trees <span class="op">=</span> <span class="bu">len</span>(clf.estimators_)</span>
-<span id="4fd1a1be-5"><a href="#4fd1a1be-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-6"><a href="#4fd1a1be-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of trees to plot</span></span>
-<span id="4fd1a1be-7"><a href="#4fd1a1be-7" aria-hidden="true" tabindex="-1"></a>num_trees_to_plot <span class="op">=</span> <span class="dv">24</span></span>
-<span id="4fd1a1be-8"><a href="#4fd1a1be-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-9"><a href="#4fd1a1be-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly pick 'num_trees_to_plot' trees from the random forest</span></span>
-<span id="4fd1a1be-10"><a href="#4fd1a1be-10" aria-hidden="true" tabindex="-1"></a>selected_trees <span class="op">=</span> random.sample(<span class="bu">range</span>(total_trees), num_trees_to_plot)</span>
-<span id="4fd1a1be-11"><a href="#4fd1a1be-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-12"><a href="#4fd1a1be-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure object and an array of axes objects (subplots)</span></span>
-<span id="4fd1a1be-13"><a href="#4fd1a1be-13" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(</span>
-<span id="4fd1a1be-14"><a href="#4fd1a1be-14" aria-hidden="true" tabindex="-1"></a>    nrows<span class="op">=</span>(num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>,</span>
-<span id="4fd1a1be-15"><a href="#4fd1a1be-15" aria-hidden="true" tabindex="-1"></a>    ncols<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="4fd1a1be-16"><a href="#4fd1a1be-16" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span> <span class="op">*</span> ((num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>)),</span>
-<span id="4fd1a1be-17"><a href="#4fd1a1be-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="4fd1a1be-18"><a href="#4fd1a1be-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-19"><a href="#4fd1a1be-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes (for easy iteration if it's 2D due to multiple rows)</span></span>
-<span id="4fd1a1be-20"><a href="#4fd1a1be-20" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
-<span id="4fd1a1be-21"><a href="#4fd1a1be-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-22"><a href="#4fd1a1be-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each randomly selected tree using a subplot</span></span>
-<span id="4fd1a1be-23"><a href="#4fd1a1be-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(</span>
-<span id="4fd1a1be-24"><a href="#4fd1a1be-24" aria-hidden="true" tabindex="-1"></a>    axes[:num_trees_to_plot]</span>
-<span id="4fd1a1be-25"><a href="#4fd1a1be-25" aria-hidden="true" tabindex="-1"></a>):  <span class="co"># Limit axes iteration to number of trees to plot</span></span>
-<span id="4fd1a1be-26"><a href="#4fd1a1be-26" aria-hidden="true" tabindex="-1"></a>    tree_index <span class="op">=</span> selected_trees[i]</span>
-<span id="4fd1a1be-27"><a href="#4fd1a1be-27" aria-hidden="true" tabindex="-1"></a>    tree.plot_tree(</span>
-<span id="4fd1a1be-28"><a href="#4fd1a1be-28" aria-hidden="true" tabindex="-1"></a>        clf.estimators_[tree_index],</span>
-<span id="4fd1a1be-29"><a href="#4fd1a1be-29" aria-hidden="true" tabindex="-1"></a>        feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
-<span id="4fd1a1be-30"><a href="#4fd1a1be-30" aria-hidden="true" tabindex="-1"></a>        class_names<span class="op">=</span>[<span class="st">"Malignant"</span>, <span class="st">"Benign"</span>],</span>
-<span id="4fd1a1be-31"><a href="#4fd1a1be-31" aria-hidden="true" tabindex="-1"></a>        filled<span class="op">=</span><span class="va">True</span>,</span>
-<span id="4fd1a1be-32"><a href="#4fd1a1be-32" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
-<span id="4fd1a1be-33"><a href="#4fd1a1be-33" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="4fd1a1be-34"><a href="#4fd1a1be-34" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Tree </span><span class="sc">{</span>tree_index<span class="sc">}</span><span class="ss">"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="4fd1a1be-35"><a href="#4fd1a1be-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-36"><a href="#4fd1a1be-36" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are any leftover axes, turn them off (when num_trees_to_plot is not a multiple of 4)</span></span>
-<span id="4fd1a1be-37"><a href="#4fd1a1be-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_trees_to_plot:]:</span>
-<span id="4fd1a1be-38"><a href="#4fd1a1be-38" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="4fd1a1be-39"><a href="#4fd1a1be-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-40"><a href="#4fd1a1be-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
-<span id="4fd1a1be-41"><a href="#4fd1a1be-41" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="4fd1a1be-42"><a href="#4fd1a1be-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="4fd1a1be-43"><a href="#4fd1a1be-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
-<span id="4fd1a1be-44"><a href="#4fd1a1be-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="1da33ccf"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1da33ccf-1"><a href="#1da33ccf-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="1da33ccf-2"><a href="#1da33ccf-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-3"><a href="#1da33ccf-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Total number of trees in the random forest</span></span>
+<span id="1da33ccf-4"><a href="#1da33ccf-4" aria-hidden="true" tabindex="-1"></a>total_trees <span class="op">=</span> <span class="bu">len</span>(clf.estimators_)</span>
+<span id="1da33ccf-5"><a href="#1da33ccf-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-6"><a href="#1da33ccf-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of trees to plot</span></span>
+<span id="1da33ccf-7"><a href="#1da33ccf-7" aria-hidden="true" tabindex="-1"></a>num_trees_to_plot <span class="op">=</span> <span class="dv">24</span></span>
+<span id="1da33ccf-8"><a href="#1da33ccf-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-9"><a href="#1da33ccf-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly pick 'num_trees_to_plot' trees from the random forest</span></span>
+<span id="1da33ccf-10"><a href="#1da33ccf-10" aria-hidden="true" tabindex="-1"></a>selected_trees <span class="op">=</span> random.sample(<span class="bu">range</span>(total_trees), num_trees_to_plot)</span>
+<span id="1da33ccf-11"><a href="#1da33ccf-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-12"><a href="#1da33ccf-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a figure object and an array of axes objects (subplots)</span></span>
+<span id="1da33ccf-13"><a href="#1da33ccf-13" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(</span>
+<span id="1da33ccf-14"><a href="#1da33ccf-14" aria-hidden="true" tabindex="-1"></a>    nrows<span class="op">=</span>(num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="1da33ccf-15"><a href="#1da33ccf-15" aria-hidden="true" tabindex="-1"></a>    ncols<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="1da33ccf-16"><a href="#1da33ccf-16" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span> <span class="op">*</span> ((num_trees_to_plot <span class="op">//</span> <span class="dv">4</span>) <span class="op">+</span> <span class="dv">1</span>)),</span>
+<span id="1da33ccf-17"><a href="#1da33ccf-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="1da33ccf-18"><a href="#1da33ccf-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-19"><a href="#1da33ccf-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the array of axes (for easy iteration if it's 2D due to multiple rows)</span></span>
+<span id="1da33ccf-20"><a href="#1da33ccf-20" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="1da33ccf-21"><a href="#1da33ccf-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-22"><a href="#1da33ccf-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each randomly selected tree using a subplot</span></span>
+<span id="1da33ccf-23"><a href="#1da33ccf-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(</span>
+<span id="1da33ccf-24"><a href="#1da33ccf-24" aria-hidden="true" tabindex="-1"></a>    axes[:num_trees_to_plot]</span>
+<span id="1da33ccf-25"><a href="#1da33ccf-25" aria-hidden="true" tabindex="-1"></a>):  <span class="co"># Limit axes iteration to number of trees to plot</span></span>
+<span id="1da33ccf-26"><a href="#1da33ccf-26" aria-hidden="true" tabindex="-1"></a>    tree_index <span class="op">=</span> selected_trees[i]</span>
+<span id="1da33ccf-27"><a href="#1da33ccf-27" aria-hidden="true" tabindex="-1"></a>    tree.plot_tree(</span>
+<span id="1da33ccf-28"><a href="#1da33ccf-28" aria-hidden="true" tabindex="-1"></a>        clf.estimators_[tree_index],</span>
+<span id="1da33ccf-29"><a href="#1da33ccf-29" aria-hidden="true" tabindex="-1"></a>        feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="1da33ccf-30"><a href="#1da33ccf-30" aria-hidden="true" tabindex="-1"></a>        class_names<span class="op">=</span>[<span class="st">"Malignant"</span>, <span class="st">"Benign"</span>],</span>
+<span id="1da33ccf-31"><a href="#1da33ccf-31" aria-hidden="true" tabindex="-1"></a>        filled<span class="op">=</span><span class="va">True</span>,</span>
+<span id="1da33ccf-32"><a href="#1da33ccf-32" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="1da33ccf-33"><a href="#1da33ccf-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="1da33ccf-34"><a href="#1da33ccf-34" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"Tree </span><span class="sc">{</span>tree_index<span class="sc">}</span><span class="ss">"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="1da33ccf-35"><a href="#1da33ccf-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-36"><a href="#1da33ccf-36" aria-hidden="true" tabindex="-1"></a><span class="co"># If there are any leftover axes, turn them off (when num_trees_to_plot is not a multiple of 4)</span></span>
+<span id="1da33ccf-37"><a href="#1da33ccf-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[num_trees_to_plot:]:</span>
+<span id="1da33ccf-38"><a href="#1da33ccf-38" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="1da33ccf-39"><a href="#1da33ccf-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-40"><a href="#1da33ccf-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
+<span id="1da33ccf-41"><a href="#1da33ccf-41" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="1da33ccf-42"><a href="#1da33ccf-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1da33ccf-43"><a href="#1da33ccf-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="1da33ccf-44"><a href="#1da33ccf-44" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1401,39 +1403,39 @@ About Scale Variance
 <h2 class="anchored" data-anchor-id="explainability">Explainability</h2>
 <p>We’ve established that Random Forest models offer substantial explainability, unlike many other complex model frameworks that are often considered “black boxes.” To elucidate this aspect, one effective method is visualizing the decision paths used by the trees within the forest when making predictions. This can be accomplished using the <a href="https://github.com/parrt/dtreeviz">dtreeviz</a> library, which provides a detailed and interactive visualization of the decision-making process within a tree.</p>
 <p>Using dtreeviz, we can trace the decision path of a single example from the training set across any of the trees in the model. This visualization includes splits made at each node, the criteria for these splits, and the distribution of target classes at each step. Such detailed traceability helps in understanding exactly how the model is arriving at its conclusions, highlighting the individual contributions of features in the decision process.</p>
-<div id="9a050032" class="cell" data-execution_count="7">
+<div id="e0f17946" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="9a050032"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="9a050032-1"><a href="#9a050032-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> model</span>
-<span id="9a050032-2"><a href="#9a050032-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9a050032-3"><a href="#9a050032-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress warnings - this is just to shut up warnings about fonts in GitHub Actions</span></span>
-<span id="9a050032-4"><a href="#9a050032-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
-<span id="9a050032-5"><a href="#9a050032-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9a050032-6"><a href="#9a050032-6" aria-hidden="true" tabindex="-1"></a>logging.getLogger(<span class="st">"matplotlib.font_manager"</span>).setLevel(level<span class="op">=</span>logging.CRITICAL)</span>
-<span id="9a050032-7"><a href="#9a050032-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9a050032-8"><a href="#9a050032-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The training sample to visualize</span></span>
-<span id="9a050032-9"><a href="#9a050032-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[<span class="dv">5</span>]</span>
-<span id="9a050032-10"><a href="#9a050032-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9a050032-11"><a href="#9a050032-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for benign and malignant</span></span>
-<span id="9a050032-12"><a href="#9a050032-12" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {</span>
-<span id="9a050032-13"><a href="#9a050032-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"classes"</span>: [</span>
-<span id="9a050032-14"><a href="#9a050032-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">None</span>,  <span class="co"># 0 classes</span></span>
-<span id="9a050032-15"><a href="#9a050032-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">None</span>,  <span class="co"># 1 class</span></span>
-<span id="9a050032-16"><a href="#9a050032-16" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"#FFAAAA"</span>, <span class="st">"#AAFFAA"</span>],  <span class="co"># 2 classes</span></span>
-<span id="9a050032-17"><a href="#9a050032-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="9a050032-18"><a href="#9a050032-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="9a050032-19"><a href="#9a050032-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9a050032-20"><a href="#9a050032-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the selected tree</span></span>
-<span id="9a050032-21"><a href="#9a050032-21" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> model(</span>
-<span id="9a050032-22"><a href="#9a050032-22" aria-hidden="true" tabindex="-1"></a>    estimator,</span>
-<span id="9a050032-23"><a href="#9a050032-23" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
-<span id="9a050032-24"><a href="#9a050032-24" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
-<span id="9a050032-25"><a href="#9a050032-25" aria-hidden="true" tabindex="-1"></a>    target_name<span class="op">=</span><span class="st">"Target"</span>,</span>
-<span id="9a050032-26"><a href="#9a050032-26" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
-<span id="9a050032-27"><a href="#9a050032-27" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span><span class="bu">list</span>(breast_cancer.target_names),</span>
-<span id="9a050032-28"><a href="#9a050032-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="9a050032-29"><a href="#9a050032-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="9a050032-30"><a href="#9a050032-30" aria-hidden="true" tabindex="-1"></a>viz.view(x<span class="op">=</span>x, colors<span class="op">=</span>color_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="e0f17946"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e0f17946-1"><a href="#e0f17946-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> model</span>
+<span id="e0f17946-2"><a href="#e0f17946-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e0f17946-3"><a href="#e0f17946-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suppress warnings - this is just to shut up warnings about fonts in GitHub Actions</span></span>
+<span id="e0f17946-4"><a href="#e0f17946-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="e0f17946-5"><a href="#e0f17946-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e0f17946-6"><a href="#e0f17946-6" aria-hidden="true" tabindex="-1"></a>logging.getLogger(<span class="st">"matplotlib.font_manager"</span>).setLevel(level<span class="op">=</span>logging.CRITICAL)</span>
+<span id="e0f17946-7"><a href="#e0f17946-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e0f17946-8"><a href="#e0f17946-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The training sample to visualize</span></span>
+<span id="e0f17946-9"><a href="#e0f17946-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X_train[<span class="dv">5</span>]</span>
+<span id="e0f17946-10"><a href="#e0f17946-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e0f17946-11"><a href="#e0f17946-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for benign and malignant</span></span>
+<span id="e0f17946-12"><a href="#e0f17946-12" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {</span>
+<span id="e0f17946-13"><a href="#e0f17946-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"classes"</span>: [</span>
+<span id="e0f17946-14"><a href="#e0f17946-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">None</span>,  <span class="co"># 0 classes</span></span>
+<span id="e0f17946-15"><a href="#e0f17946-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">None</span>,  <span class="co"># 1 class</span></span>
+<span id="e0f17946-16"><a href="#e0f17946-16" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"#FFAAAA"</span>, <span class="st">"#AAFFAA"</span>],  <span class="co"># 2 classes</span></span>
+<span id="e0f17946-17"><a href="#e0f17946-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="e0f17946-18"><a href="#e0f17946-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="e0f17946-19"><a href="#e0f17946-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e0f17946-20"><a href="#e0f17946-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the selected tree</span></span>
+<span id="e0f17946-21"><a href="#e0f17946-21" aria-hidden="true" tabindex="-1"></a>viz <span class="op">=</span> model(</span>
+<span id="e0f17946-22"><a href="#e0f17946-22" aria-hidden="true" tabindex="-1"></a>    estimator,</span>
+<span id="e0f17946-23"><a href="#e0f17946-23" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="e0f17946-24"><a href="#e0f17946-24" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="e0f17946-25"><a href="#e0f17946-25" aria-hidden="true" tabindex="-1"></a>    target_name<span class="op">=</span><span class="st">"Target"</span>,</span>
+<span id="e0f17946-26"><a href="#e0f17946-26" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>breast_cancer.feature_names,</span>
+<span id="e0f17946-27"><a href="#e0f17946-27" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span><span class="bu">list</span>(breast_cancer.target_names),</span>
+<span id="e0f17946-28"><a href="#e0f17946-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="e0f17946-29"><a href="#e0f17946-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e0f17946-30"><a href="#e0f17946-30" aria-hidden="true" tabindex="-1"></a>viz.view(x<span class="op">=</span>x, colors<span class="op">=</span>color_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -1444,21 +1446,21 @@ About Scale Variance
 </div>
 </div>
 <p>Another great feature of Random Forests is that they can explain the relative importance of each feature when predicting results. For our <code>Breast Cancer</code> dataset, here is how each feature impacts the model.</p>
-<div id="d61470e7" class="cell" data-execution_count="8">
+<div id="73e7c4fb" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="d61470e7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d61470e7-1"><a href="#d61470e7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="d61470e7-2"><a href="#d61470e7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d61470e7-3"><a href="#d61470e7-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> breast_cancer.feature_names</span>
-<span id="d61470e7-4"><a href="#d61470e7-4" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> clf.feature_importances_</span>
-<span id="d61470e7-5"><a href="#d61470e7-5" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argsort(importances)</span>
-<span id="d61470e7-6"><a href="#d61470e7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="d61470e7-7"><a href="#d61470e7-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="d61470e7-8"><a href="#d61470e7-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Importances"</span>)</span>
-<span id="d61470e7-9"><a href="#d61470e7-9" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(indices)), importances[indices], color<span class="op">=</span><span class="st">"b"</span>, align<span class="op">=</span><span class="st">"center"</span>)</span>
-<span id="d61470e7-10"><a href="#d61470e7-10" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(indices)), [features[i] <span class="cf">for</span> i <span class="kw">in</span> indices])</span>
-<span id="d61470e7-11"><a href="#d61470e7-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Relative Importance"</span>)</span>
-<span id="d61470e7-12"><a href="#d61470e7-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="73e7c4fb"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="73e7c4fb-1"><a href="#73e7c4fb-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="73e7c4fb-2"><a href="#73e7c4fb-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="73e7c4fb-3"><a href="#73e7c4fb-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> breast_cancer.feature_names</span>
+<span id="73e7c4fb-4"><a href="#73e7c4fb-4" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> clf.feature_importances_</span>
+<span id="73e7c4fb-5"><a href="#73e7c4fb-5" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> np.argsort(importances)</span>
+<span id="73e7c4fb-6"><a href="#73e7c4fb-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="73e7c4fb-7"><a href="#73e7c4fb-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="73e7c4fb-8"><a href="#73e7c4fb-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Feature Importances"</span>)</span>
+<span id="73e7c4fb-9"><a href="#73e7c4fb-9" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(indices)), importances[indices], color<span class="op">=</span><span class="st">"b"</span>, align<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="73e7c4fb-10"><a href="#73e7c4fb-10" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(indices)), [features[i] <span class="cf">for</span> i <span class="kw">in</span> indices])</span>
+<span id="73e7c4fb-11"><a href="#73e7c4fb-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Relative Importance"</span>)</span>
+<span id="73e7c4fb-12"><a href="#73e7c4fb-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1469,29 +1471,29 @@ About Scale Variance
 </div>
 </div>
 <p>Now that we know which features are most important, we can use <code>dtreeviz</code> to visualise the classification boundaries for any pair of features. This can help us understand how the model is making decisions. Let us visualise classification boundaries for <code>worst concave points</code> and <code>worst area</code> features.</p>
-<div id="e823cd90" class="cell" data-execution_count="9">
+<div id="b813ec2a" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="e823cd90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e823cd90-1"><a href="#e823cd90-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> decision_boundaries</span>
-<span id="e823cd90-2"><a href="#e823cd90-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e823cd90-3"><a href="#e823cd90-3" aria-hidden="true" tabindex="-1"></a>X_features_for_boundaries <span class="op">=</span> X_train[</span>
-<span id="e823cd90-4"><a href="#e823cd90-4" aria-hidden="true" tabindex="-1"></a>    :, [<span class="dv">27</span>, <span class="dv">23</span>]</span>
-<span id="e823cd90-5"><a href="#e823cd90-5" aria-hidden="true" tabindex="-1"></a>]  <span class="co"># 27 = 'worst concave points', 23 = 'worst area'</span></span>
-<span id="e823cd90-6"><a href="#e823cd90-6" aria-hidden="true" tabindex="-1"></a>new_clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="e823cd90-7"><a href="#e823cd90-7" aria-hidden="true" tabindex="-1"></a>new_clf.fit(X_features_for_boundaries, y_train)</span>
-<span id="e823cd90-8"><a href="#e823cd90-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="e823cd90-9"><a href="#e823cd90-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="e823cd90-10"><a href="#e823cd90-10" aria-hidden="true" tabindex="-1"></a>decision_boundaries(</span>
-<span id="e823cd90-11"><a href="#e823cd90-11" aria-hidden="true" tabindex="-1"></a>    new_clf,</span>
-<span id="e823cd90-12"><a href="#e823cd90-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries,</span>
-<span id="e823cd90-13"><a href="#e823cd90-13" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
-<span id="e823cd90-14"><a href="#e823cd90-14" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
-<span id="e823cd90-15"><a href="#e823cd90-15" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>[<span class="st">"worst concave points"</span>, <span class="st">"worst area"</span>],</span>
-<span id="e823cd90-16"><a href="#e823cd90-16" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>breast_cancer.target_names,</span>
-<span id="e823cd90-17"><a href="#e823cd90-17" aria-hidden="true" tabindex="-1"></a>    markers<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"s"</span>],</span>
-<span id="e823cd90-18"><a href="#e823cd90-18" aria-hidden="true" tabindex="-1"></a>    colors<span class="op">=</span>color_map,</span>
-<span id="e823cd90-19"><a href="#e823cd90-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="e823cd90-20"><a href="#e823cd90-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="b813ec2a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b813ec2a-1"><a href="#b813ec2a-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dtreeviz <span class="im">import</span> decision_boundaries</span>
+<span id="b813ec2a-2"><a href="#b813ec2a-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b813ec2a-3"><a href="#b813ec2a-3" aria-hidden="true" tabindex="-1"></a>X_features_for_boundaries <span class="op">=</span> X_train[</span>
+<span id="b813ec2a-4"><a href="#b813ec2a-4" aria-hidden="true" tabindex="-1"></a>    :, [<span class="dv">27</span>, <span class="dv">23</span>]</span>
+<span id="b813ec2a-5"><a href="#b813ec2a-5" aria-hidden="true" tabindex="-1"></a>]  <span class="co"># 27 = 'worst concave points', 23 = 'worst area'</span></span>
+<span id="b813ec2a-6"><a href="#b813ec2a-6" aria-hidden="true" tabindex="-1"></a>new_clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="b813ec2a-7"><a href="#b813ec2a-7" aria-hidden="true" tabindex="-1"></a>new_clf.fit(X_features_for_boundaries, y_train)</span>
+<span id="b813ec2a-8"><a href="#b813ec2a-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b813ec2a-9"><a href="#b813ec2a-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="b813ec2a-10"><a href="#b813ec2a-10" aria-hidden="true" tabindex="-1"></a>decision_boundaries(</span>
+<span id="b813ec2a-11"><a href="#b813ec2a-11" aria-hidden="true" tabindex="-1"></a>    new_clf,</span>
+<span id="b813ec2a-12"><a href="#b813ec2a-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries,</span>
+<span id="b813ec2a-13"><a href="#b813ec2a-13" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="b813ec2a-14"><a href="#b813ec2a-14" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes,</span>
+<span id="b813ec2a-15"><a href="#b813ec2a-15" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>[<span class="st">"worst concave points"</span>, <span class="st">"worst area"</span>],</span>
+<span id="b813ec2a-16"><a href="#b813ec2a-16" aria-hidden="true" tabindex="-1"></a>    class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="b813ec2a-17"><a href="#b813ec2a-17" aria-hidden="true" tabindex="-1"></a>    markers<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"s"</span>],</span>
+<span id="b813ec2a-18"><a href="#b813ec2a-18" aria-hidden="true" tabindex="-1"></a>    colors<span class="op">=</span>color_map,</span>
+<span id="b813ec2a-19"><a href="#b813ec2a-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="b813ec2a-20"><a href="#b813ec2a-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1502,44 +1504,44 @@ About Scale Variance
 </div>
 </div>
 <p>We can also plot pairs of features and their decision boundaries in a grid, to understand how pairs of features interact in the model. This can help us understand the relationships between features and how they contribute to the model’s predictions. Let us do so for random pairs, just for illustration purposes. In practice, you would choose pairs of features that are most important for your specific problem.</p>
-<div id="54ec1dc9" class="cell" data-execution_count="10">
+<div id="d98c2ded" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="54ec1dc9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="54ec1dc9-1"><a href="#54ec1dc9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>
-<span id="54ec1dc9-2"><a href="#54ec1dc9-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="54ec1dc9-3"><a href="#54ec1dc9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="54ec1dc9-4"><a href="#54ec1dc9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 4x4 subplot grid</span></span>
-<span id="54ec1dc9-5"><a href="#54ec1dc9-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
-<span id="54ec1dc9-6"><a href="#54ec1dc9-6" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the 2D array of axes for easy iteration</span></span>
-<span id="54ec1dc9-7"><a href="#54ec1dc9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="54ec1dc9-8"><a href="#54ec1dc9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select and plot decision boundaries for 5x5 pairs of features</span></span>
-<span id="54ec1dc9-9"><a href="#54ec1dc9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
-<span id="54ec1dc9-10"><a href="#54ec1dc9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly pick two distinct features</span></span>
-<span id="54ec1dc9-11"><a href="#54ec1dc9-11" aria-hidden="true" tabindex="-1"></a>    features_idx <span class="op">=</span> np.random.choice(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]), size<span class="op">=</span><span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="54ec1dc9-12"><a href="#54ec1dc9-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries <span class="op">=</span> X[:, features_idx]</span>
-<span id="54ec1dc9-13"><a href="#54ec1dc9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="54ec1dc9-14"><a href="#54ec1dc9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train a new classifier</span></span>
-<span id="54ec1dc9-15"><a href="#54ec1dc9-15" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="54ec1dc9-16"><a href="#54ec1dc9-16" aria-hidden="true" tabindex="-1"></a>    clf.fit(X_features_for_boundaries, y)</span>
-<span id="54ec1dc9-17"><a href="#54ec1dc9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="54ec1dc9-18"><a href="#54ec1dc9-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot decision boundaries using dtreeviz</span></span>
-<span id="54ec1dc9-19"><a href="#54ec1dc9-19" aria-hidden="true" tabindex="-1"></a>    decision_boundaries(</span>
-<span id="54ec1dc9-20"><a href="#54ec1dc9-20" aria-hidden="true" tabindex="-1"></a>        clf,</span>
-<span id="54ec1dc9-21"><a href="#54ec1dc9-21" aria-hidden="true" tabindex="-1"></a>        X_features_for_boundaries,</span>
-<span id="54ec1dc9-22"><a href="#54ec1dc9-22" aria-hidden="true" tabindex="-1"></a>        y,</span>
-<span id="54ec1dc9-23"><a href="#54ec1dc9-23" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
-<span id="54ec1dc9-24"><a href="#54ec1dc9-24" aria-hidden="true" tabindex="-1"></a>        feature_names<span class="op">=</span>features[features_idx],</span>
-<span id="54ec1dc9-25"><a href="#54ec1dc9-25" aria-hidden="true" tabindex="-1"></a>        class_names<span class="op">=</span>breast_cancer.target_names,</span>
-<span id="54ec1dc9-26"><a href="#54ec1dc9-26" aria-hidden="true" tabindex="-1"></a>        markers<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"s"</span>],</span>
-<span id="54ec1dc9-27"><a href="#54ec1dc9-27" aria-hidden="true" tabindex="-1"></a>        colors<span class="op">=</span>color_map,</span>
-<span id="54ec1dc9-28"><a href="#54ec1dc9-28" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="54ec1dc9-29"><a href="#54ec1dc9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="54ec1dc9-30"><a href="#54ec1dc9-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set titles for the subplots</span></span>
-<span id="54ec1dc9-31"><a href="#54ec1dc9-31" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>features[features_idx[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>features[features_idx[<span class="dv">1</span>]]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="54ec1dc9-32"><a href="#54ec1dc9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="54ec1dc9-33"><a href="#54ec1dc9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
-<span id="54ec1dc9-34"><a href="#54ec1dc9-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="54ec1dc9-35"><a href="#54ec1dc9-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="d98c2ded"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d98c2ded-1"><a href="#d98c2ded-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed for reproducibility</span></span>
+<span id="d98c2ded-2"><a href="#d98c2ded-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="d98c2ded-3"><a href="#d98c2ded-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d98c2ded-4"><a href="#d98c2ded-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 4x4 subplot grid</span></span>
+<span id="d98c2ded-5"><a href="#d98c2ded-5" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">4</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">20</span>))</span>
+<span id="d98c2ded-6"><a href="#d98c2ded-6" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()  <span class="co"># Flatten the 2D array of axes for easy iteration</span></span>
+<span id="d98c2ded-7"><a href="#d98c2ded-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d98c2ded-8"><a href="#d98c2ded-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select and plot decision boundaries for 5x5 pairs of features</span></span>
+<span id="d98c2ded-9"><a href="#d98c2ded-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes:</span>
+<span id="d98c2ded-10"><a href="#d98c2ded-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly pick two distinct features</span></span>
+<span id="d98c2ded-11"><a href="#d98c2ded-11" aria-hidden="true" tabindex="-1"></a>    features_idx <span class="op">=</span> np.random.choice(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]), size<span class="op">=</span><span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="d98c2ded-12"><a href="#d98c2ded-12" aria-hidden="true" tabindex="-1"></a>    X_features_for_boundaries <span class="op">=</span> X[:, features_idx]</span>
+<span id="d98c2ded-13"><a href="#d98c2ded-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d98c2ded-14"><a href="#d98c2ded-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train a new classifier</span></span>
+<span id="d98c2ded-15"><a href="#d98c2ded-15" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="d98c2ded-16"><a href="#d98c2ded-16" aria-hidden="true" tabindex="-1"></a>    clf.fit(X_features_for_boundaries, y)</span>
+<span id="d98c2ded-17"><a href="#d98c2ded-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d98c2ded-18"><a href="#d98c2ded-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot decision boundaries using dtreeviz</span></span>
+<span id="d98c2ded-19"><a href="#d98c2ded-19" aria-hidden="true" tabindex="-1"></a>    decision_boundaries(</span>
+<span id="d98c2ded-20"><a href="#d98c2ded-20" aria-hidden="true" tabindex="-1"></a>        clf,</span>
+<span id="d98c2ded-21"><a href="#d98c2ded-21" aria-hidden="true" tabindex="-1"></a>        X_features_for_boundaries,</span>
+<span id="d98c2ded-22"><a href="#d98c2ded-22" aria-hidden="true" tabindex="-1"></a>        y,</span>
+<span id="d98c2ded-23"><a href="#d98c2ded-23" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="d98c2ded-24"><a href="#d98c2ded-24" aria-hidden="true" tabindex="-1"></a>        feature_names<span class="op">=</span>features[features_idx],</span>
+<span id="d98c2ded-25"><a href="#d98c2ded-25" aria-hidden="true" tabindex="-1"></a>        class_names<span class="op">=</span>breast_cancer.target_names,</span>
+<span id="d98c2ded-26"><a href="#d98c2ded-26" aria-hidden="true" tabindex="-1"></a>        markers<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"s"</span>],</span>
+<span id="d98c2ded-27"><a href="#d98c2ded-27" aria-hidden="true" tabindex="-1"></a>        colors<span class="op">=</span>color_map,</span>
+<span id="d98c2ded-28"><a href="#d98c2ded-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="d98c2ded-29"><a href="#d98c2ded-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d98c2ded-30"><a href="#d98c2ded-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set titles for the subplots</span></span>
+<span id="d98c2ded-31"><a href="#d98c2ded-31" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>features[features_idx[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>features[features_idx[<span class="dv">1</span>]]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="d98c2ded-32"><a href="#d98c2ded-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d98c2ded-33"><a href="#d98c2ded-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent overlap</span></span>
+<span id="d98c2ded-34"><a href="#d98c2ded-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="d98c2ded-35"><a href="#d98c2ded-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1592,236 +1594,242 @@ About Scale Variance
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1829,185 +1837,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

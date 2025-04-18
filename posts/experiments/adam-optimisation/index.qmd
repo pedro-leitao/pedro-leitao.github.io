@@ -33,18 +33,23 @@ In the code below we define the `rosenbrock_2d` function, set up the optimisatio
 
 ```{python}
 import torch
+
+device = torch.device("mps" if torch.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else device)
+print(f"Using device: {device}")
+```
+
+```{python}
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d import Axes3D  # Ensures 3D projection is recognized
 
-
 def rosenbrock_2d(x, y, a=1.0, b=100.0):
     return (a - x)**2 + b*(y - x**2)**2
 
-
 # PyTorch setup: we'll optimize x, y to find the minimum of the Rosenbrock function
-params = torch.tensor([-0.8, 2.0], requires_grad=True)
+params = torch.tensor([-0.8, 2.0], requires_grad=True, device=device)
 optimizer = torch.optim.Adam([params], lr=0.01)
 
 # Track the path: (x, y, f(x,y)) each iteration
@@ -209,15 +214,6 @@ plt.figure(figsize=(8, 8))
 plt.imshow(img)
 plt.axis('off')
 plt.show()
-```
-
-In my case, I am using Apple Silicon to run this code, so we check for the presence of MPS so PyTorch uses the GPU. If you are running this on a different platform, you may need to adjust the device accordingly.
-
-```{python}
-import torch
-
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-print(f"Using device: {device}")
 ```
 
 We also need to create a coordinate grid that represents the spatial coordinates of each pixel in the image. This grid will be the input to our neural network, and the target will be the RGB values of the corresponding pixels in the image. We'll use the coordinate grid to train the model to predict the RGB values based on spatial location.
