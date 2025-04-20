@@ -304,85 +304,149 @@ All done! ✨ 🍰 ✨
 
 [ 8/51] posts/thoughts/met-police-data/index.qmd
 
-reformatted _0b75e5e1_black_formatted.py
+
+Starting python3 kernel...
+Done
+
+
+Executing 'index.quarto_ipynb'
+
+  Cell 1/19: ''...
+Done
+
+  Cell 2/19: ''...
+Done
+
+  Cell 3/19: ''...
+Done
+
+  Cell 4/19: ''...Done
+  Cell 5/19: ''...
+Done
+
+  Cell 6/19: ''...
+Done
+
+  Cell 7/19: ''...
+Done
+
+  Cell 8/19: ''...
+Done
+
+  Cell 9/19: ''...
+Done
+
+  Cell 10/19: ''...
+Done
+
+  Cell 11/19: ''...
+Done
+
+  Cell 12/19: ''...
+Done
+
+  Cell 13/19: ''...
+Done
+
+  Cell 14/19: ''...
+Done
+
+  Cell 15/19: ''...
+Done
+
+  Cell 16/19: ''...
+Done
+
+  Cell 17/19: ''...
+Done
+
+  Cell 18/19: ''...
+Done
+
+  Cell 19/19: ''...
+Done
+
+
+
+reformatted _fe1e1bbc_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _1a070d85_black_formatted.py
+reformatted _9b755f6a_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _728457a9_black_formatted.py
+reformatted _374d6e5e_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _09952c82_black_formatted.py
+reformatted _c2650b1b_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _9d895125_black_formatted.py
+reformatted _21824d2d_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _7d10c8f3_black_formatted.py
+reformatted _48c93fdc_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _74391501_black_formatted.py
+reformatted _aaab1c6c_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _a01754c3_black_formatted.py
+reformatted _9d752d47_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _3ac4c656_black_formatted.py
+reformatted _cda2a237_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _d457b1d2_black_formatted.py
+reformatted _6d8661fe_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _7337990d_black_formatted.py
+reformatted _e6a8d7ac_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _d2463961_black_formatted.py
+reformatted _565867ac_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _c52cc6dc_black_formatted.py
+reformatted _8feef02b_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _ee9d7ee5_black_formatted.py
+reformatted _7bec9739_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
@@ -600,6 +664,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _e4ede705_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -611,10 +676,12 @@ All done! ✨ 🍰 ✨
 
 reformatted _11b82447_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _c5540e4e_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -688,6 +755,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _c2ea882d_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -884,6 +952,7 @@ reformatted _460b2e16_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 [20/51] posts/experiments/random-forests/index.qmd
@@ -1749,8 +1818,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _ee2dcbf6_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 [30/51] posts/experiments/connect-four-rl/index.ipynb
@@ -1792,6 +1861,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _882c2b47_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1895,6 +1965,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _ef6583d0_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1956,8 +2027,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _77de6ea3_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _b2bfd088_black_formatted.py
@@ -2539,19 +2610,19 @@ All done! ✨ 🍰 ✨
 
 [46/51] python-for-students/introduction/index.qmd
 
-reformatted _malejo_black_formatted.py
+reformatted _qzjbjn_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _ehutzz_black_formatted.py
+reformatted _dgedxd_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _uwvzce_black_formatted.py
+reformatted _mchlxj_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
