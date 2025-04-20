@@ -566,6 +566,7 @@ fig.update_layout(
     title_y=0.95,
     title_font=dict(size=18),
     xaxis_tickangle=-45,
+    yaxis_type='log'
 )
 
 fig.show()
