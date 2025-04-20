@@ -48,6 +48,13 @@ latest_date = df['Month'].max()
 ```{python}
 #| echo: false
 #| output: false
+# Extract borough from 'LSOA name', matching 'borough xxxx'
+df['Borough'] = df['LSOA name'].str.extract(r'(((\w|\s)+)\s(\d|\w)+$)', expand=False)[1]
+```
+
+```{python}
+#| echo: false
+#| output: false
 df.head()
 ```
 
@@ -59,15 +66,27 @@ import plotly.io as pio
 pio.templates.default = "simple_white"
 ```
 
-## Number of crimes per month and three-month moving average
+## Totals and trends
+
+Overall totals and trends, including the number of crimes per month, cumulative totals over time, and the peak month for each crime type.
+
+### Number of crimes per month and three-month moving average
 ```{python}
 import plotly.express as px
 
 df['count'] = 1
 df_grouped = df.groupby('Month').count().reset_index()
 df_grouped['three_month_avg'] = df_grouped['count'].rolling(3).mean()
-fig = px.line(df_grouped, x='Month', y=['count', 'three_month_avg'])
+
+fig = px.line(
+    df_grouped,
+    x='Month',
+    y=['count', 'three_month_avg'],
+    labels={'value': 'Number of Crimes', 'variable': 'Series'}
+)
+
 fig.update_traces(line=dict(width=2), mode='lines')
+
 fig.update_layout(
     xaxis_title='Month',
     yaxis_title='Number of Crimes',
@@ -76,11 +95,20 @@ fig.update_layout(
     title_font=dict(size=18),
     xaxis_tickformat='%Y-%m',
     xaxis_tickangle=-45,
+    legend=dict(
+        orientation='h',    # horizontal legend
+        yanchor='bottom',
+        y=1.02,             # slightly above the plot
+        xanchor='center',
+        x=0.5
+    ),
+    margin=dict(t=80)      # add top margin so legend doesn't overlap
 )
+
 fig.show()
 ```
 
-## Cummulative counts over time
+### Cummulative totals over time
 ```{python}
 import plotly.graph_objects as go
 
@@ -168,9 +196,8 @@ fig = go.Figure(
 fig.show()
 ```
 
-## Peak month for each crime type
+### Peak month for each crime type
 ```{python}
-
 df['MonthName'] = df['Month'].dt.month_name()
 
 # count per crime/month
@@ -194,10 +221,12 @@ fig = px.bar(
     text='MonthName',
     category_orders={'Crime type': worst_months['Crime type'].tolist()}
 )
+
 fig.update_traces(
     marker=dict(line=dict(width=2)),
     textposition='outside'
 )
+
 fig.update_layout(
     xaxis_title='Crime Type',
     yaxis_title='Occurrences in Peak Month',
@@ -205,18 +234,39 @@ fig.update_layout(
     title_y=0.95,
     title_font=dict(size=18),
     xaxis_tickangle=-45,
-    legend_title_text='Worst Month'
+    legend_title_text='Worst Month',
+    legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        y=1.02,
+        xanchor='center',
+        x=0.5
+    ),
+    margin=dict(t=100)
 )
+
 fig.show()
 ```
 
-# Number of occurrences per month by crime type
+### Number of crimes per month by type
 You can click on the legend to hide or show a crime type, and double-click to isolate a crime type.
 ```{python}
-# Plot over time, by crime type, using a stacked area chart
-df_grouped = df.groupby(['Month', 'Crime type']).count().reset_index()
-fig = px.area(df_grouped, x='Month', y='count', color='Crime type')
+
+df_grouped = df.groupby(['Month', 'Crime type']) \
+               .count() \
+               .reset_index()
+
+fig = px.area(
+    df_grouped,
+    x='Month',
+    y='count',
+    color='Crime type'
+)
+
+# thicken the lines on the boundaries between areas
 fig.update_traces(line=dict(width=2), mode='lines')
+
+# move the legend above the chart
 fig.update_layout(
     xaxis_title='Month',
     yaxis_title='Number of Occurrences',
@@ -225,11 +275,25 @@ fig.update_layout(
     title_font=dict(size=18),
     xaxis_tickformat='%Y-%m',
     xaxis_tickangle=-45,
+
+    legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        y=1.02,
+        xanchor='center',
+        x=0.5
+    ),
+    margin=dict(t=100)
 )
+
 fig.show()
 ```
 
-## Year-on-year change in crime type, per month
+## Changes year-on-year
+
+Changes, relative to the same month in the previous year.
+
+### Crime type, per month
 ```{python}
 
 monthly = (
@@ -261,27 +325,41 @@ fig = px.bar(
     labels={'pct_change':'% change'}
 )
 
-# zero anchor, tidy up
 fig.add_hline(y=0, line_dash='dash', line_color='gray', row='all', col='all')
+
 fig.update_layout(
     xaxis=dict(tickformat='%Y‑%m', tickangle=-45),
     bargap=0.2,
+
+    # move legend above the plot
+    legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        y=1.02,
+        xanchor='center',
+        x=0.5
+    ),
+    margin=dict(t=100),
     legend_title_text=''
 )
+
 fig.for_each_annotation(lambda a: a.update(text=a.text.split('=')[-1]))
+
 fig.show()
 ```
 
-## Year-on-year change in crime type, per month (top 3 risers and fallers)
+### Crime type, per month (top 3 risers and fallers)
 ```{python}
 
-mean_change   = plot_df.groupby('Crime type')['pct_change'].mean()
-top_risers    = mean_change.nlargest(3).index.tolist()
-top_fallers   = mean_change.nsmallest(3).index.tolist()
+mean_change = plot_df.groupby('Crime type')['pct_change'].mean()
+top_risers  = mean_change.nlargest(3).index.tolist()
+top_fallers = mean_change.nsmallest(3).index.tolist()
 
 df_change = plot_df[plot_df['Crime type'].isin(top_risers + top_fallers)].copy()
-df_change['Trend']   = df_change['Crime type'].apply(lambda ct: 'Rising' if ct in top_risers else 'Decreasing')
-df_change['Month']   = pd.to_datetime(df_change['Month'])
+df_change['Trend'] = df_change['Crime type'].apply(
+    lambda ct: 'Rising' if ct in top_risers else 'Decreasing'
+)
+df_change['Month'] = pd.to_datetime(df_change['Month'])
 
 fig = px.bar(
     df_change,
@@ -289,22 +367,36 @@ fig = px.bar(
     y='pct_change',
     color='Crime type',
     facet_row='Trend',
-    category_orders={'Trend': ['Rising','Decreasing']},
-    labels={'pct_change':'% change'}
+    category_orders={'Trend': ['Rising', 'Decreasing']},
+    labels={'pct_change': '% change'}
 )
 
 fig.add_hline(y=0, line_dash='dash', line_color='gray', row='all', col='all')
+
 fig.update_layout(
-    xaxis=dict(tickformat='%Y‑%m', tickangle=-45),
+    xaxis=dict(tickformat='%Y-%m', tickangle=-45),
     bargap=0.2,
+    legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        y=1.02, 
+        xanchor='center',
+        x=0.5
+    ),
+    margin=dict(t=100),
     legend_title_text=''
 )
+
 fig.for_each_annotation(lambda a: a.update(text=a.text.split('=')[-1]))
+
 fig.show()
 ```
 
-## Crime heatmap (all crimes)
+## Geographical heatmaps
+
 You can zoom in and out, and pan around the map. The heatmap shows the density of crimes in a given month, down to individual crimes at street level.
+
+### All crimes
 ```{python}
 import folium
 from folium.plugins import HeatMapWithTime
@@ -432,32 +524,41 @@ m.save('crime_violence_heatmap.html')
 
 <iframe src="crime_violence_heatmap.html" width="100%" height="450px"></iframe>
 
-## Outcomes (cummulative totals)
+## Crime outcomes
+
+Overall outcomes of crimes, as reported by the Metropolitan Police. Some outcomes might not be final, and are subject to change.
+
+### Cummulative totals
 
 ```{python}
-# Plot distribution of outcomes, for all crimes.
 
-# Where outcome is not available, set it to "Unreported"
 df['Last outcome category'] = df['Last outcome category'].fillna('Category N/A')
 
-df_outcomes = df[['Last outcome category']].dropna()
-
-# Count occurrences of each outcome
-df_outcomes = df_outcomes['Last outcome category'].value_counts().reset_index()
+df_outcomes = (
+    df['Last outcome category']
+      .value_counts()
+      .reset_index()
+)
 df_outcomes.columns = ['Outcome', 'Count']
 df_outcomes = df_outcomes.sort_values('Count', ascending=False)
-# Plot with bars in descending order
+
+total = df_outcomes['Count'].sum()
+df_outcomes['Pct'] = df_outcomes['Count'] / total * 100
+
 fig = px.bar(
     df_outcomes,
     x='Outcome',
     y='Count',
-    text='Count',
+    text='Pct',
     category_orders={'Outcome': df_outcomes['Outcome'].tolist()}
 )
+
 fig.update_traces(
     marker=dict(line=dict(width=2)),
+    texttemplate='%{text:.1f}%',
     textposition='outside'
 )
+
 fig.update_layout(
     xaxis_title='Outcome',
     yaxis_title='Occurrences',
@@ -466,17 +567,32 @@ fig.update_layout(
     title_font=dict(size=18),
     xaxis_tickangle=-45,
 )
+
 fig.show()
 ```
 
 ### Outcomes month by month
 ```{python}
-# Plot over time, by outcome, using a stacked area chart
-df_outcomes = df[['Month', 'Last outcome category']].dropna()
+
+df_outcomes = df[['Month', 'Last outcome category']].dropna().copy()
 df_outcomes['count'] = 1
-df_outcomes_grouped = df_outcomes.groupby(['Month', 'Last outcome category']).count().reset_index()
-fig = px.area(df_outcomes_grouped, x='Month', y='count', color='Last outcome category')
+df_outcomes_grouped = (
+    df_outcomes
+    .groupby(['Month', 'Last outcome category'], as_index=False)
+    .count()
+)
+
+# Build the area plot
+fig = px.area(
+    df_outcomes_grouped,
+    x='Month',
+    y='count',
+    color='Last outcome category',
+    labels={'count': 'Number of Occurrences'}
+)
+
 fig.update_traces(line=dict(width=2), mode='lines')
+
 fig.update_layout(
     xaxis_title='Month',
     yaxis_title='Number of Occurrences',
@@ -485,6 +601,146 @@ fig.update_layout(
     title_font=dict(size=18),
     xaxis_tickformat='%Y-%m',
     xaxis_tickangle=-45,
+
+    legend=dict(
+        orientation='h',
+        yanchor='bottom',
+        y=1.02,
+        xanchor='center',
+        x=0.5
+    ),
+    margin=dict(t=100)
 )
+
+fig.show()
+```
+
+## Boroughs
+
+Crime and outcomes relative to the location where it occurs.
+
+### Location relative to crime type (top locations only)
+
+This chart shows the relative percentage of each crime type for each location, i.e., the percentage of each crime type in the top N locations, relative to the total number of crimes in that location. This is useful to see which crime types are more prevalent in each location.
+```{python}
+
+n_locations = 20
+
+# 1) aggregate raw counts
+df_borough = (
+    df
+    .groupby(['Borough', 'Crime type'])
+    .size()
+    .reset_index(name='count')
+)
+
+# 2) pick top N boroughs by overall crime
+top_locations = (
+    df_borough
+    .groupby('Borough')['count']
+    .sum()
+    .nlargest(n_locations)
+    .index
+    .tolist()
+)
+df_borough = df_borough[df_borough['Borough'].isin(top_locations)]
+
+# 3) compute relative % **within each crime type**
+df_borough['rel_pct'] = (
+    df_borough
+    .groupby('Crime type')['count']
+    .transform(lambda x: x / x.sum() * 100)
+)
+
+# 4) lock in ordering
+borough_order = top_locations
+crime_order   = df_borough['Crime type'].unique().tolist()
+
+# 5) plot
+fig = px.density_heatmap(
+    df_borough,
+    x='Borough',
+    y='Crime type',
+    z='rel_pct',
+    histfunc='sum',    # sums the one value per cell → rel_pct
+    category_orders={
+        'Borough': borough_order,
+        'Crime type': crime_order
+    },
+    color_continuous_scale=['green', 'yellow', 'red'],
+    labels={'rel_pct': '% of Crime Type'}
+)
+
+# 6) layout tweaks
+fig.update_layout(
+    xaxis_title='Borough',
+    yaxis_title='Crime Type',
+    title_x=0.5,
+    title_y=0.95,
+    title_font=dict(size=18),
+)
+fig.update_xaxes(tickangle=-45)
+
+# 7) format colorbar ticks as percentages
+fig.update_coloraxes(colorbar_tickformat=".1f")
+
+fig.show()
+```
+
+## Location relative to outcome (top locations only)
+
+```{python}
+
+df_borough = (
+    df
+    .groupby(['Borough', 'Last outcome category'])
+    .size()
+    .reset_index(name='count')
+)
+
+top_locations = (
+    df_borough
+    .groupby('Borough')['count']
+    .sum()
+    .nlargest(n_locations)
+    .index
+    .tolist()
+)
+df_borough = df_borough[df_borough['Borough'].isin(top_locations)]
+
+df_borough['rel_pct'] = (
+    df_borough
+    .groupby('Last outcome category')['count']
+    .transform(lambda x: x / x.sum() * 100)
+)
+
+borough_order = top_locations
+outcome_order   = df_borough['Last outcome category'].unique().tolist()
+
+fig = px.density_heatmap(
+    df_borough,
+    x='Borough',
+    y='Last outcome category',
+    z='rel_pct',
+    histfunc='sum',    # sums the one value per cell → rel_pct
+    category_orders={
+        'Borough': borough_order,
+        'Last outcome category': outcome_order
+    },
+    color_continuous_scale=['green', 'yellow', 'red'],
+    labels={'rel_pct': '% of Outcome'}
+)
+
+fig.update_layout(
+    xaxis_title='Borough',
+    yaxis_title='Outcome',
+    title_x=0.5,
+    title_y=0.95,
+    title_font=dict(size=18),
+)
+fig.update_xaxes(tickangle=-45)
+fig.update_yaxes(tickangle=-45)
+
+fig.update_coloraxes(colorbar_tickformat=".1f")
 fig.show()
 ```
