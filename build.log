@@ -273,7 +273,6 @@ All done! ✨ 🍰 ✨
 reformatted _79a40bd3_black_formatted.py
 
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -601,7 +600,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _e4ede705_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -613,12 +611,10 @@ All done! ✨ 🍰 ✨
 
 reformatted _11b82447_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _c5540e4e_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -692,7 +688,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _c2ea882d_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -992,6 +987,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _f10ac813_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1256,6 +1252,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _e553758e_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1436,6 +1433,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _db6326b9_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1752,6 +1750,7 @@ All done! ✨ 🍰 ✨
 reformatted _ee2dcbf6_black_formatted.py
 
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 [30/51] posts/experiments/connect-four-rl/index.ipynb
@@ -1794,7 +1793,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _882c2b47_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1815,7 +1813,6 @@ All done! ✨ 🍰 ✨
 error: cannot format _41ec65ce_black_formatted.py: Cannot parse: 3:0: !kaggle datasets download -d radheshyamkollipara/bank-customer-churn -p .data/ --unzip
 
 Oh no! 💥 💔 💥
-
 1 file failed to reformat.
 
 reformatted _e6888c88_black_formatted.py
@@ -1897,7 +1894,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _ef6583d0_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2340,8 +2336,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _d1b6ba66_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _eb9f326c_black_formatted.py
@@ -2412,8 +2408,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _8e72ae74_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _53cd596a_black_formatted.py
@@ -2543,19 +2539,19 @@ All done! ✨ 🍰 ✨
 
 [46/51] python-for-students/introduction/index.qmd
 
-reformatted _wcpsdh_black_formatted.py
+reformatted _malejo_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _tvkwmv_black_formatted.py
+reformatted _ehutzz_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _kyimdl_black_formatted.py
+reformatted _uwvzce_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
@@ -2576,6 +2572,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _0dfc442c_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
