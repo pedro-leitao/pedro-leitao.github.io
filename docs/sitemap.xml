@@ -89,32 +89,36 @@
     <lastmod>2025-04-14T16:01:56.179Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/index.html</loc>
-    <lastmod>2025-04-14T16:01:56.177Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/index.html</loc>
-    <lastmod>2025-04-14T16:01:56.126Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/howtos/mlflow-ui/index.html</loc>
-    <lastmod>2025-04-15T09:34:19.685Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/python-for-students.html</loc>
-    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
-  </url>
-  <url>
-    <loc>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/index.html</loc>
-    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/thoughts/scalling-ai/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.178Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/howtos/caching-ml/index.html</loc>
     <lastmod>2025-04-14T16:01:56.125Z</lastmod>
   </url>
   <url>
-    <loc>https://pedroleitao.nl/posts/thoughts/scalling-ai/index.html</loc>
-    <lastmod>2025-04-14T16:01:56.178Z</lastmod>
+    <loc>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.125Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/python-for-students.html</loc>
+    <lastmod>2025-04-14T16:01:56.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/howtos/mlflow-ui/index.html</loc>
+    <lastmod>2025-04-15T09:34:19.685Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/howtos/mlx-fine-tuning/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.126Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/howtos/transformers-fine-tuning/index.html</loc>
+    <lastmod>2025-04-14T16:01:56.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pedroleitao.nl/posts/thoughts/met-police-data/index.html</loc>
+    <lastmod>2025-04-20T11:48:59.194Z</lastmod>
   </url>
   <url>
     <loc>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/index.html</loc>
