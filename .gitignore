@@ -21,3 +21,5 @@ python-for-students_files/
 python-for-students/**/.jupyter_cache
 posts/**/*.html
 posts/**/__pycache__/
+
+/.quarto/

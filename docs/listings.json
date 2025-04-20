@@ -12,6 +12,7 @@
   {
     "listing": "/thoughts.html",
     "items": [
+      "/posts/thoughts/met-police-data/index.html",
       "/posts/thoughts/universal-control/index.html",
       "/posts/thoughts/engineering-teams-scale/index.html",
       "/posts/thoughts/moving-to-quarto/index.html",
@@ -39,6 +40,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/thoughts/met-police-data/index.html",
       "/posts/thoughts/universal-control/index.html",
       "/posts/experiments/blade-runner-enhance/index.html",
       "/posts/experiments/mondrianiser/index.html",

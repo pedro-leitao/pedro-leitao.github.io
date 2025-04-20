@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/thoughts.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Fri, 28 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 18 Apr 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Metropolitan Police Data</title>
+  <link>https://pedroleitao.nl/posts/thoughts/met-police-data/</link>
+  <description><![CDATA[ London has historically been a city which isn’t a complete stranger to crime. Here I provide a compilation of visuals produced from available <a href="https://data.police.uk">open data</a> regarding London crime as reported by the Metropolitan Police. I include no comentary on it, and restric myself to derived visuals and the code to produce them. This crime data is exclusively as reported, and is not a complete picture as there is also <em>unreported</em> crime, which obviously is not included in this dataset. All charts are interactive, and you can hover over them to see more details. ]]></description>
+  <category>Thoughts</category>
+  <category>Open Data</category>
+  <category>London</category>
+  <guid>https://pedroleitao.nl/posts/thoughts/met-police-data/</guid>
+  <pubDate>Fri, 18 Apr 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Dear Apple, Why Does Universal Control Suck?</title>
   <link>https://pedroleitao.nl/posts/thoughts/universal-control/</link>
