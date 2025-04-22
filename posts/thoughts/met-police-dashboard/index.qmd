@@ -1,0 +1,507 @@
+---
+title: London Crime Dashboard
+description: a dashboard about London crime, as reported by the Metropolitan Police.
+format: dashboard
+theme: custom.scss
+tags:
+  - Thoughts
+  - Publishing
+  - Open Data
+categories:
+  - Thoughts
+  - Open Data
+  - London
+date: 2025-04-19
+---
+
+## Introduction {.sidebar}
+Built from [Open data](https://data.police.uk) regarding London crime, as reported by the Metropolitan Police. This dashboard is exclusively as reported, and is not a complete picture as there is also *unreported* crime. All charts are interactive, and you can hover over them to see more details.
+
+```{python}
+#| echo: false
+#| output: false
+# Recursively load all data under /home/pedro/datasets/met-police-data/, find files named *metropolitan-street.csv and add them to a single Pandas DataFrame
+import os
+import pandas as pd
+import glob
+
+files = glob.glob('/home/pedro/datasets/met-police-data/**/*metropolitan-street.csv', recursive=True)
+print(f"Found {len(files)} files.")
+dataframes = []
+for file in files:
+    df = pd.read_csv(file)
+    dataframes.append(df)
+# Concatenate all dataframes into a single dataframe
+df = pd.concat(dataframes, ignore_index=True)
+```
+
+```{python}
+#| echo: false
+#| output: false
+# Convert Month column to datetime
+df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
+df['Year'] = df['Month'].dt.year
+# Calculate earliest and latest date
+earliest_date = df['Month'].min()
+latest_date = df['Month'].max()
+```
+
+```{python}
+#| echo: false
+#| output: false
+# Extract borough from 'LSOA name', matching 'borough xxxx'
+df['Borough'] = df['LSOA name'].str.extract(r'(((\w|\s)+)\s(\d|\w)+$)', expand=False)[1]
+```
+
+```{python}
+#| echo: false
+#| output: false
+df.head()
+```
+
+```{python}
+#| echo: false
+#| output: false
+# Set a plotly template
+import plotly.io as pio
+pio.templates.default = "simple_white"
+```
+
+```{python}
+#| echo: false
+#| output: false
+# Compute auxiliary data for the dashboard
+
+# Unique outcomes
+outcomes = df['Last outcome category'].unique()
+
+# Unique crime types
+crime_types = df['Crime type'].unique()
+
+# Unique boroughs
+boroughs = df['Borough'].unique()
+
+# Total number of reported crimes
+total_crimes_withID = df['Crime ID'].count()
+total_crimes_withoutID = df['Crime ID'].isna().sum()
+total_crimes = total_crimes_withID + total_crimes_withoutID
+
+# Earliest date in the dataset
+earliest_date_str = earliest_date.strftime('%Y-%m')
+# Latest date in the dataset
+latest_date_str = latest_date.strftime('%Y-%m')
+
+# Total number of boroughs
+total_boroughs = df['Borough'].nunique()
+
+# Total crimes under investigation
+total_crimes_under_investigation = df[df['Last outcome category'] == 'Under investigation']['Crime ID'].count()
+
+# Total crimes by type
+crime_type_counts = (
+    df
+    .groupby(['Crime type', 'Month'])
+    .size()
+    .reset_index(name='count')
+)
+crime_type_counts['delta'] = crime_type_counts.groupby('Crime type')['count'].diff()
+
+# First vs latest three months
+earliest_vs_latest_crime_counts = (
+    crime_type_counts
+    .groupby('Crime type')['count']
+    .agg(
+        first3=lambda x: x.iloc[:3].sum(),
+        last3=lambda x: x.iloc[-3:].sum()
+    )
+    .assign(pct_delta=lambda df: ((df.last3 - df.first3) / df.first3 * 100).round(2))
+    .reset_index()
+).sort_values(
+    'pct_delta',
+    ascending=False
+)
+
+top_n_boroughs = 33
+
+# Outcomes by borough
+outcomes_by_borough = (
+    df
+    .groupby(['Borough', 'Last outcome category'])
+    .size()
+    .reset_index(name='count')
+)
+
+# Boroughs with the most reported crimes
+top_boroughs = (
+    outcomes_by_borough
+    .groupby('Borough')['count']
+    .sum()
+    .nlargest(top_n_boroughs)
+    .index
+    .tolist()
+)
+
+total_outcomes_by_borough = outcomes_by_borough.groupby('Borough')['count'].transform('sum')
+
+outcomes_by_borough['percentage'] = ((outcomes_by_borough['count'] / total_outcomes_by_borough) * 100).round(2)
+
+```
+
+# Summary
+
+## Row
+```{python}
+#|content: valuebox
+#|title: Earliest Date
+dict(
+    icon = "calendar",
+    color = "info",
+    value = earliest_date_str
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Latest Date
+dict(
+    icon = "calendar",
+    color = "info",
+    value = latest_date_str
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Identified Locations
+dict(
+    icon = "geo-alt-fill",
+    color = "info",
+    value = total_boroughs
+)
+```
+
+## Row
+
+```{python}
+#|content: valuebox
+#|title: Total Reported Crimes
+dict(
+    # icon = "arrow-left-square-fill",
+    color = "danger",
+    value = total_crimes
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Total Reported Crimes with Crime Identifier
+dict(
+    icon = "person-check-fill",
+    color = "light",
+    value = total_crimes_withID
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Total Reported Crimes without Crime Identifier
+dict(
+    icon = "person-dash-fill",
+    color = "light",
+    value = total_crimes_withoutID
+)
+```
+
+# Outcomes
+
+## Row
+
+```{python}
+#|content: valuebox
+#|title: "% of crimes under investigation"
+dict(
+    icon = "person-check-fill",
+    color = "light",
+    value = f"{(total_crimes_under_investigation / total_crimes_withID) * 100:.2f}%"
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: "% of crimes with no further action"
+# Percentage of crimes with no further action
+no_further_action_outcomes = [
+    'Further action is not in the public interest',
+    'Further investigation is not in the public interest',
+    'Formal action is not in the public interest',
+    'Investigation complete; no suspect identified'
+]
+total_crimes_no_further_action = df[df['Last outcome category'].isin(no_further_action_outcomes)]['Crime ID'].count()
+dict(
+    icon = "person-dash-fill",
+    color = "danger",
+    value = f"{(total_crimes_no_further_action / total_crimes_withID) * 100:.2f}%"
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: "% of crimes without suspect identified"
+# Percentage of crimes without suspect identified
+no_suspect_outcomes = [
+    'Investigation complete; no suspect identified'
+]
+total_crimes_no_suspect = df[df['Last outcome category'].isin(no_suspect_outcomes)]['Crime ID'].count()
+dict(
+    icon = "person-dash-fill",
+    color = "danger",
+    value = f"{(total_crimes_no_suspect / total_crimes_withID) * 100:.2f}%"
+)
+```
+
+## Row
+
+```{python}
+#|title: Outcomes by Location (Top)
+#|expandable: true
+# Plot the distribution of outcomes by borough
+import plotly.express as px
+
+filtered = outcomes_by_borough[outcomes_by_borough['Borough'].isin(top_boroughs)]
+
+fig = px.bar(
+    filtered,
+    x='count',
+    y='Borough',
+    color='Last outcome category',
+    orientation='h',
+    category_orders={'Borough': top_boroughs[::-1]},  # reverse so largest on top
+    labels={'count': 'Outcomes', 'Borough': ''},
+).update_layout(
+    barmode='stack',
+    margin=dict(l=20, r=20, t=20, b=20)
+).update_coloraxes(showscale=False).update_traces(showlegend=False)
+
+fig
+```
+
+```{python}
+#|title: Outcomes by Location (Top) - as a % of Total
+#|expandable: true
+# Plot the distribution of outcomes by borough
+
+fig = px.bar(
+    filtered,
+    x='percentage',
+    y='Borough',
+    color='Last outcome category',
+    orientation='h',
+    category_orders={'Borough': top_boroughs[::-1]},  # reverse so largest on top
+    labels={'percentage': 'Percentage of Outcomes', 'Borough': ''},
+    text='percentage'
+).update_layout(
+    barmode='stack',
+    margin=dict(l=20, r=20, t=20, b=20)
+).update_coloraxes(showscale=False).update_traces(showlegend=False)
+
+fig
+```
+
+```{python}
+#|title: Outcomes by Location
+#|expandable: true
+import geopandas as gpd
+import folium
+import branca
+from folium import LayerControl
+
+pivot = (
+    filtered
+    .pivot(index='Borough',
+           columns='Last outcome category',
+           values='percentage')
+    .fillna(0)
+)
+
+london_boroughs = (
+    gpd.read_file("london_boroughs.geojson")
+       .set_crs(epsg=4326, allow_override=True)
+       .rename(columns={"name":"Borough"})
+)
+merged = london_boroughs.merge(
+    pivot.reset_index(),
+    on="Borough",
+    how="left"
+).fillna(0)
+
+m = folium.Map(
+    location=[51.5074, -0.1278],
+    zoom_start=10
+)
+
+_ = folium.TileLayer(
+    tiles="CartoDB Positron",
+    name="Map",
+    control=False,
+).add_to(m)
+
+vmin, vmax = 0, pivot.values.max()
+cmap = branca.colormap.linear.YlOrRd_09.scale(vmin, vmax)
+cmap.caption = "% of outcomes in Borough"
+_ = cmap.add_to(m)
+
+for i, outcome in enumerate(pivot.columns):
+    _ = folium.GeoJson(
+        merged,
+        name=outcome,
+        overlay=False,
+        control=True,
+        style_function=lambda feat, o=outcome: {
+            "fillColor": cmap(feat["properties"].get(o, 0)),
+            "color": "black",
+            "weight": 0.5,
+            "fillOpacity": 0.7,
+        },
+        highlight_function=lambda feat: {
+            "weight": 2,
+            "color": "blue",
+        },
+        tooltip=folium.GeoJsonTooltip(
+            fields=["Borough", outcome],
+            aliases=["Borough", f"% {outcome}"],
+            localize=True,
+            sticky=False
+        ),
+        show=(i == 6) # Show the nth layer (outcome) by default
+    ).add_to(m)
+
+_ = LayerControl(position='topright', collapsed=False).add_to(m)
+
+m
+```
+
+# Trends
+
+## Row
+
+```{python}
+#|content: valuebox
+#|title: Variation in all crime (earliest 3 months vs latest 3 months)"
+total_crimes_earliest = earliest_vs_latest_crime_counts['first3'].sum()
+total_crimes_latest = earliest_vs_latest_crime_counts['last3'].sum()
+value = ((total_crimes_latest - total_crimes_earliest) / total_crimes_earliest) * 100
+if value > 0:
+    color = "danger"
+    icon = "arrow-up-right-square-fill"
+else:
+    color = "success"
+    icon = "arrow-down-right-square-fill"
+dict(
+    icon = icon,
+    color = color,
+    value = f"{value:.2f}%"
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Largest increase
+highest_increase_crime_type, highest_increase_crime_type_pct = \
+    earliest_vs_latest_crime_counts.loc[
+        earliest_vs_latest_crime_counts['pct_delta'].idxmax(), 
+        ['Crime type','pct_delta']
+    ].values
+dict(
+    icon = "arrow-up-right-square-fill",
+    color = "danger",
+    value = f"{highest_increase_crime_type} ({highest_increase_crime_type_pct:.2f}%)"
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Largest decrease
+highest_decrease_crime_type, highest_decrease_crime_type_pct = \
+    earliest_vs_latest_crime_counts.loc[
+        earliest_vs_latest_crime_counts['pct_delta'].idxmin(), 
+        ['Crime type','pct_delta']
+    ].values
+dict(
+    icon = "arrow-down-right-square-fill",
+    color = "success",
+    value = f"{highest_decrease_crime_type} ({highest_decrease_crime_type_pct:.2f}%)"
+)
+```
+
+## Row
+
+```{python}
+#|title: Crime variation (first reported 3 months vs last reported 3 months)
+#|expandable: true
+
+fig = px.bar(
+    earliest_vs_latest_crime_counts,
+    x='pct_delta',
+    y='Crime type',
+    color='pct_delta',
+    color_continuous_scale=['green', 'yellow', 'red'],  # Green (smallest) to Red (largest)
+    orientation='h',
+    labels={'pct_delta': 'Percentage Change', 'Crime type': ''},
+).update_layout(
+    margin=dict(l=20, r=20, t=20, b=20),
+    showlegend=False  # Added to hide the legend
+).update_coloraxes(
+    showscale=False
+)
+
+fig
+```
+
+```{python}
+#|title: Monthly Crimes
+#|expandable: true
+
+fig = px.bar(
+    crime_type_counts,
+    x='Month',
+    y='count',
+    color='Crime type',
+    barmode='stack',
+    labels={
+        'count': 'Crimes',
+        'Month': 'Month'
+    },
+)
+
+fig.update_layout(
+    xaxis_tickformat='%Y-%m',
+    xaxis_tickangle=-45,
+    margin=dict(l=20, r=20, t=20, b=20),
+    showlegend=False
+)
+```
+
+```{python}
+#|title: Monthly Crime - Month on Month Change
+#|expandable: true
+
+delta = crime_type_counts.dropna(
+    subset=['delta']
+).copy()
+
+fig = px.bar(
+    delta,
+    x='Month',
+    y='delta',
+    color='Crime type',
+    barmode='relative',   # shows positives above, negatives below
+    labels={'delta':'Δ Crimes','Month':'Month'},
+).update_layout(
+    xaxis_tickformat='%Y‑%m',
+    xaxis_tickangle=-45,
+    margin=dict(l=20, r=20, t=50, b=20),
+    showlegend=False
+)
+
+fig
+```

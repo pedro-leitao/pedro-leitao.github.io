@@ -302,157 +302,7 @@ All done! ✨ 🍰 ✨
 
 [ 7/51] posts/thoughts/scalling-ai/index.qmd
 
-[ 8/51] posts/thoughts/met-police-data/index.qmd
-
-
-Starting python3 kernel...
-Done
-
-
-Executing 'index.quarto_ipynb'
-
-  Cell 1/19: ''...
-Done
-
-  Cell 2/19: ''...
-Done
-
-  Cell 3/19: ''...
-Done
-
-  Cell 4/19: ''...Done
-  Cell 5/19: ''...
-Done
-
-  Cell 6/19: ''...
-Done
-
-  Cell 7/19: ''...
-Done
-
-  Cell 8/19: ''...
-Done
-
-  Cell 9/19: ''...
-Done
-
-  Cell 10/19: ''...
-Done
-
-  Cell 11/19: ''...
-Done
-
-  Cell 12/19: ''...
-Done
-
-  Cell 13/19: ''...
-Done
-
-  Cell 14/19: ''...
-Done
-
-  Cell 15/19: ''...
-Done
-
-  Cell 16/19: ''...
-Done
-
-  Cell 17/19: ''...
-Done
-
-  Cell 18/19: ''...
-Done
-
-  Cell 19/19: ''...
-Done
-
-
-
-reformatted _fe1e1bbc_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _9b755f6a_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _374d6e5e_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _c2650b1b_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _21824d2d_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _48c93fdc_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _aaab1c6c_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _9d752d47_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _cda2a237_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _6d8661fe_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _e6a8d7ac_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _565867ac_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _8feef02b_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _7bec9739_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-[ 9/51] posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.ipynb
+[ 8/51] posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.ipynb
 
 reformatted _cell-2_black_formatted.py
 
@@ -460,7 +310,7 @@ reformatted _cell-2_black_formatted.py
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-[10/51] posts/thoughts/engineering-teams-scale/index.qmd
+[ 9/51] posts/thoughts/engineering-teams-scale/index.qmd
 
 reformatted _84359aa7_black_formatted.py
 
@@ -479,6 +329,8 @@ reformatted _5812f832_black_formatted.py
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
+
+[10/51] posts/thoughts/met-police-dashboard/index.qmd
 
 [11/51] posts/thoughts/connundrum-european-tech/index.qmd
 
@@ -742,7 +594,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _2fb5499f_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -762,8 +613,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _b5ba9b60_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _7caaccab_black_formatted.py
@@ -773,7 +624,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _625ff315_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -786,12 +636,10 @@ All done! ✨ 🍰 ✨
 
 reformatted _09fc9edf_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _e1ae3f0e_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -952,7 +800,6 @@ reformatted _460b2e16_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
-
 1 file reformatted.
 
 [20/51] posts/experiments/random-forests/index.qmd
@@ -2027,8 +1874,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _77de6ea3_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _b2bfd088_black_formatted.py
@@ -2050,7 +1897,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _cbf4c19e_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2610,19 +2456,19 @@ All done! ✨ 🍰 ✨
 
 [46/51] python-for-students/introduction/index.qmd
 
-reformatted _qzjbjn_black_formatted.py
+reformatted _msdvjg_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _dgedxd_black_formatted.py
+reformatted _eodjup_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _mchlxj_black_formatted.py
+reformatted _neymyl_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
@@ -2709,6 +2555,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _97d41464_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
