@@ -21,6 +21,8 @@ website:
       - thoughts.qmd
       - howtos.qmd
       - python-for-students.qmd
+      - text: Met Police Dashboard
+        href: posts/thoughts/met-police-dashboard/index.qmd
       - icon: github
         href: https://github.com/pedro-leitao
       - icon: linkedin
