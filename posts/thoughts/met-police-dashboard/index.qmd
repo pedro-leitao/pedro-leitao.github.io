@@ -659,28 +659,6 @@ dict(
 )
 ```
 
-```{python}
-#|title: Grid with highest number of crimes
-#|expandable: true
-import folium
-import h3
-
-# Create a Folium map centered on the highest crime grid
-boundary = h3.cell_to_boundary(highest_crime_grid_h3)
-total_crimes_in_grid = crimes_by_grid.loc[crimes_by_grid['h3_index'] == highest_crime_grid_h3, 'count'].values[0]
-m = folium.Map(location=boundary[0], zoom_start=15, tiles="CartoDB Positron")
-# Highlight the boundary
-_ = folium.Polygon(
-    locations=boundary,
-    color='red',
-    fill=True,
-    fill_opacity=0.4,
-    tooltip=f"Total crimes: {total_crimes_in_grid}"
-).add_to(m)
-
-m
-```
-
 ## Row
 
 ```{python}
