@@ -684,7 +684,7 @@ m
 ## Row
 
 ```{python}
-#|title: All crime grid
+#|title: All crime heatmap
 #|expandable: true
 import folium
 from folium.plugins import HeatMap
@@ -717,6 +717,43 @@ _ = HeatMap(
     min_opacity=0.2, # faintest opacity
     max_val=cap      # clamp top 5%
 ).add_to(m)
+
+m
+```
+
+```{python}
+#|title: All crime hotspots (top 1 percentile)
+#|expandable: true
+import folium
+import h3
+import numpy as np
+
+count_thresh = np.percentile(crimes_by_grid['count'], 99)
+hotspots = crimes_by_grid[crimes_by_grid['count'] >= count_thresh]
+
+centroids = [h3.cell_to_latlng(idx) for idx in hotspots['h3_index']]
+lats, lons = zip(*centroids)
+lat_center, lon_center = np.mean(lats), np.mean(lons)
+
+m = folium.Map(
+    location=[lat_center, lon_center],
+    zoom_start=12,
+    tiles="CartoDB Positron"
+)
+
+scale_factor = 25  # metres per log-crime unit
+for idx, cnt in zip(hotspots['h3_index'], hotspots['count']):
+    lat, lon = h3.cell_to_latlng(idx)
+    radius = scale_factor * np.log1p(cnt)
+    _ = folium.Circle(
+        location=[lat, lon],
+        radius=radius,
+        color='crimson',
+        weight=1,
+        fill=True,
+        fill_opacity=0.2,
+        tooltip=f"Crime count: {cnt}"
+    ).add_to(m)
 
 m
 ```
