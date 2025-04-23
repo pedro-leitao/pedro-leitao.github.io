@@ -15,7 +15,7 @@ date: 2025-04-19
 ---
 
 ## Introduction {.sidebar}
-Built from [Open data](https://data.police.uk) regarding London crime, as reported by the Metropolitan Police. This dashboard is exclusively as reported, and is not a complete picture as there is also *unreported* crime. All charts are interactive, and you can hover over them to see more details.
+This dashboard draws on the Metropolitan Police’s [open London crime data](https://data.police.uk) and reflects only reported incidents - unreported crime isn’t included. All charts are interactive; just hover over them for extra detail.
 
 ```{python}
 #| echo: false
@@ -86,6 +86,14 @@ total_crimes_withID = df['Crime ID'].count()
 total_crimes_withoutID = df['Crime ID'].isna().sum()
 total_crimes = total_crimes_withID + total_crimes_withoutID
 
+# Total crimes per month
+total_crimes_per_month = df.groupby('Month')['Crime ID'].count().reset_index(name='count')
+
+# Worst month for overall crime
+worst_month = total_crimes_per_month.loc[total_crimes_per_month['count'].idxmax(), 'Month']
+# Best month for overall crime
+best_month = total_crimes_per_month.loc[total_crimes_per_month['count'].idxmin(), 'Month']
+
 # Earliest date in the dataset
 earliest_date_str = earliest_date.strftime('%Y-%m')
 # Latest date in the dataset
@@ -105,6 +113,11 @@ crime_type_counts = (
     .reset_index(name='count')
 )
 crime_type_counts['delta'] = crime_type_counts.groupby('Crime type')['count'].diff()
+
+# Worst month for each crime type
+worst_months_crime_types = crime_type_counts.loc[crime_type_counts.groupby('Crime type')['count'].idxmax(), ['Crime type', 'Month']]
+# Best month for each crime type
+best_months_crime_types = crime_type_counts.loc[crime_type_counts.groupby('Crime type')['count'].idxmin(), ['Crime type', 'Month']]
 
 # First vs latest three months
 earliest_vs_latest_crime_counts = (
@@ -145,6 +158,64 @@ total_outcomes_by_borough = outcomes_by_borough.groupby('Borough')['count'].tran
 
 outcomes_by_borough['percentage'] = ((outcomes_by_borough['count'] / total_outcomes_by_borough) * 100).round(2)
 
+# Crime types by Location
+crime_types_by_location = (
+    df[df['Location'] != 'On or near']
+    .groupby(['Location', 'Crime type'])
+    .size()
+    .reset_index(name='count')
+)
+
+# Total number of reported crimes by location
+total_crimes_by_location = crime_types_by_location.groupby('Location')['count'].transform('sum')
+
+# Crime types by rounded lat/lon to three decimal places, where Latitude and Longitude are numbers
+crime_types_by_coords = df[
+    df['Latitude'].apply(lambda x: isinstance(x, (int, float))) &
+    df['Longitude'].apply(lambda x: isinstance(x, (int, float)))
+].copy()
+crime_types_by_coords['Latitude'] = crime_types_by_coords['Latitude'].round(3)
+crime_types_by_coords['Longitude'] = crime_types_by_coords['Longitude'].round(3)
+
+```
+
+```{python}
+#| echo: false
+#| output: false
+# Compute an H3 grid for the crime types by location
+import h3
+
+valid = (
+    df['Latitude'].between(-90, 90) &
+    df['Longitude'].between(-180, 180)
+)
+
+valid_geo = df[valid]
+
+h3_resolution = 9  # H3 resolution (0-15)
+
+def safe_h3(lat, lon, res):
+    try:
+        return h3.latlng_to_cell(lat, lon, res)
+    except h3.H3LatLngDomainError:
+        return None
+
+df['h3_index'] = [
+    safe_h3(lat, lon, h3_resolution)
+    for lat, lon in zip(df['Latitude'], df['Longitude'])
+]
+
+crimes_by_grid = (
+    df
+    .groupby(['h3_index', 'Crime type'])
+    .size()
+    .reset_index(name='count')
+)
+crimes_by_grid['total'] = crimes_by_grid.groupby('h3_index')['count'].transform('sum')
+crimes_by_grid['percentage'] = ((crimes_by_grid['count'] / crimes_by_grid['total']) * 100).round(2)
+
+# Grid with highest number of crimes
+highest_crime_grid_h3 = crimes_by_grid.loc[crimes_by_grid['count'].idxmax(), 'h3_index']
 ```
 
 # Summary
@@ -433,6 +504,64 @@ dict(
 )
 ```
 
+## Row {height=40%}
+
+```{python}
+#|title: Overall crime trend
+#|expandable: true
+
+fig = px.line(
+    total_crimes_per_month,
+    x='Month',
+    y='count',
+    labels={'count': 'Crimes', 'Month': 'Month'},
+).update_layout(
+    xaxis_tickformat='%Y-%m',
+    xaxis_tickangle=-45,
+    margin=dict(l=20, r=20, t=20, b=20),
+    showlegend=False
+).add_annotation(
+    x=worst_month,
+    y=total_crimes_per_month.loc[total_crimes_per_month['Month'] == worst_month, 'count'].values[0],
+    text="Worst month",
+    showarrow=True,
+    arrowhead=2,
+    ax=0,
+    ay=-40,
+    font=dict(color="red")
+).add_annotation(
+    x=best_month,
+    y=total_crimes_per_month.loc[total_crimes_per_month['Month'] == best_month, 'count'].values[0],
+    text="Best month",
+    showarrow=True,
+    arrowhead=2,
+    ax=0,
+    ay=-40,
+    font=dict(color="green")
+)
+fig
+```
+
+```{python}
+#|content: valuebox
+#|title: Worst month for overall crime
+dict(
+    icon = "arrow-up-right-square-fill",
+    color = "danger",
+    value = worst_month.strftime('%Y-%m')
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Best month for overall crime
+dict(
+    icon = "arrow-down-right-square-fill",
+    color = "success",
+    value = best_month.strftime('%Y-%m')
+)
+```
+
 ## Row
 
 ```{python}
@@ -505,3 +634,91 @@ fig = px.bar(
 
 fig
 ```
+
+# Locations
+
+## Row {height=30%}
+
+```{python}
+#|content: valuebox
+#|title: Total geo-grids
+dict(
+    icon = "geo-alt-fill",
+    color = "info",
+    value = df['h3_index'].nunique()
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Total geo-located crimes
+dict(
+    icon = "geo-alt-fill",
+    color = "info",
+    value = df['h3_index'].count()
+)
+```
+
+```{python}
+#|title: Grid with highest number of crimes
+#|expandable: true
+import folium
+import h3
+
+# Create a Folium map centered on the highest crime grid
+boundary = h3.cell_to_boundary(highest_crime_grid_h3)
+total_crimes_in_grid = crimes_by_grid.loc[crimes_by_grid['h3_index'] == highest_crime_grid_h3, 'count'].values[0]
+m = folium.Map(location=boundary[0], zoom_start=15, tiles="CartoDB Positron")
+# Highlight the boundary
+_ = folium.Polygon(
+    locations=boundary,
+    color='red',
+    fill=True,
+    fill_opacity=0.4,
+    tooltip=f"Total crimes: {total_crimes_in_grid}"
+).add_to(m)
+
+m
+```
+
+## Row
+
+```{python}
+#|title: All crime grid
+#|expandable: true
+import folium
+from folium.plugins import HeatMap
+import h3
+import numpy as np
+
+centroids = [h3.cell_to_latlng(idx) for idx in crimes_by_grid['h3_index']]
+lats, lons = zip(*centroids)
+lat_center, lon_center = np.mean(lats), np.mean(lons)
+
+m = folium.Map(
+    location=[lat_center, lon_center],
+    zoom_start=12,
+    tiles="CartoDB Positron"
+)
+
+heat_data = [
+    [lat, lon, np.log1p(cnt)]
+    for (lat, lon), cnt in zip(centroids, crimes_by_grid['count'])
+]
+
+weights = [w for _, _, w in heat_data]
+cap = np.percentile(weights, 95)
+
+_ = HeatMap(
+    heat_data,
+    radius=20,       # size of each hotspot
+    blur=15,         # smoothing
+    max_zoom=12,     # zoom where points hit max intensity
+    min_opacity=0.2, # faintest opacity
+    max_val=cap      # clamp top 5%
+).add_to(m)
+
+m
+```
+
+
