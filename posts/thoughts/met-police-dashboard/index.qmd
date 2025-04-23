@@ -728,9 +728,16 @@ import folium
 import h3
 import numpy as np
 
+# determine threshold and hotspots
 count_thresh = np.percentile(crimes_by_grid['count'], 99)
 hotspots = crimes_by_grid[crimes_by_grid['count'] >= count_thresh]
 
+# find the single cell with the highest crime count
+max_idx = hotspots['count'].idxmax()
+max_h3 = hotspots.loc[max_idx, 'h3_index']
+max_cnt = hotspots.loc[max_idx, 'count']
+
+# compute map centre
 centroids = [h3.cell_to_latlng(idx) for idx in hotspots['h3_index']]
 lats, lons = zip(*centroids)
 lat_center, lon_center = np.mean(lats), np.mean(lons)
@@ -745,14 +752,25 @@ scale_factor = 25  # metres per log-crime unit
 for idx, cnt in zip(hotspots['h3_index'], hotspots['count']):
     lat, lon = h3.cell_to_latlng(idx)
     radius = scale_factor * np.log1p(cnt)
+    # pick a special color for the absolute max
+    if idx == max_h3:
+        fill_color = 'gold'
+        stroke_color = 'darkorange'
+        tooltip = f"🔥 Highest crime count: {cnt}"
+    else:
+        fill_color = 'crimson'
+        stroke_color = 'crimson'
+        tooltip = f"Crime count: {cnt}"
+
     _ = folium.Circle(
         location=[lat, lon],
         radius=radius,
-        color='crimson',
+        color=stroke_color,
         weight=1,
         fill=True,
+        fill_color=fill_color,
         fill_opacity=0.2,
-        tooltip=f"Crime count: {cnt}"
+        tooltip=tooltip
     ).add_to(m)
 
 m
