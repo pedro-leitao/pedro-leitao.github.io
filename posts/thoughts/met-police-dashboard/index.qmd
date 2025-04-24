@@ -637,7 +637,7 @@ fig
 
 # Locations
 
-## Row {height=30%}
+## Row {height=20%}
 
 ```{python}
 #|content: valuebox
@@ -706,25 +706,51 @@ import folium
 import h3
 import numpy as np
 
-# determine threshold and hotspots
-count_thresh = np.percentile(crimes_by_grid['count'], 99)
-hotspots = crimes_by_grid[crimes_by_grid['count'] >= count_thresh]
+def compute_hotspots(crimes_by_grid, crime_types=None, percentile=99):
+    """
+    Compute crime hotspots based on a given percentile threshold.
 
-# find the single cell with the highest crime count
-max_idx = hotspots['count'].idxmax()
-max_h3 = hotspots.loc[max_idx, 'h3_index']
-max_cnt = hotspots.loc[max_idx, 'count']
+    Parameters:
+    - crimes_by_grid (DataFrame): DataFrame containing crime counts by H3 grid.
+    - crime_types (list): Optional; specific crime types to filter hotspots.
+    - percentile (int): Percentile threshold for determining hotspots (default: 99).
 
-# compute map centre
-centroids = [h3.cell_to_latlng(idx) for idx in hotspots['h3_index']]
-lats, lons = zip(*centroids)
-lat_center, lon_center = np.mean(lats), np.mean(lons)
+    Returns:
+    - hotspots (DataFrame): DataFrame of hotspots meeting the threshold.
+    - max_h3 (str): H3 index of the grid with the highest crime count.
+    - max_cnt (int): Highest crime count.
+    - lat_center (float): Latitude of the map center.
+    - lon_center (float): Longitude of the map center.
+    """
+    import numpy as np
+    import h3
+
+    # Determine threshold and hotspots
+    count_thresh = np.percentile(crimes_by_grid['count'], percentile)
+    hotspots = crimes_by_grid[crimes_by_grid['count'] >= count_thresh]
+    if crime_types is not None:
+        hotspots = hotspots[hotspots['Crime type'].isin(crime_types)]
+    hotspots = hotspots.sort_values('count', ascending=False).reset_index(drop=True)
+
+    # Find the single cell with the highest crime count
+    max_idx = hotspots['count'].idxmax()
+    max_h3 = hotspots.loc[max_idx, 'h3_index']
+    max_cnt = hotspots.loc[max_idx, 'count']
+
+    # Compute map center
+    centroids = [h3.cell_to_latlng(idx) for idx in hotspots['h3_index']]
+    lats, lons = zip(*centroids)
+    lat_center, lon_center = np.mean(lats), np.mean(lons)
+
+    return hotspots, max_h3, max_cnt, lat_center, lon_center
 
 m = folium.Map(
     location=[lat_center, lon_center],
     zoom_start=12,
     tiles="CartoDB Positron"
 )
+
+hotspots, max_h3, max_cnt, lat_center, lon_center = compute_hotspots(crimes_by_grid, percentile=99)
 
 scale_factor = 25  # metres per log-crime unit
 for idx, cnt in zip(hotspots['h3_index'], hotspots['count']):
@@ -734,11 +760,11 @@ for idx, cnt in zip(hotspots['h3_index'], hotspots['count']):
     if idx == max_h3:
         fill_color = 'gold'
         stroke_color = 'darkorange'
-        tooltip = f"🔥 Highest crime count: {cnt}"
+        tooltip = f"🔥 Highest crime count: {cnt}, all crime"
     else:
         fill_color = 'crimson'
         stroke_color = 'crimson'
-        tooltip = f"Crime count: {cnt}"
+        tooltip = f"Crime count: {cnt}, all crime"
 
     _ = folium.Circle(
         location=[lat, lon],
@@ -754,4 +780,150 @@ for idx, cnt in zip(hotspots['h3_index'], hotspots['count']):
 m
 ```
 
+```{python}
+#|expandable: true
+
+print("title=", f"Crime hotspots for {highest_increase_crime_type}")
+
+m = folium.Map(
+    location=[lat_center, lon_center],
+    zoom_start=12,
+    tiles="CartoDB Positron"
+)
+
+hotspots, max_h3, max_cnt, lat_center, lon_center = compute_hotspots(crimes_by_grid, crime_types=[highest_increase_crime_type], percentile=99)
+
+scale_factor = 25  # metres per log-crime unit
+for idx, cnt in zip(hotspots['h3_index'], hotspots['count']):
+    lat, lon = h3.cell_to_latlng(idx)
+    radius = scale_factor * np.log1p(cnt)
+    # pick a special color for the absolute max
+    if idx == max_h3:
+        fill_color = 'gold'
+        stroke_color = 'darkorange'
+        tooltip = f"🔥 Highest crime count: {cnt}, {highest_increase_crime_type}"
+    else:
+        fill_color = 'crimson'
+        stroke_color = 'crimson'
+        tooltip = f"Crime count: {cnt}, {highest_increase_crime_type}"
+
+    _ = folium.Circle(
+        location=[lat, lon],
+        radius=radius,
+        color=stroke_color,
+        weight=1,
+        fill=True,
+        fill_color=fill_color,
+        fill_opacity=0.2,
+        tooltip=tooltip
+    ).add_to(m)
+
+m
+```
+
+```{python}
+#|expandable: true
+import folium
+import h3
+import numpy as np
+from branca.element import Template, MacroElement
+import matplotlib
+import matplotlib.colors as mcolors
+
+def compute_top_n_hotspots(crimes_by_grid, crime_types=None, top_n=5):
+    """
+    For each crime type, pick the top_n H3 cells by count.
+    Returns:
+      - hotspots_by_type: dict(ct -> DataFrame of top_n rows)
+      - map_center: (lat, lon) average of all hotspot centroids
+    """
+    if crime_types is None:
+        crime_types = crimes_by_grid['Crime type'].unique()
+    
+    hotspots_by_type = {}
+    all_centroids = []
+    
+    for ct in crime_types:
+        df_ct = crimes_by_grid[crimes_by_grid['Crime type'] == ct]
+        top_df = df_ct.nlargest(top_n, 'count').reset_index(drop=True)
+        hotspots_by_type[ct] = top_df
+        
+        # collect centroids for map centering
+        cents = [h3.cell_to_latlng(idx) for idx in top_df['h3_index']]
+        all_centroids.extend(cents)
+    
+    # overall map centre
+    lats, lons = zip(*all_centroids)
+    center = (np.mean(lats), np.mean(lons))
+    
+    return hotspots_by_type, center
+
+top_n = 20
+scale = 25  # metres per log‐crime‐unit
+
+print("title=", f"Top {top_n} crime hotspots for each crime type")
+
+hotspots_by_type, (lat_center, lon_center) = compute_top_n_hotspots(
+    crimes_by_grid,
+    crime_types=None,  # or a list like ['burglary','assault']
+    top_n=top_n
+)
+
+m = folium.Map(
+    location=[lat_center, lon_center],
+    zoom_start=12,
+    tiles="CartoDB Positron"
+)
+
+colormap = matplotlib.colormaps.get_cmap('tab20')
+base_colors = colormap.colors
+palette = [mcolors.to_hex(base_colors[i % top_n]) for i in range(top_n)]
+
+colors = { ct: palette[i] for i, ct in enumerate(crime_types) }
+
+for ct, df in hotspots_by_type.items():
+    col = colors[ct]
+    for _, row in df.iterrows():
+        lat, lon = h3.cell_to_latlng(row['h3_index'])
+        radius = scale * np.log1p(row['count'])
+        _ = folium.Circle(
+            location=[lat, lon],
+            radius=radius,
+            color=col,
+            weight=1,
+            fill=True,
+            fill_color=col,
+            fill_opacity=0.3,
+            tooltip=f"{ct}: {row['count']}"
+        ).add_to(m)
+
+legend_items = "".join(
+    f"<p style='margin:0;font-size:small;'><span style='"
+    f"display:inline-block;width:12px;height:12px;"
+    f"background:{colors[ct]};margin-right:6px;'></span>{ct}</p>"
+    for ct in colors
+)
+
+legend_html = """
+{% macro html(this, args) %}
+<div style="
+    position: fixed;
+    bottom: 30px; left: 30px;
+    width: 150px; padding: 10px;
+    background: white; border:2px solid grey;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+    z-index:9999;
+">
+<b>Crime type</b><br>
+""" + legend_items + """
+</div>
+{% endmacro %}
+"""
+
+legend = MacroElement()
+legend._template = Template(legend_html)
+_ = m.get_root().add_child(legend)
+
+m
+```
 
