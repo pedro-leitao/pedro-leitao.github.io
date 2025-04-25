@@ -46,7 +46,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _f009e86e_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -267,8 +266,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _7383cc7d_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _79a40bd3_black_formatted.py
@@ -335,108 +334,7 @@ All done! ✨ 🍰 ✨
 
 
 Starting python3 kernel...
-Done
-
-
-Executing 'index.quarto_ipynb'
-
-  Cell 1/33: ''...
-Done
-
-  Cell 2/33: ''...
-Done
-
-  Cell 3/33: ''...
-Done
-
-  Cell 4/33: ''...
-Done
-
-  Cell 5/33: ''...
-Done
-
-  Cell 6/33: ''...
-Done
-
-  Cell 7/33: ''...
-Done
-
-  Cell 8/33: ''...Done
-  Cell 9/33: ''...
-Done
-
-  Cell 10/33: ''...
-Done
-
-  Cell 11/33: ''...
-Done
-
-  Cell 12/33: ''...
-Done
-
-  Cell 13/33: ''...
-Done
-
-  Cell 14/33: ''...
-Done
-
-  Cell 15/33: ''...
-Done
-
-  Cell 16/33: ''...
-Done
-
-  Cell 17/33: ''...
-Done
-
-  Cell 18/33: ''...
-Done
-
-  Cell 19/33: ''...
-Done
-
-  Cell 20/33: ''...
-Done
-
-  Cell 21/33: ''...
-Done
-
-  Cell 22/33: ''...
-Done
-
-  Cell 23/33: ''...
-Done
-
-  Cell 24/33: ''...
-Done
-
-  Cell 25/33: ''...
-Done
-
-  Cell 26/33: ''...
-Done
-
-  Cell 27/33: ''...
-Done
-
-  Cell 28/33: ''...
-Done
-
-  Cell 29/33: ''...
-Done
-
-  Cell 30/33: ''...
-Done
-
-  Cell 31/33: ''...
-Done
-
-  Cell 32/33: ''...
-Done
-
-  Cell 33/33: ''...
-Done
-
+(Notebook read from cache)
 
 
 [11/51] posts/thoughts/connundrum-european-tech/index.qmd
@@ -477,12 +375,10 @@ All done! ✨ 🍰 ✨
 
 reformatted _5c6328d6_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _d4a927c2_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -671,7 +567,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _748f801e_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -831,6 +726,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _64b0b2e3_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -916,14 +812,13 @@ All done! ✨ 🍰 ✨
 
 reformatted _4fc9f663_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _cfa9cb07_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _ab17f06c_black_formatted.py
@@ -994,7 +889,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _ff8dca5e_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1099,6 +993,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _1d8de81c_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1124,8 +1019,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _91e442c8_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _ce98a09b_black_formatted.py
@@ -1167,7 +1062,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _6052996c_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1179,8 +1073,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _ffa771f1_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _28db1144_black_formatted.py
@@ -1220,7 +1114,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _11ef3ed6_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1465,7 +1358,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _e1e20836_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1612,6 +1504,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _5989f2ee_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1626,12 +1519,12 @@ All done! ✨ 🍰 ✨
 error: cannot format _bc95ca6f_black_formatted.py: Cannot parse: 3:0: !kaggle datasets download -p .data/ shahmirvarqha/weather-data-malaysia --unzip
 
 Oh no! 💥 💔 💥
+
 1 file failed to reformat.
 
 error: cannot format _22ca6d96_black_formatted.py: Cannot parse: 3:0: !kaggle datasets download -p .data/ jylim21/malaysia-public-data --unzip
 
 Oh no! 💥 💔 💥
-
 1 file failed to reformat.
 
 reformatted _7f422e32_black_formatted.py
@@ -1708,6 +1601,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _77229a16_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1719,10 +1613,12 @@ All done! ✨ 🍰 ✨
 
 reformatted _081cf820_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _b51558e9_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2008,7 +1904,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _84f7a295_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2305,7 +2200,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _acb3160a_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -2562,19 +2456,19 @@ All done! ✨ 🍰 ✨
 
 [46/51] python-for-students/introduction/index.qmd
 
-reformatted _ruskse_black_formatted.py
+reformatted _phovan_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _qfbhdb_black_formatted.py
+reformatted _pdkrwk_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _bsgcev_black_formatted.py
+reformatted _cdudzd_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
@@ -2602,8 +2496,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _60bb9e88_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _158cfb0a_black_formatted.py
@@ -2638,7 +2532,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _721fe5d4_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -2671,7 +2564,6 @@ All done! ✨ 🍰 ✨
 [49/51] python-for-students/comprehensions/index.qmd
 
 reformatted _1a49aad8_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2725,6 +2617,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _0e5bd254_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2945,7 +2838,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _3193d5cb_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -2980,7 +2872,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _3cff12b3_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
