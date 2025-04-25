@@ -659,6 +659,8 @@ dict(
 )
 ```
 
+## Row
+
 ```{python}
 #|title: All crime hotspots (top 1 percentile)
 #|expandable: true
