@@ -659,52 +659,16 @@ dict(
 )
 ```
 
-## Row
-
-```{python}
-#|title: All crime heatmap
-#|expandable: true
-import folium
-from folium.plugins import HeatMap
-import h3
-import numpy as np
-
-centroids = [h3.cell_to_latlng(idx) for idx in crimes_by_grid['h3_index']]
-lats, lons = zip(*centroids)
-lat_center, lon_center = np.mean(lats), np.mean(lons)
-
-m = folium.Map(
-    location=[lat_center, lon_center],
-    zoom_start=12,
-    tiles="CartoDB Positron"
-)
-
-heat_data = [
-    [lat, lon, np.log1p(cnt)]
-    for (lat, lon), cnt in zip(centroids, crimes_by_grid['count'])
-]
-
-weights = [w for _, _, w in heat_data]
-cap = np.percentile(weights, 95)
-
-_ = HeatMap(
-    heat_data,
-    radius=20,       # size of each hotspot
-    blur=15,         # smoothing
-    max_zoom=12,     # zoom where points hit max intensity
-    min_opacity=0.2, # faintest opacity
-    max_val=cap      # clamp top 5%
-).add_to(m)
-
-m
-```
-
 ```{python}
 #|title: All crime hotspots (top 1 percentile)
 #|expandable: true
 import folium
 import h3
 import numpy as np
+
+centroids = [h3.cell_to_latlng(idx) for idx in crimes_by_grid['h3_index']]
+lats, lons = zip(*centroids)
+lat_center, lon_center = np.mean(lats), np.mean(lons)
 
 def compute_hotspots(crimes_by_grid, crime_types=None, percentile=99):
     """

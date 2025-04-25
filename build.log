@@ -78,6 +78,7 @@ Oh no! 💥 💔 💥
 error: cannot format _84fba563_black_formatted.py: Cannot parse: 1:0: !ollama pull hf.co/unsloth/DeepSeek-R1-Distill-Llama-8B-GGUF
 
 Oh no! 💥 💔 💥
+
 1 file failed to reformat.
 
 error: cannot format _975b450c_black_formatted.py: Cannot parse: 1:0: !ollama list
@@ -260,14 +261,14 @@ All done! ✨ 🍰 ✨
 
 reformatted _3b215504_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _7383cc7d_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _79a40bd3_black_formatted.py
@@ -331,6 +332,112 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 [10/51] posts/thoughts/met-police-dashboard/index.qmd
+
+
+Starting python3 kernel...
+Done
+
+
+Executing 'index.quarto_ipynb'
+
+  Cell 1/33: ''...
+Done
+
+  Cell 2/33: ''...
+Done
+
+  Cell 3/33: ''...
+Done
+
+  Cell 4/33: ''...
+Done
+
+  Cell 5/33: ''...
+Done
+
+  Cell 6/33: ''...
+Done
+
+  Cell 7/33: ''...
+Done
+
+  Cell 8/33: ''...Done
+  Cell 9/33: ''...
+Done
+
+  Cell 10/33: ''...
+Done
+
+  Cell 11/33: ''...
+Done
+
+  Cell 12/33: ''...
+Done
+
+  Cell 13/33: ''...
+Done
+
+  Cell 14/33: ''...
+Done
+
+  Cell 15/33: ''...
+Done
+
+  Cell 16/33: ''...
+Done
+
+  Cell 17/33: ''...
+Done
+
+  Cell 18/33: ''...
+Done
+
+  Cell 19/33: ''...
+Done
+
+  Cell 20/33: ''...
+Done
+
+  Cell 21/33: ''...
+Done
+
+  Cell 22/33: ''...
+Done
+
+  Cell 23/33: ''...
+Done
+
+  Cell 24/33: ''...
+Done
+
+  Cell 25/33: ''...
+Done
+
+  Cell 26/33: ''...
+Done
+
+  Cell 27/33: ''...
+Done
+
+  Cell 28/33: ''...
+Done
+
+  Cell 29/33: ''...
+Done
+
+  Cell 30/33: ''...
+Done
+
+  Cell 31/33: ''...
+Done
+
+  Cell 32/33: ''...
+Done
+
+  Cell 33/33: ''...
+Done
+
+
 
 [11/51] posts/thoughts/connundrum-european-tech/index.qmd
 
@@ -724,7 +831,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _64b0b2e3_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -753,6 +859,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _323ee924_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -788,6 +895,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _6fda398c_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -990,7 +1098,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _1d8de81c_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1455,6 +1562,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _5fc94668_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1504,7 +1612,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _5989f2ee_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1524,6 +1631,7 @@ Oh no! 💥 💔 💥
 error: cannot format _22ca6d96_black_formatted.py: Cannot parse: 3:0: !kaggle datasets download -p .data/ jylim21/malaysia-public-data --unzip
 
 Oh no! 💥 💔 💥
+
 1 file failed to reformat.
 
 reformatted _7f422e32_black_formatted.py
@@ -1552,6 +1660,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _46665238_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1574,6 +1683,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _6c3577ad_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1598,7 +1708,6 @@ All done! ✨ 🍰 ✨
 
 reformatted _77229a16_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1610,12 +1719,10 @@ All done! ✨ 🍰 ✨
 
 reformatted _081cf820_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _b51558e9_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1663,7 +1770,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _ee2dcbf6_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1745,6 +1851,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _0fb5312b_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -1773,6 +1880,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _8aed1910_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -1845,8 +1953,8 @@ All done! ✨ 🍰 ✨
 
 reformatted _0da1eff4_black_formatted.py
 
-All done! ✨ 🍰 ✨
 
+All done! ✨ 🍰 ✨
 1 file reformatted.
 
 [32/51] posts/experiments/regularisation/index.qmd
@@ -1888,6 +1996,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _8f548ecc_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2453,19 +2562,19 @@ All done! ✨ 🍰 ✨
 
 [46/51] python-for-students/introduction/index.qmd
 
-reformatted _owsqmh_black_formatted.py
+reformatted _ruskse_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _xdlgwv_black_formatted.py
+reformatted _qfbhdb_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
-reformatted _cxevlh_black_formatted.py
+reformatted _bsgcev_black_formatted.py
 
 
 All done! ✨ 🍰 ✨
@@ -2474,6 +2583,7 @@ All done! ✨ 🍰 ✨
 [47/51] python-for-students/flow-control/index.qmd
 
 reformatted _047327d6_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2486,13 +2596,14 @@ All done! ✨ 🍰 ✨
 
 reformatted _0dfc442c_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _60bb9e88_black_formatted.py
 
-
 All done! ✨ 🍰 ✨
+
 1 file reformatted.
 
 reformatted _158cfb0a_black_formatted.py
@@ -2573,6 +2684,7 @@ All done! ✨ 🍰 ✨
 
 reformatted _aa82708e_black_formatted.py
 
+
 All done! ✨ 🍰 ✨
 1 file reformatted.
 
@@ -2613,7 +2725,6 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _0e5bd254_black_formatted.py
-
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
@@ -2747,6 +2858,7 @@ All done! ✨ 🍰 ✨
 1 file reformatted.
 
 reformatted _ca064a3e_black_formatted.py
+
 
 All done! ✨ 🍰 ✨
 1 file reformatted.
