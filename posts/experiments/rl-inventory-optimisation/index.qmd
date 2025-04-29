@@ -309,7 +309,7 @@ demand_data_without_boost = demand_data.copy()
 demand_data = demand_data * holiday_multipliers[:len(demand_data)]
 ```
 
-Finally, here is the demand curve, which includes seasonality and holiday spikes. You will notice that the demand data is now boosted on weekends and holidays, as expected. You can click on the plot to zoom in and out, hover over points to see the values, and click on the legend items to show and hide individual series.
+Here is the final demand curve, which includes seasonality and holiday spikes. You will notice that the demand data is now boosted on weekends and holidays, as expected. You can click on the plot to zoom in and out, hover over points to see the values, and click on the legend items to show and hide individual series.
 
 ```{python}
 # Plot demand data with seasonality and holiday spikes, vs original demand data
@@ -364,7 +364,30 @@ We will use the [Gymnasium](https://github.com/Farama-Foundation/Gymnasium) libr
 
 This is the fundamental principle of reinforcement learning: the agent learns to take actions that maximise the expected cumulative reward over time. The environment will provide feedback to the agent in the form of rewards, which will be used to update a policy.
 
-First let us define a few parameters for the environment - the possible order quantities which the agent can choose from, and the action space size it will be working in.
+In diagram form, the main pieces of the environment are as follows.
+
+```{mermaid}
+flowchart TD
+ subgraph s1["Environment"]
+        n1["Action Space"]
+        n2["Order&nbsp;0"]
+        n3["Order&nbsp;5"]
+        n4["Order&nbsp;10"]
+        n5["Order&nbsp;..."]
+        n6["Observation Space"]
+        n7["Inventory"]
+        n8["Demand"]
+        n9["Functions"]
+        n10["Reset"]
+        n11["Step"]
+  end
+    n1 --> n2 & n3 & n4 & n5
+    n6 --> n7 & n8
+    n9 --> n10
+    n9 --> n11
+```
+
+To start with, let us define a few parameters for the environment - the possible order quantities which the agent can choose from, and the action space size it will be working in.
 
 ```{python}
 # Define the action space as a discrete set of order quantities from 0 to 200, with increments of 5
@@ -387,14 +410,16 @@ Finally we define the Gymnasium class for the environment. It is composed of sta
 Note that the reset function can be called with a `random_start` parameter, which will randomly select a starting point in the demand data. This is useful for training the agent on different starting points, and can help to improve the robustness of the learned policy as that way we will not bias the agent to learn a policy that only works for a specific starting point.
 :::
 
-An important part of the environment is defining the costs associated with holding inventory, stockouts, and ordering stock. For this experiment, we will use the following costs:
+An important part is defining the costs associated with holding inventory, stockouts, and ordering stock. For this experiment, we will use the following costs:
 
-- Holding cost per unit: $0.2
-- Stockout penalty per unit: 20% of the average selling price
-- Fixed order cost: $1
-- Order cost per unit: 10% of the average selling price
+- Holding cost per unit: $$0.2$$
+- Stockout penalty per unit: $20\%$ of the average selling price
+- Fixed order cost: $$1$$
+- Order cost per unit: $10\%$ of the average selling price
 
-These costs in practice are a key driver for model performance, for this experiment we are using speculative values. In practice, you would want to use actual costs from your business to train the agent, and they would be specific to each product and store (for example, a stockout penalty will vary wildly between products, between stores for the same product or even when it occurs).
+::: {.callout-note}
+In practice, these costs are a key driver for model performance. For this experiment we are using simple, speculative values. You would want to use actual costs from your business to train the agent, and they would be specific to each product and store (for example, a stockout penalty will vary wildly between products, between stores for the same product or even when the stockout event occurs).
+:::
 
 ```{python}
 import gymnasium as gym
@@ -481,11 +506,6 @@ class InventoryManagementEnv(gym.Env):
         return self._get_obs(), reward, done, {}
 
     def reset(self):
-        self.current_step = 0
-        self.inventory = self.max_inventory // self.random_inventory_divider
-        return self._get_obs()
-
-    def reset(self):
         if self.random_start:
             # we choose a random window so we always have enough days left
             max_start = len(self.demand_data) - 1 - self.episode_length
@@ -505,7 +525,7 @@ We now have a custom environment that simulates the inventory management process
 
 ## The Q-learning agent
 
-The agent will use a Q-table to store the expected rewards for each state-action pair. The Q-table is a 2D array where the rows represent the states (inventory levels and recent demand) and the columns represent the actions (order quantities). It will update the Q-table using the Q-learning algorithm, which is a model-free reinforcement learning algorithm that learns the value of taking a particular action in a given state.
+The agent will use a Q-table to store the expected rewards for each state-action pair. The Q-table is a 2D array where the rows represent the states (inventory levels and recent demand) and the columns represent the actions (order quantities). It will update it using the Q-learning algorithm, which is a model-free reinforcement learning algorithm which learns the value of taking a particular action in a given state.
 
 ::: {.callout-note}
 
@@ -528,10 +548,10 @@ where:
 :::
 
 
-The Q-learning agent will use a simple $\epsilon$-greedy policy to balance exploration and exploitation. This means that the agent will choose a random action with probability $\epsilon$ and the best action with probability $1 - \epsilon$. The value of $\epsilon$ will decay over time to encourage exploration in the beginning and exploitation later on.
+The agent will use a simple $\epsilon$-greedy policy to balance exploration and exploitation. This means it will choose a random action with probability $\epsilon$ and the best action with probability $1 - \epsilon$. The value of $\epsilon$ will decay over time to encourage exploration in the beginning and exploitation later on.
 
 ::: {.callout-note}
-Don't worry for now about the details if it sounds a bit overwhelming, what is important is that you develop an intuition of how reinforcement learning solves this domain problem. You can explore the details in your own time.
+Don't worry for now about the details if it sounds a bit overwhelming, what is important is that you develop an intuition of how reinforcement learning solves this domain problem. You can explore how this works in your own time.
 :::
 
 ```{python}
@@ -564,6 +584,20 @@ class QLearningAgent:
 
 The Q-learning algorithm requires a discrete state space, so we need to discretise the continuous state space (inventory levels and recent demand) into bins. We will use a simple binning approach to achieve this. The number of bins for inventory and demand can be adjusted based on the expected range of values, but we will use a simple heuristic to determine the number of bins based on the maximum values of inventory and demand.
 
+```{mermaid}
+flowchart TD
+ subgraph s1["Bins"]
+        n2["1&nbsp;to&nbsp;5"]
+        n3["6&nbsp;to&nbsp;10"]
+        n4["..."]
+        n5["51&nbsp;to&nbsp;55"]
+  end
+  subgraph s2["Data"]
+    n1["1,2,3,4,5,6,7,...,51,52,53,54,55"] --> n2 & n3 & n4
+    n1 --> n5
+  end
+```
+
 We will use the following formula to calculate the number of bins:
 $$
 \text{bins} = \frac{\text{max value} - \text{min value}}{\text{target bin width}}
@@ -588,8 +622,7 @@ def discretise_state(state, inventory_bins=10, demand_bins=5, max_inventory=1000
 ```
 
 ```{python}
-desired_bins = 15
-
+desired_bins = 30
 width = (demand_data.max() - demand_data.min()) / desired_bins
 target_demand_bin_width = max(1, int(width))
 
@@ -600,8 +633,8 @@ target_inventory_bin_width = max(1, int(width))
 demand_bins = int(np.ceil((np.max(demand_data) - np.min(demand_data)) / target_demand_bin_width))
 inventory_bins = int(np.ceil(expected_max_inventory / target_inventory_bin_width))
 # Cap bins to avoid outliers
-demand_bins = np.clip(demand_bins, 5, 50)
-inventory_bins = np.clip(inventory_bins, 5, 50)
+demand_bins = np.clip(demand_bins, 5, desired_bins)
+inventory_bins = np.clip(inventory_bins, 5, desired_bins)
 print(f"Demand bins: {demand_bins}, Inventory bins: {inventory_bins}")
 ```
 
@@ -618,7 +651,7 @@ env = InventoryManagementEnv(
     max_inventory=max_inventory,
     max_order=max_order,
     random_start=True,
-    episode_length=180
+    episode_length=365
 )
 
 agent = QLearningAgent(
@@ -626,7 +659,7 @@ agent = QLearningAgent(
     action_space_size=action_space_size
 )
 
-n_episodes = 5000
+n_episodes = 3000
 
 rewards_per_episode = []
 
@@ -654,7 +687,11 @@ for episode in range(n_episodes):
 
 ## Comparing to baseline policies
 
-With the model trained, let us compare the results to typical baseline policies which represent common inventory management strategies. We will implement a naive policy, a reorder point policy, and a dynamic reorder policy. The naive policy simply orders a fixed quantity of stock every day, while the reorder point policy orders stock when inventory falls below a certain threshold. The dynamic reorder policy adjusts the reorder point based on recent demand.
+With the model trained, let us compare the results to typical baseline policies which represent common inventory management strategies. We will implement a naive policy, a reorder point policy, and a dynamic reorder policy.
+
+Naive policy simply orders a fixed quantity of stock every day, while the reorder point policy orders stock when inventory falls below a certain threshold.
+
+Dynamic reorder policy adjusts the reorder point based on recent demand, which is a more sophisticated strategy that takes into account the current demand levels and adjusts the reorder point accordingly.
 
 These policies are not necessarily optimal, but they represent common strategies used in inventory management. The goal is to demonstrate the effectiveness of the RL approach compared to these.
 
@@ -668,7 +705,9 @@ def find_closest_action(order_quantity, order_quantities):
     )
 ```
 
-We then define the policies. The naive policy simply orders a fixed quantity of stock every day, independent of the inventory level or demand.
+We then define the policies.
+
+### Naive policy
 
 ```{python}
 def simulate_naive_policy(
@@ -707,7 +746,7 @@ def simulate_naive_policy(
     return rewards
 ```
 
-The reorder point policy orders stock when inventory falls below a certain threshold. This is a common strategy used in inventory management, and it is based on the simple idea that when inventory levels are low, it is time to reorder stock.
+### Reorder point policy
 
 ```{python}
 def simulate_reorder_point_policy(
@@ -755,7 +794,7 @@ def simulate_reorder_point_policy(
     return rewards, metrics
 ```
 
-Finally, the dynamic reorder policy adjusts the reorder point based on recent demand. This is a more sophisticated strategy that takes into account the current demand levels and adjusts the reorder point accordingly.
+### Dynamic reorder policy
 
 ```{python}
 def simulate_dynamic_reorder_policy(
@@ -808,7 +847,7 @@ def simulate_dynamic_reorder_policy(
     return rewards, metrics
 ```
 
-With all the baseline policies defined, we can now simulate them in the environment. We will use the same environment and demand data as the RL agent, and we will compare the rewards received by each policy over the same number of episodes.
+With all the baseline policies defined, we can now simulate them in the environment. We use the same environment and demand data as the RL agent, and compare against the rewards received by each policy over the same number of episodes.
 
 ```{python}
 # Simulate the naive policy
@@ -819,9 +858,9 @@ reorder_rewards, reorder_metrics = simulate_reorder_point_policy(env, order_quan
 dynamic_rewards, dynamic_metrics = simulate_dynamic_reorder_policy(env, order_quantities, base_reorder_point=expected_max_inventory // 2, base_order_quantity=expected_max_inventory, n_episodes=n_episodes)
 ```
 
-## Performance comparison
+## Performance benchmarking
 
-We can now compare the performance of the RL agent against the baseline policies. We will plot the rewards received by each policy over the same number of episodes, and we will also include the rewards received by the RL agent.
+We can now contrast the performance of the RL agent against the baseline policies. Let us plot the rewards received by each policy over the same number of episodes, and include the rewards received by the RL agent for comparison.
 
 ```{python}
 # Plot the rewards per episode for each policy, including the RL agent
@@ -872,11 +911,13 @@ fig.update_layout(
 fig.show()
 ```
 
-We can clearly see the RL agent (the red line in the plot) is outperforming all the baseline policies after enough training episodes, meaning the agent has learned a set of actions that maximises the expected cumulative reward over time.
+It is clear the RL agent (the red line in the plot) is outperforming all the baseline policies after enough training episodes, meaning the agent has learned a set of actions that maximises the expected cumulative reward over time.
 
 ## Visualising the Q-table
 
-In the Q-learning algorithm, the Q-table is a 2D array where the rows represent the states (inventory levels and recent demand) and the columns represent the actions (order quantities). It forms the "brain" of the agent, and it is used to store the expected rewards for each state-action pair. It offers good explanatory power for the learned policy, and we can visualise it to understand how the agent has learned to take actions based on the state of the environment.
+In the Q-learning algorithm, the Q-table is a 2D array where the rows represent the states (inventory levels and recent demand) and the columns represent the actions (order quantities). It forms the "brain" of the agent, where each cell represents the expected reward for taking a particular action in a given state.
+
+It offers good explanatory power for the learned policy, we can visualise it to understand how the agent has learned to take actions based on the state of the environment.
 
 ```{python}
 q_table_reshaped = agent.q_table.reshape((inventory_bins, demand_bins, action_space_size))
