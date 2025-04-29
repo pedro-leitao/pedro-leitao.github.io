@@ -20,11 +20,11 @@ Businesses struggle to balance inventory: too much stock ties up cash, too littl
 
 This experiment explores using reinforcement learning (RL) to optimise inventory, using a simple simulation of a retail store. The goal is to learn an optimal policy for ordering stock based on demand forecasts and current inventory levels.
 
-We will be using the [M5 Forecasting - Accuracy](https://www.kaggle.com/competitions/m5-forecasting-accuracy/data) dataset from Kaggle, which contains historical sales data for various products across different stores. The dataset includes features such as sales history, promotional events, and calendar information. We will use this data to train our RL agent in a simulated environment, to make inventory decisions such as how much stock to order and when to place orders, with the aim of maximising profits while minimising stockouts and holding costs.
+We will be using the [M5 Forecasting - Accuracy](https://www.kaggle.com/competitions/m5-forecasting-accuracy/data) dataset from Kaggle, which contains historical sales data for various products across different stores. The dataset includes features such as sales history and event calendar information. We will use this data to train our RL agent in a simulated environment, to make inventory decisions such as how much stock to order and when to place orders, with the aim of maximising profits while minimising [:link stockouts](https://en.wikipedia.org/wiki/Stockout) and holding costs.
 
 ## The overall approach
 
-The overall approach to the experiment is as follows:
+The overall approach to the experiment is as follows.
 
 ```{mermaid}
 flowchart TD
@@ -63,9 +63,9 @@ random.seed(seed)
 np.random.seed(seed)
 ```
 
-## What does the data represent ?
+## What does it represent ?
 
-The M5 dataset is composed of several data tables, each representing different aspects of the sales data. The main tables we will be using are the `calendar`, `sell prices` and `sales` data tables. The `calendar` table contains information about the dates, including holidays and events, `sell prices` contains information about the prices of the products in different stores, while `sales` contains the sales data for each product in each store.
+The M5 dataset is composed of several data tables, each representing different aspects of the sales data. The main tables we will be using are the `calendar`, `sell prices` and `sales` data tables. The `calendar` table contains information about the dates, including holidays and events, `sell prices` contains information about the prices of the products in different stores over time, while `sales` contains the sales data for each product in each store.
 
 ### Calendar
 
@@ -99,7 +99,7 @@ display(sales_train_validation.head())
 
 ## Selecting a store and product
 
-We will select a random store and product from the sales data, but we don't want to select a product that has no sales. We will filter the products to only include those that have sales on at least 75% of the days in the dataset. This will ensure that we have enough data to train our agent.
+We will select a random store and product from the sales data, but we don't want to select a product that has no sales. We will filter the products to only include those that have sales on at least 75% of the days in the dataset. This will help ensure that we have enough data to train our agent.
 
 First, we pick a random store.
 
@@ -148,7 +148,7 @@ fig.update_layout(grid=dict())
 fig.show()
 ```
 
-We need to pick a product from the tail end of the distribution, so we have a good chance for the RL agent to learn something useful, rather than attempting to train from a data set which is too sparse. Let us filter the products to only include those that have sales on at least 75% of the days in the dataset.
+We will pick a product from the tail end of the distribution, so we increase the chance for the RL agent to learn something useful, rather than attempting to train from a dataset which is too sparse. Let us filter the products to only include those that have sales on at least 75% of the days in the dataset.
 
 ```{python}
 # Filter to products with ≥75% days having sales
@@ -171,7 +171,7 @@ product_id = random.choice(valid_products)
 print(f"Selected product: {product_id}")
 ```
 
-Now that we have a store and product to work with. Let us finalise the data we will be using for the experiment.
+Now that we have a store and product, let us finalise the data we will be using for the experiment.
 
 ```{python}
 # Filter the sales data for the selected store and product
@@ -190,7 +190,7 @@ product_prices = sell_prices[
 product_prices = product_prices[['wm_yr_wk', 'sell_price']].reset_index(drop=True)
 ```
 
-To develop an intuition of what we will be working with, we can visualise some of the important data points, starting with product prices.
+To develop an intuition of what we selected, let us visualise some of the important data points, starting with product prices.
 
 ```{python}
 # Plot select product prices
@@ -251,7 +251,7 @@ print(f"Expected Max Inventory: {expected_max_inventory}")
 print(f"Min daily sales: {np.min(daily_sales)}, Max daily sales: {np.max(daily_sales)}")
 ```
 
-We can look at the calculated demand data, which is a rolling average of the sales data. We apply a rolling average to smooth out the demand curve, and make it more stable for the RL agent to learn from. We will also plot the demand data, with event days highlighted in red.
+We can look at the calculated demand data, which is a rolling average of the sales data. We apply an average to smooth out the demand curve, making it more stable for the RL agent to learn from. Let us have a quick look at the demand data, with event days highlighted in red.
 
 ```{python}
 # Plot demand data for the selected product
@@ -283,7 +283,7 @@ fig.update_layout(
 fig.show()
 ```
 
-We want to affect the demand data with seasonality and holiday spikes. We will do this by boosting demand on weekends and holidays.
+We want to affect the demand with seasonality and holiday spikes. We will do this by boosting demand on weekends and holidays.
 
 ```{python}
 def add_weekly_seasonality(demand_data, weekend_multiplier=1.2):

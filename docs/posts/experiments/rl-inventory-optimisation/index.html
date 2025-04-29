@@ -272,7 +272,7 @@ window.Quarto = {
   <ul>
   <li><a href="#the-overall-approach" id="toc-the-overall-approach" class="nav-link active" data-scroll-target="#the-overall-approach">The overall approach</a></li>
   <li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link" data-scroll-target="#getting-the-data">Getting the data</a></li>
-  <li><a href="#what-does-the-data-represent" id="toc-what-does-the-data-represent" class="nav-link" data-scroll-target="#what-does-the-data-represent">What does the data represent ?</a>
+  <li><a href="#what-does-it-represent" id="toc-what-does-it-represent" class="nav-link" data-scroll-target="#what-does-it-represent">What does it represent ?</a>
   <ul class="collapse">
   <li><a href="#calendar" id="toc-calendar" class="nav-link" data-scroll-target="#calendar">Calendar</a></li>
   <li><a href="#sell-prices" id="toc-sell-prices" class="nav-link" data-scroll-target="#sell-prices">Sell prices</a></li>
@@ -299,10 +299,10 @@ window.Quarto = {
 
 <p>Businesses struggle to balance inventory: too much stock ties up cash, too little loses sales. Inventory optimisation is a whole field of study, which has a well understood impact of the potential profitability of any business which sells physical goods - the median company <a href="https://www.scmr.com/article/inventory_optimization_show_me_the_money">spends 1% of revenue carrying inventory</a>.</p>
 <p>This experiment explores using reinforcement learning (RL) to optimise inventory, using a simple simulation of a retail store. The goal is to learn an optimal policy for ordering stock based on demand forecasts and current inventory levels.</p>
-<p>We will be using the <a href="https://www.kaggle.com/competitions/m5-forecasting-accuracy/data">M5 Forecasting - Accuracy</a> dataset from Kaggle, which contains historical sales data for various products across different stores. The dataset includes features such as sales history, promotional events, and calendar information. We will use this data to train our RL agent in a simulated environment, to make inventory decisions such as how much stock to order and when to place orders, with the aim of maximising profits while minimising stockouts and holding costs.</p>
+<p>We will be using the <a href="https://www.kaggle.com/competitions/m5-forecasting-accuracy/data">M5 Forecasting - Accuracy</a> dataset from Kaggle, which contains historical sales data for various products across different stores. The dataset includes features such as sales history and event calendar information. We will use this data to train our RL agent in a simulated environment, to make inventory decisions such as how much stock to order and when to place orders, with the aim of maximising profits while minimising <a href="https://en.wikipedia.org/wiki/Stockout">:link stockouts</a> and holding costs.</p>
 <section id="the-overall-approach" class="level2">
 <h2 class="anchored" data-anchor-id="the-overall-approach">The overall approach</h2>
-<p>The overall approach to the experiment is as follows:</p>
+<p>The overall approach to the experiment is as follows.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -354,9 +354,9 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="what-does-the-data-represent" class="level2">
-<h2 class="anchored" data-anchor-id="what-does-the-data-represent">What does the data represent ?</h2>
-<p>The M5 dataset is composed of several data tables, each representing different aspects of the sales data. The main tables we will be using are the <code>calendar</code>, <code>sell prices</code> and <code>sales</code> data tables. The <code>calendar</code> table contains information about the dates, including holidays and events, <code>sell prices</code> contains information about the prices of the products in different stores, while <code>sales</code> contains the sales data for each product in each store.</p>
+<section id="what-does-it-represent" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-it-represent">What does it represent ?</h2>
+<p>The M5 dataset is composed of several data tables, each representing different aspects of the sales data. The main tables we will be using are the <code>calendar</code>, <code>sell prices</code> and <code>sales</code> data tables. The <code>calendar</code> table contains information about the dates, including holidays and events, <code>sell prices</code> contains information about the prices of the products in different stores over time, while <code>sales</code> contains the sales data for each product in each store.</p>
 <section id="calendar" class="level3">
 <h3 class="anchored" data-anchor-id="calendar">Calendar</h3>
 <div id="efbb09c2" class="cell" data-execution_count="4">
@@ -727,7 +727,7 @@ window.Quarto = {
 </section>
 <section id="selecting-a-store-and-product" class="level2">
 <h2 class="anchored" data-anchor-id="selecting-a-store-and-product">Selecting a store and product</h2>
-<p>We will select a random store and product from the sales data, but we don’t want to select a product that has no sales. We will filter the products to only include those that have sales on at least 75% of the days in the dataset. This will ensure that we have enough data to train our agent.</p>
+<p>We will select a random store and product from the sales data, but we don’t want to select a product that has no sales. We will filter the products to only include those that have sales on at least 75% of the days in the dataset. This will help ensure that we have enough data to train our agent.</p>
 <p>First, we pick a random store.</p>
 <div id="5163a3a9" class="cell" data-execution_count="7">
 <details class="code-fold">
@@ -818,7 +818,7 @@ if (outputEl) {{
                         })                };            </script>        </div>
 </div>
 </div>
-<p>We need to pick a product from the tail end of the distribution, so we have a good chance for the RL agent to learn something useful, rather than attempting to train from a data set which is too sparse. Let us filter the products to only include those that have sales on at least 75% of the days in the dataset.</p>
+<p>We will pick a product from the tail end of the distribution, so we increase the chance for the RL agent to learn something useful, rather than attempting to train from a dataset which is too sparse. Let us filter the products to only include those that have sales on at least 75% of the days in the dataset.</p>
 <div id="e5161b31" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -854,7 +854,7 @@ if (outputEl) {{
 <pre><code>Selected product: FOODS_3_723</code></pre>
 </div>
 </div>
-<p>Now that we have a store and product to work with. Let us finalise the data we will be using for the experiment.</p>
+<p>Now that we have a store and product, let us finalise the data we will be using for the experiment.</p>
 <div id="8e468525" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -875,7 +875,7 @@ if (outputEl) {{
 <span id="c640713e-5"><a href="#c640713e-5" aria-hidden="true" tabindex="-1"></a>product_prices <span class="op">=</span> product_prices[[<span class="st">"wm_yr_wk"</span>, <span class="st">"sell_price"</span>]].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>To develop an intuition of what we will be working with, we can visualise some of the important data points, starting with product prices.</p>
+<p>To develop an intuition of what we selected, let us visualise some of the important data points, starting with product prices.</p>
 <div id="d96d4e03" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -989,7 +989,7 @@ Expected Max Inventory: 143.71428571428572
 Min daily sales: 0, Max daily sales: 154</code></pre>
 </div>
 </div>
-<p>We can look at the calculated demand data, which is a rolling average of the sales data. We apply a rolling average to smooth out the demand curve, and make it more stable for the RL agent to learn from. We will also plot the demand data, with event days highlighted in red.</p>
+<p>We can look at the calculated demand data, which is a rolling average of the sales data. We apply an average to smooth out the demand curve, making it more stable for the RL agent to learn from. Let us have a quick look at the demand data, with event days highlighted in red.</p>
 <div id="a0a2c986" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -1050,7 +1050,7 @@ if (outputEl) {{
                         })                };            </script>        </div>
 </div>
 </div>
-<p>We want to affect the demand data with seasonality and holiday spikes. We will do this by boosting demand on weekends and holidays.</p>
+<p>We want to affect the demand with seasonality and holiday spikes. We will do this by boosting demand on weekends and holidays.</p>
 <div id="c0fbd43a" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
