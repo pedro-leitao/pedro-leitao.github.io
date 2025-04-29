@@ -1,0 +1,909 @@
+---
+title: Dynamic Inventory Management with Reinforcement Learning
+subtitle: exploring a reinforcement learning approach to inventory optimisation
+tags:
+    - Reinforcement Learning
+    - Inventory Management
+    - Supply Chain
+categories:
+    - Experiments
+    - Machine Learning
+    - Reinforcement Learning
+date: 2025-04-26
+format:
+  html:
+    mermaid:
+      theme: forest
+---
+
+Businesses struggle to balance inventory: too much stock ties up cash, too little loses sales. Inventory optimisation is a whole field of study, which has a well understood impact of the potential profitability of any business which sells physical goods - the median company [spends 1% of revenue carrying inventory](https://www.scmr.com/article/inventory_optimization_show_me_the_money).
+
+This experiment explores using reinforcement learning (RL) to optimise inventory, using a simple simulation of a retail store. The goal is to learn an optimal policy for ordering stock based on demand forecasts and current inventory levels.
+
+We will be using the [M5 Forecasting - Accuracy](https://www.kaggle.com/competitions/m5-forecasting-accuracy/data) dataset from Kaggle, which contains historical sales data for various products across different stores. The dataset includes features such as sales history, promotional events, and calendar information. We will use this data to train our RL agent in a simulated environment, to make inventory decisions such as how much stock to order and when to place orders, with the aim of maximising profits while minimising stockouts and holding costs.
+
+## The overall approach
+
+The overall approach to the experiment is as follows:
+
+```{mermaid}
+flowchart TD
+    n1["Data Preparation"] --> n2["Selecting a Store and Product"]
+    n2 --> n3["Extract Demand Curve"] & n4["Extract Sales Data"]
+    n3 --> n7["Train Agent"]
+    n4 --> n7
+    n5["Define the Environment"] --> n7
+    n6["Define the Q Learning Agent"] --> n7
+    n7 --> n8["Compare to Baseline Policies"]
+```
+
+For the sake of simplicity, we will be using a single store and product. The aim of the experiment is to highlight the reinforcement learning approach to inventory optimisation, rather than to achieve the best possible results.
+
+We will use a simple [:link Q-learning algorithm](https://en.wikipedia.org/wiki/Q-learning) to train our agent. This is a model-free reinforcement learning algorithm that learns the value of taking a particular action in a given state. The agent will learn to take actions that maximise the expected cumulative reward over time. If we were to train against many stores and products, we would likely use a more complex algorithm, such as Deep Q-Learning or [:link Proximal Policy Optimization](https://en.wikipedia.org/wiki/Proximal_policy_optimization) (PPO). However, for this experiment, we will keep it simple and use Q-learning.
+
+We will also compare the performance of our RL agent against some baseline policies, such as a naive policy and a [:link reorder point](https://en.wikipedia.org/wiki/Reorder_point) policy. The naive policy simply orders a fixed quantity of stock every day, while the reorder point policy orders stock when inventory falls below a certain threshold. The goal is to demonstrate the effectiveness of the RL approach in optimising inventory management.
+
+## Getting the data
+
+We start with downloading the data. You need to create a Kaggle account and download the dataset from there if you want to replicate this experiment.
+
+```{python}
+!kaggle competitions download -c m5-forecasting-accuracy -p .data && unzip -o -q .data/m5-forecasting-accuracy.zip -d .data && rm .data/m5-forecasting-accuracy.zip
+```
+
+We want replicable results, so we will set a seed for the random number generator. This will ensure that the results are consistent across different runs of the experiment.
+
+```{python}
+# Set a seed for reproducibility
+import random
+import numpy as np
+
+seed = 3141
+random.seed(seed)
+np.random.seed(seed)
+```
+
+## What does the data represent ?
+
+The M5 dataset is composed of several data tables, each representing different aspects of the sales data. The main tables we will be using are the `calendar`, `sell prices` and `sales` data tables. The `calendar` table contains information about the dates, including holidays and events, `sell prices` contains information about the prices of the products in different stores, while `sales` contains the sales data for each product in each store.
+
+### Calendar
+
+```{python}
+# Load .data/calendar.csv
+import pandas as pd
+from IPython.display import display
+
+calendar = pd.read_csv('.data/calendar.csv')
+
+display(calendar.head())
+```
+
+### Sell prices
+
+```{python}
+# Load .data/sell_prices.csv
+sell_prices = pd.read_csv('.data/sell_prices.csv')
+
+display(sell_prices.head())
+```
+
+### Sales data
+
+```{python}
+# Load .data/sales_train_validation.csv
+sales_train_validation = pd.read_csv('.data/sales_train_validation.csv')
+
+display(sales_train_validation.head())
+```
+
+## Selecting a store and product
+
+We will select a random store and product from the sales data, but we don't want to select a product that has no sales. We will filter the products to only include those that have sales on at least 75% of the days in the dataset. This will ensure that we have enough data to train our agent.
+
+First, we pick a random store.
+
+```{python}
+# Pick a random store
+store_id = random.choice(sales_train_validation['store_id'].unique())
+
+# Identify which columns are the “day” columns
+day_cols = [c for c in sales_train_validation.columns if c.startswith('d_')]
+total_days = len(day_cols)
+print(f"Total days: {total_days}")
+```
+
+We can quickly visualise the distribution of sales counts for that store.
+
+```{python}
+# Subset to that store
+df_store = sales_train_validation[sales_train_validation['store_id'] == store_id]
+
+# Compute how many days each product had non-zero sales
+sales_counts = df_store[day_cols].gt(0).sum(axis=1)
+```
+
+```{python}
+# Plot the distribution of sales counts
+import plotly.express as px
+
+fig = px.histogram(
+    sales_counts,
+    title=f'Distribution of Sales Counts for Store {store_id}',
+    labels={'value': 'Sales Count'},
+    template='plotly_white'
+)
+fig.update_traces(marker=dict(color='grey', line=dict(width=1, color='black')))
+fig.update_layout(
+    xaxis_title='Sales Count',
+    yaxis_title='Frequency',
+    xaxis=dict(title_text='Sales Count'),
+    yaxis=dict(title_text='Frequency'),
+    bargap=0.2,
+    title_x=0.5,
+    title_y=0.95,
+    title_font_size=20,
+)
+fig.update_layout(grid=dict())
+fig.show()
+```
+
+We need to pick a product from the tail end of the distribution, so we have a good chance for the RL agent to learn something useful, rather than attempting to train from a data set which is too sparse. Let us filter the products to only include those that have sales on at least 75% of the days in the dataset.
+
+```{python}
+# Filter to products with ≥75% days having sales
+threshold = 0.75 * total_days
+valid_products = df_store.loc[sales_counts >= threshold, 'item_id'].unique()
+print(f"Number of valid products to chose from: {len(valid_products)}")
+```
+
+We need to pick a product at random from this subset of products.
+
+```{python}
+# Filter to the top 10% of products by sales
+valid_products = df_store.loc[sales_counts >= threshold, 'item_id'].value_counts().nlargest(int(len(valid_products) * 0.1)).index
+
+if len(valid_products) == 0:
+    raise ValueError(f"No products in store {store_id} have sales on ≥75% of days.")
+    
+# Pick one at random
+product_id = random.choice(valid_products)
+print(f"Selected product: {product_id}")
+```
+
+Now that we have a store and product to work with. Let us finalise the data we will be using for the experiment.
+
+```{python}
+# Filter the sales data for the selected store and product
+sales_data = sales_train_validation[
+    (sales_train_validation['store_id'] == store_id) &
+    (sales_train_validation['item_id'] == product_id)
+]
+```
+
+```{python}
+product_prices = sell_prices[
+    (sell_prices['store_id'] == store_id) &
+    (sell_prices['item_id'] == product_id)
+]
+# We only need wm_yr_wk and sell_price columns
+product_prices = product_prices[['wm_yr_wk', 'sell_price']].reset_index(drop=True)
+```
+
+To develop an intuition of what we will be working with, we can visualise some of the important data points, starting with product prices.
+
+```{python}
+# Plot select product prices
+
+price_df = pd.DataFrame({
+    'Week': product_prices['wm_yr_wk'],
+    'Price': product_prices['sell_price']
+})
+fig = px.scatter(
+    price_df,
+    x='Week',
+    y='Price',
+    title=f'Prices for {product_id} in {store_id}',
+    labels={'Week': 'Weeks', 'Price': 'Price'},
+    template='plotly_white'
+)
+fig.update_traces(marker=dict(size=5, color='grey'))
+fig.update_layout(grid=dict())
+fig.update_xaxes(showticklabels=False)
+fig.show()
+```
+
+Certain events can have a significant impact on sales. For example, holidays or promotional events can lead to spikes in demand (the Superbowl leads to more beer sold, Christmas means turkey sales, etc.). We will use the `calendar` data to identify these events and incorporate them into our model. We will do so by creating demand data that includes these events. For the purpose of this experiment, we will use a simple multiplier to boost demand on event days - in practice, you would want to use a more sophisticated model to predict the impact of events on demand which is specific to each product.
+
+```{python}
+# Create a DataFrame for all days with their corresponding week
+sales_days = sales_data.columns[6:]  # columns are like d_1, d_2, ..., d_1913
+
+calendar_small = calendar[['d', 'date', 'wm_yr_wk', 'event_name_1']].set_index('d').loc[sales_days].reset_index()
+calendar_small['date'] = pd.to_datetime(calendar_small['date'])
+
+calendar_small['is_event'] = calendar_small['event_name_1'].notna()
+print(f"Number of event days: {calendar_small['is_event'].sum()}")
+```
+
+```{python}
+# Merge to get sell_price per day
+daily_prices = calendar_small.merge(product_prices, on='wm_yr_wk', how='left')
+
+# Fill missing prices if needed (e.g., if price missing for some weeks)
+daily_prices['sell_price'] = daily_prices['sell_price'].ffill()
+
+sell_price_data = daily_prices['sell_price'].values
+print(f"Min price: {np.min(sell_price_data)}, Max price: {np.max(sell_price_data)}")
+```
+
+```{python}
+daily_sales = sales_data.iloc[0, 6:].values
+demand_data = pd.Series(daily_sales).rolling(window=7, min_periods=1).mean().values
+```
+
+```{python}
+print(f"Min daily demand: {np.min(demand_data)}, Max daily demand: {np.max(demand_data)}")
+
+expected_max_inventory = 2 * np.max(demand_data)
+print(f"Expected Max Inventory: {expected_max_inventory}")
+
+print(f"Min daily sales: {np.min(daily_sales)}, Max daily sales: {np.max(daily_sales)}")
+```
+
+We can look at the calculated demand data, which is a rolling average of the sales data. We apply a rolling average to smooth out the demand curve, and make it more stable for the RL agent to learn from. We will also plot the demand data, with event days highlighted in red.
+
+```{python}
+# Plot demand data for the selected product
+
+demand_df = pd.DataFrame({
+    'Day': range(len(demand_data)),
+    'Demand': demand_data,
+    # map the boolean is_event → friendly labels
+    'Event Day': calendar_small['is_event'].map({False: 'No', True: 'Yes'})
+})
+
+fig = px.scatter(
+    demand_df,
+    x='Day',
+    y='Demand',
+    color='Event Day',
+    color_discrete_map={'No': 'grey', 'Yes': 'red'},
+    title=f'Demand Data for {product_id} in {store_id} (events in red)',
+    labels={'Day': 'Days', 'Demand': 'Demand', 'Event Day': 'Event Day'},
+    template='plotly_white'
+)
+
+fig.update_layout(
+    legend_title_text='Event Day', 
+    xaxis=dict(showgrid=True),
+    yaxis=dict(showgrid=True)
+)
+
+fig.show()
+```
+
+We want to affect the demand data with seasonality and holiday spikes. We will do this by boosting demand on weekends and holidays.
+
+```{python}
+def add_weekly_seasonality(demand_data, weekend_multiplier=1.2):
+    """Boost demand on weekends."""
+    new_demand = []
+    for i, demand in enumerate(demand_data):
+        day_of_week = i % 7
+        if day_of_week in [5, 6]:  # Saturday, Sunday
+            demand *= weekend_multiplier
+        new_demand.append(demand)
+    return np.array(new_demand)
+
+demand_data = add_weekly_seasonality(demand_data)
+```
+
+```{python}
+# Flag where there is any event
+calendar['is_holiday'] = calendar['event_name_1'].notnull().astype(int)
+
+# Build a simple multiplier array
+holiday_multipliers = np.where(calendar['is_holiday'] == 1, 1.5, 1.0)
+demand_data_without_boost = demand_data.copy()
+demand_data = demand_data * holiday_multipliers[:len(demand_data)]
+```
+
+Finally, here is the demand curve, which includes seasonality and holiday spikes. You will notice that the demand data is now boosted on weekends and holidays, as expected. You can click on the plot to zoom in and out, hover over points to see the values, and click on the legend items to show and hide individual series.
+
+```{python}
+# Plot demand data with seasonality and holiday spikes, vs original demand data
+fig = px.scatter(
+    demand_df,
+    x='Day',
+    y='Demand',
+    color='Event Day',
+    color_discrete_map={'No': 'grey', 'Yes': 'red'},
+    title=f'Demand Data with Seasonality Spikes for {product_id} in {store_id}',
+    labels={'Day': 'Days', 'Demand': 'Demand', 'Event Day': 'Event Day'},
+    template='plotly_white',
+    opacity=0.5  # Set alpha for this plot
+)
+fig.add_scatter(
+    x=demand_df['Day'],
+    y=demand_data_without_boost,
+    mode='markers',
+    name='Original Demand',
+    line=dict(color='blue', width=2),
+    opacity=0.6  # Set alpha for this plot
+)
+fig.add_scatter(
+    x=demand_df['Day'],
+    y=demand_data,
+    mode='markers',
+    name='Demand with Seasonality and Holiday Spikes',
+    line=dict(color='orange', width=2),
+    opacity=0.8  # Set alpha for this plot
+)
+fig.update_layout(
+    legend_title_text='Event Day', 
+    xaxis=dict(showgrid=True),
+    yaxis=dict(showgrid=True),
+    # Place legend outside the plot on the right
+    legend=dict(
+        orientation='v',
+        yanchor='top',
+        y=1.0,
+        xanchor='left',
+        x=1.05,
+        title_font=dict(size=12),
+        font=dict(size=10)
+    ),
+)
+fig.show()
+```
+
+## The environment
+
+We will use the [Gymnasium](https://github.com/Farama-Foundation/Gymnasium) library to create a custom environment for our RL agent. It will simulate the actions in the store and the inventory management process, including the demand data, sell prices, and inventory levels. The agent will interact with the environment by taking actions (ordering stock) and receiving rewards (profit or loss) depending on the actions it takes.
+
+This is the fundamental principle of reinforcement learning: the agent learns to take actions that maximise the expected cumulative reward over time. The environment will provide feedback to the agent in the form of rewards, which will be used to update a policy.
+
+First let us define a few parameters for the environment - the possible order quantities which the agent can choose from, and the action space size it will be working in.
+
+```{python}
+# Define the action space as a discrete set of order quantities from 0 to 200, with increments of 5
+order_quantities = list(range(0, 201, 5))
+action_space_size = len(order_quantities)
+# Set max inventory to 300% of the max demand
+max_inventory = int(3 * np.max(demand_data))
+# Set max order to 50% of the max inventory
+max_order = int(0.5 * max_inventory)
+
+print(f"Action space size: {action_space_size}")
+print(f"Order quantities: {order_quantities}")
+print(f"Max inventory: {max_inventory}")
+print(f"Max order: {max_order}")
+```
+
+Finally we define the Gymnasium class for the environment. It is composed of state data (like inventory levels and recent demand), action space (the possible order quantities), and reward function (which is based on the profit or loss from the actions taken). The environment will also include a reset function to reset the state of the environment at the beginning of each episode.
+
+::: {.callout-note}
+Note that the reset function can be called with a `random_start` parameter, which will randomly select a starting point in the demand data. This is useful for training the agent on different starting points, and can help to improve the robustness of the learned policy as that way we will not bias the agent to learn a policy that only works for a specific starting point.
+:::
+
+An important part of the environment is defining the costs associated with holding inventory, stockouts, and ordering stock. For this experiment, we will use the following costs:
+
+- Holding cost per unit: $0.2
+- Stockout penalty per unit: 20% of the average selling price
+- Fixed order cost: $1
+- Order cost per unit: 10% of the average selling price
+
+These costs in practice are a key driver for model performance, for this experiment we are using speculative values. In practice, you would want to use actual costs from your business to train the agent, and they would be specific to each product and store (for example, a stockout penalty will vary wildly between products, between stores for the same product or even when it occurs).
+
+```{python}
+import gymnasium as gym
+from gymnasium import spaces
+
+class InventoryManagementEnv(gym.Env):
+    """Custom Environment for Inventory Management"""
+    metadata = {'render.modes': ['human']}
+
+    def __init__(self, demand_data, sell_price_data, order_quantities, max_inventory=1000, max_order=500, random_start=False, episode_length=1000):
+        super(InventoryManagementEnv, self).__init__()
+        
+        # Data
+        self.demand_data = demand_data
+        self.sell_price_data = sell_price_data
+        self.avg_sell_price = np.mean(sell_price_data)
+        self.order_quantities = order_quantities
+        self.current_step = 0
+        self.random_start = random_start
+        self.episode_length = episode_length
+        self.random_inventory_divider = np.random.randint(2, 5)
+        
+        # Inventory settings
+        self.max_inventory = max_inventory
+        self.inventory = max_inventory // self.random_inventory_divider
+
+        self.max_daily_demand = np.max(demand_data) * 1.5  # Add a safety margin
+        self.max_order = max_order
+        
+        # Costs
+        self.holding_cost_per_unit = 0.2
+        self.stockout_penalty_per_unit = self.avg_sell_price * 0.2
+        self.fixed_order_cost = 1
+        self.order_cost_per_unit = 0.1 * self.avg_sell_price
+        
+        # Action space: discrete choices of order quantities
+        self.action_space = spaces.Discrete(len(order_quantities))
+        
+        # Observation space: inventory level + recent demand
+        self.observation_space = spaces.Box(
+            low=np.array([0, 0]),
+            high=np.array([self.max_inventory, self.max_daily_demand]),
+            dtype=np.float32
+        )
+
+    def _get_obs(self):
+        recent_demand = self.demand_data[max(0, self.current_step - 7):self.current_step].mean() if self.current_step > 0 else 0
+        return np.array([self.inventory, recent_demand], dtype=np.float32)
+
+    def step(self, action):
+        # Decode the action
+        order_quantity = self.order_quantities[action]
+
+        # Place an order
+        self.inventory += order_quantity
+        self.inventory = min(self.inventory, self.max_inventory)  # Cap at max_inventory
+
+        # Receive demand
+        today_demand = self.demand_data[self.current_step] if self.current_step < len(self.demand_data) else 0
+
+        # Set today's price
+        today_price = self.sell_price_data[self.current_step] if self.current_step < len(self.sell_price_data) else 0
+        
+        # Fulfill sales
+        sales = min(self.inventory, today_demand)
+        lost_sales = max(today_demand - self.inventory, 0)
+        self.inventory -= sales
+        
+        # Calculate rewards
+        revenue = sales * today_price
+        holding_cost = self.inventory * self.holding_cost_per_unit
+        stockout_cost = lost_sales * self.stockout_penalty_per_unit
+        if order_quantity > 0:
+            order_cost = self.fixed_order_cost + order_quantity * self.order_cost_per_unit
+        else:
+            order_cost = 0
+
+        
+        reward = revenue - (holding_cost + stockout_cost + order_cost)
+        
+        self.current_step += 1
+        done = self.current_step >= len(self.demand_data)
+        
+        return self._get_obs(), reward, done, {}
+
+    def reset(self):
+        self.current_step = 0
+        self.inventory = self.max_inventory // self.random_inventory_divider
+        return self._get_obs()
+
+    def reset(self):
+        if self.random_start:
+            # we choose a random window so we always have enough days left
+            max_start = len(self.demand_data) - 1 - self.episode_length
+            self.current_step = np.random.randint(0, max_start)
+        else:
+            self.current_step = 0
+
+        self.inventory = self.max_inventory // 4
+        return self._get_obs()
+
+
+    def render(self, mode='human'):
+        print(f"Day {self.current_step}: Inventory={self.inventory}")
+```
+
+We now have a custom environment that simulates the inventory management process. The agent will interact with this environment by taking actions (ordering stock) and receiving rewards (profit or loss) depending on the actions it takes. We also need to define the Q-learning agent, which will learn to take actions that maximise the expected cumulative reward over time.
+
+## The Q-learning agent
+
+The agent will use a Q-table to store the expected rewards for each state-action pair. The Q-table is a 2D array where the rows represent the states (inventory levels and recent demand) and the columns represent the actions (order quantities). It will update the Q-table using the Q-learning algorithm, which is a model-free reinforcement learning algorithm that learns the value of taking a particular action in a given state.
+
+::: {.callout-note}
+
+The Q-learning algorithm is based on the Bellman equation, which states that the value of a state–action pair is equal to the immediate reward plus the expected (discounted) value of the next state.  The Q-table is updated via:
+
+$$
+Q(s, a) \;\leftarrow\; Q(s, a) \;+\; \alpha \,\bigl(r \;+\; \gamma \,\max_{a'} Q(s', a') \;-\; Q(s, a)\bigr)
+$$
+
+where:
+
+- $Q(s, a)$ is the current estimate of the value of taking action $a$ in state $s$  
+- $\alpha$ is the learning rate (how fast we update)  
+- $r$ is the immediate reward received  
+- $\gamma$ is the discount factor (how much we value future rewards)  
+- $s'$ is the next state  
+- $a'$ is the action that maximizes $Q(s', a')$ in that next state  
+
+> **Note:** $\epsilon$ is the exploration rate used in the ε-greedy policy for choosing actions, but it does not appear explicitly in the Q-update formula above.
+:::
+
+
+The Q-learning agent will use a simple $\epsilon$-greedy policy to balance exploration and exploitation. This means that the agent will choose a random action with probability $\epsilon$ and the best action with probability $1 - \epsilon$. The value of $\epsilon$ will decay over time to encourage exploration in the beginning and exploitation later on.
+
+::: {.callout-note}
+Don't worry for now about the details if it sounds a bit overwhelming, what is important is that you develop an intuition of how reinforcement learning solves this domain problem. You can explore the details in your own time.
+:::
+
+```{python}
+class QLearningAgent:
+    def __init__(self, state_space_size, action_space_size, alpha=0.1, gamma=0.95, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01):
+        self.q_table = np.zeros((state_space_size, action_space_size))
+        self.alpha = alpha
+        self.gamma = gamma
+        self.epsilon = epsilon
+        self.epsilon_decay = epsilon_decay
+        self.epsilon_min = epsilon_min
+        self.action_space_size = action_space_size
+
+    def choose_action(self, state):
+        if np.random.rand() < self.epsilon:
+            return np.random.choice(self.action_space_size)
+        return np.argmax(self.q_table[state])
+
+    def learn(self, state, action, reward, next_state):
+        predict = self.q_table[state, action]
+        target = reward + self.gamma * np.max(self.q_table[next_state])
+        self.q_table[state, action] += self.alpha * (target - predict)
+        
+    def decay_epsilon(self):
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+```
+
+## Discretising the state space
+
+The Q-learning algorithm requires a discrete state space, so we need to discretise the continuous state space (inventory levels and recent demand) into bins. We will use a simple binning approach to achieve this. The number of bins for inventory and demand can be adjusted based on the expected range of values, but we will use a simple heuristic to determine the number of bins based on the maximum values of inventory and demand.
+
+We will use the following formula to calculate the number of bins:
+$$
+\text{bins} = \frac{\text{max value} - \text{min value}}{\text{target bin width}}
+$$
+
+where `max value` is the maximum value of the variable (inventory or demand), `min value` is the minimum value of the variable, and `target bin width` is the desired width of each bin. We will also cap the number of bins to avoid outliers.
+
+```{python}
+def discretise_state(state, inventory_bins=10, demand_bins=5, max_inventory=1000, max_demand=500):
+    inventory, recent_demand = state
+    
+    # Bin inventory
+    inventory_bin = int(np.clip(inventory / max_inventory * inventory_bins, 0, inventory_bins - 1))
+    
+    # Bin recent demand
+    demand_bin = int(np.clip(recent_demand / max_demand * demand_bins, 0, demand_bins - 1))
+    
+    # Flatten to a single integer
+    discrete_state_index = inventory_bin * demand_bins + demand_bin
+    
+    return discrete_state_index
+```
+
+```{python}
+desired_bins = 15
+
+width = (demand_data.max() - demand_data.min()) / desired_bins
+target_demand_bin_width = max(1, int(width))
+
+width = expected_max_inventory / desired_bins
+target_inventory_bin_width = max(1, int(width))
+
+# Calculate bins
+demand_bins = int(np.ceil((np.max(demand_data) - np.min(demand_data)) / target_demand_bin_width))
+inventory_bins = int(np.ceil(expected_max_inventory / target_inventory_bin_width))
+# Cap bins to avoid outliers
+demand_bins = np.clip(demand_bins, 5, 50)
+inventory_bins = np.clip(inventory_bins, 5, 50)
+print(f"Demand bins: {demand_bins}, Inventory bins: {inventory_bins}")
+```
+
+## Training the agent in the environment
+
+Finally, with all the necessary pieces in place, we can train the agent using the environment we have setup. We will use the `random_start` parameter to randomly select a starting point in the demand data, and we will train the agent for a large number of episodes. Each episode will consist of a series of steps where the agent interacts with the environment, takes actions, and receives rewards.
+
+```{python}
+
+env = InventoryManagementEnv(
+    demand_data,
+    sell_price_data,
+    order_quantities=order_quantities,
+    max_inventory=max_inventory,
+    max_order=max_order,
+    random_start=True,
+    episode_length=180
+)
+
+agent = QLearningAgent(
+    state_space_size=inventory_bins*demand_bins,
+    action_space_size=action_space_size
+)
+
+n_episodes = 5000
+
+rewards_per_episode = []
+
+for episode in range(n_episodes):
+    state = env.reset()
+    state = discretise_state(state)
+    total_reward = 0
+    
+    done = False
+    while not done:
+        action = agent.choose_action(state)
+        next_state, reward, done, _ = env.step(action)
+        next_state = discretise_state(next_state, inventory_bins=inventory_bins, demand_bins=demand_bins)
+        
+        agent.learn(state, action, reward, next_state)
+        state = next_state
+        total_reward += reward
+        
+    agent.decay_epsilon()
+    rewards_per_episode.append(total_reward)
+    
+    if episode % (n_episodes // 10) == 0:
+        print(f"Episode {episode}: Total reward = {total_reward}")
+```
+
+## Comparing to baseline policies
+
+With the model trained, let us compare the results to typical baseline policies which represent common inventory management strategies. We will implement a naive policy, a reorder point policy, and a dynamic reorder policy. The naive policy simply orders a fixed quantity of stock every day, while the reorder point policy orders stock when inventory falls below a certain threshold. The dynamic reorder policy adjusts the reorder point based on recent demand.
+
+These policies are not necessarily optimal, but they represent common strategies used in inventory management. The goal is to demonstrate the effectiveness of the RL approach compared to these.
+
+As a first step, we need a helper function to find the closest action in the action space to a given order quantity. This is important because the agent will need to choose an action based on the order quantity it wants to place, and we need to ensure that the action is valid (i.e., it is one of the possible order quantities).
+
+```{python}
+def find_closest_action(order_quantity, order_quantities):
+    return min(
+        range(len(order_quantities)),
+        key=lambda i: abs(order_quantities[i] - order_quantity)
+    )
+```
+
+We then define the policies. The naive policy simply orders a fixed quantity of stock every day, independent of the inventory level or demand.
+
+```{python}
+def simulate_naive_policy(
+    env,
+    order_quantities,
+    order_quantity=50,
+    order_every_n_days=7,
+    n_episodes=500
+):
+    rewards = []
+
+    for episode in range(n_episodes):
+        # reset() returns just obs
+        obs = env.reset()
+        total_reward = 0
+        done = False
+        day_counter = 0
+
+        while not done:
+            # Every n days, place an order
+            if day_counter % order_every_n_days == 0:
+                action = find_closest_action(order_quantity, order_quantities)
+            else:
+                action = find_closest_action(0, order_quantities)
+
+            # step() returns (obs, reward, done, info)
+            next_obs, reward, done, info = env.step(action)
+
+            total_reward += reward
+            day_counter += 1
+
+            obs = next_obs
+
+        rewards.append(total_reward)
+
+    return rewards
+```
+
+The reorder point policy orders stock when inventory falls below a certain threshold. This is a common strategy used in inventory management, and it is based on the simple idea that when inventory levels are low, it is time to reorder stock.
+
+```{python}
+def simulate_reorder_point_policy(
+    env,
+    order_quantities,
+    reorder_point=200,
+    reorder_quantity=300,
+    n_episodes=500
+):
+    rewards = []
+    metrics = {
+        'order_quantity': [],
+        'inventory': [],
+        'recent_demand': [],
+        'action': [],
+        'reward': [],
+        'episode': []
+    }
+
+    for _ in range(n_episodes):
+        obs = env.reset()
+        inventory, recent_demand = obs
+        total_reward = 0
+        done = False
+
+        while not done:
+            # if below threshold → order, else do nothing
+            if inventory < reorder_point:
+                action = find_closest_action(reorder_quantity, order_quantities)
+            else:
+                action = find_closest_action(0, order_quantities)
+
+            next_obs, reward, done, info = env.step(action)
+            inventory, recent_demand = next_obs
+            metrics['order_quantity'].append(order_quantities[action])
+            metrics['inventory'].append(inventory)
+            metrics['recent_demand'].append(recent_demand)
+            metrics['action'].append(action)
+            metrics['reward'].append(reward)
+            metrics['episode'].append(_)
+            total_reward += reward
+
+        rewards.append(total_reward)
+
+    return rewards, metrics
+```
+
+Finally, the dynamic reorder policy adjusts the reorder point based on recent demand. This is a more sophisticated strategy that takes into account the current demand levels and adjusts the reorder point accordingly.
+
+```{python}
+def simulate_dynamic_reorder_policy(
+    env,
+    order_quantities,
+    base_reorder_point=200,
+    base_order_quantity=300,
+    n_episodes=500
+):
+    rewards = []
+    metrics = {
+        'order_quantity': [],
+        'inventory': [],
+        'recent_demand': [],
+        'action': [],
+        'reward': [],
+        'episode': []
+    }
+
+    for _ in range(n_episodes):
+        obs = env.reset()
+        inventory, recent_demand = obs
+        total_reward = 0
+        done = False
+
+        while not done:
+            # dynamically adjust s based on recent demand
+            demand_factor = recent_demand / 50
+            dynamic_s = base_reorder_point * demand_factor
+            dynamic_s = np.clip(dynamic_s, 100, 400)
+
+            # policy decision
+            if inventory < dynamic_s:
+                action = find_closest_action(base_order_quantity, order_quantities)
+            else:
+                action = find_closest_action(0, order_quantities)
+
+            next_obs, reward, done, info = env.step(action)
+            inventory, recent_demand = next_obs
+            metrics['order_quantity'].append(order_quantities[action])
+            metrics['inventory'].append(inventory)
+            metrics['recent_demand'].append(recent_demand)
+            metrics['action'].append(action)
+            metrics['reward'].append(reward)
+            metrics['episode'].append(_)
+            total_reward += reward
+
+        rewards.append(total_reward)
+
+    return rewards, metrics
+```
+
+With all the baseline policies defined, we can now simulate them in the environment. We will use the same environment and demand data as the RL agent, and we will compare the rewards received by each policy over the same number of episodes.
+
+```{python}
+# Simulate the naive policy
+naive_rewards = simulate_naive_policy(env, order_quantities, order_quantity=50, order_every_n_days=7, n_episodes=n_episodes)
+# Simulate the reorder point policy
+reorder_rewards, reorder_metrics = simulate_reorder_point_policy(env, order_quantities, reorder_point=expected_max_inventory // 2, reorder_quantity=expected_max_inventory, n_episodes=n_episodes)
+# Simulate the dynamic reorder policy
+dynamic_rewards, dynamic_metrics = simulate_dynamic_reorder_policy(env, order_quantities, base_reorder_point=expected_max_inventory // 2, base_order_quantity=expected_max_inventory, n_episodes=n_episodes)
+```
+
+## Performance comparison
+
+We can now compare the performance of the RL agent against the baseline policies. We will plot the rewards received by each policy over the same number of episodes, and we will also include the rewards received by the RL agent.
+
+```{python}
+# Plot the rewards per episode for each policy, including the RL agent
+import plotly.graph_objects as go
+
+# Smooth the rewards for better visualisation
+rewards_per_episode = np.convolve(rewards_per_episode, np.ones(10)/10, mode='valid')
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x=list(range(n_episodes)),
+    y=reorder_rewards,
+    mode='markers',
+    name='Reorder Point Policy',
+    marker=dict(color='blue', symbol='circle'),
+    opacity=0.5
+))
+fig.add_trace(go.Scatter(
+    x=list(range(n_episodes)),
+    y=dynamic_rewards,
+    mode='markers',
+    name='Dynamic Reorder Policy',
+    marker=dict(color='orange', symbol='square'),
+    opacity=0.5
+))
+fig.add_trace(go.Scatter(
+    x=list(range(n_episodes)),
+    y=naive_rewards,
+    mode='markers',
+    name='Naive Policy',
+    marker=dict(color='green', symbol='triangle-up'),
+    opacity=0.5
+))
+fig.add_trace(go.Scatter(
+    x=list(range(n_episodes)),
+    y=rewards_per_episode,
+    mode='lines',
+    name='RL Agent',
+    line=dict(color='red', width=1)
+))
+fig.update_layout(
+    title='Rewards per Episode for Different Policies',
+    xaxis_title='Episode',
+    yaxis_title='Total Reward',
+    legend_title_text='Policy',
+    template='plotly_white'
+)
+fig.show()
+```
+
+We can clearly see the RL agent (the red line in the plot) is outperforming all the baseline policies after enough training episodes, meaning the agent has learned a set of actions that maximises the expected cumulative reward over time.
+
+## Visualising the Q-table
+
+In the Q-learning algorithm, the Q-table is a 2D array where the rows represent the states (inventory levels and recent demand) and the columns represent the actions (order quantities). It forms the "brain" of the agent, and it is used to store the expected rewards for each state-action pair. It offers good explanatory power for the learned policy, and we can visualise it to understand how the agent has learned to take actions based on the state of the environment.
+
+```{python}
+q_table_reshaped = agent.q_table.reshape((inventory_bins, demand_bins, action_space_size))
+
+# Best action for each (inventory, demand) combination
+best_actions = np.argmax(q_table_reshaped, axis=2)
+
+fig = go.Figure(data=go.Heatmap(
+    z=best_actions,
+    colorscale='Viridis',
+    colorbar=dict(title='Best Action Index'),
+))
+
+fig.update_layout(
+    title='Learned Policy: Best Action per (Inventory Bin, Demand Bin)',
+    xaxis_title='Demand Bin',
+    yaxis_title='Inventory Bin',
+    yaxis_autorange='reversed',  # So low inventory is at bottom
+    width=800,
+    height=600
+)
+
+fig.show()
+```
+
+## Final remarks
+
+We have explored how to use reinforcement learning to solve an inventory management problem. We have defined a custom environment using the Gymnasium library, implemented a Q-learning agent, and compared its performance against common baseline policies. The RL agent has successfully learned to take actions that maximise the expected cumulative reward over time, outperforming the baseline policies.
+
+In future work, we can explore more advanced RL algorithms, such as deep Q-learning or policy gradient methods, to further improve the performance of the agent and also integrate more stores and products into a single model.

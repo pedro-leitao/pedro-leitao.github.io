@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/experiments.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Thu, 20 Mar 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 25 Apr 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Dynamic Inventory Management with Reinforcement Learning</title>
+  <link>https://pedroleitao.nl/posts/experiments/rl-inventory-optimisation/</link>
+  <description><![CDATA[ Businesses struggle to balance inventory: too much stock ties up cash, too little loses sales. Inventory optimisation is a whole field of study, which has a well understood impact of the potential profitability of any business which sells physical goods - the median company <a href="https://www.scmr.com/article/inventory_optimization_show_me_the_money">spends 1% of revenue carrying inventory</a>. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>Reinforcement Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/rl-inventory-optimisation/</guid>
+  <pubDate>Fri, 25 Apr 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Deblurring, a Classic Machine Learning Problem</title>
   <link>https://pedroleitao.nl/posts/experiments/blade-runner-enhance/</link>
@@ -100,16 +110,6 @@
   <category>NLP</category>
   <guid>https://pedroleitao.nl/posts/experiments/random-forests-embeddings/</guid>
   <pubDate>Tue, 18 Jun 2024 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The Basics of Unsupervised Learning: Segmenting an Image</title>
-  <link>https://pedroleitao.nl/posts/experiments/unsupervised-image-segmentation/</link>
-  <description><![CDATA[ Unsupervised learning is a type of machine learning that looks for previously undetected patterns in a dataset without pre-existing labels and with minimal human supervision. Unlike supervised learning, where the model is trained on labeled data, unsupervised learning works on its own to identify structures and patterns within the data. This makes it particularly useful in situations where labeled data is scarce or unavailable. ]]></description>
-  <category>Experiments</category>
-  <category>Machine Learning</category>
-  <category>Unsupervised Learning</category>
-  <guid>https://pedroleitao.nl/posts/experiments/unsupervised-image-segmentation/</guid>
-  <pubDate>Thu, 06 Jun 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
