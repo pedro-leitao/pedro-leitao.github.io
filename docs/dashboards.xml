@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/dashboards.html</link>
+<atom:link href="https://pedroleitao.nl/dashboards.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<image>
+<url>https://pedroleitao.nl/_static/logo.png</url>
+<title>Pedro Leitão</title>
+<link>https://pedroleitao.nl/dashboards.html</link>
+</image>
+<generator>quarto-1.7.23</generator>
+<lastBuildDate>Wed, 30 Apr 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title></title>
+  <link>https://pedroleitao.nl/posts/dashboards/uk-home-prices/</link>
+  <description><![CDATA[ UK home prices, as reported by the Land Registry. ]]></description>
+  <category>Dashboards</category>
+  <category>Open Data</category>
+  <category>UK</category>
+  <guid>https://pedroleitao.nl/posts/dashboards/uk-home-prices/</guid>
+  <pubDate>Wed, 30 Apr 2025 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title></title>
+  <link>https://pedroleitao.nl/posts/dashboards/met-police-dashboard/</link>
+  <description><![CDATA[ London crime, as reported by the Metropolitan Police. ]]></description>
+  <category>Dashboards</category>
+  <category>Open Data</category>
+  <category>London</category>
+  <guid>https://pedroleitao.nl/posts/dashboards/met-police-dashboard/</guid>
+  <pubDate>Fri, 18 Apr 2025 23:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

@@ -10,17 +10,10 @@
     ]
   },
   {
-    "listing": "/thoughts.html",
+    "listing": "/dashboards.html",
     "items": [
-      "/posts/thoughts/met-police-dashboard/index.html",
-      "/posts/thoughts/universal-control/index.html",
-      "/posts/thoughts/engineering-teams-scale/index.html",
-      "/posts/thoughts/moving-to-quarto/index.html",
-      "/posts/thoughts/france-ai-investment/index.html",
-      "/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.html",
-      "/posts/thoughts/kolmogorov/index.html",
-      "/posts/thoughts/scalling-ai/index.html",
-      "/posts/thoughts/connundrum-european-tech/index.html"
+      "/posts/dashboards/uk-home-prices/index.html",
+      "/posts/dashboards/met-police-dashboard/index.html"
     ]
   },
   {
@@ -38,10 +31,24 @@
     ]
   },
   {
+    "listing": "/thoughts.html",
+    "items": [
+      "/posts/thoughts/universal-control/index.html",
+      "/posts/thoughts/engineering-teams-scale/index.html",
+      "/posts/thoughts/moving-to-quarto/index.html",
+      "/posts/thoughts/france-ai-investment/index.html",
+      "/posts/thoughts/will-ai-ever-be-more-than-curve-fitting/index.html",
+      "/posts/thoughts/kolmogorov/index.html",
+      "/posts/thoughts/scalling-ai/index.html",
+      "/posts/thoughts/connundrum-european-tech/index.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
+      "/posts/dashboards/uk-home-prices/index.html",
       "/posts/experiments/rl-inventory-optimisation/index.html",
-      "/posts/thoughts/met-police-dashboard/index.html",
+      "/posts/dashboards/met-police-dashboard/index.html",
       "/posts/thoughts/universal-control/index.html",
       "/posts/experiments/blade-runner-enhance/index.html",
       "/posts/experiments/mondrianiser/index.html",
