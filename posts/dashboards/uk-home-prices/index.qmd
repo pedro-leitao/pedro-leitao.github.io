@@ -1,0 +1,1497 @@
+---
+title: UK Home Prices
+description: UK home prices, as reported by the Land Registry.
+format: dashboard
+theme: custom.scss
+tags:
+  - Dashboards
+  - Publishing
+  - Open Data
+categories:
+  - Dashboards
+  - Open Data
+  - UK
+date: 2025-05-01
+---
+
+### Introduction {.sidebar}
+This dashboard draws on the Land Registry's [price paid data](https://www.gov.uk/guidance/about-the-price-paid-data) to provide a summary of home prices in the UK. It includes only dwelling sales, and excludes commercial properties.
+
+All charts and maps are interactive, you can hover over them to see more details, and click to zoom in.
+
+```{python}
+#| echo: false
+#| output: false
+import pandas as pd
+
+cleaned = False
+# If there is /home/pedro/datasets/land-registry/pp-dwelling-geo.csv, load it
+try:
+    paid_price = pd.read_csv('/home/pedro/datasets/land-registry/pp-dwelling-geo.csv')
+    cleaned = True
+except FileNotFoundError:
+    # If not, load the original data
+    paid_price = pd.read_csv('/home/pedro/datasets/land-registry/pp-complete.csv')
+
+    # Set column names
+    paid_price.columns = ['id', 'price', 'date', 'postcode', 'property_type', 'old_new', 'duration', 'paon', 'saon', 'street', 'locality', 'town_city', 'district', 'county', 'ppd_category_type', 'record_status']
+
+    # Filter out "other" property types
+    paid_price = paid_price[paid_price['property_type'].isin(['D', 'F', 'S', 'T'])]
+
+print(paid_price.shape)
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+# Convert date to datetime
+paid_price['date'] = pd.to_datetime(paid_price['date'], format='ISO8601')
+# Convert price to numeric
+paid_price['price'] = pd.to_numeric(paid_price['price'], errors='coerce')
+```
+
+```{python}
+#| echo: false
+#| output: false
+paid_price.head()
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+if not cleaned:    
+    # Split postcode into area and district
+    paid_price['postcode_area'] = paid_price['postcode'].str.split(' ').str[0]
+    paid_price['postcode_district'] = paid_price['postcode'].str.split(' ').str[1]
+    paid_price['postcode_nospace'] = paid_price['postcode_area'] + paid_price['postcode_district']
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+if not cleaned:
+    # Filter out rows with missing values
+    paid_price = paid_price.dropna(subset=['price', 'postcode_area', 'postcode_district'])
+    print(paid_price.shape)
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+# Convert postcode to lat/lon
+import requests
+from tqdm.notebook import tqdm
+import time
+import random
+import sys
+import math
+
+if not cleaned:
+    # unique, non-null postcodes
+    postcodes = paid_price['postcode_nospace'].dropna().unique().tolist()
+
+    def chunks(lst, n=100):
+        for i in range(0, len(lst), n):
+            yield lst[i:i + n]
+
+    url = "https://api.postcodes.io/postcodes"
+    results = []
+
+    batch_count = math.ceil(len(postcodes) / 100)
+    for batch in tqdm(chunks(postcodes, 100), total=batch_count, desc="Batches"):
+        tries = 0
+        while True:
+            resp = requests.post(url, json={"postcodes": batch})
+            code = resp.status_code
+
+            if code == 200:
+                break
+            elif code == 429:
+                wait = random.uniform(1, 5)
+                print(f"Rate limited (429). Sleeping for {wait:.1f}s and retrying...")
+                time.sleep(wait)
+                # don't count this against tries
+            else:
+                tries += 1
+                if tries >= 3:
+                    sys.exit(f"Batch request failed with status {code} after 3 attempts.")
+                print(f"Error {code}. Retry {tries}/3 in 1s...")
+                time.sleep(1)
+
+        for entry in resp.json().get('result', []):
+            res = entry.get('result')
+            # skip if postcode not found (result is None, i.e. a 404 for that query)
+            if not res:
+                continue
+            results.append({
+                'postcode_nospace': entry['query'],
+                'lat': res['latitude'],
+                'lon': res['longitude'],
+            })
+
+    geo = pd.DataFrame(results)
+    paid_price = paid_price.merge(geo, on='postcode_nospace', how='left')
+
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+# Write new dataframe to CSV
+if not cleaned:
+    paid_price.to_csv('/home/pedro/datasets/land-registry/pp-dwelling-geo.csv', index=False)
+print(paid_price.info())
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+import h3
+
+def safe_to_h3(lat, lon, res):
+    try:
+        return h3.latlng_to_cell(lat, lon, res)
+    except h3.H3LatLngDomainError:
+        return None
+
+def safe_from_h3(h3_index):
+    try:
+        return h3.cell_to_latlng(h3_index)
+    except h3.H3IndexError:
+        return None
+    except h3.H3LatLngDomainError:
+        return None
+
+# Compute H3 indices for each postcode
+
+# Set the resolution for H3
+res = 8   # ~0.7 km² per cell
+
+postcode_coords = (
+    paid_price[['postcode', 'lat', 'lon']]
+      .drop_duplicates(subset='postcode')
+      .reset_index(drop=True)
+)
+
+postcode_coords['h3_index'] = [
+    safe_to_h3(lat, lon, res)
+    for lat, lon in zip(postcode_coords['lat'], postcode_coords['lon'])
+]
+
+h3_map = postcode_coords.set_index('postcode')['h3_index']
+paid_price['h3_index'] = paid_price['postcode'].map(h3_map)
+```
+
+```{python}
+# Set the resolution for H3 (lower resolution)
+res = 6
+
+postcode_coords = (
+    paid_price[['postcode', 'lat', 'lon']]
+      .drop_duplicates(subset='postcode')
+      .reset_index(drop=True)
+)
+
+postcode_coords['h3_index_lowres'] = [
+    safe_to_h3(lat, lon, res)
+    for lat, lon in zip(postcode_coords['lat'], postcode_coords['lon'])
+]
+
+h3_map_lowres = postcode_coords.set_index('postcode')['h3_index_lowres']
+paid_price['h3_index_lowres'] = paid_price['postcode'].map(h3_map_lowres)
+```
+
+```{python}
+#| echo: false
+#| output: false
+
+# Set a plotly template
+import plotly.io as pio
+pio.templates.default = "simple_white"
+```
+
+# Summary
+
+## Row
+
+```{python}
+#|content: valuebox
+#|title: Unique Postcodes
+
+unique_postcodes = paid_price['postcode_nospace'].nunique()
+dict(
+    icon = "geo-alt-fill",
+    color = "info",
+    value = unique_postcodes,
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Earliest Date
+
+earliest_date = paid_price['date'].min().strftime('%Y-%m-%d')
+dict(
+    icon = "calendar",
+    color = "info",
+    value = earliest_date,
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Latest Date
+
+latest_date_dt = paid_price['date'].max()
+latest_date = latest_date_dt.strftime('%Y-%m-%d')
+dict(
+    icon = "calendar",
+    color = "info",
+    value = latest_date,
+)
+```
+
+## Row
+
+```{python}
+#|content: valuebox
+#|title: Total Transactions
+
+total_transactions = paid_price['id'].nunique()
+dict(
+    icon = "info",
+    color = "info",
+    value = total_transactions,
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Total Transactional Value
+
+total_value = paid_price['price'].sum() / 1e9
+dict(
+    icon = "currency-pound",
+    color = "info",
+    value = f"{total_value:.2f} billion",
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Total New Builds
+
+total_new_builds = paid_price[paid_price['old_new'] == 'Y']['id'].nunique()
+dict(
+    icon = "house",
+    color = "info",
+    value = total_new_builds,
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Total Resales
+
+total_resales = paid_price[paid_price['old_new'] == 'N']['id'].nunique()
+dict(
+    icon = "house",
+    color = "info",
+    value = total_resales,
+)
+```
+
+## Row
+
+```{python}
+#|content: valuebox
+#|title: Most Expensive Sale
+
+most_expensive = paid_price.loc[paid_price['price'].idxmax()]
+most_expensive_value = most_expensive['price'] / 1e6
+most_expensive_date = most_expensive['date'].strftime('%Y-%m-%d')
+most_expensive_postcode = most_expensive['postcode']
+dict(
+    icon = "currency-pound",
+    color = "primary",
+    value = f"{most_expensive_value:.2f} million"
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Mean Sale Price - National (last 12 months)
+
+last_12_months = paid_price[paid_price['date'] >= latest_date_dt - pd.DateOffset(months=12)]
+average_price = last_12_months['price'].mean() / 1e3
+dict(
+    icon = "currency-pound",
+    color = "info",
+    value = f"{average_price:.2f}k",
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Mean Sale Price - London (last 12 months)
+
+london = last_12_months[last_12_months['county'] == 'GREATER LONDON']
+average_price_london = london['price'].mean() / 1e3
+dict(
+    icon = "currency-pound",
+    color = "info",
+    value = f"{average_price_london:.2f}k",
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Most Expensive Postcode Area (last 12 months)
+
+most_expensive_postcode = last_12_months.groupby('postcode_area')['price'].mean().idxmax()
+most_expensive_postcode_price = last_12_months.groupby('postcode_area')['price'].mean().max() / 1e3
+dict(
+    icon = "geo-alt-fill",
+    color = "primary",
+    value = f"{most_expensive_postcode}: £{most_expensive_postcode_price:.2f}k",
+)
+```
+
+```{python}
+#|content: valuebox
+#|title: Least Expensive Postcode Area (last 12 months)
+
+least_expensive_postcode = last_12_months.groupby('postcode_area')['price'].mean().idxmin()
+least_expensive_postcode_price = last_12_months.groupby('postcode_area')['price'].mean().min() / 1e3
+dict(
+    icon = "geo-alt-fill",
+    color = "warning",
+    value = f"{least_expensive_postcode}: £{least_expensive_postcode_price:.2f}k",
+)
+```
+
+# Trends
+
+## Row
+
+```{python}
+#|title: New Builds vs Resales
+
+import plotly.express as px
+from datetime import datetime
+
+df = paid_price.copy()
+df['year_month'] = df['date'].dt.to_period('M').dt.to_timestamp()
+
+counts = (
+    df
+    .groupby(['year_month', 'old_new'])
+    .size()
+    .reset_index(name='count')
+)
+
+counts['type'] = counts['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    counts,
+    x='year_month',
+    y='count',
+    color='type',
+    markers=False,
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'count':'Number of Transactions'
+    },
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Number of Transactions',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+```{python}
+#|title: Month on Month Change - New Builds vs Resales
+
+counts = counts.sort_values(['type','year_month'])
+counts['delta'] = counts.groupby('type')['count'].diff().fillna(0)
+
+df_stream = counts[['year_month','type','delta']]
+
+fig = px.area(
+    df_stream,
+    x='year_month',
+    y='delta',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+      'year_month':'Month',
+      'delta':'MoM Δ Transactions'
+    }
+)
+
+fig = fig.update_traces(stackgroup='one')
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Change',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+## Row
+
+```{python}
+#|title: Average Price - New Builds vs Resales
+
+avg_price = (
+    df
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+```{python}
+#|title: Month on Month Change - New Builds vs Resales
+
+avg_price = avg_price.sort_values(['type','year_month'])
+avg_price['delta_price'] = avg_price.groupby('type')['price'].diff().fillna(0)
+
+fig = px.area(
+    avg_price,
+    x='year_month',
+    y='delta_price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'delta_price':'MoM Δ Average Price (£)'
+    }
+)
+
+fig = fig.update_traces(stackgroup='one')
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Change in Avg Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+## Row
+
+```{python}
+#|title: Relative Price Volatility - New Builds vs Resales
+
+stats = (
+    df
+    .groupby(['year_month', 'old_new'])
+    .agg(
+        mean_price=('price', 'mean'),
+        std_price=('price', 'std')
+    )
+    .reset_index()
+)
+
+stats['cv'] = stats['std_price'] / stats['mean_price']
+
+stats['type'] = stats['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    stats,
+    x='year_month',
+    y='cv',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'cv':'Coefficient of Variation (σ/μ)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Coefficient of Variation (σ/μ)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+```{python}
+#|title: Month on Month Change - New Builds vs Resales
+
+stats = stats.sort_values(['type', 'year_month'])
+
+stats['delta_cv'] = stats.groupby('type')['cv'].diff().fillna(0)
+
+fig = px.area(
+    stats,
+    x='year_month',
+    y='delta_cv',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month': 'Month',
+        'delta_cv': 'MoM Δ Coeff of Var (σ/μ)'
+    }
+)
+
+fig = fig.update_traces(stackgroup='one')
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Change in CV',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+# Cities
+
+## Row
+
+```{python}
+#|title: London - Average Price
+
+city = paid_price[paid_price['town_city'] == 'LONDON'].copy()
+city['year_month'] = city['date'].dt.to_period('M').dt.to_timestamp()
+
+avg_price = (
+    city
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+```{python}
+#|title: Birmingham - Average Price
+
+city = paid_price[paid_price['town_city'] == 'BIRMINGHAM'].copy()
+city['year_month'] = city['date'].dt.to_period('M').dt.to_timestamp()
+
+avg_price = (
+    city
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+## Row
+
+```{python}
+#|title: Manchester - Average Price
+
+city = paid_price[paid_price['town_city'] == 'MANCHESTER'].copy()
+city['year_month'] = city['date'].dt.to_period('M').dt.to_timestamp()
+
+avg_price = (
+    city
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+```{python}
+#|title: Liverpool - Average Price
+
+city = paid_price[paid_price['town_city'] == 'LIVERPOOL'].copy()
+city['year_month'] = city['date'].dt.to_period('M').dt.to_timestamp()
+
+avg_price = (
+    city
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+## Row
+
+```{python}
+#|title: Leeds - Average Price
+
+city = paid_price[paid_price['town_city'] == 'LEEDS'].copy()
+city['year_month'] = city['date'].dt.to_period('M').dt.to_timestamp()
+
+avg_price = (
+    city
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+```{python}
+#|title: Sheffield - Average Price
+
+city = paid_price[paid_price['town_city'] == 'SHEFFIELD'].copy()
+city['year_month'] = city['date'].dt.to_period('M').dt.to_timestamp()
+
+avg_price = (
+    city
+    .groupby(['year_month', 'old_new'])
+    .agg({'price': 'mean'})
+    .reset_index()
+)
+
+avg_price['type'] = avg_price['old_new'].map({
+    'Y': 'New Builds',
+    'N': 'Resales'
+})
+
+fig = px.line(
+    avg_price,
+    x='year_month',
+    y='price',
+    color='type',
+    category_orders={'type': ['New Builds','Resales']},
+    labels={
+        'year_month':'Month',
+        'price':'Average Price (£)'
+    },
+    markers=False,
+)
+
+fig = fig.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Price (£)',
+    showlegend=False,
+).add_shape(
+    type='line',
+    x0=datetime(2008, 9, 1),   # make sure these are real datetime objects
+    x1=datetime(2008, 9, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='red', dash='dash', width=2),
+    layer='above'
+).add_shape(
+    type='line',
+    x0=datetime(2020, 3, 1),
+    x1=datetime(2020, 3, 1),
+    y0=0,
+    y1=1,
+    xref='x',
+    yref='paper',
+    line=dict(color='blue', dash='dash', width=2),
+    layer='above'
+).add_annotation(
+    x=datetime(2008, 9, 1),
+    y=1,
+    yref='paper',
+    text='2008 Financial Crash',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+).add_annotation(
+    x=datetime(2020, 3, 1),
+    y=1,
+    yref='paper',
+    text='COVID-19 Start',
+    showarrow=False,
+    xanchor='left',
+    yanchor='bottom',
+    yshift=5
+)
+
+fig
+```
+
+# Price Map
+
+## Row
+
+```{python}
+#|title: UK - Average Price (last 12 months)
+
+import numpy as np
+import folium
+from branca.colormap import StepColormap
+from branca.colormap import linear
+
+region = last_12_months.copy()
+
+df_h3 = (
+    region
+    .groupby('h3_index_lowres')['price']
+    .mean()
+    .reset_index(name='avg_price')
+)
+
+q_low, q_high = np.quantile(df_h3['avg_price'], [0.05, 0.95])
+
+
+ticks = np.linspace(q_low, q_high, 10)
+labels = [str(int(t)) for t in ticks]
+
+colormap = StepColormap(
+    colors=linear.Reds_09.colors,
+    index=list(ticks),
+    vmin=q_low,
+    vmax=q_high,
+    caption='Average Price (£) (5–95% clamp)',
+    tick_labels=labels
+)
+
+m = folium.Map(location=[52.5619, -1.4648], zoom_start=7)
+
+_ = folium.TileLayer(
+    tiles="CartoDB Positron",
+    name="Map",
+    control=False,
+).add_to(m)
+
+for _, row in df_h3.iterrows():
+    boundary = h3.cell_to_boundary(row['h3_index_lowres'])
+    # Calculate the average price for the cell as k, or m for thousands or millions
+    avg_price = row['avg_price'] / 1e3 if row['avg_price'] < 1e6 else row['avg_price'] / 1e6
+    avg_price_unit = 'k' if row['avg_price'] < 1e6 else 'm'
+    _ = folium.Polygon(
+        locations=boundary,
+        weight=1,
+        fill=True,
+        fill_opacity=0.4,
+        fill_color=colormap(row['avg_price']),
+        tooltip=f"£{avg_price:.2f} {avg_price_unit}"
+    ).add_to(m)
+
+_ = m.add_child(colormap)
+
+m
+```
+
+# New builds
+
+## Row
+
+```{python}
+#|title: New Builds - Density (last 12 months)
+
+last_12_months = paid_price[paid_price['date'] >= latest_date_dt - pd.DateOffset(months=12)]
+
+df_h3 = (
+    last_12_months[last_12_months['old_new'] == 'Y']
+    .groupby('h3_index_lowres')
+    .size()
+    .reset_index(name='new_count')
+)
+
+q_low, q_high = np.quantile(df_h3['new_count'], [0.05, 0.95])
+
+ticks = np.linspace(q_low, q_high, 10)
+labels = [str(int(t)) for t in ticks]
+
+colormap = StepColormap(
+    colors=linear.Reds_09.colors,
+    index=list(ticks),
+    vmin=q_low,
+    vmax=q_high,
+    caption='New Builds Count (5–95% clamp)',
+    tick_labels=labels
+)
+
+m = folium.Map(location=[52.5619, -1.4648], zoom_start=7)
+_ = folium.TileLayer("CartoDB Positron", name="Map", control=False).add_to(m)
+
+for _, row in df_h3.iterrows():
+    boundary = h3.cell_to_boundary(row['h3_index_lowres'])
+    _ = folium.Polygon(
+        locations=boundary,
+        weight=1,
+        fill=True,
+        fill_opacity=0.4,
+        fill_color=colormap(row['new_count']),
+        tooltip=f"{int(row['new_count'])} new builds"
+    ).add_to(m)
+
+_ = m.add_child(colormap)
+
+m
+```
+
+```{python}
+#|title: New Builds - Time-aware Density (last 10 years)
+
+from folium.plugins import TimestampedGeoJson
+from folium.features import GeoJsonTooltip
+
+last_10_years = paid_price[paid_price['date'] >= latest_date_dt - pd.DateOffset(years=10)]
+last_10_years['year'] = last_10_years['date'].dt.year
+
+df_year = (
+    last_10_years[last_10_years['old_new'] == 'Y']
+    .groupby(['h3_index_lowres', 'year'])
+    .size()
+    .reset_index(name='new_count')
+)
+
+q_low, q_high = np.quantile(df_year['new_count'], [0.05, 0.95])
+ticks = np.linspace(q_low, q_high, 10)
+labels = [str(int(t)) for t in ticks]
+colormap = StepColormap(
+    colors=linear.Reds_09.colors,
+    index=list(ticks),
+    vmin=q_low,
+    vmax=q_high,
+    caption='New Builds Count (5–95% clamp)',
+    tick_labels=labels
+)
+
+features = []
+for _, row in df_year.iterrows():
+    # default returns [(lat,lon),…]
+    latlngs = h3.cell_to_boundary(row['h3_index_lowres'])
+    # GeoJSON needs [ [lon,lat],… ]
+    coords = [[lng, lat] for lat, lng in latlngs]
+    features.append({
+        "type": "Feature",
+        "geometry": {"type": "Polygon", "coordinates": [coords]},
+        "properties": {
+            "time": f"{row['year']}-01-01",
+            "new_count": row['new_count'],
+            "style": {
+                "weight": 1,
+                "fillOpacity": 0.4,
+                "fillColor": colormap(row['new_count'])
+            },
+            "popup": f"{row['new_count']} new builds in {row['year']}"
+        }
+    })
+
+tooltip = GeoJsonTooltip(
+    fields=["new_count"],
+    aliases=["New builds:"],
+    localize=True,
+    sticky=True
+)
+
+time_geojson = {"type": "FeatureCollection", "features": features}
+
+m = folium.Map(location=[52.56, -1.46], zoom_start=7, tiles="CartoDB Positron")
+tgj = TimestampedGeoJson(
+    time_geojson,
+    period="P1Y",                # step by year
+    add_last_point=False,
+    auto_play=False,
+    loop_button=True,
+    date_options='YYYY',
+    time_slider_drag_update=True
+)
+tgj.options['onEachFeature'] = """
+function(feature, layer){
+    layer.bindTooltip(
+        feature.properties.new_count.toString() + ' new builds',
+        {sticky: true}
+    );
+}
+"""
+_ = tgj.add_to(m)
+
+_ = m.add_child(colormap)
+
+m
+```

@@ -1,0 +1,21 @@
+---
+title: "Dashboards"
+subtitle: "various dashboards based on open data"
+listing:
+  contents: posts/dashboards
+  feed:
+    items: 10
+    image: _static/logo.png
+    type: partial
+  fields: [date, title, subtitle, description, categories, reading-time]
+  sort: "date desc"
+  type: grid
+  page-size: 6
+  grid-item-border: false
+  max-description-length: 150
+  date-format: medium
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---

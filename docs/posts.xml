@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Fri, 25 Apr 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 30 Apr 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title></title>
+  <link>https://pedroleitao.nl/posts/dashboards/uk-home-prices/</link>
+  <description><![CDATA[ UK home prices, as reported by the Land Registry. ]]></description>
+  <category>Dashboards</category>
+  <category>Open Data</category>
+  <category>UK</category>
+  <guid>https://pedroleitao.nl/posts/dashboards/uk-home-prices/</guid>
+  <pubDate>Wed, 30 Apr 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Dynamic Inventory Management with Reinforcement Learning</title>
   <link>https://pedroleitao.nl/posts/experiments/rl-inventory-optimisation/</link>
@@ -28,12 +38,12 @@
 </item>
 <item>
   <title></title>
-  <link>https://pedroleitao.nl/posts/thoughts/met-police-dashboard/</link>
-  <description><![CDATA[ a dashboard about London crime, as reported by the Metropolitan Police. ]]></description>
-  <category>Thoughts</category>
+  <link>https://pedroleitao.nl/posts/dashboards/met-police-dashboard/</link>
+  <description><![CDATA[ London crime, as reported by the Metropolitan Police. ]]></description>
+  <category>Dashboards</category>
   <category>Open Data</category>
   <category>London</category>
-  <guid>https://pedroleitao.nl/posts/thoughts/met-police-dashboard/</guid>
+  <guid>https://pedroleitao.nl/posts/dashboards/met-police-dashboard/</guid>
   <pubDate>Fri, 18 Apr 2025 23:00:00 GMT</pubDate>
 </item>
 <item>
@@ -102,17 +112,6 @@
   <category>Publishing</category>
   <guid>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/</guid>
   <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>France, AI and Back to Nuclear for Germany ?</title>
-  <link>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</link>
-  <description><![CDATA[ President Macron has <a href="https://www.reuters.com/technology/artificial-intelligence/france-invest-109-billion-euros-ai-macron-announces-2025-02-09/">just signalled that France is about to announce €109 billion private sector investments in AI</a>. This is a significant amount of money, even for a country like France. It is also a clear statement that at least some European countries might be serious about investing in digital. ]]></description>
-  <category>Thoughts</category>
-  <category>AI</category>
-  <category>Politics</category>
-  <category>Europe</category>
-  <guid>https://pedroleitao.nl/posts/thoughts/france-ai-investment/</guid>
-  <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
