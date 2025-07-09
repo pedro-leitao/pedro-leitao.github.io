@@ -1,0 +1,294 @@
+---
+title: A Primer on Spark for Data Processing
+subtitle: a five minute introduction to Spark and PySpark
+description: A quick introduction to Apache Spark, its components, and how to use PySpark for data processing tasks.
+
+date: 2025-06-09
+tags: 
+  - HowTo
+  - Data Processing
+  - Apache Spark
+  - PySpark
+categories:
+  - HowTo
+  - Data Processing
+  - Apache Spark
+jupyter: python3
+---
+
+A mainstay in big data processing, [:link Apache Spark](https://en.wikipedia.org/wiki/Apache_Spark) is an open-source distributed computing system that provides an interface for programming entire clusters with implicit data parallelism and fault tolerance. It is designed to be fast for both batch and streaming data processing, and is a tool which any data scientist or engineer should be familiar with.
+
+This primer will cover the basics of Spark, its components, and how to use PySpark for data processing tasks. It is intended for those who are new to Spark or need a quick refresher.
+
+## The Spark architecture
+
+Apache Spark is built around a master-worker architecture. The *master* node coordinates the cluster, while *worker* nodes execute tasks in parallel. Each worker runs one or more *executors*, which are JVM processes that handle the actual computation and store data in memory.
+
+The master node manages the cluster resources and schedules tasks, while the workers execute the tasks assigned to them. The Spark driver program runs on the master node and is responsible for creating the `SparkContext`, which is the entry point to using Spark.
+
+The `DAG Scheduler` is responsible for breaking down the job into smaller tasks and scheduling them across the available executors. `The Task Scheduler` then assigns these tasks to the executors, which run them in parallel.
+
+```{mermaid}
+graph LR
+  subgraph Driver
+    SC[SparkContext]
+    DAG[DAG Scheduler]
+    TS[Task Scheduler]
+  end
+
+  subgraph ClusterManager
+    CM[Cluster Manager]
+  end
+
+  subgraph Worker_Nodes
+    W1[Worker 1]
+    W2[Worker 2]
+  end
+
+  subgraph Executors
+    E1[Executor 1]
+    E2[Executor 2]
+    E3[Executor 3]
+    E4[Executor 4]
+  end
+
+  SC --> DAG --> TS --> CM
+  CM --> W1 & W2
+
+  W1 --> E1 & E2
+  W2 --> E3 & E4
+
+  E1 --> Task1[Task]
+  E2 --> Task2[Task]
+  E3 --> Task3[Task]
+  E4 --> Task4[Task]
+```
+
+## Map-Reduce
+
+MapReduce is a programming paradigm for processing large datasets in parallel by splitting a job into a map stage, where each input record is transformed into intermediate key-value pairs—and a reduce stage, where all values for each key are aggregated into a final result. Its fault-tolerance comes from writing intermediate data to disk and re-running failed tasks, but that disk I/O between stages makes multi-stage or iterative workflows comparatively slow.
+
+Apache Spark extends the MapReduce model with in-memory [Resilient Distributed Datasets](https://spark.apache.org/docs/latest/rdd-programming-guide.html#resilient-distributed-datasets-rdds) (RDDs) and a Directed Acyclic Graph (DAG) execution engine. Spark lazily builds a DAG of transformations, pipelines narrow dependencies in memory (spilling to disk only when necessary), and applies whole-stage optimizations across multiple steps. The result is often an order-of-magnitude speed-up (10x or more in real-world benchmarks) for MapReduce style jobs, especially iterative algorithms like machine learning and graph processing. On top of RDDs, Spark’s higher-level DataFrame and Dataset APIs (powered by the Catalyst optimizer and Tungsten execution engine) let you express joins, aggregations, and SQL queries more succinctly and efficiently than raw MapReduce code.
+
+## Spark DataFrames and Spark SQL
+
+Spark DataFrames are immutable, distributed collections of data organized into named columns. Think of them like tables in a relational database but spread across your cluster. Under the hood they’re built on RDDs but come with the Catalyst optimizer and Tungsten execution engine, which automatically plan and optimize your queries so you get far better performance than hand-rolled RDD code.
+
+Transformations are *lazy*, meaning Spark builds a logical plan for your operations and only kicks off computation when you call an action (e.g. `show()`), which helps minimize I/O and shuffle overhead.
+
+Here's a self contained example of using Spark DataFrames:
+
+```{python}
+#| warning: false
+#| error: false
+import os
+import sys
+# Set environment variables for PySpark
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+os.environ["PYSPARK_PYTHON"] = sys.executable
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+
+# Initialize Spark
+spark = SparkSession.builder \
+    .appName("InMemoryDataFrameExample") \
+    .getOrCreate()
+
+# Sample data as a list of tuples
+data = [
+    ("Paul", 36, "London"),
+    ("Antonio", 23, "Madrid"),
+    ("Francois", 45, "Paris"),
+    ("Katherine", 29, "Berlin"),
+    ("Sofia", 32, "Rome"),
+    ("Yuki", 28, "Tokyo"),
+    ("Amina", 41, "Cairo"),
+    ("Liam", 34, "Dublin"),
+    ("Olivia", 30, "Sydney"),
+    ("Noah", 38, "Toronto")
+]
+
+# Define column names
+columns = ["name", "age", "city"]
+
+# Create DataFrame from in-memory data
+df = spark.createDataFrame(data, schema=columns)
+
+# Transform: select name and age where age > 30
+result = df.select("name", "age").filter(col("age") > 30)
+
+# Trigger execution and display
+result.show()
+
+# Clean up
+spark.stop()
+```
+
+And here's the equivalent, but instead of using a DataFrame, we use Spark SQL:
+
+
+```{python}
+#| warning: false
+#| error: false
+import os
+import sys
+
+# point both driver and executors at the same Python
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+os.environ["PYSPARK_PYTHON"] = sys.executable
+
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("InMemorySparkSQLExample") \
+    .getOrCreate()
+
+# -- same sample data --
+data = [
+    ("Paul", 36, "London"),
+    ("Antonio", 23, "Madrid"),
+    ("Francois", 45, "Paris"),
+    ("Katherine", 29, "Berlin"),
+    ("Sofia", 32, "Rome"),
+    ("Yuki", 28, "Tokyo"),
+    ("Amina", 41, "Cairo"),
+    ("Liam", 34, "Dublin"),
+    ("Olivia", 30, "Sydney"),
+    ("Noah", 38, "Toronto")
+]
+columns = ["name", "age", "city"]
+
+# create DataFrame and register as a temp view
+df = spark.createDataFrame(data, schema=columns)
+df.createOrReplaceTempView("people")
+
+# run a SQL query
+result = spark.sql("""
+  SELECT name, age
+    FROM people
+   WHERE age > 30
+""")
+
+# show the results
+result.show()
+
+spark.stop()
+```
+
+Here we are using `df.createGlobalTempView("people")` to register the DataFrame as a temporary view, which allows us to run SQL queries against it. The `spark.sql()` method executes the SQL query and returns a new DataFrame with the results.
+
+# Connecting to Spark
+
+In the examples above, we used the `SparkSession.builder` to create a local Spark session. This is the entry point to using Spark and allows you to configure various settings, such as the application name, master URL, and more.
+
+We can connect to remote executors running in a pre-configured Spark cluster running on a specific master URL (in this case, my own host where a Spark master is running). Here's a minimal example.
+
+```{python}
+#| warning: false
+#| error: false
+import os
+import sys
+# Set environment variables for PySpark
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+os.environ["PYSPARK_PYTHON"] = sys.executable
+
+from pyspark.sql import SparkSession
+
+# Point at the remote master
+spark = SparkSession.builder \
+    .master("spark://beast.Home:7077") \
+    .appName("MinimalCounter") \
+    .getOrCreate()
+
+sc = spark.sparkContext
+
+# Verify connection and get some metadata
+print("Master URL:    ", sc.master)
+print("App ID:        ", sc.applicationId)
+print("Spark Version: ", sc.version)
+print("Default Parallelism: ", sc.defaultParallelism)
+
+# Run a trivial job
+count = sc.range(1, 100).count()
+print("Count(1→99):   ", count)
+
+# Tear down
+spark.stop()
+```
+
+## A more complex example
+
+Now let's work on a more complex example, while staying within the basics of Spark and PySpark. We'll read a dataset from a remote URL, perform some transformations, and show the results.
+
+In this example, we will read a CSV file containing housing data, perform some transformations, and display the results. The dataset is available at a remote URL, and we will use Spark to download and process it.
+
+Everything else stays as before, but now we will use the `SparkFiles` module to download the file and make it available locally. This allows us to read the file as if it were a local file, while still leveraging Spark's distributed processing capabilities.
+
+```{python}
+#| warning: false
+#| error: false
+import os
+import sys
+# Set environment variables for PySpark
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+os.environ["PYSPARK_PYTHON"] = sys.executable
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+from pyspark import SparkFiles
+
+# Remote dataset URL
+DATA_URL = (
+    "https://raw.githubusercontent.com/"
+    "ageron/handson-ml/master/datasets/housing/housing.csv"
+)
+
+# Build the SparkSession
+spark = SparkSession.builder \
+    .appName("HousingAnalysis") \
+    .master("spark://beast.Home:7077") \
+    .getOrCreate()
+
+sc = spark.sparkContext
+
+# Verify connection and get some metadata
+print("Master URL:    ", sc.master)
+print("App ID:        ", sc.applicationId)
+print("Spark Version: ", sc.version)
+print("Default Parallelism: ", sc.defaultParallelism)
+
+# Tell Spark to download the file and make it available locally
+spark.sparkContext.addFile(DATA_URL)
+local_csv = SparkFiles.get(os.path.basename(DATA_URL))
+
+# Now read from the local copy
+df = spark.read.csv(local_csv, header=True, inferSchema=True)
+
+# Quick schema + sample
+df.printSchema()
+df.show(5, truncate=False)
+
+# Add a new feature
+df2 = df.withColumn(
+    "rooms_per_household",
+    col("total_rooms") / col("households")
+)
+df2.select("rooms_per_household").show(5)
+
+spark.stop()
+```
+
+The above tells Spark to explicitely download the file from the remote URL and make it available locally in each worker. We then read the CSV file into a DataFrame, print its schema, run some transformations and show a few rows.
+
+Note that all of the above (particularly the compute necessary for the addition of the new feature) is done in a distributed manner, meaning that Spark will handle the parallel processing across the cluster for you.
+
+## Hadoop and Spark
+
+Apache Spark can run on Hadoop YARN to leverage HDFS for storage and YARN for resource management, while integrating out of the box with Hive’s metastore and HBase via built-in connectors. In YARN *cluster* mode, the driver lives inside an ApplicationMaster and executors launch as YARN containers, whereas in *client* mode the driver stays external and only the executors run under YARN.
+
+Spark isn’t tied to Hadoop, though. You can also run it in its *standalone* mode, under *Apache Mesos*, or natively on *Kubernetes*. In Kubernetes, the Spark driver and executors run as pods scheduled by Kubernetes’ own scheduler, letting you deploy Spark apps alongside your other containerized workloads.
+
+On the data side, Spark’s unified DataFrame/Dataset API can read from HDFS, local files, object stores like Amazon S3 or Azure Blob Storage, JDBC sources (e.g. MySQL, Postgres), and NoSQL systems such as Cassandra, HBase or Kudu, without changing your business logic. Spark’s Catalyst optimizer and connector implementations automatically plan efficient read patterns across these sources.
+
+These advanced deployment and integration patterns go beyond this primer, but if you want to learn more about running Spark on YARN, see the [official documentation](https://spark.apache.org/docs/latest/running-on-yarn.html), or for Kubernetes check out [Running on Kubernetes](https://spark.apache.org/docs/latest/running-on-kubernetes.html).

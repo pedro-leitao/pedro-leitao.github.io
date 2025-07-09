@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Wed, 30 Apr 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 08 Jun 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>A Primer on Spark for Data Processing</title>
+  <link>https://pedroleitao.nl/posts/howtos/spark-primer/</link>
+  <description><![CDATA[ A quick introduction to Apache Spark, its components, and how to use PySpark for data processing tasks. ]]></description>
+  <category>HowTo</category>
+  <category>Data Processing</category>
+  <category>Apache Spark</category>
+  <guid>https://pedroleitao.nl/posts/howtos/spark-primer/</guid>
+  <pubDate>Sun, 08 Jun 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title></title>
   <link>https://pedroleitao.nl/posts/dashboards/uk-home-prices/</link>
@@ -103,15 +113,6 @@
   <category>Scaling</category>
   <guid>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/</guid>
   <pubDate>Tue, 04 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Moving to Quarto</title>
-  <link>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/</link>
-  <description><![CDATA[ I’ve been using <a href="https://jupyterbook.org">JupyterBook</a> to create this site for a while, and I’ve been pretty happy with it. But I’ve recently started using <a href="https://quarto.org">Quarto</a>, and I think it’s better. Here’s why. ]]></description>
-  <category>Thoughts</category>
-  <category>Publishing</category>
-  <guid>https://pedroleitao.nl/posts/thoughts/moving-to-quarto/</guid>
-  <pubDate>Mon, 03 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
