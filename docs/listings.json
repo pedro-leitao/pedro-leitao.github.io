@@ -2,6 +2,7 @@
   {
     "listing": "/howtos.html",
     "items": [
+      "/posts/howtos/spark-primer/index.html",
       "/posts/howtos/deepseek-r1-reasoning/index.html",
       "/posts/howtos/transformers-fine-tuning/index.html",
       "/posts/howtos/mlx-fine-tuning/index.html",
@@ -46,6 +47,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/howtos/spark-primer/index.html",
       "/posts/dashboards/uk-home-prices/index.html",
       "/posts/experiments/rl-inventory-optimisation/index.html",
       "/posts/dashboards/met-police-dashboard/index.html",

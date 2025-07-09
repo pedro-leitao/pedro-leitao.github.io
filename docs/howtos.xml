@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/howtos.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Sat, 11 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 08 Jun 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>A Primer on Spark for Data Processing</title>
+  <link>https://pedroleitao.nl/posts/howtos/spark-primer/</link>
+  <description><![CDATA[ A quick introduction to Apache Spark, its components, and how to use PySpark for data processing tasks. ]]></description>
+  <category>HowTo</category>
+  <category>Data Processing</category>
+  <category>Apache Spark</category>
+  <guid>https://pedroleitao.nl/posts/howtos/spark-primer/</guid>
+  <pubDate>Sun, 08 Jun 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Reasoning Models for Fun and Profit</title>
   <link>https://pedroleitao.nl/posts/howtos/deepseek-r1-reasoning/</link>
