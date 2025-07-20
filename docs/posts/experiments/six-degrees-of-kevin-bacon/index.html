@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-07-17">
+
+<title>Six Degrees of Kevin Bacon – Pedro Leitão</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../_static/logo.jpg" rel="icon" type="image/jpeg">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-4dff25cae16b2fde054c749d4dd18e4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell.js"></script>
+<script src="../../../site_libs/quarto-contrib/nutshell-1.0.7/nutshell_options.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background-image: url(../../../_static/banner-waves-partial.jpg);
+background-size: cover;
+      }
+</style>
+<meta name="mermaid-theme" content="forest">
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script data-collect-dnt="true" async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="Six Degrees of Kevin Bacon – Pedro Leitão">
+<meta property="og:description" content="a Neo4j experiment to build a movie recommendation system">
+<meta property="og:image" content="https://pedroleitao.nl/_static/logo.jpg">
+<meta property="og:site_name" content="Pedro Leitão">
+<meta name="twitter:title" content="Six Degrees of Kevin Bacon – Pedro Leitão">
+<meta name="twitter:description" content="a Neo4j experiment to build a movie recommendation system">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../_static/logo.jpg" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Bio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../posts.html"> 
+<span class="menu-text">All posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../experiments.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../thoughts.html"> 
+<span class="menu-text">Thoughts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../howtos.html"> 
+<span class="menu-text">Howto’s</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../python-for-students.html"> 
+<span class="menu-text">Python for Students</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../dashboards.html"> 
+<span class="menu-text">Dashboards</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pedro-leitao"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/nunoleitao"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../posts.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Six Degrees of Kevin Bacon</h1>
+            <p class="subtitle lead">a Neo4j experiment to build a movie recommendation system</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Experiments</div>
+                <div class="quarto-category">Graph Analysis</div>
+                <div class="quarto-category">Network Theory</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 17, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#downloading-the-movielens-dataset" id="toc-downloading-the-movielens-dataset" class="nav-link active" data-scroll-target="#downloading-the-movielens-dataset">Downloading the MovieLens dataset</a></li>
+  <li><a href="#setting-up-neo4j" id="toc-setting-up-neo4j" class="nav-link" data-scroll-target="#setting-up-neo4j">Setting up Neo4j</a></li>
+  <li><a href="#computing-embeddings" id="toc-computing-embeddings" class="nav-link" data-scroll-target="#computing-embeddings">Computing embeddings</a></li>
+  <li><a href="#importing-the-dataset" id="toc-importing-the-dataset" class="nav-link" data-scroll-target="#importing-the-dataset">Importing the dataset</a></li>
+  <li><a href="#exploring-the-graph" id="toc-exploring-the-graph" class="nav-link" data-scroll-target="#exploring-the-graph">Exploring the graph</a></li>
+  <li><a href="#visualizing-the-data" id="toc-visualizing-the-data" class="nav-link" data-scroll-target="#visualizing-the-data">Visualizing the data</a></li>
+  <li><a href="#performing-recommendations" id="toc-performing-recommendations" class="nav-link" data-scroll-target="#performing-recommendations">Performing recommendations</a></li>
+  <li><a href="#finding-movies-by-description" id="toc-finding-movies-by-description" class="nav-link" data-scroll-target="#finding-movies-by-description">Finding movies by description</a></li>
+  <li><a href="#integrating-with-a-large-language-model" id="toc-integrating-with-a-large-language-model" class="nav-link" data-scroll-target="#integrating-with-a-large-language-model">Integrating with a Large Language Model</a>
+  <ul class="collapse">
+  <li><a href="#agent-model-and-tool-use" id="toc-agent-model-and-tool-use" class="nav-link" data-scroll-target="#agent-model-and-tool-use">Agent model and tool use</a></li>
+  <li><a href="#the-agent" id="toc-the-agent" class="nav-link" data-scroll-target="#the-agent">The agent</a></li>
+  </ul></li>
+  <li><a href="#final-remarks" id="toc-final-remarks" class="nav-link" data-scroll-target="#final-remarks">Final remarks</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>If you have ever been in linguistic domains, you have probably heard the word “ontology”. In the context of graph databases, an ontology is a formal representation of a set of concepts within a domain and the relationships between those concepts.</p>
+<p>Ontologies are essentially domain blueprints: machine‑readable vocabularies that spell out what things exist (classes), how they relate (properties), and sometimes why (logical constraints). By using universal identifiers (URIs) and logic‑friendly formalisms like <a href="https://en.wikipedia.org/wiki/Resource_Description_Framework">:link RDF</a> Schema or OWL, an ontology lets disparate systems talk about “Customer,” “Order,” or “Payment Term” without playing the usual data‑dictionary telephone game, where the pay‑off is tight semantic alignment.</p>
+<p>Graph databases are the storage engines purpose‑built for this kind of highly connected information. They persist facts as nodes and edges, optimising for pointer‑chasing traversals that perform better than JOIN‑heavy queries in traditional SQL. Two dominant flavours exist: RDF triple stores (GraphDB, Neptune‑RDF) that natively ingest ontologies and run <a href="https://www.ontotext.com/knowledgehub/fundamentals/what-is-sparql/">SPARQL</a>, and property‑graph stores (like Neo4j or TigerGraph) that add key‑value bags to nodes/edges for analytics‑friendly operations and <a href="https://en.wikipedia.org/wiki/Cypher_(query_language)">:link Cypher</a>/Gremlin query languages. In a graph data-store relationships are first‑class citizens, so asking “show me every supplier two hops from a recalled component” becomes millisecond work rather than a spaghetti SQL ordeal.</p>
+<p>Compared with relational databases, graph stores trades rigid, table‑centric schemas for schema‑late, edge‑centric flexibility. You lose some comforts like strong ACID across huge joins, but gain the ability to evolve models on the fly and surface insights hidden behind complex join queries.</p>
+<p>In this experiment, we will explore a simple use case for a graph database using the <a href="https://grouplens.org/datasets/movielens/">MovieLens</a> dataset, which contains information about movies, users, ratings, and tags. We will use <a href="https://neo4j.com/">Neo4j</a> to create a graph representation of the data and perform some interesting queries. We will then use an embedding model to compute semantic embeddings for movie titles and tags, and use those embeddings to enhance our graph queries, together with implementing a simple recommendation system using collaborative filtering.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Collaborative filtering” is a technique used in recommendation systems to suggest items (like movies) based on the preferences of similar users. It relies on the idea that if two users have similar tastes, they are likely to enjoy similar items.</p>
+</div>
+</div>
+<p>As part of the experiment, we will also explore how to use a large language model (LLM) to generate explanations for recommendations, and how to build a conversational agent that can answer movie-related queries using the graph database.</p>
+<section id="downloading-the-movielens-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="downloading-the-movielens-dataset">Downloading the MovieLens dataset</h2>
+<p>We will start by downloading the 100,000 movie ratings dataset. It is small enough to fit within the free-tier limits of Neo4j Aura, and it contains enough data to demonstrate the capabilities of graph databases.</p>
+<div id="751486c7" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="751486c7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="751486c7-1"><a href="#751486c7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mkdir <span class="op">-</span>p .data</span>
+<span id="751486c7-2"><a href="#751486c7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="751486c7-3"><a href="#751486c7-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span><span class="cf">if</span> [ <span class="op">!</span> <span class="op">-</span>f .data<span class="op">/</span>ml<span class="op">-</span>latest<span class="op">-</span>small.<span class="bu">zip</span> ]<span class="op">;</span> then <span class="op">\</span></span>
+<span id="751486c7-4"><a href="#751486c7-4" aria-hidden="true" tabindex="-1"></a>    echo <span class="st">"Downloading MovieLens…"</span><span class="op">;</span> <span class="op">\</span></span>
+<span id="751486c7-5"><a href="#751486c7-5" aria-hidden="true" tabindex="-1"></a>    curl <span class="op">-</span>L <span class="op">-</span>o .data<span class="op">/</span>ml<span class="op">-</span>latest<span class="op">-</span>small.<span class="bu">zip</span> https:<span class="op">//</span>files.grouplens.org<span class="op">/</span>datasets<span class="op">/</span>movielens<span class="op">/</span>ml<span class="op">-</span>latest<span class="op">-</span>small.<span class="bu">zip</span><span class="op">;</span> <span class="op">\</span></span>
+<span id="751486c7-6"><a href="#751486c7-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="op">\</span></span>
+<span id="751486c7-7"><a href="#751486c7-7" aria-hidden="true" tabindex="-1"></a>    echo <span class="st">".data/ml-latest-small.zip already exists; skipping download."</span><span class="op">;</span> <span class="op">\</span></span>
+<span id="751486c7-8"><a href="#751486c7-8" aria-hidden="true" tabindex="-1"></a>  fi</span>
+<span id="751486c7-9"><a href="#751486c7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="751486c7-10"><a href="#751486c7-10" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>echo <span class="st">"Unzipping…"</span></span>
+<span id="751486c7-11"><a href="#751486c7-11" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip <span class="op">-</span>o .data<span class="op">/</span>ml<span class="op">-</span>latest<span class="op">-</span>small.<span class="bu">zip</span> <span class="op">-</span>d .data</span>
+<span id="751486c7-12"><a href="#751486c7-12" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>echo <span class="st">"Done."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>.data/ml-latest-small.zip already exists; skipping download.
+Unzipping…
+Archive:  .data/ml-latest-small.zip
+  inflating: .data/ml-latest-small/links.csv  
+  inflating: .data/ml-latest-small/tags.csv  
+  inflating: .data/ml-latest-small/ratings.csv  
+  inflating: .data/ml-latest-small/README.txt  
+  inflating: .data/ml-latest-small/movies.csv  
+Done.</code></pre>
+</div>
+</div>
+<p>With the dataset downloaded, we can now proceed to set up our Neo4j database and import the data.</p>
+</section>
+<section id="setting-up-neo4j" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-neo4j">Setting up Neo4j</h2>
+<p>We will use Neo4j Aura, the cloud version of Neo4j, to host our graph database. You can sign up for a free account at <a href="https://neo4j.com/cloud/aura/">Neo4j Aura</a>. Once you have created an account, you can create a new database instance and obtain the connection details (URI, username, and password).</p>
+<p>Make sure to set the environment variables <code>NEO4J_URI</code>, <code>NEO4J_USERNAME</code>, and <code>NEO4J_PASSWORD</code> with the connection details of your Neo4j Aura instance.</p>
+<div id="65e0fb36" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="65e0fb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="65e0fb36-1"><a href="#65e0fb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="65e0fb36-2"><a href="#65e0fb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> neo4j <span class="im">import</span> GraphDatabase, basic_auth, Driver, Session, Transaction, Record</span>
+<span id="65e0fb36-3"><a href="#65e0fb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-4"><a href="#65e0fb36-4" aria-hidden="true" tabindex="-1"></a>URI <span class="op">=</span> os.getenv(<span class="st">"NEO4J_URI"</span>)</span>
+<span id="65e0fb36-5"><a href="#65e0fb36-5" aria-hidden="true" tabindex="-1"></a>USER <span class="op">=</span> os.getenv(<span class="st">"NEO4J_USERNAME"</span>)</span>
+<span id="65e0fb36-6"><a href="#65e0fb36-6" aria-hidden="true" tabindex="-1"></a>PASSWORD <span class="op">=</span> os.getenv(<span class="st">"NEO4J_PASSWORD"</span>)</span>
+<span id="65e0fb36-7"><a href="#65e0fb36-7" aria-hidden="true" tabindex="-1"></a>AUTH <span class="op">=</span> (USER, PASSWORD)</span>
+<span id="65e0fb36-8"><a href="#65e0fb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-9"><a href="#65e0fb36-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Connecting to Neo4j at </span><span class="sc">{</span>URI<span class="sc">}</span><span class="ss"> with user </span><span class="sc">{</span>USER<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="65e0fb36-10"><a href="#65e0fb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-11"><a href="#65e0fb36-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> GraphDatabase.driver(URI, auth<span class="op">=</span>AUTH) <span class="im">as</span> driver:</span>
+<span id="65e0fb36-12"><a href="#65e0fb36-12" aria-hidden="true" tabindex="-1"></a>    driver.verify_connectivity()</span>
+<span id="65e0fb36-13"><a href="#65e0fb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-14"><a href="#65e0fb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-15"><a href="#65e0fb36-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_aura_connection() <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="65e0fb36-16"><a href="#65e0fb36-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> driver.session() <span class="im">as</span> session:</span>
+<span id="65e0fb36-17"><a href="#65e0fb36-17" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> session.run(<span class="st">"RETURN 'Hello, Aura!' AS message"</span>)</span>
+<span id="65e0fb36-18"><a href="#65e0fb36-18" aria-hidden="true" tabindex="-1"></a>        record <span class="op">=</span> result.single()</span>
+<span id="65e0fb36-19"><a href="#65e0fb36-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(record[<span class="st">"message"</span>])  <span class="co"># should print "Hello, Aura!"</span></span>
+<span id="65e0fb36-20"><a href="#65e0fb36-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-21"><a href="#65e0fb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="65e0fb36-22"><a href="#65e0fb36-22" aria-hidden="true" tabindex="-1"></a>test_aura_connection()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Connecting to Neo4j at neo4j+s://8c1ab3e4.databases.neo4j.io with user neo4j</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello, Aura!</code></pre>
+</div>
+</div>
+</section>
+<section id="computing-embeddings" class="level2">
+<h2 class="anchored" data-anchor-id="computing-embeddings">Computing embeddings</h2>
+<p>With the connection established, we can now proceed to import the dataset. First however, let us define a helper class to compute <a href="../../../posts/experiments/gensim/">embeddings</a> for movie titles and tags using a Transformer model. For simplicity, we will use the <code>all-MiniLM-L6-v2</code> model from the <code>sentence-transformers</code> library, which is a lightweight model suitable for semantic similarity tasks (however, it lags behind larger models in terms of accuracy).</p>
+<div id="40d7e73e" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="40d7e73e"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="40d7e73e-1"><a href="#40d7e73e-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Method to compute embeddings using a given Transformer model</span></span>
+<span id="40d7e73e-2"><a href="#40d7e73e-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModel</span>
+<span id="40d7e73e-3"><a href="#40d7e73e-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="40d7e73e-4"><a href="#40d7e73e-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="40d7e73e-5"><a href="#40d7e73e-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List</span>
+<span id="40d7e73e-6"><a href="#40d7e73e-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40d7e73e-7"><a href="#40d7e73e-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40d7e73e-8"><a href="#40d7e73e-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EmbeddingModel:</span>
+<span id="40d7e73e-9"><a href="#40d7e73e-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
+<span id="40d7e73e-10"><a href="#40d7e73e-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>, model_name: <span class="bu">str</span> <span class="op">=</span> <span class="st">"sentence-transformers/all-MiniLM-L6-v2"</span></span>
+<span id="40d7e73e-11"><a href="#40d7e73e-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="40d7e73e-12"><a href="#40d7e73e-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use CUDA if available</span></span>
+<span id="40d7e73e-13"><a href="#40d7e73e-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> torch.cuda.is_available():</span>
+<span id="40d7e73e-14"><a href="#40d7e73e-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Using CUDA for embeddings."</span>)</span>
+<span id="40d7e73e-15"><a href="#40d7e73e-15" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.device <span class="op">=</span> torch.device(<span class="st">"cuda"</span>)</span>
+<span id="40d7e73e-16"><a href="#40d7e73e-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> torch.backends.mps.is_available():</span>
+<span id="40d7e73e-17"><a href="#40d7e73e-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Using MPS for embeddings."</span>)</span>
+<span id="40d7e73e-18"><a href="#40d7e73e-18" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.device <span class="op">=</span> torch.device(<span class="st">"mps"</span>)</span>
+<span id="40d7e73e-19"><a href="#40d7e73e-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="40d7e73e-20"><a href="#40d7e73e-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Using CPU for embeddings."</span>)</span>
+<span id="40d7e73e-21"><a href="#40d7e73e-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.device <span class="op">=</span> torch.device(<span class="st">"cpu"</span>)</span>
+<span id="40d7e73e-22"><a href="#40d7e73e-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(model_name)</span>
+<span id="40d7e73e-23"><a href="#40d7e73e-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> AutoModel.from_pretrained(model_name).to(<span class="va">self</span>.device)</span>
+<span id="40d7e73e-24"><a href="#40d7e73e-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40d7e73e-25"><a href="#40d7e73e-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> embed_batch(<span class="va">self</span>, texts: List[<span class="bu">str</span>]) <span class="op">-&gt;</span> np.ndarray:</span>
+<span id="40d7e73e-26"><a href="#40d7e73e-26" aria-hidden="true" tabindex="-1"></a>        inputs <span class="op">=</span> <span class="va">self</span>.tokenizer(</span>
+<span id="40d7e73e-27"><a href="#40d7e73e-27" aria-hidden="true" tabindex="-1"></a>            texts, return_tensors<span class="op">=</span><span class="st">"pt"</span>, truncation<span class="op">=</span><span class="va">True</span>, padding<span class="op">=</span><span class="va">True</span>, max_length<span class="op">=</span><span class="dv">512</span></span>
+<span id="40d7e73e-28"><a href="#40d7e73e-28" aria-hidden="true" tabindex="-1"></a>        ).to(<span class="va">self</span>.device)</span>
+<span id="40d7e73e-29"><a href="#40d7e73e-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> torch.no_grad():</span>
+<span id="40d7e73e-30"><a href="#40d7e73e-30" aria-hidden="true" tabindex="-1"></a>            outputs <span class="op">=</span> <span class="va">self</span>.model(<span class="op">**</span>inputs)</span>
+<span id="40d7e73e-31"><a href="#40d7e73e-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outputs.last_hidden_state.mean(dim<span class="op">=</span><span class="dv">1</span>).cpu().numpy()</span>
+<span id="40d7e73e-32"><a href="#40d7e73e-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40d7e73e-33"><a href="#40d7e73e-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="40d7e73e-34"><a href="#40d7e73e-34" aria-hidden="true" tabindex="-1"></a>embedding_model <span class="op">=</span> EmbeddingModel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Using CUDA for embeddings.</code></pre>
+</div>
+</div>
+<p>In addition, we will also need a few methods to handle the import of the dataset into Neo4j. We will create nodes for movies, users, genres, and tags, and establish relationships between them. We will be defining three methods, <code>drop_schema</code> to drop existing constraints and indexes, <code>create_constraints</code> to create the necessary constraints in the database, and <code>import_movies_batched</code>, <code>import_ratings_batched</code>, and <code>import_tags_batched</code> to import the movies, ratings, and tags data in batches (batched loading is important if you are doing any significant volume of transactions).</p>
+<p>Once all data is loaded, our graph will be structured as follows:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    subgraph Nodes
+        direction LR
+        U[User]
+        M[Movie]
+        G[Genre]
+    end
+
+    subgraph Relationships
+        direction LR
+        U -- RATED --&gt; M
+        U -- TAGGED --&gt; M
+        M -- IN_GENRE --&gt; G
+    end
+
+    style U fill:#FFDAB9,stroke:#333,stroke-width:2px
+    style M fill:#ADD8E6,stroke:#333,stroke-width:2px
+    style G fill:#90EE90,stroke:#333,stroke-width:2px
+
+    linkStyle 0 stroke:red,stroke-width:2px;
+    linkStyle 1 stroke:blue,stroke-width:2px;
+    linkStyle 2 stroke:green,stroke-width:2px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="importing-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="importing-the-dataset">Importing the dataset</h2>
+<p>Our Cypher query to import movies (and similarly, other entities) looks like this:</p>
+<pre><code>UNWIND $batch AS row
+MERGE (m:Movie {movieId: toInteger(row.movieId)})
+SET m.title  = row.title,
+    m.imdbId = row.imdbId,
+    m.tmdbId = row.tmdbId,
+    m.embedding = row.embedding
+WITH m, row
+UNWIND split(row.genres, '|') AS genreName
+    MERGE (g:Genre {name: genreName})
+    MERGE (m)-[:IN_GENRE]-&gt;(g)</code></pre>
+<p>It takes a list of records supplied in <code>$batch</code> and processes them one at a time (<code>UNWIND</code>). For each record it either finds or creates a  <code>Movie</code> node keyed by <code>movieId</code>, then updates that node with its <code>title</code>, IMDb and TMDb identifiers, plus a pre‑computed vector stored in <code>embedding</code>. Because it uses <code>MERGE</code>, you’ll never get duplicate movie nodes with the same ID.</p>
+<p>After updating the movie, the query pulls the pipe‑separated <code>genre</code> string into individual genre names, again ensuring each unique name has exactly one <code>Genre</code> node. It then creates (or confirms) an <code>IN_GENRE</code> relationship from the movie to each of its genres. The whole snippet is basically an idempotent “upsert” that normalises movies and genres while wiring them together in a clean graph structure with an <code>IN_GENRE</code> relationship.</p>
+<div id="472281d3" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="472281d3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="472281d3-1"><a href="#472281d3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="472281d3-2"><a href="#472281d3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
+<span id="472281d3-3"><a href="#472281d3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="472281d3-4"><a href="#472281d3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Dict, Any, Tuple, Optional</span>
+<span id="472281d3-5"><a href="#472281d3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-6"><a href="#472281d3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-7"><a href="#472281d3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> drop_schema(tx: Transaction) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-8"><a href="#472281d3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Drop constraints</span></span>
+<span id="472281d3-9"><a href="#472281d3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> record <span class="kw">in</span> tx.run(<span class="st">"SHOW CONSTRAINTS"</span>):</span>
+<span id="472281d3-10"><a href="#472281d3-10" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> record[<span class="st">"name"</span>]</span>
+<span id="472281d3-11"><a href="#472281d3-11" aria-hidden="true" tabindex="-1"></a>        tx.run(<span class="ss">f"DROP CONSTRAINT `</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">`"</span>)</span>
+<span id="472281d3-12"><a href="#472281d3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Drop indexes</span></span>
+<span id="472281d3-13"><a href="#472281d3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> record <span class="kw">in</span> tx.run(<span class="st">"SHOW INDEXES"</span>):</span>
+<span id="472281d3-14"><a href="#472281d3-14" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> record[<span class="st">"name"</span>]</span>
+<span id="472281d3-15"><a href="#472281d3-15" aria-hidden="true" tabindex="-1"></a>        tx.run(<span class="ss">f"DROP INDEX `</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">`"</span>)</span>
+<span id="472281d3-16"><a href="#472281d3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-17"><a href="#472281d3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-18"><a href="#472281d3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_constraints(tx: Transaction) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-19"><a href="#472281d3-19" aria-hidden="true" tabindex="-1"></a>    tx.run(<span class="st">"CREATE CONSTRAINT IF NOT EXISTS FOR (m:Movie)  REQUIRE m.movieId IS UNIQUE"</span>)</span>
+<span id="472281d3-20"><a href="#472281d3-20" aria-hidden="true" tabindex="-1"></a>    tx.run(<span class="st">"CREATE CONSTRAINT IF NOT EXISTS FOR (u:User)   REQUIRE u.userId IS UNIQUE"</span>)</span>
+<span id="472281d3-21"><a href="#472281d3-21" aria-hidden="true" tabindex="-1"></a>    tx.run(<span class="st">"CREATE CONSTRAINT IF NOT EXISTS FOR (g:Genre)  REQUIRE g.name    IS UNIQUE"</span>)</span>
+<span id="472281d3-22"><a href="#472281d3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-23"><a href="#472281d3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-24"><a href="#472281d3-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _load_movie_batch(tx: Transaction, batch: List[Dict[<span class="bu">str</span>, Any]]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-25"><a href="#472281d3-25" aria-hidden="true" tabindex="-1"></a>    tx.run(</span>
+<span id="472281d3-26"><a href="#472281d3-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""</span></span>
+<span id="472281d3-27"><a href="#472281d3-27" aria-hidden="true" tabindex="-1"></a><span class="st">        UNWIND $batch AS row</span></span>
+<span id="472281d3-28"><a href="#472281d3-28" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (m:Movie {movieId: toInteger(row.movieId)})</span></span>
+<span id="472281d3-29"><a href="#472281d3-29" aria-hidden="true" tabindex="-1"></a><span class="st">        SET m.title  = row.title,</span></span>
+<span id="472281d3-30"><a href="#472281d3-30" aria-hidden="true" tabindex="-1"></a><span class="st">            m.imdbId = row.imdbId,</span></span>
+<span id="472281d3-31"><a href="#472281d3-31" aria-hidden="true" tabindex="-1"></a><span class="st">            m.tmdbId = row.tmdbId,</span></span>
+<span id="472281d3-32"><a href="#472281d3-32" aria-hidden="true" tabindex="-1"></a><span class="st">            m.embedding = row.embedding</span></span>
+<span id="472281d3-33"><a href="#472281d3-33" aria-hidden="true" tabindex="-1"></a><span class="st">        WITH m, row</span></span>
+<span id="472281d3-34"><a href="#472281d3-34" aria-hidden="true" tabindex="-1"></a><span class="st">        UNWIND split(row.genres, '|') AS genreName</span></span>
+<span id="472281d3-35"><a href="#472281d3-35" aria-hidden="true" tabindex="-1"></a><span class="st">          MERGE (g:Genre {name: genreName})</span></span>
+<span id="472281d3-36"><a href="#472281d3-36" aria-hidden="true" tabindex="-1"></a><span class="st">          MERGE (m)-[:IN_GENRE]-&gt;(g)</span></span>
+<span id="472281d3-37"><a href="#472281d3-37" aria-hidden="true" tabindex="-1"></a><span class="st">        """</span>,</span>
+<span id="472281d3-38"><a href="#472281d3-38" aria-hidden="true" tabindex="-1"></a>        batch<span class="op">=</span>batch,</span>
+<span id="472281d3-39"><a href="#472281d3-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="472281d3-40"><a href="#472281d3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-41"><a href="#472281d3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-42"><a href="#472281d3-42" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> import_movies_batched(</span>
+<span id="472281d3-43"><a href="#472281d3-43" aria-hidden="true" tabindex="-1"></a>    session: Session, movies_f: <span class="bu">str</span>, links_f: <span class="bu">str</span>, batch_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="472281d3-44"><a href="#472281d3-44" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-45"><a href="#472281d3-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># preload links into memory once</span></span>
+<span id="472281d3-46"><a href="#472281d3-46" aria-hidden="true" tabindex="-1"></a>    links <span class="op">=</span> {}</span>
+<span id="472281d3-47"><a href="#472281d3-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(links_f, newline<span class="op">=</span><span class="st">""</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="472281d3-48"><a href="#472281d3-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> r <span class="kw">in</span> csv.DictReader(f):</span>
+<span id="472281d3-49"><a href="#472281d3-49" aria-hidden="true" tabindex="-1"></a>            links[r[<span class="st">"movieId"</span>]] <span class="op">=</span> {<span class="st">"imdbId"</span>: r[<span class="st">"imdbId"</span>], <span class="st">"tmdbId"</span>: r[<span class="st">"tmdbId"</span>]}</span>
+<span id="472281d3-50"><a href="#472281d3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-51"><a href="#472281d3-51" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> []</span>
+<span id="472281d3-52"><a href="#472281d3-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(movies_f, newline<span class="op">=</span><span class="st">""</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="472281d3-53"><a href="#472281d3-53" aria-hidden="true" tabindex="-1"></a>        reader <span class="op">=</span> csv.DictReader(f)</span>
+<span id="472281d3-54"><a href="#472281d3-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="472281d3-55"><a href="#472281d3-55" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Read a batch of rows from the CSV</span></span>
+<span id="472281d3-56"><a href="#472281d3-56" aria-hidden="true" tabindex="-1"></a>            rows <span class="op">=</span> <span class="bu">list</span>(itertools.islice(reader, batch_size))</span>
+<span id="472281d3-57"><a href="#472281d3-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> rows:</span>
+<span id="472281d3-58"><a href="#472281d3-58" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="472281d3-59"><a href="#472281d3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-60"><a href="#472281d3-60" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Extract titles and compute embeddings in a batch</span></span>
+<span id="472281d3-61"><a href="#472281d3-61" aria-hidden="true" tabindex="-1"></a>            titles <span class="op">=</span> [row[<span class="st">"title"</span>] <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="472281d3-62"><a href="#472281d3-62" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Titles have a year ("... (1994)" for example), remove it with a regexp for better embeddings</span></span>
+<span id="472281d3-63"><a href="#472281d3-63" aria-hidden="true" tabindex="-1"></a>            titles <span class="op">=</span> [re.sub(<span class="vs">r"</span><span class="dv">\s</span><span class="op">*</span><span class="ch">\(</span><span class="dv">\d</span><span class="op">{4}</span><span class="ch">\)</span><span class="dv">$</span><span class="vs">"</span>, <span class="st">""</span>, title) <span class="cf">for</span> title <span class="kw">in</span> titles]</span>
+<span id="472281d3-64"><a href="#472281d3-64" aria-hidden="true" tabindex="-1"></a>            embeddings <span class="op">=</span> embedding_model.embed_batch(titles)</span>
+<span id="472281d3-65"><a href="#472281d3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-66"><a href="#472281d3-66" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Prepare batch for Neo4j import</span></span>
+<span id="472281d3-67"><a href="#472281d3-67" aria-hidden="true" tabindex="-1"></a>            batch_to_load <span class="op">=</span> []</span>
+<span id="472281d3-68"><a href="#472281d3-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i, row <span class="kw">in</span> <span class="bu">enumerate</span>(rows):</span>
+<span id="472281d3-69"><a href="#472281d3-69" aria-hidden="true" tabindex="-1"></a>                lm <span class="op">=</span> links.get(row[<span class="st">"movieId"</span>], {})</span>
+<span id="472281d3-70"><a href="#472281d3-70" aria-hidden="true" tabindex="-1"></a>                batch_to_load.append(</span>
+<span id="472281d3-71"><a href="#472281d3-71" aria-hidden="true" tabindex="-1"></a>                    {</span>
+<span id="472281d3-72"><a href="#472281d3-72" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"movieId"</span>: row[<span class="st">"movieId"</span>],</span>
+<span id="472281d3-73"><a href="#472281d3-73" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"title"</span>: row[<span class="st">"title"</span>],</span>
+<span id="472281d3-74"><a href="#472281d3-74" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"genres"</span>: row[<span class="st">"genres"</span>],</span>
+<span id="472281d3-75"><a href="#472281d3-75" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"imdbId"</span>: lm.get(<span class="st">"imdbId"</span>),</span>
+<span id="472281d3-76"><a href="#472281d3-76" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"tmdbId"</span>: lm.get(<span class="st">"tmdbId"</span>),</span>
+<span id="472281d3-77"><a href="#472281d3-77" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"embedding"</span>: embeddings[i],</span>
+<span id="472281d3-78"><a href="#472281d3-78" aria-hidden="true" tabindex="-1"></a>                    }</span>
+<span id="472281d3-79"><a href="#472281d3-79" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="472281d3-80"><a href="#472281d3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-81"><a href="#472281d3-81" aria-hidden="true" tabindex="-1"></a>            session.execute_write(_load_movie_batch, batch_to_load)</span>
+<span id="472281d3-82"><a href="#472281d3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-83"><a href="#472281d3-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-84"><a href="#472281d3-84" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _load_ratings_batch(tx: Transaction, batch: List[Dict[<span class="bu">str</span>, <span class="bu">str</span>]]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-85"><a href="#472281d3-85" aria-hidden="true" tabindex="-1"></a>    tx.run(</span>
+<span id="472281d3-86"><a href="#472281d3-86" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""</span></span>
+<span id="472281d3-87"><a href="#472281d3-87" aria-hidden="true" tabindex="-1"></a><span class="st">        UNWIND $batch AS row</span></span>
+<span id="472281d3-88"><a href="#472281d3-88" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (u:User  {userId: toInteger(row.userId)})</span></span>
+<span id="472281d3-89"><a href="#472281d3-89" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (m:Movie {movieId: toInteger(row.movieId)})</span></span>
+<span id="472281d3-90"><a href="#472281d3-90" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (u)-[r:RATED]-&gt;(m)</span></span>
+<span id="472281d3-91"><a href="#472281d3-91" aria-hidden="true" tabindex="-1"></a><span class="st">        SET r.rating    = toFloat(row.rating),</span></span>
+<span id="472281d3-92"><a href="#472281d3-92" aria-hidden="true" tabindex="-1"></a><span class="st">            r.timestamp = toInteger(row.timestamp)</span></span>
+<span id="472281d3-93"><a href="#472281d3-93" aria-hidden="true" tabindex="-1"></a><span class="st">        """</span>,</span>
+<span id="472281d3-94"><a href="#472281d3-94" aria-hidden="true" tabindex="-1"></a>        batch<span class="op">=</span>batch,</span>
+<span id="472281d3-95"><a href="#472281d3-95" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="472281d3-96"><a href="#472281d3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-97"><a href="#472281d3-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-98"><a href="#472281d3-98" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> import_ratings_batched(</span>
+<span id="472281d3-99"><a href="#472281d3-99" aria-hidden="true" tabindex="-1"></a>    session: Session, ratings_f: <span class="bu">str</span>, batch_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="472281d3-100"><a href="#472281d3-100" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-101"><a href="#472281d3-101" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> []</span>
+<span id="472281d3-102"><a href="#472281d3-102" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(ratings_f, newline<span class="op">=</span><span class="st">""</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="472281d3-103"><a href="#472281d3-103" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> row <span class="kw">in</span> csv.DictReader(f):</span>
+<span id="472281d3-104"><a href="#472281d3-104" aria-hidden="true" tabindex="-1"></a>            batch.append(row)</span>
+<span id="472281d3-105"><a href="#472281d3-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(batch) <span class="op">&gt;=</span> batch_size:</span>
+<span id="472281d3-106"><a href="#472281d3-106" aria-hidden="true" tabindex="-1"></a>                session.execute_write(_load_ratings_batch, batch)</span>
+<span id="472281d3-107"><a href="#472281d3-107" aria-hidden="true" tabindex="-1"></a>                batch.clear()</span>
+<span id="472281d3-108"><a href="#472281d3-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> batch:</span>
+<span id="472281d3-109"><a href="#472281d3-109" aria-hidden="true" tabindex="-1"></a>            session.execute_write(_load_ratings_batch, batch)</span>
+<span id="472281d3-110"><a href="#472281d3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-111"><a href="#472281d3-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-112"><a href="#472281d3-112" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _load_tags_batch(tx: Transaction, batch: List[Dict[<span class="bu">str</span>, Any]]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-113"><a href="#472281d3-113" aria-hidden="true" tabindex="-1"></a>    tx.run(</span>
+<span id="472281d3-114"><a href="#472281d3-114" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""</span></span>
+<span id="472281d3-115"><a href="#472281d3-115" aria-hidden="true" tabindex="-1"></a><span class="st">        UNWIND $batch AS row</span></span>
+<span id="472281d3-116"><a href="#472281d3-116" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (u:User  {userId: toInteger(row.userId)})</span></span>
+<span id="472281d3-117"><a href="#472281d3-117" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (m:Movie {movieId: toInteger(row.movieId)})</span></span>
+<span id="472281d3-118"><a href="#472281d3-118" aria-hidden="true" tabindex="-1"></a><span class="st">        MERGE (u)-[t:TAGGED]-&gt;(m)</span></span>
+<span id="472281d3-119"><a href="#472281d3-119" aria-hidden="true" tabindex="-1"></a><span class="st">        SET t.tag       = row.tag,</span></span>
+<span id="472281d3-120"><a href="#472281d3-120" aria-hidden="true" tabindex="-1"></a><span class="st">            t.timestamp = toInteger(row.timestamp),</span></span>
+<span id="472281d3-121"><a href="#472281d3-121" aria-hidden="true" tabindex="-1"></a><span class="st">            t.embedding = row.embedding</span></span>
+<span id="472281d3-122"><a href="#472281d3-122" aria-hidden="true" tabindex="-1"></a><span class="st">        """</span>,</span>
+<span id="472281d3-123"><a href="#472281d3-123" aria-hidden="true" tabindex="-1"></a>        batch<span class="op">=</span>batch,</span>
+<span id="472281d3-124"><a href="#472281d3-124" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="472281d3-125"><a href="#472281d3-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-126"><a href="#472281d3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-127"><a href="#472281d3-127" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> import_tags_batched(session: Session, tags_f: <span class="bu">str</span>, batch_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1000</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="472281d3-128"><a href="#472281d3-128" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(tags_f, newline<span class="op">=</span><span class="st">""</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="472281d3-129"><a href="#472281d3-129" aria-hidden="true" tabindex="-1"></a>        reader <span class="op">=</span> csv.DictReader(f)</span>
+<span id="472281d3-130"><a href="#472281d3-130" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="472281d3-131"><a href="#472281d3-131" aria-hidden="true" tabindex="-1"></a>            rows <span class="op">=</span> <span class="bu">list</span>(itertools.islice(reader, batch_size))</span>
+<span id="472281d3-132"><a href="#472281d3-132" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> rows:</span>
+<span id="472281d3-133"><a href="#472281d3-133" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="472281d3-134"><a href="#472281d3-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-135"><a href="#472281d3-135" aria-hidden="true" tabindex="-1"></a>            tags <span class="op">=</span> [row[<span class="st">"tag"</span>] <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="472281d3-136"><a href="#472281d3-136" aria-hidden="true" tabindex="-1"></a>            embeddings <span class="op">=</span> embedding_model.embed_batch(tags)</span>
+<span id="472281d3-137"><a href="#472281d3-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-138"><a href="#472281d3-138" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i, row <span class="kw">in</span> <span class="bu">enumerate</span>(rows):</span>
+<span id="472281d3-139"><a href="#472281d3-139" aria-hidden="true" tabindex="-1"></a>                row[<span class="st">"embedding"</span>] <span class="op">=</span> embeddings[i]</span>
+<span id="472281d3-140"><a href="#472281d3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="472281d3-141"><a href="#472281d3-141" aria-hidden="true" tabindex="-1"></a>            session.execute_write(_load_tags_batch, rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We also need a couple of methods to create the vector indexes for the movie and tag embeddings. These indexes will allow us to perform efficient similarity searches against the backend.</p>
+<div id="4729320b" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="4729320b"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4729320b-1"><a href="#4729320b-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_vector_index(tx: Transaction) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="4729320b-2"><a href="#4729320b-2" aria-hidden="true" tabindex="-1"></a>    tx.run(</span>
+<span id="4729320b-3"><a href="#4729320b-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""</span></span>
+<span id="4729320b-4"><a href="#4729320b-4" aria-hidden="true" tabindex="-1"></a><span class="st">        CREATE VECTOR INDEX `movie_embeddings` IF NOT EXISTS</span></span>
+<span id="4729320b-5"><a href="#4729320b-5" aria-hidden="true" tabindex="-1"></a><span class="st">        FOR (m:Movie)</span></span>
+<span id="4729320b-6"><a href="#4729320b-6" aria-hidden="true" tabindex="-1"></a><span class="st">        ON m.embedding</span></span>
+<span id="4729320b-7"><a href="#4729320b-7" aria-hidden="true" tabindex="-1"></a><span class="st">        OPTIONS {indexConfig: {</span></span>
+<span id="4729320b-8"><a href="#4729320b-8" aria-hidden="true" tabindex="-1"></a><span class="st">            `vector.dimensions`: 384,</span></span>
+<span id="4729320b-9"><a href="#4729320b-9" aria-hidden="true" tabindex="-1"></a><span class="st">            `vector.similarity_function`: 'cosine'</span></span>
+<span id="4729320b-10"><a href="#4729320b-10" aria-hidden="true" tabindex="-1"></a><span class="st">        </span><span class="sc">}}</span></span>
+<span id="4729320b-11"><a href="#4729320b-11" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="4729320b-12"><a href="#4729320b-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="4729320b-13"><a href="#4729320b-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4729320b-14"><a href="#4729320b-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4729320b-15"><a href="#4729320b-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_tag_vector_index(tx: Transaction) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="4729320b-16"><a href="#4729320b-16" aria-hidden="true" tabindex="-1"></a>    tx.run(</span>
+<span id="4729320b-17"><a href="#4729320b-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""</span></span>
+<span id="4729320b-18"><a href="#4729320b-18" aria-hidden="true" tabindex="-1"></a><span class="st">        CREATE VECTOR INDEX `tag_embeddings` IF NOT EXISTS</span></span>
+<span id="4729320b-19"><a href="#4729320b-19" aria-hidden="true" tabindex="-1"></a><span class="st">        FOR ()-[t:TAGGED]-()</span></span>
+<span id="4729320b-20"><a href="#4729320b-20" aria-hidden="true" tabindex="-1"></a><span class="st">        ON t.embedding</span></span>
+<span id="4729320b-21"><a href="#4729320b-21" aria-hidden="true" tabindex="-1"></a><span class="st">        OPTIONS {indexConfig: {</span></span>
+<span id="4729320b-22"><a href="#4729320b-22" aria-hidden="true" tabindex="-1"></a><span class="st">            `vector.dimensions`: 384,</span></span>
+<span id="4729320b-23"><a href="#4729320b-23" aria-hidden="true" tabindex="-1"></a><span class="st">            `vector.similarity_function`: 'cosine'</span></span>
+<span id="4729320b-24"><a href="#4729320b-24" aria-hidden="true" tabindex="-1"></a><span class="st">        </span><span class="sc">}}</span></span>
+<span id="4729320b-25"><a href="#4729320b-25" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="4729320b-26"><a href="#4729320b-26" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>With this defined, we can now proceed to drop any existing schema, create the necessary constraints and indexes, and import the data into Aura.</p>
+<div id="68f54fd1" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="68f54fd1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="68f54fd1-1"><a href="#68f54fd1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> driver.session() <span class="im">as</span> sess:</span>
+<span id="68f54fd1-2"><a href="#68f54fd1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Dropping existing graph..."</span>)</span>
+<span id="68f54fd1-3"><a href="#68f54fd1-3" aria-hidden="true" tabindex="-1"></a>    sess.execute_write(<span class="kw">lambda</span> tx: tx.run(<span class="st">"MATCH (n) DETACH DELETE n"</span>))</span>
+<span id="68f54fd1-4"><a href="#68f54fd1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Dropping existing schema..."</span>)</span>
+<span id="68f54fd1-5"><a href="#68f54fd1-5" aria-hidden="true" tabindex="-1"></a>    sess.execute_write(drop_schema)</span>
+<span id="68f54fd1-6"><a href="#68f54fd1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="68f54fd1-7"><a href="#68f54fd1-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Creating constraints..."</span>)</span>
+<span id="68f54fd1-8"><a href="#68f54fd1-8" aria-hidden="true" tabindex="-1"></a>    sess.execute_write(create_constraints)</span>
+<span id="68f54fd1-9"><a href="#68f54fd1-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Creating vector index..."</span>)</span>
+<span id="68f54fd1-10"><a href="#68f54fd1-10" aria-hidden="true" tabindex="-1"></a>    sess.execute_write(create_vector_index)</span>
+<span id="68f54fd1-11"><a href="#68f54fd1-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Creating tag vector index..."</span>)</span>
+<span id="68f54fd1-12"><a href="#68f54fd1-12" aria-hidden="true" tabindex="-1"></a>    sess.execute_write(create_tag_vector_index)</span>
+<span id="68f54fd1-13"><a href="#68f54fd1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="68f54fd1-14"><a href="#68f54fd1-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Importing movies..."</span>)</span>
+<span id="68f54fd1-15"><a href="#68f54fd1-15" aria-hidden="true" tabindex="-1"></a>    import_movies_batched(</span>
+<span id="68f54fd1-16"><a href="#68f54fd1-16" aria-hidden="true" tabindex="-1"></a>        sess, <span class="st">".data/ml-latest-small/movies.csv"</span>, <span class="st">".data/ml-latest-small/links.csv"</span></span>
+<span id="68f54fd1-17"><a href="#68f54fd1-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="68f54fd1-18"><a href="#68f54fd1-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Importing ratings..."</span>)</span>
+<span id="68f54fd1-19"><a href="#68f54fd1-19" aria-hidden="true" tabindex="-1"></a>    import_ratings_batched(sess, <span class="st">".data/ml-latest-small/ratings.csv"</span>)</span>
+<span id="68f54fd1-20"><a href="#68f54fd1-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Importing tags..."</span>)</span>
+<span id="68f54fd1-21"><a href="#68f54fd1-21" aria-hidden="true" tabindex="-1"></a>    import_tags_batched(sess, <span class="st">".data/ml-latest-small/tags.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dropping existing graph...
+Dropping existing schema...
+Creating constraints...
+Creating vector index...
+Creating tag vector index...
+Importing movies...
+Importing ratings...
+Importing tags...</code></pre>
+</div>
+</div>
+</section>
+<section id="exploring-the-graph" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-graph">Exploring the graph</h2>
+<p>Let us do some exploratory queries to see what we have in our graph. We can start by picking a single movie, say “Forrest Gump (1994)”, and find out which users have tagged it, what tags they used, and which other movies those users have additionally tagged.</p>
+<p>In Cypher, this is a multi-step query which first finds the movie:</p>
+<pre><code>MATCH (fg:Movie {title: "Forrest Gump (1994)"})</code></pre>
+<p>Then finds the users who have tagged it (<code>CALL</code> is used to define a subquery):</p>
+<pre><code>CALL(fg) {
+    MATCH (u:User)-[t:TAGGED]-&gt;(fg)
+    WITH u, count(t) AS fgTagCount
+    ORDER BY fgTagCount DESC
+    LIMIT 20
+    RETURN collect(u) AS topUsers
+}</code></pre>
+<p>We then then unwind the top users and find the top 10 other movies they have tagged:</p>
+<pre><code>CALL(fg, topUsers) {
+      UNWIND topUsers AS u
+      MATCH (u)-[:TAGGED]-&gt;(m:Movie)
+      WHERE m &lt;&gt; fg
+      WITH m, count(DISTINCT u) AS userCount
+      ORDER BY userCount DESC
+      LIMIT 10
+      RETURN collect(m) AS topMovies
+    }</code></pre>
+<p>Followed by unwinding (meaning “exploding” every element in the list into separate rows) both the Forrest Gump movie and the other top 10 movies, and pulling every tag edge between those users and those movies:</p>
+<pre><code>WITH fg, topUsers, topMovies
+    UNWIND topUsers AS u
+    UNWIND [fg] + topMovies AS m</code></pre>
+<p>And finally we return the user ID, movie ID, movie title, tags, and tag count of the resulting tag edges:</p>
+<pre><code>MATCH (u)-[t:TAGGED]-&gt;(m)
+    RETURN
+      u.userId      AS uId,
+      m.movieId     AS mId,
+      m.title       AS title,
+      collect(t.tag) AS tags,
+      count(t)      AS tagCount</code></pre>
+<div id="19006f40" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="19006f40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="19006f40-1"><a href="#19006f40-1" aria-hidden="true" tabindex="-1"></a>film <span class="op">=</span> <span class="st">"Forrest Gump (1994)"</span></span>
+<span id="19006f40-2"><a href="#19006f40-2" aria-hidden="true" tabindex="-1"></a>max_users <span class="op">=</span> <span class="dv">20</span></span>
+<span id="19006f40-3"><a href="#19006f40-3" aria-hidden="true" tabindex="-1"></a>max_other_movies <span class="op">=</span> <span class="dv">10</span></span>
+<span id="19006f40-4"><a href="#19006f40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19006f40-5"><a href="#19006f40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab exactly the users and movies we care about, plus their tag‐counts &amp; tag names:</span></span>
+<span id="19006f40-6"><a href="#19006f40-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> driver.session() <span class="im">as</span> sess:</span>
+<span id="19006f40-7"><a href="#19006f40-7" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> sess.run(</span>
+<span id="19006f40-8"><a href="#19006f40-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"""</span></span>
+<span id="19006f40-9"><a href="#19006f40-9" aria-hidden="true" tabindex="-1"></a><span class="st">    MATCH (fg:Movie {title: $film})</span></span>
+<span id="19006f40-10"><a href="#19006f40-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19006f40-11"><a href="#19006f40-11" aria-hidden="true" tabindex="-1"></a><span class="st">    // top 20 users by # of tags on FG</span></span>
+<span id="19006f40-12"><a href="#19006f40-12" aria-hidden="true" tabindex="-1"></a><span class="st">    CALL(fg) {</span></span>
+<span id="19006f40-13"><a href="#19006f40-13" aria-hidden="true" tabindex="-1"></a><span class="st">      MATCH (u:User)-[t:TAGGED]-&gt;(fg)</span></span>
+<span id="19006f40-14"><a href="#19006f40-14" aria-hidden="true" tabindex="-1"></a><span class="st">      WITH u, count(t) AS fgTagCount</span></span>
+<span id="19006f40-15"><a href="#19006f40-15" aria-hidden="true" tabindex="-1"></a><span class="st">      ORDER BY fgTagCount DESC</span></span>
+<span id="19006f40-16"><a href="#19006f40-16" aria-hidden="true" tabindex="-1"></a><span class="st">      LIMIT $max_users</span></span>
+<span id="19006f40-17"><a href="#19006f40-17" aria-hidden="true" tabindex="-1"></a><span class="st">      RETURN collect(u) AS topUsers</span></span>
+<span id="19006f40-18"><a href="#19006f40-18" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="19006f40-19"><a href="#19006f40-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19006f40-20"><a href="#19006f40-20" aria-hidden="true" tabindex="-1"></a><span class="st">    // top 10 other movies tagged by those users</span></span>
+<span id="19006f40-21"><a href="#19006f40-21" aria-hidden="true" tabindex="-1"></a><span class="st">    CALL(fg, topUsers) {</span></span>
+<span id="19006f40-22"><a href="#19006f40-22" aria-hidden="true" tabindex="-1"></a><span class="st">      UNWIND topUsers AS u</span></span>
+<span id="19006f40-23"><a href="#19006f40-23" aria-hidden="true" tabindex="-1"></a><span class="st">      MATCH (u)-[:TAGGED]-&gt;(m:Movie)</span></span>
+<span id="19006f40-24"><a href="#19006f40-24" aria-hidden="true" tabindex="-1"></a><span class="st">      WHERE m &lt;&gt; fg</span></span>
+<span id="19006f40-25"><a href="#19006f40-25" aria-hidden="true" tabindex="-1"></a><span class="st">      WITH m, count(DISTINCT u) AS userCount</span></span>
+<span id="19006f40-26"><a href="#19006f40-26" aria-hidden="true" tabindex="-1"></a><span class="st">      ORDER BY userCount DESC</span></span>
+<span id="19006f40-27"><a href="#19006f40-27" aria-hidden="true" tabindex="-1"></a><span class="st">      LIMIT $max_other_movies</span></span>
+<span id="19006f40-28"><a href="#19006f40-28" aria-hidden="true" tabindex="-1"></a><span class="st">      RETURN collect(m) AS topMovies</span></span>
+<span id="19006f40-29"><a href="#19006f40-29" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="19006f40-30"><a href="#19006f40-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19006f40-31"><a href="#19006f40-31" aria-hidden="true" tabindex="-1"></a><span class="st">    WITH fg, topUsers, topMovies</span></span>
+<span id="19006f40-32"><a href="#19006f40-32" aria-hidden="true" tabindex="-1"></a><span class="st">    // unwind both FG + the other top 10</span></span>
+<span id="19006f40-33"><a href="#19006f40-33" aria-hidden="true" tabindex="-1"></a><span class="st">    UNWIND topUsers AS u</span></span>
+<span id="19006f40-34"><a href="#19006f40-34" aria-hidden="true" tabindex="-1"></a><span class="st">    UNWIND [fg] + topMovies AS m</span></span>
+<span id="19006f40-35"><a href="#19006f40-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="19006f40-36"><a href="#19006f40-36" aria-hidden="true" tabindex="-1"></a><span class="st">    // pull every tag‐edge between those users and those movies</span></span>
+<span id="19006f40-37"><a href="#19006f40-37" aria-hidden="true" tabindex="-1"></a><span class="st">    MATCH (u)-[t:TAGGED]-&gt;(m)</span></span>
+<span id="19006f40-38"><a href="#19006f40-38" aria-hidden="true" tabindex="-1"></a><span class="st">    RETURN</span></span>
+<span id="19006f40-39"><a href="#19006f40-39" aria-hidden="true" tabindex="-1"></a><span class="st">      u.userId      AS uId,</span></span>
+<span id="19006f40-40"><a href="#19006f40-40" aria-hidden="true" tabindex="-1"></a><span class="st">      m.movieId     AS mId,</span></span>
+<span id="19006f40-41"><a href="#19006f40-41" aria-hidden="true" tabindex="-1"></a><span class="st">      m.title       AS title,</span></span>
+<span id="19006f40-42"><a href="#19006f40-42" aria-hidden="true" tabindex="-1"></a><span class="st">      collect(t.tag) AS tags,</span></span>
+<span id="19006f40-43"><a href="#19006f40-43" aria-hidden="true" tabindex="-1"></a><span class="st">      count(t)      AS tagCount</span></span>
+<span id="19006f40-44"><a href="#19006f40-44" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>,</span>
+<span id="19006f40-45"><a href="#19006f40-45" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"film"</span>: film, <span class="st">"max_users"</span>: max_users, <span class="st">"max_other_movies"</span>: max_other_movies},</span>
+<span id="19006f40-46"><a href="#19006f40-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="19006f40-47"><a href="#19006f40-47" aria-hidden="true" tabindex="-1"></a>    records <span class="op">=</span> [r.data() <span class="cf">for</span> r <span class="kw">in</span> result]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The resulting records will contain the user ID, movie ID, movie title, tags used by the user, and the count of those tags. We can then display a sample record and build a network visualization of the tag edges.</p>
+<div id="63dcdfa2" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="63dcdfa2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="63dcdfa2-1"><a href="#63dcdfa2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Markdown</span>
+<span id="63dcdfa2-2"><a href="#63dcdfa2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="63dcdfa2-3"><a href="#63dcdfa2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="63dcdfa2-4"><a href="#63dcdfa2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Tag‐edges for 'Forrest Gump'"</span>)</span>
+<span id="63dcdfa2-5"><a href="#63dcdfa2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="63dcdfa2-6"><a href="#63dcdfa2-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(records)<span class="sc">}</span><span class="ss"> tag‐edges among </span><span class="sc">{</span><span class="bu">len</span>({rec[<span class="st">'uId'</span>] <span class="cf">for</span> rec <span class="kw">in</span> records})<span class="sc">}</span><span class="ss"> users and </span><span class="sc">{</span><span class="bu">len</span>({rec[<span class="st">'mId'</span>] <span class="cf">for</span> rec <span class="kw">in</span> records})<span class="sc">}</span><span class="ss"> movies.</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="63dcdfa2-7"><a href="#63dcdfa2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="63dcdfa2-8"><a href="#63dcdfa2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="63dcdfa2-9"><a href="#63dcdfa2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> records:</span>
+<span id="63dcdfa2-10"><a href="#63dcdfa2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Sample record:"</span>)</span>
+<span id="63dcdfa2-11"><a href="#63dcdfa2-11" aria-hidden="true" tabindex="-1"></a>    pretty_record <span class="op">=</span> json.dumps(records[<span class="dv">0</span>], indent<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="63dcdfa2-12"><a href="#63dcdfa2-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(pretty_record)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tag‐edges for 'Forrest Gump'
+Found 23 tag‐edges among 3 users and 11 movies.
+
+Sample record:
+{
+  "uId": 474,
+  "mId": 356,
+  "title": "Forrest Gump (1994)",
+  "tags": [
+    "Vietnam"
+  ],
+  "tagCount": 1
+}</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-data">Visualizing the data</h2>
+<p>To get a good intuition of our graph, we can use the <code>pyvis</code> library to create an interactive visualization of the tag edges. The nodes will represent users and movies, while the edges will represent the tags applied by users to movies. We will also highlight “Forrest Gump (1994)” in orange for better visibility.</p>
+<div id="b84c3580" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="b84c3580"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="b84c3580-1"><a href="#b84c3580-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
+<span id="b84c3580-2"><a href="#b84c3580-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b84c3580-3"><a href="#b84c3580-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the network</span></span>
+<span id="b84c3580-4"><a href="#b84c3580-4" aria-hidden="true" tabindex="-1"></a>net <span class="op">=</span> Network(height<span class="op">=</span><span class="st">"600px"</span>, width<span class="op">=</span><span class="st">"100%"</span>, notebook<span class="op">=</span><span class="va">True</span>, cdn_resources<span class="op">=</span><span class="st">"in_line"</span>)</span>
+<span id="b84c3580-5"><a href="#b84c3580-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b84c3580-6"><a href="#b84c3580-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rec <span class="kw">in</span> records:</span>
+<span id="b84c3580-7"><a href="#b84c3580-7" aria-hidden="true" tabindex="-1"></a>    uid <span class="op">=</span> <span class="ss">f"U</span><span class="sc">{</span>rec[<span class="st">'uId'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="b84c3580-8"><a href="#b84c3580-8" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> <span class="ss">f"M</span><span class="sc">{</span>rec[<span class="st">'mId'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="b84c3580-9"><a href="#b84c3580-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># nodes (idempotent)</span></span>
+<span id="b84c3580-10"><a href="#b84c3580-10" aria-hidden="true" tabindex="-1"></a>    net.add_node(uid, label<span class="op">=</span><span class="ss">f"User </span><span class="sc">{</span>rec[<span class="st">'uId'</span>]<span class="sc">}</span><span class="ss">"</span>, color<span class="op">=</span><span class="st">"grey"</span>)</span>
+<span id="b84c3580-11"><a href="#b84c3580-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b84c3580-12"><a href="#b84c3580-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set Forrest Gump to orange, other movies to lightblue</span></span>
+<span id="b84c3580-13"><a href="#b84c3580-13" aria-hidden="true" tabindex="-1"></a>    movie_color <span class="op">=</span> <span class="st">"orange"</span> <span class="cf">if</span> rec[<span class="st">"title"</span>] <span class="op">==</span> <span class="st">"Forrest Gump (1994)"</span> <span class="cf">else</span> <span class="st">"lightblue"</span></span>
+<span id="b84c3580-14"><a href="#b84c3580-14" aria-hidden="true" tabindex="-1"></a>    net.add_node(mid, label<span class="op">=</span>rec[<span class="st">"title"</span>], color<span class="op">=</span>movie_color)</span>
+<span id="b84c3580-15"><a href="#b84c3580-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b84c3580-16"><a href="#b84c3580-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># edge thickness = # of tags</span></span>
+<span id="b84c3580-17"><a href="#b84c3580-17" aria-hidden="true" tabindex="-1"></a>    net.add_edge(uid, mid, value<span class="op">=</span>rec[<span class="st">"tagCount"</span>], title<span class="op">=</span><span class="st">", "</span>.join(rec[<span class="st">"tags"</span>]))</span>
+<span id="b84c3580-18"><a href="#b84c3580-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b84c3580-19"><a href="#b84c3580-19" aria-hidden="true" tabindex="-1"></a><span class="co"># configure a stabilization run of 1000 iterations</span></span>
+<span id="b84c3580-20"><a href="#b84c3580-20" aria-hidden="true" tabindex="-1"></a>net.set_options(</span>
+<span id="b84c3580-21"><a href="#b84c3580-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""</span></span>
+<span id="b84c3580-22"><a href="#b84c3580-22" aria-hidden="true" tabindex="-1"></a><span class="st">var options = {</span></span>
+<span id="b84c3580-23"><a href="#b84c3580-23" aria-hidden="true" tabindex="-1"></a><span class="st">  "physics": {</span></span>
+<span id="b84c3580-24"><a href="#b84c3580-24" aria-hidden="true" tabindex="-1"></a><span class="st">    "stabilization": {</span></span>
+<span id="b84c3580-25"><a href="#b84c3580-25" aria-hidden="true" tabindex="-1"></a><span class="st">      "enabled": true,</span></span>
+<span id="b84c3580-26"><a href="#b84c3580-26" aria-hidden="true" tabindex="-1"></a><span class="st">      "iterations": 1000,</span></span>
+<span id="b84c3580-27"><a href="#b84c3580-27" aria-hidden="true" tabindex="-1"></a><span class="st">      "updateInterval": 25</span></span>
+<span id="b84c3580-28"><a href="#b84c3580-28" aria-hidden="true" tabindex="-1"></a><span class="st">    },</span></span>
+<span id="b84c3580-29"><a href="#b84c3580-29" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="b84c3580-30"><a href="#b84c3580-30" aria-hidden="true" tabindex="-1"></a><span class="st">    "barnesHut": {</span></span>
+<span id="b84c3580-31"><a href="#b84c3580-31" aria-hidden="true" tabindex="-1"></a><span class="st">      "gravitationalConstant": -8000,</span></span>
+<span id="b84c3580-32"><a href="#b84c3580-32" aria-hidden="true" tabindex="-1"></a><span class="st">      "centralGravity": 0.3,</span></span>
+<span id="b84c3580-33"><a href="#b84c3580-33" aria-hidden="true" tabindex="-1"></a><span class="st">      "springLength": 200,</span></span>
+<span id="b84c3580-34"><a href="#b84c3580-34" aria-hidden="true" tabindex="-1"></a><span class="st">      "springConstant": 0.04,</span></span>
+<span id="b84c3580-35"><a href="#b84c3580-35" aria-hidden="true" tabindex="-1"></a><span class="st">      "damping": 0.09,</span></span>
+<span id="b84c3580-36"><a href="#b84c3580-36" aria-hidden="true" tabindex="-1"></a><span class="st">      "avoidOverlap": 0.1</span></span>
+<span id="b84c3580-37"><a href="#b84c3580-37" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="b84c3580-38"><a href="#b84c3580-38" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="b84c3580-39"><a href="#b84c3580-39" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="b84c3580-40"><a href="#b84c3580-40" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="b84c3580-41"><a href="#b84c3580-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="b84c3580-42"><a href="#b84c3580-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="b84c3580-43"><a href="#b84c3580-43" aria-hidden="true" tabindex="-1"></a>net.save_graph(<span class="st">"forrest_gump_graph.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<iframe src="forrest_gump_graph.html" width="100%" height="600px" style="border:none;">
+</iframe>
+</section>
+<section id="performing-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="performing-recommendations">Performing recommendations</h2>
+<p>We previously calculated embeddings for tags and film titles, which we can use to perform “fuzzy” semantic searches. This allows us to find films that are similar to a given title, even if the title is not an exact match. We can use these embeddings to build a recommendation system that suggests films based on their semantic similarity, collaborative filtering, and shared tags.</p>
+<p>The algorithm is simple: we first find the closest movie match to the input title using the vector index, and then use that as the basis for recommendations. We will also incorporate collaborative filtering by finding users who liked both the source movie and the recommended movie, and content filtering by finding shared tags between the source and recommended movies.</p>
+<p>Here is the recommendation method that performs these steps.</p>
+<div id="e154fa24" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="e154fa24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e154fa24-1"><a href="#e154fa24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recommend_movies(</span>
+<span id="e154fa24-2"><a href="#e154fa24-2" aria-hidden="true" tabindex="-1"></a>    movie_title: <span class="bu">str</span>, num_recommendations: <span class="bu">int</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="e154fa24-3"><a href="#e154fa24-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> Tuple[Optional[<span class="bu">str</span>], List[Tuple[<span class="bu">str</span>, <span class="bu">float</span>]]]:</span>
+<span id="e154fa24-4"><a href="#e154fa24-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="e154fa24-5"><a href="#e154fa24-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Recommends movies based on a hybrid of semantic similarity,</span></span>
+<span id="e154fa24-6"><a href="#e154fa24-6" aria-hidden="true" tabindex="-1"></a><span class="co">    collaborative filtering, and shared tags.</span></span>
+<span id="e154fa24-7"><a href="#e154fa24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-8"><a href="#e154fa24-8" aria-hidden="true" tabindex="-1"></a><span class="co">    It first finds the closest movie match to the input title and then</span></span>
+<span id="e154fa24-9"><a href="#e154fa24-9" aria-hidden="true" tabindex="-1"></a><span class="co">    uses that as the basis for recommendations.</span></span>
+<span id="e154fa24-10"><a href="#e154fa24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-11"><a href="#e154fa24-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="e154fa24-12"><a href="#e154fa24-12" aria-hidden="true" tabindex="-1"></a><span class="co">        movie_title (str): The title of the movie to get recommendations for.</span></span>
+<span id="e154fa24-13"><a href="#e154fa24-13" aria-hidden="true" tabindex="-1"></a><span class="co">        num_recommendations (int): The number of recommendations to return.</span></span>
+<span id="e154fa24-14"><a href="#e154fa24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-15"><a href="#e154fa24-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="e154fa24-16"><a href="#e154fa24-16" aria-hidden="true" tabindex="-1"></a><span class="co">        tuple: A tuple containing (source_movie_title, list_of_recommendations)</span></span>
+<span id="e154fa24-17"><a href="#e154fa24-17" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="e154fa24-18"><a href="#e154fa24-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute the embedding for the input movie title</span></span>
+<span id="e154fa24-19"><a href="#e154fa24-19" aria-hidden="true" tabindex="-1"></a>    title_embedding <span class="op">=</span> embedding_model.embed_batch([movie_title])[<span class="dv">0</span>]</span>
+<span id="e154fa24-20"><a href="#e154fa24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-21"><a href="#e154fa24-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Query Neo4j for recommendations</span></span>
+<span id="e154fa24-22"><a href="#e154fa24-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> driver.session() <span class="im">as</span> sess:</span>
+<span id="e154fa24-23"><a href="#e154fa24-23" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> sess.run(</span>
+<span id="e154fa24-24"><a href="#e154fa24-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
+<span id="e154fa24-25"><a href="#e154fa24-25" aria-hidden="true" tabindex="-1"></a><span class="st">            // Find the closest movie to the input title string</span></span>
+<span id="e154fa24-26"><a href="#e154fa24-26" aria-hidden="true" tabindex="-1"></a><span class="st">            CALL db.index.vector.queryNodes('movie_embeddings', 1, $embedding)</span></span>
+<span id="e154fa24-27"><a href="#e154fa24-27" aria-hidden="true" tabindex="-1"></a><span class="st">            YIELD node AS source_movie</span></span>
+<span id="e154fa24-28"><a href="#e154fa24-28" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="e154fa24-29"><a href="#e154fa24-29" aria-hidden="true" tabindex="-1"></a><span class="st">            // Find recommendation candidates based on the source movie's embedding</span></span>
+<span id="e154fa24-30"><a href="#e154fa24-30" aria-hidden="true" tabindex="-1"></a><span class="st">            CALL db.index.vector.queryNodes('movie_embeddings', $k, source_movie.embedding)</span></span>
+<span id="e154fa24-31"><a href="#e154fa24-31" aria-hidden="true" tabindex="-1"></a><span class="st">            YIELD node AS similar_movie, score AS title_similarity</span></span>
+<span id="e154fa24-32"><a href="#e154fa24-32" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE similar_movie &lt;&gt; source_movie</span></span>
+<span id="e154fa24-33"><a href="#e154fa24-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-34"><a href="#e154fa24-34" aria-hidden="true" tabindex="-1"></a><span class="st">            // Collaborative Filtering - find users who liked both movies</span></span>
+<span id="e154fa24-35"><a href="#e154fa24-35" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source_movie, similar_movie, title_similarity</span></span>
+<span id="e154fa24-36"><a href="#e154fa24-36" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (source_movie)&lt;-[r1:RATED]-(u:User)-[r2:RATED]-&gt;(similar_movie)</span></span>
+<span id="e154fa24-37"><a href="#e154fa24-37" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE r1.rating &gt;= 4.0 AND r2.rating &gt;= 4.0</span></span>
+<span id="e154fa24-38"><a href="#e154fa24-38" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source_movie, similar_movie, title_similarity, count(DISTINCT u) AS user_overlap</span></span>
+<span id="e154fa24-39"><a href="#e154fa24-39" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="e154fa24-40"><a href="#e154fa24-40" aria-hidden="true" tabindex="-1"></a><span class="st">            // Content Filtering - find shared tags</span></span>
+<span id="e154fa24-41"><a href="#e154fa24-41" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source_movie, similar_movie, title_similarity, user_overlap</span></span>
+<span id="e154fa24-42"><a href="#e154fa24-42" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (source_movie)&lt;-[t1:TAGGED]-(u1:User)</span></span>
+<span id="e154fa24-43"><a href="#e154fa24-43" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source_movie, similar_movie, title_similarity, user_overlap, collect(DISTINCT t1.tag) AS source_tags</span></span>
+<span id="e154fa24-44"><a href="#e154fa24-44" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (similar_movie)&lt;-[t2:TAGGED]-(u2:User)</span></span>
+<span id="e154fa24-45"><a href="#e154fa24-45" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE t2.tag IN source_tags</span></span>
+<span id="e154fa24-46"><a href="#e154fa24-46" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source_movie, similar_movie, title_similarity, user_overlap, count(DISTINCT t2.tag) AS shared_tags</span></span>
+<span id="e154fa24-47"><a href="#e154fa24-47" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="e154fa24-48"><a href="#e154fa24-48" aria-hidden="true" tabindex="-1"></a><span class="st">            // Calculate final score and return</span></span>
+<span id="e154fa24-49"><a href="#e154fa24-49" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source_movie,</span></span>
+<span id="e154fa24-50"><a href="#e154fa24-50" aria-hidden="true" tabindex="-1"></a><span class="st">                 similar_movie,</span></span>
+<span id="e154fa24-51"><a href="#e154fa24-51" aria-hidden="true" tabindex="-1"></a><span class="st">                 (title_similarity * 0.5) + (user_overlap * 0.3) + (shared_tags * 0.2) AS final_score</span></span>
+<span id="e154fa24-52"><a href="#e154fa24-52" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="e154fa24-53"><a href="#e154fa24-53" aria-hidden="true" tabindex="-1"></a><span class="st">            RETURN source_movie.title AS source_title, similar_movie.title AS title, final_score</span></span>
+<span id="e154fa24-54"><a href="#e154fa24-54" aria-hidden="true" tabindex="-1"></a><span class="st">            ORDER BY final_score DESC</span></span>
+<span id="e154fa24-55"><a href="#e154fa24-55" aria-hidden="true" tabindex="-1"></a><span class="st">            LIMIT $num_recommendations</span></span>
+<span id="e154fa24-56"><a href="#e154fa24-56" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span>,</span>
+<span id="e154fa24-57"><a href="#e154fa24-57" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="e154fa24-58"><a href="#e154fa24-58" aria-hidden="true" tabindex="-1"></a>                <span class="st">"k"</span>: <span class="dv">20</span>,  <span class="co"># Get more initial candidates to refine</span></span>
+<span id="e154fa24-59"><a href="#e154fa24-59" aria-hidden="true" tabindex="-1"></a>                <span class="st">"embedding"</span>: title_embedding,</span>
+<span id="e154fa24-60"><a href="#e154fa24-60" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_recommendations"</span>: <span class="bu">int</span>(</span>
+<span id="e154fa24-61"><a href="#e154fa24-61" aria-hidden="true" tabindex="-1"></a>                    num_recommendations</span>
+<span id="e154fa24-62"><a href="#e154fa24-62" aria-hidden="true" tabindex="-1"></a>                ),  <span class="co"># Ensure it's an integer</span></span>
+<span id="e154fa24-63"><a href="#e154fa24-63" aria-hidden="true" tabindex="-1"></a>            },</span>
+<span id="e154fa24-64"><a href="#e154fa24-64" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="e154fa24-65"><a href="#e154fa24-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-66"><a href="#e154fa24-66" aria-hidden="true" tabindex="-1"></a>        records <span class="op">=</span> <span class="bu">list</span>(result)</span>
+<span id="e154fa24-67"><a href="#e154fa24-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> records:</span>
+<span id="e154fa24-68"><a href="#e154fa24-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span>, []</span>
+<span id="e154fa24-69"><a href="#e154fa24-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-70"><a href="#e154fa24-70" aria-hidden="true" tabindex="-1"></a>        source_title <span class="op">=</span> records[<span class="dv">0</span>][<span class="st">"source_title"</span>]</span>
+<span id="e154fa24-71"><a href="#e154fa24-71" aria-hidden="true" tabindex="-1"></a>        recommendations <span class="op">=</span> [(r[<span class="st">"title"</span>], r[<span class="st">"final_score"</span>]) <span class="cf">for</span> r <span class="kw">in</span> records]</span>
+<span id="e154fa24-72"><a href="#e154fa24-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e154fa24-73"><a href="#e154fa24-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> source_title, recommendations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>What does the recommendation algorithm returns for a couple of example movie titles ? The first example will be “Jurassic Park”, which should return recommendations based on that title, while the second example will be a more generic search for “world war” to see how well the algorithm can handle partial matches.</p>
+<div id="76494cb0" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="76494cb0"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="76494cb0-1"><a href="#76494cb0-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="76494cb0-2"><a href="#76494cb0-2" aria-hidden="true" tabindex="-1"></a>movie_title <span class="op">=</span> <span class="st">"Jurassic Park"</span></span>
+<span id="76494cb0-3"><a href="#76494cb0-3" aria-hidden="true" tabindex="-1"></a>source, recommendations <span class="op">=</span> recommend_movies(movie_title)</span>
+<span id="76494cb0-4"><a href="#76494cb0-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="76494cb0-5"><a href="#76494cb0-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> source:</span>
+<span id="76494cb0-6"><a href="#76494cb0-6" aria-hidden="true" tabindex="-1"></a>    md <span class="op">=</span> <span class="ss">f"Recommendations based on '</span><span class="sc">{</span>source<span class="sc">}</span><span class="ss">':</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="76494cb0-7"><a href="#76494cb0-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> title, score <span class="kw">in</span> recommendations:</span>
+<span id="76494cb0-8"><a href="#76494cb0-8" aria-hidden="true" tabindex="-1"></a>        md <span class="op">+=</span> <span class="ss">f"- </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> (Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="76494cb0-9"><a href="#76494cb0-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(md)</span>
+<span id="76494cb0-10"><a href="#76494cb0-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="76494cb0-11"><a href="#76494cb0-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No recommendations found."</span>)</span>
+<span id="76494cb0-12"><a href="#76494cb0-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="76494cb0-13"><a href="#76494cb0-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Another example with a non-exact title</span></span>
+<span id="76494cb0-14"><a href="#76494cb0-14" aria-hidden="true" tabindex="-1"></a>movie_title <span class="op">=</span> <span class="st">"world war"</span></span>
+<span id="76494cb0-15"><a href="#76494cb0-15" aria-hidden="true" tabindex="-1"></a>source, recommendations <span class="op">=</span> recommend_movies(movie_title)</span>
+<span id="76494cb0-16"><a href="#76494cb0-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="76494cb0-17"><a href="#76494cb0-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> source:</span>
+<span id="76494cb0-18"><a href="#76494cb0-18" aria-hidden="true" tabindex="-1"></a>    md <span class="op">=</span> <span class="ss">f"Recommendations based on '</span><span class="sc">{</span>source<span class="sc">}</span><span class="ss">':</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="76494cb0-19"><a href="#76494cb0-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> title, score <span class="kw">in</span> recommendations:</span>
+<span id="76494cb0-20"><a href="#76494cb0-20" aria-hidden="true" tabindex="-1"></a>        md <span class="op">+=</span> <span class="ss">f"- </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> (Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="76494cb0-21"><a href="#76494cb0-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(md)</span>
+<span id="76494cb0-22"><a href="#76494cb0-22" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="76494cb0-23"><a href="#76494cb0-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No recommendations found."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Recommendations based on 'Jurassic World: Fallen Kingdom (2018)':
+
+- Lost World: Jurassic Park, The (1997) (Score: 0.4793)
+- Jurassic World (2015) (Score: 0.4699)
+- Jurassic Park III (2001) (Score: 0.4665)
+- Jurassic Park (1993) (Score: 0.4661)
+- Dinotopia (2002) (Score: 0.4473)
+
+Recommendations based on 'War of the Worlds (2005)':
+- War of the Worlds (2005) (Score: 0.4975)
+- War of the Worlds, The (1953) (Score: 0.4931)
+- Lord of War (2005) (Score: 0.4761)
+- In Love and War (1996) (Score: 0.4715)
+- Reign of Fire (2002) (Score: 0.4703)
+</code></pre>
+</div>
+</div>
+<p>The recommendations returned by the algorithm are a pretty reasonable match to the input titles, and include a mix of movies that are semantically similar, have shared tags, and are liked by users who also liked the source movie.</p>
+</section>
+<section id="finding-movies-by-description" class="level2">
+<h2 class="anchored" data-anchor-id="finding-movies-by-description">Finding movies by description</h2>
+<p>Further down we will also need a method to find movies based on a natural language description of their themes or content. This will allow us to search for movies using more abstract queries, such as “space travel and aliens” or “funny romantic movies”. We will use the same embedding model to compute the embedding for the input description and then query Neo4j for movies based on similarity using a <a href="https://en.wikipedia.org/wiki/Cosine_similarity">:link cosine similarity search</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Neo4j supports vector search using the <code>db.index.vector.queryRelationships</code> procedure, which allows us to find relationships that are similar to a given embedding.</p>
+</div>
+</div>
+<div id="1c26a41a" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="1c26a41a"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="1c26a41a-1"><a href="#1c26a41a-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_movies_by_description(</span>
+<span id="1c26a41a-2"><a href="#1c26a41a-2" aria-hidden="true" tabindex="-1"></a>    description: <span class="bu">str</span>, num_results: <span class="bu">int</span> <span class="op">=</span> <span class="dv">10</span></span>
+<span id="1c26a41a-3"><a href="#1c26a41a-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> List[Tuple[<span class="bu">str</span>, <span class="bu">float</span>]]:</span>
+<span id="1c26a41a-4"><a href="#1c26a41a-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="1c26a41a-5"><a href="#1c26a41a-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Finds movies based on a natural language description of their themes or content.</span></span>
+<span id="1c26a41a-6"><a href="#1c26a41a-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1c26a41a-7"><a href="#1c26a41a-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="1c26a41a-8"><a href="#1c26a41a-8" aria-hidden="true" tabindex="-1"></a><span class="co">        description (str): The descriptive search query.</span></span>
+<span id="1c26a41a-9"><a href="#1c26a41a-9" aria-hidden="true" tabindex="-1"></a><span class="co">        num_results (int): The number of movies to return.</span></span>
+<span id="1c26a41a-10"><a href="#1c26a41a-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1c26a41a-11"><a href="#1c26a41a-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="1c26a41a-12"><a href="#1c26a41a-12" aria-hidden="true" tabindex="-1"></a><span class="co">        list: A list of tuples, each containing a movie title and its relevance score.</span></span>
+<span id="1c26a41a-13"><a href="#1c26a41a-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="1c26a41a-14"><a href="#1c26a41a-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Compute the embedding for the input description</span></span>
+<span id="1c26a41a-15"><a href="#1c26a41a-15" aria-hidden="true" tabindex="-1"></a>    description_embedding <span class="op">=</span> embedding_model.embed_batch([description])[<span class="dv">0</span>]</span>
+<span id="1c26a41a-16"><a href="#1c26a41a-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1c26a41a-17"><a href="#1c26a41a-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Query Neo4j for movies based on tag similarity</span></span>
+<span id="1c26a41a-18"><a href="#1c26a41a-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> driver.session() <span class="im">as</span> sess:</span>
+<span id="1c26a41a-19"><a href="#1c26a41a-19" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> sess.run(</span>
+<span id="1c26a41a-20"><a href="#1c26a41a-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
+<span id="1c26a41a-21"><a href="#1c26a41a-21" aria-hidden="true" tabindex="-1"></a><span class="st">            // Find top K similar tags via vector search</span></span>
+<span id="1c26a41a-22"><a href="#1c26a41a-22" aria-hidden="true" tabindex="-1"></a><span class="st">            CALL db.index.vector.queryRelationships('tag_embeddings', $k, $embedding)</span></span>
+<span id="1c26a41a-23"><a href="#1c26a41a-23" aria-hidden="true" tabindex="-1"></a><span class="st">            YIELD relationship AS t, score</span></span>
+<span id="1c26a41a-24"><a href="#1c26a41a-24" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="1c26a41a-25"><a href="#1c26a41a-25" aria-hidden="true" tabindex="-1"></a><span class="st">            // Find the movies associated with those tags</span></span>
+<span id="1c26a41a-26"><a href="#1c26a41a-26" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH t, score</span></span>
+<span id="1c26a41a-27"><a href="#1c26a41a-27" aria-hidden="true" tabindex="-1"></a><span class="st">            MATCH (m:Movie)&lt;-[t]-()</span></span>
+<span id="1c26a41a-28"><a href="#1c26a41a-28" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="1c26a41a-29"><a href="#1c26a41a-29" aria-hidden="true" tabindex="-1"></a><span class="st">            // Aggregate scores for each movie</span></span>
+<span id="1c26a41a-30"><a href="#1c26a41a-30" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH m, sum(score) AS total_score, count(t) AS matching_tags</span></span>
+<span id="1c26a41a-31"><a href="#1c26a41a-31" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
+<span id="1c26a41a-32"><a href="#1c26a41a-32" aria-hidden="true" tabindex="-1"></a><span class="st">            // Return top N movies ranked by score</span></span>
+<span id="1c26a41a-33"><a href="#1c26a41a-33" aria-hidden="true" tabindex="-1"></a><span class="st">            RETURN m.title AS title, total_score, matching_tags</span></span>
+<span id="1c26a41a-34"><a href="#1c26a41a-34" aria-hidden="true" tabindex="-1"></a><span class="st">            ORDER BY total_score DESC</span></span>
+<span id="1c26a41a-35"><a href="#1c26a41a-35" aria-hidden="true" tabindex="-1"></a><span class="st">            LIMIT $num_results</span></span>
+<span id="1c26a41a-36"><a href="#1c26a41a-36" aria-hidden="true" tabindex="-1"></a><span class="st">            """</span>,</span>
+<span id="1c26a41a-37"><a href="#1c26a41a-37" aria-hidden="true" tabindex="-1"></a>            {</span>
+<span id="1c26a41a-38"><a href="#1c26a41a-38" aria-hidden="true" tabindex="-1"></a>                <span class="st">"k"</span>: <span class="dv">20</span>,  <span class="co"># Find top 20 tags to broaden the search space</span></span>
+<span id="1c26a41a-39"><a href="#1c26a41a-39" aria-hidden="true" tabindex="-1"></a>                <span class="st">"embedding"</span>: description_embedding,</span>
+<span id="1c26a41a-40"><a href="#1c26a41a-40" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_results"</span>: num_results,</span>
+<span id="1c26a41a-41"><a href="#1c26a41a-41" aria-hidden="true" tabindex="-1"></a>            },</span>
+<span id="1c26a41a-42"><a href="#1c26a41a-42" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="1c26a41a-43"><a href="#1c26a41a-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1c26a41a-44"><a href="#1c26a41a-44" aria-hidden="true" tabindex="-1"></a>        movies <span class="op">=</span> [(r[<span class="st">"title"</span>], r[<span class="st">"total_score"</span>]) <span class="cf">for</span> r <span class="kw">in</span> result]</span>
+<span id="1c26a41a-45"><a href="#1c26a41a-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="1c26a41a-46"><a href="#1c26a41a-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> movies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let’s try this method with a couple of example queries to see how well it can find movies based on their tags. The first query will be “space travel and aliens”, which should return movies related to those themes, and the second query will be “funny romantic movies”, which should return light-hearted romantic comedies.</p>
+<p>This will be heavily dependent on the tags that users have applied to movies in the dataset, so the results may vary based on tag availability.</p>
+<div id="d609daab" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="d609daab"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="d609daab-1"><a href="#d609daab-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="d609daab-2"><a href="#d609daab-2" aria-hidden="true" tabindex="-1"></a>search_query <span class="op">=</span> <span class="st">"space travel and aliens"</span></span>
+<span id="d609daab-3"><a href="#d609daab-3" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> find_movies_by_description(search_query)</span>
+<span id="d609daab-4"><a href="#d609daab-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d609daab-5"><a href="#d609daab-5" aria-hidden="true" tabindex="-1"></a>md <span class="op">=</span> <span class="ss">f"Movies found for '</span><span class="sc">{</span>search_query<span class="sc">}</span><span class="ss">':</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="d609daab-6"><a href="#d609daab-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> movies:</span>
+<span id="d609daab-7"><a href="#d609daab-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> title, score <span class="kw">in</span> movies:</span>
+<span id="d609daab-8"><a href="#d609daab-8" aria-hidden="true" tabindex="-1"></a>        md <span class="op">+=</span> <span class="ss">f"- </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> (Relevance: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="d609daab-9"><a href="#d609daab-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="d609daab-10"><a href="#d609daab-10" aria-hidden="true" tabindex="-1"></a>    md <span class="op">+=</span> <span class="st">"No matching movies found."</span></span>
+<span id="d609daab-11"><a href="#d609daab-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(md)</span>
+<span id="d609daab-12"><a href="#d609daab-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d609daab-13"><a href="#d609daab-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d609daab-14"><a href="#d609daab-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Another example:</span></span>
+<span id="d609daab-15"><a href="#d609daab-15" aria-hidden="true" tabindex="-1"></a>search_query <span class="op">=</span> <span class="st">"funny romantic movies"</span></span>
+<span id="d609daab-16"><a href="#d609daab-16" aria-hidden="true" tabindex="-1"></a>movies <span class="op">=</span> find_movies_by_description(search_query)</span>
+<span id="d609daab-17"><a href="#d609daab-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="d609daab-18"><a href="#d609daab-18" aria-hidden="true" tabindex="-1"></a>md <span class="op">=</span> <span class="ss">f"Movies found for '</span><span class="sc">{</span>search_query<span class="sc">}</span><span class="ss">':</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="d609daab-19"><a href="#d609daab-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> movies:</span>
+<span id="d609daab-20"><a href="#d609daab-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> title, score <span class="kw">in</span> movies:</span>
+<span id="d609daab-21"><a href="#d609daab-21" aria-hidden="true" tabindex="-1"></a>        md <span class="op">+=</span> <span class="ss">f"- </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> (Relevance: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="d609daab-22"><a href="#d609daab-22" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="d609daab-23"><a href="#d609daab-23" aria-hidden="true" tabindex="-1"></a>    md <span class="op">+=</span> <span class="st">"No matching movies found."</span></span>
+<span id="d609daab-24"><a href="#d609daab-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(md)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Movies found for 'space travel and aliens':
+
+- Day the Earth Stood Still, The (1951) (Relevance: 0.7658)
+- Thing from Another World, The (1951) (Relevance: 0.7658)
+- Astronaut's Wife, The (1999) (Relevance: 0.7658)
+- Independence Day (a.k.a. ID4) (1996) (Relevance: 0.7658)
+- Men in Black (a.k.a. MIB) (1997) (Relevance: 0.7658)
+- Arrival, The (1996) (Relevance: 0.7658)
+- Alien (1979) (Relevance: 0.7658)
+- My Stepmother Is an Alien (1988) (Relevance: 0.7658)
+- E.T. the Extra-Terrestrial (1982) (Relevance: 0.7658)
+- Signs (2002) (Relevance: 0.7433)
+
+Movies found for 'funny romantic movies':
+
+- Son of Rambow (2007) (Relevance: 0.7653)
+- Titanic (1997) (Relevance: 0.7422)
+- Harold and Maude (1971) (Relevance: 0.7266)
+- Punchline (1988) (Relevance: 0.7195)
+- Personal Velocity (2002) (Relevance: 0.7180)
+- Corrina, Corrina (1994) (Relevance: 0.7165)
+- Monty Python's The Meaning of Life (1983) (Relevance: 0.7077)
+- Sunset Blvd. (a.k.a. Sunset Boulevard) (1950) (Relevance: 0.7023)
+- State and Main (2000) (Relevance: 0.7023)
+- Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) (Relevance: 0.6999)
+</code></pre>
+</div>
+</div>
+</section>
+<section id="integrating-with-a-large-language-model" class="level2">
+<h2 class="anchored" data-anchor-id="integrating-with-a-large-language-model">Integrating with a Large Language Model</h2>
+<p>To enhance our recommendation system, we can integrate a large language model (LLM) to generate natural language explanations for why certain movies are recommended. This will provide users with more context and reasoning behind the recommendations, making the system more user-friendly and informative.</p>
+<p>To do this, we will use the <a href="https://ai.google.dev">Google Gemini API</a> to generate explanations based on the recommendations. The LLM will take the source movie, the recommended movie, and the evidence gathered from the graph (shared genres, user overlap, and shared tags) to create a friendly and concise explanation.</p>
+<p>We could use any other language model, including a local small language model, but we will leave that as an exercise for the reader.</p>
+<section id="agent-model-and-tool-use" class="level3">
+<h3 class="anchored" data-anchor-id="agent-model-and-tool-use">Agent model and tool use</h3>
+<p>The way we will implement this is by defining a function that takes the source movie title and a list of recommended movies, gathers the necessary evidence from the graph, and then uses the Gemini API to generate explanations for each recommendation. The function will return a list of dictionaries containing the recommended movie title and its explanation.</p>
+<p>These methods will then be used as part of a <em>conversational agent</em> that can answer movie-related queries and provide recommendations based on user input. The agent will have these methods as tools it can call to provide answers, making it capable of handling a wide range of movie-related questions.</p>
+<div id="5b2f90a6" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="5b2f90a6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="5b2f90a6-1"><a href="#5b2f90a6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> google.generativeai <span class="im">as</span> genai</span>
+<span id="5b2f90a6-2"><a href="#5b2f90a6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-3"><a href="#5b2f90a6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for Google API key, preferring GEMINI_API_KEY</span></span>
+<span id="5b2f90a6-4"><a href="#5b2f90a6-4" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> os.getenv(<span class="st">"GEMINI_API_KEY"</span>) <span class="kw">or</span> os.getenv(<span class="st">"GOOGLE_API_KEY"</span>)</span>
+<span id="5b2f90a6-5"><a href="#5b2f90a6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> api_key:</span>
+<span id="5b2f90a6-6"><a href="#5b2f90a6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="5b2f90a6-7"><a href="#5b2f90a6-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"API key not found. Please set the GEMINI_API_KEY or GOOGLE_API_KEY environment variable."</span></span>
+<span id="5b2f90a6-8"><a href="#5b2f90a6-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="5b2f90a6-9"><a href="#5b2f90a6-9" aria-hidden="true" tabindex="-1"></a>    gemini_model <span class="op">=</span> <span class="va">None</span></span>
+<span id="5b2f90a6-10"><a href="#5b2f90a6-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="5b2f90a6-11"><a href="#5b2f90a6-11" aria-hidden="true" tabindex="-1"></a>    genai.configure(api_key<span class="op">=</span>api_key)</span>
+<span id="5b2f90a6-12"><a href="#5b2f90a6-12" aria-hidden="true" tabindex="-1"></a>    gemini_model <span class="op">=</span> genai.GenerativeModel(<span class="st">"gemini-2.5-flash"</span>)</span>
+<span id="5b2f90a6-13"><a href="#5b2f90a6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-14"><a href="#5b2f90a6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-15"><a href="#5b2f90a6-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_recommendation_evidence(</span>
+<span id="5b2f90a6-16"><a href="#5b2f90a6-16" aria-hidden="true" tabindex="-1"></a>    source_title: <span class="bu">str</span>, recommended_title: <span class="bu">str</span></span>
+<span id="5b2f90a6-17"><a href="#5b2f90a6-17" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> Optional[Record]:</span>
+<span id="5b2f90a6-18"><a href="#5b2f90a6-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="5b2f90a6-19"><a href="#5b2f90a6-19" aria-hidden="true" tabindex="-1"></a><span class="co">    Gathers the evidence for why a movie is recommended.</span></span>
+<span id="5b2f90a6-20"><a href="#5b2f90a6-20" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="5b2f90a6-21"><a href="#5b2f90a6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> driver.session() <span class="im">as</span> sess:</span>
+<span id="5b2f90a6-22"><a href="#5b2f90a6-22" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> sess.run(</span>
+<span id="5b2f90a6-23"><a href="#5b2f90a6-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"""</span></span>
+<span id="5b2f90a6-24"><a href="#5b2f90a6-24" aria-hidden="true" tabindex="-1"></a><span class="st">            MATCH (source:Movie {title: $source_title})</span></span>
+<span id="5b2f90a6-25"><a href="#5b2f90a6-25" aria-hidden="true" tabindex="-1"></a><span class="st">            MATCH (recommended:Movie {title: $recommended_title})</span></span>
+<span id="5b2f90a6-26"><a href="#5b2f90a6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-27"><a href="#5b2f90a6-27" aria-hidden="true" tabindex="-1"></a><span class="st">            // Get shared genres</span></span>
+<span id="5b2f90a6-28"><a href="#5b2f90a6-28" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (source)-[:IN_GENRE]-&gt;(g:Genre)&lt;-[:IN_GENRE]-(recommended)</span></span>
+<span id="5b2f90a6-29"><a href="#5b2f90a6-29" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source, recommended, collect(DISTINCT g.name) AS shared_genres</span></span>
+<span id="5b2f90a6-30"><a href="#5b2f90a6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-31"><a href="#5b2f90a6-31" aria-hidden="true" tabindex="-1"></a><span class="st">            // Get user overlap</span></span>
+<span id="5b2f90a6-32"><a href="#5b2f90a6-32" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (source)&lt;-[r1:RATED]-(u:User)-[r2:RATED]-&gt;(recommended)</span></span>
+<span id="5b2f90a6-33"><a href="#5b2f90a6-33" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE r1.rating &gt;= 4.0 AND r2.rating &gt;= 4.0</span></span>
+<span id="5b2f90a6-34"><a href="#5b2f90a6-34" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source, recommended, shared_genres, count(DISTINCT u) AS user_overlap</span></span>
+<span id="5b2f90a6-35"><a href="#5b2f90a6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-36"><a href="#5b2f90a6-36" aria-hidden="true" tabindex="-1"></a><span class="st">            // Get shared tags (limit to 5 for brevity)</span></span>
+<span id="5b2f90a6-37"><a href="#5b2f90a6-37" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (source)&lt;-[t1:TAGGED]-(:User)</span></span>
+<span id="5b2f90a6-38"><a href="#5b2f90a6-38" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH source, recommended, shared_genres, user_overlap, collect(DISTINCT t1.tag) AS source_tags</span></span>
+<span id="5b2f90a6-39"><a href="#5b2f90a6-39" aria-hidden="true" tabindex="-1"></a><span class="st">            OPTIONAL MATCH (recommended)&lt;-[t2:TAGGED]-(:User)</span></span>
+<span id="5b2f90a6-40"><a href="#5b2f90a6-40" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE t2.tag IN source_tags</span></span>
+<span id="5b2f90a6-41"><a href="#5b2f90a6-41" aria-hidden="true" tabindex="-1"></a><span class="st">            WITH shared_genres, user_overlap, collect(DISTINCT t2.tag)[..5] AS shared_tags</span></span>
+<span id="5b2f90a6-42"><a href="#5b2f90a6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-43"><a href="#5b2f90a6-43" aria-hidden="true" tabindex="-1"></a><span class="st">            RETURN shared_genres, user_overlap, shared_tags</span></span>
+<span id="5b2f90a6-44"><a href="#5b2f90a6-44" aria-hidden="true" tabindex="-1"></a><span class="st">        """</span>,</span>
+<span id="5b2f90a6-45"><a href="#5b2f90a6-45" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"source_title"</span>: source_title, <span class="st">"recommended_title"</span>: recommended_title},</span>
+<span id="5b2f90a6-46"><a href="#5b2f90a6-46" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="5b2f90a6-47"><a href="#5b2f90a6-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result.single()</span>
+<span id="5b2f90a6-48"><a href="#5b2f90a6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-49"><a href="#5b2f90a6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-50"><a href="#5b2f90a6-50" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_recommendation_explanations(</span>
+<span id="5b2f90a6-51"><a href="#5b2f90a6-51" aria-hidden="true" tabindex="-1"></a>    source_title: <span class="bu">str</span>, recommendations: List[Tuple[<span class="bu">str</span>, <span class="bu">float</span>]]</span>
+<span id="5b2f90a6-52"><a href="#5b2f90a6-52" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> List[Dict[<span class="bu">str</span>, <span class="bu">str</span>]]:</span>
+<span id="5b2f90a6-53"><a href="#5b2f90a6-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="5b2f90a6-54"><a href="#5b2f90a6-54" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates natural language explanations for recommendations using the Gemini API.</span></span>
+<span id="5b2f90a6-55"><a href="#5b2f90a6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-56"><a href="#5b2f90a6-56" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="5b2f90a6-57"><a href="#5b2f90a6-57" aria-hidden="true" tabindex="-1"></a><span class="co">        list: A list of dictionaries, each containing a 'title' and 'explanation'.</span></span>
+<span id="5b2f90a6-58"><a href="#5b2f90a6-58" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="5b2f90a6-59"><a href="#5b2f90a6-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> gemini_model:</span>
+<span id="5b2f90a6-60"><a href="#5b2f90a6-60" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Gemini model not initialized. Cannot generate explanations."</span>)</span>
+<span id="5b2f90a6-61"><a href="#5b2f90a6-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
+<span id="5b2f90a6-62"><a href="#5b2f90a6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-63"><a href="#5b2f90a6-63" aria-hidden="true" tabindex="-1"></a>    explained_recommendations <span class="op">=</span> []</span>
+<span id="5b2f90a6-64"><a href="#5b2f90a6-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> recommended_title, score <span class="kw">in</span> recommendations:</span>
+<span id="5b2f90a6-65"><a href="#5b2f90a6-65" aria-hidden="true" tabindex="-1"></a>        evidence <span class="op">=</span> get_recommendation_evidence(source_title, recommended_title)</span>
+<span id="5b2f90a6-66"><a href="#5b2f90a6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-67"><a href="#5b2f90a6-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> evidence:</span>
+<span id="5b2f90a6-68"><a href="#5b2f90a6-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="5b2f90a6-69"><a href="#5b2f90a6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-70"><a href="#5b2f90a6-70" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Construct a detailed prompt for the LLM</span></span>
+<span id="5b2f90a6-71"><a href="#5b2f90a6-71" aria-hidden="true" tabindex="-1"></a>        prompt <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="5b2f90a6-72"><a href="#5b2f90a6-72" aria-hidden="true" tabindex="-1"></a><span class="ss">        You are a movie recommendation assistant. Your task is to provide a compelling, one-paragraph explanation for a movie recommendation.</span></span>
+<span id="5b2f90a6-73"><a href="#5b2f90a6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-74"><a href="#5b2f90a6-74" aria-hidden="true" tabindex="-1"></a><span class="ss">        Here is the data you should use:</span></span>
+<span id="5b2f90a6-75"><a href="#5b2f90a6-75" aria-hidden="true" tabindex="-1"></a><span class="ss">        - The user liked the movie: "</span><span class="sc">{</span>source_title<span class="sc">}</span><span class="ss">"</span></span>
+<span id="5b2f90a6-76"><a href="#5b2f90a6-76" aria-hidden="true" tabindex="-1"></a><span class="ss">        - We are recommending the movie: "</span><span class="sc">{</span>recommended_title<span class="sc">}</span><span class="ss">"</span></span>
+<span id="5b2f90a6-77"><a href="#5b2f90a6-77" aria-hidden="true" tabindex="-1"></a><span class="ss">        - These two movies share the following genres: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(evidence[<span class="st">'shared_genres'</span>])<span class="sc">}</span></span>
+<span id="5b2f90a6-78"><a href="#5b2f90a6-78" aria-hidden="true" tabindex="-1"></a><span class="ss">        - We found that </span><span class="sc">{</span>evidence[<span class="st">'user_overlap'</span>]<span class="sc">}</span><span class="ss"> users who gave a high rating to "</span><span class="sc">{</span>source_title<span class="sc">}</span><span class="ss">" also gave a high rating to "</span><span class="sc">{</span>recommended_title<span class="sc">}</span><span class="ss">".</span></span>
+<span id="5b2f90a6-79"><a href="#5b2f90a6-79" aria-hidden="true" tabindex="-1"></a><span class="ss">        - They also share common themes, as shown by these shared tags: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(evidence[<span class="st">'shared_tags'</span>])<span class="sc">}</span><span class="ss">.</span></span>
+<span id="5b2f90a6-80"><a href="#5b2f90a6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-81"><a href="#5b2f90a6-81" aria-hidden="true" tabindex="-1"></a><span class="ss">        Based on this evidence, please generate a friendly and concise paragraph explaining why someone who liked "</span><span class="sc">{</span>source_title<span class="sc">}</span><span class="ss">" would enjoy "</span><span class="sc">{</span>recommended_title<span class="sc">}</span><span class="ss">".</span></span>
+<span id="5b2f90a6-82"><a href="#5b2f90a6-82" aria-hidden="true" tabindex="-1"></a><span class="ss">        Do not just list the data; weave it into a natural-sounding explanation.</span></span>
+<span id="5b2f90a6-83"><a href="#5b2f90a6-83" aria-hidden="true" tabindex="-1"></a><span class="ss">        """</span></span>
+<span id="5b2f90a6-84"><a href="#5b2f90a6-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-85"><a href="#5b2f90a6-85" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="5b2f90a6-86"><a href="#5b2f90a6-86" aria-hidden="true" tabindex="-1"></a>            response <span class="op">=</span> gemini_model.generate_content(prompt)</span>
+<span id="5b2f90a6-87"><a href="#5b2f90a6-87" aria-hidden="true" tabindex="-1"></a>            explanation <span class="op">=</span> response.text</span>
+<span id="5b2f90a6-88"><a href="#5b2f90a6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-89"><a href="#5b2f90a6-89" aria-hidden="true" tabindex="-1"></a>            explained_recommendations.append(</span>
+<span id="5b2f90a6-90"><a href="#5b2f90a6-90" aria-hidden="true" tabindex="-1"></a>                {<span class="st">"title"</span>: recommended_title, <span class="st">"explanation"</span>: explanation}</span>
+<span id="5b2f90a6-91"><a href="#5b2f90a6-91" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="5b2f90a6-92"><a href="#5b2f90a6-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-93"><a href="#5b2f90a6-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="5b2f90a6-94"><a href="#5b2f90a6-94" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="5b2f90a6-95"><a href="#5b2f90a6-95" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"An error occurred while generating explanation for </span><span class="sc">{</span>recommended_title<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span></span>
+<span id="5b2f90a6-96"><a href="#5b2f90a6-96" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="5b2f90a6-97"><a href="#5b2f90a6-97" aria-hidden="true" tabindex="-1"></a>            explained_recommendations.append(</span>
+<span id="5b2f90a6-98"><a href="#5b2f90a6-98" aria-hidden="true" tabindex="-1"></a>                {</span>
+<span id="5b2f90a6-99"><a href="#5b2f90a6-99" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"title"</span>: recommended_title,</span>
+<span id="5b2f90a6-100"><a href="#5b2f90a6-100" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"explanation"</span>: <span class="ss">f"Could not generate explanation: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="5b2f90a6-101"><a href="#5b2f90a6-101" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="5b2f90a6-102"><a href="#5b2f90a6-102" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="5b2f90a6-103"><a href="#5b2f90a6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="5b2f90a6-104"><a href="#5b2f90a6-104" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> explained_recommendations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Let us test the recommendation explanations with a specific movie title and see how the LLM generates explanations for the recommendations. We will use the movie “Life Is a Long Quiet River” as an example, which should yield interesting recommendations based on its themes and user ratings.</p>
+<div id="4438e105" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="4438e105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="4438e105-1"><a href="#4438e105-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
+<span id="4438e105-2"><a href="#4438e105-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="4438e105-3"><a href="#4438e105-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4438e105-4"><a href="#4438e105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage with generative explanations</span></span>
+<span id="4438e105-5"><a href="#4438e105-5" aria-hidden="true" tabindex="-1"></a>movie_title <span class="op">=</span> <span class="st">"Life Is a Long Quiet River"</span></span>
+<span id="4438e105-6"><a href="#4438e105-6" aria-hidden="true" tabindex="-1"></a>source, recommendations <span class="op">=</span> recommend_movies(movie_title, num_recommendations<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="4438e105-7"><a href="#4438e105-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4438e105-8"><a href="#4438e105-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> source:</span>
+<span id="4438e105-9"><a href="#4438e105-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Recommendations based on '</span><span class="sc">{</span>source<span class="sc">}</span><span class="ss">':</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="4438e105-10"><a href="#4438e105-10" aria-hidden="true" tabindex="-1"></a>    explained_recs <span class="op">=</span> generate_recommendation_explanations(source, recommendations)</span>
+<span id="4438e105-11"><a href="#4438e105-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4438e105-12"><a href="#4438e105-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Build and display a pandas DataFrame</span></span>
+<span id="4438e105-13"><a href="#4438e105-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> explained_recs:</span>
+<span id="4438e105-14"><a href="#4438e105-14" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> pd.DataFrame(explained_recs)</span>
+<span id="4438e105-15"><a href="#4438e105-15" aria-hidden="true" tabindex="-1"></a>        df.rename(</span>
+<span id="4438e105-16"><a href="#4438e105-16" aria-hidden="true" tabindex="-1"></a>            columns<span class="op">=</span>{<span class="st">"title"</span>: <span class="st">"Recommended Movie"</span>, <span class="st">"explanation"</span>: <span class="st">"Explanation"</span>},</span>
+<span id="4438e105-17"><a href="#4438e105-17" aria-hidden="true" tabindex="-1"></a>            inplace<span class="op">=</span><span class="va">True</span>,</span>
+<span id="4438e105-18"><a href="#4438e105-18" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="4438e105-19"><a href="#4438e105-19" aria-hidden="true" tabindex="-1"></a>        styler <span class="op">=</span> df.style.set_properties(</span>
+<span id="4438e105-20"><a href="#4438e105-20" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>{<span class="st">"white-space"</span>: <span class="st">"normal"</span>, <span class="st">"text-align"</span>: <span class="st">"left"</span>}</span>
+<span id="4438e105-21"><a href="#4438e105-21" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="4438e105-22"><a href="#4438e105-22" aria-hidden="true" tabindex="-1"></a>        styler.set_table_styles([<span class="bu">dict</span>(selector<span class="op">=</span><span class="st">"th"</span>, props<span class="op">=</span>[(<span class="st">"text-align"</span>, <span class="st">"left"</span>)])])</span>
+<span id="4438e105-23"><a href="#4438e105-23" aria-hidden="true" tabindex="-1"></a>        display(styler)</span>
+<span id="4438e105-24"><a href="#4438e105-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="4438e105-25"><a href="#4438e105-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Could not generate explanations for the recommendations."</span>)</span>
+<span id="4438e105-26"><a href="#4438e105-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="4438e105-27"><a href="#4438e105-27" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="4438e105-28"><a href="#4438e105-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No recommendations found."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Recommendations based on 'Life Is a Long Quiet River (La vie est un long fleuve tranquille) (1988)':
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<style type="text/css">
+#T_e144c th {
+  text-align: left;
+}
+#T_e144c_row0_col0, #T_e144c_row0_col1, #T_e144c_row1_col0, #T_e144c_row1_col1, #T_e144c_row2_col0, #T_e144c_row2_col1 {
+  white-space: normal;
+  text-align: left;
+}
+</style>
+
+<table id="T_e144c" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_e144c_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Recommended Movie</th>
+<th id="T_e144c_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_e144c_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_e144c_row0_col0" class="data row0 col0">Life Is Beautiful (La Vita è bella) (1997)</td>
+<td id="T_e144c_row0_col1" class="data row0 col1">Given your appreciation for the unique charm of "Life Is a Long Quiet River (La vie est un long fleuve tranquille) (1988)", we think you'll find a lot to love in "Life Is Beautiful (La Vita è bella) (1997)". Both films brilliantly utilize the Comedy genre, using humor to tell deeply moving stories, and we've observed that at least one other viewer who highly rated "Life Is a Long Quiet River" also thoroughly enjoyed "Life Is Beautiful". This suggests a shared appreciation for heartwarming narratives that skillfully blend laughter with life's profound moments, making "Life Is Beautiful" a highly recommended watch for you.</td>
+</tr>
+<tr class="even">
+<td id="T_e144c_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_e144c_row1_col0" class="data row1 col0">Train of Life (Train de vie) (1998)</td>
+<td id="T_e144c_row1_col1" class="data row1 col1">Given your appreciation for the comedic elements found in "Life Is a Long Quiet River (La vie est un long fleuve tranquille)," you might also find yourself drawn to "Train of Life (Train de vie)." Both films expertly navigate their narratives with a distinct comedic sensibility, promising an engaging and often humorous journey. If you enjoyed the unique brand of comedy presented in your previous watch, "Train of Life" offers another delightful experience within the same genre.</td>
+</tr>
+<tr class="odd">
+<td id="T_e144c_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_e144c_row2_col0" class="data row2 col0">La cravate (1957)</td>
+<td id="T_e144c_row2_col1" class="data row2 col1">Given your appreciation for "Life Is a Long Quiet River," you might consider watching "La cravate" as a unique cinematic exploration. While our data doesn't highlight shared genres, thematic tags, or a direct overlap in user preferences between these two films, sometimes the most rewarding discoveries lie in venturing into new cinematic territory. "La cravate" offers a distinct artistic vision that could broaden your cinematic palate in unexpected and intriguing ways.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="the-agent" class="level3">
+<h3 class="anchored" data-anchor-id="the-agent">The agent</h3>
+<p>Now let us create the conversational agent that can use these tools to answer movie-related queries. The agent will be able to autonomously recommend movies and find movies by description.</p>
+<p>Here is a diagram of our agent architecture:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    subgraph "User Interaction"
+        A[User Query]
+    end
+
+    subgraph "Conversational Agent"
+        B(converse_with_llm)
+        C{Tool Executor}
+        D[recommend_movies]
+        E[find_movies_by_description]
+    end
+
+    subgraph "Gemini API"
+        F(Gemini LLM)
+    end
+
+    subgraph "Neo4j Database"
+        G((Graph Database))
+    end
+
+    A --&gt; B;
+    B -- "Query + Tools" --&gt; F;
+    F -- "Function Call" --&gt; C;
+    F -- "Direct Answer" --&gt; H[Formatted Response];
+    C -- "Executes" --&gt; D;
+    C -- "Executes" --&gt; E;
+    D -- "Cypher Query" --&gt; G;
+    E -- "Cypher Query" --&gt; G;
+    G -- "Data" --&gt; D;
+    G -- "Data" --&gt; E;
+    D --&gt; H;
+    E --&gt; H;
+    H --&gt; I[Display to User];
+
+    style A fill:#FFDAB9,stroke:#333,stroke-width:2px
+    style F fill:#ADD8E6,stroke:#333,stroke-width:2px
+    style G fill:#90EE90,stroke:#333,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="12c562a5" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="12c562a5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="12c562a5-1"><a href="#12c562a5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversational Agent with Tool Use</span></span>
+<span id="12c562a5-2"><a href="#12c562a5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-3"><a href="#12c562a5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-4"><a href="#12c562a5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> converse_with_llm(query: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="12c562a5-5"><a href="#12c562a5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="12c562a5-6"><a href="#12c562a5-6" aria-hidden="true" tabindex="-1"></a><span class="co">    A conversational agent that can use tools to answer movie-related queries.</span></span>
+<span id="12c562a5-7"><a href="#12c562a5-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="12c562a5-8"><a href="#12c562a5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> gemini_model:</span>
+<span id="12c562a5-9"><a href="#12c562a5-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Gemini model not initialized. Cannot process query."</span></span>
+<span id="12c562a5-10"><a href="#12c562a5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-11"><a href="#12c562a5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The user's query</span></span>
+<span id="12c562a5-12"><a href="#12c562a5-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"User query: '</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="12c562a5-13"><a href="#12c562a5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-14"><a href="#12c562a5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Give the model the available tools</span></span>
+<span id="12c562a5-15"><a href="#12c562a5-15" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> gemini_model.generate_content(</span>
+<span id="12c562a5-16"><a href="#12c562a5-16" aria-hidden="true" tabindex="-1"></a>        query,</span>
+<span id="12c562a5-17"><a href="#12c562a5-17" aria-hidden="true" tabindex="-1"></a>        tools<span class="op">=</span>[recommend_movies, find_movies_by_description],</span>
+<span id="12c562a5-18"><a href="#12c562a5-18" aria-hidden="true" tabindex="-1"></a>        generation_config<span class="op">=</span>{<span class="st">"max_output_tokens"</span>: <span class="dv">250</span>},</span>
+<span id="12c562a5-19"><a href="#12c562a5-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="12c562a5-20"><a href="#12c562a5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-21"><a href="#12c562a5-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the model decided to call a tool</span></span>
+<span id="12c562a5-22"><a href="#12c562a5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> response.candidates[<span class="dv">0</span>].content.parts:</span>
+<span id="12c562a5-23"><a href="#12c562a5-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"I'm sorry, I couldn't find a suitable tool to answer your question."</span></span>
+<span id="12c562a5-24"><a href="#12c562a5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-25"><a href="#12c562a5-25" aria-hidden="true" tabindex="-1"></a>    part <span class="op">=</span> response.candidates[<span class="dv">0</span>].content.parts[<span class="dv">0</span>]</span>
+<span id="12c562a5-26"><a href="#12c562a5-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> part.function_call:</span>
+<span id="12c562a5-27"><a href="#12c562a5-27" aria-hidden="true" tabindex="-1"></a>        function_call <span class="op">=</span> part.function_call</span>
+<span id="12c562a5-28"><a href="#12c562a5-28" aria-hidden="true" tabindex="-1"></a>        function_name <span class="op">=</span> function_call.name</span>
+<span id="12c562a5-29"><a href="#12c562a5-29" aria-hidden="true" tabindex="-1"></a>        function_args <span class="op">=</span> <span class="bu">dict</span>(function_call.args)</span>
+<span id="12c562a5-30"><a href="#12c562a5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-31"><a href="#12c562a5-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(</span>
+<span id="12c562a5-32"><a href="#12c562a5-32" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"LLM decided to call tool '</span><span class="sc">{</span>function_name<span class="sc">}</span><span class="ss">' with arguments: </span><span class="sc">{</span>function_args<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="12c562a5-33"><a href="#12c562a5-33" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="12c562a5-34"><a href="#12c562a5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-35"><a href="#12c562a5-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># --- Call the chosen function ---</span></span>
+<span id="12c562a5-36"><a href="#12c562a5-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> function_name <span class="op">==</span> <span class="st">"recommend_movies"</span>:</span>
+<span id="12c562a5-37"><a href="#12c562a5-37" aria-hidden="true" tabindex="-1"></a>            source_title, recommendations <span class="op">=</span> recommend_movies(<span class="op">**</span>function_args)</span>
+<span id="12c562a5-38"><a href="#12c562a5-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> recommendations:</span>
+<span id="12c562a5-39"><a href="#12c562a5-39" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="ss">f"Sorry, couldn't find recommendations for '</span><span class="sc">{</span>function_args<span class="sc">.</span>get(<span class="st">'movie_title'</span>)<span class="sc">}</span><span class="ss">'"</span></span>
+<span id="12c562a5-40"><a href="#12c562a5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-41"><a href="#12c562a5-41" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Format the output</span></span>
+<span id="12c562a5-42"><a href="#12c562a5-42" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> <span class="ss">f"Recommendations based on '</span><span class="sc">{</span>source_title<span class="sc">}</span><span class="ss">':</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="12c562a5-43"><a href="#12c562a5-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> title, score <span class="kw">in</span> recommendations:</span>
+<span id="12c562a5-44"><a href="#12c562a5-44" aria-hidden="true" tabindex="-1"></a>                output <span class="op">+=</span> <span class="ss">f"- </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> (Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="12c562a5-45"><a href="#12c562a5-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> output</span>
+<span id="12c562a5-46"><a href="#12c562a5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-47"><a href="#12c562a5-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> function_name <span class="op">==</span> <span class="st">"find_movies_by_description"</span>:</span>
+<span id="12c562a5-48"><a href="#12c562a5-48" aria-hidden="true" tabindex="-1"></a>            movies <span class="op">=</span> find_movies_by_description(<span class="op">**</span>function_args)</span>
+<span id="12c562a5-49"><a href="#12c562a5-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> movies:</span>
+<span id="12c562a5-50"><a href="#12c562a5-50" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="ss">f"Sorry, couldn't find movies for description: '</span><span class="sc">{</span>function_args<span class="sc">.</span>get(<span class="st">'description'</span>)<span class="sc">}</span><span class="ss">'"</span></span>
+<span id="12c562a5-51"><a href="#12c562a5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="12c562a5-52"><a href="#12c562a5-52" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Format the output</span></span>
+<span id="12c562a5-53"><a href="#12c562a5-53" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> <span class="ss">f"Movies found for '</span><span class="sc">{</span>function_args<span class="sc">.</span>get(<span class="st">'description'</span>)<span class="sc">}</span><span class="ss">':</span><span class="ch">\n\n</span><span class="ss">"</span></span>
+<span id="12c562a5-54"><a href="#12c562a5-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> title, score <span class="kw">in</span> movies:</span>
+<span id="12c562a5-55"><a href="#12c562a5-55" aria-hidden="true" tabindex="-1"></a>                output <span class="op">+=</span> <span class="ss">f"- </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> (Relevance: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="12c562a5-56"><a href="#12c562a5-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> output</span>
+<span id="12c562a5-57"><a href="#12c562a5-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="12c562a5-58"><a href="#12c562a5-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="ss">f"Error: Unknown function call '</span><span class="sc">{</span>function_name<span class="sc">}</span><span class="ss">'"</span></span>
+<span id="12c562a5-59"><a href="#12c562a5-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="12c562a5-60"><a href="#12c562a5-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The model responded directly</span></span>
+<span id="12c562a5-61"><a href="#12c562a5-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> response.text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>And finally let us test it out with a couple of queries.</p>
+<div id="e8fd9012" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="e8fd9012"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="e8fd9012-1"><a href="#e8fd9012-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the recommendation tool</span></span>
+<span id="e8fd9012-2"><a href="#e8fd9012-2" aria-hidden="true" tabindex="-1"></a>query1 <span class="op">=</span> <span class="st">"Can you recommend some movies similar to 'Toy Story'?"</span></span>
+<span id="e8fd9012-3"><a href="#e8fd9012-3" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> converse_with_llm(query1)</span>
+<span id="e8fd9012-4"><a href="#e8fd9012-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result1)</span>
+<span id="e8fd9012-5"><a href="#e8fd9012-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="e8fd9012-6"><a href="#e8fd9012-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the description search tool</span></span>
+<span id="e8fd9012-7"><a href="#e8fd9012-7" aria-hidden="true" tabindex="-1"></a>query2 <span class="op">=</span> <span class="st">"I want to watch a movie about space exploration and robots."</span></span>
+<span id="e8fd9012-8"><a href="#e8fd9012-8" aria-hidden="true" tabindex="-1"></a>result2 <span class="op">=</span> converse_with_llm(query2)</span>
+<span id="e8fd9012-9"><a href="#e8fd9012-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>User query: 'Can you recommend some movies similar to 'Toy Story'?'
+LLM decided to call tool 'recommend_movies' with arguments: {'movie_title': 'Toy Story'}
+</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Recommendations based on 'Toy Story (1995)':
+
+- Toy Story 2 (1999) (Score: 14.2874)
+- Toy Story 3 (2010) (Score: 8.8880)
+- Psycho (1960) (Score: 8.2628)
+- The Lego Movie (2014) (Score: 3.1701)
+- Dangerous Minds (1995) (Score: 1.9641)
+
+User query: 'I want to watch a movie about space exploration and robots.'
+LLM decided to call tool 'find_movies_by_description' with arguments: {'description': 'space exploration and robots'}
+
+Movies found for 'space exploration and robots':
+
+- Star Wars: Episode IV - A New Hope (1977) (Relevance: 2.0728)
+- Iron Giant, The (1999) (Relevance: 0.7099)
+- Terminator 2: Judgment Day (1991) (Relevance: 0.7099)
+- Terminator, The (1984) (Relevance: 0.7099)
+- Blade Runner (1982) (Relevance: 0.7099)
+- A.I. Artificial Intelligence (2001) (Relevance: 0.7099)
+- Short Circuit (1986) (Relevance: 0.7099)
+- Apollo 13 (1995) (Relevance: 0.7073)
+- Forbidden Planet (1956) (Relevance: 0.7073)
+- 2001: A Space Odyssey (1968) (Relevance: 0.7073)
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="final-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="final-remarks">Final remarks</h2>
+<p>This experiment has demonstrated how to build a simple movie recommendation system using Neo4j and a large language model. We have imported a dataset of movies, ratings, and tags into a Neo4j graph database, created a recommendation algorithm that combines semantic similarity, collaborative filtering, and shared tags, and integrated a large language model to generate natural language explanations for the recommendations.</p>
+<p>We also created a conversational agent that can answer movie-related queries and provide recommendations based on user input. The agent can autonomously recommend movies and find movies by description, integrating graph capabilities and natural language understanding.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>This work is licensed under CC BY <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">(View License)</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pedroleitao\.nl");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Written with love, take time to think and ponder.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://quarto.org">
+      <i class="bi bi-arrow-through-heart" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="http://www.frankscanteen.com">
+      <i class="bi bi-cup-hot" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.instagram.com/bilhanovarestaurante">
+      <i class="bi bi-egg-fried" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

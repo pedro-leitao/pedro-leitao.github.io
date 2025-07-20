@@ -4,6 +4,7 @@
 /*.log
 /.DS_Store
 /.quarto
+/.env
 
 posts/**/.jupyter_cache
 posts/**/*.pth
@@ -23,3 +24,4 @@ posts/**/*.html
 posts/**/__pycache__/
 
 /.quarto/
+/.vscode/

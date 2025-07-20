@@ -47,6 +47,7 @@
   {
     "listing": "/posts.html",
     "items": [
+      "/posts/experiments/six-degrees-of-kevin-bacon/index.html",
       "/posts/howtos/spark-primer/index.html",
       "/posts/dashboards/uk-home-prices/index.html",
       "/posts/experiments/rl-inventory-optimisation/index.html",
@@ -87,6 +88,7 @@
   {
     "listing": "/experiments.html",
     "items": [
+      "/posts/experiments/six-degrees-of-kevin-bacon/index.html",
       "/posts/experiments/rl-inventory-optimisation/index.html",
       "/posts/experiments/blade-runner-enhance/index.html",
       "/posts/experiments/mondrianiser/index.html",

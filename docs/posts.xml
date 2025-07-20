@@ -15,7 +15,17 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Sun, 08 Jun 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 16 Jul 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Six Degrees of Kevin Bacon</title>
+  <link>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</link>
+  <description><![CDATA[ If you have ever been in linguistic domains, you have probably heard the word “ontology”. In the context of graph databases, an ontology is a formal representation of a set of concepts within a domain and the relationships between those concepts. ]]></description>
+  <category>Experiments</category>
+  <category>Graph Analysis</category>
+  <category>Network Theory</category>
+  <guid>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</guid>
+  <pubDate>Wed, 16 Jul 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>A Primer on Spark for Data Processing</title>
   <link>https://pedroleitao.nl/posts/howtos/spark-primer/</link>
@@ -103,16 +113,6 @@
   <category>Software Engineering</category>
   <guid>https://pedroleitao.nl/posts/experiments/maps-and-maps/</guid>
   <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Getting Things Right: How Engineering Teams Scale and Achieve Great Things</title>
-  <link>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/</link>
-  <description><![CDATA[ larger doesn’t always mean faster or better ]]></description>
-  <category>Thoughts</category>
-  <category>Software Engineering</category>
-  <category>Scaling</category>
-  <guid>https://pedroleitao.nl/posts/thoughts/engineering-teams-scale/</guid>
-  <pubDate>Tue, 04 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
