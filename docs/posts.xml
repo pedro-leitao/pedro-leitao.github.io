@@ -19,7 +19,7 @@
 <item>
   <title>Six Degrees of Kevin Bacon</title>
   <link>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</link>
-  <description><![CDATA[ If you have ever been in linguistic domains, you have probably heard the word “ontology”. In the context of graph databases, an ontology is a formal representation of a set of concepts within a domain and the relationships between those concepts. ]]></description>
+  <description><![CDATA[ In graph‑centric work you’ve probably heard the term ontology. In graph databases, an ontology is simply a formal, machine‑readable vocabulary that defines a domain’s classes (things that exist), properties (how they’re related) and constraints (logical rules). By using universal identifiers (URIs) and logic‑friendly standards like RDF Schema or OWL, ontologies ensure that systems agree on what “Customer,” “Order” or “PaymentTerm” actually mean, without necessarily requiring data dictionaries. ]]></description>
   <category>Experiments</category>
   <category>Graph Analysis</category>
   <category>Network Theory</category>
