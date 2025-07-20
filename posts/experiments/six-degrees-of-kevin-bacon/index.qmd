@@ -22,13 +22,16 @@ A [graph database](https://en.wikipedia.org/wiki/Graph_database) is the storage 
 
 Compared to relational databases, graph stores trade rigid, table‑bound schemas for schema‑late, edge‑like flexibility. While you do give up some of the cross‑table ACID simplicity (especially at massive scale or across clusters), you gain the ability to evolve your data model on the fly and uncover hidden patterns, making graphs a natural fit whenever relationships matter most.
 
-In this experiment, we will explore a simple use case for a graph database using the [MovieLens](https://grouplens.org/datasets/movielens/) dataset, which contains information about movies, users, ratings, and tags. We will use Neo4j to create a graph representation of the data and perform some interesting queries. We will then use an embedding model to compute semantic embeddings for movie titles and tags, and use those embeddings to enhance our graph queries, together with implementing a simple recommendation system using collaborative filtering.
+In this experiment, we will explore a simple use case for a graph database using the [MovieLens](https://grouplens.org/datasets/movielens/) dataset, which contains information about movies, users, ratings, and tags.
+
+- We will use Neo4j to create a graph representation of the data and perform some interesting queries.
+- An embedding model will compute semantic embeddings for movie titles and tags, and we will use those embeddings to enhance our graph queries.
+- We will implement a simple recommendation system using collaborative filtering.
+- Finally we will use a large language model (LLM) to generate explanations for recommendations and build a conversational agent that can answer movie-related queries using the graph database.
 
 ::: {.callout-note}
 "Collaborative filtering" is a technique used in recommendation systems to suggest items (like movies) based on the preferences of similar users. It relies on the idea that if two users have similar tastes, they are likely to enjoy similar items.
 :::
-
-As part of the experiment, we will also explore how to use a large language model (LLM) to generate explanations for recommendations, and how to build a conversational agent that can answer movie-related queries using the graph database.
 
 ## Downloading the MovieLens dataset
 
@@ -525,10 +528,14 @@ We previously calculated embeddings for tags and film titles, which we can use t
 
 The algorithm is simple: we first find the closest movie match to the input title using the vector index, and then use that as the basis for recommendations. We will also incorporate collaborative filtering by finding users who liked both the source movie and the recommended movie, and content filtering by finding shared tags between the source and recommended movies.
 
+The formula for the final recommendation score is a weighted sum of the title similarity, user overlap, and shared tags:
+
+$\text{final\_score} = 0.5 \times \text{title\_similarity} + 0.3 \times \text{user\_overlap} + 0.2 \times \text{shared\_tags}$
+
 Here is the recommendation method that performs these steps.
 
 ```{python}
-def recommend_movies(movie_title: str, num_recommendations: int = 5) -> Tuple[Optional[str], List[Tuple[str, float]]]:
+def recommend_movies(movie_title: str, num_recommendations: int = 5) -> Tuple[Optional[str], List[Dict[str, Any]]]:
     """
     Recommends movies based on a hybrid of semantic similarity,
     collaborative filtering, and shared tags.
@@ -541,7 +548,8 @@ def recommend_movies(movie_title: str, num_recommendations: int = 5) -> Tuple[Op
         num_recommendations (int): The number of recommendations to return.
         
     Returns:
-        tuple: A tuple containing (source_movie_title, list_of_recommendations)
+        tuple: A tuple containing (source_movie_title, list_of_recommendations).
+               Each recommendation is a dictionary with title, score, and evidence.
     """
     # Compute the embedding for the input movie title
     title_embedding = embedding_model.embed_batch([movie_title])[0]
@@ -570,14 +578,27 @@ def recommend_movies(movie_title: str, num_recommendations: int = 5) -> Tuple[Op
             WITH source_movie, similar_movie, title_similarity, user_overlap, collect(DISTINCT t1.tag) AS source_tags
             OPTIONAL MATCH (similar_movie)<-[t2:TAGGED]-(u2:User)
             WHERE t2.tag IN source_tags
-            WITH source_movie, similar_movie, title_similarity, user_overlap, count(DISTINCT t2.tag) AS shared_tags
+            WITH source_movie, similar_movie, title_similarity, user_overlap, collect(DISTINCT t2.tag) AS shared_tags
             
+            // Get shared genres
+            WITH source_movie, similar_movie, title_similarity, user_overlap, shared_tags
+            OPTIONAL MATCH (source_movie)-[:IN_GENRE]->(g:Genre)<-[:IN_GENRE]-(similar_movie)
+            WITH source_movie, similar_movie, title_similarity, user_overlap, shared_tags, collect(DISTINCT g.name) AS shared_genres
+
             // Calculate final score and return
             WITH source_movie,
                  similar_movie,
-                 (title_similarity * 0.5) + (user_overlap * 0.3) + (shared_tags * 0.2) AS final_score
+                 (title_similarity * 0.5) + (user_overlap * 0.3) + (size(shared_tags) * 0.2) AS final_score,
+                 user_overlap,
+                 shared_tags,
+                 shared_genres
             
-            RETURN source_movie.title AS source_title, similar_movie.title AS title, final_score
+            RETURN source_movie.title AS source_title,
+                   similar_movie.title AS title,
+                   final_score,
+                   user_overlap,
+                   shared_tags,
+                   shared_genres
             ORDER BY final_score DESC
             LIMIT $num_recommendations
             """, {
@@ -592,7 +613,17 @@ def recommend_movies(movie_title: str, num_recommendations: int = 5) -> Tuple[Op
             return None, []
             
         source_title = records[0]["source_title"]
-        recommendations = [(r["title"], r["final_score"]) for r in records]
+        recommendations = [
+            {
+                "title": r["title"],
+                "score": r["final_score"],
+                "evidence": {
+                    "user_overlap": r["user_overlap"],
+                    "shared_tags": r["shared_tags"],
+                    "shared_genres": r["shared_genres"]
+                }
+            } for r in records
+        ]
     
     return source_title, recommendations
 ```
@@ -606,8 +637,8 @@ source, recommendations = recommend_movies(movie_title)
 
 if source:
     md = f"Recommendations based on '{source}':\n\n"
-    for title, score in recommendations:
-        md += f"- {title} (Score: {score:.4f})\n"
+    for rec in recommendations:
+        md += f"- {rec['title']} (Score: {rec['score']:.4f})\n"
     print(md)
 else:
     print("No recommendations found.")
@@ -618,8 +649,8 @@ source, recommendations = recommend_movies(movie_title)
 
 if source:
     md = f"Recommendations based on '{source}':\n"
-    for title, score in recommendations:
-        md += f"- {title} (Score: {score:.4f})\n"
+    for rec in recommendations:
+        md += f"- {rec['title']} (Score: {rec['score']:.4f})\n"
     print(md)
 else:
     print("No recommendations found.")
@@ -737,36 +768,7 @@ else:
     genai.configure(api_key=api_key)
     gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 
-def get_recommendation_evidence(source_title: str, recommended_title: str) -> Optional[Record]:
-    """
-    Gathers the evidence for why a movie is recommended.
-    """
-    with driver.session() as sess:
-        result = sess.run("""
-            MATCH (source:Movie {title: $source_title})
-            MATCH (recommended:Movie {title: $recommended_title})
-
-            // Get shared genres
-            OPTIONAL MATCH (source)-[:IN_GENRE]->(g:Genre)<-[:IN_GENRE]-(recommended)
-            WITH source, recommended, collect(DISTINCT g.name) AS shared_genres
-
-            // Get user overlap
-            OPTIONAL MATCH (source)<-[r1:RATED]-(u:User)-[r2:RATED]->(recommended)
-            WHERE r1.rating >= 4.0 AND r2.rating >= 4.0
-            WITH source, recommended, shared_genres, count(DISTINCT u) AS user_overlap
-
-            // Get shared tags (limit to 5 for brevity)
-            OPTIONAL MATCH (source)<-[t1:TAGGED]-(:User)
-            WITH source, recommended, shared_genres, user_overlap, collect(DISTINCT t1.tag) AS source_tags
-            OPTIONAL MATCH (recommended)<-[t2:TAGGED]-(:User)
-            WHERE t2.tag IN source_tags
-            WITH shared_genres, user_overlap, collect(DISTINCT t2.tag)[..5] AS shared_tags
-
-            RETURN shared_genres, user_overlap, shared_tags
-        """, { "source_title": source_title, "recommended_title": recommended_title })
-        return result.single()
-
-def generate_recommendation_explanations(source_title: str, recommendations: List[Tuple[str, float]]) -> List[Dict[str, str]]:
+def generate_recommendation_explanations(source_title: str, recommendations: List[Dict[str, Any]]) -> List[Dict[str, str]]:
     """
     Generates natural language explanations for recommendations using the Gemini API.
     
@@ -778,8 +780,9 @@ def generate_recommendation_explanations(source_title: str, recommendations: Lis
         return []
         
     explained_recommendations = []
-    for recommended_title, score in recommendations:
-        evidence = get_recommendation_evidence(source_title, recommended_title)
+    for rec in recommendations:
+        recommended_title = rec["title"]
+        evidence = rec["evidence"]
         
         if not evidence:
             continue
@@ -848,7 +851,7 @@ else:
 
 ### The agent
 
-Now let us create the conversational agent that can use these tools to answer movie-related queries. The agent will be able to autonomously recommend movies and find movies by description.
+Now let us create the conversational agent that can use the tools we built previously to answer movie-related queries. The agent will be able to autonomously recommend movies and find movies by description.
 
 Here is a diagram of our agent architecture:
 
@@ -934,8 +937,8 @@ def converse_with_llm(query: str) -> str:
             
             # Format the output
             output = f"Recommendations based on '{source_title}':\n\n"
-            for title, score in recommendations:
-                output += f"- {title} (Score: {score:.4f})\n"
+            for rec in recommendations:
+                output += f"- {rec['title']} (Score: {rec['score']:.4f})\n"
             return output
 
         elif function_name == "find_movies_by_description":
