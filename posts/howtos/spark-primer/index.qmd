@@ -14,6 +14,10 @@ categories:
   - Data Processing
   - Apache Spark
 jupyter: python3
+format:
+  html:
+    mermaid:
+      theme: forest
 ---
 
 A mainstay in big data processing, [:link Apache Spark](https://en.wikipedia.org/wiki/Apache_Spark) is an open-source distributed computing system that provides an interface for programming entire clusters with implicit data parallelism and fault tolerance. It is designed to be fast for both batch and streaming data processing, and is a tool which any data scientist or engineer should be familiar with.
