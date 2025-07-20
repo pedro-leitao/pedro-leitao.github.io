@@ -1,39 +1,71 @@
-[1/3] posts/howtos/caching-ml/index.qmd
+pandoc 
 
+  to: html
+  output-file: thoughts.html
+  standalone: true
+  title-prefix: Pedro Leitão
+  section-divs: true
+  html-math-method: mathjax
+  wrap: none
+  default-image-extension: png
+  css:
+    - styles.css
+  toc: true
+  variables: {}
+  
 
-Starting python3 kernel...
-(Notebook read from cache)
+metadata
 
+  document-css: false
+  link-citations: true
+  date-format: long
+  lang: en
+  unsplash:
+    client_id: d53HeQO3HqiazQlm5nM8o443dCxD5iM8d-zvjbVA5N4
+  jupyter:
+    kernelspec:
+      name: python3
+      language: python
+      display_name: ML Environment (latest)
+  theme:
+    - cosmo
+    - custom.scss
+  mermaid:
+    theme: default
+  code-summary: Show the code
+  code-block-border-left: false
+  lightbox: true
+  title-block-categories: true
+  title-block-banner: _static/banner-highlights-partial.jpg
+  mainfont: Roboto Flex
+  monofont: Roboto Mono
+  title: Thoughts
+  subtitle: thoughts and reflections
+  listing:
+    contents: posts/thoughts
+    feed:
+      items: 10
+      image: _static/logo.jpg
+      type: partial
+    fields:
+      - date
+      - title
+      - subtitle
+      - description
+      - categories
+      - reading-time
+    sort: date desc
+    type: grid
+    page-size: 6
+    grid-item-border: false
+    max-description-length: 150
+    date-format: medium
+    categories: true
+    sort-ui: false
+    filter-ui: false
+  page-layout: full
+  
 
-reformatted _bbb2e413_black_formatted.py
+Output created: docs/thoughts.html
 
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _f8267f99_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _95a23e20_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _5d41eb6e_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-reformatted _208cb3e1_black_formatted.py
-
-
-All done! ✨ 🍰 ✨
-1 file reformatted.
-
-[2/3] posts.qmd
 
