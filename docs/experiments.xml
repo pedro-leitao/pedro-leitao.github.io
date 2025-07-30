@@ -28,16 +28,6 @@
   <pubDate>Tue, 22 Jul 2025 23:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Six Degrees of Kevin Bacon</title>
-  <link>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</link>
-  <description><![CDATA[ In linguistics you’ve probably heard the term “ontology”. In knowledge graphs, an ontology is a formal, machine‑readable vocabulary that defines a domain’s classes (things that exist), properties (how they’re related) and constraints (logical rules). By using universal identifiers (URIs) and logic‑friendly standards like RDF Schema or OWL, ontologies ensure that systems agree on what “Customer,” “Order” or “PaymentTerm” actually mean, without necessarily requiring data dictionaries. ]]></description>
-  <category>Experiments</category>
-  <category>Graph Analysis</category>
-  <category>Network Theory</category>
-  <guid>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</guid>
-  <pubDate>Wed, 16 Jul 2025 23:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Dynamic Inventory Management with Reinforcement Learning</title>
   <link>https://pedroleitao.nl/posts/experiments/rl-inventory-optimisation/</link>
   <description><![CDATA[ Businesses struggle to balance inventory: too much stock ties up cash, too little loses sales. Inventory optimisation is a whole field of study, which has a well understood impact of the potential profitability of any business which sells physical goods - the median company <a href="https://www.scmr.com/article/inventory_optimization_show_me_the_money">spends 1% of revenue carrying inventory</a>. ]]></description>
@@ -112,6 +102,15 @@
   <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
   <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>A Classical Machine Learning Problem: Predicting Customer Churn</title>
+  <link>https://pedroleitao.nl/posts/experiments/customer-churn/</link>
+  <description><![CDATA[ Customer churn, where customers stop using a company’s services, is a major concern for businesses as it directly impacts revenue. Traditionally, companies tackled this issue by manually analyzing past data and relying on the intuition of marketing and sales teams. They used methods like customer surveys, simple statistical analysis, and basic segmentation based on purchase history and customer interactions. These approaches provided some insights but were often reactive and lacked precision. ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <guid>https://pedroleitao.nl/posts/experiments/customer-churn/</guid>
+  <pubDate>Mon, 08 Jul 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
