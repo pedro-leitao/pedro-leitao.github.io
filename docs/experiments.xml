@@ -15,7 +15,18 @@
 <link>https://pedroleitao.nl/experiments.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Wed, 16 Jul 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 22 Jul 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>A Use Case for Graph RAG</title>
+  <link>https://pedroleitao.nl/posts/experiments/a-use-case-for-graph-rag/</link>
+  <description><![CDATA[ issue analysis with graphs and RAG ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>RAG</category>
+  <category>LLMs</category>
+  <guid>https://pedroleitao.nl/posts/experiments/a-use-case-for-graph-rag/</guid>
+  <pubDate>Tue, 22 Jul 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Six Degrees of Kevin Bacon</title>
   <link>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</link>
@@ -101,15 +112,6 @@
   <category>Machine Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/regularisation/</guid>
   <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>A Classical Machine Learning Problem: Predicting Customer Churn</title>
-  <link>https://pedroleitao.nl/posts/experiments/customer-churn/</link>
-  <description><![CDATA[ Customer churn, where customers stop using a company’s services, is a major concern for businesses as it directly impacts revenue. Traditionally, companies tackled this issue by manually analyzing past data and relying on the intuition of marketing and sales teams. They used methods like customer surveys, simple statistical analysis, and basic segmentation based on purchase history and customer interactions. These approaches provided some insights but were often reactive and lacked precision. ]]></description>
-  <category>Experiments</category>
-  <category>Machine Learning</category>
-  <guid>https://pedroleitao.nl/posts/experiments/customer-churn/</guid>
-  <pubDate>Mon, 08 Jul 2024 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

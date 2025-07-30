@@ -15,7 +15,18 @@
 <link>https://pedroleitao.nl/posts.html</link>
 </image>
 <generator>quarto-1.7.23</generator>
-<lastBuildDate>Wed, 16 Jul 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 22 Jul 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>A Use Case for Graph RAG</title>
+  <link>https://pedroleitao.nl/posts/experiments/a-use-case-for-graph-rag/</link>
+  <description><![CDATA[ issue analysis with graphs and RAG ]]></description>
+  <category>Experiments</category>
+  <category>Machine Learning</category>
+  <category>RAG</category>
+  <category>LLMs</category>
+  <guid>https://pedroleitao.nl/posts/experiments/a-use-case-for-graph-rag/</guid>
+  <pubDate>Tue, 22 Jul 2025 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Six Degrees of Kevin Bacon</title>
   <link>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</link>
@@ -104,15 +115,6 @@
   <category>Deep Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/adam-optimisation/</guid>
   <pubDate>Fri, 14 Mar 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Maps and More Maps</title>
-  <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
-  <description><![CDATA[ Recently I was trying to figure out sun exposure for a specific location, except I was a couple of thousand kilometers away, and needed to get a sense of the sun’s path relative to a rooftop. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much can do the job. But, I really wanted to find out if I could do it myself from first principles. ]]></description>
-  <category>Experiments</category>
-  <category>Software Engineering</category>
-  <guid>https://pedroleitao.nl/posts/experiments/maps-and-maps/</guid>
-  <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
