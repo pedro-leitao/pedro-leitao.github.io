@@ -28,16 +28,6 @@
   <pubDate>Tue, 22 Jul 2025 23:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Six Degrees of Kevin Bacon</title>
-  <link>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</link>
-  <description><![CDATA[ In linguistics you’ve probably heard the term “ontology”. In knowledge graphs, an ontology is a formal, machine‑readable vocabulary that defines a domain’s classes (things that exist), properties (how they’re related) and constraints (logical rules). By using universal identifiers (URIs) and logic‑friendly standards like RDF Schema or OWL, ontologies ensure that systems agree on what “Customer,” “Order” or “PaymentTerm” actually mean, without necessarily requiring data dictionaries. ]]></description>
-  <category>Experiments</category>
-  <category>Graph Analysis</category>
-  <category>Network Theory</category>
-  <guid>https://pedroleitao.nl/posts/experiments/six-degrees-of-kevin-bacon/</guid>
-  <pubDate>Wed, 16 Jul 2025 23:00:00 GMT</pubDate>
-</item>
-<item>
   <title>A Primer on Spark for Data Processing</title>
   <link>https://pedroleitao.nl/posts/howtos/spark-primer/</link>
   <description><![CDATA[ A quick introduction to Apache Spark, its components, and how to use PySpark for data processing tasks. ]]></description>
@@ -115,6 +105,15 @@
   <category>Deep Learning</category>
   <guid>https://pedroleitao.nl/posts/experiments/adam-optimisation/</guid>
   <pubDate>Fri, 14 Mar 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Maps and More Maps</title>
+  <link>https://pedroleitao.nl/posts/experiments/maps-and-maps/</link>
+  <description><![CDATA[ Recently I was trying to figure out sun exposure for a specific location, except I was a couple of thousand kilometers away, and needed to get a sense of the sun’s path relative to a rooftop. There are quite a few tools available online (like <a href="https://suncalc.org">SunCalc</a>), and some mobile apps which pretty much can do the job. But, I really wanted to find out if I could do it myself from first principles. ]]></description>
+  <category>Experiments</category>
+  <category>Software Engineering</category>
+  <guid>https://pedroleitao.nl/posts/experiments/maps-and-maps/</guid>
+  <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
