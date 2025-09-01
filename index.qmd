@@ -25,8 +25,7 @@ format:
 
 ---
 
-Hello! I am Pedro Leitão (vaguely pronounced as "Pe-drow Lay-tow"). Professionally, I am
-a chief architect in the software industry, mostly engaging in Cloud Native systems design, Systems Thinking, Analytics & Data Science, Machine Learning and AI. More importantly, I am a father and adventurer in all things family-related.
+Hello! I am Pedro Leitão (vaguely pronounced as "Pe-drow Lay-tow"). Professionally, I have held architecture positions software industry, from IC architecture roles all the way to chief architect, mostly engaging in Cloud Native systems design, Systems Thinking, Analytics & Data Science, Machine Learning and AI. At a personal level, I am a father and adventurer in all things family-related.
 
 I love embracing new challenges, continuous learning, and mentoring others - I build and manage high-performance tech teams while keeping a hands-on approach. Based in London, but you will often find me somewhere further south.
 

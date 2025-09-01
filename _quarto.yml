@@ -57,7 +57,7 @@ format:
     highlight-style: pygments
     lightbox: true
     title-block-categories: true
-    title-block-banner: _static/banner-highlights-partial.jpg
+    title-block-banner: _static/banner-waves-partial.jpg
     mainfont: "Roboto Flex"
     monofont: "Roboto Mono"
     include-in-header:
